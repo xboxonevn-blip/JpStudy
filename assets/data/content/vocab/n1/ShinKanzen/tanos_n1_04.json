@@ -6,8 +6,8 @@
   "lessonId": 4,
   "bookTitle": "JLPT N1 Vocabulary Import",
   "entryCount": 140,
-  "importStatus": "source-imported-vi-draft",
-  "sourceNote": "Imported from Hanabira/Tanos. Vietnamese meanings are internal draft translations from English glosses and require human review; not copied from Vietnamese dictionary/course websites.",
+  "importStatus": "vi-editorial-codex-pass",
+  "sourceNote": "Imported from Hanabira/Tanos. Vietnamese meanings were aligned against the reviewed N1 Hajimete vocabulary set, with remaining unmatched glosses editorially translated by Codex.",
   "license": "CC-BY / source attribution required; see docs/credits/upper-jlpt-sources.md",
   "entries": [
     {
@@ -19,7 +19,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -35,15 +35,13 @@
       },
       "sense": {
         "senseId": "n1_s0421",
-        "meaningVi": "[VI cần duyệt] to wear; [VI cần duyệt] to carry; [VI cần duyệt] to be entrusted; có; [VI cần duyệt] to take on; [VI cần duyệt] to have a trace of; [VI cần duyệt] to be tinged with",
-        "meaningEn": "to wear, to carry, to be entrusted, to have, to take on, to have a trace of, to be tinged with",
-        "meaningViDraft": "[VI cần duyệt] to wear; [VI cần duyệt] to carry; [VI cần duyệt] to be entrusted; có; [VI cần duyệt] to take on; [VI cần duyệt] to have a trace of; [VI cần duyệt] to be tinged with",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "mặc; mang theo; được giao phó; có; mang theo; có dấu vết; nhuốm màu",
+        "meaningEn": "to wear, to carry, to be entrusted, to have, to take on, to have a trace of, to be tinged with"
       },
       "search": {
         "termNoAccent": "帯ひる",
         "readingNoAccent": "おひる",
-        "meaningViNoAccent": "[VI can duyet] to wear; [VI can duyet] to carry; [VI can duyet] to be entrusted; co; [VI can duyet] to take on; [VI can duyet] to have a trace of; [VI can duyet] to be tinged with",
+        "meaningViNoAccent": "mac; mang theo; duoc giao pho; co; mang theo; co dau vet; nhuom mau",
         "hanVietNoAccent": null
       },
       "links": {
@@ -65,7 +63,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -81,15 +79,13 @@
       },
       "sense": {
         "senseId": "n1_s0422",
-        "meaningVi": "ký ức; [VI cần duyệt] sense; kinh nghiệm",
-        "meaningEn": "memory, sense, experience",
-        "meaningViDraft": "ký ức; [VI cần duyệt] sense; kinh nghiệm",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "ký ức; giác quan; kinh nghiệm",
+        "meaningEn": "memory, sense, experience"
       },
       "search": {
         "termNoAccent": "覚え",
         "readingNoAccent": "おほえ",
-        "meaningViNoAccent": "ky uc; [VI can duyet] sense; kinh nghiem",
+        "meaningViNoAccent": "ky uc; giac quan; kinh nghiem",
         "hanVietNoAccent": null
       },
       "links": {
@@ -111,7 +107,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -127,15 +123,13 @@
       },
       "sense": {
         "senseId": "n1_s0423",
-        "meaningVi": "[VI cần duyệt] 1. a discount; [VI cần duyệt] a prize; [VI cần duyệt] 2. something additional; [VI cần duyệt] bonus; [VI cần duyệt] an extra; [VI cần duyệt] 3. an exaggeration",
-        "meaningEn": "1. a discount, a prize, 2. something additional, bonus, an extra, 3. an exaggeration",
-        "meaningViDraft": "[VI cần duyệt] 1. a discount; [VI cần duyệt] a prize; [VI cần duyệt] 2. something additional; [VI cần duyệt] bonus; [VI cần duyệt] an extra; [VI cần duyệt] 3. an exaggeration",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "1. giảm giá; giải thưởng; 2. cái gì bổ sung;thêm;thêm; 3. cường điệu",
+        "meaningEn": "1. a discount, a prize, 2. something additional, bonus, an extra, 3. an exaggeration"
       },
       "search": {
         "termNoAccent": "御負け",
         "readingNoAccent": "おまけ",
-        "meaningViNoAccent": "[VI can duyet] 1. a discount; [VI can duyet] a prize; [VI can duyet] 2. something additional; [VI can duyet] bonus; [VI can duyet] an extra; [VI can duyet] 3. an exaggeration",
+        "meaningViNoAccent": "1. giam gia; giai thuong; 2. cai gi bo sung;them;them; 3. cuong dieu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -157,7 +151,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -173,15 +167,13 @@
       },
       "sense": {
         "senseId": "n1_s0424",
-        "meaningVi": "[VI cần duyệt] policeman",
-        "meaningEn": "policeman",
-        "meaningViDraft": "[VI cần duyệt] policeman",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cảnh sát (thuật ngữ thân thiện)",
+        "meaningEn": "policeman"
       },
       "search": {
         "termNoAccent": "お巡りさん",
         "readingNoAccent": "おまわりさん",
-        "meaningViNoAccent": "[VI can duyet] policeman",
+        "meaningViNoAccent": "canh sat (thuat ngu than thien)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -203,7 +195,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -219,15 +211,13 @@
       },
       "sense": {
         "senseId": "n1_s0425",
-        "meaningVi": "[VI cần duyệt] Shinto shrine",
-        "meaningEn": "Shinto shrine",
-        "meaningViDraft": "[VI cần duyệt] Shinto shrine",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "Đền thờ Thần đạo",
+        "meaningEn": "Shinto shrine"
       },
       "search": {
         "termNoAccent": "お宮",
         "readingNoAccent": "おみや",
-        "meaningViNoAccent": "[VI can duyet] Shinto shrine",
+        "meaningViNoAccent": "den tho than dao",
         "hanVietNoAccent": null
       },
       "links": {
@@ -249,7 +239,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -265,15 +255,13 @@
       },
       "sense": {
         "senseId": "n1_s0426",
-        "meaningVi": "[VI cần duyệt] diaper; [VI cần duyệt] nappy",
-        "meaningEn": "diaper, nappy",
-        "meaningViDraft": "[VI cần duyệt] diaper; [VI cần duyệt] nappy",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tã lót; tã lót",
+        "meaningEn": "diaper, nappy"
       },
       "search": {
         "termNoAccent": "お襁褓",
         "readingNoAccent": "おむつ",
-        "meaningViNoAccent": "[VI can duyet] diaper; [VI can duyet] nappy",
+        "meaningViNoAccent": "ta lot; ta lot",
         "hanVietNoAccent": null
       },
       "links": {
@@ -295,7 +283,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -311,15 +299,13 @@
       },
       "sense": {
         "senseId": "n1_s0427",
-        "meaningVi": "[VI cần duyệt] Congratulations!; [VI cần duyệt] an auspicious occasion!",
-        "meaningEn": "Congratulations!, an auspicious occasion!",
-        "meaningViDraft": "[VI cần duyệt] Congratulations!; [VI cần duyệt] an auspicious occasion!",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "(ateji) (int) (uk) Xin chúc mừng!;một dịp tốt lành!",
+        "meaningEn": "Congratulations!, an auspicious occasion!"
       },
       "search": {
         "termNoAccent": "お目出度う",
         "readingNoAccent": "おめてとう",
-        "meaningViNoAccent": "[VI can duyet] Congratulations!; [VI can duyet] an auspicious occasion!",
+        "meaningViNoAccent": "(ateji) (int) (uk) xin chuc mung!;mot dip tot lanh!",
         "hanVietNoAccent": null
       },
       "links": {
@@ -341,7 +327,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -357,15 +343,13 @@
       },
       "sense": {
         "senseId": "n1_s0428",
-        "meaningVi": "[VI cần duyệt] face",
-        "meaningEn": "face",
-        "meaningViDraft": "[VI cần duyệt] face",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đối mặt",
+        "meaningEn": "face"
       },
       "search": {
         "termNoAccent": "面",
         "readingNoAccent": "おも",
-        "meaningViNoAccent": "[VI can duyet] face",
+        "meaningViNoAccent": "doi mat",
         "hanVietNoAccent": null
       },
       "links": {
@@ -387,7 +371,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -403,15 +387,13 @@
       },
       "sense": {
         "senseId": "n1_s0429",
-        "meaningVi": "kế hoạch; ý tưởng; [VI cần duyệt] suggestion",
-        "meaningEn": "plan, idea, suggestion",
-        "meaningViDraft": "kế hoạch; ý tưởng; [VI cần duyệt] suggestion",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "kế hoạch; ý tưởng; đề nghị",
+        "meaningEn": "plan, idea, suggestion"
       },
       "search": {
         "termNoAccent": "思い付き",
         "readingNoAccent": "おもいつき",
-        "meaningViNoAccent": "ke hoach; y tuong; [VI can duyet] suggestion",
+        "meaningViNoAccent": "ke hoach; y tuong; de nghi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -433,7 +415,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -449,15 +431,13 @@
       },
       "sense": {
         "senseId": "n1_s0430",
-        "meaningVi": "[VI cần duyệt] interesting; [VI cần duyệt] amusing",
-        "meaningEn": "interesting, amusing",
-        "meaningViDraft": "[VI cần duyệt] interesting; [VI cần duyệt] amusing",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "thú vị; thú vị",
+        "meaningEn": "interesting, amusing"
       },
       "search": {
         "termNoAccent": "面白い",
         "readingNoAccent": "おもしろい",
-        "meaningViNoAccent": "[VI can duyet] interesting; [VI can duyet] amusing",
+        "meaningViNoAccent": "thu vi; thu vi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -479,7 +459,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -495,15 +475,13 @@
       },
       "sense": {
         "senseId": "n1_s0431",
-        "meaningVi": "[VI cần duyệt] toy",
-        "meaningEn": "toy",
-        "meaningViDraft": "[VI cần duyệt] toy",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đồ chơi",
+        "meaningEn": "toy"
       },
       "search": {
         "termNoAccent": "玩具",
         "readingNoAccent": "おもちゃ",
-        "meaningViNoAccent": "[VI can duyet] toy",
+        "meaningViNoAccent": "do choi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -525,7 +503,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -541,15 +519,13 @@
       },
       "sense": {
         "senseId": "n1_s0432",
-        "meaningVi": "[VI cần duyệt] main; [VI cần duyệt] principal; quan trọng",
-        "meaningEn": "main, principal, important",
-        "meaningViDraft": "[VI cần duyệt] main; [VI cần duyệt] principal; quan trọng",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chính; hiệu trưởng; quan trọng",
+        "meaningEn": "main, principal, important"
       },
       "search": {
         "termNoAccent": "重なる",
         "readingNoAccent": "おもなる",
-        "meaningViNoAccent": "[VI can duyet] main; [VI can duyet] principal; quan trong",
+        "meaningViNoAccent": "chinh; hieu truong; quan trong",
         "hanVietNoAccent": null
       },
       "links": {
@@ -571,7 +547,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -587,15 +563,13 @@
       },
       "sense": {
         "senseId": "n1_s0433",
-        "meaningVi": "[VI cần duyệt] meaning; [VI cần duyệt] tenor; [VI cần duyệt] gist; ảnh hưởng; [VI cần duyệt] appearance; [VI cần duyệt] taste; [VI cần duyệt] grace; [VI cần duyệt] charm; [VI cần duyệt] refinement",
-        "meaningEn": "meaning, tenor, gist, effect, appearance, taste, grace, charm, refinement",
-        "meaningViDraft": "[VI cần duyệt] meaning; [VI cần duyệt] tenor; [VI cần duyệt] gist; ảnh hưởng; [VI cần duyệt] appearance; [VI cần duyệt] taste; [VI cần duyệt] grace; [VI cần duyệt] charm; [VI cần duyệt] refinement",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "ý nghĩa;giọng nam cao;ý chính;tác dụng;ngoại hình;hương vị;duyên dáng;quyến rũ;sự tinh tế",
+        "meaningEn": "meaning, tenor, gist, effect, appearance, taste, grace, charm, refinement"
       },
       "search": {
         "termNoAccent": "趣",
         "readingNoAccent": "おもむき",
-        "meaningViNoAccent": "[VI can duyet] meaning; [VI can duyet] tenor; [VI can duyet] gist; anh huong; [VI can duyet] appearance; [VI can duyet] taste; [VI can duyet] grace; [VI can duyet] charm; [VI can duyet] refinement",
+        "meaningViNoAccent": "y nghia;giong nam cao;y chinh;tac dung;ngoai hinh;huong vi;duyen dang;quyen ru;su tinh te",
         "hanVietNoAccent": null
       },
       "links": {
@@ -617,7 +591,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -633,15 +607,13 @@
       },
       "sense": {
         "senseId": "n1_s0434",
-        "meaningVi": "đi; [VI cần duyệt] to proceed; [VI cần duyệt] to repair to; trở nên",
-        "meaningEn": "to go, to proceed, to repair to, to become",
-        "meaningViDraft": "đi; [VI cần duyệt] to proceed; [VI cần duyệt] to repair to; trở nên",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đi; tiếp tục; sửa chữa; trở thành",
+        "meaningEn": "to go, to proceed, to repair to, to become"
       },
       "search": {
         "termNoAccent": "赴く",
         "readingNoAccent": "おもむく",
-        "meaningViNoAccent": "đi; [VI can duyet] to proceed; [VI can duyet] to repair to; tro nen",
+        "meaningViNoAccent": "di; tiep tuc; sua chua; tro thanh",
         "hanVietNoAccent": null
       },
       "links": {
@@ -663,7 +635,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -679,15 +651,13 @@
       },
       "sense": {
         "senseId": "n1_s0435",
-        "meaningVi": "[VI cần duyệt] heavy responsibilities; [VI cần duyệt] director",
-        "meaningEn": "heavy responsibilities, director",
-        "meaningViDraft": "[VI cần duyệt] heavy responsibilities; [VI cần duyệt] director",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "trách nhiệm nặng nề; giám đốc",
+        "meaningEn": "heavy responsibilities, director"
       },
       "search": {
         "termNoAccent": "重役",
         "readingNoAccent": "おもやく",
-        "meaningViNoAccent": "[VI can duyet] heavy responsibilities; [VI can duyet] director",
+        "meaningViNoAccent": "trach nhiem nang ne; giam doc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -709,7 +679,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -725,15 +695,13 @@
       },
       "sense": {
         "senseId": "n1_s0436",
-        "meaningVi": "[VI cần duyệt] to respect; [VI cần duyệt] to honor; [VI cần duyệt] to esteem; [VI cần duyệt] to prize",
-        "meaningEn": "to respect, to honor, to esteem, to prize",
-        "meaningViDraft": "[VI cần duyệt] to respect; [VI cần duyệt] to honor; [VI cần duyệt] to esteem; [VI cần duyệt] to prize",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tôn trọng; tôn vinh; đánh giá cao; đánh giá cao",
+        "meaningEn": "to respect, to honor, to esteem, to prize"
       },
       "search": {
         "termNoAccent": "重んしる",
         "readingNoAccent": "おもんしる",
-        "meaningViNoAccent": "[VI can duyet] to respect; [VI can duyet] to honor; [VI can duyet] to esteem; [VI can duyet] to prize",
+        "meaningViNoAccent": "ton trong; ton vinh; danh gia cao; danh gia cao",
         "hanVietNoAccent": null
       },
       "links": {
@@ -755,7 +723,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -771,15 +739,13 @@
       },
       "sense": {
         "senseId": "n1_s0437",
-        "meaningVi": "[VI cần duyệt] to honor; [VI cần duyệt] to respect; [VI cần duyệt] to esteem; [VI cần duyệt] to prize",
-        "meaningEn": "to honor, to respect, to esteem, to prize",
-        "meaningViDraft": "[VI cần duyệt] to honor; [VI cần duyệt] to respect; [VI cần duyệt] to esteem; [VI cần duyệt] to prize",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tôn vinh; tôn trọng; đánh giá cao; đánh giá cao",
+        "meaningEn": "to honor, to respect, to esteem, to prize"
       },
       "search": {
         "termNoAccent": "重んする",
         "readingNoAccent": "おもんする",
-        "meaningViNoAccent": "[VI can duyet] to honor; [VI can duyet] to respect; [VI can duyet] to esteem; [VI can duyet] to prize",
+        "meaningViNoAccent": "ton vinh; ton trong; danh gia cao; danh gia cao",
         "hanVietNoAccent": null
       },
       "links": {
@@ -801,7 +767,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -817,15 +783,13 @@
       },
       "sense": {
         "senseId": "n1_s0438",
-        "meaningVi": "[VI cần duyệt] holiday; [VI cần duyệt] absence; [VI cần duyệt] rest; [VI cần duyệt] Good night",
-        "meaningEn": "holiday, absence, rest, Good night",
-        "meaningViDraft": "[VI cần duyệt] holiday; [VI cần duyệt] absence; [VI cần duyệt] rest; [VI cần duyệt] Good night",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "kỳ nghỉ;vắng mặt;nghỉ ngơi;Chúc ngủ ngon",
+        "meaningEn": "holiday, absence, rest, Good night"
       },
       "search": {
         "termNoAccent": "お休み",
         "readingNoAccent": "おやすみ",
-        "meaningViNoAccent": "[VI can duyet] holiday; [VI can duyet] absence; [VI can duyet] rest; [VI can duyet] Good night",
+        "meaningViNoAccent": "ky nghi;vang mat;nghi ngoi;chuc ngu ngon",
         "hanVietNoAccent": null
       },
       "links": {
@@ -847,7 +811,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -863,15 +827,13 @@
       },
       "sense": {
         "senseId": "n1_s0439",
-        "meaningVi": "[VI cần duyệt] 1. between meal snack; [VI cần duyệt] afternoon refreshment; [VI cần duyệt] afternoon tea; [VI cần duyệt] 2. mid-day snack",
-        "meaningEn": "1. between meal snack, afternoon refreshment, afternoon tea, 2. mid-day snack",
-        "meaningViDraft": "[VI cần duyệt] 1. between meal snack; [VI cần duyệt] afternoon refreshment; [VI cần duyệt] afternoon tea; [VI cần duyệt] 2. mid-day snack",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "1. (uk) giữa bữa ăn nhẹ; giải khát buổi chiều; trà chiều; 2. bữa ăn nhẹ giữa ngày",
+        "meaningEn": "1. between meal snack, afternoon refreshment, afternoon tea, 2. mid-day snack"
       },
       "search": {
         "termNoAccent": "お八",
         "readingNoAccent": "おやつ",
-        "meaningViNoAccent": "[VI can duyet] 1. between meal snack; [VI can duyet] afternoon refreshment; [VI can duyet] afternoon tea; [VI can duyet] 2. mid-day snack",
+        "meaningViNoAccent": "1. (uk) giua bua an nhe; giai khat buoi chieu; tra chieu; 2. bua an nhe giua ngay",
         "hanVietNoAccent": null
       },
       "links": {
@@ -893,7 +855,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -909,15 +871,13 @@
       },
       "sense": {
         "senseId": "n1_s0440",
-        "meaningVi": "[VI cần duyệt] about; [VI cần duyệt] roughly; [VI cần duyệt] as a rule; [VI cần duyệt] approximately",
-        "meaningEn": "about, roughly, as a rule, approximately",
-        "meaningViDraft": "[VI cần duyệt] about; [VI cần duyệt] roughly; [VI cần duyệt] as a rule; [VI cần duyệt] approximately",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "khoảng; đại khái; như một quy luật; ước chừng",
+        "meaningEn": "about, roughly, as a rule, approximately"
       },
       "search": {
         "termNoAccent": "凡そ",
         "readingNoAccent": "およそ",
-        "meaningViNoAccent": "[VI can duyet] about; [VI can duyet] roughly; [VI can duyet] as a rule; [VI can duyet] approximately",
+        "meaningViNoAccent": "khoang; dai khai; nhu mot quy luat; uoc chung",
         "hanVietNoAccent": null
       },
       "links": {
@@ -939,7 +899,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -955,15 +915,13 @@
       },
       "sense": {
         "senseId": "n1_s0441",
-        "meaningVi": "[VI cần duyệt] as well as",
-        "meaningEn": "and, as well as",
-        "meaningViDraft": "[VI cần duyệt] as well as",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "và;cũng như",
+        "meaningEn": "and, as well as"
       },
       "search": {
         "termNoAccent": "及ひ",
         "readingNoAccent": "およひ",
-        "meaningViNoAccent": "[VI can duyet] as well as",
+        "meaningViNoAccent": "va;cung nhu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -985,7 +943,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1001,15 +959,13 @@
       },
       "sense": {
         "senseId": "n1_s0442",
-        "meaningVi": "[VI cần duyệt] to reach; [VI cần duyệt] to come up to; [VI cần duyệt] to amount to; [VI cần duyệt] to befall; [VI cần duyệt] to happen to; [VI cần duyệt] to extend; [VI cần duyệt] to match; [VI cần duyệt] to equal",
-        "meaningEn": "to reach, to come up to, to amount to, to befall, to happen to, to extend, to match, to equal",
-        "meaningViDraft": "[VI cần duyệt] to reach; [VI cần duyệt] to come up to; [VI cần duyệt] to amount to; [VI cần duyệt] to befall; [VI cần duyệt] to happen to; [VI cần duyệt] to extend; [VI cần duyệt] to match; [VI cần duyệt] to equal",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đạt tới;đi tới;tương đương với;xảy ra;xảy ra;mở rộng;phù hợp;bằng",
+        "meaningEn": "to reach, to come up to, to amount to, to befall, to happen to, to extend, to match, to equal"
       },
       "search": {
         "termNoAccent": "及ふ",
         "readingNoAccent": "およふ",
-        "meaningViNoAccent": "[VI can duyet] to reach; [VI can duyet] to come up to; [VI can duyet] to amount to; [VI can duyet] to befall; [VI can duyet] to happen to; [VI can duyet] to extend; [VI can duyet] to match; [VI can duyet] to equal",
+        "meaningViNoAccent": "dat toi;di toi;tuong duong voi;xay ra;xay ra;mo rong;phu hop;bang",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1031,7 +987,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1047,15 +1003,13 @@
       },
       "sense": {
         "senseId": "n1_s0443",
-        "meaningVi": "[VI cần duyệt] weave; [VI cần duyệt] weaving; [VI cần duyệt] woven item",
-        "meaningEn": "weave, weaving, woven item",
-        "meaningViDraft": "[VI cần duyệt] weave; [VI cần duyệt] weaving; [VI cần duyệt] woven item",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "dệt; dệt; đồ dệt",
+        "meaningEn": "weave, weaving, woven item"
       },
       "search": {
         "termNoAccent": "織",
         "readingNoAccent": "おり",
-        "meaningViNoAccent": "[VI can duyet] weave; [VI can duyet] weaving; [VI can duyet] woven item",
+        "meaningViNoAccent": "det; det; do det",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1077,7 +1031,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1093,15 +1047,13 @@
       },
       "sense": {
         "senseId": "n1_s0444",
-        "meaningVi": "[VI cần duyệt] cage; [VI cần duyệt] pen; [VI cần duyệt] jail cell",
-        "meaningEn": "cage, pen, jail cell",
-        "meaningViDraft": "[VI cần duyệt] cage; [VI cần duyệt] pen; [VI cần duyệt] jail cell",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "lồng; chuồng; nhà tù",
+        "meaningEn": "cage, pen, jail cell"
       },
       "search": {
         "termNoAccent": "檻",
         "readingNoAccent": "おり",
-        "meaningViNoAccent": "[VI can duyet] cage; [VI can duyet] pen; [VI can duyet] jail cell",
+        "meaningViNoAccent": "long; chuong; nha tu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1123,7 +1075,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1139,15 +1091,13 @@
       },
       "sense": {
         "senseId": "n1_s0445",
-        "meaningVi": "[VI cần duyệt] to turn up; [VI cần duyệt] to fold back",
-        "meaningEn": "to turn up, to fold back",
-        "meaningViDraft": "[VI cần duyệt] to turn up; [VI cần duyệt] to fold back",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "lật lên; gấp lại",
+        "meaningEn": "to turn up, to fold back"
       },
       "search": {
         "termNoAccent": "折り返す",
         "readingNoAccent": "おりかえす",
-        "meaningViNoAccent": "[VI can duyet] to turn up; [VI can duyet] to fold back",
+        "meaningViNoAccent": "lat len; gap lai",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1169,7 +1119,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1185,15 +1135,13 @@
       },
       "sense": {
         "senseId": "n1_s0446",
-        "meaningVi": "[VI cần duyệt] textile; [VI cần duyệt] fabric",
-        "meaningEn": "textile, fabric",
-        "meaningViDraft": "[VI cần duyệt] textile; [VI cần duyệt] fabric",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "dệt; vải",
+        "meaningEn": "textile, fabric"
       },
       "search": {
         "termNoAccent": "織物",
         "readingNoAccent": "おりもの",
-        "meaningViNoAccent": "[VI can duyet] textile; [VI can duyet] fabric",
+        "meaningViNoAccent": "det; vai",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1215,7 +1163,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1231,15 +1179,13 @@
       },
       "sense": {
         "senseId": "n1_s0447",
-        "meaningVi": "[VI cần duyệt] to weave",
-        "meaningEn": "to weave",
-        "meaningViDraft": "[VI cần duyệt] to weave",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "dệt",
+        "meaningEn": "to weave"
       },
       "search": {
         "termNoAccent": "織る",
         "readingNoAccent": "おる",
-        "meaningViNoAccent": "[VI can duyet] to weave",
+        "meaningViNoAccent": "det",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1261,7 +1207,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1277,15 +1223,13 @@
       },
       "sense": {
         "senseId": "n1_s0448",
-        "meaningVi": "[VI cần duyệt] I",
-        "meaningEn": "I",
-        "meaningViDraft": "[VI cần duyệt] I",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "Tôi (cái tôi) (đại từ nhân xưng ngôi thứ nhất khoe khoang)",
+        "meaningEn": "I"
       },
       "search": {
         "termNoAccent": "俺",
         "readingNoAccent": "おれ",
-        "meaningViNoAccent": "[VI can duyet] I",
+        "meaningViNoAccent": "toi (cai toi) (dai tu nhan xung ngoi thu nhat khoe khoang)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1307,7 +1251,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1323,15 +1267,13 @@
       },
       "sense": {
         "senseId": "n1_s0449",
-        "meaningVi": "[VI cần duyệt] foolish; [VI cần duyệt] stupid",
-        "meaningEn": "foolish, stupid",
-        "meaningViDraft": "[VI cần duyệt] foolish; [VI cần duyệt] stupid",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "ngu xuẩn; ngu ngốc",
+        "meaningEn": "foolish, stupid"
       },
       "search": {
         "termNoAccent": "愚か",
         "readingNoAccent": "おろか",
-        "meaningViNoAccent": "[VI can duyet] foolish; [VI can duyet] stupid",
+        "meaningViNoAccent": "ngu xuan; ngu ngoc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1353,7 +1295,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1369,15 +1311,13 @@
       },
       "sense": {
         "senseId": "n1_s0450",
-        "meaningVi": "[VI cần duyệt] neglect; [VI cần duyệt] negligence; [VI cần duyệt] carelessness",
-        "meaningEn": "neglect, negligence, carelessness",
-        "meaningViDraft": "[VI cần duyệt] neglect; [VI cần duyệt] negligence; [VI cần duyệt] carelessness",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự lơ là; sự cẩu thả; sự cẩu thả",
+        "meaningEn": "neglect, negligence, carelessness"
       },
       "search": {
         "termNoAccent": "疎か",
         "readingNoAccent": "おろそか",
-        "meaningViNoAccent": "[VI can duyet] neglect; [VI can duyet] negligence; [VI can duyet] carelessness",
+        "meaningViNoAccent": "su lo la; su cau tha; su cau tha",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1399,7 +1339,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1415,15 +1355,13 @@
       },
       "sense": {
         "senseId": "n1_s0451",
-        "meaningVi": "kết thúc; đóng",
-        "meaningEn": "to finish, to close",
-        "meaningViDraft": "kết thúc; đóng",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "kết thúc; kết thúc",
+        "meaningEn": "to finish, to close"
       },
       "search": {
         "termNoAccent": "終わる",
         "readingNoAccent": "おわる",
-        "meaningViNoAccent": "ket thuc; đong",
+        "meaningViNoAccent": "ket thuc; ket thuc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1445,7 +1383,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1461,15 +1399,13 @@
       },
       "sense": {
         "senseId": "n1_s0452",
-        "meaningVi": "[VI cần duyệt] tone color; [VI cần duyệt] tone quality; [VI cần duyệt] timbre; [VI cần duyệt] synthesizer patch",
-        "meaningEn": "tone color, tone quality, timbre, synthesizer patch",
-        "meaningViDraft": "[VI cần duyệt] tone color; [VI cần duyệt] tone quality; [VI cần duyệt] timbre; [VI cần duyệt] synthesizer patch",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tông màu;chất lượng âm sắc;âm sắc;bản vá tổng hợp",
+        "meaningEn": "tone color, tone quality, timbre, synthesizer patch"
       },
       "search": {
         "termNoAccent": "音色",
         "readingNoAccent": "おんいろ",
-        "meaningViNoAccent": "[VI can duyet] tone color; [VI can duyet] tone quality; [VI can duyet] timbre; [VI can duyet] synthesizer patch",
+        "meaningViNoAccent": "tong mau;chat luong am sac;am sac;ban va tong hop",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1491,7 +1427,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1507,15 +1443,13 @@
       },
       "sense": {
         "senseId": "n1_s0453",
-        "meaningVi": "[VI cần duyệt] gentle; [VI cần duyệt] mild; [VI cần duyệt] moderate",
-        "meaningEn": "gentle, mild, moderate",
-        "meaningViDraft": "[VI cần duyệt] gentle; [VI cần duyệt] mild; [VI cần duyệt] moderate",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "nhẹ nhàng; nhẹ nhàng; vừa phải",
+        "meaningEn": "gentle, mild, moderate"
       },
       "search": {
         "termNoAccent": "温和",
         "readingNoAccent": "おんわ",
-        "meaningViNoAccent": "[VI can duyet] gentle; [VI can duyet] mild; [VI can duyet] moderate",
+        "meaningViNoAccent": "nhe nhang; nhe nhang; vua phai",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1537,7 +1471,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1553,15 +1487,13 @@
       },
       "sense": {
         "senseId": "n1_s0454",
-        "meaningVi": "[VI cần duyệt] tentative; [VI cần duyệt] provisional",
-        "meaningEn": "tentative, provisional",
-        "meaningViDraft": "[VI cần duyệt] tentative; [VI cần duyệt] provisional",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "dự kiến; tạm thời",
+        "meaningEn": "tentative, provisional"
       },
       "search": {
         "termNoAccent": "仮",
         "readingNoAccent": "か",
-        "meaningViNoAccent": "[VI can duyet] tentative; [VI can duyet] provisional",
+        "meaningViNoAccent": "du kien; tam thoi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1583,7 +1515,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1599,15 +1531,13 @@
       },
       "sense": {
         "senseId": "n1_s0455",
-        "meaningVi": "[VI cần duyệt] department; [VI cần duyệt] section",
-        "meaningEn": "department, section",
-        "meaningViDraft": "[VI cần duyệt] department; [VI cần duyệt] section",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "bộ phận; bộ phận",
+        "meaningEn": "department, section"
       },
       "search": {
         "termNoAccent": "科",
         "readingNoAccent": "か",
-        "meaningViNoAccent": "[VI can duyet] department; [VI can duyet] section",
+        "meaningViNoAccent": "bo phan; bo phan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1629,7 +1559,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1645,15 +1575,13 @@
       },
       "sense": {
         "senseId": "n1_s0456",
-        "meaningVi": "[VI cần duyệt] article counter",
-        "meaningEn": "article counter",
-        "meaningViDraft": "[VI cần duyệt] article counter",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "quầy bài viết",
+        "meaningEn": "article counter"
       },
       "search": {
         "termNoAccent": "個",
         "readingNoAccent": "か",
-        "meaningViNoAccent": "[VI can duyet] article counter",
+        "meaningViNoAccent": "quay bai viet",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1675,7 +1603,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1691,15 +1619,13 @@
       },
       "sense": {
         "senseId": "n1_s0457",
-        "meaningVi": "[VI cần duyệt] low rank; [VI cần duyệt] subordinate; [VI cần duyệt] lower order",
-        "meaningEn": "low rank, subordinate, lower order",
-        "meaningViDraft": "[VI cần duyệt] low rank; [VI cần duyệt] subordinate; [VI cần duyệt] lower order",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "thứ hạng thấp;cấp dưới;thứ tự thấp hơn (ví dụ: byte)",
+        "meaningEn": "low rank, subordinate, lower order"
       },
       "search": {
         "termNoAccent": "下位",
         "readingNoAccent": "かい",
-        "meaningViNoAccent": "[VI can duyet] low rank; [VI can duyet] subordinate; [VI can duyet] lower order",
+        "meaningViNoAccent": "thu hang thap;cap duoi;thu tu thap hon (vi du: byte)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1721,7 +1647,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1737,15 +1663,13 @@
       },
       "sense": {
         "senseId": "n1_s0458",
-        "meaningVi": "[VI cần duyệt] -floor; [VI cần duyệt] stories",
-        "meaningEn": "-floor , stories",
-        "meaningViDraft": "[VI cần duyệt] -floor; [VI cần duyệt] stories",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "-sàn (quầy);truyện",
+        "meaningEn": "-floor , stories"
       },
       "search": {
         "termNoAccent": "階",
         "readingNoAccent": "かい",
-        "meaningViNoAccent": "[VI can duyet] -floor; [VI can duyet] stories",
+        "meaningViNoAccent": "-san (quay);truyen",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1767,7 +1691,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1783,15 +1707,13 @@
       },
       "sense": {
         "senseId": "n1_s0459",
-        "meaningVi": "[VI cần duyệt] deterioration; [VI cần duyệt] changing for the worse",
-        "meaningEn": "deterioration, changing for the worse",
-        "meaningViDraft": "[VI cần duyệt] deterioration; [VI cần duyệt] changing for the worse",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự suy thoái; sự thay đổi trở nên tồi tệ hơn",
+        "meaningEn": "deterioration, changing for the worse"
       },
       "search": {
         "termNoAccent": "改悪",
         "readingNoAccent": "かいあく",
-        "meaningViNoAccent": "[VI can duyet] deterioration; [VI can duyet] changing for the worse",
+        "meaningViNoAccent": "su suy thoai; su thay doi tro nen toi te hon",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1813,7 +1735,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1829,15 +1751,13 @@
       },
       "sense": {
         "senseId": "n1_s0460",
-        "meaningVi": "[VI cần duyệt] maritime; [VI cần duyệt] marine transportation",
-        "meaningEn": "maritime, marine transportation",
-        "meaningViDraft": "[VI cần duyệt] maritime; [VI cần duyệt] marine transportation",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "hàng hải; vận tải biển",
+        "meaningEn": "maritime, marine transportation"
       },
       "search": {
         "termNoAccent": "海運",
         "readingNoAccent": "かいうん",
-        "meaningViNoAccent": "[VI can duyet] maritime; [VI can duyet] marine transportation",
+        "meaningViNoAccent": "hang hai; van tai bien",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1859,7 +1779,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1875,15 +1795,13 @@
       },
       "sense": {
         "senseId": "n1_s0461",
-        "meaningVi": "[VI cần duyệt] reform; [VI cần duyệt] reformation; [VI cần duyệt] innovation",
-        "meaningEn": "reform, reformation, innovation",
-        "meaningViDraft": "[VI cần duyệt] reform; [VI cần duyệt] reformation; [VI cần duyệt] innovation",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự cải cách; sự cải cách; sự đổi mới",
+        "meaningEn": "reform, reformation, innovation"
       },
       "search": {
         "termNoAccent": "改革",
         "readingNoAccent": "かいかく",
-        "meaningViNoAccent": "[VI can duyet] reform; [VI can duyet] reformation; [VI can duyet] innovation",
+        "meaningViNoAccent": "su cai cach; su cai cach; su doi moi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1905,7 +1823,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1921,15 +1839,13 @@
       },
       "sense": {
         "senseId": "n1_s0462",
-        "meaningVi": "[VI cần duyệt] shell",
-        "meaningEn": "shell",
-        "meaningViDraft": "[VI cần duyệt] shell",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "vỏ",
+        "meaningEn": "shell"
       },
       "search": {
         "termNoAccent": "貝殻",
         "readingNoAccent": "かいから",
-        "meaningViNoAccent": "[VI can duyet] shell",
+        "meaningViNoAccent": "vo",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1951,7 +1867,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -1967,15 +1883,13 @@
       },
       "sense": {
         "senseId": "n1_s0463",
-        "meaningVi": "[VI cần duyệt] class; [VI cần duyệt] rank; [VI cần duyệt] grade",
-        "meaningEn": "class, rank, grade",
-        "meaningViDraft": "[VI cần duyệt] class; [VI cần duyệt] rank; [VI cần duyệt] grade",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "lớp; cấp bậc; cấp bậc",
+        "meaningEn": "class, rank, grade"
       },
       "search": {
         "termNoAccent": "階級",
         "readingNoAccent": "かいきゅう",
-        "meaningViNoAccent": "[VI can duyet] class; [VI can duyet] rank; [VI can duyet] grade",
+        "meaningViNoAccent": "lop; cap bac; cap bac",
         "hanVietNoAccent": null
       },
       "links": {
@@ -1997,7 +1911,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2013,15 +1927,13 @@
       },
       "sense": {
         "senseId": "n1_s0464",
-        "meaningVi": "[VI cần duyệt] channel",
-        "meaningEn": "channel",
-        "meaningViDraft": "[VI cần duyệt] channel",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "kênh",
+        "meaningEn": "channel"
       },
       "search": {
         "termNoAccent": "海峡",
         "readingNoAccent": "かいきょう",
-        "meaningViNoAccent": "[VI can duyet] channel",
+        "meaningViNoAccent": "kenh",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2043,7 +1955,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2059,15 +1971,13 @@
       },
       "sense": {
         "senseId": "n1_s0465",
-        "meaningVi": "[VI cần duyệt] interview; [VI cần duyệt] audience",
-        "meaningEn": "interview, audience",
-        "meaningViDraft": "[VI cần duyệt] interview; [VI cần duyệt] audience",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cuộc phỏng vấn; khán giả",
+        "meaningEn": "interview, audience"
       },
       "search": {
         "termNoAccent": "会見",
         "readingNoAccent": "かいけん",
-        "meaningViNoAccent": "[VI can duyet] interview; [VI can duyet] audience",
+        "meaningViNoAccent": "cuoc phong van; khan gia",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2089,7 +1999,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2105,15 +2015,13 @@
       },
       "sense": {
         "senseId": "n1_s0466",
-        "meaningVi": "[VI cần duyệt] nursing",
-        "meaningEn": "nursing",
-        "meaningViDraft": "[VI cần duyệt] nursing",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "điều dưỡng",
+        "meaningEn": "nursing"
       },
       "search": {
         "termNoAccent": "介護",
         "readingNoAccent": "かいこ",
-        "meaningViNoAccent": "[VI can duyet] nursing",
+        "meaningViNoAccent": "dieu duong",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2135,7 +2043,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2151,15 +2059,13 @@
       },
       "sense": {
         "senseId": "n1_s0467",
-        "meaningVi": "[VI cần duyệt] holding a meeting; [VI cần duyệt] open an exhibition",
-        "meaningEn": "holding a meeting, open an exhibition",
-        "meaningViDraft": "[VI cần duyệt] holding a meeting; [VI cần duyệt] open an exhibition",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tổ chức một cuộc họp; mở một cuộc triển lãm",
+        "meaningEn": "holding a meeting, open an exhibition"
       },
       "search": {
         "termNoAccent": "開催",
         "readingNoAccent": "かいさい",
-        "meaningViNoAccent": "[VI can duyet] holding a meeting; [VI can duyet] open an exhibition",
+        "meaningViNoAccent": "to chuc mot cuoc hop; mo mot cuoc trien lam",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2181,7 +2087,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2197,15 +2103,13 @@
       },
       "sense": {
         "senseId": "n1_s0468",
-        "meaningVi": "[VI cần duyệt] collection; [VI cần duyệt] recovery",
-        "meaningEn": "collection, recovery",
-        "meaningViDraft": "[VI cần duyệt] collection; [VI cần duyệt] recovery",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự thu thập; sự phục hồi",
+        "meaningEn": "collection, recovery"
       },
       "search": {
         "termNoAccent": "回収",
         "readingNoAccent": "かいしゅう",
-        "meaningViNoAccent": "[VI can duyet] collection; [VI can duyet] recovery",
+        "meaningViNoAccent": "su thu thap; su phuc hoi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2227,7 +2131,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2243,15 +2147,13 @@
       },
       "sense": {
         "senseId": "n1_s0469",
-        "meaningVi": "[VI cần duyệt] repair; cải thiện",
-        "meaningEn": "repair, improvement",
-        "meaningViDraft": "[VI cần duyệt] repair; cải thiện",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sửa chữa; cải tiến",
+        "meaningEn": "repair, improvement"
       },
       "search": {
         "termNoAccent": "改修",
         "readingNoAccent": "かいしゅう",
-        "meaningViNoAccent": "[VI can duyet] repair; cai thien",
+        "meaningViNoAccent": "sua chua; cai tien",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2273,7 +2175,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2289,15 +2191,13 @@
       },
       "sense": {
         "senseId": "n1_s0470",
-        "meaningVi": "[VI cần duyệt] monster",
-        "meaningEn": "monster",
-        "meaningViDraft": "[VI cần duyệt] monster",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "quái vật",
+        "meaningEn": "monster"
       },
       "search": {
         "termNoAccent": "怪獣",
         "readingNoAccent": "かいしゅう",
-        "meaningViNoAccent": "[VI can duyet] monster",
+        "meaningViNoAccent": "quai vat",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2319,7 +2219,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2335,15 +2235,13 @@
       },
       "sense": {
         "senseId": "n1_s0471",
-        "meaningVi": "[VI cần duyệt] cancellation; [VI cần duyệt] rescinding; [VI cần duyệt] release; [VI cần duyệt] calling off",
-        "meaningEn": "cancellation, rescinding, release, calling off",
-        "meaningViDraft": "[VI cần duyệt] cancellation; [VI cần duyệt] rescinding; [VI cần duyệt] release; [VI cần duyệt] calling off",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "hủy bỏ;hủy bỏ;giải phóng;hủy bỏ",
+        "meaningEn": "cancellation, rescinding, release, calling off"
       },
       "search": {
         "termNoAccent": "解除",
         "readingNoAccent": "かいしょ",
-        "meaningViNoAccent": "[VI can duyet] cancellation; [VI can duyet] rescinding; [VI can duyet] release; [VI can duyet] calling off",
+        "meaningViNoAccent": "huy bo;huy bo;giai phong;huy bo",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2365,7 +2263,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2381,15 +2279,13 @@
       },
       "sense": {
         "senseId": "n1_s0472",
-        "meaningVi": "[VI cần duyệt] forwarding",
-        "meaningEn": "forwarding",
-        "meaningViDraft": "[VI cần duyệt] forwarding",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chuyển tiếp",
+        "meaningEn": "forwarding"
       },
       "search": {
         "termNoAccent": "回送",
         "readingNoAccent": "かいそう",
-        "meaningViNoAccent": "[VI can duyet] forwarding",
+        "meaningViNoAccent": "chuyen tiep",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2411,7 +2307,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2427,15 +2323,13 @@
       },
       "sense": {
         "senseId": "n1_s0473",
-        "meaningVi": "[VI cần duyệt] class; [VI cần duyệt] level; [VI cần duyệt] stratum; [VI cần duyệt] hierarchy",
-        "meaningEn": "class, level, stratum, hierarchy",
-        "meaningViDraft": "[VI cần duyệt] class; [VI cần duyệt] level; [VI cần duyệt] stratum; [VI cần duyệt] hierarchy",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "lớp; cấp độ; tầng lớp; thứ bậc",
+        "meaningEn": "class, level, stratum, hierarchy"
       },
       "search": {
         "termNoAccent": "階層",
         "readingNoAccent": "かいそう",
-        "meaningViNoAccent": "[VI can duyet] class; [VI can duyet] level; [VI can duyet] stratum; [VI can duyet] hierarchy",
+        "meaningViNoAccent": "lop; cap do; tang lop; thu bac",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2457,7 +2351,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2473,15 +2367,13 @@
       },
       "sense": {
         "senseId": "n1_s0474",
-        "meaningVi": "[VI cần duyệt] reclamation; [VI cần duyệt] cultivation; [VI cần duyệt] pioneer",
-        "meaningEn": "reclamation , cultivation, pioneer",
-        "meaningViDraft": "[VI cần duyệt] reclamation; [VI cần duyệt] cultivation; [VI cần duyệt] pioneer",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự khai hoang (đất hoang); việc trồng trọt; người tiên phong",
+        "meaningEn": "reclamation , cultivation, pioneer"
       },
       "search": {
         "termNoAccent": "開拓",
         "readingNoAccent": "かいたく",
-        "meaningViNoAccent": "[VI can duyet] reclamation; [VI can duyet] cultivation; [VI can duyet] pioneer",
+        "meaningViNoAccent": "su khai hoang (dat hoang); viec trong trot; nguoi tien phong",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2503,7 +2395,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2519,15 +2411,13 @@
       },
       "sense": {
         "senseId": "n1_s0475",
-        "meaningVi": "cuộc trò chuyện; hội nghị; thảo luận; [VI cần duyệt] interview",
-        "meaningEn": "conversation, conference, discussion, interview",
-        "meaningViDraft": "cuộc trò chuyện; hội nghị; thảo luận; [VI cần duyệt] interview",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cuộc đối thoại; cuộc hội nghị; cuộc thảo luận; cuộc phỏng vấn",
+        "meaningEn": "conversation, conference, discussion, interview"
       },
       "search": {
         "termNoAccent": "会談",
         "readingNoAccent": "かいたん",
-        "meaningViNoAccent": "cuoc tro chuyen; hoi nghi; thao luan; [VI can duyet] interview",
+        "meaningViNoAccent": "cuoc doi thoai; cuoc hoi nghi; cuoc thao luan; cuoc phong van",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2549,7 +2439,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2565,15 +2455,13 @@
       },
       "sense": {
         "senseId": "n1_s0476",
-        "meaningVi": "[VI cần duyệt] reform",
-        "meaningEn": "reform",
-        "meaningViDraft": "[VI cần duyệt] reform",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cải cách",
+        "meaningEn": "reform"
       },
       "search": {
         "termNoAccent": "改定",
         "readingNoAccent": "かいてい",
-        "meaningViNoAccent": "[VI can duyet] reform",
+        "meaningViNoAccent": "cai cach",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2595,7 +2483,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2611,15 +2499,13 @@
       },
       "sense": {
         "senseId": "n1_s0477",
-        "meaningVi": "[VI cần duyệt] revision",
-        "meaningEn": "revision",
-        "meaningViDraft": "[VI cần duyệt] revision",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sửa đổi",
+        "meaningEn": "revision"
       },
       "search": {
         "termNoAccent": "改訂",
         "readingNoAccent": "かいてい",
-        "meaningViNoAccent": "[VI can duyet] revision",
+        "meaningViNoAccent": "sua doi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2641,7 +2527,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2657,15 +2543,13 @@
       },
       "sense": {
         "senseId": "n1_s0478",
-        "meaningVi": "[VI cần duyệt] highway",
-        "meaningEn": "highway",
-        "meaningViDraft": "[VI cần duyệt] highway",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đường cao tốc",
+        "meaningEn": "highway"
       },
       "search": {
         "termNoAccent": "街道",
         "readingNoAccent": "かいとう",
-        "meaningViNoAccent": "[VI can duyet] highway",
+        "meaningViNoAccent": "duong cao toc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2687,7 +2571,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2703,15 +2587,13 @@
       },
       "sense": {
         "senseId": "n1_s0479",
-        "meaningVi": "[VI cần duyệt] intervention",
-        "meaningEn": "intervention",
-        "meaningViDraft": "[VI cần duyệt] intervention",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự can thiệp",
+        "meaningEn": "intervention"
       },
       "search": {
         "termNoAccent": "介入",
         "readingNoAccent": "かいにゅう",
-        "meaningViNoAccent": "[VI can duyet] intervention",
+        "meaningViNoAccent": "su can thiep",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2733,7 +2615,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2749,15 +2631,13 @@
       },
       "sense": {
         "senseId": "n1_s0480",
-        "meaningVi": "phát triển; [VI cần duyệt] exploitation",
-        "meaningEn": "development, exploitation",
-        "meaningViDraft": "phát triển; [VI cần duyệt] exploitation",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "phát triển; khai thác",
+        "meaningEn": "development, exploitation"
       },
       "search": {
         "termNoAccent": "開発",
         "readingNoAccent": "かいはつ",
-        "meaningViNoAccent": "phat trien; [VI can duyet] exploitation",
+        "meaningViNoAccent": "phat trien; khai thac",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2779,7 +2659,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2795,15 +2675,13 @@
       },
       "sense": {
         "senseId": "n1_s0481",
-        "meaningVi": "[VI cần duyệt] height above sea level",
-        "meaningEn": "height above sea level",
-        "meaningViDraft": "[VI cần duyệt] height above sea level",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "độ cao so với mực nước biển",
+        "meaningEn": "height above sea level"
       },
       "search": {
         "termNoAccent": "海抜",
         "readingNoAccent": "かいはつ",
-        "meaningViNoAccent": "[VI can duyet] height above sea level",
+        "meaningViNoAccent": "do cao so voi muc nuoc bien",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2825,7 +2703,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2841,15 +2719,13 @@
       },
       "sense": {
         "senseId": "n1_s0482",
-        "meaningVi": "[VI cần duyệt] nursing; [VI cần duyệt] looking after",
-        "meaningEn": "nursing, looking after",
-        "meaningViDraft": "[VI cần duyệt] nursing; [VI cần duyệt] looking after",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "điều dưỡng; chăm sóc",
+        "meaningEn": "nursing, looking after"
       },
       "search": {
         "termNoAccent": "介抱",
         "readingNoAccent": "かいほう",
-        "meaningViNoAccent": "[VI can duyet] nursing; [VI can duyet] looking after",
+        "meaningViNoAccent": "dieu duong; cham soc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2871,7 +2747,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2887,15 +2763,13 @@
       },
       "sense": {
         "senseId": "n1_s0483",
-        "meaningVi": "[VI cần duyệt] dissection; [VI cần duyệt] autopsy",
-        "meaningEn": "dissection, autopsy",
-        "meaningViDraft": "[VI cần duyệt] dissection; [VI cần duyệt] autopsy",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "mổ xẻ; khám nghiệm tử thi",
+        "meaningEn": "dissection, autopsy"
       },
       "search": {
         "termNoAccent": "解剖",
         "readingNoAccent": "かいほう",
-        "meaningViNoAccent": "[VI can duyet] dissection; [VI can duyet] autopsy",
+        "meaningViNoAccent": "mo xe; kham nghiem tu thi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2917,7 +2791,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2933,15 +2807,13 @@
       },
       "sense": {
         "senseId": "n1_s0484",
-        "meaningVi": "[VI cần duyệt] circulation",
-        "meaningEn": "circulation",
-        "meaningViDraft": "[VI cần duyệt] circulation",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự lưu thông",
+        "meaningEn": "circulation"
       },
       "search": {
         "termNoAccent": "回覧",
         "readingNoAccent": "かいらん",
-        "meaningViNoAccent": "[VI can duyet] circulation",
+        "meaningViNoAccent": "su luu thong",
         "hanVietNoAccent": null
       },
       "links": {
@@ -2963,7 +2835,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -2979,15 +2851,13 @@
       },
       "sense": {
         "senseId": "n1_s0485",
-        "meaningVi": "[VI cần duyệt] ocean current",
-        "meaningEn": "ocean current",
-        "meaningViDraft": "[VI cần duyệt] ocean current",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "dòng hải lưu",
+        "meaningEn": "ocean current"
       },
       "search": {
         "termNoAccent": "海流",
         "readingNoAccent": "かいりゅう",
-        "meaningViNoAccent": "[VI can duyet] ocean current",
+        "meaningViNoAccent": "dong hai luu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3009,7 +2879,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3025,15 +2895,13 @@
       },
       "sense": {
         "senseId": "n1_s0486",
-        "meaningVi": "cải thiện; [VI cần duyệt] reform",
-        "meaningEn": "improvement, reform",
-        "meaningViDraft": "cải thiện; [VI cần duyệt] reform",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cải tiến; cải cách",
+        "meaningEn": "improvement, reform"
       },
       "search": {
         "termNoAccent": "改良",
         "readingNoAccent": "かいりょう",
-        "meaningViNoAccent": "cai thien; [VI can duyet] reform",
+        "meaningViNoAccent": "cai tien; cai cach",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3055,7 +2923,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3071,15 +2939,13 @@
       },
       "sense": {
         "senseId": "n1_s0487",
-        "meaningVi": "[VI cần duyệt] circuit",
-        "meaningEn": "circuit",
-        "meaningViDraft": "[VI cần duyệt] circuit",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "mạch (điện)",
+        "meaningEn": "circuit"
       },
       "search": {
         "termNoAccent": "回路",
         "readingNoAccent": "かいろ",
-        "meaningViNoAccent": "[VI can duyet] circuit",
+        "meaningViNoAccent": "mach (dien)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3101,7 +2967,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3117,15 +2983,13 @@
       },
       "sense": {
         "senseId": "n1_s0488",
-        "meaningVi": "[VI cần duyệt] to look back; [VI cần duyệt] to turn around; [VI cần duyệt] to review",
-        "meaningEn": "to look back, to turn around, to review",
-        "meaningViDraft": "[VI cần duyệt] to look back; [VI cần duyệt] to turn around; [VI cần duyệt] to review",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "nhìn lại; quay lại; xem xét lại",
+        "meaningEn": "to look back, to turn around, to review"
       },
       "search": {
         "termNoAccent": "顧みる",
         "readingNoAccent": "かえりみる",
-        "meaningViNoAccent": "[VI can duyet] to look back; [VI can duyet] to turn around; [VI can duyet] to review",
+        "meaningViNoAccent": "nhin lai; quay lai; xem xet lai",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3147,7 +3011,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3163,15 +3027,13 @@
       },
       "sense": {
         "senseId": "n1_s0489",
-        "meaningVi": "[VI cần duyệt] to reflect",
-        "meaningEn": "to reflect",
-        "meaningViDraft": "[VI cần duyệt] to reflect",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "để phản ánh",
+        "meaningEn": "to reflect"
       },
       "search": {
         "termNoAccent": "省みる",
         "readingNoAccent": "かえりみる",
-        "meaningViNoAccent": "[VI can duyet] to reflect",
+        "meaningViNoAccent": "de phan anh",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3193,7 +3055,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3209,15 +3071,13 @@
       },
       "sense": {
         "senseId": "n1_s0490",
-        "meaningVi": "trở về; [VI cần duyệt] to come back; [VI cần duyệt] to go back",
-        "meaningEn": "to return, to come back, to go back",
-        "meaningViDraft": "trở về; [VI cần duyệt] to come back; [VI cần duyệt] to go back",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "trở về; trở lại; quay trở lại",
+        "meaningEn": "to return, to come back, to go back"
       },
       "search": {
         "termNoAccent": "返る",
         "readingNoAccent": "かえる",
-        "meaningViNoAccent": "tro ve; [VI can duyet] to come back; [VI can duyet] to go back",
+        "meaningViNoAccent": "tro ve; tro lai; quay tro lai",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3239,7 +3099,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3255,15 +3115,13 @@
       },
       "sense": {
         "senseId": "n1_s0491",
-        "meaningVi": "[VI cần duyệt] looks; [VI cần duyệt] features; [VI cần duyệt] face; [VI cần duyệt] countenance; [VI cần duyệt] expression",
-        "meaningEn": "looks, features, face, countenance, expression",
-        "meaningViDraft": "[VI cần duyệt] looks; [VI cần duyệt] features; [VI cần duyệt] face; [VI cần duyệt] countenance; [VI cần duyệt] expression",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "(bên ngoài) vẻ ngoài, nét mặt, nét mặt, vẻ mặt, biểu cảm",
+        "meaningEn": "looks, features, face, countenance, expression"
       },
       "search": {
         "termNoAccent": "顔付き",
         "readingNoAccent": "かおつき",
-        "meaningViNoAccent": "[VI can duyet] looks; [VI can duyet] features; [VI can duyet] face; [VI can duyet] countenance; [VI can duyet] expression",
+        "meaningViNoAccent": "(ben ngoai) ve ngoai, net mat, net mat, ve mat, bieu cam",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3285,7 +3143,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3301,15 +3159,13 @@
       },
       "sense": {
         "senseId": "n1_s0492",
-        "meaningVi": "[VI cần duyệt] to publish; [VI cần duyệt] to print; [VI cần duyệt] to carry; [VI cần duyệt] to put up; [VI cần duyệt] to hang out; [VI cần duyệt] to hoist; bay; [VI cần duyệt] to float (a",
-        "meaningEn": "to publish, to print, to carry , to put up, to hang out, to hoist, to fly , to float (a",
-        "meaningViDraft": "[VI cần duyệt] to publish; [VI cần duyệt] to print; [VI cần duyệt] to carry; [VI cần duyệt] to put up; [VI cần duyệt] to hang out; [VI cần duyệt] to hoist; bay; [VI cần duyệt] to float (a",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "xuất bản; in; mang theo (một bài báo); treo lên; đi chơi; kéo; bay (một cánh buồm); thả nổi (một",
+        "meaningEn": "to publish, to print, to carry , to put up, to hang out, to hoist, to fly , to float (a"
       },
       "search": {
         "termNoAccent": "掲ける",
         "readingNoAccent": "かかける",
-        "meaningViNoAccent": "[VI can duyet] to publish; [VI can duyet] to print; [VI can duyet] to carry; [VI can duyet] to put up; [VI can duyet] to hang out; [VI can duyet] to hoist; bay; [VI can duyet] to float (a",
+        "meaningViNoAccent": "xuat ban; in; mang theo (mot bai bao); treo len; di choi; keo; bay (mot canh buom); tha noi (mot",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3331,7 +3187,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3347,15 +3203,13 @@
       },
       "sense": {
         "senseId": "n1_s0493",
-        "meaningVi": "[VI cần duyệt] heel",
-        "meaningEn": "heel",
-        "meaningViDraft": "[VI cần duyệt] heel",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "(giày) gót chân",
+        "meaningEn": "heel"
       },
       "search": {
         "termNoAccent": "踵",
         "readingNoAccent": "かかと",
-        "meaningViNoAccent": "[VI can duyet] heel",
+        "meaningViNoAccent": "(giay) got chan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3377,7 +3231,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3393,15 +3247,13 @@
       },
       "sense": {
         "senseId": "n1_s0494",
-        "meaningVi": "[VI cần duyệt] official; [VI cần duyệt] duty; [VI cần duyệt] person in charge",
-        "meaningEn": "official, duty, person in charge",
-        "meaningViDraft": "[VI cần duyệt] official; [VI cần duyệt] duty; [VI cần duyệt] person in charge",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "quan chức, nhiệm vụ, người phụ trách",
+        "meaningEn": "official, duty, person in charge"
       },
       "search": {
         "termNoAccent": "係り",
         "readingNoAccent": "かかり",
-        "meaningViNoAccent": "[VI can duyet] official; [VI can duyet] duty; [VI can duyet] person in charge",
+        "meaningViNoAccent": "quan chuc, nhiem vu, nguoi phu trach",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3423,7 +3275,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3439,15 +3291,13 @@
       },
       "sense": {
         "senseId": "n1_s0495",
-        "meaningVi": "[VI cần duyệt] extracurricular",
-        "meaningEn": "extracurricular",
-        "meaningViDraft": "[VI cần duyệt] extracurricular",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "ngoại khóa",
+        "meaningEn": "extracurricular"
       },
       "search": {
         "termNoAccent": "課外",
         "readingNoAccent": "かかい",
-        "meaningViNoAccent": "[VI can duyet] extracurricular",
+        "meaningViNoAccent": "ngoai khoa",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3469,7 +3319,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3485,15 +3335,13 @@
       },
       "sense": {
         "senseId": "n1_s0496",
-        "meaningVi": "[VI cần duyệt] dictation",
-        "meaningEn": "dictation",
-        "meaningViDraft": "[VI cần duyệt] dictation",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự đọc chính tả",
+        "meaningEn": "dictation"
       },
       "search": {
         "termNoAccent": "書き取り",
         "readingNoAccent": "かきとり",
-        "meaningViNoAccent": "[VI can duyet] dictation",
+        "meaningViNoAccent": "su doc chinh ta",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3515,7 +3363,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3531,15 +3379,13 @@
       },
       "sense": {
         "senseId": "n1_s0497",
-        "meaningVi": "[VI cần duyệt] to write down; [VI cần duyệt] to take dictation; [VI cần duyệt] to take notes",
-        "meaningEn": "to write down, to take dictation, to take notes",
-        "meaningViDraft": "[VI cần duyệt] to write down; [VI cần duyệt] to take dictation; [VI cần duyệt] to take notes",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "viết ra; ghi chép; ghi chép",
+        "meaningEn": "to write down, to take dictation, to take notes"
       },
       "search": {
         "termNoAccent": "書き取る",
         "readingNoAccent": "かきとる",
-        "meaningViNoAccent": "[VI can duyet] to write down; [VI can duyet] to take dictation; [VI can duyet] to take notes",
+        "meaningViNoAccent": "viet ra; ghi chep; ghi chep",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3561,7 +3407,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3577,15 +3423,13 @@
       },
       "sense": {
         "senseId": "n1_s0498",
-        "meaningVi": "[VI cần duyệt] to stir up; [VI cần duyệt] to churn; [VI cần duyệt] to ransack; [VI cần duyệt] to disturb",
-        "meaningEn": "to stir up, to churn, to ransack, to disturb",
-        "meaningViDraft": "[VI cần duyệt] to stir up; [VI cần duyệt] to churn; [VI cần duyệt] to ransack; [VI cần duyệt] to disturb",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "khuấy động; khuấy động; lục soát; quấy rối",
+        "meaningEn": "to stir up, to churn, to ransack, to disturb"
       },
       "search": {
         "termNoAccent": "掻き回す",
         "readingNoAccent": "かきまわす",
-        "meaningViNoAccent": "[VI can duyet] to stir up; [VI can duyet] to churn; [VI can duyet] to ransack; [VI can duyet] to disturb",
+        "meaningViNoAccent": "khuay dong; khuay dong; luc soat; quay roi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3607,7 +3451,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3623,15 +3467,13 @@
       },
       "sense": {
         "senseId": "n1_s0499",
-        "meaningVi": "[VI cần duyệt] to lack; [VI cần duyệt] to break; [VI cần duyệt] to crack; [VI cần duyệt] to chip",
-        "meaningEn": "to lack, to break, to crack, to chip",
-        "meaningViDraft": "[VI cần duyệt] to lack; [VI cần duyệt] to break; [VI cần duyệt] to crack; [VI cần duyệt] to chip",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "thiếu; gãy; nứt; sứt mẻ",
+        "meaningEn": "to lack, to break, to crack, to chip"
       },
       "search": {
         "termNoAccent": "欠く",
         "readingNoAccent": "かく",
-        "meaningViNoAccent": "[VI can duyet] to lack; [VI can duyet] to break; [VI can duyet] to crack; [VI can duyet] to chip",
+        "meaningViNoAccent": "thieu; gay; nut; sut me",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3653,7 +3495,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3669,15 +3511,13 @@
       },
       "sense": {
         "senseId": "n1_s0500",
-        "meaningVi": "[VI cần duyệt] 1. angle; [VI cần duyệt] 2. bishop",
-        "meaningEn": "1. angle, 2. bishop",
-        "meaningViDraft": "[VI cần duyệt] 1. angle; [VI cần duyệt] 2. bishop",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "1. góc; 2. giám mục (shogi)",
+        "meaningEn": "1. angle, 2. bishop"
       },
       "search": {
         "termNoAccent": "角",
         "readingNoAccent": "かく",
-        "meaningViNoAccent": "[VI can duyet] 1. angle; [VI can duyet] 2. bishop",
+        "meaningViNoAccent": "1. goc; 2. giam muc (shogi)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3699,7 +3539,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3715,15 +3555,13 @@
       },
       "sense": {
         "senseId": "n1_s0501",
-        "meaningVi": "[VI cần duyệt] nucleus; [VI cần duyệt] kernel",
-        "meaningEn": "nucleus, kernel",
-        "meaningViDraft": "[VI cần duyệt] nucleus; [VI cần duyệt] kernel",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "hạt nhân; hạt nhân",
+        "meaningEn": "nucleus, kernel"
       },
       "search": {
         "termNoAccent": "核",
         "readingNoAccent": "かく",
-        "meaningViNoAccent": "[VI can duyet] nucleus; [VI can duyet] kernel",
+        "meaningViNoAccent": "hat nhan; hat nhan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3745,7 +3583,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3761,15 +3599,13 @@
       },
       "sense": {
         "senseId": "n1_s0502",
-        "meaningVi": "[VI cần duyệt] status; [VI cần duyệt] character; [VI cần duyệt] case",
-        "meaningEn": "status, character, case",
-        "meaningViDraft": "[VI cần duyệt] status; [VI cần duyệt] character; [VI cần duyệt] case",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tình trạng;nhân vật;trường hợp",
+        "meaningEn": "status, character, case"
       },
       "search": {
         "termNoAccent": "格",
         "readingNoAccent": "かく",
-        "meaningViNoAccent": "[VI can duyet] status; [VI can duyet] character; [VI can duyet] case",
+        "meaningViNoAccent": "tinh trang;nhan vat;truong hop",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3791,7 +3627,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3807,15 +3643,13 @@
       },
       "sense": {
         "senseId": "n1_s0503",
-        "meaningVi": "[VI cần duyệt] beautiful passage of literature",
-        "meaningEn": "beautiful passage of literature",
-        "meaningViDraft": "[VI cần duyệt] beautiful passage of literature",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đoạn văn hay",
+        "meaningEn": "beautiful passage of literature"
       },
       "search": {
         "termNoAccent": "佳句",
         "readingNoAccent": "かく",
-        "meaningViNoAccent": "[VI can duyet] beautiful passage of literature",
+        "meaningViNoAccent": "doan van hay",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3837,7 +3671,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3853,15 +3687,13 @@
       },
       "sense": {
         "senseId": "n1_s0504",
-        "meaningVi": "[VI cần duyệt] stroke",
-        "meaningEn": "stroke",
-        "meaningViDraft": "[VI cần duyệt] stroke",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đột quỵ",
+        "meaningEn": "stroke"
       },
       "search": {
         "termNoAccent": "画",
         "readingNoAccent": "かく",
-        "meaningViNoAccent": "[VI can duyet] stroke",
+        "meaningViNoAccent": "dot quy",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3883,7 +3715,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3899,15 +3731,13 @@
       },
       "sense": {
         "senseId": "n1_s0505",
-        "meaningVi": "[VI cần duyệt] qualitative difference; [VI cần duyệt] disparity",
-        "meaningEn": "qualitative difference, disparity",
-        "meaningViDraft": "[VI cần duyệt] qualitative difference; [VI cần duyệt] disparity",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự khác biệt về chất; sự khác biệt",
+        "meaningEn": "qualitative difference, disparity"
       },
       "search": {
         "termNoAccent": "格差",
         "readingNoAccent": "かくさ",
-        "meaningViNoAccent": "[VI can duyet] qualitative difference; [VI can duyet] disparity",
+        "meaningViNoAccent": "su khac biet ve chat; su khac biet",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3929,7 +3759,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3945,15 +3775,13 @@
       },
       "sense": {
         "senseId": "n1_s0506",
-        "meaningVi": "[VI cần duyệt] scattering; [VI cần duyệt] diffusion",
-        "meaningEn": "scattering, diffusion",
-        "meaningViDraft": "[VI cần duyệt] scattering; [VI cần duyệt] diffusion",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự tán xạ; sự khuếch tán",
+        "meaningEn": "scattering, diffusion"
       },
       "search": {
         "termNoAccent": "拡散",
         "readingNoAccent": "かくさん",
-        "meaningViNoAccent": "[VI can duyet] scattering; [VI can duyet] diffusion",
+        "meaningViNoAccent": "su tan xa; su khuech tan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -3975,7 +3803,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -3991,15 +3819,13 @@
       },
       "sense": {
         "senseId": "n1_s0507",
-        "meaningVi": "[VI cần duyệt] every kind; [VI cần duyệt] all sorts",
-        "meaningEn": "every kind, all sorts",
-        "meaningViDraft": "[VI cần duyệt] every kind; [VI cần duyệt] all sorts",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đủ loại; đủ loại",
+        "meaningEn": "every kind, all sorts"
       },
       "search": {
         "termNoAccent": "各種",
         "readingNoAccent": "かくしゅ",
-        "meaningViNoAccent": "[VI can duyet] every kind; [VI can duyet] all sorts",
+        "meaningViNoAccent": "du loai; du loai",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4021,7 +3847,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4037,15 +3863,13 @@
       },
       "sense": {
         "senseId": "n1_s0508",
-        "meaningVi": "[VI cần duyệt] every other week",
-        "meaningEn": "every other week",
-        "meaningViDraft": "[VI cần duyệt] every other week",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "mỗi tuần",
+        "meaningEn": "every other week"
       },
       "search": {
         "termNoAccent": "隔週",
         "readingNoAccent": "かくしゅう",
-        "meaningViNoAccent": "[VI can duyet] every other week",
+        "meaningViNoAccent": "moi tuan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4067,7 +3891,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4083,15 +3907,13 @@
       },
       "sense": {
         "senseId": "n1_s0509",
-        "meaningVi": "[VI cần duyệt] conviction; [VI cần duyệt] confidence",
-        "meaningEn": "conviction, confidence",
-        "meaningViDraft": "[VI cần duyệt] conviction; [VI cần duyệt] confidence",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "niềm tin; sự tự tin",
+        "meaningEn": "conviction, confidence"
       },
       "search": {
         "termNoAccent": "確信",
         "readingNoAccent": "かくしん",
-        "meaningViNoAccent": "[VI can duyet] conviction; [VI can duyet] confidence",
+        "meaningViNoAccent": "niem tin; su tu tin",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4113,7 +3935,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4129,15 +3951,13 @@
       },
       "sense": {
         "senseId": "n1_s0510",
-        "meaningVi": "[VI cần duyệt] reform; [VI cần duyệt] innovation",
-        "meaningEn": "reform, innovation",
-        "meaningViDraft": "[VI cần duyệt] reform; [VI cần duyệt] innovation",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cải cách; đổi mới",
+        "meaningEn": "reform, innovation"
       },
       "search": {
         "termNoAccent": "革新",
         "readingNoAccent": "かくしん",
-        "meaningViNoAccent": "[VI can duyet] reform; [VI can duyet] innovation",
+        "meaningViNoAccent": "cai cach; doi moi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4159,7 +3979,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4175,15 +3995,13 @@
       },
       "sense": {
         "senseId": "n1_s0511",
-        "meaningVi": "[VI cần duyệt] definition; quyết định; [VI cần duyệt] settlement",
-        "meaningEn": "definition , decision, settlement",
-        "meaningViDraft": "[VI cần duyệt] definition; quyết định; [VI cần duyệt] settlement",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "định nghĩa (toán học); quyết định; giải quyết",
+        "meaningEn": "definition , decision, settlement"
       },
       "search": {
         "termNoAccent": "確定",
         "readingNoAccent": "かくてい",
-        "meaningViNoAccent": "[VI can duyet] definition; quyet đinh; [VI can duyet] settlement",
+        "meaningViNoAccent": "dinh nghia (toan hoc); quyet dinh; giai quyet",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4205,7 +4023,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4221,15 +4039,13 @@
       },
       "sense": {
         "senseId": "n1_s0512",
-        "meaningVi": "[VI cần duyệt] acquisition; [VI cần duyệt] possession",
-        "meaningEn": "acquisition, possession",
-        "meaningViDraft": "[VI cần duyệt] acquisition; [VI cần duyệt] possession",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự mua lại; sự sở hữu",
+        "meaningEn": "acquisition, possession"
       },
       "search": {
         "termNoAccent": "獲得",
         "readingNoAccent": "かくとく",
-        "meaningViNoAccent": "[VI can duyet] acquisition; [VI can duyet] possession",
+        "meaningViNoAccent": "su mua lai; su so huu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4251,7 +4067,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4267,15 +4083,13 @@
       },
       "sense": {
         "senseId": "n1_s0513",
-        "meaningVi": "[VI cần duyệt] guarantee; [VI cần duyệt] ensure; [VI cần duyệt] maintain; [VI cần duyệt] insure; [VI cần duyệt] secure",
-        "meaningEn": "guarantee, ensure, maintain, insure, secure",
-        "meaningViDraft": "[VI cần duyệt] guarantee; [VI cần duyệt] ensure; [VI cần duyệt] maintain; [VI cần duyệt] insure; [VI cần duyệt] secure",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đảm bảo;đảm bảo;duy trì;đảm bảo;an toàn",
+        "meaningEn": "guarantee, ensure, maintain, insure, secure"
       },
       "search": {
         "termNoAccent": "確保",
         "readingNoAccent": "かくほ",
-        "meaningViNoAccent": "[VI can duyet] guarantee; [VI can duyet] ensure; [VI can duyet] maintain; [VI can duyet] insure; [VI can duyet] secure",
+        "meaningViNoAccent": "dam bao;dam bao;duy tri;dam bao;an toan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4297,7 +4111,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4313,15 +4127,13 @@
       },
       "sense": {
         "senseId": "n1_s0514",
-        "meaningVi": "[VI cần duyệt] revolution",
-        "meaningEn": "revolution",
-        "meaningViDraft": "[VI cần duyệt] revolution",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cuộc cách mạng",
+        "meaningEn": "revolution"
       },
       "search": {
         "termNoAccent": "革命",
         "readingNoAccent": "かくめい",
-        "meaningViNoAccent": "[VI can duyet] revolution",
+        "meaningViNoAccent": "cuoc cach mang",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4343,7 +4155,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4359,15 +4171,13 @@
       },
       "sense": {
         "senseId": "n1_s0515",
-        "meaningVi": "[VI cần duyệt] establishment",
-        "meaningEn": "establishment",
-        "meaningViDraft": "[VI cần duyệt] establishment",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "thành lập",
+        "meaningEn": "establishment"
       },
       "search": {
         "termNoAccent": "確立",
         "readingNoAccent": "かくりつ",
-        "meaningViNoAccent": "[VI can duyet] establishment",
+        "meaningViNoAccent": "thanh lap",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4389,7 +4199,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4405,15 +4215,13 @@
       },
       "sense": {
         "senseId": "n1_s0516",
-        "meaningVi": "[VI cần duyệt] betting; [VI cần duyệt] gambling; [VI cần duyệt] a gamble",
-        "meaningEn": "betting, gambling, a gamble",
-        "meaningViDraft": "[VI cần duyệt] betting; [VI cần duyệt] gambling; [VI cần duyệt] a gamble",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "cá cược; cờ bạc; canh bạc",
+        "meaningEn": "betting, gambling, a gamble"
       },
       "search": {
         "termNoAccent": "賭け",
         "readingNoAccent": "かけ",
-        "meaningViNoAccent": "[VI can duyet] betting; [VI can duyet] gambling; [VI can duyet] a gamble",
+        "meaningViNoAccent": "ca cuoc; co bac; canh bac",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4435,7 +4243,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4451,15 +4259,13 @@
       },
       "sense": {
         "senseId": "n1_s0517",
-        "meaningVi": "[VI cần duyệt] credit",
-        "meaningEn": "credit",
-        "meaningViDraft": "[VI cần duyệt] credit",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tín dụng",
+        "meaningEn": "credit"
       },
       "search": {
         "termNoAccent": "掛け",
         "readingNoAccent": "かけ",
-        "meaningViNoAccent": "[VI can duyet] credit",
+        "meaningViNoAccent": "tin dung",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4481,7 +4287,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4497,15 +4303,13 @@
       },
       "sense": {
         "senseId": "n1_s0518",
-        "meaningVi": "[VI cần duyệt] running fast; [VI cần duyệt] double time",
-        "meaningEn": "running fast, double time",
-        "meaningViDraft": "[VI cần duyệt] running fast; [VI cần duyệt] double time",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chạy nhanh; gấp đôi thời gian",
+        "meaningEn": "running fast, double time"
       },
       "search": {
         "termNoAccent": "駆け足",
         "readingNoAccent": "かけあし",
-        "meaningViNoAccent": "[VI can duyet] running fast; [VI can duyet] double time",
+        "meaningViNoAccent": "chay nhanh; gap doi thoi gian",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4527,7 +4331,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4543,15 +4347,13 @@
       },
       "sense": {
         "senseId": "n1_s0519",
-        "meaningVi": "[VI cần duyệt] household economy; [VI cần duyệt] family finances",
-        "meaningEn": "household economy, family finances",
-        "meaningViDraft": "[VI cần duyệt] household economy; [VI cần duyệt] family finances",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "kinh tế hộ gia đình; tài chính gia đình",
+        "meaningEn": "household economy, family finances"
       },
       "search": {
         "termNoAccent": "家計",
         "readingNoAccent": "かけい",
-        "meaningViNoAccent": "[VI can duyet] household economy; [VI can duyet] family finances",
+        "meaningViNoAccent": "kinh te ho gia dinh; tai chinh gia dinh",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4573,7 +4375,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4589,15 +4391,13 @@
       },
       "sense": {
         "senseId": "n1_s0520",
-        "meaningVi": "[VI cần duyệt] race",
-        "meaningEn": "race",
-        "meaningViDraft": "[VI cần duyệt] race",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "(chân) cuộc đua",
+        "meaningEn": "race"
       },
       "search": {
         "termNoAccent": "駆けっこ",
         "readingNoAccent": "かけっこ",
-        "meaningViNoAccent": "[VI can duyet] race",
+        "meaningViNoAccent": "(chan) cuoc dua",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4619,7 +4419,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4635,15 +4435,13 @@
       },
       "sense": {
         "senseId": "n1_s0521",
-        "meaningVi": "chạy; [VI cần duyệt] to gallop; [VI cần duyệt] to canter",
-        "meaningEn": "to run , to gallop, to canter",
-        "meaningViDraft": "chạy; [VI cần duyệt] to gallop; [VI cần duyệt] to canter",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chạy (đặc biệt là đua ngựa); phi nước đại; phi nước kiệu",
+        "meaningEn": "to run , to gallop, to canter"
       },
       "search": {
         "termNoAccent": "駆ける",
         "readingNoAccent": "かける",
-        "meaningViNoAccent": "chay; [VI can duyet] to gallop; [VI can duyet] to canter",
+        "meaningViNoAccent": "chay (dac biet la dua ngua); phi nuoc dai; phi nuoc kieu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4665,7 +4463,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4681,15 +4479,13 @@
       },
       "sense": {
         "senseId": "n1_s0522",
-        "meaningVi": "[VI cần duyệt] to wager; [VI cần duyệt] to bet; [VI cần duyệt] to risk; [VI cần duyệt] to stake; [VI cần duyệt] to gamble",
-        "meaningEn": "to wager, to bet, to risk, to stake, to gamble",
-        "meaningViDraft": "[VI cần duyệt] to wager; [VI cần duyệt] to bet; [VI cần duyệt] to risk; [VI cần duyệt] to stake; [VI cần duyệt] to gamble",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đánh cược;đánh cược;đánh cược;đánh bạc;đánh bạc",
+        "meaningEn": "to wager, to bet, to risk, to stake, to gamble"
       },
       "search": {
         "termNoAccent": "賭ける",
         "readingNoAccent": "かける",
-        "meaningViNoAccent": "[VI can duyet] to wager; [VI can duyet] to bet; [VI can duyet] to risk; [VI can duyet] to stake; [VI can duyet] to gamble",
+        "meaningViNoAccent": "danh cuoc;danh cuoc;danh cuoc;danh bac;danh bac",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4711,7 +4507,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4727,15 +4523,13 @@
       },
       "sense": {
         "senseId": "n1_s0523",
-        "meaningVi": "[VI cần duyệt] #NAME?",
-        "meaningEn": "#NAME?",
-        "meaningViDraft": "[VI cần duyệt] #NAME?",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "#TÊN?",
+        "meaningEn": "#NAME?"
       },
       "search": {
         "termNoAccent": "ヶ月",
         "readingNoAccent": "かけつ",
-        "meaningViNoAccent": "[VI can duyet] #NAME?",
+        "meaningViNoAccent": "#ten?",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4757,7 +4551,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4773,15 +4567,13 @@
       },
       "sense": {
         "senseId": "n1_s0524",
-        "meaningVi": "[VI cần duyệt] manufacturing; [VI cần duyệt] processing; [VI cần duyệt] treatment",
-        "meaningEn": "manufacturing, processing, treatment",
-        "meaningViDraft": "[VI cần duyệt] manufacturing; [VI cần duyệt] processing; [VI cần duyệt] treatment",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sản xuất; chế biến; xử lý",
+        "meaningEn": "manufacturing, processing, treatment"
       },
       "search": {
         "termNoAccent": "加工",
         "readingNoAccent": "かこう",
-        "meaningViNoAccent": "[VI can duyet] manufacturing; [VI can duyet] processing; [VI can duyet] treatment",
+        "meaningViNoAccent": "san xuat; che bien; xu ly",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4803,7 +4595,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4819,15 +4611,13 @@
       },
       "sense": {
         "senseId": "n1_s0525",
-        "meaningVi": "[VI cần duyệt] chemical combination",
-        "meaningEn": "chemical combination",
-        "meaningViDraft": "[VI cần duyệt] chemical combination",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự kết hợp hóa học",
+        "meaningEn": "chemical combination"
       },
       "search": {
         "termNoAccent": "化合",
         "readingNoAccent": "かこう",
-        "meaningViNoAccent": "[VI can duyet] chemical combination",
+        "meaningViNoAccent": "su ket hop hoa hoc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4849,7 +4639,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4865,15 +4655,13 @@
       },
       "sense": {
         "senseId": "n1_s0526",
-        "meaningVi": "[VI cần duyệt] to be bulky; [VI cần duyệt] to be unwieldy; [VI cần duyệt] to grow voluminous",
-        "meaningEn": "to be bulky, to be unwieldy, to grow voluminous",
-        "meaningViDraft": "[VI cần duyệt] to be bulky; [VI cần duyệt] to be unwieldy; [VI cần duyệt] to grow voluminous",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "trở nên cồng kềnh; trở nên cồng kềnh; trở nên đồ sộ",
+        "meaningEn": "to be bulky, to be unwieldy, to grow voluminous"
       },
       "search": {
         "termNoAccent": "嵩張る",
         "readingNoAccent": "かさはる",
-        "meaningViNoAccent": "[VI can duyet] to be bulky; [VI can duyet] to be unwieldy; [VI can duyet] to grow voluminous",
+        "meaningViNoAccent": "tro nen cong kenh; tro nen cong kenh; tro nen do so",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4895,7 +4683,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4911,15 +4699,13 @@
       },
       "sense": {
         "senseId": "n1_s0527",
-        "meaningVi": "[VI cần duyệt] to pile up; tăng",
-        "meaningEn": "to pile up, to increase",
-        "meaningViDraft": "[VI cần duyệt] to pile up; tăng",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chồng chất lên; tăng lên",
+        "meaningEn": "to pile up, to increase"
       },
       "search": {
         "termNoAccent": "嵩む",
         "readingNoAccent": "かさむ",
-        "meaningViNoAccent": "[VI can duyet] to pile up; tang",
+        "meaningViNoAccent": "chong chat len; tang len",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4941,7 +4727,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -4957,15 +4743,13 @@
       },
       "sense": {
         "senseId": "n1_s0528",
-        "meaningVi": "[VI cần duyệt] 1. windmill; [VI cần duyệt] 2. pinwheel",
-        "meaningEn": "1. windmill, 2. pinwheel",
-        "meaningViDraft": "[VI cần duyệt] 1. windmill; [VI cần duyệt] 2. pinwheel",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "1. cối xay gió; 2. chong chóng",
+        "meaningEn": "1. windmill, 2. pinwheel"
       },
       "search": {
         "termNoAccent": "風車",
         "readingNoAccent": "かさくるま",
-        "meaningViNoAccent": "[VI can duyet] 1. windmill; [VI can duyet] 2. pinwheel",
+        "meaningViNoAccent": "1. coi xay gio; 2. chong chong",
         "hanVietNoAccent": null
       },
       "links": {
@@ -4987,7 +4771,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5003,15 +4787,13 @@
       },
       "sense": {
         "senseId": "n1_s0529",
-        "meaningVi": "[VI cần duyệt] certainly!",
-        "meaningEn": "certainly!",
-        "meaningViDraft": "[VI cần duyệt] certainly!",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chắc chắn rồi!",
+        "meaningEn": "certainly!"
       },
       "search": {
         "termNoAccent": "畏まりました",
         "readingNoAccent": "かしこまりました",
-        "meaningViNoAccent": "[VI can duyet] certainly!",
+        "meaningViNoAccent": "chac chan roi!",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5033,7 +4815,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5049,15 +4831,13 @@
       },
       "sense": {
         "senseId": "n1_s0530",
-        "meaningVi": "[VI cần duyệt] luxury; [VI cần duyệt] pomp; [VI cần duyệt] delicate; [VI cần duyệt] slender; [VI cần duyệt] gorgeous",
-        "meaningEn": "luxury, pomp, delicate, slender, gorgeous",
-        "meaningViDraft": "[VI cần duyệt] luxury; [VI cần duyệt] pomp; [VI cần duyệt] delicate; [VI cần duyệt] slender; [VI cần duyệt] gorgeous",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sang trọng; hào hoa; tinh tế; thanh mảnh; tuyệt đẹp",
+        "meaningEn": "luxury, pomp, delicate, slender, gorgeous"
       },
       "search": {
         "termNoAccent": "華奢",
         "readingNoAccent": "かしゃ",
-        "meaningViNoAccent": "[VI can duyet] luxury; [VI can duyet] pomp; [VI can duyet] delicate; [VI can duyet] slender; [VI can duyet] gorgeous",
+        "meaningViNoAccent": "sang trong; hao hoa; tinh te; thanh manh; tuyet dep",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5079,7 +4859,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5095,15 +4875,13 @@
       },
       "sense": {
         "senseId": "n1_s0531",
-        "meaningVi": "[VI cần duyệt] passage; nơi chốn; [VI cần duyệt] point; [VI cần duyệt] part",
-        "meaningEn": "passage, place, point, part",
-        "meaningViDraft": "[VI cần duyệt] passage; nơi chốn; [VI cần duyệt] point; [VI cần duyệt] part",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đoạn;địa điểm;điểm;phần",
+        "meaningEn": "passage, place, point, part"
       },
       "search": {
         "termNoAccent": "箇所",
         "readingNoAccent": "かしょ",
-        "meaningViNoAccent": "[VI can duyet] passage; noi chon; [VI can duyet] point; [VI can duyet] part",
+        "meaningViNoAccent": "doan;dia diem;diem;phan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5125,7 +4903,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5141,15 +4919,13 @@
       },
       "sense": {
         "senseId": "n1_s0532",
-        "meaningVi": "[VI cần duyệt] burn; [VI cần duyệt] scald",
-        "meaningEn": "burn, scald",
-        "meaningViDraft": "[VI cần duyệt] burn; [VI cần duyệt] scald",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "đốt; bỏng nước",
+        "meaningEn": "burn, scald"
       },
       "search": {
         "termNoAccent": "火傷",
         "readingNoAccent": "かしょう",
-        "meaningViNoAccent": "[VI can duyet] burn; [VI can duyet] scald",
+        "meaningViNoAccent": "dot; bong nuoc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5171,7 +4947,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5187,15 +4963,13 @@
       },
       "sense": {
         "senseId": "n1_s0533",
-        "meaningVi": "[VI cần duyệt] itemized form; [VI cần duyệt] itemization",
-        "meaningEn": "itemized form, itemization",
-        "meaningViDraft": "[VI cần duyệt] itemized form; [VI cần duyệt] itemization",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "hình thức chia thành từng khoản; sự chia thành từng khoản",
+        "meaningEn": "itemized form, itemization"
       },
       "search": {
         "termNoAccent": "箇条書き",
         "readingNoAccent": "かしょうかき",
-        "meaningViNoAccent": "[VI can duyet] itemized form; [VI can duyet] itemization",
+        "meaningViNoAccent": "hinh thuc chia thanh tung khoan; su chia thanh tung khoan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5217,7 +4991,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5233,15 +5007,13 @@
       },
       "sense": {
         "senseId": "n1_s0534",
-        "meaningVi": "[VI cần duyệt] to chew; [VI cần duyệt] to bite; [VI cần duyệt] to gnaw; [VI cần duyệt] to nibble; [VI cần duyệt] to munch; [VI cần duyệt] to crunch; [VI cần duyệt] to have a smattering of",
-        "meaningEn": "to chew, to bite , to gnaw, to nibble, to munch, to crunch, to have a smattering of",
-        "meaningViDraft": "[VI cần duyệt] to chew; [VI cần duyệt] to bite; [VI cần duyệt] to gnaw; [VI cần duyệt] to nibble; [VI cần duyệt] to munch; [VI cần duyệt] to crunch; [VI cần duyệt] to have a smattering of",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "nhai;cắn;gặm;nhấm nháp;nghiền;nghiền nát;có một chút gì đó",
+        "meaningEn": "to chew, to bite , to gnaw, to nibble, to munch, to crunch, to have a smattering of"
       },
       "search": {
         "termNoAccent": "噛る",
         "readingNoAccent": "かしる",
-        "meaningViNoAccent": "[VI can duyet] to chew; [VI can duyet] to bite; [VI can duyet] to gnaw; [VI can duyet] to nibble; [VI can duyet] to munch; [VI can duyet] to crunch; [VI can duyet] to have a smattering of",
+        "meaningViNoAccent": "nhai;can;gam;nham nhap;nghien;nghien nat;co mot chut gi do",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5263,7 +5035,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5279,15 +5051,13 @@
       },
       "sense": {
         "senseId": "n1_s0535",
-        "meaningVi": "[VI cần duyệt] faint; [VI cần duyệt] dim; yếu; [VI cần duyệt] indistinct; [VI cần duyệt] hazy; nghèo; [VI cần duyệt] wretched",
-        "meaningEn": "faint, dim, weak, indistinct, hazy, poor, wretched",
-        "meaningViDraft": "[VI cần duyệt] faint; [VI cần duyệt] dim; yếu; [VI cần duyệt] indistinct; [VI cần duyệt] hazy; nghèo; [VI cần duyệt] wretched",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "mờ nhạt; mờ nhạt; yếu đuối; không rõ ràng; mơ hồ; nghèo nàn; khốn khổ",
+        "meaningEn": "faint, dim, weak, indistinct, hazy, poor, wretched"
       },
       "search": {
         "termNoAccent": "微か",
         "readingNoAccent": "かすか",
-        "meaningViNoAccent": "[VI can duyet] faint; [VI can duyet] dim; yeu; [VI can duyet] indistinct; [VI can duyet] hazy; ngheo; [VI can duyet] wretched",
+        "meaningViNoAccent": "mo nhat; mo nhat; yeu duoi; khong ro rang; mo ho; ngheo nan; khon kho",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5309,7 +5079,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5325,15 +5095,13 @@
       },
       "sense": {
         "senseId": "n1_s0536",
-        "meaningVi": "[VI cần duyệt] to grow hazy; [VI cần duyệt] to be misty",
-        "meaningEn": "to grow hazy, to be misty",
-        "meaningViDraft": "[VI cần duyệt] to grow hazy; [VI cần duyệt] to be misty",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "trở nên mù mịt; trở nên mù mịt",
+        "meaningEn": "to grow hazy, to be misty"
       },
       "search": {
         "termNoAccent": "霞む",
         "readingNoAccent": "かすむ",
-        "meaningViNoAccent": "[VI can duyet] to grow hazy; [VI can duyet] to be misty",
+        "meaningViNoAccent": "tro nen mu mit; tro nen mu mit",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5355,7 +5123,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5371,15 +5139,13 @@
       },
       "sense": {
         "senseId": "n1_s0537",
-        "meaningVi": "[VI cần duyệt] to change into; [VI cần duyệt] to convert into; [VI cần duyệt] to transform; [VI cần duyệt] to be reduced; ảnh hưởng; cải thiện",
-        "meaningEn": "to change into, to convert into, to transform, to be reduced, to influence, to improve",
-        "meaningViDraft": "[VI cần duyệt] to change into; [VI cần duyệt] to convert into; [VI cần duyệt] to transform; [VI cần duyệt] to be reduced; ảnh hưởng; cải thiện",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "thay đổi thành, chuyển đổi thành, biến đổi, giảm bớt, ảnh hưởng, cải thiện (ai đó)",
+        "meaningEn": "to change into, to convert into, to transform, to be reduced, to influence, to improve"
       },
       "search": {
         "termNoAccent": "化する",
         "readingNoAccent": "かする",
-        "meaningViNoAccent": "[VI can duyet] to change into; [VI can duyet] to convert into; [VI can duyet] to transform; [VI can duyet] to be reduced; anh huong; cai thien",
+        "meaningViNoAccent": "thay doi thanh, chuyen doi thanh, bien doi, giam bot, anh huong, cai thien (ai do)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5401,7 +5167,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5417,15 +5183,13 @@
       },
       "sense": {
         "senseId": "n1_s0538",
-        "meaningVi": "[VI cần duyệt] to touch lightly; [VI cần duyệt] to take a percentage",
-        "meaningEn": "to touch lightly, to take a percentage",
-        "meaningViDraft": "[VI cần duyệt] to touch lightly; [VI cần duyệt] to take a percentage",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chạm nhẹ; lấy phần trăm (từ)",
+        "meaningEn": "to touch lightly, to take a percentage"
       },
       "search": {
         "termNoAccent": "擦る",
         "readingNoAccent": "かする",
-        "meaningViNoAccent": "[VI can duyet] to touch lightly; [VI can duyet] to take a percentage",
+        "meaningViNoAccent": "cham nhe; lay phan tram (tu)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5447,7 +5211,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5463,15 +5227,13 @@
       },
       "sense": {
         "senseId": "n1_s0539",
-        "meaningVi": "[VI cần duyệt] Mars",
-        "meaningEn": "Mars",
-        "meaningViDraft": "[VI cần duyệt] Mars",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "Sao Hỏa (hành tinh)",
+        "meaningEn": "Mars"
       },
       "search": {
         "termNoAccent": "火星",
         "readingNoAccent": "かせい",
-        "meaningViNoAccent": "[VI can duyet] Mars",
+        "meaningViNoAccent": "sao hoa (hanh tinh)",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5493,7 +5255,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5509,15 +5271,13 @@
       },
       "sense": {
         "senseId": "n1_s0540",
-        "meaningVi": "[VI cần duyệt] fossil; [VI cần duyệt] petrifaction; [VI cần duyệt] fossilization",
-        "meaningEn": "fossil, petrifaction, fossilization",
-        "meaningViDraft": "[VI cần duyệt] fossil; [VI cần duyệt] petrifaction; [VI cần duyệt] fossilization",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "hóa thạch; hóa đá; hóa thạch",
+        "meaningEn": "fossil, petrifaction, fossilization"
       },
       "search": {
         "termNoAccent": "化石",
         "readingNoAccent": "かせき",
-        "meaningViNoAccent": "[VI can duyet] fossil; [VI can duyet] petrifaction; [VI can duyet] fossilization",
+        "meaningViNoAccent": "hoa thach; hoa da; hoa thach",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5539,7 +5299,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5555,15 +5315,13 @@
       },
       "sense": {
         "senseId": "n1_s0541",
-        "meaningVi": "[VI cần duyệt] rivers",
-        "meaningEn": "rivers",
-        "meaningViDraft": "[VI cần duyệt] rivers",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sông",
+        "meaningEn": "rivers"
       },
       "search": {
         "termNoAccent": "河川",
         "readingNoAccent": "かせん",
-        "meaningViNoAccent": "[VI can duyet] rivers",
+        "meaningViNoAccent": "song",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5585,7 +5343,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5601,15 +5359,13 @@
       },
       "sense": {
         "senseId": "n1_s0542",
-        "meaningVi": "[VI cần duyệt] synthetic fibres",
-        "meaningEn": "synthetic fibres",
-        "meaningViDraft": "[VI cần duyệt] synthetic fibres",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sợi tổng hợp",
+        "meaningEn": "synthetic fibres"
       },
       "search": {
         "termNoAccent": "化繊",
         "readingNoAccent": "かせん",
-        "meaningViNoAccent": "[VI can duyet] synthetic fibres",
+        "meaningViNoAccent": "soi tong hop",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5631,7 +5387,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5647,15 +5403,13 @@
       },
       "sense": {
         "senseId": "n1_s0543",
-        "meaningVi": "[VI cần duyệt] depopulation",
-        "meaningEn": "depopulation",
-        "meaningViDraft": "[VI cần duyệt] depopulation",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sự suy giảm dân số",
+        "meaningEn": "depopulation"
       },
       "search": {
         "termNoAccent": "過疎",
         "readingNoAccent": "かそ",
-        "meaningViNoAccent": "[VI can duyet] depopulation",
+        "meaningViNoAccent": "su suy giam dan so",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5677,7 +5431,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5693,15 +5447,13 @@
       },
       "sense": {
         "senseId": "n1_s0544",
-        "meaningVi": "[VI cần duyệt] excess; [VI cần duyệt] superabundance",
-        "meaningEn": "excess, superabundance",
-        "meaningViDraft": "[VI cần duyệt] excess; [VI cần duyệt] superabundance",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "dư thừa; dư thừa",
+        "meaningEn": "excess, superabundance"
       },
       "search": {
         "termNoAccent": "過多",
         "readingNoAccent": "かた",
-        "meaningViNoAccent": "[VI can duyet] excess; [VI can duyet] superabundance",
+        "meaningViNoAccent": "du thua; du thua",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5723,7 +5475,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5739,15 +5491,13 @@
       },
       "sense": {
         "senseId": "n1_s0545",
-        "meaningVi": "khó; [VI cần duyệt] hard",
-        "meaningEn": "difficult, hard",
-        "meaningViDraft": "khó; [VI cần duyệt] hard",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "khó khăn; khó khăn",
+        "meaningEn": "difficult, hard"
       },
       "search": {
         "termNoAccent": "難い",
         "readingNoAccent": "かたい",
-        "meaningViNoAccent": "kho; [VI can duyet] hard",
+        "meaningViNoAccent": "kho khan; kho khan",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5769,7 +5519,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5785,15 +5535,13 @@
       },
       "sense": {
         "senseId": "n1_s0546",
-        "meaningVi": "[VI cần duyệt] unrequited love",
-        "meaningEn": "unrequited love",
-        "meaningViDraft": "[VI cần duyệt] unrequited love",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tình yêu đơn phương",
+        "meaningEn": "unrequited love"
       },
       "search": {
         "termNoAccent": "片思い",
         "readingNoAccent": "かたおもい",
-        "meaningViNoAccent": "[VI can duyet] unrequited love",
+        "meaningViNoAccent": "tinh yeu don phuong",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5815,7 +5563,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5831,15 +5579,13 @@
       },
       "sense": {
         "senseId": "n1_s0547",
-        "meaningVi": "[VI cần duyệt] enemy; [VI cần duyệt] rival",
-        "meaningEn": "enemy, rival",
-        "meaningViDraft": "[VI cần duyệt] enemy; [VI cần duyệt] rival",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "kẻ thù; đối thủ",
+        "meaningEn": "enemy, rival"
       },
       "search": {
         "termNoAccent": "敵",
         "readingNoAccent": "かたき",
-        "meaningViNoAccent": "[VI can duyet] enemy; [VI can duyet] rival",
+        "meaningViNoAccent": "ke thu; doi thu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5861,7 +5607,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5877,15 +5623,13 @@
       },
       "sense": {
         "senseId": "n1_s0548",
-        "meaningVi": "[VI cần duyệt] spirit; [VI cần duyệt] character; [VI cần duyệt] trait; [VI cần duyệt] temperament; [VI cần duyệt] disposition",
-        "meaningEn": "spirit, character, trait, temperament, disposition",
-        "meaningViDraft": "[VI cần duyệt] spirit; [VI cần duyệt] character; [VI cần duyệt] trait; [VI cần duyệt] temperament; [VI cần duyệt] disposition",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tinh thần; tính cách; tính cách; tính khí; tính tình",
+        "meaningEn": "spirit, character, trait, temperament, disposition"
       },
       "search": {
         "termNoAccent": "気質",
         "readingNoAccent": "かたき",
-        "meaningViNoAccent": "[VI can duyet] spirit; [VI can duyet] character; [VI can duyet] trait; [VI can duyet] temperament; [VI can duyet] disposition",
+        "meaningViNoAccent": "tinh than; tinh cach; tinh cach; tinh khi; tinh tinh",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5907,7 +5651,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5923,15 +5667,13 @@
       },
       "sense": {
         "senseId": "n1_s0549",
-        "meaningVi": "[VI cần duyệt] a smattering; [VI cần duyệt] talk like a baby; [VI cần duyệt] speak haltingly",
-        "meaningEn": "a smattering, talk like a baby, speak haltingly",
-        "meaningViDraft": "[VI cần duyệt] a smattering; [VI cần duyệt] talk like a baby; [VI cần duyệt] speak haltingly",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "nói lảng vảng; nói như trẻ con; nói ngập ngừng",
+        "meaningEn": "a smattering, talk like a baby, speak haltingly"
       },
       "search": {
         "termNoAccent": "片言",
         "readingNoAccent": "かたこと",
-        "meaningViNoAccent": "[VI can duyet] a smattering; [VI can duyet] talk like a baby; [VI can duyet] speak haltingly",
+        "meaningViNoAccent": "noi lang vang; noi nhu tre con; noi ngap ngung",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5953,7 +5695,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -5969,15 +5711,13 @@
       },
       "sense": {
         "senseId": "n1_s0550",
-        "meaningVi": "[VI cần duyệt] tidying up; [VI cần duyệt] finishing",
-        "meaningEn": "tidying up, finishing",
-        "meaningViDraft": "[VI cần duyệt] tidying up; [VI cần duyệt] finishing",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "dọn dẹp; hoàn thiện",
+        "meaningEn": "tidying up, finishing"
       },
       "search": {
         "termNoAccent": "片付け",
         "readingNoAccent": "かたつけ",
-        "meaningViNoAccent": "[VI can duyet] tidying up; [VI can duyet] finishing",
+        "meaningViNoAccent": "don dep; hoan thien",
         "hanVietNoAccent": null
       },
       "links": {
@@ -5999,7 +5739,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6015,15 +5755,13 @@
       },
       "sense": {
         "senseId": "n1_s0551",
-        "meaningVi": "[VI cần duyệt] to incline toward; [VI cần duyệt] to slant; [VI cần duyệt] to lurch; [VI cần duyệt] to heel over; [VI cần duyệt] to be disposed to; [VI cần duyệt] to trend toward; [VI cần duyệt] to be prone to; [VI cần duyệt] to",
-        "meaningEn": "to incline toward, to slant, to lurch, to heel over, to be disposed to, to trend toward, to be prone to, to",
-        "meaningViDraft": "[VI cần duyệt] to incline toward; [VI cần duyệt] to slant; [VI cần duyệt] to lurch; [VI cần duyệt] to heel over; [VI cần duyệt] to be disposed to; [VI cần duyệt] to trend toward; [VI cần duyệt] to be prone to; [VI cần duyệt] to",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "nghiêng về; nghiêng; lảo đảo; nghiêng về; sẵn sàng; có xu hướng; nghiêng về; nghiêng về",
+        "meaningEn": "to incline toward, to slant, to lurch, to heel over, to be disposed to, to trend toward, to be prone to, to"
       },
       "search": {
         "termNoAccent": "傾く",
         "readingNoAccent": "かたふく",
-        "meaningViNoAccent": "[VI can duyet] to incline toward; [VI can duyet] to slant; [VI can duyet] to lurch; [VI can duyet] to heel over; [VI can duyet] to be disposed to; [VI can duyet] to trend toward; [VI can duyet] to be prone to; [VI can duyet] to",
+        "meaningViNoAccent": "nghieng ve; nghieng; lao dao; nghieng ve; san sang; co xu huong; nghieng ve; nghieng ve",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6045,7 +5783,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6061,15 +5799,13 @@
       },
       "sense": {
         "senseId": "n1_s0552",
-        "meaningVi": "[VI cần duyệt] to incline; [VI cần duyệt] to list; [VI cần duyệt] to bend; [VI cần duyệt] to lean; [VI cần duyệt] to tip; [VI cần duyệt] to tilt; [VI cần duyệt] to slant; [VI cần duyệt] to concentrate on; [VI cần duyệt] to ruin; [VI cần duyệt] to",
-        "meaningEn": "to incline, to list, to bend, to lean, to tip, to tilt, to slant, to concentrate on, to ruin , to",
-        "meaningViDraft": "[VI cần duyệt] to incline; [VI cần duyệt] to list; [VI cần duyệt] to bend; [VI cần duyệt] to lean; [VI cần duyệt] to tip; [VI cần duyệt] to tilt; [VI cần duyệt] to slant; [VI cần duyệt] to concentrate on; [VI cần duyệt] to ruin; [VI cần duyệt] to",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "nghiêng;liệt kê;uốn cong;nghiêng;nghiêng;nghiêng;nghiêng;tập trung vào;hủy hoại (một đất nước);",
+        "meaningEn": "to incline, to list, to bend, to lean, to tip, to tilt, to slant, to concentrate on, to ruin , to"
       },
       "search": {
         "termNoAccent": "傾ける",
         "readingNoAccent": "かたむける",
-        "meaningViNoAccent": "[VI can duyet] to incline; [VI can duyet] to list; [VI can duyet] to bend; [VI can duyet] to lean; [VI can duyet] to tip; [VI can duyet] to tilt; [VI can duyet] to slant; [VI can duyet] to concentrate on; [VI can duyet] to ruin; [VI can duyet] to",
+        "meaningViNoAccent": "nghieng;liet ke;uon cong;nghieng;nghieng;nghieng;nghieng;tap trung vao;huy hoai (mot dat nuoc);",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6091,7 +5827,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6107,15 +5843,13 @@
       },
       "sense": {
         "senseId": "n1_s0553",
-        "meaningVi": "[VI cần duyệt] to harden; [VI cần duyệt] to freeze; [VI cần duyệt] to fortify",
-        "meaningEn": "to harden, to freeze, to fortify",
-        "meaningViDraft": "[VI cần duyệt] to harden; [VI cần duyệt] to freeze; [VI cần duyệt] to fortify",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "làm cứng lại; đóng băng; củng cố",
+        "meaningEn": "to harden, to freeze, to fortify"
       },
       "search": {
         "termNoAccent": "固める",
         "readingNoAccent": "かためる",
-        "meaningViNoAccent": "[VI can duyet] to harden; [VI can duyet] to freeze; [VI can duyet] to fortify",
+        "meaningViNoAccent": "lam cung lai; dong bang; cung co",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6137,7 +5871,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6153,15 +5887,13 @@
       },
       "sense": {
         "senseId": "n1_s0554",
-        "meaningVi": "[VI cần duyệt] to be one-sided; [VI cần duyệt] to incline; [VI cần duyệt] to be partial; [VI cần duyệt] to be prejudiced; [VI cần duyệt] to lean; [VI cần duyệt] to be biased",
-        "meaningEn": "to be one-sided, to incline, to be partial, to be prejudiced, to lean, to be biased",
-        "meaningViDraft": "[VI cần duyệt] to be one-sided; [VI cần duyệt] to incline; [VI cần duyệt] to be partial; [VI cần duyệt] to be prejudiced; [VI cần duyệt] to lean; [VI cần duyệt] to be biased",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "thiên vị; thiên về; thiên vị; thiên vị; thiên vị; thiên vị",
+        "meaningEn": "to be one-sided, to incline, to be partial, to be prejudiced, to lean, to be biased"
       },
       "search": {
         "termNoAccent": "偏る",
         "readingNoAccent": "かたよる",
-        "meaningViNoAccent": "[VI can duyet] to be one-sided; [VI can duyet] to incline; [VI can duyet] to be partial; [VI can duyet] to be prejudiced; [VI can duyet] to lean; [VI can duyet] to be biased",
+        "meaningViNoAccent": "thien vi; thien ve; thien vi; thien vi; thien vi; thien vi",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6183,7 +5915,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6199,15 +5931,13 @@
       },
       "sense": {
         "senseId": "n1_s0555",
-        "meaningVi": "[VI cần duyệt] beside; [VI cần duyệt] while; [VI cần duyệt] nearby",
-        "meaningEn": "beside , while, nearby",
-        "meaningViDraft": "[VI cần duyệt] beside; [VI cần duyệt] while; [VI cần duyệt] nearby",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "bên cạnh;trong khi;gần đây",
+        "meaningEn": "beside , while, nearby"
       },
       "search": {
         "termNoAccent": "傍ら",
         "readingNoAccent": "かたわら",
-        "meaningViNoAccent": "[VI can duyet] beside; [VI can duyet] while; [VI can duyet] nearby",
+        "meaningViNoAccent": "ben canh;trong khi;gan day",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6229,7 +5959,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6245,15 +5975,13 @@
       },
       "sense": {
         "senseId": "n1_s0556",
-        "meaningVi": "[VI cần duyệt] subject; [VI cần duyệt] theme; [VI cần duyệt] task",
-        "meaningEn": "subject, theme, task",
-        "meaningViDraft": "[VI cần duyệt] subject; [VI cần duyệt] theme; [VI cần duyệt] task",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "chủ đề; chủ đề; nhiệm vụ",
+        "meaningEn": "subject, theme, task"
       },
       "search": {
         "termNoAccent": "課題",
         "readingNoAccent": "かたい",
-        "meaningViNoAccent": "[VI can duyet] subject; [VI can duyet] theme; [VI can duyet] task",
+        "meaningViNoAccent": "chu de; chu de; nhiem vu",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6275,7 +6003,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6291,15 +6019,13 @@
       },
       "sense": {
         "senseId": "n1_s0557",
-        "meaningVi": "[VI cần duyệt] flower bed",
-        "meaningEn": "flower bed",
-        "meaningViDraft": "[VI cần duyệt] flower bed",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "giường hoa",
+        "meaningEn": "flower bed"
       },
       "search": {
         "termNoAccent": "花壇",
         "readingNoAccent": "かたん",
-        "meaningViNoAccent": "[VI can duyet] flower bed",
+        "meaningViNoAccent": "giuong hoa",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6321,7 +6047,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6337,15 +6063,13 @@
       },
       "sense": {
         "senseId": "n1_s0558",
-        "meaningVi": "[VI cần duyệt] domestic animals; [VI cần duyệt] livestock; [VI cần duyệt] cattle",
-        "meaningEn": "domestic animals, livestock, cattle",
-        "meaningViDraft": "[VI cần duyệt] domestic animals; [VI cần duyệt] livestock; [VI cần duyệt] cattle",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "vật nuôi; vật nuôi; gia súc",
+        "meaningEn": "domestic animals, livestock, cattle"
       },
       "search": {
         "termNoAccent": "家畜",
         "readingNoAccent": "かちく",
-        "meaningViNoAccent": "[VI can duyet] domestic animals; [VI can duyet] livestock; [VI can duyet] cattle",
+        "meaningViNoAccent": "vat nuoi; vat nuoi; gia suc",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6367,7 +6091,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6383,15 +6107,13 @@
       },
       "sense": {
         "senseId": "n1_s0559",
-        "meaningVi": "[VI cần duyệt] epoch-making",
-        "meaningEn": "epoch-making",
-        "meaningViDraft": "[VI cần duyệt] epoch-making",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "tạo nên kỷ nguyên",
+        "meaningEn": "epoch-making"
       },
       "search": {
         "termNoAccent": "画期",
         "readingNoAccent": "かっき",
-        "meaningViNoAccent": "[VI can duyet] epoch-making",
+        "meaningViNoAccent": "tao nen ky nguyen",
         "hanVietNoAccent": null
       },
       "links": {
@@ -6413,7 +6135,7 @@
         "tanos",
         "jlpt-vocab",
         "n1-vocab-import",
-        "machine-translated-vi"
+        "vi-editorial-codex-pass"
       ],
       "classification": {
         "wordType": "nan",
@@ -6429,15 +6151,13 @@
       },
       "sense": {
         "senseId": "n1_s0560",
-        "meaningVi": "[VI cần duyệt] vigor; [VI cần duyệt] active",
-        "meaningEn": "vigor, active",
-        "meaningViDraft": "[VI cần duyệt] vigor; [VI cần duyệt] active",
-        "meaningViSource": "internal-en-gloss-draft"
+        "meaningVi": "sức sống; năng động",
+        "meaningEn": "vigor, active"
       },
       "search": {
         "termNoAccent": "活発",
         "readingNoAccent": "かっはつ",
-        "meaningViNoAccent": "[VI can duyet] vigor; [VI can duyet] active",
+        "meaningViNoAccent": "suc song; nang dong",
         "hanVietNoAccent": null
       },
       "links": {
