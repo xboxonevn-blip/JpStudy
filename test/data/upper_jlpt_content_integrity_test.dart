@@ -147,7 +147,7 @@ void main() {
         expect(count, greaterThanOrEqualTo(1500));
       });
 
-      test('$level upper grammar has safe Vietnamese draft metadata', () {
+      test('$level upper grammar has honest Vietnamese draft metadata', () {
         if (level == 'n3') return;
 
         var count = 0;
@@ -169,11 +169,11 @@ void main() {
             expect(_readRequired(point, 'explanationEn'), isNotEmpty);
             expect(point['explanationViDraft'], point['explanation']);
             expect(point['explanationViSource'], 'internal-en-grammar-draft');
-            expect(point['explanationViStatus'], 'approved-by-user');
+            expect(point['explanationViStatus'], 'vi-machine-draft');
             expect(tags, contains('machine-translated-vi'));
-            expect(tags, contains('vi-editorial-approved'));
-            expect(tags, isNot(contains('needs-human-review')));
-            expect(tags, isNot(contains('needs-vi-editorial')));
+            expect(tags, contains('vi-machine-draft'));
+            expect(tags, contains('vi-needs-review'));
+            expect(tags, isNot(contains('vi-editorial-approved')));
             count++;
           }
         }
