@@ -23,7 +23,7 @@ execution, GA4 retention UI proof, and App Check enforcement. Each gate still
 requires explicit metadata. Sentry, Storage, and GA4 learning-event export gates
 remain source-verified and cannot be closed by the proof state file.
 
-Latest run on `2026-05-16T08:12+07:00` returned `complete=false` with
+Latest run on `2026-05-16T09:49+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -79,10 +79,10 @@ Current status:
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
   `https://jpstudy.web.app/?sentry-smoke=1` in Chromium.
-- Repository Actions secrets rechecked on `2026-05-16T08:12+07:00` include
+- Repository Actions secrets rechecked on `2026-05-16T09:49+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
-- Sentry readiness CLI rechecked on `2026-05-16T08:12+07:00` with
+- Sentry readiness CLI rechecked on `2026-05-16T09:49+07:00` with
   `npm run report:sentry-readiness -- --json`: source wiring and workflow smoke
   gate are present, repo secrets metadata is readable, no event was sent, and
   readiness remains `false` with reason `sentry-dsn-missing`.
@@ -113,7 +113,7 @@ payload before enabling automatic migration.
 
 Current status:
 
-- Recheck on `2026-05-16T08:12+07:00`:
+- Recheck on `2026-05-16T09:49+07:00`:
   `firebase deploy --only storage --project jpstudy-v2 --dry-run` still fails
   because Firebase Storage has not been set up for project `jpstudy-v2`.
 
@@ -201,9 +201,10 @@ Current status:
     `correct_count=0`, `total_count=50`, `accuracy=0`.
   - `session_quality_rated`: GA response `204`; params `mode=test`,
     `rating=5`.
-- Export ingestion is still pending. Recheck on `2026-05-16T08:12+07:00`
-  found only `analytics_536663906.events_20260514`; the learning rows are not
-  in BigQuery yet.
+- Export ingestion is still pending. Recheck on `2026-05-16T09:49+07:00`
+  found daily tables `analytics_536663906.events_20260514` and
+  `analytics_536663906.events_20260515`, but the learning rows are not in
+  BigQuery yet.
 - The export report query now scores the quiz gate from the app's actual
   telemetry params: `score`, or `accuracy * 100`, or
   `correct_count / total_count * 100`.

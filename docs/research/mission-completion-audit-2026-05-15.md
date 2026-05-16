@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-15
 
-Timestamp: `2026-05-16T08:57:12+07:00`
+Timestamp: `2026-05-16T09:49:41+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -48,6 +48,7 @@ The goal is complete only when all of these are true:
 | CI failure addendum Group C | `df021973 ci: use Java 21 for Firebase emulator`; `firebase-security-rules` passed in CI run `25901716829` | Passed |
 | CI failure addendum Group D | `8f34a3dc docs(workflow): commit directly to main, no feature branches`, `55010d68 feat(kanji): add N2 and N1 level tabs in Kanji Hub` | Passed |
 | Structured manual proof state | `beee04be tooling(launch): add structured proof state`; `docs/compliance/launch-proof-state.json`; `test/tool/research/launch_readiness_report_node_test.js` verifies complete proof metadata closes only manual gates and incomplete metadata stays blocked | Passed |
+| CI launch-readiness visibility | `31c6fc1a ci: report launch readiness blockers`, `3af9ff16 ci: publish launch readiness summary`; CI run `25950578094` shows `Report launch readiness blockers` success and publishes the markdown report to the GitHub Step Summary | Passed |
 | Synthesis and mission report | `6f3871a4 docs(research): synthesis 2026-05-15 beta readiness`, `924d5443 docs(research): final mission report 2026-05-15` | Passed |
 
 ## Verification Evidence
@@ -79,7 +80,7 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25949508519` on `beee04be`.
+  `25950578094` on `3af9ff16`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
@@ -87,7 +88,7 @@ GitHub Actions summary:
   Lighthouse live gate all completed with `success`.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
   now performs a single aggregate proof check with structured manual proof
-  metadata. Latest run on `2026-05-16T08:57+07:00` returned
+  metadata. Latest run on `2026-05-16T09:49+07:00` returned
   `complete=false` with blockers `legal-approval-missing`,
   `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
   `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -101,14 +102,14 @@ These prevent marking the active goal complete:
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
    `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. The
-  Sentry readiness report rechecked on `2026-05-16T08:57+07:00` found source
+  Sentry readiness report rechecked on `2026-05-16T09:49+07:00` found source
    and workflow smoke gates present, repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
    `JPSTUDY_SENTRY_DSN`; no event was sent by that readiness report.
 3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
-  2026-05-16T08:57+07:00 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
+  2026-05-16T09:49+07:00 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
   recheck still reports that Firebase Storage has not been set up on the
   project.
 4. First executed deletion runbook proof is missing. The runbook and Support ID
@@ -128,9 +129,11 @@ These prevent marking the active goal complete:
    learning event families to GA4: `22` batched `srs_review_completed` rows
    across `204` responses, plus earlier `n5_micro_quiz_completed` and
    `session_quality_rated` `204` responses in the same live-smoke session.
-   A 2026-05-16T08:57+07:00 export recheck still does not expose the
-   required learning-event rows, so they
-   are not present in the source-verifiable export sample yet.
+   A 2026-05-16T09:49+07:00 export recheck now exposes daily tables
+   `events_20260514` and `events_20260515`, but still does not expose the
+   required learning-event rows. The source-verifiable export sample still has
+   `0` SRS review gate passes, `0` quiz gate passes, and `0` quality gate
+   passes.
 7. App Check enforcement proof remains future work. Current docs say enforce
    mode should wait until 1-2 weeks of monitoring.
 
