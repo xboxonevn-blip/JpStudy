@@ -771,13 +771,17 @@ class _RoadmapActionTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 TextButton.icon(
+                  key: ValueKey('library_roadmap_action_cta_${action.id}'),
                   onPressed: onTap,
                   style: TextButton.styleFrom(
                     foregroundColor: action.color,
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(0, 0),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    visualDensity: VisualDensity.compact,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    minimumSize: const Size(
+                      AppTouchTargets.min,
+                      AppTouchTargets.min,
+                    ),
+                    tapTargetSize: MaterialTapTargetSize.padded,
+                    visualDensity: VisualDensity.standard,
                   ),
                   icon: const Icon(Icons.arrow_outward_rounded, size: 16),
                   label: Text(action.ctaLabel),

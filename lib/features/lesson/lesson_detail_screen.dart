@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'dart:async';
 import 'dart:math';
@@ -1601,7 +1602,10 @@ class _LessonCard extends StatelessWidget {
                         ),
                         tooltip: language.learnedLabel,
                         padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
+                        constraints: const BoxConstraints(
+                          minWidth: AppTouchTargets.min,
+                          minHeight: AppTouchTargets.min,
+                        ),
                       ),
                     const SizedBox(width: 16),
                     IconButton(
@@ -1617,7 +1621,10 @@ class _LessonCard extends StatelessWidget {
                       ),
                       tooltip: language.starLabel,
                       padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
+                      constraints: const BoxConstraints(
+                        minWidth: AppTouchTargets.min,
+                        minHeight: AppTouchTargets.min,
+                      ),
                     ),
                     const SizedBox(width: 16),
                     IconButton(
@@ -1629,7 +1636,10 @@ class _LessonCard extends StatelessWidget {
                       ),
                       tooltip: language.editLabel,
                       padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
+                      constraints: const BoxConstraints(
+                        minWidth: AppTouchTargets.min,
+                        minHeight: AppTouchTargets.min,
+                      ),
                     ),
                   ],
                 ),

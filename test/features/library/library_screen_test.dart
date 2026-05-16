@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -171,6 +172,16 @@ void main() {
     await _pumpScreen(tester, buildLibraryScreen());
     await _tapAndWait(tester, find.text('Grammar'));
     expect(find.text('Grammar Route'), findsOneWidget);
+  });
+
+  testWidgets('roadmap action CTAs keep 44px touch targets', (tester) async {
+    await _pumpScreen(tester, buildLibraryScreen());
+
+    final cta = find.byKey(const ValueKey('library_roadmap_action_cta_lookup'));
+    await tester.ensureVisible(cta);
+    final size = tester.getSize(cta);
+    expect(size.width, greaterThanOrEqualTo(AppTouchTargets.min));
+    expect(size.height, greaterThanOrEqualTo(AppTouchTargets.min));
   });
 
   testWidgets('lesson tile shows due count when due lessons exist', (

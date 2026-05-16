@@ -454,14 +454,19 @@ class _SessionHeader extends ConsumerWidget {
           if (onFreePractice != null &&
               source != _HandwritingSessionSource.free)
             TextButton(
+              key: const ValueKey('handwriting_free_practice_cta'),
               onPressed: onFreePractice,
               style: TextButton.styleFrom(
                 foregroundColor: palette.ink,
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.sm,
-                  vertical: 2,
+                  vertical: AppSpacing.xs,
                 ),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                minimumSize: const Size(
+                  AppTouchTargets.min,
+                  AppTouchTargets.min,
+                ),
+                tapTargetSize: MaterialTapTargetSize.padded,
                 textStyle: const TextStyle(fontSize: 12),
               ),
               child: Text(language.handwritingFreePracticeLabel),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -151,6 +152,19 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
       // Screen renders without error
       expect(find.byType(PracticeScreen), findsOneWidget);
+    });
+
+    testWidgets('session step CTA keeps a 44px touch target', (tester) async {
+      await tester.pumpWidget(_buildScreen());
+      await tester.pumpAndSettle();
+
+      final cta = find.byKey(
+        const ValueKey('practice_session_step_cta_grammar_due'),
+      );
+      await tester.ensureVisible(cta);
+      final size = tester.getSize(cta);
+      expect(size.width, greaterThanOrEqualTo(AppTouchTargets.min));
+      expect(size.height, greaterThanOrEqualTo(AppTouchTargets.min));
     });
   });
 }
