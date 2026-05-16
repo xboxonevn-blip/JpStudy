@@ -20,19 +20,19 @@ dart run tool\research\content_vi_status_report.dart
 | Items scanned | 23,444 |
 | Files with machine VI | 150 |
 | Files with open review tags | 75 |
-| Files with approval signals | 675 |
+| Files with approval signals | 650 |
 
 | Level | Items | Machine | Open review | Approved |
 |---|---:|---:|---:|---:|
 | N5 | 3,497 | 0 | 0 | 3,497 |
 | N4 | 3,376 | 0 | 0 | 3,376 |
-| N3 | 3,412 | 0 | 100 | 3,412 |
+| N3 | 3,412 | 0 | 100 | 3,312 |
 | N2 | 4,770 | 2,752 | 764 | 2,209 |
 | N1 | 8,389 | 4,701 | 980 | 3,933 |
 
 | Dataset | Items | Machine | Open review | Approved |
 |---|---:|---:|---:|---:|
-| grammar | 754 | 436 | 100 | 754 |
+| grammar | 754 | 436 | 100 | 654 |
 | grammar_examples | 4,924 | 1,744 | 1,744 | 3,180 |
 | vocab | 16,712 | 5,273 | 0 | 11,439 |
 | kanji | 929 | 0 | 0 | 929 |
