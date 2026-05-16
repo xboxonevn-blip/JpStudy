@@ -21,6 +21,18 @@ Review the source copy:
   - `legalDraftNotice`
 - `lib/features/legal/legal_document_screen.dart`
 
+Latest Codex live smoke on `2026-05-17T04:48+07:00`:
+
+- `https://jpstudy.web.app/#/privacy` rendered the Privacy draft screen.
+- `https://jpstudy.web.app/#/terms` rendered the Terms draft screen.
+- Both routes visibly showed the `bản nháp cần rà soát` draft notice.
+- Privacy copy stated beta backup uses local file export/import and account
+  cloud backup is planned for a later release.
+- Terms copy stated account cloud backup is not part of the beta.
+
+This smoke verifies reachability and current product-state wording only. It is
+not legal approval.
+
 ## Privacy Review Items
 
 - The copy correctly states that learning progress is stored locally first.
