@@ -19,3 +19,11 @@ test('CI workflow keeps live Lighthouse performance gate lenient', () => {
   );
   assert.match(workflow, /performance: 0\.20,/);
 });
+
+test('CI workflow publishes launch readiness blockers with proof-state', () => {
+  assert.match(workflow, /name: Report launch readiness blockers/);
+  assert.match(
+    workflow,
+    /npm run report:launch-readiness -- --json --proof-state docs\/compliance\/launch-proof-state\.json/,
+  );
+});
