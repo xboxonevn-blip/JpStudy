@@ -210,7 +210,8 @@ void main() {
       'wa',
     );
     await tester.pumpAndSettle();
-    expect(find.textContaining('ch? ??'), findsOneWidget);
+    expect(find.text('mẫu câu chủ đề cơ bản'), findsOneWidget);
+    expect(find.textContaining('ch? ??'), findsNothing);
     expect(find.textContaining('???c ph?p'), findsNothing);
 
     await tester.enterText(
@@ -218,7 +219,7 @@ void main() {
       'topic marker',
     );
     await tester.pumpAndSettle();
-    expect(find.textContaining('ch? ??'), findsOneWidget);
+    expect(find.text('mẫu câu chủ đề cơ bản'), findsOneWidget);
   });
 
   testWidgets('tapping grammar point row navigates to detail page', (

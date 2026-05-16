@@ -341,8 +341,8 @@ class _RetrievabilityChip extends StatelessWidget {
         : palette.error;
     final label = switch (language) {
       AppLanguage.en => 'Memory $pct%',
-      AppLanguage.vi => 'Ð? nh? $pct%',
-      AppLanguage.ja => '??? $pct%',
+      AppLanguage.vi => 'Độ nhớ $pct%',
+      AppLanguage.ja => '記憶 $pct%',
     };
 
     return Container(

@@ -902,11 +902,11 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         ),
       ),
       (
-        query: '??',
+        query: 'もり',
         label: _promptLabel(
           language,
           kind: _SearchPromptKind.reading,
-          value: '??',
+          value: 'もり',
         ),
       ),
       (
@@ -932,25 +932,25 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           case AppLanguage.vi:
             return 'Romaji: $value';
           case AppLanguage.ja:
-            return '????: $value';
+            return 'ローマ字: $value';
         }
       case _SearchPromptKind.reading:
         switch (language) {
           case AppLanguage.en:
             return 'Reading: $value';
           case AppLanguage.vi:
-            return 'C?ch ??c: $value';
+            return 'Cách đọc: $value';
           case AppLanguage.ja:
-            return '??: $value';
+            return '読み: $value';
         }
       case _SearchPromptKind.meaning:
         switch (language) {
           case AppLanguage.en:
             return 'Meaning: $value';
           case AppLanguage.vi:
-            return 'Ngh?a: $value';
+            return 'Nghĩa: $value';
           case AppLanguage.ja:
-            return '??: $value';
+            return '意味: $value';
         }
     }
   }

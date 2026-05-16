@@ -795,7 +795,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
   List<String> _buildContextLines(UserMistake mistake, AppLanguage language) {
     final lines = <String>[];
     lines.add(
-      '${_tr(language, 'Review checkpoint', 'M?c ?n', '??????????')}: '
+      '${_tr(language, 'Review checkpoint', 'Mốc ôn', '復習チェックポイント')}: '
       '${_dueCheckpointLabel(mistake.lastMistakeAt, language)}',
     );
     final prompt = (mistake.prompt ?? '').trim();

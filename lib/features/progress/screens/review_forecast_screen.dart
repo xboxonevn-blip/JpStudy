@@ -685,7 +685,7 @@ class _ConfidenceSection extends StatelessWidget {
           Row(
             children: [
               _ConfidencePill(
-                label: _tr(language, en: 'Again', vi: 'L?m l?i', ja: '????'),
+                label: _tr(language, en: 'Again', vi: 'Làm lại', ja: 'もう一度'),
                 count: confidence.again,
                 total: total,
                 color: palette.error,
@@ -693,7 +693,7 @@ class _ConfidenceSection extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               _ConfidencePill(
-                label: _tr(language, en: 'Hard', vi: 'Kh?', ja: '???'),
+                label: _tr(language, en: 'Hard', vi: 'Khó', ja: '難しい'),
                 count: confidence.hard,
                 total: total,
                 color: palette.warning,

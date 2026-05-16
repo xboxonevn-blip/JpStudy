@@ -819,14 +819,14 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                                   ? _tr(
                                       widget.language,
                                       en: 'Mastered',
-                                      vi: '?? thu?c',
-                                      ja: '????',
+                                      vi: 'Đã thuộc',
+                                      ja: '習得済み',
                                     )
                                   : _tr(
                                       widget.language,
                                       en: 'Learning',
-                                      vi: '?ang h?c',
-                                      ja: '???',
+                                      vi: 'Đang học',
+                                      ja: '学習中',
                                     ),
                               fg: point.isLearned
                                   ? palette.success
