@@ -1,5 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const childProcess = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
@@ -16,6 +17,14 @@ function writeTempProofState(value) {
   const file = path.join(dir, 'launch-proof-state.json');
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
   return file;
+}
+
+function currentCommit() {
+  return childProcess
+    .execFileSync('git', ['rev-parse', '--short', 'HEAD'], {
+      encoding: 'utf8',
+    })
+    .trim();
 }
 
 test('buildLaunchReadiness keeps goal blocked on unresolved proof gates', () => {
@@ -98,7 +107,7 @@ test('collectEvidence closes manual proof gates from complete proof-state metada
       approved: true,
       reviewer: 'Owner',
       approvedAt: '2026-05-16',
-      commit: 'abc1234',
+      commit: currentCommit(),
       evidence: 'Reviewed privacy and terms copy.',
     },
     deletion: {
@@ -172,4 +181,45 @@ test('collectEvidence does not close gates from manual flags alone', () => {
     evidence.appCheck.source,
     /manual flag --app-check-enforced ignored/,
   );
+});
+
+test('collectEvidence rejects malformed proof-state metadata', () => {
+  const proofStatePath = writeTempProofState({
+    legal: {
+      approved: true,
+      reviewer: 'Owner',
+      approvedAt: 'not-a-date',
+      commit: 'badref',
+      evidence: 'Reviewed privacy and terms copy.',
+    },
+    deletion: {
+      executed: true,
+      executedAt: 'not-a-date',
+      supportId: 'support-test-001',
+      evidence: 'Deletion proof.',
+    },
+    ga4Retention: {
+      verified: true,
+      verifiedAt: 'not-a-date',
+      retention: '2 months',
+      evidence: 'GA4 retention proof.',
+    },
+    appCheck: {
+      enforced: true,
+      enforcedAt: 'not-a-date',
+      evidence: 'App Check proof.',
+    },
+  });
+
+  const evidence = collectEvidence({ skipLive: true, proofStatePath });
+
+  assert.equal(evidence.legal.approved, false);
+  assert.match(evidence.legal.source, /invalid approvedAt/);
+  assert.match(evidence.legal.source, /commit must reference/);
+  assert.equal(evidence.deletion.executed, false);
+  assert.match(evidence.deletion.source, /invalid executedAt/);
+  assert.equal(evidence.ga4.adminRetentionOk, false);
+  assert.match(evidence.ga4.adminRetentionSource, /invalid verifiedAt/);
+  assert.equal(evidence.appCheck.enforced, false);
+  assert.match(evidence.appCheck.source, /invalid enforcedAt/);
 });

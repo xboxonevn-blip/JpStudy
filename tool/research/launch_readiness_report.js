@@ -74,7 +74,13 @@ function loadProofState(proofStatePath = DEFAULT_PROOF_STATE_PATH) {
   return { path: proofStatePath, state: JSON.parse(raw) };
 }
 
-function validateProofGate({ proofState, gate, statusField, requiredFields }) {
+function validateProofGate({
+  proofState,
+  gate,
+  statusField,
+  requiredFields,
+  validators = {},
+}) {
   const entry = proofState?.state?.[gate];
   if (!entry || entry[statusField] !== true) return null;
 
@@ -89,10 +95,40 @@ function validateProofGate({ proofState, gate, statusField, requiredFields }) {
     };
   }
 
+  const invalid = [];
+  for (const [field, validate] of Object.entries(validators)) {
+    const reason = validate(entry[field]);
+    if (reason) invalid.push(`${field} ${reason}`);
+  }
+  if (invalid.length > 0) {
+    return {
+      ok: false,
+      source: `proof-state ${gate} invalid ${invalid.join(', ')}`,
+    };
+  }
+
   return {
     ok: true,
     source: `proof-state ${proofState.path}`,
   };
+}
+
+function isValidDate(value) {
+  return typeof value === 'string' && !Number.isNaN(Date.parse(value));
+}
+
+function gitCommitExists(value) {
+  if (typeof value !== 'string' || !/^[0-9a-f]{7,40}$/i.test(value)) {
+    return false;
+  }
+  try {
+    childProcess.execFileSync('git', ['cat-file', '-e', `${value}^{commit}`], {
+      stdio: 'ignore',
+    });
+    return true;
+  } catch (_) {
+    return false;
+  }
 }
 
 function legalEvidence({ approved, proofState }) {
@@ -101,6 +137,11 @@ function legalEvidence({ approved, proofState }) {
     gate: 'legal',
     statusField: 'approved',
     requiredFields: ['reviewer', 'approvedAt', 'commit', 'evidence'],
+    validators: {
+      approvedAt: (value) => (isValidDate(value) ? null : 'must be a date'),
+      commit: (value) =>
+        gitCommitExists(value) ? null : 'must reference an existing commit',
+    },
   });
   if (proof) {
     return {
@@ -138,6 +179,9 @@ function deletionEvidence({ executed, proofState }) {
     gate: 'deletion',
     statusField: 'executed',
     requiredFields: ['executedAt', 'supportId', 'evidence'],
+    validators: {
+      executedAt: (value) => (isValidDate(value) ? null : 'must be a date'),
+    },
   });
   if (proof) return { executed: proof.ok, source: proof.source };
   if (executed) {
@@ -156,6 +200,9 @@ function appCheckEvidence({ enforced, proofState }) {
     gate: 'appCheck',
     statusField: 'enforced',
     requiredFields: ['enforcedAt', 'evidence'],
+    validators: {
+      enforcedAt: (value) => (isValidDate(value) ? null : 'must be a date'),
+    },
   });
   if (proof) return { enforced: proof.ok, source: proof.source };
   if (enforced) {
@@ -180,6 +227,9 @@ function ga4RetentionEvidence({ adminRetentionOk, proofState }) {
     gate: 'ga4Retention',
     statusField: 'verified',
     requiredFields: ['verifiedAt', 'retention', 'evidence'],
+    validators: {
+      verifiedAt: (value) => (isValidDate(value) ? null : 'must be a date'),
+    },
   });
   return proof
     ? { ok: proof.ok, source: proof.source }

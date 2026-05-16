@@ -20,8 +20,10 @@ npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-p
 
 The proof state file may close only manual gates: legal approval, deletion
 execution, GA4 retention UI proof, and App Check enforcement. Each gate still
-requires explicit metadata. Sentry, Storage, and GA4 learning-event export gates
-remain source-verified and cannot be closed by the proof state file.
+requires explicit metadata. Date fields must parse as dates, and legal
+approval must reference an existing git commit. Sentry, Storage, and GA4
+learning-event export gates remain source-verified and cannot be closed by the
+proof state file.
 
 Latest run on `2026-05-16T15:56+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
