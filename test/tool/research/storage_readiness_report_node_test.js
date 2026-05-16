@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const {
+  buildOperatorUrls,
   buildShellCommand,
   buildMarkdownReport,
   classifyStorageReadiness,
@@ -73,6 +74,27 @@ test('buildMarkdownReport records rules and production dry-run evidence', () => 
   assert.match(report, /Production dry-run status: `fail`/);
   assert.match(report, /Firebase Storage has not been set up/);
   assert.match(report, /storage-not-provisioned/);
+  assert.match(report, /## Operator URLs/);
+  assert.match(report, /Firebase Storage setup: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/storage`/);
+  assert.match(report, /GCP billing: `https:\/\/console\.cloud\.google\.com\/billing\/linkedaccount\?project=jpstudy-v2&authuser=1`/);
+  assert.match(report, /Firebase usage: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/usage\/details`/);
+});
+
+test('buildOperatorUrls points to Storage setup and billing consoles', () => {
+  const urls = buildOperatorUrls({ project: 'jpstudy-v2' });
+
+  assert.equal(
+    urls.firebaseStorage,
+    'https://console.firebase.google.com/u/1/project/jpstudy-v2/storage',
+  );
+  assert.equal(
+    urls.firebaseUsage,
+    'https://console.firebase.google.com/u/1/project/jpstudy-v2/usage/details',
+  );
+  assert.equal(
+    urls.gcpBilling,
+    'https://console.cloud.google.com/billing/linkedaccount?project=jpstudy-v2&authuser=1',
+  );
 });
 
 test('readBillingPrerequisite records Spark context from CLAUDE.md', () => {

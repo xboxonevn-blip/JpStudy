@@ -80,6 +80,7 @@ function collectStatus(args) {
     generatedAt: new Date().toISOString(),
     project: args.project,
     billingPrerequisite: readBillingPrerequisite(),
+    operatorUrls: buildOperatorUrls({ project: args.project }),
     rulesTest,
     cors: readCorsConfig(args.corsFile),
     dryRun,
@@ -100,6 +101,14 @@ function readBillingPrerequisite(contextFile = DEFAULT_CONTEXT_FILE) {
     source: currentPlan === 'Spark' ? contextFile : 'Firebase docs',
     note:
       'Firebase currently requires the pay-as-you-go Blaze plan to use Cloud Storage for Firebase.',
+  };
+}
+
+function buildOperatorUrls({ project = DEFAULT_PROJECT } = {}) {
+  return {
+    firebaseStorage: `https://console.firebase.google.com/u/1/project/${project}/storage`,
+    firebaseUsage: `https://console.firebase.google.com/u/1/project/${project}/usage/details`,
+    gcpBilling: `https://console.cloud.google.com/billing/linkedaccount?project=${project}&authuser=1`,
   };
 }
 
@@ -158,6 +167,9 @@ function fenced(value) {
 
 function buildMarkdownReport(status) {
   const readiness = classifyStorageReadiness(status);
+  const operatorUrls = status.operatorUrls || buildOperatorUrls({
+    project: status.project,
+  });
   const lines = [
     '# Firebase Storage Readiness Report',
     '',
@@ -173,6 +185,12 @@ function buildMarkdownReport(status) {
     `Current documented plan: \`${status.billingPrerequisite?.currentPlan || 'unknown'}\``,
     `Source: \`${status.billingPrerequisite?.source || 'Firebase docs'}\``,
     status.billingPrerequisite?.note || '',
+    '',
+    '## Operator URLs',
+    '',
+    `Firebase Storage setup: \`${operatorUrls.firebaseStorage}\``,
+    `Firebase usage: \`${operatorUrls.firebaseUsage}\``,
+    `GCP billing: \`${operatorUrls.gcpBilling}\``,
     '',
     '## Storage Rules Emulator',
     '',
@@ -228,6 +246,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  buildOperatorUrls,
   buildShellCommand,
   buildMarkdownReport,
   classifyStorageReadiness,
