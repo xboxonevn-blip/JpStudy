@@ -378,3 +378,10 @@
 - Actual observation: the app emits `correct_count`, `total_count`, and `accuracy`, while the BigQuery report queried a nonexistent `score` parameter. The event family could arrive and still produce `quizGatePasses=0`.
 - Delta: -45 percentage points on confidence that event-name coverage alone proves measurement readiness.
 - Updated belief: telemetry contracts need parameter-level parity between app emitters, network proof, BigQuery SQL, and the NS scorer. Event presence is only the first gate.
+
+## 2026-05-16T04:20:00+07:00 - D2 fake-approval incident compromised taxonomy integrity
+
+- Prior belief: a user approval instruction could safely convert the remaining D2 batch to `vi-human-approved` if no immediate UI failure appeared.
+- Actual observation: bulk `vi-human-approved` was applied to 23,444 items including 50 untranslated N1/N2 grammar-example placeholder files. Those files still contained `Bản dịch ví dụ cần biên tập từ: [English]` and draft/review tags.
+- Delta: -80 percentage points on confidence that approval tags can be trusted without content-state guards.
+- Updated belief: `approved` must mean content verified, not user-said-go. Tag taxonomy integrity requires automatic contradiction checks, and machine/open-review debt must stay visible until content is actually rewritten or reviewed.
