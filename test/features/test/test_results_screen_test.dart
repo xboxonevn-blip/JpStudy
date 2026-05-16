@@ -216,25 +216,28 @@ void main() {
     await tester.pump();
   });
 
-  testWidgets('triggers auto cloud upload when results open', (tester) async {
-    final db = app_db.AppDatabase(executor: NativeDatabase.memory());
-    addTearDown(db.close);
-    final storage = _FakeCloudStorageSyncService();
+  testWidgets(
+    'does not auto cloud upload while beta cloud backup is disabled',
+    (tester) async {
+      final db = app_db.AppDatabase(executor: NativeDatabase.memory());
+      addTearDown(db.close);
+      final storage = _FakeCloudStorageSyncService();
 
-    await tester.pumpWidget(
-      buildScreen(
-        db,
-        autoUpload: _autoUpload(
-          storage: storage,
-          user: const AuthUser(uid: 'uid-1'),
+      await tester.pumpWidget(
+        buildScreen(
+          db,
+          autoUpload: _autoUpload(
+            storage: storage,
+            user: const AuthUser(uid: 'uid-1'),
+          ),
         ),
-      ),
-    );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 200));
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
 
-    expect(storage.uploadCalls, 1);
-  });
+      expect(storage.uploadCalls, 0);
+    },
+  );
 
   testWidgets('rating test quality logs analytics event', (tester) async {
     final db = app_db.AppDatabase(executor: NativeDatabase.memory());

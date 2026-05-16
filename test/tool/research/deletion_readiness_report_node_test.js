@@ -11,7 +11,7 @@ const {
 test('buildDeletionReadiness reports operator blockers without deleting data', () => {
   const readiness = buildDeletionReadiness({
     identifiers: { uid: 'uid-1' },
-    storage: { ready: false, reason: 'storage-not-provisioned' },
+    storage: { ready: true, deferred: true, reason: 'storage-descoped-for-beta' },
     ga4: { adminRetention: { ok: false, status: 403 } },
     bigQuery: { datasetExists: true, tableCount: 1 },
     localTools: {
@@ -24,10 +24,9 @@ test('buildDeletionReadiness reports operator blockers without deleting data', (
   assert.equal(readiness.safeMode, true);
   assert.equal(readiness.executable, false);
   assert.deepEqual(readiness.blockers, [
-    'Firebase Storage is not provisioned',
     'GA4 Admin API/deletion access is not available',
     'firebase-admin dependency/tooling is not installed',
-    'gcloud is not available for Storage/GA4 operator commands',
+    'gcloud is not available for GA4 operator commands',
   ]);
 });
 
@@ -46,7 +45,7 @@ test('buildDeletionReadiness blocks UID-scoped deletion when UID is missing', ()
 
   assert.equal(readiness.executable, false);
   assert.deepEqual(readiness.blockers, [
-    'Firebase UID is required for Auth, Storage, GA4 userId, and BigQuery user_id deletion',
+    'Firebase UID is required for Auth, GA4 userId, and BigQuery user_id deletion',
   ]);
 });
 
@@ -59,8 +58,8 @@ test('buildMarkdownReport includes evidence and safe-mode warning', () => {
     readiness: {
       safeMode: true,
       executable: false,
-      blockers: ['Firebase Storage is not provisioned'],
-      nextActions: ['Provision Firebase Storage in Console'],
+      blockers: ['GA4 Admin API/deletion access is not available'],
+      nextActions: ['Enable Analytics Admin API and grant deletion-capable GA access.'],
     },
     operatorUrls: buildOperatorUrls({ uid: 'uid-1' }),
   });
@@ -68,7 +67,7 @@ test('buildMarkdownReport includes evidence and safe-mode warning', () => {
   assert.match(report, /# Deletion Runbook Readiness Report/);
   assert.match(report, /Safe mode: `true`/);
   assert.match(report, /UID: `uid-1`/);
-  assert.match(report, /Firebase Storage is not provisioned/);
+  assert.match(report, /GA4 Admin API\/deletion access is not available/);
   assert.match(report, /No deletion was performed/);
   assert.match(report, /## Operator URLs/);
   assert.match(report, /Firebase Auth users: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/authentication\/users`/);

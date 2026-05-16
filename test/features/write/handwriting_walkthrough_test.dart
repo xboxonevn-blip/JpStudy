@@ -988,7 +988,7 @@ void main() {
 
       expect(find.text('Practice hub'), findsOneWidget);
       expect(find.byType(HandwritingPracticeScreen), findsNothing);
-      expect(storage.uploadCalls, 1);
+      expect(storage.uploadCalls, 0);
     },
   );
 }

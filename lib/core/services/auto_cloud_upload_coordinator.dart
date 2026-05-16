@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
+import 'package:jpstudy/core/services/cloud_backup_feature_flag.dart'
+    as cloud_backup_flags;
 
 typedef BackupEnvelopeBuilder = Future<Map<String, dynamic>> Function();
 typedef AuthStateReader = AuthUser? Function();
@@ -18,6 +20,7 @@ class AutoCloudUploadCoordinator {
     this.analyticsService,
     this.minimumInterval = const Duration(minutes: 5),
     this.clock = DateTime.now,
+    this.cloudBackupEnabled = cloud_backup_flags.cloudBackupEnabled,
   });
 
   static const enabledPreferenceKey = 'backup.cloud.autoUpload.enabled';
@@ -30,6 +33,7 @@ class AutoCloudUploadCoordinator {
   final AnalyticsService? analyticsService;
   final Duration minimumInterval;
   final Clock clock;
+  final bool cloudBackupEnabled;
 
   Future<String>? _inFlight;
 
@@ -47,6 +51,9 @@ class AutoCloudUploadCoordinator {
 
   Future<String> _maybeUpload() async {
     try {
+      if (!cloudBackupEnabled) {
+        return 'disabled';
+      }
       if (authState() == null) {
         return 'notSignedIn';
       }
@@ -71,6 +78,8 @@ class AutoCloudUploadCoordinator {
           );
           await analyticsService?.logCloudUpload('auto');
           return 'uploaded';
+        case CloudStorageUploadDecision.disabled:
+          return 'disabled';
         case CloudStorageUploadDecision.notSignedIn:
           return 'notSignedIn';
         case CloudStorageUploadDecision.emailNotVerified:

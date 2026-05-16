@@ -239,40 +239,40 @@ void main() {
     expect(find.textContaining('Last:'), findsOneWidget);
   });
 
-  testWidgets('keeps account sync discoverable when signed out', (
-    tester,
-  ) async {
+  testWidgets('shows account cloud backup as beta-disabled', (tester) async {
     await tester.pumpWidget(buildScreen());
     await tester.pumpAndSettle();
 
     expect(find.text('Account sync'), findsOneWidget);
-    expect(find.text('Please sign in to use cloud sync.'), findsOneWidget);
+    expect(
+      find.text('Cloud backup is planned for a future release.'),
+      findsOneWidget,
+    );
+    expect(find.text('Auto-upload to cloud'), findsNothing);
     expect(find.text('Upload to cloud'), findsNothing);
     expect(find.text('Pull from cloud'), findsNothing);
   });
 
-  testWidgets('shows signed-in auto-upload toggle and encryption note', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      buildScreen(
-        signedInUser: const AuthUser(uid: 'uid-1', email: 'user@example.com'),
-      ),
-    );
-    await tester.pumpAndSettle();
+  testWidgets(
+    'keeps local backup/export visible while account cloud is disabled',
+    (tester) async {
+      await tester.pumpWidget(
+        buildScreen(
+          signedInUser: const AuthUser(uid: 'uid-1', email: 'user@example.com'),
+        ),
+      );
+      await tester.pumpAndSettle();
 
-    expect(find.text('Auto-upload to cloud'), findsOneWidget);
-    expect(
-      find.text(
-        'Auto-upload does not support encryption. Turn on encryption = upload manually.',
-      ),
-      findsOneWidget,
-    );
-    final tile = tester.widget<SwitchListTile>(
-      find.widgetWithText(SwitchListTile, 'Auto-upload to cloud'),
-    );
-    expect(tile.value, isTrue);
-  });
+      expect(find.text('Manual backup', skipOffstage: false), findsOneWidget);
+      expect(find.text('Export backup'), findsOneWidget);
+      expect(find.text('Import backup'), findsOneWidget);
+      expect(
+        find.text('Cloud backup is planned for a future release.'),
+        findsOneWidget,
+      );
+      expect(find.text('Auto-upload to cloud'), findsNothing);
+    },
+  );
 
   testWidgets('copies support ID for deletion support requests', (
     tester,

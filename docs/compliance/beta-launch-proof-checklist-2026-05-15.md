@@ -21,15 +21,19 @@ npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-p
 The proof state file may close only manual gates: legal approval, deletion
 execution, GA4 retention UI proof, and App Check enforcement. Each gate still
 requires explicit metadata. Date fields must parse as dates, and legal
-approval must reference an existing git commit. Sentry, Storage, and GA4
-learning-event export gates remain source-verified and cannot be closed by the
-proof state file.
+approval must reference an existing git commit. Sentry and GA4 learning-event
+export gates remain source-verified and cannot be closed by the proof state
+file. Firebase Storage is intentionally descoped for beta and recorded as
+deferred metadata because the app is local-first and the project remains on
+Spark.
 
-Latest run on `2026-05-16T22:54+07:00` returned `complete=false` with
-blockers: `legal-approval-missing`, `sentry-dsn-missing`,
-`storage-not-provisioned`, `deletion-proof-missing`,
+Latest post-descope run on `2026-05-17T02:49+07:00` returned
+`complete=false` with blockers: `legal-approval-missing`,
+`sentry-dsn-missing`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
-`app-check-enforcement-deferred`.
+`app-check-enforcement-deferred`. Storage reports as `deferred` with reason
+`storage-descoped-for-beta`; `storage-not-provisioned` is no longer a beta
+blocker.
 
 Operator URLs are now printed directly by:
 
@@ -54,20 +58,18 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
    - Add GitHub Actions secret `JPSTUDY_SENTRY_DSN`.
    - Run GitHub Actions `CI` manually with `sentry_smoke=true`.
    - Record the first Sentry issue URL in the checklist/research docs.
-3. Firebase Storage proof:
-   - Project is currently on Spark. Firebase docs say projects that have not
-     upgraded to pay-as-you-go Blaze cannot use Cloud Storage for Firebase:
-     `https://firebase.google.com/docs/storage/web/start`.
-   - Open
-     `https://console.firebase.google.com/u/1/project/jpstudy-v2/storage`.
-   - Upgrade/confirm billing if needed, click "Get Started", choose the
-     irreversible bucket location intentionally, then deploy rules and apply
-     `storage.cors.json`.
+3. Firebase Storage:
+   - Descoped for beta by owner decision on `2026-05-17`.
+   - Rationale: new Cloud Storage for Firebase buckets require Blaze, while
+     `jpstudy-v2` stays on Spark and the app is local-first.
+   - Beta backup path is local file export/import in Data controls.
+   - Keep Storage scaffolding, rules, and CORS files for a future cloud-sync
+     rebuild, but do not require bucket provisioning for beta.
 4. Deletion proof:
    - Use only the dedicated test UID/support ID.
    - Run `npm run report:deletion-readiness -- --uid "<uid>"`.
-   - After Storage and GA4 Admin access are ready, execute the runbook and set
-     `deletion.executed=true`, `deletion.executedAt`,
+   - After GA4 Admin/deletion access is ready, execute the beta runbook and
+     set `deletion.executed=true`, `deletion.executedAt`,
      `deletion.supportId`, and `deletion.evidence`.
 5. GA4 retention proof:
    - Open GA4 Admin for property `536663906`.
@@ -80,7 +82,7 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
      `n5_micro_quiz_completed`, and `session_quality_rated`.
 7. App Check enforcement:
    - Wait 1-2 weeks of beta monitoring.
-   - Enforce App Check, smoke Auth/Storage/Analytics, then set
+   - Enforce App Check, smoke Auth/Analytics, then set
      `appCheck.enforced=true`, `appCheck.enforcedAt`, and
      `appCheck.evidence`.
 
@@ -166,16 +168,19 @@ Evidence to record:
 
 ## 3. Firebase Storage Migration Proof
 
-Goal: prove anonymous Auth plus Storage rules can write the legacy migration
-payload before enabling automatic migration.
+Goal: deferred for beta. Firebase Storage remains scaffolded but disabled.
+Do not enable automatic migration during the Spark/local-first beta.
 
 Current status:
 
-- Recheck on `2026-05-16T09:49+07:00`:
-  `firebase deploy --only storage --project jpstudy-v2 --dry-run` still fails
-  because Firebase Storage has not been set up for project `jpstudy-v2`.
+- Owner decision on `2026-05-17`: beta will not use Firebase Storage because
+  new Storage buckets require Blaze and `jpstudy-v2` stays on Spark.
+- Cloud backup UI is gated off by default; local file export/import remains
+  the beta backup story.
+- Legacy Storage migration stays gated by
+  `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION=false` / unset.
 
-Required setup:
+Future setup, only if cloud sync returns:
 
 - Confirm/upgrade billing plan first. `jpstudy-v2` is currently documented as
   Spark, while Firebase currently requires Blaze to use Cloud Storage for
@@ -188,6 +193,10 @@ Required setup:
 
 Evidence to record:
 
+- Not required for beta.
+- Current beta evidence is `storage-descoped-for-beta` from
+  `npm run report:storage-readiness -- --json --skip-emulator`.
+- If reintroduced later, record:
 - Storage bucket name and console URL.
 - Rules deploy command output.
 - CORS config command output or console proof from `storage.cors.json`.
@@ -226,9 +235,11 @@ Evidence to record:
 - Readiness report output:
   `npm run report:deletion-readiness -- --uid "<firebase-uid>"`.
 - Auth user deletion result.
-- Storage `users/{uid}/...` deletion result.
+- Storage deletion result is out of beta scope; no Storage user data should
+  exist while cloud backup/migration are gated off.
 - GA4/BigQuery deletion request or documented limitation.
-- Verification that the app no longer restores that user's cloud data.
+- Verification that the app no longer has an Auth identity for that user and
+  cannot associate future GA4 events with that UID.
 
 Current status:
 
@@ -237,9 +248,9 @@ Current status:
 - Dry-run helper defaults to `safeMode=true`; live Auth deletion requires
   explicit `--execute`.
 - Recheck on `2026-05-16T11:29+07:00` removed the previous
-  `firebase-admin` tooling blocker. Remaining deletion proof blockers are
-  Storage provisioning, GA4 Admin deletion access, and `gcloud` or equivalent
-  operator path.
+  `firebase-admin` tooling blocker. After the `2026-05-17` Storage descope,
+  remaining deletion proof blockers are GA4 Admin deletion access and
+  `gcloud` or equivalent operator proof path.
 
 ## 6. GA4 Retention UI Proof
 
@@ -306,8 +317,8 @@ Evidence to record:
 
 - App Check monitoring screenshot/summary before enforcement.
 - Enforcement change date.
-- Post-enforcement smoke: Auth, Storage backup/migration, and Analytics still
-  work on `https://jpstudy.web.app`.
+- Post-enforcement smoke: Auth and Analytics still work on
+  `https://jpstudy.web.app`; Storage backup/migration are outside beta scope.
 
 ## Update Locations After Proof
 

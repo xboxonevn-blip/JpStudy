@@ -14,6 +14,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/services/auto_cloud_upload_coordinator.dart';
 import 'package:jpstudy/core/services/backup_encryption.dart';
 import 'package:jpstudy/core/services/backup_sync_service.dart';
+import 'package:jpstudy/core/services/cloud_backup_feature_flag.dart';
 import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
 import 'package:jpstudy/core/services/cloud_sync_service.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
@@ -125,7 +126,8 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   Future<void> refresh() async {
     final prefs = await _ensurePrefs();
     final autoBackupEnabled = prefs.getBool(_prefAutoBackup) ?? false;
-    final autoCloudUploadEnabled = prefs.getBool(_prefAutoCloudUpload) ?? true;
+    final autoCloudUploadEnabled =
+        cloudBackupEnabled && (prefs.getBool(_prefAutoCloudUpload) ?? true);
     final autoBackupTime =
         _backupTimeFromPrefs(prefs) ?? const TimeOfDay(hour: 2, minute: 0);
     final lastRaw = prefs.getString(_prefAutoBackupLast);
@@ -168,8 +170,9 @@ class DataSettingsController extends Notifier<DataSettingsState> {
 
   Future<void> setAutoCloudUpload(bool enabled, AppLanguage _) async {
     final prefs = await _ensurePrefs();
-    await prefs.setBool(_prefAutoCloudUpload, enabled);
-    state = state.copyWith(autoCloudUploadEnabled: enabled, isReady: true);
+    final effective = cloudBackupEnabled && enabled;
+    await prefs.setBool(_prefAutoCloudUpload, effective);
+    state = state.copyWith(autoCloudUploadEnabled: effective, isReady: true);
   }
 
   Future<void> exportBackup(
@@ -449,6 +452,8 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     final message = switch (result.decision) {
       CloudStorageUploadDecision.uploaded =>
         language.firebaseStorageUploadSuccessLabel,
+      CloudStorageUploadDecision.disabled =>
+        language.firebaseStorageComingSoonBody,
       CloudStorageUploadDecision.notSignedIn =>
         language.firebaseStorageNotSignedInLabel,
       CloudStorageUploadDecision.emailNotVerified =>
@@ -496,6 +501,9 @@ class DataSettingsController extends Notifier<DataSettingsState> {
           successMessage: language.firebaseStorageDownloadSuccessLabel,
         );
         return;
+      case CloudStorageDownloadDecision.disabled:
+        _showSnackBar(context, language.firebaseStorageComingSoonBody);
+        return;
       case CloudStorageDownloadDecision.skipOlder:
         if (result.payload == null) {
           return;
@@ -538,6 +546,8 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     final message = switch (result.decision) {
       CloudStorageDeleteDecision.deleted =>
         language.firebaseStorageDeleteSuccessLabel,
+      CloudStorageDeleteDecision.disabled =>
+        language.firebaseStorageComingSoonBody,
       CloudStorageDeleteDecision.notSignedIn =>
         language.firebaseStorageNotSignedInLabel,
       CloudStorageDeleteDecision.emailNotVerified =>

@@ -344,7 +344,9 @@ function buildLaunchReadiness({ legal, sentry, storage, deletion, ga4, appCheck 
   const blockers = [];
   if (!legal.approved) blockers.push('legal-approval-missing');
   if (!sentry.ready) blockers.push(sentry.reason || 'sentry-not-ready');
-  if (!storage.ready) blockers.push(storage.reason || 'storage-not-ready');
+  if (!storage.ready && !storage.deferred) {
+    blockers.push(storage.reason || 'storage-not-ready');
+  }
   if (!deletion.executed) blockers.push('deletion-proof-missing');
   if (!ga4.adminRetentionOk) blockers.push('ga4-retention-proof-missing');
   if ((ga4.learningReadiness || []).length > 0) {
@@ -365,9 +367,6 @@ function nextActionFor(blocker) {
   }
   if (blocker === 'sentry-dsn-missing') {
     return 'Set JPSTUDY_SENTRY_DSN and run workflow_dispatch with sentry_smoke=true.';
-  }
-  if (blocker === 'storage-not-provisioned') {
-    return 'Confirm/upgrade Blaze billing, provision Firebase Storage, deploy rules, apply storage.cors.json, then run migration proof.';
   }
   if (blocker === 'deletion-proof-missing') {
     return 'Execute the deletion runbook against a dedicated test UID, then record deletion proof in docs/compliance/launch-proof-state.json.';
@@ -414,6 +413,11 @@ function buildMarkdownReport({
   const nextActions = readiness.nextActions.length
     ? readiness.nextActions.map((item) => `- ${item}`)
     : ['- none'];
+  const storageStatus = evidence.storage.deferred
+    ? 'deferred'
+    : evidence.storage.ready
+      ? 'pass'
+      : 'blocked';
 
   return `${[
     '# Beta Launch Readiness Report',
@@ -427,7 +431,7 @@ function buildMarkdownReport({
     '| --- | --- | --- |',
     `| Legal approval | ${evidence.legal.source} | ${evidence.legal.approved ? 'pass' : 'blocked'} |`,
     `| Sentry first issue | reason=${evidence.sentry.reason || 'ready'} | ${evidence.sentry.ready ? 'pass' : 'blocked'} |`,
-    `| Storage migration | reason=${evidence.storage.reason || 'ready'} | ${evidence.storage.ready ? 'pass' : 'blocked'} |`,
+    `| Storage migration | reason=${evidence.storage.reason || 'ready'} | ${storageStatus} |`,
     `| Deletion proof | ${evidence.deletion.source || `executed=${Boolean(evidence.deletion.executed)}`} | ${evidence.deletion.executed ? 'pass' : 'blocked'} |`,
     `| GA4 retention | ${evidence.ga4.adminRetentionSource || `adminRetentionOk=${Boolean(evidence.ga4.adminRetentionOk)}`} | ${evidence.ga4.adminRetentionOk ? 'pass' : 'blocked'} |`,
     `| GA4 learning events | ${(evidence.ga4.learningReadiness || []).join(', ') || 'present'} | ${(evidence.ga4.learningReadiness || []).length === 0 ? 'pass' : 'blocked'} |`,

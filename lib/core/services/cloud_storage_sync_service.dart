@@ -5,9 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'backup_sync_service.dart';
+import 'cloud_backup_feature_flag.dart';
 
 enum CloudStorageUploadDecision {
   uploaded,
+  disabled,
   notSignedIn,
   emailNotVerified,
   payloadTooLarge,
@@ -16,6 +18,7 @@ enum CloudStorageUploadDecision {
 
 enum CloudStorageDownloadDecision {
   apply,
+  disabled,
   skipOlder,
   invalidChecksum,
   invalidFormat,
@@ -29,6 +32,7 @@ enum CloudStorageDownloadDecision {
 
 enum CloudStorageDeleteDecision {
   deleted,
+  disabled,
   notSignedIn,
   emailNotVerified,
   noRemoteFile,
@@ -92,6 +96,11 @@ class CloudStorageSyncService {
   Future<CloudStorageUploadResult> uploadEnvelope(
     Map<String, dynamic> envelope,
   ) async {
+    if (!cloudBackupEnabled) {
+      return const CloudStorageUploadResult(
+        decision: CloudStorageUploadDecision.disabled,
+      );
+    }
     final userBackup = _backupPathForCurrentUser();
     if (userBackup == null) {
       return const CloudStorageUploadResult(
@@ -133,6 +142,11 @@ class CloudStorageSyncService {
   Future<CloudStorageDownloadResult> prepareDownload({
     String? passphrase,
   }) async {
+    if (!cloudBackupEnabled) {
+      return const CloudStorageDownloadResult(
+        decision: CloudStorageDownloadDecision.disabled,
+      );
+    }
     final userBackup = _backupPathForCurrentUser();
     if (userBackup == null) {
       return const CloudStorageDownloadResult(
@@ -222,6 +236,11 @@ class CloudStorageSyncService {
   }
 
   Future<CloudStorageDeleteResult> deleteRemoteBackup() async {
+    if (!cloudBackupEnabled) {
+      return const CloudStorageDeleteResult(
+        decision: CloudStorageDeleteDecision.disabled,
+      );
+    }
     final userBackup = _backupPathForCurrentUser();
     if (userBackup == null) {
       return const CloudStorageDeleteResult(

@@ -11,6 +11,7 @@ import 'package:jpstudy/core/analytics/analytics_provider.dart';
 import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/services/cloud_backup_feature_flag.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
 import 'package:jpstudy/features/legal/legal_document_screen.dart';
@@ -299,33 +300,37 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            user == null
+            !cloudBackupEnabled
+                ? language.firebaseStorageComingSoonBody
+                : user == null
                 ? language.firebaseStorageNotSignedInLabel
                 : language.firebaseStorageSectionSubtitle,
             style: Theme.of(
               context,
             ).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
           ),
-          const SizedBox(height: AppSpacing.sm),
-          SwitchListTile(
-            value: settings.autoCloudUploadEnabled,
-            onChanged: user != null && settings.isReady
-                ? (value) => controller.setAutoCloudUpload(value, language)
-                : null,
-            contentPadding: EdgeInsets.zero,
-            title: Text(language.autoCloudUploadLabel),
-            subtitle: Text(language.autoCloudUploadHint),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-            child: Text(
-              language.autoCloudUploadEncryptionWarning,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).hintColor,
-                fontStyle: FontStyle.italic,
+          if (cloudBackupEnabled) ...[
+            const SizedBox(height: AppSpacing.sm),
+            SwitchListTile(
+              value: settings.autoCloudUploadEnabled,
+              onChanged: user != null && settings.isReady
+                  ? (value) => controller.setAutoCloudUpload(value, language)
+                  : null,
+              contentPadding: EdgeInsets.zero,
+              title: Text(language.autoCloudUploadLabel),
+              subtitle: Text(language.autoCloudUploadHint),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: Text(
+                language.autoCloudUploadEncryptionWarning,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).hintColor,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
-          ),
+          ],
           if (user != null) ...[
             const SizedBox(height: AppSpacing.md),
             _ActionTile(
@@ -336,6 +341,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                   ? () => _copySupportId(user.uid, language)
                   : null,
             ),
+          ],
+          if (cloudBackupEnabled && user != null) ...[
             const SizedBox(height: AppSpacing.md),
             Wrap(
               spacing: AppSpacing.sm,

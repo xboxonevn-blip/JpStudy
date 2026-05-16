@@ -15,7 +15,7 @@ The active mission is complete only if all are true:
 3. D2 editorial approval state is honest, with no Codex-created `vi-human-approved` claims.
 4. CI/CD, Firebase rules, deploy, and live smoke gates pass on `main`.
 5. Live route matrix preserves seeded level for core N4/N3/N2/N1 direct hash routes.
-6. Public/beta launch blockers are closed with real evidence: legal approval, Sentry first issue, Storage migration proof, deletion proof, GA4 retention proof, GA4 exported learning events, and App Check enforcement.
+6. Public/beta launch blockers are closed with real evidence: legal approval, Sentry first issue, deletion proof, GA4 retention proof, GA4 exported learning events, and App Check enforcement. Firebase Storage migration proof is descoped for beta by owner decision on 2026-05-17.
 
 ## Prompt-To-Artifact Checklist
 
@@ -32,8 +32,8 @@ The active mission is complete only if all are true:
 | Live route matrix | `docs/research/D4-persona-synthesis.md` records Playwright checks for N4/N3/N2/N1 across `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`, `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/exam-center`; `npm run report:live-route-matrix -- --json` passed `36/36` | Passed for N4-N1 seeded hash routes; sparse semantics caveat remains for some routes |
 | Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T02:03+07` | Failed |
 | Sentry operational proof | `npm run report:sentry-readiness -- --json`: source/workflow gates present, GitHub secrets have `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, `JPSTUDY_SENTRY_DSN=false` | Missing |
-| Storage migration proof | `npm run report:storage-readiness -- --json --skip-emulator`: Spark prerequisite documented, CORS file present, dry-run says Firebase Storage not set up | Missing |
-| Deletion proof | `npm run report:deletion-readiness -- --uid iE3tNLHW7tTvTAL7WmSG2JyIovI2 --json`: executable `false`; blocked by Storage, GA4 Admin/deletion access, and missing `gcloud` or console-equivalent proof | Missing |
+| Storage migration proof | Owner decision 2026-05-17 descopes Firebase Storage for beta; `npm run report:storage-readiness -- --json --skip-emulator` now reports `storage-descoped-for-beta` | Deferred for beta |
+| Deletion proof | `npm run report:deletion-readiness -- --uid iE3tNLHW7tTvTAL7WmSG2JyIovI2 --json`: executable `false`; blocked by GA4 Admin/deletion access and missing `gcloud` or console-equivalent proof | Missing |
 | GA4 retention proof | GA4 Admin API probe returns `403`; `docs/compliance/launch-proof-state.json` has `ga4Retention.verified=false` | Missing |
 | GA4 learning export | `npm run report:ga4-export -- --json`: BigQuery tables only `events_20260514` and `events_20260515`; learning rows still missing | Missing |
 | App Check enforcement | `docs/compliance/launch-proof-state.json` has `appCheck.enforced=false`; enforcement intentionally deferred until monitoring window | Deferred/missing |
@@ -49,12 +49,11 @@ npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-p
 Latest checked result:
 
 ```text
-generatedAt -> 2026-05-16T19:03:46.767Z
+generatedAt -> 2026-05-16T19:49:16.741Z
 complete -> false
 blockers:
 - legal-approval-missing
 - sentry-dsn-missing
-- storage-not-provisioned
 - deletion-proof-missing
 - ga4-retention-proof-missing
 - ga4-learning-events-missing
@@ -67,11 +66,14 @@ These items cannot be honestly closed by repo edits alone:
 
 1. Legal reviewer/date/evidence for `/privacy` and `/terms`.
 2. Sentry DSN, secret-backed smoke run with `sentry_smoke=true`, and first deployed issue URL.
-3. Firebase Storage Console setup, rules deploy, CORS proof, and migration proof.
-4. A real deletion proof against a dedicated test UID/support ID.
-5. GA4 Admin retention Console/API proof.
-6. BigQuery export ingestion of the already client-proven learning event rows.
-7. App Check enforcement after the beta monitoring window.
+3. A real deletion proof against a dedicated test UID/support ID.
+4. GA4 Admin retention Console/API proof.
+5. BigQuery export ingestion of the already client-proven learning event rows.
+6. App Check enforcement after the beta monitoring window.
+
+Firebase Storage note: cloud backup and legacy migration are not beta
+requirements. The project remains on Spark, Storage setup would require Blaze,
+and local file export/import is the beta backup path.
 
 ## Verdict
 

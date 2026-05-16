@@ -17,8 +17,9 @@ The goal is complete only when all of these are true:
 3. CI failure addendum is fixed on `main`, with no feature branches.
 4. Verification gates pass locally and in GitHub Actions.
 5. Public/beta launch blockers in the stopping condition are cleared, including
-   legal review, operational observability, Storage migration proof, and
-   deletion/retention proofs.
+   legal review, operational observability, and deletion/retention proofs.
+   Firebase Storage migration proof was descoped for beta by owner decision on
+   2026-05-17.
 
 ## Prompt-To-Artifact Checklist
 
@@ -35,7 +36,7 @@ The goal is complete only when all of these are true:
 | SP4 Privacy/Terms route/link surface | `lib/features/legal/legal_document_screen.dart`; tests include `/privacy`, `/terms`, onboarding, settings/data, login links; `docs/research/README.md` marks copy as review-needed draft | Source passed; legal approval missing |
 | SP5 Sentry source wiring | `3c27e46f feat(observability): add Sentry web error monitoring`, `7a279bcb fix(observability): allow Sentry ingest in CSP`, `5a19cd80 feat(observability): add sentry smoke event trigger`, `pubspec.yaml` has `sentry_flutter`, docs record optional DSN | Source passed; real DSN and first issue proof missing |
 | SP6 CI/CD | `.github/workflows/ui-string-guard.yml` runs UI guard, analyze, test, web build, perf budget, resource smoke, storage rules, and gated deploy job; run `25933463058` completed a real secret-backed deploy/live-smoke/Lighthouse path on `main` | Passed |
-| SP7 anonymous auth | `ee711bf3 feat(auth): add anonymous auth bootstrap`, `lib/core/auth/anonymous_auth_service.dart`, `storage.rules`, `docs/research/D8-compliance/Q8.7-analysis.md` | Source/live auth passed; Storage migration proof blocked by missing bucket/setup |
+| SP7 anonymous auth | `ee711bf3 feat(auth): add anonymous auth bootstrap`, `lib/core/auth/anonymous_auth_service.dart`, `storage.rules`, `docs/research/D8-compliance/Q8.7-analysis.md` | Source/live auth passed; Storage migration descoped for beta and remains gated off |
 | T5 textbook roadmap | `63163f4d feat(roadmap): model textbook-aligned phases per level`, `828d84a4 feat(roadmap): show textbook phases on learning path`, roadmap tests | Passed |
 | T6 radical header mojibake | `2c452da4 fix(kanji): migrate radical group headers to i18n`; string guard remains 0 candidates | Passed |
 | T7 N2/N1 Kanji tabs | `55010d68 feat(kanji): add N2 and N1 level tabs in Kanji Hub`; tests in `test/features/kanji_hub/kanji_hub_screen_test.dart` | Passed |
@@ -76,7 +77,7 @@ Local commands run during the completion audit:
 - `npm run test:research-tooling`
   - Result: 43 passed, 0 failed.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
-  - Result: `complete=false` with the seven remaining proof blockers listed
+  - Result: `complete=false` with the remaining proof blockers listed
     below.
 
 GitHub Actions summary:
@@ -93,11 +94,12 @@ GitHub Actions summary:
   but do not close proof gates by themselves.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
   now performs a single aggregate proof check with structured manual proof
-  metadata. Latest run on `2026-05-16T22:54+07:00` returned
+  metadata. Latest post-descope run on `2026-05-17T02:49+07:00` returned
   `complete=false` with blockers `legal-approval-missing`,
-  `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
+  `sentry-dsn-missing`, `deletion-proof-missing`,
   `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
-  `app-check-enforcement-deferred`.
+  `app-check-enforcement-deferred`. Storage reports
+  `storage-descoped-for-beta`, not a beta blocker.
 
 ## Missing Or Weakly Verified Requirements
 
@@ -111,12 +113,10 @@ These prevent marking the active goal complete:
    and workflow smoke gates present, repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
    `JPSTUDY_SENTRY_DSN`; no event was sent by that readiness report.
-3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
-   Storage bucket/rules/CORS path is not provisioned/proven, so
-   `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
-  2026-05-16T09:49+07:00 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
-  recheck still reports that Firebase Storage has not been set up on the
-  project.
+3. Firebase Storage migration is no longer a beta blocker. Owner decision on
+   2026-05-17 keeps the beta local-first on Spark; cloud backup and legacy
+   Storage migration remain gated off, and local file export/import is the
+   beta backup path.
 4. First executed deletion runbook proof is missing. The runbook and Support ID
    surface exist, and an audited safe-by-default Firebase Auth deletion helper
    now exists, but no real deletion request has been executed end to end.

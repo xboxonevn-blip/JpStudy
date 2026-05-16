@@ -3724,11 +3724,11 @@ extension AppLanguageLabels on AppLanguage {
   String get authEmailVerificationSentLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Verification email sent. Verify your email to enable cloud backup.';
+        return 'Verification email sent.';
       case AppLanguage.vi:
-        return 'Đã gửi email xác minh. Hãy xác minh email để bật sao lưu đám mây.';
+        return 'Đã gửi email xác minh.';
       case AppLanguage.ja:
-        return '確認メールを送信しました。クラウドバックアップを有効にするにはメールを確認してください。';
+        return '確認メールを送信しました。';
     }
   }
 
@@ -3828,6 +3828,17 @@ extension AppLanguageLabels on AppLanguage {
         return '\u0110\u1ed3ng b\u1ed9 b\u1ea3n sao l\u01b0u (\u0111\u00e3 m\u00e3 h\u00f3a) qua t\u00e0i kho\u1ea3n \u0111\u00e3 \u0111\u0103ng nh\u1eadp.';
       case AppLanguage.ja:
         return '\u30b5\u30a4\u30f3\u30a4\u30f3\u4e2d\u306e\u30a2\u30ab\u30a6\u30f3\u30c8\u3067\u6697\u53f7\u5316\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u540c\u671f\u3057\u307e\u3059\u3002';
+    }
+  }
+
+  String get firebaseStorageComingSoonBody {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Cloud backup is planned for a future release.';
+      case AppLanguage.vi:
+        return 'Sao lưu cloud sẽ được bổ sung trong bản phát hành sau.';
+      case AppLanguage.ja:
+        return 'クラウドバックアップは今後のリリースで提供予定です。';
     }
   }
 
@@ -8249,17 +8260,17 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return const [
           'This is a review-needed draft for beta readiness. Have the final policy reviewed before public launch.',
-          'JpStudy stores learning progress locally on your device. If you sign in or enable cloud backup, account identifiers and backup files may be handled through Firebase services.',
+          'JpStudy stores learning progress locally on your device. If you sign in, account identifiers may be handled through Firebase services.',
           'Analytics events are intended to measure learning funnels, retention, performance, and content quality. They should not include prompts, answers, names, or free-text learner content.',
-          'You can export, import, or delete backup data from Data controls. Account-based cloud backup requires sign-in and email verification.',
+          'For the beta, backup is available through local file export/import in Data controls. Account-based cloud backup is planned for a future release.',
           'Contact support before launch to request data deletion or policy clarification.',
         ];
       case AppLanguage.vi:
         return const [
           '\u0110\u00e2y l\u00e0 b\u1ea3n nh\u00e1p c\u1ea7n r\u00e0 so\u00e1t cho beta. H\u00e3y r\u00e0 so\u00e1t ch\u00ednh s\u00e1ch cu\u1ed1i c\u00f9ng tr\u01b0\u1edbc khi ra m\u1eaft c\u00f4ng khai.',
-          'JpStudy l\u01b0u ti\u1ebfn \u0111\u1ed9 h\u1ecdc ch\u1ee7 y\u1ebfu tr\u00ean thi\u1ebft b\u1ecb. N\u1ebfu b\u1ea1n \u0111\u0103ng nh\u1eadp ho\u1eb7c b\u1eadt sao l\u01b0u cloud, m\u00e3 \u0111\u1ecbnh danh t\u00e0i kho\u1ea3n v\u00e0 file sao l\u01b0u c\u00f3 th\u1ec3 \u0111\u01b0\u1ee3c x\u1eed l\u00fd qua Firebase.',
+          'JpStudy l\u01b0u ti\u1ebfn \u0111\u1ed9 h\u1ecdc ch\u1ee7 y\u1ebfu tr\u00ean thi\u1ebft b\u1ecb. N\u1ebfu b\u1ea1n \u0111\u0103ng nh\u1eadp, m\u00e3 \u0111\u1ecbnh danh t\u00e0i kho\u1ea3n c\u00f3 th\u1ec3 \u0111\u01b0\u1ee3c x\u1eed l\u00fd qua Firebase.',
           'S\u1ef1 ki\u1ec7n ph\u00e2n t\u00edch ch\u1ec9 n\u00ean d\u00f9ng \u0111\u1ec3 \u0111o funnel h\u1ecdc, retention, hi\u1ec7u n\u0103ng v\u00e0 ch\u1ea5t l\u01b0\u1ee3ng n\u1ed9i dung. Kh\u00f4ng \u0111\u01b0a prompt, c\u00e2u tr\u1ea3 l\u1eddi, t\u00ean ho\u1eb7c n\u1ed9i dung t\u1ef1 do c\u1ee7a ng\u01b0\u1eddi h\u1ecdc v\u00e0o telemetry.',
-          'B\u1ea1n c\u00f3 th\u1ec3 xu\u1ea5t, nh\u1eadp ho\u1eb7c x\u00f3a d\u1eef li\u1ec7u sao l\u01b0u trong ph\u1ea7n D\u1eef li\u1ec7u. Sao l\u01b0u cloud theo t\u00e0i kho\u1ea3n c\u1ea7n \u0111\u0103ng nh\u1eadp v\u00e0 x\u00e1c minh email.',
+          'Trong beta, sao l\u01b0u d\u00f9ng file xu\u1ea5t/nh\u1eadp c\u1ee5c b\u1ed9 trong ph\u1ea7n D\u1eef li\u1ec7u. Sao l\u01b0u cloud theo t\u00e0i kho\u1ea3n \u0111\u01b0\u1ee3c d\u1ef1 ki\u1ebfn cho b\u1ea3n sau.',
           'H\u00e3y li\u00ean h\u1ec7 h\u1ed7 tr\u1ee3 tr\u01b0\u1edbc khi ra m\u1eaft \u0111\u1ec3 y\u00eau c\u1ea7u x\u00f3a d\u1eef li\u1ec7u ho\u1eb7c l\u00e0m r\u00f5 ch\u00ednh s\u00e1ch.',
         ];
       case AppLanguage.ja:
@@ -8274,16 +8285,16 @@ extension AppLanguageLabels on AppLanguage {
           'This is a review-needed draft for beta readiness. Have the final terms reviewed before public launch.',
           'JpStudy is a study tool for Japanese learning. It does not guarantee exam results, certification outcomes, or uninterrupted service.',
           'You are responsible for keeping your account credentials and backup files safe.',
-          'Do not upload unlawful content, abuse Firebase-backed services, or attempt to disrupt the app for other learners.',
-          'JpStudy may change beta features, telemetry, and backup behavior as the product is hardened.',
+          'Do not abuse Firebase-backed services or attempt to disrupt the app for other learners.',
+          'JpStudy may change beta features, telemetry, and backup behavior as the product is hardened. Account cloud backup is not part of the beta.',
         ];
       case AppLanguage.vi:
         return const [
           '\u0110\u00e2y l\u00e0 b\u1ea3n nh\u00e1p c\u1ea7n r\u00e0 so\u00e1t cho beta. H\u00e3y r\u00e0 so\u00e1t \u0111i\u1ec1u kho\u1ea3n cu\u1ed1i c\u00f9ng tr\u01b0\u1edbc khi ra m\u1eaft c\u00f4ng khai.',
           'JpStudy l\u00e0 c\u00f4ng c\u1ee5 h\u1ed7 tr\u1ee3 h\u1ecdc ti\u1ebfng Nh\u1eadt. App kh\u00f4ng \u0111\u1ea3m b\u1ea3o k\u1ebft qu\u1ea3 thi, ch\u1ee9ng ch\u1ec9 ho\u1eb7c d\u1ecbch v\u1ee5 kh\u00f4ng gi\u00e1n \u0111o\u1ea1n.',
           'B\u1ea1n ch\u1ecbu tr\u00e1ch nhi\u1ec7m gi\u1eef an to\u00e0n th\u00f4ng tin t\u00e0i kho\u1ea3n v\u00e0 file sao l\u01b0u.',
-          'Kh\u00f4ng t\u1ea3i n\u1ed9i dung vi ph\u1ea1m ph\u00e1p lu\u1eadt, l\u1ea1m d\u1ee5ng d\u1ecbch v\u1ee5 d\u1ef1a tr\u00ean Firebase, ho\u1eb7c c\u1ed1 t\u00ecnh g\u00e2y gi\u00e1n \u0111o\u1ea1n app cho ng\u01b0\u1eddi h\u1ecdc kh\u00e1c.',
-          'JpStudy c\u00f3 th\u1ec3 thay \u0111\u1ed5i t\u00ednh n\u0103ng beta, telemetry v\u00e0 c\u00e1ch sao l\u01b0u trong qu\u00e1 tr\u00ecnh harden s\u1ea3n ph\u1ea9m.',
+          'Kh\u00f4ng l\u1ea1m d\u1ee5ng d\u1ecbch v\u1ee5 d\u1ef1a tr\u00ean Firebase ho\u1eb7c c\u1ed1 t\u00ecnh g\u00e2y gi\u00e1n \u0111o\u1ea1n app cho ng\u01b0\u1eddi h\u1ecdc kh\u00e1c.',
+          'JpStudy c\u00f3 th\u1ec3 thay \u0111\u1ed5i t\u00ednh n\u0103ng beta, telemetry v\u00e0 c\u00e1ch sao l\u01b0u trong qu\u00e1 tr\u00ecnh harden s\u1ea3n ph\u1ea9m. Sao l\u01b0u cloud theo t\u00e0i kho\u1ea3n kh\u00f4ng n\u1eb1m trong beta.',
         ];
       case AppLanguage.ja:
         return legalTermsBodyForEnglish;
@@ -8292,9 +8303,9 @@ extension AppLanguageLabels on AppLanguage {
 
   List<String> get legalPrivacyBodyForEnglish => const [
     'This is a review-needed draft for beta readiness. Have the final policy reviewed before public launch.',
-    'JpStudy stores learning progress locally on your device. If you sign in or enable cloud backup, account identifiers and backup files may be handled through Firebase services.',
+    'JpStudy stores learning progress locally on your device. If you sign in, account identifiers may be handled through Firebase services.',
     'Analytics events are intended to measure learning funnels, retention, performance, and content quality. They should not include prompts, answers, names, or free-text learner content.',
-    'You can export, import, or delete backup data from Data controls. Account-based cloud backup requires sign-in and email verification.',
+    'For the beta, backup is available through local file export/import in Data controls. Account-based cloud backup is planned for a future release.',
     'Contact support before launch to request data deletion or policy clarification.',
   ];
 
@@ -8302,7 +8313,7 @@ extension AppLanguageLabels on AppLanguage {
     'This is a review-needed draft for beta readiness. Have the final terms reviewed before public launch.',
     'JpStudy is a study tool for Japanese learning. It does not guarantee exam results, certification outcomes, or uninterrupted service.',
     'You are responsible for keeping your account credentials and backup files safe.',
-    'Do not upload unlawful content, abuse Firebase-backed services, or attempt to disrupt the app for other learners.',
-    'JpStudy may change beta features, telemetry, and backup behavior as the product is hardened.',
+    'Do not abuse Firebase-backed services or attempt to disrupt the app for other learners.',
+    'JpStudy may change beta features, telemetry, and backup behavior as the product is hardened. Account cloud backup is not part of the beta.',
   ];
 } // End extension

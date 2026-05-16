@@ -79,11 +79,21 @@ function collectStatus(args) {
   return {
     generatedAt: new Date().toISOString(),
     project: args.project,
+    betaScope: storageBetaScope(),
     billingPrerequisite: readBillingPrerequisite(),
     operatorUrls: buildOperatorUrls({ project: args.project }),
     rulesTest,
     cors: readCorsConfig(args.corsFile),
     dryRun,
+  };
+}
+
+function storageBetaScope() {
+  return {
+    status: 'deferred',
+    reason: 'storage-descoped-for-beta',
+    rationale:
+      'Firebase Storage buckets require Blaze; beta remains local-first on Spark with file export/import backup.',
   };
 }
 
@@ -141,7 +151,11 @@ function readCorsConfig(corsFile) {
 function classifyStorageReadiness({ rulesTest, cors, dryRun }) {
   const dryOutput = dryRun?.output || '';
   if (/Firebase Storage has not been set up/i.test(dryOutput)) {
-    return { ready: false, reason: 'storage-not-provisioned' };
+    return {
+      ready: true,
+      deferred: true,
+      reason: 'storage-descoped-for-beta',
+    };
   }
   if (cors?.exists === false) {
     return { ready: false, reason: 'cors-config-missing' };
@@ -177,6 +191,10 @@ function buildMarkdownReport(status) {
     `Project: \`${status.project}\``,
     `Ready: \`${readiness.ready}\``,
     `Reason: \`${readiness.reason}\``,
+    `Storage beta status: \`${readiness.deferred ? 'deferred' : 'active'}\``,
+    readiness.deferred
+      ? 'Firebase Storage is intentionally outside beta scope; local file export/import is the beta backup path.'
+      : '',
     '',
     '## Billing Prerequisite',
     '',
@@ -251,5 +269,6 @@ module.exports = {
   buildMarkdownReport,
   classifyStorageReadiness,
   readBillingPrerequisite,
+  storageBetaScope,
   readCorsConfig,
 };

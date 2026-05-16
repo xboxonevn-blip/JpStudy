@@ -56,10 +56,29 @@ Future<AutoCloudUploadCoordinator> _coordinator({
     preferences: prefs,
     minimumInterval: minimumInterval,
     clock: () => now ?? DateTime(2026, 5, 8, 12),
+    cloudBackupEnabled: true,
   );
 }
 
 void main() {
+  test('returns disabled when account cloud backup feature is off', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final storage = _FakeCloudStorageSyncService(
+      CloudStorageUploadDecision.uploaded,
+    );
+    final coordinator = AutoCloudUploadCoordinator(
+      cloudStorageSync: storage,
+      envelopeBuilder: () async => {'version': 2, 'exportedAt': 'now'},
+      authState: () => _user,
+      preferences: prefs,
+      cloudBackupEnabled: false,
+    );
+
+    expect(await coordinator.maybeUpload(), 'disabled');
+    expect(storage.uploadCalls, 0);
+  });
+
   test('returns notSignedIn when AuthUser is null', () async {
     final coordinator = await _coordinator(user: null);
     expect(await coordinator.maybeUpload(), 'notSignedIn');

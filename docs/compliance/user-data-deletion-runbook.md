@@ -8,8 +8,9 @@ Primary Hosting: `https://jpstudy.web.app`
 
 ## Purpose
 
-Use this runbook when a learner asks JpStudy to delete account, cloud backup,
-Analytics, or exported telemetry data.
+Use this runbook when a learner asks JpStudy to delete account, Analytics, or
+exported telemetry data. Firebase Storage is outside beta scope; no beta cloud
+backup data should exist.
 
 This is the server-side/support process. It is separate from the in-app
 Analytics reset button, which only attempts a device-side SDK reset and is
@@ -27,7 +28,7 @@ currently unsupported by Firebase Analytics Web.
 | Store | Data | Identifier | Current status |
 |---|---|---|---|
 | Firebase Auth | anonymous or linked user record | Firebase `uid`, email if linked | Anonymous Auth enabled on 2026-05-15 |
-| Firebase Storage | cloud backup and legacy migration payloads | `users/{uid}/...` | Storage bucket not set up yet; migration gated off |
+| Firebase Storage | future cloud backup and legacy migration payloads | `users/{uid}/...` | Descoped for beta; bucket not provisioned; migration gated off |
 | GA4 | Analytics events and user properties | `userId`, `clientId`, `appInstanceId`, or normalized user-provided data | `userId` set only through consent-gated Analytics service |
 | BigQuery GA4 export | raw `events_*` tables | `user_id`, possibly `user_pseudo_id` | `analytics_536663906` exists in `asia-southeast1`; tables expire after 60 days |
 
@@ -47,7 +48,8 @@ currently unsupported by Firebase Analytics Web.
 
 Data controls exposes a "Support ID" action for signed-in users, including
 anonymous Firebase users. The action copies the Firebase UID so support can
-target Firebase Auth, Firebase Storage, GA4 `userId`, and BigQuery `user_id`.
+target Firebase Auth, GA4 `userId`, and BigQuery `user_id`. Storage is not a
+beta target because cloud backup and migration are disabled.
 
 If the user cannot open Data controls or no Auth user exists, record the
 limitation and delete only data that can be confidently matched.
@@ -68,10 +70,10 @@ npm run report:deletion-readiness -- --uid "<firebase-uid>" --json
 npm run report:deletion-readiness -- --uid "<firebase-uid>" --out output\research\deletion-readiness-latest.md
 ```
 
-Current known blockers: Firebase Storage is not provisioned, GA4 Admin
-API/deletion access is not available, and `gcloud` is not installed locally.
-Because `jpstudy-v2` is on Spark, Firebase's current Storage setup docs require
-Blaze before the owner can use Cloud Storage for Firebase:
+Current known blockers: GA4 Admin API/deletion access is not available, and
+`gcloud` is not installed locally. Firebase Storage is intentionally descoped
+for beta because `jpstudy-v2` is on Spark and Firebase's current Storage setup
+docs require Blaze before the owner can use Cloud Storage for Firebase:
 `https://firebase.google.com/docs/storage/web/start`.
 Firebase Auth deletion tooling is audited at
 `tool/research/firebase_admin_delete_user.js`. Until all live-service blockers
@@ -94,9 +96,13 @@ If email is provided, resolve it to UID in Firebase Console Auth Users or with
 Admin SDK tooling. Firebase documents lookup by UID and email in the Admin user
 management API.
 
-### 2. Delete Firebase Storage User Data
+### 2. Firebase Storage User Data
 
-Expected user-owned paths:
+Beta status: not applicable. Cloud backup and legacy Storage migration are
+disabled, and no Storage bucket is provisioned. Do not require a
+`users/{uid}/...` deletion step for beta evidence.
+
+Future user-owned paths if Storage returns:
 
 ```text
 users/<uid>/backup.json
@@ -104,7 +110,8 @@ users/<uid>/legacy_migration.json
 users/<uid>/*
 ```
 
-When Firebase Storage is provisioned, delete the whole UID prefix:
+When Firebase Storage is intentionally reintroduced and provisioned, delete
+the whole UID prefix:
 
 ```powershell
 gcloud storage rm --recursive "gs://<firebase-storage-bucket>/users/$Uid/"
@@ -196,7 +203,7 @@ Record evidence in the ticket:
 Request received:
 Requester:
 Identifier(s):
-Firebase Storage result:
+Firebase Storage result: not applicable for beta unless Storage was explicitly enabled later
 GA4 deletion request time:
 BigQuery cleanup result:
 Firebase Auth deletion result:
@@ -228,7 +235,6 @@ release checks.
 
 ## Open Launch Gaps
 
-- Firebase Storage bucket/rules/CORS setup is still blocked by Console setup.
 - GA4 retention setting needs Console proof.
 - First executed deletion request needs evidence across Auth, GA4, and BigQuery.
 - Privacy/Terms copy still needs human/legal review.

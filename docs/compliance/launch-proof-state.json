@@ -22,5 +22,13 @@
     "enforced": false,
     "enforcedAt": "",
     "evidence": ""
+  },
+  "storage": {
+    "betaScope": "descoped",
+    "reason": "New Firebase Storage buckets require Blaze; beta remains Spark/local-first.",
+    "backupPath": "local file export/import",
+    "cloudBackupEnabled": false,
+    "legacyMigrationEnabled": false,
+    "evidence": "Owner decision 2026-05-17; tool/research/storage_readiness_report.js reports storage-descoped-for-beta."
   }
 }

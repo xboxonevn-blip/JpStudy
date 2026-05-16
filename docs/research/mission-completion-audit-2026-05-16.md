@@ -16,8 +16,9 @@ The active mission is complete only if all are true:
 3. D2 editorial approval state is recorded without fake human approval.
 4. CI/CD, Firebase rules, deploy, and live smoke gates pass on `main`.
 5. Public/beta launch blockers are closed with real evidence: legal approval,
-   Sentry first issue, Storage migration proof, deletion proof, GA4 retention
-   proof, GA4 exported learning events, and App Check enforcement.
+   Sentry first issue, deletion proof, GA4 retention proof, GA4 exported
+   learning events, and App Check enforcement. Firebase Storage migration proof
+   is descoped for beta by owner decision on 2026-05-17.
 
 ## Prompt-To-Artifact Checklist
 
@@ -32,7 +33,7 @@ The active mission is complete only if all are true:
 | Operator URL handoff | `npm run report:launch-readiness`, `report:storage-readiness`, `report:deletion-readiness`, and `report:ga4-export` now print direct operator URLs for proof gates | Passed; URLs do not close gates |
 | Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json` | Failed |
 | Sentry operational proof | `npm run report:sentry-readiness -- --json` reports `JPSTUDY_SENTRY_DSN=false` | Missing |
-| Storage migration proof | `firebase deploy --only storage --project jpstudy-v2 --dry-run` fails: Storage not set up | Missing |
+| Storage migration proof | Owner decision 2026-05-17 descopes Firebase Storage for beta; local file export/import is the beta backup path | Deferred for beta |
 | Deletion proof | Readiness tool is safe and present, but no live deletion proof is recorded | Missing |
 | GA4 retention proof | GA4 Admin probe returns `403`; no Console proof in proof state | Missing |
 | GA4 learning export | `npm run report:ga4-export -- --json` lacks `srs_review_completed`, `n5_micro_quiz_completed`, `session_quality_rated` rows | Missing |
@@ -48,12 +49,15 @@ complete -> false
 blockers:
 - legal-approval-missing
 - sentry-dsn-missing
-- storage-not-provisioned
 - deletion-proof-missing
 - ga4-retention-proof-missing
 - ga4-learning-events-missing
 - app-check-enforcement-deferred
 ```
+
+Superseded on 2026-05-17: latest Storage-aware launch-readiness run reports
+`storage-descoped-for-beta`, so `storage-not-provisioned` is no longer a beta
+blocker.
 
 ## Missing Evidence
 
@@ -61,13 +65,15 @@ These items cannot be honestly closed by repo edits alone:
 
 1. Legal reviewer/date/evidence for `/privacy` and `/terms`.
 2. Sentry DSN and first deployed issue URL.
-3. Firebase Storage Console setup, rules deploy, CORS proof, and migration
-   proof.
-4. A real deletion proof against a dedicated test UID.
-5. GA4 Admin retention Console/API proof.
-6. BigQuery export ingestion of learning-event rows already proven at the
+3. A real deletion proof against a dedicated test UID.
+4. GA4 Admin retention Console/API proof.
+5. BigQuery export ingestion of learning-event rows already proven at the
    client network layer.
-7. App Check enforcement after the beta monitoring window.
+6. App Check enforcement after the beta monitoring window.
+
+Firebase Storage note: cloud backup and legacy migration are not beta
+requirements. Keep the scaffolding gated for future cloud sync; do not require
+Storage setup for beta launch.
 
 ## Verdict
 

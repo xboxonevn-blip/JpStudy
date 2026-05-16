@@ -117,16 +117,11 @@ function buildDeletionReadiness({
 
   if (!identifiers.uid) {
     blockers.push(
-      'Firebase UID is required for Auth, Storage, GA4 userId, and BigQuery user_id deletion',
+      'Firebase UID is required for Auth, GA4 userId, and BigQuery user_id deletion',
     );
     nextActions.push('Ask the learner to copy Support ID from Data controls.');
   }
-  if (storage?.reason === 'storage-not-provisioned') {
-    blockers.push('Firebase Storage is not provisioned');
-    nextActions.push(
-      'Confirm/upgrade Blaze billing, then provision Firebase Storage in Console.',
-    );
-  } else if (storage?.ready === false) {
+  if (storage?.ready === false && !storage?.deferred) {
     blockers.push(`Firebase Storage readiness failed: ${storage.reason}`);
     nextActions.push('Fix Storage readiness before running a live deletion proof.');
   }
@@ -142,7 +137,7 @@ function buildDeletionReadiness({
     nextActions.push('Install firebase-admin and use the audited Auth delete helper.');
   }
   if (!localTools?.gcloudAvailable) {
-    blockers.push('gcloud is not available for Storage/GA4 operator commands');
+    blockers.push('gcloud is not available for GA4 operator commands');
     nextActions.push('Install gcloud or use Console/API equivalents for operator proof.');
   }
 
@@ -238,7 +233,11 @@ async function main(argv = process.argv.slice(2)) {
   };
   const liveStatus = args.skipLive
     ? {
-        storage: { ready: false, reason: 'skipped-live-checks' },
+        storage: {
+          ready: true,
+          deferred: true,
+          reason: 'storage-descoped-for-beta',
+        },
         ga4: { adminRetention: { ok: false, status: 'skipped' } },
         bigQuery: { datasetExists: false, tableCount: 0 },
         localTools: {

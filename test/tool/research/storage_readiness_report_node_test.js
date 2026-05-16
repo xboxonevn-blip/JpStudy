@@ -9,7 +9,7 @@ const {
   readBillingPrerequisite,
 } = require('../../../tool/research/storage_readiness_report');
 
-test('classifyStorageReadiness blocks when production dry-run says Storage is not set up', () => {
+test('classifyStorageReadiness treats unprovisioned Storage as beta-deferred', () => {
   const status = classifyStorageReadiness({
     rulesTest: { status: 0 },
     cors: { exists: true },
@@ -19,8 +19,9 @@ test('classifyStorageReadiness blocks when production dry-run says Storage is no
     },
   });
 
-  assert.equal(status.ready, false);
-  assert.equal(status.reason, 'storage-not-provisioned');
+  assert.equal(status.ready, true);
+  assert.equal(status.deferred, true);
+  assert.equal(status.reason, 'storage-descoped-for-beta');
 });
 
 test('classifyStorageReadiness blocks when CORS config is missing', () => {
@@ -73,7 +74,8 @@ test('buildMarkdownReport records rules and production dry-run evidence', () => 
   assert.match(report, /https:\/\/jpstudy\.web\.app/);
   assert.match(report, /Production dry-run status: `fail`/);
   assert.match(report, /Firebase Storage has not been set up/);
-  assert.match(report, /storage-not-provisioned/);
+  assert.match(report, /Storage beta status: `deferred`/);
+  assert.match(report, /storage-descoped-for-beta/);
   assert.match(report, /## Operator URLs/);
   assert.match(report, /Firebase Storage setup: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/storage`/);
   assert.match(report, /GCP billing: `https:\/\/console\.cloud\.google\.com\/billing\/linkedaccount\?project=jpstudy-v2&authuser=1`/);

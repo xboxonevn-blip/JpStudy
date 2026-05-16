@@ -32,7 +32,7 @@ test('buildLaunchReadiness keeps goal blocked on unresolved proof gates', () => 
   const readiness = buildLaunchReadiness({
     legal: { approved: false },
     sentry: { ready: false, reason: 'sentry-dsn-missing' },
-    storage: { ready: false, reason: 'storage-not-provisioned' },
+    storage: { ready: true, deferred: true, reason: 'storage-descoped-for-beta' },
     deletion: { executed: false },
     ga4: {
       adminRetentionOk: false,
@@ -48,12 +48,12 @@ test('buildLaunchReadiness keeps goal blocked on unresolved proof gates', () => 
   assert.deepEqual(readiness.blockers, [
     'legal-approval-missing',
     'sentry-dsn-missing',
-    'storage-not-provisioned',
     'deletion-proof-missing',
     'ga4-retention-proof-missing',
     'ga4-learning-events-missing',
     'app-check-enforcement-deferred',
   ]);
+  assert.equal(readiness.blockers.includes('storage-not-provisioned'), false);
 });
 
 test('buildLaunchReadiness passes only when every proof gate is closed', () => {
