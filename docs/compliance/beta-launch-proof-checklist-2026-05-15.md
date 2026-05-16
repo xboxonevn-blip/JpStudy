@@ -29,6 +29,46 @@ blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
 `app-check-enforcement-deferred`.
 
+## Remaining Owner Gate Quick Actions
+
+Use the project owner account `chung.phukiengiabuon@gmail.com`
+(`authuser=1`) for Firebase/GCP/GA actions.
+
+1. Legal approval:
+   - Review live `/privacy` and `/terms`.
+   - Fill `docs/compliance/launch-proof-state.json`:
+     `legal.approved=true`, `legal.reviewer`, `legal.approvedAt`,
+     `legal.commit`, and `legal.evidence`.
+2. Sentry proof:
+   - Add GitHub Actions secret `JPSTUDY_SENTRY_DSN`.
+   - Run GitHub Actions `CI` manually with `sentry_smoke=true`.
+   - Record the first Sentry issue URL in the checklist/research docs.
+3. Firebase Storage proof:
+   - Open
+     `https://console.firebase.google.com/u/1/project/jpstudy-v2/storage`.
+   - Click "Get Started", choose the project location, then deploy rules and
+     apply `storage.cors.json`.
+4. Deletion proof:
+   - Use only the dedicated test UID/support ID.
+   - Run `npm run report:deletion-readiness -- --uid "<uid>"`.
+   - After Storage and GA4 Admin access are ready, execute the runbook and set
+     `deletion.executed=true`, `deletion.executedAt`,
+     `deletion.supportId`, and `deletion.evidence`.
+5. GA4 retention proof:
+   - Open GA4 Admin for property `536663906`.
+   - Record retention value and set `ga4Retention.verified=true`,
+     `ga4Retention.verifiedAt`, `ga4Retention.retention`, and
+     `ga4Retention.evidence`.
+6. GA4 learning export:
+   - Rerun `npm run report:ga4-export -- --json` after the next daily export
+     until BigQuery contains `srs_review_completed`,
+     `n5_micro_quiz_completed`, and `session_quality_rated`.
+7. App Check enforcement:
+   - Wait 1-2 weeks of beta monitoring.
+   - Enforce App Check, smoke Auth/Storage/Analytics, then set
+     `appCheck.enforced=true`, `appCheck.enforcedAt`, and
+     `appCheck.evidence`.
+
 ## 1. GitHub Actions Secret-Backed Deploy
 
 Status: completed on `main`; latest re-confirmed on commit `df27cc4b`.
