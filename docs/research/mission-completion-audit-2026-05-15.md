@@ -124,12 +124,13 @@ These prevent marking the active goal complete:
    service account also returned `403 PERMISSION_DENIED`, so Codex cannot enable
    or verify that API state from the current credentials.
 6. Real GA4 learning outcome export sample is incomplete. A
-   `2026-05-16T03:33+07:00` Playwright network smoke on
+   `2026-05-16T10:37+07:00` Playwright network smoke on
    `https://jpstudy.web.app` proved the deployed client sends all three
-   learning event families to GA4: `22` batched `srs_review_completed` rows
-   across `204` responses, plus earlier `n5_micro_quiz_completed` and
-   `session_quality_rated` `204` responses in the same live-smoke session.
-   A 2026-05-16T09:49+07:00 export recheck now exposes daily tables
+   learning event families to GA4: `srs_review_completed` batched vocab review
+   rows, `n5_micro_quiz_completed` with `correct_count=4`,
+   `total_count=10`, `accuracy=0.4`, and `session_quality_rated` with
+   `mode=test`, `rating=5`; all observed GA requests returned `204`.
+   A 2026-05-16T10:38+07:00 export recheck exposes daily tables
    `events_20260514` and `events_20260515`, but still does not expose the
    required learning-event rows. The source-verifiable export sample still has
    `0` SRS review gate passes, `0` quiz gate passes, and `0` quality gate

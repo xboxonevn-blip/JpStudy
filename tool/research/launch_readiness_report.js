@@ -319,7 +319,7 @@ function nextActionFor(blocker) {
     return 'Record GA4 Admin retention UI proof in docs/compliance/launch-proof-state.json or enable Analytics Admin API for source verification.';
   }
   if (blocker === 'ga4-learning-events-missing') {
-    return 'Collect real srs_review_completed, n5_micro_quiz_completed, and session_quality_rated events.';
+    return 'Wait for GA4 BigQuery export to include srs_review_completed, n5_micro_quiz_completed, and session_quality_rated rows, then rerun the GA4 export report.';
   }
   if (blocker === 'app-check-enforcement-deferred') {
     return 'After 1-2 weeks monitoring, enforce App Check, then record proof in docs/compliance/launch-proof-state.json or rerun with --app-check-enforced.';
