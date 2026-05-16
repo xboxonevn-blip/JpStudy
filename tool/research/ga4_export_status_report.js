@@ -10,6 +10,8 @@ const DEFAULT_LOCATION = 'asia-southeast1';
 const DEFAULT_DAYS = 2;
 const PROPERTY_DATASET = 'analytics_536663906';
 const DEFAULT_PROPERTY_ID = '536663906';
+const DEFAULT_ACCOUNT_ID = '393943579';
+const DEFAULT_PROJECT_NUMBER = '129949648924';
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const ANALYTICS_ADMIN_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
 
@@ -19,6 +21,8 @@ function parseArgs(argv) {
     location: DEFAULT_LOCATION,
     days: DEFAULT_DAYS,
     property: DEFAULT_PROPERTY_ID,
+    account: DEFAULT_ACCOUNT_ID,
+    projectNumber: DEFAULT_PROJECT_NUMBER,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const item = argv[index];
@@ -28,6 +32,8 @@ function parseArgs(argv) {
     else if (item === '--location') args.location = argv[++index];
     else if (item === '--days') args.days = Number(argv[++index]);
     else if (item === '--property') args.property = argv[++index];
+    else if (item === '--account') args.account = argv[++index];
+    else if (item === '--project-number') args.projectNumber = argv[++index];
     else if (item === '--skip-admin-retention') args.skipAdminRetention = true;
     else if (item === '--help' || item === '-h') args.help = true;
     else throw new Error(`Unknown argument: ${item}`);
@@ -40,6 +46,7 @@ function printHelp() {
   node tool/research/ga4_export_status_report.js
   node tool/research/ga4_export_status_report.js --out docs/research/secure/ga4-export-status.md
   node tool/research/ga4_export_status_report.js --json
+  node tool/research/ga4_export_status_report.js --account 393943579 --project-number 129949648924
   node tool/research/ga4_export_status_report.js --skip-admin-retention
 `);
 }
@@ -214,6 +221,7 @@ FROM users`,
 
 async function collectStatus(args) {
   const querySet = queries(args);
+  const operatorUrls = buildOperatorUrls(args);
   const adminRetention = args.skipAdminRetention
     ? null
     : await fetchAdminRetention({ property: args.property });
@@ -232,6 +240,7 @@ async function collectStatus(args) {
       funnel: {},
       northStar: {},
       adminRetention,
+      operatorUrls,
     };
   }
   return {
@@ -245,6 +254,20 @@ async function collectStatus(args) {
     funnel: runBigQuery({ ...args, query: querySet.funnel })[0] || {},
     northStar: runBigQuery({ ...args, query: querySet.northStar })[0] || {},
     adminRetention,
+    operatorUrls,
+  };
+}
+
+function buildOperatorUrls({
+  project = DEFAULT_PROJECT,
+  property = DEFAULT_PROPERTY_ID,
+  account = DEFAULT_ACCOUNT_ID,
+  projectNumber = DEFAULT_PROJECT_NUMBER,
+} = {}) {
+  return {
+    ga4Admin: `https://analytics.google.com/analytics/web/?authuser=1#/a${account}p${property}/admin`,
+    analyticsAdminApi: `https://console.developers.google.com/apis/api/analyticsadmin.googleapis.com/overview?project=${projectNumber}&authuser=1`,
+    bigQueryDataset: `https://console.cloud.google.com/bigquery?project=${project}&authuser=1`,
   };
 }
 
@@ -315,6 +338,12 @@ function buildMarkdownReport(status) {
     `Generated: \`${status.generatedAt}\``,
     `Location: \`${status.location}\``,
     `Dataset: \`${PROPERTY_DATASET}\` ${datasetExists ? 'exists' : 'missing'}`,
+    '',
+    '## Operator URLs',
+    '',
+    `GA4 Admin: \`${status.operatorUrls?.ga4Admin || buildOperatorUrls().ga4Admin}\``,
+    `Analytics Admin API: \`${status.operatorUrls?.analyticsAdminApi || buildOperatorUrls().analyticsAdminApi}\``,
+    `BigQuery dataset: \`${status.operatorUrls?.bigQueryDataset || buildOperatorUrls().bigQueryDataset}\``,
     '',
     '## Datasets',
     '',
@@ -390,6 +419,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  buildOperatorUrls,
   buildMarkdownReport,
   queries,
   summarizeLearningReadiness,

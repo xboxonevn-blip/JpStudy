@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const {
+  buildOperatorUrls,
   buildMarkdownReport,
   queries,
   summarizeLearningReadiness,
@@ -47,11 +48,16 @@ test('buildMarkdownReport summarizes export, funnel, NS, and TTL evidence', () =
       status: 403,
       message: 'Google Analytics Admin API is disabled.',
     },
+    operatorUrls: buildOperatorUrls(),
   });
 
   assert.match(report, /# GA4 Export Status Report/);
   assert.match(report, /Location: `asia-southeast1`/);
   assert.match(report, /`analytics_536663906` exists/);
+  assert.match(report, /## Operator URLs/);
+  assert.match(report, /analytics\.google\.com\/analytics\/web/);
+  assert.match(report, /analyticsadmin\.googleapis\.com/);
+  assert.match(report, /console\.cloud\.google\.com\/bigquery/);
   assert.match(report, /\| `page_view` \| 31 \| 3 \|/);
   assert.match(report, /Observed users: `4`/);
   assert.match(report, /First SRS users: `0`/);
@@ -62,6 +68,28 @@ test('buildMarkdownReport summarizes export, funnel, NS, and TTL evidence', () =
   assert.match(report, /Status: `403`/);
   assert.match(report, /Google Analytics Admin API is disabled/);
   assert.match(report, /learning-outcome events are missing/);
+});
+
+test('buildOperatorUrls points to GA4, API enable, and BigQuery consoles', () => {
+  const urls = buildOperatorUrls({
+    project: 'jpstudy-v2',
+    property: '536663906',
+    account: '393943579',
+    projectNumber: '129949648924',
+  });
+
+  assert.equal(
+    urls.ga4Admin,
+    'https://analytics.google.com/analytics/web/?authuser=1#/a393943579p536663906/admin',
+  );
+  assert.equal(
+    urls.analyticsAdminApi,
+    'https://console.developers.google.com/apis/api/analyticsadmin.googleapis.com/overview?project=129949648924&authuser=1',
+  );
+  assert.equal(
+    urls.bigQueryDataset,
+    'https://console.cloud.google.com/bigquery?project=jpstudy-v2&authuser=1',
+  );
 });
 
 test('buildMarkdownReport prints GA4 Admin retention settings when available', () => {
