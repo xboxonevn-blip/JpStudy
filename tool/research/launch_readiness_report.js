@@ -394,7 +394,6 @@ function buildOperatorUrls({
     proofState: proofStatePath.replaceAll('\\', '/'),
     legalChecklist: 'docs/compliance/legal-approval-checklist.md',
     appCheck: `https://console.firebase.google.com/u/1/project/${project}/appcheck`,
-    firebaseStorage: `https://console.firebase.google.com/u/1/project/${project}/storage`,
     ga4Admin: `https://analytics.google.com/analytics/web/?authuser=1#/a${account}p${property}/admin`,
     githubActions: `https://github.com/${repository}/actions/workflows/ui-string-guard.yml`,
   };
@@ -442,7 +441,7 @@ function buildMarkdownReport({
     `Proof state: \`${urls.proofState}\``,
     `Legal checklist: \`${urls.legalChecklist}\``,
     `App Check: \`${urls.appCheck}\``,
-    `Firebase Storage: \`${urls.firebaseStorage}\``,
+    'Firebase Storage: `descoped for beta; see Storage migration checklist`',
     `GA4 Admin: \`${urls.ga4Admin}\``,
     `GitHub Actions: \`${urls.githubActions}\``,
     '',

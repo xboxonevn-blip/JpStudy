@@ -97,6 +97,7 @@ test('buildMarkdownReport maps blockers to concrete evidence sections', () => {
   assert.match(report, /## Operator URLs/);
   assert.match(report, /Proof state: `docs\/compliance\/launch-proof-state\.json`/);
   assert.match(report, /App Check: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/appcheck`/);
+  assert.match(report, /Firebase Storage: `descoped for beta; see Storage migration checklist`/);
   assert.match(report, /GA4 Admin: `https:\/\/analytics\.google\.com\/analytics\/web\/\?authuser=1#\/a393943579p536663906\/admin`/);
 });
 
@@ -117,6 +118,7 @@ test('buildOperatorUrls points to launch proof consoles', () => {
     urls.ga4Admin,
     'https://analytics.google.com/analytics/web/?authuser=1#/a393943579p536663906/admin',
   );
+  assert.equal(Object.hasOwn(urls, 'firebaseStorage'), false);
   assert.equal(
     urls.githubActions,
     'https://github.com/xboxonevn-blip/JpStudy/actions/workflows/ui-string-guard.yml',
