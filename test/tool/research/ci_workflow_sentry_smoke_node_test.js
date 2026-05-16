@@ -24,6 +24,7 @@ test('CI workflow publishes launch readiness blockers with proof-state', () => {
   assert.match(workflow, /name: Report launch readiness blockers/);
   assert.match(
     workflow,
-    /npm run report:launch-readiness -- --json --proof-state docs\/compliance\/launch-proof-state\.json/,
+    /npm run report:launch-readiness -- --out \/tmp\/jpstudy-launch-readiness\.md --proof-state docs\/compliance\/launch-proof-state\.json/,
   );
+  assert.match(workflow, /cat \/tmp\/jpstudy-launch-readiness\.md >> "\$\{GITHUB_STEP_SUMMARY\}"/);
 });

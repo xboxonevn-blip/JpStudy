@@ -75,7 +75,11 @@ jobs:
         run: npm run test:research-tooling
 
       - name: Report launch readiness blockers
-        run: npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json
+        shell: bash
+        run: |
+          npm run report:launch-readiness -- --out /tmp/jpstudy-launch-readiness.md --proof-state docs/compliance/launch-proof-state.json
+          cat /tmp/jpstudy-launch-readiness.md
+          cat /tmp/jpstudy-launch-readiness.md >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Install Playwright Chromium
         run: npx playwright install chromium
