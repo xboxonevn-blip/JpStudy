@@ -132,7 +132,7 @@ test('parseArgs accepts a structured proof-state path', () => {
   });
 });
 
-test('collectEvidence closes manual proof gates from complete proof-state metadata', () => {
+test('collectEvidence keeps legal blocked while draft notice remains', () => {
   const proofStatePath = writeTempProofState({
     legal: {
       approved: true,
@@ -162,8 +162,9 @@ test('collectEvidence closes manual proof gates from complete proof-state metada
 
   const evidence = collectEvidence({ skipLive: true, proofStatePath });
 
-  assert.equal(evidence.legal.approved, true);
+  assert.equal(evidence.legal.approved, false);
   assert.match(evidence.legal.source, /proof-state/);
+  assert.match(evidence.legal.source, /legalDraftNotice\/review-needed draft present/);
   assert.equal(evidence.deletion.executed, true);
   assert.match(evidence.deletion.source, /proof-state/);
   assert.equal(evidence.ga4.adminRetentionOk, true);

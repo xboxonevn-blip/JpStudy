@@ -87,4 +87,7 @@ npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-p
 ```
 
 Do not remove the in-app draft notice until this proof state is recorded and
-the approved copy commit is final.
+the approved copy commit is final. After approval is recorded, remove the
+`legalDraftNotice` UI and the `review-needed draft` status text in the same
+approved-copy commit; launch readiness intentionally stays blocked while those
+draft signals remain visible.

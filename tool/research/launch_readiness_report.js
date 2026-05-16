@@ -136,6 +136,7 @@ function gitCommitExists(value) {
 }
 
 function legalEvidence({ approved, proofState }) {
+  const draftSource = legalDraftSource();
   const proof = validateProofGate({
     proofState,
     gate: 'legal',
@@ -148,6 +149,12 @@ function legalEvidence({ approved, proofState }) {
     },
   });
   if (proof) {
+    if (proof.ok && draftSource) {
+      return {
+        approved: false,
+        source: `${proof.source}; ${draftSource}`,
+      };
+    }
     return {
       approved: proof.ok,
       source: proof.source,
@@ -161,20 +168,22 @@ function legalEvidence({ approved, proofState }) {
     };
   }
 
+  return {
+    approved: false,
+    source: draftSource || 'no approval proof found',
+  };
+}
+
+function legalDraftSource() {
   const screen = fs.existsSync('lib/features/legal/legal_document_screen.dart')
     ? fs.readFileSync('lib/features/legal/legal_document_screen.dart', 'utf8')
     : '';
   const docs = fs.existsSync('docs/research/README.md')
     ? fs.readFileSync('docs/research/README.md', 'utf8')
     : '';
-  const draftSignal =
-    /legalDraftNotice/.test(screen) || /review-needed draft/.test(docs);
-  return {
-    approved: false,
-    source: draftSignal
-      ? 'legalDraftNotice/review-needed draft present'
-      : 'no approval proof found',
-  };
+  return /legalDraftNotice/.test(screen) || /review-needed draft/.test(docs)
+    ? 'legalDraftNotice/review-needed draft present'
+    : '';
 }
 
 function deletionEvidence({ executed, proofState }) {
