@@ -6,486 +6,316 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～に対して",
       "sentence": "日本の文化に対して尊敬の念を持っています。",
-      "translation": "I have a sense of respect towards Japanese culture.",
+      "translation": "Tôi có sự tôn trọng đối với văn hóa Nhật Bản.",
       "translationEn": "I have a sense of respect towards Japanese culture",
       "romaji": "Nihon no bunka ni taishite sonkei no nen wo motte imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I have a sense of respect towards Japanese culture",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に対して",
       "sentence": "彼に対して無礼な態度を取らないでください。",
-      "translation": "Please don't have a rude attitude towards him.",
+      "translation": "Đừng có thái độ vô lễ với anh ấy.",
       "translationEn": "Please dont have a rude attitude towards him",
       "romaji": "Kare ni taishite burei na taido wo toranaide kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please dont have a rude attitude towards him",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に対して",
       "sentence": "先生の質問に対して、彼女はすぐに答えました。",
-      "translation": "In response to the teacher's question, she answered immediately.",
+      "translation": "Trước câu hỏi của giáo viên, cô ấy trả lời ngay.",
       "translationEn": "In response to the teachers question, she answered immediately",
       "romaji": "Sensei no shitsumon ni taishite, kanojo wa sugu ni kotaemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In response to the teachers question, she answered immediately",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に対して",
       "sentence": "男性に対して、女性は同じ仕事でも低い給料をもらっている。",
-      "translation": "In contrast to men, women receive lower salaries for the same job.",
+      "translation": "So với nam giới, phụ nữ nhận lương thấp hơn dù làm cùng công việc.",
       "translationEn": "In contrast to men, women receive lower salaries for the same job",
       "romaji": "Dansei ni taishite, josei wa onaji shigoto demo hikui kyuuryou wo moratte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In contrast to men, women receive lower salaries for the same job",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応えて",
       "sentence": "お客様の要望に応えて、新しいメニューを作りました。",
-      "translation": "Responding to the customers' requests, we created a new menu.",
+      "translation": "Đáp ứng yêu cầu của khách hàng, chúng tôi đã tạo thực đơn mới.",
       "translationEn": "Responding to the customers requests, we created a new menu",
       "romaji": "Okyaku-sama no youbou ni kotaete, atarashii menyuu o tsukurimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Responding to the customers requests, we created a new menu",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応えて",
       "sentence": "彼はチームの期待に応えて素晴らしいプレーを見せた。",
-      "translation": "He lived up to the team's expectations and showed a great performance.",
+      "translation": "Anh ấy đáp lại kỳ vọng của đội bằng màn trình diễn xuất sắc.",
       "translationEn": "He lived up to the teams expectations and showed a great performance",
       "romaji": "Kare wa chiimu no kitai ni kotaete, subarashii puree o miseta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He lived up to the teams expectations and showed a great performance",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応えて",
       "sentence": "政府は国民の声に応えて、新しい法律を制定した。",
-      "translation": "The government enacted a new law in response to the voice of the people.",
+      "translation": "Chính phủ ban hành luật mới để đáp lại tiếng nói của người dân.",
       "translationEn": "The government enacted a new law in response to the voice of the people",
       "romaji": "Seifu wa kokumin no koe ni kotaete, atarashii houritsu o seitei shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The government enacted a new law in response to the voice of the people",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応えて",
       "sentence": "企業は環境問題に応えて、環境に優しい製品を開発している。",
-      "translation": "Companies are developing environmentally friendly products in response to environmental issues.",
+      "translation": "Các doanh nghiệp đang phát triển sản phẩm thân thiện với môi trường để ứng phó với vấn đề môi trường.",
       "translationEn": "Companies are developing environmentally friendly products in response to environmental issues",
       "romaji": "Kigyou wa kankyou mondai ni kotaete, kankyou ni yasashii seihin o kaihatsu shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Companies are developing environmentally friendly products in response to environmental issues",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応じて",
       "sentence": "仕事の量に応じて給料が変わります。",
-      "translation": "The salary changes depending on the amount of work.",
+      "translation": "Lương thay đổi tùy theo lượng công việc.",
       "translationEn": "The salary changes depending on the amount of work",
       "romaji": "Shigoto no ryou ni oujite kyuuryou ga kawarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The salary changes depending on the amount of work",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応じて",
       "sentence": "季節に応じて服装を選びましょう。",
-      "translation": "Choose your clothes according to the season.",
+      "translation": "Hãy chọn trang phục phù hợp với mùa.",
       "translationEn": "Choose your clothes according to the season",
       "romaji": "Kisetsu ni oujite fukusou wo erabimashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Choose your clothes according to the season",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応じて",
       "sentence": "お客様の希望に応じてプランを提案します。",
-      "translation": "We propose plans according to the customers' wishes.",
+      "translation": "Chúng tôi đề xuất kế hoạch theo mong muốn của khách hàng.",
       "translationEn": "We propose plans according to the customers wishes",
       "romaji": "Okyakusama no kibou ni oujite puran wo teian shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We propose plans according to the customers wishes",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に応じて",
       "sentence": "年齢に応じて健康診断項目が異なります。",
-      "translation": "Health check items vary depending on age.",
+      "translation": "Hạng mục khám sức khỏe khác nhau tùy theo độ tuổi.",
       "translationEn": "Health check items vary depending on age",
       "romaji": "Nenrei ni oujite kenkou shindan koumoku ga kotonarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Health check items vary depending on age",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に決まっている",
       "sentence": "こんなに暑い日に運動したら、汗をかくに決まっている。",
-      "translation": "It's obvious that you'll sweat if you exercise on such a hot day.",
+      "translation": "Ngày nóng thế này mà vận động thì chắc chắn sẽ đổ mồ hôi.",
       "translationEn": "Its obvious that youll sweat if you exercise on such a hot day",
       "romaji": "Konna ni atsui hi ni undou shitara, ase wo kaku ni kimatte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its obvious that youll sweat if you exercise on such a hot day",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に決まっている",
       "sentence": "彼が試験に落ちたら、がっかりするに決まっている。",
-      "translation": "If he fails the exam, it's obvious he will be disappointed.",
+      "translation": "Nếu trượt kỳ thi, chắc chắn anh ấy sẽ thất vọng.",
       "translationEn": "If he fails the exam, its obvious he will be disappointed",
       "romaji": "Kare ga shiken ni ochitara, gakkari suru ni kimatte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If he fails the exam, its obvious he will be disappointed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に決まっている",
       "sentence": "彼女はいつも遅れるから、今日も遅れるに決まっている。",
-      "translation": "She's always late, so it's obvious she'll be late today too.",
+      "translation": "Cô ấy lúc nào cũng đến muộn, nên hôm nay chắc chắn cũng sẽ muộn.",
       "translationEn": "Shes always late, so its obvious shell be late today too",
       "romaji": "Kanojo wa itsumo okureru kara, kyou mo okureru ni kimatte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Shes always late, so its obvious shell be late today too",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に決まっている",
       "sentence": "このゲームは楽しいに決まっている。",
-      "translation": "It's obvious that this game is fun.",
+      "translation": "Trò chơi này chắc chắn thú vị.",
       "translationEn": "Its obvious that this game is fun",
       "romaji": "Kono geemu wa tanoshii ni kimatte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its obvious that this game is fun",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に沿って",
       "sentence": "川に沿って歩いていくと、橋が見えてきます。",
-      "translation": "If you walk along the river, you will see a bridge.",
+      "translation": "Đi dọc theo con sông, bạn sẽ thấy một cây cầu.",
       "translationEn": "If you walk along the river, you will see a bridge",
       "romaji": "Kawa ni sotte aruite iku to, hashi ga miete kimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you walk along the river, you will see a bridge",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に沿って",
       "sentence": "このレシピに沿って料理を作れば、間違いありません。",
-      "translation": "If you cook according to this recipe, there will be no mistakes.",
+      "translation": "Nếu nấu theo công thức này thì sẽ không sai.",
       "translationEn": "If you cook according to this recipe, there will be no mistakes",
       "romaji": "Kono reshipi ni sotte ryouri wo tsukureba, machigai arimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you cook according to this recipe, there will be no mistakes",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に沿って",
       "sentence": "規則に沿って行動しなければなりません。",
-      "translation": "We must act in accordance with the rules.",
+      "translation": "Chúng ta phải hành động theo quy định.",
       "translationEn": "We must act in accordance with the rules",
       "romaji": "Kisoku ni sotte koudou shinakereba narimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We must act in accordance with the rules",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に沿って",
       "sentence": "山道に沿って進むと、小さな神社があります。",
-      "translation": "If you follow the mountain path, there is a small shrine.",
+      "translation": "Đi theo đường núi sẽ có một ngôi đền nhỏ.",
       "translationEn": "If you follow the mountain path, there is a small shrine",
       "romaji": "Yamamichi ni sotte susumu to, chiisana jinja ga arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you follow the mountain path, there is a small shrine",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に過ぎない",
       "sentence": "彼の失敗はミスに過ぎない。",
-      "translation": "His failure is nothing more than a mistake.",
+      "translation": "Thất bại của anh ấy chỉ là một sai sót.",
       "translationEn": "His failure is nothing more than a mistake",
       "romaji": "Kare no shippai wa misu ni suginai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His failure is nothing more than a mistake",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に過ぎない",
       "sentence": "この試験は簡単な問題に過ぎない。",
-      "translation": "This test is nothing more than a simple question.",
+      "translation": "Bài kiểm tra này chỉ là một câu hỏi đơn giản.",
       "translationEn": "This test is nothing more than a simple question",
       "romaji": "Kono shiken wa kantan na mondai ni suginai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This test is nothing more than a simple question",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に過ぎない",
       "sentence": "彼女は友達に過ぎない。",
-      "translation": "She is nothing more than a friend.",
+      "translation": "Cô ấy chỉ là bạn bè thôi.",
       "translationEn": "She is nothing more than a friend",
       "romaji": "Kanojo wa tomodachi ni suginai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is nothing more than a friend",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に過ぎない",
       "sentence": "その発言は冗談に過ぎない。",
-      "translation": "That remark is nothing more than a joke.",
+      "translation": "Phát ngôn đó chỉ là lời nói đùa.",
       "translationEn": "That remark is nothing more than a joke",
       "romaji": "Sono hatsugen wa joudan ni suginai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That remark is nothing more than a joke",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に関わって",
       "sentence": "試験の内容に関わって、先生に質問があります。",
-      "translation": "I have a question for the teacher regarding the content of the exam.",
+      "translation": "Về nội dung kỳ thi, tôi có câu hỏi muốn hỏi thầy cô.",
       "translationEn": "I have a question for the teacher regarding the content of the exam",
       "romaji": "Shiken no naiyou ni kakawatte, sensei ni shitsumon ga arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I have a question for the teacher regarding the content of the exam",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に関わって",
       "sentence": "このプロジェクトに関わって、意見があれば、遠慮なく言ってください。",
-      "translation": "If you have any opinions regarding this project, please feel free to express them.",
+      "translation": "Nếu có ý kiến về dự án này, xin cứ nói thẳng.",
       "translationEn": "If you have any opinions regarding this project, please feel free to express them",
       "romaji": "Kono purojekuto ni kakawatte, iken ga areba, enryo naku itte kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you have any opinions regarding this project, please feel free to express them",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に関わって",
       "sentence": "健康に関わって、食生活はとても重要です。",
-      "translation": "Regarding health, dietary habits are very important.",
+      "translation": "Về sức khỏe, thói quen ăn uống rất quan trọng.",
       "translationEn": "Regarding health, dietary habits are very important",
       "romaji": "Kenkou ni kakawatte, shokuseikatsu wa totemo juuyou desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regarding health, dietary habits are very important",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～に関わって",
       "sentence": "その事件に関わって、彼も少し疑われています。",
-      "translation": "He is also somewhat suspected in connection with the incident.",
+      "translation": "Anh ấy cũng bị nghi ngờ phần nào liên quan đến vụ việc đó.",
       "translationEn": "He is also somewhat suspected in connection with the incident",
       "romaji": "Sono jiken ni kakawatte, kare mo sukoshi utagawarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is also somewhat suspected in connection with the incident",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
