@@ -23,7 +23,7 @@ execution, GA4 retention UI proof, and App Check enforcement. Each gate still
 requires explicit metadata. Sentry, Storage, and GA4 learning-event export gates
 remain source-verified and cannot be closed by the proof state file.
 
-Latest run on `2026-05-16T13:23+07:00` returned `complete=false` with
+Latest run on `2026-05-16T15:56+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -71,7 +71,7 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `df296ff4`.
+Status: completed on `main`; latest re-confirmed on commit `a19a3ccc`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -92,7 +92,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25956826925`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25957463659`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -106,9 +106,9 @@ Evidence recorded:
   Playwright visual smoke on `2026-05-16T08:05+07:00` checked Kanji radical
   headers, Han-Viet rules, and Review Forecast labels on
   `https://jpstudy.web.app`.
-- Latest CI recheck on `2026-05-16T15:15+07:00` completed
+- Latest CI recheck on `2026-05-16T15:50+07:00` completed
   `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` with
-  `success` on commit `df296ff4`.
+  `success` on commit `a19a3ccc` in GitHub Actions run `25957463659`.
 
 ## 2. Sentry First-Issue Proof
 
@@ -117,7 +117,7 @@ Goal: prove source-wired Sentry is operational in a deployed web build.
 Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
-  `main`; latest CI/deploy proof is `12a0b7ea`.
+  `main`; latest CI/deploy proof is `a19a3ccc`.
 - Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
