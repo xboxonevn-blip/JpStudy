@@ -101,11 +101,11 @@ Future<void> _mockRadicalsAsset() async {
       });
 }
 
-Widget _subject() => ProviderScope(
+Widget _subject({AppLanguage language = AppLanguage.vi}) => ProviderScope(
   retry: (retryCount, error) => null,
   overrides: [
     appLanguageProvider.overrideWith(
-      (ref) => AppLanguageController.test(AppLanguage.vi),
+      (ref) => AppLanguageController.test(language),
     ),
     studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
     lessonRepositoryProvider.overrideWithValue(_Repo()),
@@ -143,10 +143,11 @@ void main() {
 
         await tester.ensureVisible(find.text(String.fromCharCode(0x5b66)).last);
         await tester.pump(const Duration(milliseconds: 200));
-        final kanjiFinder = find.bySemanticsLabel(RegExp('onyomi GAKU'));
+        final kanjiFinder = find.bySemanticsLabel(RegExp('Học chữ \u5b66'));
         expect(kanjiFinder, findsOneWidget);
         final kanjiNode = tester.getSemantics(kanjiFinder);
-        expect(kanjiNode.label, contains('kunyomi manabu'));
+        expect(kanjiNode.label, contains('âm On GAKU'));
+        expect(kanjiNode.label, contains('âm Kun manabu'));
         expect(kanjiNode.label, contains('N5'));
 
         await tester.pumpWidget(const _FilterSemanticsProbe());
@@ -165,4 +166,27 @@ void main() {
       }
     },
   );
+
+  testWidgets('English kanji card semantics do not announce Han-Viet labels', (
+    tester,
+  ) async {
+    await _mockRadicalsAsset();
+    final semantics = tester.ensureSemantics();
+    try {
+      await tester.pumpWidget(_subject(language: AppLanguage.en));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      await tester.ensureVisible(find.text(String.fromCharCode(0x5b66)).last);
+      await tester.pump(const Duration(milliseconds: 200));
+      final kanjiFinder = find.bySemanticsLabel(RegExp('Kanji \u5b66'));
+      expect(kanjiFinder, findsOneWidget);
+      final kanjiNode = tester.getSemantics(kanjiFinder);
+      expect(kanjiNode.label, contains('meaning study'));
+      expect(kanjiNode.label, isNot(contains('hoc')));
+      expect(kanjiNode.label, isNot(contains('Hán')));
+    } finally {
+      semantics.dispose();
+    }
+  });
 }

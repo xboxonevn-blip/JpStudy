@@ -544,3 +544,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: live Flutter web still rendered the non-compact lesson-test prompt inside a 390x640 Playwright viewport until the compact flag used the physical `View` size and separated answer compacting from navigation button visibility.
 - Delta: -25 percentage points on confidence that widget-test viewport constraints match deployed Flutter web shell constraints.
 - Updated belief: mobile quiz fixes need both widget guards and cache-cleared live proof; compact answer layout should be driven by the actual view size, while desktop navigation affordances should stay width-based.
+
+## 2026-05-18 - Kanji language gating included accessibility copy
+
+- Prior belief: hiding Hán-Việt visual rows/panels would cover the first kanji per-language slice.
+- Actual observation: kanji card semantics still used Vietnamese-only `Học` labels and romanized `onyomi/kunyomi` terms, so EN/JA users would hear VI-shaped accessibility copy even after visual gating.
+- Delta: -15 percentage points on confidence that visual localization covers assistive experiences.
+- Updated belief: per-language UX changes need rendered accessibility labels in the same regression set as visible widgets.

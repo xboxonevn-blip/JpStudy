@@ -121,6 +121,54 @@ extension KanjiCopy on AppLanguage {
     AppLanguage.ja => 'ベトナム語意味',
   };
 
+  String kanjiDetailHanVietLabel() => switch (this) {
+    AppLanguage.en => 'Han-Viet',
+    AppLanguage.vi => 'Hán-Việt',
+    AppLanguage.ja => '越南漢字音',
+  };
+
+  String kanjiDetailOnyomiLabel() => switch (this) {
+    AppLanguage.en => 'On reading',
+    AppLanguage.vi => 'Âm On',
+    AppLanguage.ja => '音読み',
+  };
+
+  String kanjiDetailKunyomiLabel() => switch (this) {
+    AppLanguage.en => 'Kun reading',
+    AppLanguage.vi => 'Âm Kun',
+    AppLanguage.ja => '訓読み',
+  };
+
+  String kanjiDetailStrokeLevelLabel(int strokes, String level) =>
+      switch (this) {
+        AppLanguage.en => 'Strokes: $strokes · Level: $level',
+        AppLanguage.vi => 'Số nét: $strokes · Cấp độ: $level',
+        AppLanguage.ja => '画数: $strokes · レベル: $level',
+      };
+
+  String kanjiDetailMnemonicLabel() => switch (this) {
+    AppLanguage.en => 'Mnemonic',
+    AppLanguage.vi => 'Mẹo ghi nhớ',
+    AppLanguage.ja => '覚え方',
+  };
+
+  String kanjiTileSemanticLabel({
+    required String character,
+    required String meaning,
+    required String onyomi,
+    required String kunyomi,
+    required String level,
+  }) => switch (this) {
+    AppLanguage.en =>
+      'Kanji $character, meaning $meaning, on reading $onyomi, '
+          'kun reading $kunyomi, level $level',
+    AppLanguage.vi =>
+      'Học chữ $character, Hán-Việt $meaning, âm On $onyomi, '
+          'âm Kun $kunyomi, cấp $level',
+    AppLanguage.ja =>
+      '漢字 $character、意味 $meaning、音読み $onyomi、訓読み $kunyomi、レベル $level',
+  };
+
   String kanjiStrokeLabel(int strokes) => switch (this) {
     AppLanguage.en => '$strokes strokes',
     AppLanguage.vi => '$strokes nét',

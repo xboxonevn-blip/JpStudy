@@ -1360,6 +1360,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                             );
                                         return _KanjiTile(
                                           item: item,
+                                          language: widget.language,
                                           isHighlighted:
                                               widget.candidateKanji.contains(
                                                 item.character,
@@ -1447,11 +1448,13 @@ enum _KanjiSrsStatus { unseen, studied, due }
 class _KanjiTile extends StatelessWidget {
   const _KanjiTile({
     required this.item,
+    required this.language,
     required this.onTap,
     this.isHighlighted = false,
     this.srsStatus = _KanjiSrsStatus.unseen,
   });
   final KanjiItem item;
+  final AppLanguage language;
   final VoidCallback onTap;
   final bool isHighlighted;
   final _KanjiSrsStatus srsStatus;
@@ -1467,14 +1470,26 @@ class _KanjiTile extends StatelessWidget {
         : palette.outline.withValues(alpha: 0.5);
 
     final hanViet = item.decomposition?.hanViet?.trim();
-    final semanticName = hanViet == null || hanViet.isEmpty
-        ? item.meaning
-        : hanViet;
-    final semanticLabel =
-        'H\u1ecdc $semanticName, '
-        'onyomi ${item.onyomi?.trim().isNotEmpty == true ? item.onyomi!.trim() : '-'}, '
-        'kunyomi ${item.kunyomi?.trim().isNotEmpty == true ? item.kunyomi!.trim() : '-'}, '
-        '${item.jlptLevel}';
+    final english = item.meaningEn?.trim();
+    final semanticName = switch (language) {
+      AppLanguage.vi =>
+        hanViet == null || hanViet.isEmpty ? item.meaning : hanViet,
+      AppLanguage.en =>
+        english == null || english.isEmpty ? item.meaning : english,
+      AppLanguage.ja =>
+        english == null || english.isEmpty ? item.meaning : english,
+    };
+    final semanticLabel = language.kanjiTileSemanticLabel(
+      character: item.character,
+      meaning: semanticName,
+      onyomi: item.onyomi?.trim().isNotEmpty == true
+          ? item.onyomi!.trim()
+          : '-',
+      kunyomi: item.kunyomi?.trim().isNotEmpty == true
+          ? item.kunyomi!.trim()
+          : '-',
+      level: item.jlptLevel,
+    );
 
     return Semantics(
       button: true,
@@ -1606,6 +1621,14 @@ class _KanjiDetailDialogState extends State<_KanjiDetailDialog> {
       AppLanguage.vi => widget.item.meaning,
       _ => widget.item.meaningEn ?? widget.item.meaning,
     };
+    final hanViet = widget.item.decomposition?.hanViet?.trim();
+    final showHanViet =
+        widget.language == AppLanguage.vi &&
+        hanViet != null &&
+        hanViet.isNotEmpty;
+    final mnemonic = widget.language == AppLanguage.ja
+        ? null
+        : widget.item.displayMnemonic(widget.language)?.trim();
 
     return AlertDialog(
       backgroundColor: palette.elevated,
@@ -1641,33 +1664,54 @@ class _KanjiDetailDialogState extends State<_KanjiDetailDialog> {
             ),
             const SizedBox(height: 16),
             if (widget.item.onyomi != null && widget.item.onyomi!.isNotEmpty)
-              Text(
-                'Onyomi: ${widget.item.onyomi}',
-                style: Theme.of(context).textTheme.bodyLarge,
+              _KanjiDetailInfoRow(
+                label: widget.language.kanjiDetailOnyomiLabel(),
+                value: widget.item.onyomi!,
               ),
             if (widget.item.kunyomi != null && widget.item.kunyomi!.isNotEmpty)
-              Text(
-                'Kunyomi: ${widget.item.kunyomi}',
-                style: Theme.of(context).textTheme.bodyLarge,
+              _KanjiDetailInfoRow(
+                label: widget.language.kanjiDetailKunyomiLabel(),
+                value: widget.item.kunyomi!,
               ),
             const SizedBox(height: 8),
             Text(
-              'Strokes: ${widget.item.strokeCount} | Level: ${widget.item.jlptLevel}',
+              widget.language.kanjiDetailStrokeLevelLabel(
+                widget.item.strokeCount,
+                widget.item.jlptLevel,
+              ),
             ),
-            const SizedBox(height: 12),
-            Consumer(
-              builder: (context, ref, child) {
-                final rules = ref.watch(hanVietRulesProvider);
-                return rules.maybeWhen(
-                  data: (ruleSet) => HanVietInlinePanel(
-                    rules: ruleSet.rules,
-                    language: widget.language,
-                    kanji: widget.item.character,
-                  ),
-                  orElse: () => const SizedBox.shrink(),
-                );
-              },
-            ),
+            if (showHanViet) ...[
+              const SizedBox(height: 8),
+              _KanjiDetailInfoRow(
+                key: const ValueKey('kanji_detail_han_viet_row'),
+                label: widget.language.kanjiDetailHanVietLabel(),
+                value: hanViet,
+              ),
+            ],
+            if (mnemonic != null && mnemonic.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              _KanjiDetailInfoRow(
+                key: const ValueKey('kanji_detail_mnemonic_row'),
+                label: widget.language.kanjiDetailMnemonicLabel(),
+                value: mnemonic,
+              ),
+            ],
+            if (widget.language == AppLanguage.vi) ...[
+              const SizedBox(height: 12),
+              Consumer(
+                builder: (context, ref, child) {
+                  final rules = ref.watch(hanVietRulesProvider);
+                  return rules.maybeWhen(
+                    data: (ruleSet) => HanVietInlinePanel(
+                      rules: ruleSet.rules,
+                      language: widget.language,
+                      kanji: widget.item.character,
+                    ),
+                    orElse: () => const SizedBox.shrink(),
+                  );
+                },
+              ),
+            ],
             if (widget.relatedKanjiFuture != null) ...[
               const SizedBox(height: 16),
               FutureBuilder<List<KanjiItem>>(
@@ -1700,6 +1744,47 @@ class _KanjiDetailDialogState extends State<_KanjiDetailDialog> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _KanjiDetailInfoRow extends StatelessWidget {
+  const _KanjiDetailInfoRow({
+    super.key,
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 96,
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: palette.ink.withValues(alpha: 0.62),
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Text(
+            value,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: palette.ink,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

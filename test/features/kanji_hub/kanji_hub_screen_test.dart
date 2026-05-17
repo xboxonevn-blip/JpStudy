@@ -176,6 +176,8 @@ _FakeKanjiHubLessonRepository _buildRepo({
         kunyomi: 'manabu',
         meaning: 'hoc',
         meaningEn: 'study',
+        mnemonicVi: 'Liên tưởng mái trường khi học chữ này.',
+        mnemonicEn: 'Picture a student under a school roof.',
         examples: [
           KanjiExample(
             word: '\u5b66\u6821',
@@ -540,5 +542,71 @@ void main() {
     expect(find.text('Mở tất cả (2)'), findsOneWidget);
     expect(find.text('Nhóm N4 \u2014 1 kanji'), findsOneWidget);
     expect(find.text('Nhóm N3 \u2014 1 kanji'), findsOneWidget);
+  });
+
+  testWidgets('Vietnamese kanji detail shows Han-Viet learning aids', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(
+      _buildSubject(repo: _buildRepo(), language: AppLanguage.vi),
+    );
+    await _pumpKanjiHub(tester);
+
+    await tester.tap(find.text('\u5b66').first);
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(
+      find.byKey(const ValueKey('kanji_detail_han_viet_row')),
+      findsOneWidget,
+    );
+    expect(find.text('Liên tưởng mái trường khi học chữ này.'), findsOneWidget);
+  });
+
+  testWidgets('English and Japanese kanji detail hide Han-Viet aids', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    for (final language in [AppLanguage.en, AppLanguage.ja]) {
+      await _mockRadicalsAsset();
+      await tester.pumpWidget(
+        _buildSubject(repo: _buildRepo(), language: language),
+      );
+      await _pumpKanjiHub(tester);
+
+      await tester.tap(find.text('\u5b66').first);
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(
+        find.byKey(const ValueKey('kanji_detail_han_viet_row')),
+        findsNothing,
+        reason: 'language=$language',
+      );
+      expect(
+        find.byKey(const ValueKey('han_viet_inline_panel')),
+        findsNothing,
+        reason: 'language=$language',
+      );
+      if (language == AppLanguage.en) {
+        expect(
+          find.text('Picture a student under a school roof.'),
+          findsOneWidget,
+        );
+      }
+
+      await tester.pumpWidget(Container());
+      await tester.pump();
+    }
   });
 }
