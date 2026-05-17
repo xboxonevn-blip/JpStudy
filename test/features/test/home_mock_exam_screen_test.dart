@@ -109,32 +109,53 @@ Widget buildScreen({
   child: MaterialApp(home: HomeMockExamScreen(launchArgs: launchArgs)),
 );
 
+Widget buildExamCenter({StudyLevel? level}) => ProviderScope(
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    studyLevelProvider.overrideWith((ref) => level),
+  ],
+  child: const MaterialApp(home: ExamCenterHubScreen()),
+);
+
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  testWidgets(
-    'defaults to N5 mock exam when level is not selected',
-    (tester) async {
-      final db = AppDatabase(executor: NativeDatabase.memory());
-      final cdb = ContentDatabase(executor: NativeDatabase.memory());
-      final repo = FakeMockLessonRepository(
-        db,
-        cdb,
-        itemsByLevel: const {'N5': []},
-      );
+  testWidgets('exam center cards follow the selected study level', (
+    tester,
+  ) async {
+    await tester.pumpWidget(buildExamCenter(level: StudyLevel.n2));
+    await tester.pump();
 
-      await tester.pumpWidget(buildScreen(repo: repo));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 100));
-      expect(find.text('JLPT N5 Mock Exam'), findsOneWidget);
-      expect(find.text('No terms available for this lesson.'), findsOneWidget);
+    expect(find.text('JLPT N2 practice hub'), findsOneWidget);
+    expect(find.text('N2 mock exam (105 min)'), findsOneWidget);
+    expect(find.text('N2 reading practice'), findsOneWidget);
+    expect(find.text('N5 mock exam (105 min)'), findsNothing);
+  });
 
-      await tester.pumpWidget(Container());
-      await tester.pump(const Duration(milliseconds: 100));
-      await db.close();
-      await cdb.close();
-    },
-  );
+  testWidgets('defaults to N5 mock exam when level is not selected', (
+    tester,
+  ) async {
+    final db = AppDatabase(executor: NativeDatabase.memory());
+    final cdb = ContentDatabase(executor: NativeDatabase.memory());
+    final repo = FakeMockLessonRepository(
+      db,
+      cdb,
+      itemsByLevel: const {'N5': []},
+    );
+
+    await tester.pumpWidget(buildScreen(repo: repo));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text('JLPT N5 Mock Exam'), findsOneWidget);
+    expect(find.text('No terms available for this lesson.'), findsOneWidget);
+
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+    await db.close();
+    await cdb.close();
+  });
 
   testWidgets('shows JLPT mock exam title for selected level', (tester) async {
     final db = AppDatabase(executor: NativeDatabase.memory());

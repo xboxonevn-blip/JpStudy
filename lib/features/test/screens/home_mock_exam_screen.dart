@@ -113,9 +113,9 @@ class ExamCenterHubScreen extends ConsumerWidget {
                   icon: Icons.assignment_turned_in_rounded,
                   title: _text(
                     language,
-                    'N5 mock exam (105 min)',
-                    'Thi th\u1eed N5 (105 ph\u00fat)',
-                    'N5\u6a21\u8a66\uff08105\u5206\uff09',
+                    '$levelLabel mock exam (105 min)',
+                    'Thi th\u1eed $levelLabel (105 ph\u00fat)',
+                    '$levelLabel\u6a21\u8a66\uff08105\u5206\uff09',
                   ),
                   subtitle: _text(
                     language,
@@ -135,9 +135,9 @@ class ExamCenterHubScreen extends ConsumerWidget {
                   icon: Icons.menu_book_rounded,
                   title: _text(
                     language,
-                    'N5 reading practice',
-                    'Luy\u1ec7n \u0111\u1ecdc N5',
-                    'N5\u8aad\u89e3',
+                    '$levelLabel reading practice',
+                    'Luy\u1ec7n \u0111\u1ecdc $levelLabel',
+                    '$levelLabel\u8aad\u89e3',
                   ),
                   subtitle: _text(
                     language,
