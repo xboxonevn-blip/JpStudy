@@ -35,7 +35,7 @@ class QuestionPromptCard extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.xl),
+      padding: EdgeInsets.all(compact ? AppSpacing.sm : AppSpacing.xl),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -52,63 +52,134 @@ class QuestionPromptCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: alignment,
-        children: [
-          Wrap(
-            spacing: AppSpacing.sm,
-            runSpacing: AppSpacing.sm,
-            alignment: centered ? WrapAlignment.center : WrapAlignment.start,
-            children: [
-              _PromptChip(label: label, icon: icon, color: accentColor),
-            ],
-          ),
-          SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
-          Text(
-            title,
-            textAlign: textAlign,
-            style: TextStyle(
-              fontSize: compact ? (centered ? 24 : 20) : (centered ? 34 : 24),
-              height: 1.15,
-              fontWeight: FontWeight.w900,
-              color: palette.ink,
+      child: compact
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    _PromptChip(label: label, icon: icon, color: accentColor),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 22,
+                              height: 1.1,
+                              fontWeight: FontWeight.w900,
+                              color: palette.ink,
+                            ),
+                          ),
+                          if (subtitle != null &&
+                              subtitle!.trim().isNotEmpty) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              subtitle!.trim(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 13,
+                                height: 1.2,
+                                fontWeight: FontWeight.w600,
+                                color: palette.ink.withValues(alpha: 0.66),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(AppSpacing.sm),
+                  decoration: BoxDecoration(
+                    color: accentColor.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                    border: Border.all(
+                      color: accentColor.withValues(alpha: 0.14),
+                    ),
+                  ),
+                  child: Text(
+                    prompt,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 13,
+                      height: 1.25,
+                      fontWeight: FontWeight.w600,
+                      color: palette.ink,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: alignment,
+              children: [
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
+                  alignment: centered
+                      ? WrapAlignment.center
+                      : WrapAlignment.start,
+                  children: [
+                    _PromptChip(label: label, icon: icon, color: accentColor),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.lg),
+                Text(
+                  title,
+                  textAlign: textAlign,
+                  style: TextStyle(
+                    fontSize: centered ? 34 : 24,
+                    height: 1.15,
+                    fontWeight: FontWeight.w900,
+                    color: palette.ink,
+                  ),
+                ),
+                if (subtitle != null && subtitle!.trim().isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    subtitle!.trim(),
+                    textAlign: textAlign,
+                    style: TextStyle(
+                      fontSize: 18,
+                      height: 1.35,
+                      fontWeight: FontWeight.w600,
+                      color: palette.ink.withValues(alpha: 0.66),
+                    ),
+                  ),
+                ],
+                const SizedBox(height: AppSpacing.lg),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  decoration: BoxDecoration(
+                    color: accentColor.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+                    border: Border.all(
+                      color: accentColor.withValues(alpha: 0.14),
+                    ),
+                  ),
+                  child: Text(
+                    prompt,
+                    textAlign: textAlign,
+                    style: TextStyle(
+                      fontSize: 15,
+                      height: 1.55,
+                      fontWeight: FontWeight.w600,
+                      color: palette.ink,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          if (subtitle != null && subtitle!.trim().isNotEmpty) ...[
-            SizedBox(height: compact ? AppSpacing.xs : AppSpacing.sm),
-            Text(
-              subtitle!.trim(),
-              textAlign: textAlign,
-              style: TextStyle(
-                fontSize: compact ? 14 : 18,
-                height: 1.35,
-                fontWeight: FontWeight.w600,
-                color: palette.ink.withValues(alpha: 0.66),
-              ),
-            ),
-          ],
-          SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.lg),
-            decoration: BoxDecoration(
-              color: accentColor.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-              border: Border.all(color: accentColor.withValues(alpha: 0.14)),
-            ),
-            child: Text(
-              prompt,
-              textAlign: textAlign,
-              style: TextStyle(
-                fontSize: compact ? 13 : 15,
-                height: compact ? 1.35 : 1.55,
-                fontWeight: FontWeight.w600,
-                color: palette.ink,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -183,6 +254,7 @@ class QuestionChoiceTile extends StatelessWidget {
                 label: leadingLabel,
                 icon: leadingIcon,
                 color: stateColor,
+                compact: compact,
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -326,17 +398,23 @@ class _PromptChip extends StatelessWidget {
 }
 
 class _LeadingBadge extends StatelessWidget {
-  const _LeadingBadge({this.label, this.icon, required this.color});
+  const _LeadingBadge({
+    this.label,
+    this.icon,
+    required this.color,
+    this.compact = false,
+  });
 
   final String? label;
   final IconData? icon;
   final Color color;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 36,
-      height: 36,
+      width: compact ? 28 : 36,
+      height: compact ? 28 : 36,
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
@@ -346,12 +424,12 @@ class _LeadingBadge extends StatelessWidget {
           ? Text(
               label!,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: compact ? 12 : 14,
                 fontWeight: FontWeight.w900,
                 color: color,
               ),
             )
-          : Icon(icon, color: color, size: 18),
+          : Icon(icon, color: color, size: compact ? 16 : 18),
     );
   }
 }

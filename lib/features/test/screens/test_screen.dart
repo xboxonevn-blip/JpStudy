@@ -235,11 +235,11 @@ class _TestScreenState extends ConsumerState<TestScreen> {
               final wide = constraints.maxWidth >= 1180;
               final compact = constraints.maxWidth < 700;
               return Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg,
+                padding: EdgeInsets.fromLTRB(
+                  compact ? AppSpacing.md : AppSpacing.lg,
                   AppSpacing.sm,
-                  AppSpacing.lg,
-                  AppSpacing.lg,
+                  compact ? AppSpacing.md : AppSpacing.lg,
+                  compact ? AppSpacing.sm : AppSpacing.lg,
                 ),
                 child: Align(
                   alignment: Alignment.topCenter,

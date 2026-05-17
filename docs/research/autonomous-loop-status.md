@@ -54,7 +54,7 @@
 ## 2026-05-17 Lesson Test Mobile Layout Slice
 
 - Live check after deploy `12283ccc` found lesson test mobile still broken: the header text wrapped vertically and the answer area did not fit.
-- Verified locally with new guard: `flutter test test/features/test/test_screen_mobile_layout_test.dart` passes and catches the former mobile overflow.
-- Verified locally: focused learn/test/grammar regression suites passed after compacting the shared learn multiple-choice primitives and TestScreen mobile header.
+- Verified locally with new guard: `flutter test test/features/test/test_screen_mobile_layout_test.dart` passes and catches the former mobile overflow under a 390x540 shell-height viewport.
+- Verified locally: focused learn/test/grammar regression suites passed after compacting the shared learn multiple-choice/true-false primitives and TestScreen mobile header.
 - Still unverified: deployed/live proof after this layout commit.
 - Still pending: one shared quiz component across lesson test, grammar gate, and JLPT mock/exam.

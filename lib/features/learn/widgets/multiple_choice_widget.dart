@@ -99,11 +99,11 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
               if (index < options.length - 1)
                 SizedBox(height: compact ? AppSpacing.xs : AppSpacing.md),
             ],
-            SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
+            SizedBox(height: compact ? AppSpacing.xs : AppSpacing.lg),
             FilledButton(
               key: const ValueKey('learn_mc_confirm'),
               style: FilledButton.styleFrom(
-                minimumSize: Size.fromHeight(compact ? 44 : 48),
+                minimumSize: Size.fromHeight(compact ? 32 : 48),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               onPressed: widget.showResult || _pendingAnswer == null

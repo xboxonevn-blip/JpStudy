@@ -28,6 +28,7 @@ class TrueFalseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
+    final compact = MediaQuery.sizeOf(context).width < 700;
     final isCorrectTrue =
         revealCorrectAnswer && question.isStatementTrue == true;
     final isCorrectFalse =
@@ -45,8 +46,9 @@ class TrueFalseWidget extends StatelessWidget {
           prompt: question.questionText,
           icon: Icons.rule_rounded,
           accentColor: palette.accent,
+          compact: compact,
         ),
-        const SizedBox(height: AppSpacing.lg),
+        SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
         LayoutBuilder(
           builder: (context, constraints) {
             final vertical = constraints.maxWidth < 560;
@@ -57,6 +59,7 @@ class TrueFalseWidget extends StatelessWidget {
               isSelected: selectedAnswer == true,
               isCorrect: showResult && isCorrectTrue,
               isWrong: showResult && selectedAnswer == true && !isCorrectTrue,
+              compact: compact,
               onTap: showResult ? null : () => onSelect(true),
             );
             final falseTile = QuestionChoiceTile(
@@ -66,6 +69,7 @@ class TrueFalseWidget extends StatelessWidget {
               isSelected: selectedAnswer == false,
               isCorrect: showResult && isCorrectFalse,
               isWrong: showResult && selectedAnswer == false && !isCorrectFalse,
+              compact: compact,
               onTap: showResult ? null : () => onSelect(false),
             );
 
@@ -73,7 +77,7 @@ class TrueFalseWidget extends StatelessWidget {
               return Column(
                 children: [
                   trueTile,
-                  const SizedBox(height: AppSpacing.md),
+                  SizedBox(height: compact ? AppSpacing.xs : AppSpacing.md),
                   falseTile,
                 ],
               );
