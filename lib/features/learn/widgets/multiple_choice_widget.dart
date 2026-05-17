@@ -7,7 +7,7 @@ import '../models/question.dart';
 import 'question_surface.dart';
 
 /// Multiple choice question widget
-class MultipleChoiceWidget extends StatelessWidget {
+class MultipleChoiceWidget extends StatefulWidget {
   final Question question;
   final String? selectedAnswer;
   final bool showResult;
@@ -26,20 +26,44 @@ class MultipleChoiceWidget extends StatelessWidget {
   });
 
   @override
+  State<MultipleChoiceWidget> createState() => _MultipleChoiceWidgetState();
+}
+
+class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
+  String? _pendingAnswer;
+
+  @override
+  void initState() {
+    super.initState();
+    _pendingAnswer = widget.selectedAnswer;
+  }
+
+  @override
+  void didUpdateWidget(covariant MultipleChoiceWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.question.id != widget.question.id ||
+        oldWidget.selectedAnswer != widget.selectedAnswer ||
+        oldWidget.showResult != widget.showResult) {
+      _pendingAnswer = widget.selectedAnswer;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    final options = question.options ?? const <String>[];
+    final options = widget.question.options ?? const <String>[];
+    final selected = widget.showResult ? widget.selectedAnswer : _pendingAnswer;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         QuestionPromptCard(
-          label: language.multipleChoiceLabel,
-          title: question.targetItem.term,
-          subtitle: question.targetItem.hasDisplayReading
-              ? question.targetItem.reading!.trim()
+          label: widget.language.multipleChoiceLabel,
+          title: widget.question.targetItem.term,
+          subtitle: widget.question.targetItem.hasDisplayReading
+              ? widget.question.targetItem.reading!.trim()
               : null,
-          prompt: question.questionText,
+          prompt: widget.question.questionText,
           icon: Icons.layers_rounded,
           accentColor: palette.info,
         ),
@@ -49,17 +73,32 @@ class MultipleChoiceWidget extends StatelessWidget {
             title: options[index],
             leadingLabel: String.fromCharCode(65 + index),
             accentColor: palette.primary,
-            isSelected: selectedAnswer == options[index],
+            isSelected: selected == options[index],
             isCorrect:
-                revealCorrectAnswer && options[index] == question.correctAnswer,
+                widget.revealCorrectAnswer &&
+                options[index] == widget.question.correctAnswer,
             isWrong:
-                showResult &&
-                selectedAnswer == options[index] &&
-                options[index] != question.correctAnswer,
-            onTap: showResult ? null : () => onSelect(options[index]),
+                widget.showResult &&
+                widget.selectedAnswer == options[index] &&
+                options[index] != widget.question.correctAnswer,
+            onTap: widget.showResult
+                ? null
+                : () {
+                    setState(() {
+                      _pendingAnswer = options[index];
+                    });
+                  },
           ),
           if (index < options.length - 1) const SizedBox(height: AppSpacing.md),
         ],
+        const SizedBox(height: AppSpacing.lg),
+        FilledButton(
+          key: const ValueKey('learn_mc_confirm'),
+          onPressed: widget.showResult || _pendingAnswer == null
+              ? null
+              : () => widget.onSelect(_pendingAnswer!),
+          child: Text(widget.language.checkAnswerLabel),
+        ),
       ],
     );
   }

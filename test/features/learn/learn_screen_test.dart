@@ -190,6 +190,18 @@ Future<ProviderContainer> pumpLearnScreen(
   return container;
 }
 
+Future<void> tapMultipleChoiceAnswer(WidgetTester tester, String answer) async {
+  final answerFinder = find.text(answer).first;
+  await tester.ensureVisible(answerFinder);
+  await tester.tap(answerFinder);
+  await tester.pumpAndSettle();
+
+  final confirmFinder = find.byKey(const ValueKey('learn_mc_confirm'));
+  await tester.ensureVisible(confirmFinder);
+  await tester.tap(confirmFinder);
+  await tester.pumpAndSettle();
+}
+
 LearnSessionSnapshot resumeSnap() {
   final qs = [
     q(QuestionType.multipleChoice, 0),
@@ -260,8 +272,7 @@ void main() {
   ) async {
     await pumpLearnScreen(tester, config: cfg(QuestionType.multipleChoice));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('fire'));
-    await tester.pumpAndSettle();
+    await tapMultipleChoiceAnswer(tester, 'fire');
     expect(find.text(AppLanguage.en.willRetryLabel), findsOneWidget);
   });
 
@@ -296,8 +307,7 @@ void main() {
           .length;
 
       // First wrong answer → requeueQuestion called → list grows by 1.
-      await tester.tap(find.text('fire'));
-      await tester.pumpAndSettle();
+      await tapMultipleChoiceAnswer(tester, 'fire');
       expect(
         container.read(learnSessionProvider)!.questions.length,
         initialQuestionCount + 1,
@@ -309,8 +319,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Second wrong on the same question id → guarded, NO double-requeue.
-      await tester.tap(find.text('fire'));
-      await tester.pumpAndSettle();
+      await tapMultipleChoiceAnswer(tester, 'fire');
       expect(
         container.read(learnSessionProvider)!.questions.length,
         initialQuestionCount + 1,
@@ -328,8 +337,7 @@ void main() {
       storage: storage,
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('water'));
-    await tester.pumpAndSettle();
+    await tapMultipleChoiceAnswer(tester, 'water');
     await tester.tap(find.text(AppLanguage.en.continueLabel));
     await tester.pumpAndSettle();
     expect(find.byType(LearnSummaryScreen), findsOneWidget);
@@ -348,8 +356,7 @@ void main() {
       storage: storage,
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('water'));
-    await tester.pumpAndSettle();
+    await tapMultipleChoiceAnswer(tester, 'water');
     expect(storage.savedSnapshots.last.results.single.userAnswer, 'water');
   });
 
@@ -366,7 +373,9 @@ void main() {
 
       expect(find.byType(ContextualHintCard), findsNothing);
 
-      await tester.tap(find.byIcon(Icons.lightbulb_outline));
+      final hintButton = find.byIcon(Icons.lightbulb_outline);
+      await tester.ensureVisible(hintButton);
+      await tester.tap(hintButton);
       await tester.pumpAndSettle();
 
       expect(find.byType(ContextualHintCard), findsOneWidget);

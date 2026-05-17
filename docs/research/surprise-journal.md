@@ -523,3 +523,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: compact answer rows still failed on long repair prompts until the prompt region was made scale-down safe; otherwise tests caught render overflows before the answer layout could be trusted.
 - Delta: -20 percentage points on confidence that deleting chrome alone guarantees no-scroll answer selection.
 - Updated belief: quiz UX fixes need viewport-level widget guards for both ordinary and long-prompt question types before live proof.
+
+## 2026-05-17 - Select-confirm was still fragmented by feature surface
+
+- Prior belief: grammar practice was the dominant instant-commit quiz surface.
+- Actual observation: lesson learn multiple-choice had its own widget and tests that still assumed tap-to-submit, so the safer select -> confirm pattern was not shared yet.
+- Delta: -25 percentage points on confidence that fixing one quiz surface changes the product-wide quiz behavior.
+- Updated belief: the final answer-selection redesign needs a shared quiz component or an explicit consumer-by-consumer parity checklist; otherwise old instant-submit behavior will persist in parallel widgets.

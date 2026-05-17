@@ -107,7 +107,9 @@ void main() {
       expect(find.text('to sleep'), findsOneWidget);
     });
 
-    testWidgets('tapping an option invokes onSelect callback', (tester) async {
+    testWidgets('tapping an option selects it before explicit confirm', (
+      tester,
+    ) async {
       String? selected;
       await tester.pumpWidget(
         _buildHarness(
@@ -121,6 +123,12 @@ void main() {
       await _pump(tester);
 
       await tester.tap(find.text('to eat'));
+      await _pump(tester);
+
+      expect(selected, isNull);
+      expect(find.byKey(const ValueKey('learn_mc_confirm')), findsOneWidget);
+
+      await tester.tap(find.byKey(const ValueKey('learn_mc_confirm')));
       await _pump(tester);
 
       expect(selected, equals('to eat'));

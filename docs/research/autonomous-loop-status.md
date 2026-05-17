@@ -42,3 +42,11 @@
 - Verified live after deploy `4622e4c5`: desktop `/#/grammar-practice` shows one slim top row, four answers in a 2x2 grid, and disabled `Answer` until selection; mobile 390x640 shows question, four compact answer rows, and `Answer` in one viewport.
 - Verified live after deploy `4622e4c5`: tapping a mobile answer then `Answer` advances from question 1 to question 2, proving select -> confirm is active.
 - Still pending: one shared quiz component across lesson test, grammar gate, and JLPT mock/exam.
+
+## 2026-05-17 Learn Multiple-Choice Confirm Slice
+
+- Verified locally: lesson learn multiple-choice no longer submits on option tap; option tap only selects and the `learn_mc_confirm` button submits.
+- Verified locally: `flutter test test/features/learn/learn_screen_test.dart test/features/test/test_screen_submit_test.dart test/features/test/test_screen_feedback_test.dart` passed.
+- Verified locally: `flutter test test/features/learn/widgets/learn_widgets_test.dart` passed.
+- Still unverified: deployed/live proof for lesson learn multiple-choice after this commit.
+- Still pending: one shared quiz component across lesson test, grammar gate, and JLPT mock/exam.
