@@ -5,7 +5,7 @@ import 'package:jpstudy/features/exam/exam_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_mock_pro_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_reading_screen.dart';
-import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
+import 'package:jpstudy/features/lesson/lesson_practice_screen.dart';
 import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
 import 'package:jpstudy/features/test/screens/home_mock_exam_screen.dart';
 import 'package:jpstudy/features/test/screens/test_history_screen.dart';
@@ -50,10 +50,8 @@ StatefulShellBranch buildExamBranch() {
       GoRoute(
         path: AppRoutePath.lessonTestEnhanced,
         name: AppRouteName.lessonTestEnhanced,
-        builder: (context, state) => TestModeIntegration(
-          lessonId: routeInt(state, 'id'),
-          lessonTitle: routeLessonTitle(state),
-        ),
+        redirect: (context, state) =>
+            redirectToLessonPractice(state, LessonPracticeMode.test),
       ),
       GoRoute(
         path: AppRoutePath.lessonTestHistory,

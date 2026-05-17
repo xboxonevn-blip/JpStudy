@@ -2,8 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_route_builders.dart';
 import 'package:jpstudy/features/achievements/achievements_screen.dart';
-import 'package:jpstudy/features/flashcards/integration/flashcard_mode_integration.dart';
 import 'package:jpstudy/features/learn/screens/recovery_pack_screen.dart';
+import 'package:jpstudy/features/lesson/lesson_practice_screen.dart';
 import 'package:jpstudy/features/mistakes/screens/mistake_screen.dart';
 import 'package:jpstudy/features/study_hub/study_hub_screen.dart';
 
@@ -31,10 +31,8 @@ List<RouteBase> buildMemoryRoutes() {
     GoRoute(
       path: AppRoutePath.lessonFlashcardsEnhanced,
       name: AppRouteName.lessonFlashcardsEnhanced,
-      builder: (context, state) => FlashcardModeIntegration(
-        lessonId: routeInt(state, 'id'),
-        lessonTitle: routeLessonTitle(state),
-      ),
+      redirect: (context, state) =>
+          redirectToLessonPractice(state, LessonPracticeMode.learn),
     ),
     GoRoute(
       path: AppRoutePath.learnRecoveryPack,

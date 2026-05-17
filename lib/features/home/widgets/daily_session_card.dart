@@ -15,6 +15,7 @@ import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
+import 'package:jpstudy/features/lesson/lesson_practice_screen.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
 import 'package:jpstudy/features/vocab/vocab_copy.dart';
@@ -584,8 +585,9 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
       return _DeepeningTask(
         label: _nextLessonLabel(language),
         count: 1,
-        route: AppRouteLocation.lessonLearnEnhanced(
+        route: AppRouteLocation.lessonPractice(
           lessonId,
+          LessonPracticeMode.learn,
           title: continueAction.label,
         ),
       );

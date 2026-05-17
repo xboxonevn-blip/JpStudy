@@ -144,15 +144,15 @@ extension AppNavigationContext on BuildContext {
     String? title,
   }) => push(AppRouteLocation.lessonPractice(lessonId, mode, title: title));
   void openLessonLearn(Object? lessonId, {String? title}) =>
-      push(AppRouteLocation.lessonLearnEnhanced(lessonId, title: title));
+      openLessonPractice(lessonId, LessonPracticeMode.learn, title: title);
   void openLessonWrite(Object? lessonId, {String? title}) =>
-      push(AppRouteLocation.lessonWriteMode(lessonId, title: title));
+      openLessonPractice(lessonId, LessonPracticeMode.write, title: title);
   void openLessonMatch(Object? lessonId, {String? title}) =>
-      push(AppRouteLocation.lessonMatchMode(lessonId, title: title));
+      openLessonPractice(lessonId, LessonPracticeMode.match, title: title);
   void openLessonFlashcards(Object? lessonId, {String? title}) =>
-      push(AppRouteLocation.lessonFlashcardsEnhanced(lessonId, title: title));
+      openLessonPractice(lessonId, LessonPracticeMode.learn, title: title);
   void openLessonTest(Object? lessonId, {String? title}) =>
-      push(AppRouteLocation.lessonTestEnhanced(lessonId, title: title));
+      openLessonPractice(lessonId, LessonPracticeMode.test, title: title);
   void openLessonTestHistory(Object? lessonId, {String? title}) =>
       push(AppRouteLocation.lessonTestHistory(lessonId, title: title));
   void openGrammarDetail(Object? grammarId) =>

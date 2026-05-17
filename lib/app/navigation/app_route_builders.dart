@@ -1,11 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/grammar/services/grammar_question_generator.dart';
 import 'package:jpstudy/features/learn/models/learn_config.dart';
 import 'package:jpstudy/features/learn/models/learn_session_args.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
 import 'package:jpstudy/features/learn/screens/learn_screen.dart';
+import 'package:jpstudy/features/lesson/lesson_practice_screen.dart';
 
 int routeInt(GoRouterState state, String key, {int fallback = 1}) {
   return int.tryParse(state.pathParameters[key] ?? '') ?? fallback;
@@ -13,6 +15,15 @@ int routeInt(GoRouterState state, String key, {int fallback = 1}) {
 
 String routeLessonTitle(GoRouterState state) {
   return state.uri.queryParameters['title'] ?? 'Lesson';
+}
+
+String redirectToLessonPractice(GoRouterState state, LessonPracticeMode mode) {
+  final lessonId = state.pathParameters['id'] ?? '1';
+  return AppRouteLocation.lessonPractice(
+    lessonId,
+    mode,
+    title: state.uri.queryParameters['title'],
+  );
 }
 
 GrammarPracticeScreen buildGrammarPracticeScreen(

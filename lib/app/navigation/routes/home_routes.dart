@@ -1,11 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_route_builders.dart';
-import 'package:jpstudy/features/games/match_game/lesson_match_screen.dart';
 import 'package:jpstudy/features/home/home_screen.dart';
 import 'package:jpstudy/features/home/screens/daily_session_summary_screen.dart';
-import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
-import 'package:jpstudy/features/learn/integration/write_mode_integration.dart';
 import 'package:jpstudy/features/library/library_screen.dart';
 import 'package:jpstudy/features/lesson/lesson_detail_screen.dart';
 import 'package:jpstudy/features/lesson/lesson_edit_screen.dart';
@@ -81,26 +78,20 @@ StatefulShellBranch buildHomeBranch() {
       GoRoute(
         path: AppRoutePath.lessonLearnEnhanced,
         name: AppRouteName.lessonLearnEnhanced,
-        builder: (context, state) => LearnModeIntegration(
-          lessonId: routeInt(state, 'id'),
-          lessonTitle: routeLessonTitle(state),
-        ),
+        redirect: (context, state) =>
+            redirectToLessonPractice(state, LessonPracticeMode.learn),
       ),
       GoRoute(
         path: AppRoutePath.lessonWriteMode,
         name: AppRouteName.lessonWriteMode,
-        builder: (context, state) => WriteModeIntegration(
-          lessonId: routeInt(state, 'id'),
-          lessonTitle: routeLessonTitle(state),
-        ),
+        redirect: (context, state) =>
+            redirectToLessonPractice(state, LessonPracticeMode.write),
       ),
       GoRoute(
         path: AppRoutePath.lessonMatchMode,
         name: AppRouteName.lessonMatchMode,
-        builder: (context, state) => LessonMatchScreen(
-          lessonId: routeInt(state, 'id'),
-          lessonTitle: routeLessonTitle(state),
-        ),
+        redirect: (context, state) =>
+            redirectToLessonPractice(state, LessonPracticeMode.match),
       ),
     ],
   );

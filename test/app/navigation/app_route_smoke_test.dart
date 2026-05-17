@@ -74,4 +74,34 @@ void main() {
 
     await disposeSmokeApp(tester);
   });
+
+  testWidgets(
+    'legacy lesson mode aliases redirect to canonical practice route',
+    (tester) async {
+      await pumpReleaseSmokeApp(tester, size: const Size(1440, 1600));
+
+      await pumpSmokeRoute(tester, '/lesson/1/learn-enhanced?title=Lesson%201');
+      var uri = AppRouter.router.routeInformationProvider.value.uri;
+      expect(uri.path, '/lesson/1/practice/learn');
+      expect(uri.queryParameters['title'], 'Lesson 1');
+
+      await pumpSmokeRoute(tester, '/lesson/1/flashcards-enhanced');
+      uri = AppRouter.router.routeInformationProvider.value.uri;
+      expect(uri.path, '/lesson/1/practice/learn');
+
+      await pumpSmokeRoute(tester, '/lesson/1/test-enhanced');
+      uri = AppRouter.router.routeInformationProvider.value.uri;
+      expect(uri.path, '/lesson/1/practice/test');
+
+      await pumpSmokeRoute(tester, '/lesson/1/write-mode');
+      uri = AppRouter.router.routeInformationProvider.value.uri;
+      expect(uri.path, '/lesson/1/practice/write');
+
+      await pumpSmokeRoute(tester, '/lesson/1/match-mode');
+      uri = AppRouter.router.routeInformationProvider.value.uri;
+      expect(uri.path, '/lesson/1/practice/match');
+
+      await disposeSmokeApp(tester);
+    },
+  );
 }
