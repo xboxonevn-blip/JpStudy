@@ -45,7 +45,7 @@ The active mission is complete only if all are true:
 | App coherence Phase 5 | Current working-tree Phase 5 pass rewrites learner-facing copy across Home/Learn/Review/Exam/Kanji/Vocab/Grammar/Profile/Premium/Progress/Search/Library/practice surfaces; the Design Lab dev surface is removed from learner routing/source; roadmap fallback no longer leaks raw phase IDs | `flutter analyze lib test` clean; UI string guard 0 candidates; content taxonomy 2/2; node tooling 53/53; full `flutter test` 2299/2299 |
 | App coherence Phase 6 | Commit `812b4e0` adds N5-only Kana soft-suggest gating, verifies search source/tests cover vocab/kanji/kana, and unifies remaining vocab CTA/path wording | `flutter analyze lib test` clean; UI string guard 0; content taxonomy 2/2; node tooling 53/53; focused Phase 6 tests 44/44; full `flutter test` 2300/2300; deployed to `hosting:jpstudy` and live-verified N3 `/vocab` without Kana prompt after cache-disabled reload |
 | D6.Q6.5 contrast follow-up | Commit `669347cf` raises Vocab flashcard tap-to-flip helper text from `ink 0.55` to `ink 0.64` and adds a regression test for light-surface AA contrast | `flutter test test\features\vocab\widgets\flashcard_widget_test.dart` passed 12/12; focused D6 widget set passed 49/49; `flutter analyze lib test` clean; UI string guard 0; built and deployed to `hosting:jpstudy`; primary Hosting `200`, legacy `404` |
-| Kanji per-language UX | Commits through `4747b677` localize Kanji detail/search/lesson/practice consumers by UI language, hide Hán-Việt outside Vietnamese, and seed Hán-Việt metadata into detail records | Focused Kanji lesson/reading/write tests passed; `flutter analyze lib test`, UI string guard, taxonomy guard, and full `flutter test` passed with 2317 tests; deployed to `hosting:jpstudy`; live proof covers JA detail with no Hán-Việt UI and JA Search `nhan` with no hidden Hán-Việt match. Lesson/practice live proof and real Japanese definitions remain open |
+| Kanji per-language UX | Commits through `4747b677` localize Kanji detail/search/lesson/practice consumers by UI language, hide Hán-Việt outside Vietnamese, and seed Hán-Việt metadata into detail records; `b07d10f6` fixes the discovered Flutter web handwriting seed crash | Focused Kanji lesson/reading/write tests passed; `flutter analyze lib test`, UI string guard, taxonomy guard, and full `flutter test` passed with 2318 tests; deployed to `hosting:jpstudy`; live proof covers JA detail, JA Search `nhan`, JA lesson Kanji tab, JA Kanji Reading, and JA Handwriting with Hán-Việt hidden. Real Japanese definitions remain open |
 
 ## Latest Readiness Result
 
@@ -152,10 +152,12 @@ and Lighthouse live gate all passed. Sentry smoke remains skipped until
 Kanji per-language update: Hán-Việt rules are no longer routed through the
 N5-only Kana gate, and Kanji UX now switches by UI language for detail, search,
 lesson Kanji list, reading practice, and handwriting practice. Commit
-`4747b677` was pushed to `main`, built, and deployed. Live proof currently
-covers Japanese Kanji detail and Japanese Search Hán-Việt keyword gating;
-lesson/practice consumer screens still need live proof, and Japanese
-definitions need real data rather than English fallback.
+`4747b677` was pushed to `main`, built, and deployed. Follow-up `b07d10f6`
+fixed a Flutter web-only handwriting seed crash discovered during live proof.
+Live proof covers Japanese Kanji detail, Japanese Search Hán-Việt keyword
+gating, Japanese lesson Kanji tab, Japanese Kanji Reading, and Japanese
+Handwriting; Japanese definitions still need real data rather than English
+fallback.
 
 ## Verdict
 
