@@ -89,6 +89,78 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
      `appCheck.enforced=true`, `appCheck.enforcedAt`, and
      `appCheck.evidence`.
 
+## Proof State Templates
+
+Use these as field-shape examples only. Do not record screenshots with secret
+values or private learner data. Leave a gate `false` until its evidence is
+real and repeatable.
+
+Legal approval:
+
+```json
+{
+  "legal": {
+    "approved": true,
+    "reviewer": "owner/legal reviewer name",
+    "approvedAt": "2026-05-17",
+    "commit": "approved-copy-commit-hash",
+    "evidence": "Reviewed live /privacy and /terms against docs/compliance/legal-approval-checklist.md"
+  }
+}
+```
+
+Sentry first issue:
+
+```json
+{
+  "sentry": {
+    "eventSent": true,
+    "sentAt": "2026-05-17T10:00:00+07:00",
+    "issueUrl": "https://sentry.io/organizations/<org>/issues/<id>/",
+    "workflowRun": "https://github.com/xboxonevn-blip/JpStudy/actions/runs/<run-id>",
+    "evidence": "Manual CI workflow_dispatch with sentry_smoke=true produced first deployed web issue."
+  }
+}
+```
+
+Deletion proof:
+
+```json
+{
+  "deletion": {
+    "executed": true,
+    "executedAt": "2026-05-17T10:00:00+07:00",
+    "supportId": "dedicated-test-firebase-uid",
+    "evidence": "Executed user-data deletion runbook for dedicated test UID; Storage not applicable for beta."
+  }
+}
+```
+
+GA4 retention proof:
+
+```json
+{
+  "ga4Retention": {
+    "verified": true,
+    "verifiedAt": "2026-05-17T10:00:00+07:00",
+    "retention": "2 months",
+    "evidence": "GA4 Admin Data retention UI for property 536663906 shows event data retention set to 2 months."
+  }
+}
+```
+
+App Check enforcement:
+
+```json
+{
+  "appCheck": {
+    "enforced": true,
+    "enforcedAt": "2026-05-31T10:00:00+07:00",
+    "evidence": "Firebase App Check enforcement enabled after monitoring window; Auth and Analytics smoke passed."
+  }
+}
+```
+
 ## 1. GitHub Actions Secret-Backed Deploy
 
 Status: completed on `main`. Use the current GitHub Actions run for the newest
