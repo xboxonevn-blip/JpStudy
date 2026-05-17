@@ -39,6 +39,7 @@ The active mission is complete only if all are true:
 | App Check enforcement | `docs/compliance/launch-proof-state.json` has `appCheck.enforced=false`; enforcement intentionally deferred until monitoring window | Deferred/missing |
 | App coherence Phase 0 | `docs/research/app-coherence-audit-2026-05-17.md` confirms 11 shell branches, 68 routes, duplicate Home routes, dual onboarding gates, split Home implementations, and stale manifest/runtime vocab drift | New blocker class documented |
 | App coherence Phase 1 | `docs/research/app-coherence-phase1-content-pipeline-2026-05-17.md`; commits `2dcd5938`, `39020712`, `98cad1bf` make lesson vocab source-aware, regenerate/guard the content manifest, and cover N5-N1 lesson vocab seeding | Passed for runtime vocab availability; level-ID collision caveat remains |
+| Full live app audit | `docs/research/full-audit-2026-05-17.md` verifies live lesson routes still show `Tổng 0` + spinner and traces root causes to route identity, unbounded async loading, double shell navigation, and fragmented level writers | P0 blocking fix required before IA consolidation |
 
 ## Latest Readiness Result
 
@@ -80,6 +81,10 @@ regenerated the content manifest. The remaining content-pipeline caveat is
 identity: curriculum progress rows still key by integer `lessonId`, while
 N5/N3/N2/N1 all reuse lesson IDs 1-25. Phase 2/3 should resolve route and
 storage identity while simplifying IA.
+
+Full live audit note: `full-audit-2026-05-17.md` supersedes the prior IA-first
+ordering. The live app remains unusable for lesson study until the P0 lesson
+loading/identity and shell-navigation fixes are shipped and verified.
 
 ## Verdict
 

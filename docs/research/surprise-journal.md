@@ -441,3 +441,7 @@ Audit expected N2/N1 lesson vocab to be absent from the runtime path. Actual: N2
 ## 2026-05-17 - Lesson Identity Collision
 
 While verifying all-level lesson vocab seeding, a new coherence risk surfaced: lesson progress and terms are keyed by integer `lessonId`, but N5, N3, N2, and N1 all use route lesson IDs 1-25. The Phase 1 source-aware fix makes a clean active-level lesson load correctly, but a user who switches levels after seeding another level can still collide with existing rows. Mental model update: source-aware data loading is necessary but not sufficient; curriculum identity must include level or a stable level-scoped route ID.
+
+## 2026-05-17 - Live Lesson Zero Was Not Missing Content
+
+Live `/lesson/1` and `/lesson/26` still showed `Tổng 0` with a spinner after the content manifest and source-aware query were fixed. Actual root cause is stronger than "missing vocab": route identity omits level, pending async providers are rendered as empty lists, and content seeding has no timeout/error contract. Mental model update: authored assets plus repository tests do not prove the learner loop works; direct route identity and loading-state semantics are part of the content pipeline.
