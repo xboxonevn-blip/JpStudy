@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -132,15 +134,29 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
-    testWidgets('shows onboarding screen when onboarding is incomplete', (
-      tester,
-    ) async {
-      configureView(tester);
-      await tester.pumpWidget(buildScreen(onboardingDone: false));
-      await pumpAndSettle(tester);
-      expect(find.text(AppLanguage.en.onboardingWelcomeTitle), findsOneWidget);
-    });
+    testWidgets(
+      'shows loading fallback when router onboarding gate is bypassed',
+      (tester) async {
+        configureView(tester);
+        await tester.pumpWidget(buildScreen(onboardingDone: false));
+        await pumpAndSettle(tester);
+        expect(find.text(AppLanguage.en.onboardingWelcomeTitle), findsNothing);
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      },
+    );
   });
+
+  test(
+    'HomeScreen delegates onboarding and mobile layout to shared systems',
+    () {
+      final source = File(
+        'lib/features/home/home_screen.dart',
+      ).readAsStringSync();
+
+      expect(source, isNot(contains('OnboardingScreen(')));
+      expect(source, isNot(contains('_MobileHomeFallback')));
+    },
+  );
 
   group('home screen — onboarding complete', () {
     testWidgets('renders LearningPathScreen when onboarding is done', (
@@ -190,18 +206,20 @@ void main() {
       await cleanUp(tester);
     });
 
-    testWidgets('mobile home shows foundations card for N5', (tester) async {
+    testWidgets('mobile home uses the same learning path screen for N5', (
+      tester,
+    ) async {
       configureMobileView(tester);
       await tester.pumpWidget(
         buildScreen(onboardingDone: true, level: StudyLevel.n5),
       );
       await pumpAndSettle(tester);
 
-      expect(find.text('Foundations'), findsOneWidget);
+      expect(find.byType(LearningPathScreen), findsOneWidget);
       await cleanUp(tester);
     });
 
-    testWidgets('mobile home hides foundations card for non-N5 levels', (
+    testWidgets('mobile home uses the same learning path screen for non-N5', (
       tester,
     ) async {
       configureMobileView(tester);
@@ -210,7 +228,7 @@ void main() {
       );
       await pumpAndSettle(tester);
 
-      expect(find.text('Foundations'), findsNothing);
+      expect(find.byType(LearningPathScreen), findsOneWidget);
       await cleanUp(tester);
     });
 
