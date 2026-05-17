@@ -5,10 +5,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum FoundationsSoftSuggestSurface { vocab, grammar, kanji }
+
+bool shouldSuggestFoundationsForLevel(StudyLevel? level) {
+  return level == null || level == StudyLevel.n5;
+}
 
 class FoundationsSoftSuggestGate extends ConsumerStatefulWidget {
   const FoundationsSoftSuggestGate({
@@ -46,6 +52,9 @@ class _FoundationsSoftSuggestGateState
     if (WidgetsBinding.instance.runtimeType.toString().contains(
       'TestWidgetsFlutterBinding',
     )) {
+      return;
+    }
+    if (!shouldSuggestFoundationsForLevel(ref.read(studyLevelProvider))) {
       return;
     }
     await ref.read(foundationsProgressProvider.notifier).loadFromDao();

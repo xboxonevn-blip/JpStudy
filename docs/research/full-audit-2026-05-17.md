@@ -260,3 +260,31 @@ Remaining caveat: Phase 6 polish and the new 2026-05-17 full-app P0 audit
 remain separate workstreams. Search/vocab/kana completeness, "Mở track" live
 behavior, and level-state live consistency still need their own verification
 after the copy cleanup commit.
+
+## Phase 6 Polish Update
+
+Timestamp: `2026-05-17T18:05+07:00`
+
+Hypothesis: the remaining polish issues were small copy/state guards, not a new
+data-pipeline rewrite.
+
+Verification and changes:
+
+- Search source already builds a mixed index from current-level vocab and kanji,
+  classifying kana-only vocab as Kana (`search_screen.dart`); existing search
+  tests cover vocab, kanji, kana filter behavior, and romaji matching.
+- Foundations soft-suggest was level-blind. Added a N5-only guard so the "study
+  Kana first" prompt does not appear for N4/N3/N2/N1 learners.
+- Vocab CTA labels were already unified in Vietnamese as `Mở hướng học`; the
+  remaining visible lane/track wording was cleaned in Japanese and shared vocab
+  copy so CTA language points to "study/path" consistently.
+
+Focused verification:
+
+```text
+flutter test test/features/foundations/foundations_soft_suggest_gate_test.dart test/features/search/search_screen_test.dart test/features/vocab/vocab_screen_test.dart test/features/vocab/hajimete_chapter_catalog_screen_test.dart -> 44/44 passed
+```
+
+Remaining caveat: this is source/test verification. Live deploy verification of
+N3+ no-Kana-suggest and search/vocab behavior should be done after the Phase 6
+commit is deployed.

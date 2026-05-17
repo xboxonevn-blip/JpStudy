@@ -6,11 +6,11 @@ void main() {
   group('VocabCopy', () {
     test('returns proper accented Vietnamese labels', () {
       expect(AppLanguage.vi.vocabTodayTitle(), 'Hôm nay');
-      expect(AppLanguage.vi.vocabActiveLaneLabel(), 'Nhánh học hiện tại');
+      expect(AppLanguage.vi.vocabActiveLaneLabel(), 'Hướng học hiện tại');
       expect(AppLanguage.vi.vocabReviewNowLabel(), 'Ôn ngay');
       expect(
         AppLanguage.vi.vocabCompanionShortcutLabel(),
-        'Mở nhánh học đồng hành',
+        'Mở hướng học đồng hành',
       );
       expect(AppLanguage.vi.vocabReviewTitle('N5'), 'Ôn N5');
       expect(AppLanguage.vi.vocabLiveCatalogTitle(), 'Danh mục đang mở');

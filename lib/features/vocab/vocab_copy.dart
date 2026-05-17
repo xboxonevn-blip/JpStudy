@@ -12,7 +12,7 @@ extension VocabCopy on AppLanguage {
       'Start with the current study path, then browse more lists only when you need them.',
     AppLanguage.vi =>
       'Bắt đầu từ hướng học hiện tại, rồi mở danh sách khác khi thật sự cần.',
-    AppLanguage.ja => 'まず学習中のレーンから始め、必要なときだけカタログを開きます。',
+    AppLanguage.ja => 'まず今の学習内容から始め、必要なときだけカタログを開きます。',
   };
 
   String vocabDueNowLabel() => switch (this) {
@@ -23,8 +23,8 @@ extension VocabCopy on AppLanguage {
 
   String vocabActiveLaneLabel() => switch (this) {
     AppLanguage.en => 'Current path',
-    AppLanguage.vi => 'Nhánh học hiện tại',
-    AppLanguage.ja => '現在のレーン',
+    AppLanguage.vi => 'Hướng học hiện tại',
+    AppLanguage.ja => '現在の学習',
   };
 
   String vocabNextWindowLabel() => switch (this) {
@@ -41,8 +41,8 @@ extension VocabCopy on AppLanguage {
 
   String vocabCompanionShortcutLabel() => switch (this) {
     AppLanguage.en => 'Open companion path',
-    AppLanguage.vi => 'Mở nhánh học đồng hành',
-    AppLanguage.ja => '補助レーンを開く',
+    AppLanguage.vi => 'Mở hướng học đồng hành',
+    AppLanguage.ja => '補助学習を開く',
   };
 
   String vocabReviewTitle(String levelCode) => switch (this) {
@@ -314,7 +314,7 @@ extension VocabCopy on AppLanguage {
   String vocabPreviewDialogTitle() => switch (this) {
     AppLanguage.en => 'Path preview',
     AppLanguage.vi => 'Xem trước hướng học',
-    AppLanguage.ja => 'トラックのプレビュー',
+    AppLanguage.ja => '学習内容のプレビュー',
   };
 
   String vocabPreviewDialogClose() => switch (this) {
@@ -328,7 +328,7 @@ extension VocabCopy on AppLanguage {
       'This path already has vocabulary inside JpStudy. You can preview the word volume and content now.',
     AppLanguage.vi =>
       'Hướng học này đã có từ vựng trong JpStudy. Bạn có thể xem trước số lượng và nội dung ngay.',
-    AppLanguage.ja => 'このトラックにはすでに JP Study 内の語彙データがあります。カタログ内容は確認できます。',
+    AppLanguage.ja => 'この学習内容にはすでに JP Study 内の語彙データがあります。カタログ内容は確認できます。',
   };
 
   String vocabMeaningFirstLabel() => switch (this) {
@@ -340,7 +340,7 @@ extension VocabCopy on AppLanguage {
   String vocabUsageFlowLabel() => switch (this) {
     AppLanguage.en => 'Usage order',
     AppLanguage.vi => 'Thứ tự theo cách dùng',
-    AppLanguage.ja => '用法フロー',
+    AppLanguage.ja => '用法順',
   };
 
   String vocabReviewReadyLabel() => switch (this) {
@@ -352,13 +352,13 @@ extension VocabCopy on AppLanguage {
   String vocabOpenLaneLabel() => switch (this) {
     AppLanguage.en => 'Open path',
     AppLanguage.vi => 'Mở hướng học',
-    AppLanguage.ja => 'レーンを開く',
+    AppLanguage.ja => '学習を開く',
   };
 
   String vocabJoinTrackLabel() => switch (this) {
     AppLanguage.en => 'Open path',
     AppLanguage.vi => 'Mở hướng học',
-    AppLanguage.ja => 'トラックを開く',
+    AppLanguage.ja => '学習を開く',
   };
 
   String vocabPreviewLabel() => switch (this) {
