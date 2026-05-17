@@ -434,3 +434,6 @@
 - Actual observation: labels like `(1) hoàn toàn` and `(sl) ôm` made duplicate fragments look distinct, so 35 repeated N3 Hajimete glosses still passed until the test canonicalized numbered/parenthetical prefixes.
 - Delta: -30 percentage points on confidence that separator-only checks catch editorial debt.
 - Updated belief: content QA tests must normalize editorial wrappers before comparing meanings; otherwise real duplicate glosses hide behind dictionary labels.
+## 2026-05-17 - App Coherence Phase 0 Vocab Pipeline
+
+Audit expected N2/N1 lesson vocab to be absent from the runtime path. Actual: N2/N1 ShinKanzen lesson assets and indexes exist, and `/lesson/:id` can load them through a direct asset fallback. The real coherence defect is stale `index.json` plus a `minna_*`-only content DB lookup that misses seeded ShinKanzen rows. Mental model update: asset availability is not equivalent to canonical runtime wiring; fallback success can hide a broken primary pipeline.

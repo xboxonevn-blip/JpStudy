@@ -37,6 +37,7 @@ The active mission is complete only if all are true:
 | GA4 retention proof | GA4 Admin API probe returns `403`; `docs/compliance/launch-proof-state.json` has `ga4Retention.verified=false` | Missing |
 | GA4 learning export | `npm run report:ga4-export -- --json` at `2026-05-17T09:57+07`: BigQuery tables `events_20260514`/`15`/`16`; `srs_review_completed=69`, `n5_micro_quiz_completed=3`, `session_quality_rated=2`; `northStar.qualifiedUsers=1` | Passed |
 | App Check enforcement | `docs/compliance/launch-proof-state.json` has `appCheck.enforced=false`; enforcement intentionally deferred until monitoring window | Deferred/missing |
+| App coherence Phase 0 | `docs/research/app-coherence-audit-2026-05-17.md` confirms 11 shell branches, 68 routes, duplicate Home routes, dual onboarding gates, split Home implementations, and stale manifest/runtime vocab drift | New blocker class documented |
 
 ## Latest Readiness Result
 
@@ -72,6 +73,11 @@ These items cannot be honestly closed by repo edits alone:
 Firebase Storage note: cloud backup and legacy migration are not beta
 requirements. The project remains on Spark, Storage setup would require Blaze,
 and local file export/import is the beta backup path.
+
+App coherence note: Phase 0 found that N2/N1 lesson vocab assets exist and can
+reach `/lesson/:id` via direct asset fallback, but the runtime content DB query
+is still hardcoded to `minna_*` tags and the manifest omits N2/N1, grammar, and
+immersion. Phase 1 must make lesson vocab source-aware before IA cleanup.
 
 ## Verdict
 
