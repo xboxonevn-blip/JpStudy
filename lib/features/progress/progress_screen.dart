@@ -1812,7 +1812,7 @@ class _ForecastPreviewCard extends ConsumerWidget {
                 Text(
                   _tr(
                     language,
-                    '${forecast.totalDueNow} due today · ${forecast.totalTracked} tracked',
+                    '${forecast.totalDueNow} due today · ${forecast.totalTracked} recorded',
                     '${forecast.totalDueNow} đến hạn hôm nay · ${forecast.totalTracked} đang theo dõi',
                     '今日${forecast.totalDueNow}件 · 追跡中${forecast.totalTracked}件',
                   ),

@@ -292,7 +292,7 @@ ProgressCoachAction? _nextLessonAction(
     subtitle: _l(
       language,
       en: 'Review pressure is low enough to add one deeper lesson.',
-      vi: 'Áp lực review đang đủ thấp để thêm một bài sâu hơn.',
+      vi: 'Áp lực ôn tập đang đủ thấp để thêm một bài sâu hơn.',
       ja: '復習圧が低い今のうちに新しいレッスンを進めましょう。',
     ),
     ctaLabel: _l(language, en: 'Open lesson', vi: 'Mở bài học', ja: 'レッスンへ'),
@@ -625,7 +625,7 @@ ProgressCoachSignal _buildPerformanceSignal({
       _l(
         language,
         en: 'Progress says overdue reviews are the biggest source of drag right now.',
-        vi: 'Tiến độ cho thấy review quá hạn đang là lực kéo lùi lớn nhất lúc này.',
+        vi: 'Tiến độ cho thấy các lượt ôn quá hạn đang là lực kéo lùi lớn nhất lúc này.',
         ja: '今は期限超過レビューが最も大きな足かせになっています。',
       ),
     );

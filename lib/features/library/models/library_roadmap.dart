@@ -155,7 +155,7 @@ LibraryRoadmapBoard buildLibraryRoadmapBoard({
             ? _l(
                 language,
                 en: 'No lesson progress yet.',
-                vi: 'Chưa có tiến độ lesson nào.',
+                vi: 'Chưa có tiến độ bài học nào.',
                 ja: 'まだレッスン進捗はありません。',
               )
             : _l(
@@ -168,13 +168,13 @@ LibraryRoadmapBoard buildLibraryRoadmapBoard({
         color: const Color(0xFF2563EB),
       ),
       LibraryRoadmapStat(
-        label: _l(language, en: 'Review load', vi: 'Tải review', ja: '復習負荷'),
+        label: _l(language, en: 'Review load', vi: 'Áp lực ôn tập', ja: '復習負荷'),
         value: '${sortedDue.length}',
         detail: sortedDue.isEmpty
             ? _l(
                 language,
                 en: 'No lesson is flashing due pressure right now.',
-                vi: 'Hiện chưa có lesson nào đang chớp áp lực review.',
+                vi: 'Hiện chưa có bài học nào đang chịu áp lực ôn tập.',
                 ja: '今はレビュー圧が高いレッスンはありません。',
               )
             : _l(
@@ -193,13 +193,13 @@ LibraryRoadmapBoard buildLibraryRoadmapBoard({
             ? _l(
                 language,
                 en: 'You can open a fresh lesson without much carry-over.',
-                vi: 'Bạn có thể mở một lesson mới mà không bị kéo theo quá nhiều phần dang dở.',
+                vi: 'Bạn có thể mở một bài học mới mà không bị kéo theo quá nhiều phần dang dở.',
                 ja: '持ち越しが少ないので新しいレッスンを開きやすい状態です。',
               )
             : _l(
                 language,
                 en: '${inProgress.first.title} is the strongest in-progress candidate right now.',
-                vi: '${inProgress.first.title} là lesson đang học đáng quay lại nhất lúc này.',
+                vi: '${inProgress.first.title} là bài học đang học đáng quay lại nhất lúc này.',
                 ja: '${inProgress.first.title} が今戻る価値の高い進行中レッスンです。',
               ),
         icon: Icons.track_changes_rounded,
@@ -215,19 +215,19 @@ LibraryRoadmapAction _dueAction(AppLanguage language, LessonMeta lesson) {
     title: _l(
       language,
       en: 'Clean review pressure in ${lesson.title}',
-      vi: 'Dọn áp lực review ở ${lesson.title}',
+      vi: 'Dọn áp lực ôn tập ở ${lesson.title}',
       ja: '${lesson.title} のレビュー圧を下げる',
     ),
     subtitle: _l(
       language,
       en: '${lesson.dueCount} due terms are waiting inside this lesson right now.',
-      vi: '${lesson.dueCount} mục đến hạn đang chờ bên trong lesson này.',
+      vi: '${lesson.dueCount} mục đến hạn đang chờ trong bài học này.',
       ja: 'このレッスン内で${lesson.dueCount}件の期限項目が待っています。',
     ),
     ctaLabel: _l(
       language,
       en: 'Open priority lesson',
-      vi: 'Mở lesson ưu tiên',
+      vi: 'Mở bài học ưu tiên',
       ja: '優先レッスンへ',
     ),
     route: AppRouteLocation.lessonDetail(lesson.id),
@@ -266,19 +266,19 @@ LibraryRoadmapAction _nextLessonAction(
         ? _l(
             language,
             en: '${AppLanguage.en.termsCountLabel(lesson.termCount)} are waiting in a clear lesson set.',
-            vi: '${lesson.termCount} mục đang chờ trong một lesson còn sạch.',
+            vi: '${lesson.termCount} mục đang chờ trong một bài học còn sạch.',
             ja: '${lesson.termCount}項目の新しいレッスンが待っています。',
           )
         : _l(
             language,
             en: '${lesson.completedCount}/${AppLanguage.en.termsCountLabel(lesson.termCount)} are already moving in this lesson.',
-            vi: '${lesson.completedCount}/${lesson.termCount} mục đã được đụng trong lesson này.',
+            vi: '${lesson.completedCount}/${lesson.termCount} mục đã được học trong bài học này.',
             ja: 'このレッスンは${lesson.completedCount}/${lesson.termCount}項目まで進んでいます。',
           ),
     ctaLabel: _l(
       language,
       en: isFresh ? 'Start lesson' : 'Resume lesson',
-      vi: isFresh ? 'Bắt đầu lesson' : 'Học tiếp lesson',
+      vi: isFresh ? 'Bắt đầu bài học' : 'Học tiếp bài học',
       ja: isFresh ? 'レッスン開始' : 'レッスン再開',
     ),
     route: AppRouteLocation.lessonDetail(lesson.id),
@@ -299,19 +299,19 @@ LibraryRoadmapAction _freshLessonAction(
     title: _l(
       language,
       en: 'Keep a fresh lesson ready',
-      vi: 'Giữ sẵn một lesson mới',
+      vi: 'Giữ sẵn một bài học mới',
       ja: '新しいレッスンを用意する',
     ),
     subtitle: _l(
       language,
       en: '${lesson.title} is the cleanest place to expand after review is stable.',
-      vi: '${lesson.title} là chỗ sạch nhất để mở rộng sau khi review ổn định.',
+      vi: '${lesson.title} là chỗ sạch nhất để mở rộng sau khi ôn tập ổn định.',
       ja: '${lesson.title} は復習が落ち着いた後に広げやすい入口です。',
     ),
     ctaLabel: _l(
       language,
       en: 'Open fresh lesson',
-      vi: 'Mở lesson mới',
+      vi: 'Mở bài học mới',
       ja: '新規レッスンへ',
     ),
     route: AppRouteLocation.lessonDetail(lesson.id),
@@ -350,19 +350,19 @@ LibraryRoadmapAction _emptyAction(AppLanguage language, int fallbackLessonId) {
     title: _l(
       language,
       en: 'Open the first lesson',
-      vi: 'Mở lesson đầu tiên',
+      vi: 'Mở bài học đầu tiên',
       ja: '最初のレッスンを開く',
     ),
     subtitle: _l(
       language,
-      en: 'This level has no tracked lesson progress yet, so start from the first lesson set.',
-      vi: 'Cấp này chưa có tiến độ bài học nào được theo dõi, nên hãy vào nhóm bài đầu tiên.',
+      en: 'This level has no recorded lesson progress yet, so start from the first lesson set.',
+      vi: 'Cấp này chưa có tiến độ bài học nào được ghi nhận, nên hãy vào nhóm bài đầu tiên.',
       ja: 'このレベルにはまだ進捗がないので、最初のブロックから始めましょう。',
     ),
     ctaLabel: _l(
       language,
       en: 'Open first lesson',
-      vi: 'Mở lesson đầu',
+      vi: 'Mở bài học đầu',
       ja: '最初のレッスンへ',
     ),
     route: AppRouteLocation.lessonDetail(fallbackLessonId),
@@ -384,13 +384,13 @@ LibraryRoadmapAction _emptyAction(AppLanguage language, int fallbackLessonId) {
       _l(
         language,
         en: 'Stabilize the lesson queue first',
-        vi: 'Ổn định hàng lesson trước',
+        vi: 'Ổn định bài học đến hạn trước',
         ja: 'まずレッスンのキューを安定させる',
       ),
       _l(
         language,
         en: 'Library says review pressure has returned inside your active lessons.',
-        vi: 'Library cho thấy áp lực review đã quay lại bên trong các lesson đang mở.',
+        vi: 'Thư viện cho thấy áp lực ôn tập đã quay lại trong các bài học đang mở.',
         ja: 'ライブラリ上では進行中レッスンのレビュー圧が戻ってきています。',
       ),
     );
@@ -406,7 +406,7 @@ LibraryRoadmapAction _emptyAction(AppLanguage language, int fallbackLessonId) {
       _l(
         language,
         en: 'You already have lessons in motion, so the cheapest progress is to keep them moving.',
-        vi: 'Bạn đã có lesson đang chạy, nên tiến bộ rẻ nhất lúc này là đẩy tiếp chúng đi.',
+        vi: 'Bạn đã có bài học đang mở, nên cách tiến bộ nhẹ nhất lúc này là học tiếp các bài đó.',
         ja: 'すでに動いているレッスンがあるので、まずはその流れを続けるのが最短です。',
       ),
     );
@@ -416,13 +416,13 @@ LibraryRoadmapAction _emptyAction(AppLanguage language, int fallbackLessonId) {
       _l(
         language,
         en: 'Open the next clean lesson',
-        vi: 'Mở lesson sạch tiếp theo',
+        vi: 'Mở bài học mới tiếp theo',
         ja: '次のきれいなレッスンを開く',
       ),
       _l(
         language,
         en: '$completionRate% of the level is already familiar, so you can expand with confidence.',
-        vi: '$completionRate% của level đã quen tay, nên bạn có thể mở rộng khá tự tin.',
+        vi: '$completionRate% của cấp độ đã quen tay, nên bạn có thể mở rộng khá tự tin.',
         ja: 'レベルの$completionRate%はすでに触れているので、安心して広げられます。',
       ),
     );
@@ -431,13 +431,13 @@ LibraryRoadmapAction _emptyAction(AppLanguage language, int fallbackLessonId) {
     _l(
       language,
       en: 'Start building the level map',
-      vi: 'Bắt đầu dựng bản đồ level',
+      vi: 'Bắt đầu dựng bản đồ cấp độ',
       ja: 'レベルの地図を作り始める',
     ),
     _l(
       language,
-      en: 'There is no tracked lesson activity yet, so begin from the first lesson.',
-      vi: 'Chưa có hoạt động lesson nào được theo dõi, nên hãy bắt đầu từ bài đầu tiên.',
+      en: 'There is no recorded lesson activity yet, so begin from the first lesson.',
+      vi: 'Chưa có hoạt động bài học nào được ghi nhận, nên hãy bắt đầu từ bài đầu tiên.',
       ja: 'まだ追跡されたレッスン活動がないので、最初のレッスンから始めましょう。',
     ),
   );

@@ -157,7 +157,7 @@ String _sectionsTitle(AppLanguage language) => switch (language) {
 
 String _sectionsCaption(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Move between lookup, grammar, and the lesson roadmap.',
-  AppLanguage.vi => 'Di chuyển giữa tra cứu, ngữ pháp, và roadmap lesson.',
+  AppLanguage.vi => 'Di chuyển giữa tra cứu, ngữ pháp, và lộ trình bài học.',
   AppLanguage.ja => '検索・文法・レッスンロードマップを行き来できます。',
 };
 
@@ -173,27 +173,27 @@ String _lessonsCaption(AppLanguage language, _LibraryFilter filter) =>
         AppLanguage.en =>
           'See the whole level with due lessons pulled forward.',
         AppLanguage.vi =>
-          'Xem toàn bộ level với các lesson đến hạn được kéo lên trước.',
+          'Xem toàn bộ cấp độ với các bài học đến hạn được kéo lên trước.',
         AppLanguage.ja => '期限のあるレッスンを前に出して全体を見られます。',
       },
       _LibraryFilter.due => switch (language) {
         AppLanguage.en => 'Only lessons that currently need review attention.',
-        AppLanguage.vi => 'Chỉ hiện các lesson đang cần chú ý review.',
+        AppLanguage.vi => 'Chỉ hiện các bài học đang cần ôn tập.',
         AppLanguage.ja => '今レビュー注意が必要なレッスンのみ表示します。',
       },
       _LibraryFilter.active => switch (language) {
         AppLanguage.en => 'Lessons already in motion but not finished yet.',
-        AppLanguage.vi => 'Các lesson đã bắt đầu nhưng vẫn chưa khép vòng.',
+        AppLanguage.vi => 'Các bài học đã bắt đầu nhưng chưa hoàn thành.',
         AppLanguage.ja => 'すでに進めていて、まだ閉じていないレッスンです。',
       },
       _LibraryFilter.fresh => switch (language) {
         AppLanguage.en => 'Fresh lessons you can open cleanly next.',
-        AppLanguage.vi => 'Các lesson còn sạch mà bạn có thể mở tiếp.',
+        AppLanguage.vi => 'Các bài học còn sạch mà bạn có thể mở tiếp.',
         AppLanguage.ja => '次にきれいに開ける新しいレッスンです。',
       },
       _LibraryFilter.completed => switch (language) {
         AppLanguage.en => 'Finished lessons you can revisit when needed.',
-        AppLanguage.vi => 'Các lesson đã hoàn thành để quay lại khi cần.',
+        AppLanguage.vi => 'Các bài học đã hoàn thành để quay lại khi cần.',
         AppLanguage.ja => '必要な時に戻れる完了済みレッスンです。',
       },
     };
@@ -1356,12 +1356,12 @@ class _FilteredEmptyLibrary extends StatelessWidget {
       child: Text(switch (filter) {
         _LibraryFilter.due => switch (language) {
           AppLanguage.en => 'No lessons are due right now.',
-          AppLanguage.vi => 'Hiện chưa có lesson nào đến hạn.',
+          AppLanguage.vi => 'Hiện chưa có bài học nào đến hạn.',
           AppLanguage.ja => '今は期限のレッスンはありません。',
         },
         _LibraryFilter.active => switch (language) {
           AppLanguage.en => 'No lesson is currently mid-flight.',
-          AppLanguage.vi => 'Hiện chưa có lesson nào đang ở giữa chặng.',
+          AppLanguage.vi => 'Hiện chưa có bài học nào đang học dở.',
           AppLanguage.ja => '現在進行中のレッスンはありません。',
         },
         _LibraryFilter.fresh => switch (language) {
@@ -1371,7 +1371,7 @@ class _FilteredEmptyLibrary extends StatelessWidget {
           AppLanguage.ja => 'このレベルに未着手レッスンは残っていません。',
         },
         _LibraryFilter.completed => switch (language) {
-          AppLanguage.en => 'No completed lesson is tracked yet.',
+          AppLanguage.en => 'No completed lesson has been recorded yet.',
           AppLanguage.vi => 'Chưa có bài học hoàn thành nào được ghi nhận.',
           AppLanguage.ja => '完了済みレッスンはまだありません。',
         },
