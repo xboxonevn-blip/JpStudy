@@ -28,7 +28,7 @@ proof state file. Firebase Storage is intentionally descoped for beta and
 recorded as deferred metadata because the app is local-first and the project
 remains on Spark.
 
-Latest post-descope run on `2026-05-17T09:12+07:00` returned
+Latest post-descope run on `2026-05-17T10:00+07:00` returned
 `complete=false` with blockers: `legal-approval-missing`,
 `sentry-dsn-missing`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, and `app-check-enforcement-deferred`.
@@ -80,9 +80,9 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
      `ga4Retention.verifiedAt`, `ga4Retention.retention`, and
      `ga4Retention.evidence`.
 6. GA4 learning export:
-   - Closed on `2026-05-17T08:28+07`: BigQuery export contains
-     `srs_review_completed`, `n5_micro_quiz_completed`, and
-     `session_quality_rated`.
+   - Closed and rechecked on `2026-05-17T09:57+07`: BigQuery export contains
+     `srs_review_completed=69`, `n5_micro_quiz_completed=3`, and
+     `session_quality_rated=2`.
 7. App Check enforcement:
    - Wait 1-2 weeks of beta monitoring.
    - Enforce App Check, smoke Auth/Analytics, then set

@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-17
 
-Timestamp: `2026-05-17T09:13:17+07:00`
+Timestamp: `2026-05-17T10:00:56+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -27,15 +27,15 @@ The active mission is complete only if all are true:
 | T6-T10 and later addenda | Prior audits plus latest route-bootstrap commits `50e91392`, `a0dd28ab`, `558fc151` | Passed for implemented scope |
 | D2 editorial approval integrity | `D2-honest-audit-2026-05-16-all-levels.md`; `f5ff772b fix(content): clean duplicate N3 vocab glosses`; current policy says Codex must not add `vi-human-approved`; N3/N2/N1 spot-check remains user-review pending | Passed; no human approval claimed |
 | FSRS-6 P0 | `lib/core/services/fsrs_service.dart`; D5.Q5.1 docs; pinned interval tests in test suite | Passed |
-| CI/deploy latest | GitHub Actions run `25978515809` for `f5ff772b`: `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all `success` | Passed |
-| Local verification latest content/storage cluster | `flutter analyze lib test` passed; `flutter test test/data/content_review_taxonomy_integrity_test.dart` passed; `flutter test test/data/upper_jlpt_content_integrity_test.dart` passed; `npm run test:research-tooling` passed `50`; `dart run tool/research/content_vi_status_report.dart` reports machine/open-review `0/0` | Passed |
+| CI/deploy latest | GitHub Actions run `25979337393` for `f88fff0f`: `status=completed`, `conclusion=success`; local `HEAD` matches `origin/main` at `f88fff0f` | Passed |
+| Local verification latest content/storage cluster | `flutter analyze lib test` passed; `flutter test test/data/content_review_taxonomy_integrity_test.dart test/data/upper_jlpt_content_integrity_test.dart` passed `32/32`; `node --test test/tool/research/*.js` passed `50/50`; `dart run tool/research/content_vi_status_report.dart` reports machine/open-review `0/0` across `23,444` items | Passed |
 | Live route matrix | `docs/research/D4-persona-synthesis.md` records Playwright checks for N4/N3/N2/N1 across `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`, `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/exam-center`; `npm run report:live-route-matrix -- --json` passed `36/36` | Passed for N4-N1 seeded hash routes; sparse semantics caveat remains for some routes |
-| Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T09:12+07` | Failed |
-| Sentry operational proof | `npm run report:sentry-readiness -- --json` at `2026-05-17T09:13+07`: source/workflow gates present, GitHub secrets have `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, `JPSTUDY_SENTRY_DSN=false` | Missing |
+| Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T10:00+07` | Failed |
+| Sentry operational proof | `npm run report:sentry-readiness -- --json` at `2026-05-17T09:57+07`: source/workflow gates present, GitHub secrets have `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, `JPSTUDY_SENTRY_DSN=false` | Missing |
 | Storage migration proof | Owner decision 2026-05-17 descopes Firebase Storage for beta; `npm run report:storage-readiness -- --json --skip-emulator` now reports `storage-descoped-for-beta` | Deferred for beta |
-| Deletion proof | `npm run report:deletion-readiness -- --json` at `2026-05-17T09:13+07`: executable `false`; blocked by missing Support ID/Firebase UID, GA4 Admin/deletion access, and missing `gcloud` or console-equivalent proof | Missing |
+| Deletion proof | `npm run report:deletion-readiness -- --json` at `2026-05-17T09:57+07`: executable `false`; blocked by missing Support ID/Firebase UID, GA4 Admin/deletion access, and missing `gcloud` or console-equivalent proof | Missing |
 | GA4 retention proof | GA4 Admin API probe returns `403`; `docs/compliance/launch-proof-state.json` has `ga4Retention.verified=false` | Missing |
-| GA4 learning export | `npm run report:ga4-export -- --json` at `2026-05-17T09:13+07`: BigQuery tables `events_20260514`/`15`/`16`; `srs_review_completed=69`, `n5_micro_quiz_completed=3`, `session_quality_rated=2`; `northStar.qualifiedUsers=1` | Passed |
+| GA4 learning export | `npm run report:ga4-export -- --json` at `2026-05-17T09:57+07`: BigQuery tables `events_20260514`/`15`/`16`; `srs_review_completed=69`, `n5_micro_quiz_completed=3`, `session_quality_rated=2`; `northStar.qualifiedUsers=1` | Passed |
 | App Check enforcement | `docs/compliance/launch-proof-state.json` has `appCheck.enforced=false`; enforcement intentionally deferred until monitoring window | Deferred/missing |
 
 ## Latest Readiness Result
@@ -49,7 +49,7 @@ npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-p
 Latest checked result:
 
 ```text
-generatedAt -> 2026-05-17T02:12:34.009Z
+generatedAt -> 2026-05-17T03:00:56.242Z
 complete -> false
 blockers:
 - legal-approval-missing
