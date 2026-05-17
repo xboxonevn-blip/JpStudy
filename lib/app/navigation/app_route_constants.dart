@@ -150,7 +150,6 @@ class AppRouteName {
   static const premium = 'premium';
   static const community = 'community';
   static const me = 'me';
-  static const progressProfile = 'progress-profile';
   static const mastery = 'mastery';
   static const meData = 'me-data';
   static const forecast = 'forecast';

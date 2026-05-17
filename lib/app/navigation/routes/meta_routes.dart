@@ -6,7 +6,6 @@ import 'package:jpstudy/features/legal/legal_document_screen.dart';
 import 'package:jpstudy/features/me/me_screen.dart';
 import 'package:jpstudy/features/me/screens/data_settings_screen.dart';
 import 'package:jpstudy/features/premium/premium_screen.dart';
-import 'package:jpstudy/features/progress/progress_screen.dart';
 import 'package:jpstudy/features/progress/screens/mastery_dashboard_screen.dart';
 import 'package:jpstudy/features/progress/screens/review_forecast_screen.dart';
 
@@ -59,11 +58,6 @@ List<RouteBase> buildProfileRoutes() {
       path: AppRoutePath.community,
       name: AppRouteName.community,
       redirect: (context, state) => AppRoutePath.me,
-    ),
-    GoRoute(
-      path: AppRoutePath.progress,
-      name: AppRouteName.progressProfile,
-      builder: (context, state) => const ProgressScreen(),
     ),
     GoRoute(
       path: AppRoutePath.mastery,

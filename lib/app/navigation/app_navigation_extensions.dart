@@ -55,7 +55,7 @@ extension AppNavigationContext on BuildContext {
   void openMe() => goNamed(AppRouteName.me);
   void openMeData() => pushNamed(AppRouteName.meData);
   void openProgressHome() => pushNamed(AppRouteName.progressHome);
-  void openProgress() => pushNamed(AppRouteName.progressProfile);
+  void openProgress() => pushNamed(AppRouteName.progressHome);
   void openMastery() => pushNamed(AppRouteName.mastery);
   void openForecast() => pushNamed(AppRouteName.forecast);
   void openAchievements() => pushNamed(AppRouteName.achievements);
