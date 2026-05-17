@@ -453,3 +453,7 @@ The first P0 hypothesis focused on UI loading semantics, but repository tests ex
 ## 2026-05-17 - Exam Navigation Uses Exam Center, Not Exam Route
 
 Phase 2 first fixed the selected-level copy in `ExamScreen`, but the sidebar branch actually lands on `/exam-center`. Live checks still showed stale N5 cards until `ExamCenterHubScreen` was updated too. Mental model update: route labels and branch targets are the product surface; fixing a similarly named route is insufficient unless the shell wiring proves it is the live destination.
+
+## 2026-05-17 - IA Cleanup Needed Legacy Route Ownership
+
+Phase 3 reduced the visible shell to five branches, but old route paths still mattered: `/memory`, `/community`, enhanced lesson-mode URLs, and duplicate `/progress` ownership could keep stale mental models alive even after the sidebar looked clean. Mental model update: IA consolidation is not complete when navigation labels change; every legacy path must either redirect to a canonical owner or be removed with tests.

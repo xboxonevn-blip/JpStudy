@@ -159,3 +159,32 @@ Live Playwright results after deploy:
 | `/#/search` | N5 | Rendered Search content with `Xem tất cả (988)` vocab entries, not Community. |
 
 Remaining caveat: this verifies the P0 learner-loop blockers, not the later Phase 2 level-store unification or Phase 3 IA consolidation.
+
+## Phase 3 IA Consolidation Update
+
+Timestamp: `2026-05-17T15:47+07:00`
+
+Source commits through `0494c0f9 refactor(nav): keep progress on canonical home branch`.
+
+Verified source changes:
+
+- `app_router.dart` now has five shell branches: Home, Learn, Review, Exam, Profile.
+- `/roadmap` and `/today` redirect to `/`.
+- `/memory` redirects to `/review`; `/community` redirects to `/me`.
+- Old enhanced lesson mode URLs redirect to canonical `/lesson/:id/practice/:mode`:
+  `learn-enhanced`, `flashcards-enhanced`, `test-enhanced`, `write-mode`, and `match-mode`.
+- New navigation calls for lesson learn/write/match/flashcards/test use canonical practice routes.
+- Home no longer mounts a second inline onboarding system or mobile-only fallback path.
+- `CommunityScreen` was removed because Community was not a real community surface and now resolves to Profile.
+- Review screen title now matches the shell label.
+- `/progress` is owned by the Home branch only; Profile links call that canonical route.
+
+Verification run before docs update:
+
+```text
+flutter analyze lib test -> passed
+flutter test -> 2299 passed
+python tooling/audit_ui_string_literals.py --check -> 0 remaining candidates
+```
+
+Remaining caveat: Phase 3 IA source cleanup is not the same as Phase 4 lesson-screen/product-identity cleanup. `lesson_detail_screen.dart` is still monolithic, curriculum lesson edit/copy/create affordances still need hard-gating or isolation, and practice-mode copy still needs learner-language polish.

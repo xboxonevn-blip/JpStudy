@@ -200,7 +200,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Study'), findsAtLeastNWidgets(1));
+    expect(find.text('Review'), findsAtLeastNWidgets(1));
     expect(find.text('Today plan'), findsOneWidget);
     expect(find.text('Clear the vocab queue'), findsAtLeastNWidgets(1));
     expect(find.text('Clean up the mistake bank'), findsAtLeastNWidgets(1));

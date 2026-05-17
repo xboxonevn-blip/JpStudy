@@ -40,6 +40,7 @@ The active mission is complete only if all are true:
 | App coherence Phase 0 | `docs/research/app-coherence-audit-2026-05-17.md` confirms 11 shell branches, 68 routes, duplicate Home routes, dual onboarding gates, split Home implementations, and stale manifest/runtime vocab drift | New blocker class documented |
 | App coherence Phase 1 | `docs/research/app-coherence-phase1-content-pipeline-2026-05-17.md`; commits `2dcd5938`, `39020712`, `98cad1bf` make lesson vocab source-aware, regenerate/guard the content manifest, and cover N5-N1 lesson vocab seeding | Passed for runtime vocab availability; level-ID collision caveat remains |
 | Full live app audit | `docs/research/full-audit-2026-05-17.md` verifies live lesson routes still show `Tổng 0` + spinner and traces root causes to route identity, unbounded async loading, double shell navigation, and fragmented level writers | P0 source fix deployed/rechecked: N5/N4/N3/N2/N1 lesson routes now render non-zero vocab totals; `/premium` and `/search` render matching screens |
+| App coherence Phase 3 | Commits `bf63a2ca`, `9e9693f8`, `5468a0d5`, `791cefb1`, `2b0faa9a`, `6268f760`, `0494c0f9` consolidate the shell to five branches, remove inline Home onboarding/mobile fallback, redirect legacy `/memory` and `/community`, redirect enhanced lesson aliases to canonical practice routes, align Review title, remove the dead Community placeholder, and keep `/progress` on one branch | Passed for IA cleanup source scope; Phase 4 lesson-screen/product-identity work remains |
 
 ## Latest Readiness Result
 
@@ -98,6 +99,16 @@ Full live audit note: `full-audit-2026-05-17.md` supersedes the prior IA-first
 ordering. P0 source fixes were built, deployed, and live-verified on
 2026-05-17T14:13+07:00. Lesson study is no longer blocked by zero vocab totals
 or shell branch URL/content desync in the checked routes.
+
+Phase 3 update: the shell is now five primary destinations (`/`, `/learn`,
+`/review`, `/exam-center`, `/me`). Legacy `/roadmap` and `/today` redirect to
+`/`; `/memory` redirects to `/review`; `/community` redirects to `/me`; old
+lesson mode URLs (`learn-enhanced`, `flashcards-enhanced`, `test-enhanced`,
+`write-mode`, `match-mode`) redirect to `/lesson/:id/practice/:mode`. The dead
+Community placeholder module was removed, Review screen title now matches the
+Review shell label, and duplicate `/progress` routing was reduced to the Home
+branch. Remaining work: Phase 4 lesson detail decomposition, product-identity
+cleanup, practice-mode reduction, and copy polish.
 
 ## Verdict
 
