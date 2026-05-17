@@ -1470,14 +1470,10 @@ class _KanjiTile extends StatelessWidget {
         : palette.outline.withValues(alpha: 0.5);
 
     final hanViet = item.decomposition?.hanViet?.trim();
-    final english = item.meaningEn?.trim();
     final semanticName = switch (language) {
       AppLanguage.vi =>
         hanViet == null || hanViet.isEmpty ? item.meaning : hanViet,
-      AppLanguage.en =>
-        english == null || english.isEmpty ? item.meaning : english,
-      AppLanguage.ja =>
-        english == null || english.isEmpty ? item.meaning : english,
+      AppLanguage.en || AppLanguage.ja => item.displayMeaning(language),
     };
     final semanticLabel = language.kanjiTileSemanticLabel(
       character: item.character,
@@ -1617,10 +1613,7 @@ class _KanjiDetailDialogState extends State<_KanjiDetailDialog> {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    final meaning = switch (widget.language) {
-      AppLanguage.vi => widget.item.meaning,
-      _ => widget.item.meaningEn ?? widget.item.meaning,
-    };
+    final meaning = widget.item.displayMeaning(widget.language);
     final hanViet = widget.item.decomposition?.hanViet?.trim();
     final showHanViet =
         widget.language == AppLanguage.vi &&

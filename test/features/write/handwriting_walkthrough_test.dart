@@ -147,6 +147,7 @@ void main() {
       strokeCount: 4,
       meaning: 'lửa',
       meaningEn: 'fire',
+      meaningJa: '火のこと',
       examples: [],
       jlptLevel: 'N5',
     );
@@ -171,7 +172,8 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
-    expect(find.text('fire', skipOffstage: false), findsOneWidget);
+    expect(find.text('火のこと', skipOffstage: false), findsOneWidget);
+    expect(find.text('fire', skipOffstage: false), findsNothing);
     expect(find.text('lửa', skipOffstage: false), findsNothing);
   });
 

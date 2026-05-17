@@ -44,11 +44,7 @@ class _KanjiReadingQuizScreenState
   bool get _isLast => _current >= widget.questions.length - 1;
 
   String _meaningFor(KanjiItem item, AppLanguage language) {
-    if (language == AppLanguage.vi) {
-      return item.meaning;
-    }
-    final english = item.meaningEn?.trim() ?? '';
-    return english.isNotEmpty ? english : item.meaning;
+    return item.displayMeaning(language);
   }
 
   Future<void> _handleOption(int index) async {

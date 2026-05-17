@@ -24,6 +24,7 @@ const _kKanji = KanjiItem(
   kunyomi: 'た-べる',
   meaning: 'ăn',
   meaningEn: 'eat',
+  meaningJa: '食べるもの',
   decomposition: KanjiDecomposition(
     hanViet: 'Thực',
     components: ['亼', '良'],
@@ -186,13 +187,14 @@ void main() {
       expect(find.text('ăn'), findsWidgets);
     });
 
-    testWidgets('JA locale uses non-Vietnamese meaning fallback', (
+    testWidgets('JA locale uses Japanese meaning when available', (
       tester,
     ) async {
       await tester.pumpWidget(_buildHarness(language: AppLanguage.ja));
       await _pump(tester);
 
-      expect(find.text('eat'), findsWidgets);
+      expect(find.text('食べるもの'), findsWidgets);
+      expect(find.text('eat'), findsNothing);
       expect(find.text('ăn'), findsNothing);
     });
 

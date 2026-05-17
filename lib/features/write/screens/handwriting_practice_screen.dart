@@ -1592,11 +1592,17 @@ class _HandwritingPracticeScreenState
   }
 
   String _resolveMeaning(_PracticeTarget target, AppLanguage language) {
-    if (language == AppLanguage.vi) {
-      return target.meaning;
-    }
+    final japanese = target.meaningJa.trim();
     final english = target.meaningEn.trim();
-    return english.isNotEmpty ? english : target.meaning;
+    switch (language) {
+      case AppLanguage.vi:
+        return target.meaning;
+      case AppLanguage.en:
+        return english.isNotEmpty ? english : target.meaning;
+      case AppLanguage.ja:
+        if (japanese.isNotEmpty) return japanese;
+        return english.isNotEmpty ? english : target.meaning;
+    }
   }
 
   Future<void> _commitReviewIfNeeded() async {
@@ -2054,6 +2060,7 @@ class _HandwritingPracticeScreenState
           ].join(' - '),
           meaning: item.meaning,
           meaningEn: (item.meaningEn ?? '').trim(),
+          meaningJa: (item.meaningJa ?? '').trim(),
           expectedStrokes: max(1, item.strokeCount),
           isCompound: false,
           primaryKanjiId: item.id,
@@ -2132,6 +2139,7 @@ class _HandwritingPracticeScreenState
             meaningEn: (example.meaningEn ?? '').trim().isNotEmpty
                 ? example.meaningEn!.trim()
                 : (item.meaningEn ?? '').trim(),
+            meaningJa: (item.meaningJa ?? '').trim(),
             expectedStrokes: expectedStrokes,
             isCompound: true,
             primaryKanjiId: item.id,
@@ -2272,6 +2280,7 @@ class _HandwritingPracticeScreenState
         a.kunyomi == b.kunyomi &&
         a.meaning == b.meaning &&
         a.meaningEn == b.meaningEn &&
+        a.meaningJa == b.meaningJa &&
         a.jlptLevel == b.jlptLevel &&
         _hasSameExamples(a.examples, b.examples);
   }
@@ -2943,6 +2952,7 @@ class _PracticeTarget {
     required this.reading,
     required this.meaning,
     required this.meaningEn,
+    required this.meaningJa,
     required this.expectedStrokes,
     required this.isCompound,
     required this.primaryKanjiId,
@@ -2957,6 +2967,7 @@ class _PracticeTarget {
   final String reading;
   final String meaning;
   final String meaningEn;
+  final String meaningJa;
   final int expectedStrokes;
   final bool isCompound;
   final int primaryKanjiId;

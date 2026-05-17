@@ -18,6 +18,7 @@ KanjiReadingQuestion _question() => KanjiReadingQuestion(
     kunyomi: 'ひ',
     meaning: 'lửa',
     meaningEn: 'fire',
+    meaningJa: '火のこと',
     examples: [],
     jlptLevel: 'N5',
   ),
@@ -55,7 +56,7 @@ void main() {
     expect(find.text('カ'), findsOneWidget);
   });
 
-  testWidgets('JA locale does not show Vietnamese kanji meaning', (
+  testWidgets('JA locale shows Japanese meaning when available', (
     tester,
   ) async {
     await tester.pumpWidget(
@@ -63,7 +64,8 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('fire'), findsOneWidget);
+    expect(find.text('火のこと'), findsOneWidget);
+    expect(find.text('fire'), findsNothing);
     expect(find.text('lửa'), findsNothing);
   });
 

@@ -58,17 +58,13 @@ final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
             .whereType<String>()
             .where((value) => value.trim().isNotEmpty)
             .join(' / '),
-        meaning: switch (language) {
-          AppLanguage.vi => item.meaning,
-          AppLanguage.en || AppLanguage.ja =>
-            (item.meaningEn?.trim().isNotEmpty ?? false)
-                ? item.meaningEn!.trim()
-                : item.meaning,
-        },
+        meaning: item.displayMeaning(language),
         keywords: [
           item.character,
           item.onyomi ?? '',
           item.kunyomi ?? '',
+          item.displayMeaning(language),
+          if (language == AppLanguage.ja) item.meaningJa ?? '',
           item.meaningEn ?? '',
           if (language == AppLanguage.vi) ...[
             item.meaning,

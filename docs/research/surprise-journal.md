@@ -572,3 +572,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: live web blanked the `書く` practice surface because `Random().nextInt(1 << 32)` compiled to a zero max on web and threw `RangeError`.
 - Delta: -20 percentage points on confidence that Dart VM widget coverage catches Flutter web numeric edge cases.
 - Updated belief: any random/bitwise seed logic used by learner routes needs a web-safe constant and live route proof, not only VM widget tests.
+
+## 2026-05-17 - Japanese Kanji UX had no Japanese definition field
+
+- Prior belief: the per-language Kanji slice mainly needed UI switching because the schema already had localized meaning fields.
+- Actual observation: runtime Kanji had Vietnamese and English meanings, but no Japanese definition field in the model/DB path, and current content assets have `0` `meaningJa` entries.
+- Delta: -20 percentage points on confidence that "localized schema exists" implies all target locales have data paths.
+- Updated belief: per-language learning modes need two checks: rendered UI gating and asset-to-model field availability for each locale, before claiming immersion completeness.

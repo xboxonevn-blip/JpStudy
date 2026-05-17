@@ -220,6 +220,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
   }) {
     final palette = context.appPalette;
     final englishMeaning = (item.meaningEn ?? '').trim();
+    final localizedMeaning = item.displayMeaning(language);
     final mnemonic = item.displayMnemonic(language)?.trim();
     final decomp = item.decomposition;
 
@@ -274,7 +275,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _primaryMeaning(item, language),
+                        localizedMeaning,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w800,
                           color: palette.ink,
@@ -829,13 +830,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
   }
 
   String _primaryMeaning(KanjiItem item, AppLanguage language) {
-    if (language != AppLanguage.vi) {
-      final english = (item.meaningEn ?? '').trim();
-      if (english.isNotEmpty) {
-        return english;
-      }
-    }
-    return item.meaning;
+    return item.displayMeaning(language);
   }
 
   String _decompositionLabel(

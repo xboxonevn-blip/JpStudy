@@ -2211,6 +2211,7 @@ class LessonRepository {
         kunyomi: row.kunyomi,
         meaning: row.meaning,
         meaningEn: row.meaningEn,
+        meaningJa: row.meaningJa,
         mnemonicVi: row.mnemonicVi,
         mnemonicEn: row.mnemonicEn,
         decomposition: _decodeKanjiDecomposition(row.decompositionJson),

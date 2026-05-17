@@ -10,6 +10,7 @@ class KanjiItem {
     this.kunyomi,
     required this.meaning,
     this.meaningEn,
+    this.meaningJa,
     this.mnemonicVi,
     this.mnemonicEn,
     this.decomposition,
@@ -25,11 +26,27 @@ class KanjiItem {
   final String? kunyomi;
   final String meaning;
   final String? meaningEn;
+  final String? meaningJa;
   final String? mnemonicVi;
   final String? mnemonicEn;
   final KanjiDecomposition? decomposition;
   final List<KanjiExample> examples;
   final String jlptLevel;
+
+  String displayMeaning(AppLanguage language) {
+    final vi = meaning.trim();
+    final en = meaningEn?.trim();
+    final ja = meaningJa?.trim();
+    switch (language) {
+      case AppLanguage.vi:
+        return vi;
+      case AppLanguage.en:
+        return en != null && en.isNotEmpty ? en : vi;
+      case AppLanguage.ja:
+        if (ja != null && ja.isNotEmpty) return ja;
+        return en != null && en.isNotEmpty ? en : vi;
+    }
+  }
 
   String? displayMnemonic(AppLanguage language) {
     final vi = mnemonicVi?.trim();

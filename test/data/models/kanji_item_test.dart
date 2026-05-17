@@ -3,6 +3,38 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 
 void main() {
+  group('KanjiItem.displayMeaning', () {
+    KanjiItem kanji({String? meaningJa, String? meaningEn}) {
+      return KanjiItem(
+        id: 1,
+        lessonId: 1,
+        character: '食',
+        strokeCount: 9,
+        meaning: 'thức ăn',
+        meaningEn: meaningEn,
+        meaningJa: meaningJa,
+        examples: const [],
+        jlptLevel: 'N5',
+      );
+    }
+
+    test('AppLanguage.ja returns Japanese definition when set', () {
+      final k = kanji(meaningJa: '食べ物。食べるもの。', meaningEn: 'food');
+      expect(k.displayMeaning(AppLanguage.ja), '食べ物。食べるもの。');
+    });
+
+    test('AppLanguage.ja falls back to English then Vietnamese', () {
+      expect(kanji(meaningEn: 'food').displayMeaning(AppLanguage.ja), 'food');
+      expect(kanji().displayMeaning(AppLanguage.ja), 'thức ăn');
+    });
+
+    test('AppLanguage.vi and en keep their existing meanings', () {
+      final k = kanji(meaningJa: '食べ物。', meaningEn: 'food');
+      expect(k.displayMeaning(AppLanguage.vi), 'thức ăn');
+      expect(k.displayMeaning(AppLanguage.en), 'food');
+    });
+  });
+
   // ---------------------------------------------------------------------------
   // KanjiItem.displayMnemonic
   // ---------------------------------------------------------------------------

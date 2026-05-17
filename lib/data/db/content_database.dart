@@ -31,7 +31,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 33;
+  int get schemaVersion => 34;
 
   @override
   MigrationStrategy get migration {
@@ -143,6 +143,10 @@ class ContentDatabase extends _$ContentDatabase {
           await _reseedMinnaKanji();
         }
         if (from < 33) {
+          await _reseedMinnaKanji();
+        }
+        if (from < 34) {
+          await _addColumn(m, kanji, kanji.meaningJa);
           await _reseedMinnaKanji();
         }
       },
@@ -1094,6 +1098,9 @@ class ContentDatabase extends _$ContentDatabase {
           'meaningEn': labels == null
               ? null
               : _readNullableText(labels, 'meaningEn'),
+          'meaningJa': labels == null
+              ? null
+              : _readNullableText(labels, 'meaningJa'),
           'mnemonic_vi': mnemonic == null
               ? null
               : _readNullableText(mnemonic, 'vi'),
@@ -1138,6 +1145,7 @@ class ContentDatabase extends _$ContentDatabase {
             kunyomi: Value(_readNullableText(item, 'kunyomi')),
             meaning: _readText(item, 'meaning'),
             meaningEn: Value(_readNullableText(item, 'meaningEn')),
+            meaningJa: Value(_readNullableText(item, 'meaningJa')),
             mnemonicVi: Value(_readNullableText(item, 'mnemonic_vi')),
             mnemonicEn: Value(_readNullableText(item, 'mnemonic_en')),
             decompositionJson: Value(
