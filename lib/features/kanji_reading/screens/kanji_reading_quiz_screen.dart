@@ -4,6 +4,7 @@ import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/kanji_hub/kanji_copy.dart';
 import 'package:jpstudy/features/kanji_hub/providers/kanji_home_provider.dart';
@@ -41,6 +42,14 @@ class _KanjiReadingQuizScreenState
 
   KanjiReadingQuestion get _question => widget.questions[_current];
   bool get _isLast => _current >= widget.questions.length - 1;
+
+  String _meaningFor(KanjiItem item, AppLanguage language) {
+    if (language == AppLanguage.vi) {
+      return item.meaning;
+    }
+    final english = item.meaningEn?.trim() ?? '';
+    return english.isNotEmpty ? english : item.meaning;
+  }
 
   Future<void> _handleOption(int index) async {
     if (_answered) return;
@@ -259,7 +268,7 @@ class _KanjiReadingQuizScreenState
                       ),
                       const SizedBox(height: AppSpacing.sm),
                       Text(
-                        _question.target.meaning,
+                        _meaningFor(_question.target, language),
                         style: theme.textTheme.bodyLarge?.copyWith(
                           color: palette.ink.withValues(alpha: 0.58),
                           fontWeight: FontWeight.w700,

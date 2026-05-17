@@ -24,6 +24,11 @@ const _kKanji = KanjiItem(
   kunyomi: 'た-べる',
   meaning: 'ăn',
   meaningEn: 'eat',
+  decomposition: KanjiDecomposition(
+    hanViet: 'Thực',
+    components: ['亼', '良'],
+    componentNames: ['Tập (nắp đậy)', 'Lương biến thể (tốt)'],
+  ),
   examples: [],
   jlptLevel: 'N5',
 );
@@ -181,6 +186,16 @@ void main() {
       expect(find.text('ăn'), findsWidgets);
     });
 
+    testWidgets('JA locale uses non-Vietnamese meaning fallback', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_buildHarness(language: AppLanguage.ja));
+      await _pump(tester);
+
+      expect(find.text('eat'), findsWidgets);
+      expect(find.text('ăn'), findsNothing);
+    });
+
     testWidgets('renders combined onyomi/kunyomi subtitle', (tester) async {
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
@@ -198,6 +213,34 @@ void main() {
       // handwritingStrokeShortLabel(9, EN) = '9 strokes'
       // Appears in both collapsed pill and expanded body pill
       expect(find.text('9 strokes'), findsAtLeast(1));
+    });
+
+    testWidgets('EN locale hides Han-Viet labels and Vietnamese components', (
+      tester,
+    ) async {
+      _largeViewport(tester);
+      await tester.pumpWidget(_buildHarness(language: AppLanguage.en));
+      await _pump(tester);
+      await tester.tap(find.text('食').first);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Thực'), findsNothing);
+      expect(find.textContaining('Tập (nắp đậy)'), findsNothing);
+      expect(find.textContaining('Lương biến thể'), findsNothing);
+    });
+
+    testWidgets('VI locale keeps Han-Viet labels and Vietnamese components', (
+      tester,
+    ) async {
+      _largeViewport(tester);
+      await tester.pumpWidget(_buildHarness(language: AppLanguage.vi));
+      await _pump(tester);
+      await tester.tap(find.text('食').first);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Thực'), findsOneWidget);
+      expect(find.textContaining('Tập (nắp đậy)'), findsOneWidget);
+      expect(find.textContaining('Lương biến thể'), findsOneWidget);
     });
 
     testWidgets('all kanji items rendered in multi-item list', (tester) async {

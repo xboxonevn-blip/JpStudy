@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
+import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/services/auto_cloud_upload_coordinator.dart';
 import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
@@ -117,6 +118,61 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(HandwritingPracticeScreen), findsOneWidget);
+  });
+
+  testWidgets('JA handwriting header does not show Vietnamese kanji meaning', (
+    tester,
+  ) async {
+    KanjiStrokeTemplateService.setDebugTemplateOverrides({
+      '\u706B': const KanjiStrokeTemplate(
+        character: '\u706B',
+        quality: 'manual',
+        strokes: [StrokeTemplate(start: Point(0.1, 0.1), end: Point(0.9, 0.9))],
+      ),
+    });
+    addTearDown(() {
+      KanjiStrokeTemplateService.setDebugTemplateOverrides(null);
+    });
+    final db = AppDatabase(executor: NativeDatabase.memory());
+    final contentDb = ContentDatabase(executor: NativeDatabase.memory());
+    final repo = LessonRepository(db, contentDb);
+    addTearDown(() async {
+      await contentDb.close();
+      await db.close();
+    });
+    const item = KanjiItem(
+      id: 1,
+      lessonId: 1,
+      character: '\u706B',
+      strokeCount: 4,
+      meaning: 'lửa',
+      meaningEn: 'fire',
+      examples: [],
+      jlptLevel: 'N5',
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.ja),
+          ),
+          databaseProvider.overrideWithValue(db),
+          lessonRepositoryProvider.overrideWithValue(repo),
+        ],
+        child: const MaterialApp(
+          home: HandwritingPracticeScreen(
+            lessonTitle: 'Lesson 1',
+            items: [item],
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.text('fire', skipOffstage: false), findsOneWidget);
+    expect(find.text('lửa', skipOffstage: false), findsNothing);
   });
 
   testWidgets(

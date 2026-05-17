@@ -1592,11 +1592,11 @@ class _HandwritingPracticeScreenState
   }
 
   String _resolveMeaning(_PracticeTarget target, AppLanguage language) {
-    if (language == AppLanguage.en) {
-      final english = target.meaningEn.trim();
-      return english.isNotEmpty ? english : target.meaning;
+    if (language == AppLanguage.vi) {
+      return target.meaning;
     }
-    return target.meaning;
+    final english = target.meaningEn.trim();
+    return english.isNotEmpty ? english : target.meaning;
   }
 
   Future<void> _commitReviewIfNeeded() async {

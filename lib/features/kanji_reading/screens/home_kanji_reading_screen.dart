@@ -428,9 +428,11 @@ class _KanjiRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  language == AppLanguage.en
-                      ? (kanji.meaningEn ?? kanji.meaning)
-                      : kanji.meaning,
+                  language == AppLanguage.vi
+                      ? kanji.meaning
+                      : ((kanji.meaningEn ?? '').trim().isNotEmpty
+                            ? kanji.meaningEn!.trim()
+                            : kanji.meaning),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,

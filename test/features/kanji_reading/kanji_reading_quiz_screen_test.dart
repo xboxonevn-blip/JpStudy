@@ -16,7 +16,7 @@ KanjiReadingQuestion _question() => KanjiReadingQuestion(
     strokeCount: 4,
     onyomi: 'カ',
     kunyomi: 'ひ',
-    meaning: 'fire',
+    meaning: 'lửa',
     meaningEn: 'fire',
     examples: [],
     jlptLevel: 'N5',
@@ -26,10 +26,13 @@ KanjiReadingQuestion _question() => KanjiReadingQuestion(
   mode: KanjiQuizMode.kanjiToReading,
 );
 
-Widget buildScreen(List<KanjiReadingQuestion> questions) => ProviderScope(
+Widget buildScreen(
+  List<KanjiReadingQuestion> questions, {
+  AppLanguage language = AppLanguage.en,
+}) => ProviderScope(
   overrides: [
     appLanguageProvider.overrideWith(
-      (ref) => AppLanguageController.test(AppLanguage.en),
+      (ref) => AppLanguageController.test(language),
     ),
   ],
   child: MaterialApp(home: KanjiReadingQuizScreen(questions: questions)),
@@ -50,6 +53,18 @@ void main() {
     expect(find.text('火'), findsOneWidget);
     expect(find.text('fire'), findsOneWidget);
     expect(find.text('カ'), findsOneWidget);
+  });
+
+  testWidgets('JA locale does not show Vietnamese kanji meaning', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      buildScreen([_question()], language: AppLanguage.ja),
+    );
+    await tester.pump();
+
+    expect(find.text('fire'), findsOneWidget);
+    expect(find.text('lửa'), findsNothing);
   });
 
   testWidgets('shows progress indicator', (tester) async {

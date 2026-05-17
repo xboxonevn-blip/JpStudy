@@ -74,6 +74,7 @@ List<KanjiItem> get _n4Kanji => [
 
 Widget buildScreen({
   required StudyLevel? level,
+  AppLanguage language = AppLanguage.en,
   KanjiPracticeArgs? launchArgs,
   Map<String, List<KanjiItem>> allItemsByLevel = const {},
   Map<String, List<KanjiItem>> dueItemsByLevel = const {},
@@ -83,7 +84,7 @@ Widget buildScreen({
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith(
-        (ref) => AppLanguageController.test(AppLanguage.en),
+        (ref) => AppLanguageController.test(language),
       ),
       studyLevelProvider.overrideWith((ref) => level),
       kanjiByLevelCodeProvider.overrideWith(
@@ -165,6 +166,37 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('3 items due'), findsWidgets);
+  });
+
+  testWidgets('JA locale does not show Vietnamese kanji row meaning', (
+    tester,
+  ) async {
+    final kanji = KanjiItem(
+      id: 9,
+      lessonId: 1,
+      character: '火',
+      strokeCount: 4,
+      onyomi: 'カ',
+      kunyomi: 'ひ',
+      meaning: 'lửa',
+      meaningEn: 'fire',
+      examples: const [],
+      jlptLevel: 'N5',
+    );
+
+    await tester.pumpWidget(
+      buildScreen(
+        level: StudyLevel.n5,
+        language: AppLanguage.ja,
+        allItemsByLevel: {
+          'N5': [kanji, _kanji(2, '水'), _kanji(3, '木'), _kanji(4, '金')],
+        },
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('fire'), findsOneWidget);
+    expect(find.text('lửa'), findsNothing);
   });
 
   testWidgets(

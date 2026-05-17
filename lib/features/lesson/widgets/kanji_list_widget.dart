@@ -315,7 +315,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
               ],
             ),
           ),
-          if (language != AppLanguage.en && englishMeaning.isNotEmpty) ...[
+          if (language == AppLanguage.vi && englishMeaning.isNotEmpty) ...[
             const SizedBox(height: 14),
             _buildMetaPill(
               context,
@@ -424,7 +424,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
     required AppLanguage language,
   }) {
     final palette = context.appPalette;
-    final decompositionLabel = _decompositionLabel(item, decomp);
+    final decompositionLabel = _decompositionLabel(item, decomp, language);
     final components = decomp.components;
     final componentNames = decomp.componentNames;
     final relatedKanji = decomp.relatedKanji;
@@ -512,7 +512,8 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
                       border: Border.all(color: palette.outline),
                     ),
                     child: Text(
-                      i < componentNames.length &&
+                      language == AppLanguage.vi &&
+                              i < componentNames.length &&
                               componentNames[i].trim().isNotEmpty
                           ? '${components[i]}  ${componentNames[i]}'
                           : components[i],
@@ -828,7 +829,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
   }
 
   String _primaryMeaning(KanjiItem item, AppLanguage language) {
-    if (language == AppLanguage.en) {
+    if (language != AppLanguage.vi) {
       final english = (item.meaningEn ?? '').trim();
       if (english.isNotEmpty) {
         return english;
@@ -837,7 +838,14 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
     return item.meaning;
   }
 
-  String _decompositionLabel(KanjiItem item, KanjiDecomposition decomp) {
+  String _decompositionLabel(
+    KanjiItem item,
+    KanjiDecomposition decomp,
+    AppLanguage language,
+  ) {
+    if (language != AppLanguage.vi) {
+      return '';
+    }
     final canonical = (decomp.hanViet ?? '').trim();
     if (canonical.isNotEmpty) {
       return canonical;
@@ -854,7 +862,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
 
   String _exampleMeaning(KanjiExample example, AppLanguage language) {
     final fallback = example.meaning.trim();
-    if (language == AppLanguage.en) {
+    if (language != AppLanguage.vi) {
       final english = (example.meaningEn ?? '').trim();
       return english.isNotEmpty
           ? english
