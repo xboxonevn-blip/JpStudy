@@ -5,7 +5,9 @@ import '../../app/theme/app_spacing.dart';
 import '../../app/theme/app_theme_palette.dart';
 import '../../core/app_language.dart';
 import '../../core/language_provider.dart';
+import '../../core/level_provider.dart';
 import '../../core/services/session_storage_provider.dart';
+import '../../core/study_level.dart';
 import '../../data/repositories/lesson_repository.dart';
 import '../../features/common/widgets/compact_ui.dart';
 import '../test/models/test_config.dart';
@@ -18,6 +20,11 @@ class ExamScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
+    final selectedLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
+    final levels = [
+      selectedLevel,
+      ...StudyLevel.values.where((level) => level != selectedLevel),
+    ];
 
     return Scaffold(
       appBar: AppBar(title: Text(language.examTitle)),
@@ -30,21 +37,23 @@ class ExamScreen extends ConsumerWidget {
               icon: Icons.timer_outlined,
               title: language.examTitle,
               subtitle: language.mockExamSubtitle,
+              status: AppStatusChip(
+                label: selectedLevel.shortLabel,
+                tone: AppStatusTone.primary,
+              ),
             ),
             const SizedBox(height: AppSpacing.lg),
             AppSectionHeader(title: _chooseLevelLabel(language)),
             const SizedBox(height: AppSpacing.sm),
-            _ExamLevelCard(
-              level: 'N5',
-              subtitle: language.examSubtitle('N5'),
-              onTap: () => _startMockExam(context, ref, language, 'N5'),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            _ExamLevelCard(
-              level: 'N4',
-              subtitle: language.examSubtitle('N4'),
-              onTap: () => _startMockExam(context, ref, language, 'N4'),
-            ),
+            for (final level in levels) ...[
+              _ExamLevelCard(
+                level: level.shortLabel,
+                subtitle: language.examSubtitle(level.shortLabel),
+                onTap: () =>
+                    _startMockExam(context, ref, language, level.shortLabel),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+            ],
           ],
         ),
       ),

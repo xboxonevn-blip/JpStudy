@@ -4,8 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/services/session_storage.dart';
 import 'package:jpstudy/core/services/session_storage_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
@@ -47,12 +49,17 @@ const _sampleItem = VocabItem(
   level: 'N5',
 );
 
-Widget buildExamScreen({LessonRepository? repo, SessionStorage? storage}) {
+Widget buildExamScreen({
+  LessonRepository? repo,
+  SessionStorage? storage,
+  StudyLevel? level,
+}) {
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith(
         (ref) => AppLanguageController.test(AppLanguage.en),
       ),
+      if (level != null) studyLevelProvider.overrideWith((ref) => level),
       if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
       if (storage != null) sessionStorageProvider.overrideWithValue(storage),
     ],
@@ -75,6 +82,16 @@ void main() {
 
     expect(find.text('JLPT N5'), findsOneWidget);
     expect(find.text('JLPT N4'), findsOneWidget);
+  });
+
+  testWidgets('surfaces the current selected level in exam choices', (
+    tester,
+  ) async {
+    await tester.pumpWidget(buildExamScreen(level: StudyLevel.n2));
+    await tester.pump();
+
+    expect(find.text('N2'), findsOneWidget);
+    expect(find.text('JLPT N2'), findsOneWidget);
   });
 
   testWidgets('shows level subtitles with timer and scoring', (tester) async {
