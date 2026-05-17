@@ -437,3 +437,7 @@
 ## 2026-05-17 - App Coherence Phase 0 Vocab Pipeline
 
 Audit expected N2/N1 lesson vocab to be absent from the runtime path. Actual: N2/N1 ShinKanzen lesson assets and indexes exist, and `/lesson/:id` can load them through a direct asset fallback. The real coherence defect is stale `index.json` plus a `minna_*`-only content DB lookup that misses seeded ShinKanzen rows. Mental model update: asset availability is not equivalent to canonical runtime wiring; fallback success can hide a broken primary pipeline.
+
+## 2026-05-17 - Lesson Identity Collision
+
+While verifying all-level lesson vocab seeding, a new coherence risk surfaced: lesson progress and terms are keyed by integer `lessonId`, but N5, N3, N2, and N1 all use route lesson IDs 1-25. The Phase 1 source-aware fix makes a clean active-level lesson load correctly, but a user who switches levels after seeding another level can still collide with existing rows. Mental model update: source-aware data loading is necessary but not sufficient; curriculum identity must include level or a stable level-scoped route ID.
