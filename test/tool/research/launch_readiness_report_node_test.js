@@ -97,9 +97,14 @@ test('buildMarkdownReport maps blockers to concrete evidence sections', () => {
   assert.match(report, /## Prompt-To-Artifact Checklist/);
   assert.match(report, /## Operator URLs/);
   assert.match(report, /Proof state: `docs\/compliance\/launch-proof-state\.json`/);
+  assert.match(report, /Sentry secrets: `https:\/\/github\.com\/xboxonevn-blip\/JpStudy\/settings\/secrets\/actions`/);
+  assert.match(report, /Deletion runbook: `docs\/compliance\/user-data-deletion-runbook\.md`/);
+  assert.match(report, /Firebase Auth users: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/authentication\/users`/);
   assert.match(report, /App Check: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/appcheck`/);
   assert.match(report, /Firebase Storage: `descoped for beta; see Storage migration checklist`/);
   assert.match(report, /GA4 Admin: `https:\/\/analytics\.google\.com\/analytics\/web\/\?authuser=1#\/a393943579p536663906\/admin`/);
+  assert.match(report, /Analytics Admin API: `https:\/\/console\.developers\.google\.com\/apis\/api\/analyticsadmin\.googleapis\.com\/overview\?project=129949648924&authuser=1`/);
+  assert.match(report, /BigQuery dataset: `https:\/\/console\.cloud\.google\.com\/bigquery\?project=jpstudy-v2&authuser=1`/);
 });
 
 test('buildOperatorUrls points to launch proof consoles', () => {
@@ -112,6 +117,22 @@ test('buildOperatorUrls points to launch proof consoles', () => {
 
   assert.equal(urls.proofState, 'docs/compliance/launch-proof-state.json');
   assert.equal(
+    urls.sentrySecrets,
+    'https://github.com/xboxonevn-blip/JpStudy/settings/secrets/actions',
+  );
+  assert.equal(
+    urls.sentryWorkflowDispatch,
+    'https://github.com/xboxonevn-blip/JpStudy/actions/workflows/ui-string-guard.yml',
+  );
+  assert.equal(
+    urls.deletionRunbook,
+    'docs/compliance/user-data-deletion-runbook.md',
+  );
+  assert.equal(
+    urls.firebaseAuthUsers,
+    'https://console.firebase.google.com/u/1/project/jpstudy-v2/authentication/users',
+  );
+  assert.equal(
     urls.appCheck,
     'https://console.firebase.google.com/u/1/project/jpstudy-v2/appcheck',
   );
@@ -120,6 +141,14 @@ test('buildOperatorUrls points to launch proof consoles', () => {
     'https://analytics.google.com/analytics/web/?authuser=1#/a393943579p536663906/admin',
   );
   assert.equal(Object.hasOwn(urls, 'firebaseStorage'), false);
+  assert.equal(
+    urls.analyticsAdminApi,
+    'https://console.developers.google.com/apis/api/analyticsadmin.googleapis.com/overview?project=129949648924&authuser=1',
+  );
+  assert.equal(
+    urls.bigQueryDataset,
+    'https://console.cloud.google.com/bigquery?project=jpstudy-v2&authuser=1',
+  );
   assert.equal(
     urls.githubActions,
     'https://github.com/xboxonevn-blip/JpStudy/actions/workflows/ui-string-guard.yml',

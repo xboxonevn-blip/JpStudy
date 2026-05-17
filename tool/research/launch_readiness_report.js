@@ -15,6 +15,7 @@ const DEFAULT_PROOF_STATE_PATH = path.join(
 const DEFAULT_PROJECT = 'jpstudy-v2';
 const DEFAULT_PROPERTY = '536663906';
 const DEFAULT_ACCOUNT = '393943579';
+const DEFAULT_GCP_PROJECT_NUMBER = '129949648924';
 const DEFAULT_REPOSITORY = 'xboxonevn-blip/JpStudy';
 
 function parseArgs(argv) {
@@ -472,14 +473,21 @@ function buildOperatorUrls({
   project = DEFAULT_PROJECT,
   property = DEFAULT_PROPERTY,
   account = DEFAULT_ACCOUNT,
+  gcpProjectNumber = DEFAULT_GCP_PROJECT_NUMBER,
   repository = DEFAULT_REPOSITORY,
   proofStatePath = DEFAULT_PROOF_STATE_PATH,
 } = {}) {
   return {
     proofState: proofStatePath.replaceAll('\\', '/'),
     legalChecklist: 'docs/compliance/legal-approval-checklist.md',
+    sentrySecrets: `https://github.com/${repository}/settings/secrets/actions`,
+    sentryWorkflowDispatch: `https://github.com/${repository}/actions/workflows/ui-string-guard.yml`,
+    deletionRunbook: 'docs/compliance/user-data-deletion-runbook.md',
+    firebaseAuthUsers: `https://console.firebase.google.com/u/1/project/${project}/authentication/users`,
     appCheck: `https://console.firebase.google.com/u/1/project/${project}/appcheck`,
     ga4Admin: `https://analytics.google.com/analytics/web/?authuser=1#/a${account}p${property}/admin`,
+    analyticsAdminApi: `https://console.developers.google.com/apis/api/analyticsadmin.googleapis.com/overview?project=${gcpProjectNumber}&authuser=1`,
+    bigQueryDataset: `https://console.cloud.google.com/bigquery?project=${project}&authuser=1`,
     githubActions: `https://github.com/${repository}/actions/workflows/ui-string-guard.yml`,
   };
 }
@@ -525,9 +533,15 @@ function buildMarkdownReport({
     '',
     `Proof state: \`${urls.proofState}\``,
     `Legal checklist: \`${urls.legalChecklist}\``,
+    `Sentry secrets: \`${urls.sentrySecrets}\``,
+    `Sentry workflow: \`${urls.sentryWorkflowDispatch}\``,
+    `Deletion runbook: \`${urls.deletionRunbook}\``,
+    `Firebase Auth users: \`${urls.firebaseAuthUsers}\``,
     `App Check: \`${urls.appCheck}\``,
     'Firebase Storage: `descoped for beta; see Storage migration checklist`',
     `GA4 Admin: \`${urls.ga4Admin}\``,
+    `Analytics Admin API: \`${urls.analyticsAdminApi}\``,
+    `BigQuery dataset: \`${urls.bigQueryDataset}\``,
     `GitHub Actions: \`${urls.githubActions}\``,
     '',
     '## Blockers',
