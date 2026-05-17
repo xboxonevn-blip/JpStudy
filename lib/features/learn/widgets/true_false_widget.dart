@@ -73,7 +73,7 @@ class TrueFalseWidget extends StatelessWidget {
               onTap: showResult ? null : () => onSelect(false),
             );
 
-            if (vertical) {
+            if (vertical && !compact) {
               return Column(
                 children: [
                   trueTile,
