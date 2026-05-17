@@ -57,7 +57,7 @@ void main() {
   }
 
   testWidgets(
-    'uses the selected JLPT level for fallback sessions and shows explicit session metadata',
+    'uses the selected JLPT level and keeps question chrome compact',
     (tester) async {
       final db = AppDatabase(executor: NativeDatabase.memory());
       addTearDown(() async {
@@ -144,11 +144,20 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.text('Session: Mastery'), findsOneWidget);
-      expect(find.text('Source: Practice queue'), findsOneWidget);
-      expect(find.text('Scope: N4 full mix'), findsOneWidget);
-      expect(find.text('Goal: Balanced JLPT'), findsOneWidget);
-      expect(find.text('Mode: Quiz'), findsOneWidget);
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is Text &&
+              (widget.data?.startsWith('Question 1 of ') ?? false),
+        ),
+        findsOneWidget,
+      );
+      expect(find.text('Pattern'), findsOneWidget);
+      expect(find.text('Session: Mastery'), findsNothing);
+      expect(find.text('Source: Practice queue'), findsNothing);
+      expect(find.text('Scope: N4 full mix'), findsNothing);
+      expect(find.text('Goal: Balanced JLPT'), findsNothing);
+      expect(find.text('Mode: Quiz'), findsNothing);
 
       expect(
         find.byWidgetPredicate(

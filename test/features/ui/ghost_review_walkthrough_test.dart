@@ -140,6 +140,8 @@ void main() {
         .isNotEmpty) {
       await tester.tap(find.byKey(const ValueKey('grammar_mc_option_0')));
       await tester.pump(const Duration(milliseconds: 100));
+      await tester.tap(find.byKey(const ValueKey('grammar_mc_confirm')));
+      await tester.pump(const Duration(milliseconds: 100));
       return;
     }
 
@@ -170,9 +172,16 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(GrammarPracticeScreen), findsOneWidget);
-    expect(find.text('Source: Ghost review'), findsOneWidget);
-    expect(find.text('Session: Mastery'), findsOneWidget);
-    expect(find.text('Ghost'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is Text &&
+            (widget.data?.startsWith('Question 1 of ') ?? false),
+      ),
+      findsOneWidget,
+    );
+    expect(find.text('Source: Ghost review'), findsNothing);
+    expect(find.text('Session: Mastery'), findsNothing);
   });
 
   testWidgets('Ghost review shows mistake context (prompt/answer/source)', (

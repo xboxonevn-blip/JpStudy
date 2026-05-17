@@ -57,6 +57,14 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
 
     setState(() {
       _selectedOption = option;
+    });
+  }
+
+  void _confirmSelection() {
+    final option = _selectedOption;
+    if (_isAnswered || option == null) return;
+
+    setState(() {
       _isAnswered = true;
     });
 
@@ -94,38 +102,97 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
     );
 
     return LayoutBuilder(
-      builder: (context, constraints) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      builder: (context, constraints) {
+        final useGrid = constraints.maxWidth >= 720;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Flexible(
+              flex: 3,
+              fit: FlexFit.loose,
+              child: LayoutBuilder(
+                builder: (context, headerConstraints) {
+                  return FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.topCenter,
+                    child: SizedBox(
+                      width: headerConstraints.maxWidth,
+                      child: headerSection,
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(flex: 2, child: _buildOptions(useGrid)),
+            const SizedBox(height: 10),
+            FilledButton(
+              key: const ValueKey('grammar_mc_confirm'),
+              onPressed: _selectedOption == null || _isAnswered
+                  ? null
+                  : _confirmSelection,
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(52),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: Text(_confirmLabel(widget.language)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildOptions(bool useGrid) {
+    final tiles = [
+      for (var index = 0; index < widget.options.length; index++)
+        GrammarOptionTile(
+          key: ValueKey('grammar_mc_option_$index'),
+          marker: grammarChoiceMarker(index),
+          label: widget.options[index],
+          state: _tileStateFor(widget.options[index]),
+          compact: true,
+          onTap: _isAnswered
+              ? null
+              : () => _handleOptionTap(widget.options[index]),
+        ),
+    ];
+
+    if (useGrid && tiles.length == 4) {
+      return Column(
         children: [
-          Flexible(
-            fit: FlexFit.loose,
-            child: SingleChildScrollView(
-              padding: EdgeInsets.zero,
-              child: headerSection,
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(child: tiles[0]),
+                const SizedBox(width: 10),
+                Expanded(child: tiles[1]),
+              ],
             ),
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.only(bottom: 8),
-              itemCount: widget.options.length,
-              separatorBuilder: (_, _) => const SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                final option = widget.options[index];
-                final state = _tileStateFor(option);
-
-                return GrammarOptionTile(
-                  key: ValueKey('grammar_mc_option_$index'),
-                  marker: grammarChoiceMarker(index),
-                  label: option,
-                  state: state,
-                  onTap: _isAnswered ? null : () => _handleOptionTap(option),
-                );
-              },
+            child: Row(
+              children: [
+                Expanded(child: tiles[2]),
+                const SizedBox(width: 10),
+                Expanded(child: tiles[3]),
+              ],
             ),
           ),
         ],
-      ),
+      );
+    }
+
+    return Column(
+      children: [
+        for (var index = 0; index < tiles.length; index++) ...[
+          Expanded(child: tiles[index]),
+          if (index < tiles.length - 1) const SizedBox(height: 8),
+        ],
+      ],
     );
   }
 
@@ -313,11 +380,22 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
 
     switch (language) {
       case AppLanguage.en:
-        return 'One tap answers immediately, so focus on nuance before choosing.';
+        return 'Select one option, then confirm when you are ready.';
       case AppLanguage.vi:
-        return 'Chạm một lần là chấm luôn, nên hãy đọc kỹ sắc thái trước khi chọn.';
+        return 'Chọn một đáp án trước, rồi bấm Trả lời khi đã chắc.';
       case AppLanguage.ja:
-        return '1回タップすると即回答されるため、ニュアンスを見てから選んでください。';
+        return '先に選択し、準備できたら回答を確定してください。';
+    }
+  }
+
+  String _confirmLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Answer';
+      case AppLanguage.vi:
+        return 'Trả lời';
+      case AppLanguage.ja:
+        return '回答する';
     }
   }
 }
@@ -346,6 +424,8 @@ class _GrammarRepairPrompt extends StatelessWidget {
           backgroundColor: colors.promptSurface,
           borderColor: colors.promptBorder,
           shadowColor: colors.promptShadow,
+          padding: const EdgeInsets.all(12),
+          radius: 18,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -381,19 +461,21 @@ class _GrammarRepairPrompt extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
               Text(
                 prompt.intro,
-                style: theme.textTheme.titleLarge?.copyWith(
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w900,
-                  height: 1.32,
+                  height: 1.22,
                   color: palette.ink,
                 ),
               ),
               if ((prompt.action ?? '').trim().isNotEmpty) ...[
-                const SizedBox(height: 14),
+                const SizedBox(height: 8),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                   decoration: BoxDecoration(
                     color: colors.noteBackground,
                     borderRadius: BorderRadius.circular(18),
@@ -406,15 +488,17 @@ class _GrammarRepairPrompt extends StatelessWidget {
                         type == GrammarQuestionType.errorCorrection
                             ? Icons.keyboard_double_arrow_right_rounded
                             : Icons.rule_folder_outlined,
-                        size: 18,
+                        size: 16,
                         color: colors.badgeText,
                       ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
                           prompt.action!,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            height: 1.45,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            height: 1.32,
                             fontWeight: FontWeight.w700,
                             color: palette.ink.withValues(alpha: 0.82),
                           ),
@@ -432,7 +516,8 @@ class _GrammarRepairPrompt extends StatelessWidget {
           backgroundColor: colors.surface,
           borderColor: colors.border,
           shadowColor: colors.shadow,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
+          radius: 18,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -440,8 +525,8 @@ class _GrammarRepairPrompt extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 30,
-                    height: 30,
+                    width: 26,
+                    height: 26,
                     decoration: BoxDecoration(
                       color: colors.badgeBackground,
                       borderRadius: BorderRadius.circular(999),
@@ -491,10 +576,10 @@ class _GrammarRepairPrompt extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(14, 13, 14, 14),
+                padding: const EdgeInsets.fromLTRB(12, 10, 12, 11),
                 decoration: BoxDecoration(
                   color: colors.paperBackground,
                   borderRadius: BorderRadius.circular(18),
@@ -511,12 +596,12 @@ class _GrammarRepairPrompt extends StatelessWidget {
                         letterSpacing: 0.1,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     SelectableText(
                       prompt.sentence,
-                      style: theme.textTheme.titleLarge?.copyWith(
+                      style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w800,
-                        height: 1.45,
+                        height: 1.34,
                         color: palette.ink,
                       ),
                     ),

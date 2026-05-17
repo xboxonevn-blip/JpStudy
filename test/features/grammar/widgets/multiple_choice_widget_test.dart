@@ -113,6 +113,126 @@ void main() {
     expect(find.byIcon(Icons.cancel_rounded), findsNothing);
     expect(find.byIcon(Icons.radio_button_checked_rounded), findsNothing);
     expect(find.byIcon(Icons.radio_button_unchecked_rounded), findsNWidgets(3));
+    expect(find.byKey(const ValueKey('grammar_mc_confirm')), findsOneWidget);
+  });
+
+  testWidgets('multiple choice selects first and confirms explicitly', (
+    tester,
+  ) async {
+    final answers = <String>[];
+    await tester.pumpWidget(
+      buildHarness(
+        MultipleChoiceWidget(
+          language: AppLanguage.vi,
+          questionType: GrammarQuestionType.multipleChoice,
+          question: 'Chọn nghĩa đúng của に',
+          options: const ['đến', 'từ', 'bằng', 'với'],
+          correctAnswer: 'đến',
+          onAnswer: (isCorrect, selected) => answers.add(selected),
+        ),
+      ),
+    );
+
+    expect(
+      tester
+          .widget<FilledButton>(
+            find.byKey(const ValueKey('grammar_mc_confirm')),
+          )
+          .onPressed,
+      isNull,
+    );
+
+    await tester.tap(find.byKey(const ValueKey('grammar_mc_option_0')));
+    await tester.pump();
+
+    expect(answers, isEmpty);
+    expect(find.byIcon(Icons.radio_button_checked_rounded), findsOneWidget);
+    expect(
+      tester
+          .widget<FilledButton>(
+            find.byKey(const ValueKey('grammar_mc_confirm')),
+          )
+          .onPressed,
+      isNotNull,
+    );
+
+    await tester.tap(find.byKey(const ValueKey('grammar_mc_confirm')));
+    await tester.pump();
+
+    expect(answers, ['đến']);
+    expect(find.byIcon(Icons.check_circle_rounded), findsOneWidget);
+  });
+
+  testWidgets('wide multiple choice lays four answers out as a 2x2 grid', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 900,
+            height: 620,
+            child: MultipleChoiceWidget(
+              language: AppLanguage.en,
+              questionType: GrammarQuestionType.multipleChoice,
+              question: 'Choose the closest usage.',
+              options: const ['Option A', 'Option B', 'Option C', 'Option D'],
+              correctAnswer: 'Option A',
+              onAnswer: (isCorrect, selected) {},
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final a = tester.getTopLeft(
+      find.byKey(const ValueKey('grammar_mc_option_0')),
+    );
+    final b = tester.getTopLeft(
+      find.byKey(const ValueKey('grammar_mc_option_1')),
+    );
+    final c = tester.getTopLeft(
+      find.byKey(const ValueKey('grammar_mc_option_2')),
+    );
+
+    expect((a.dy - b.dy).abs(), lessThan(2));
+    expect(b.dx, greaterThan(a.dx + 200));
+    expect(c.dy, greaterThan(a.dy + 40));
+  });
+
+  testWidgets('mobile answer selection exposes all options without scrolling', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 390,
+            height: 640,
+            child: MultipleChoiceWidget(
+              language: AppLanguage.vi,
+              questionType: GrammarQuestionType.multipleChoice,
+              question: 'Chọn cách dùng đúng nhất.',
+              options: const ['Đáp án A', 'Đáp án B', 'Đáp án C', 'Đáp án D'],
+              correctAnswer: 'Đáp án A',
+              onAnswer: (isCorrect, selected) {},
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.byType(Scrollable), findsNothing);
+    for (var index = 0; index < 4; index++) {
+      expect(
+        find.byKey(ValueKey('grammar_mc_option_$index')).hitTestable(),
+        findsOneWidget,
+      );
+    }
+    expect(
+      find.byKey(const ValueKey('grammar_mc_confirm')).hitTestable(),
+      findsOneWidget,
+    );
   });
 
   testWidgets('new question resets prior multiple-choice selection state', (
@@ -146,7 +266,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('grammar_mc_option_0')));
     await tester.pump();
 
-    expect(find.byIcon(Icons.check_circle_rounded), findsOneWidget);
+    expect(find.byIcon(Icons.radio_button_checked_rounded), findsOneWidget);
 
     await tester.pumpWidget(
       buildQuestion(
@@ -187,7 +307,7 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('grammar_mc_option_0')));
       await tester.pump();
 
-      expect(find.byIcon(Icons.check_circle_rounded), findsOneWidget);
+      expect(find.byIcon(Icons.radio_button_checked_rounded), findsOneWidget);
 
       await tester.pumpWidget(buildQuestion('session_2'));
       await tester.pump();

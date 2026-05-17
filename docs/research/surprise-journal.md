@@ -516,3 +516,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: the route was wrapped by the N5-only Kana guard, so higher-level learners hit a Kana unavailable message from a Kanji aid.
 - Delta: -30 percentage points on confidence that module folder ownership matches product ownership.
 - Updated belief: language-specific learning aids should be routed by learner task ownership; Hán-Việt belongs to Kanji UX even if it reuses Foundations data services.
+
+## 2026-05-17T23:58+07:00 - Quiz chrome needed layout proof, not just copy removal
+
+- Prior belief: removing the repeated mode/config card would be the main quiz viewport fix.
+- Actual observation: compact answer rows still failed on long repair prompts until the prompt region was made scale-down safe; otherwise tests caught render overflows before the answer layout could be trusted.
+- Delta: -20 percentage points on confidence that deleting chrome alone guarantees no-scroll answer selection.
+- Updated belief: quiz UX fixes need viewport-level widget guards for both ordinary and long-prompt question types before live proof.

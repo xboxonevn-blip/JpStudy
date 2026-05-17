@@ -416,7 +416,6 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   late GrammarGoalProfile _goalProfile;
   Set<GrammarQuestionType>? _activeAllowedTypes;
   bool _isWeakDrill = false;
-  String _activeScopeLabel = 'N5';
 
   @override
   void initState() {
@@ -562,11 +561,6 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       _isLoading = false;
       _questionStartTime = DateTime.now();
       _sessionRenderToken = nextSessionRenderToken;
-      _activeScopeLabel = _resolveActiveScopeLabel(
-        points,
-        fallbackLevel: selectedLevel,
-        constrainedToSelectedLevel: constrainToSelectedLevel,
-      );
       if (_sessionType == GrammarSessionType.mock && _questions.isNotEmpty) {
         _remainingSeconds = (_questions.length * 25).clamp(180, 1200);
       }
@@ -645,31 +639,6 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
           (point) => point.jlptLevel.trim().toUpperCase() == normalizedLevel,
         )
         .toList(growable: false);
-  }
-
-  String _resolveActiveScopeLabel(
-    List<GrammarPoint> points, {
-    required String fallbackLevel,
-    required bool constrainedToSelectedLevel,
-  }) {
-    if (constrainedToSelectedLevel) {
-      return fallbackLevel;
-    }
-
-    final levels =
-        points
-            .map((point) => point.jlptLevel.trim())
-            .where((level) => level.isNotEmpty)
-            .toSet()
-            .toList(growable: false)
-          ..sort();
-    if (levels.isEmpty) {
-      return fallbackLevel;
-    }
-    if (levels.length == 1) {
-      return levels.first;
-    }
-    return levels.join(' / ');
   }
 
   List<GeneratedQuestion> _prepareSessionQuestions(
@@ -1136,8 +1105,6 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _buildModeBanner(language),
-                      const SizedBox(height: 12),
                       _buildTopStats(language, progress, question),
                       if (_blueprint == GrammarPracticeBlueprint.learn &&
                           (question.explanation ?? '').trim().isNotEmpty) ...[
@@ -1167,138 +1134,6 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     );
   }
 
-  Widget _buildModeBanner(AppLanguage language) {
-    final palette = context.appPalette;
-    final color = _modeColor();
-    final icon = switch (_blueprint) {
-      GrammarPracticeBlueprint.learn => Icons.menu_book_rounded,
-      GrammarPracticeBlueprint.drill => Icons.fitness_center_rounded,
-      GrammarPracticeBlueprint.quiz => Icons.fact_check_rounded,
-    };
-    final subtitle = switch (_blueprint) {
-      GrammarPracticeBlueprint.learn => _tr(
-        language,
-        en: 'Learn mode: recognition first, hints enabled.',
-        vi: 'Chế độ Học: Làm quen mẫu câu, có gợi ý.',
-        ja: '学習モード: まず認識重視、ヒントあり。',
-      ),
-      GrammarPracticeBlueprint.drill => _tr(
-        language,
-        en: 'Drill mode: fix weak patterns with detailed feedback.',
-        vi: 'Chế độ Luyện: Sửa lỗi, phản hồi kỹ.',
-        ja: 'ドリルモード: 詳細なフィードバックで弱点を補強。',
-      ),
-      GrammarPracticeBlueprint.quiz => _tr(
-        language,
-        en: 'Quiz mode: exam-like flow, no long hints.',
-        vi: 'Chế độ Kiểm tra: Sát thi thật, ít gợi ý.',
-        ja: 'クイズモード: 試験に近い流れ、長いヒントなし。',
-      ),
-    };
-    final title = switch (_blueprint) {
-      GrammarPracticeBlueprint.learn => _tr(
-        language,
-        en: 'Learn mode',
-        vi: 'Chế độ học',
-        ja: '学習モード',
-      ),
-      GrammarPracticeBlueprint.drill => _tr(
-        language,
-        en: 'Drill mode',
-        vi: 'Chế độ luyện',
-        ja: 'ドリルモード',
-      ),
-      GrammarPracticeBlueprint.quiz => _tr(
-        language,
-        en: 'Quiz mode',
-        vi: 'Chế độ kiểm tra',
-        ja: 'クイズモード',
-      ),
-    };
-    final infoPills = <String>[
-      _sessionInfoLabel(language),
-      _sourceInfoLabel(language),
-      _scopeInfoLabel(language),
-      _goalInfoLabel(language),
-      _modeInfoLabel(language),
-    ];
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color.withValues(alpha: 0.16), palette.elevated],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: color.withValues(alpha: 0.25)),
-        boxShadow: [
-          BoxShadow(
-            color: palette.ink.withValues(alpha: 0.06),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(icon, size: 20, color: color),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    color: palette.ink.withValues(alpha: 0.76),
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w600,
-                    height: 1.4,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Wrap(
-                  spacing: 7,
-                  runSpacing: 7,
-                  children: [
-                    for (final label in infoPills)
-                      _pill(
-                        label: label,
-                        fg: color,
-                        bg: color.withValues(alpha: 0.08),
-                        border: color.withValues(alpha: 0.18),
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildTopStats(
     AppLanguage language,
     double progress,
@@ -1307,144 +1142,52 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     final color = _modeColor();
     final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.fromLTRB(16, 15, 16, 14),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
       decoration: BoxDecoration(
         color: palette.elevated,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: palette.outline),
         boxShadow: [
           BoxShadow(
             color: palette.ink.withValues(alpha: 0.06),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _tr(
-                        language,
-                        en: 'Question ${_currentIndex + 1} of ${_questions.length}',
-                        vi: 'Câu ${_currentIndex + 1}/${_questions.length}',
-                        ja: '${_currentIndex + 1} / ${_questions.length} 問目',
-                      ),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: palette.ink.withValues(alpha: 0.62),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      qTypeLabel(language, question.type),
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w900,
-                        color: palette.ink,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 12),
-              Wrap(
-                spacing: 6,
-                runSpacing: 6,
-                alignment: WrapAlignment.end,
-                children: [
-                  _pill(
-                    label: question.point.jlptLevel,
-                    fg: palette.ink.withValues(alpha: 0.82),
-                    bg: palette.surface,
-                    border: palette.outlineSoft,
-                  ),
-                  _pill(
-                    label: _tr(
-                      language,
-                      en: 'Score $_score',
-                      vi: 'Điểm $_score',
-                      ja: 'スコア $_score',
-                    ),
-                    fg: palette.info,
-                    bg: palette.info.withValues(alpha: 0.07),
-                    border: palette.info.withValues(alpha: 0.25),
-                  ),
-                  _pill(
-                    label: switch (_blueprint) {
-                      GrammarPracticeBlueprint.learn => _tr(
-                        language,
-                        en: 'Learn',
-                        vi: 'Học',
-                        ja: '学習',
-                      ),
-                      GrammarPracticeBlueprint.drill => _tr(
-                        language,
-                        en: 'Drill',
-                        vi: 'Luyện',
-                        ja: 'ドリル',
-                      ),
-                      GrammarPracticeBlueprint.quiz => _tr(
-                        language,
-                        en: 'Quiz',
-                        vi: 'Kiểm tra',
-                        ja: 'クイズ',
-                      ),
-                    },
-                    fg: color,
-                    bg: color.withValues(alpha: 0.10),
-                    border: color.withValues(alpha: 0.20),
-                  ),
-                  _pill(
-                    label: _sessionTypeChipLabel(language),
-                    fg: palette.ink.withValues(alpha: 0.78),
-                    bg: palette.surface,
-                    border: palette.outlineSoft,
-                  ),
-                  if (widget.mode == GrammarPracticeMode.ghost)
-                    _pill(
-                      label: _tr(
-                        language,
-                        en: 'Ghost',
-                        vi: 'Ôn quên',
-                        ja: 'ゴースト',
-                      ),
-                      fg: palette.warning,
-                      bg: palette.warning.withValues(alpha: 0.08),
-                      border: palette.warning.withValues(alpha: 0.28),
-                    ),
-                  if (_isWeakDrill)
-                    _pill(
-                      label: _tr(
-                        language,
-                        en: 'Weak only',
-                        vi: 'Chỉ phần yếu',
-                        ja: '弱点のみ',
-                      ),
-                      fg: palette.accent,
-                      bg: palette.accent.withValues(alpha: 0.07),
-                      border: palette.accent.withValues(alpha: 0.25),
-                    ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: LinearProgressIndicator(
-              value: progress,
-              minHeight: 9,
-              backgroundColor: palette.surface,
-              color: color,
+          Text(
+            _tr(
+              language,
+              en: 'Question ${_currentIndex + 1} of ${_questions.length}',
+              vi: 'Câu ${_currentIndex + 1}/${_questions.length}',
+              ja: '${_currentIndex + 1}/${_questions.length}',
             ),
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w800,
+              color: palette.ink.withValues(alpha: 0.78),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(999),
+              child: LinearProgressIndicator(
+                value: progress,
+                minHeight: 6,
+                backgroundColor: palette.surface,
+                color: color,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          _pill(
+            label: qTypeLabel(language, question.type),
+            fg: color,
+            bg: color.withValues(alpha: 0.10),
+            border: color.withValues(alpha: 0.20),
           ),
         ],
       ),
@@ -1690,127 +1433,6 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       GrammarPracticeBlueprint.drill => palette.warning,
       GrammarPracticeBlueprint.quiz => palette.accent,
     };
-  }
-
-  String _sessionTypeChipLabel(AppLanguage language) {
-    switch (_sessionType) {
-      case GrammarSessionType.quick:
-        return _tr(language, en: 'Quick', vi: '10 câu nhanh', ja: 'クイック');
-      case GrammarSessionType.mastery:
-        return _tr(language, en: 'Mastery', vi: 'Chắc bài', ja: 'マスタリー');
-      case GrammarSessionType.mock:
-        return _tr(language, en: 'Mock', vi: 'Mini JLPT', ja: '模試');
-    }
-  }
-
-  String _sessionInfoLabel(AppLanguage language) {
-    switch (_sessionType) {
-      case GrammarSessionType.quick:
-        return _tr(
-          language,
-          en: 'Session: Quick 10',
-          vi: 'Buổi học: 10 câu nhanh',
-          ja: 'セッション: クイック10',
-        );
-      case GrammarSessionType.mastery:
-        return _tr(
-          language,
-          en: 'Session: Mastery',
-          vi: 'Buổi học: Luyện chắc bài',
-          ja: 'セッション: マスタリー',
-        );
-      case GrammarSessionType.mock:
-        return _tr(
-          language,
-          en: 'Session: Mock',
-          vi: 'Buổi học: Mini JLPT',
-          ja: 'セッション: 模試',
-        );
-    }
-  }
-
-  String _sourceInfoLabel(AppLanguage language) {
-    return widget.mode == GrammarPracticeMode.ghost
-        ? _tr(
-            language,
-            en: 'Source: Ghost review',
-            vi: 'Nguồn câu hỏi: Ôn phần vừa quên',
-            ja: '出題元: ゴースト復習',
-          )
-        : _tr(
-            language,
-            en: 'Source: Practice queue',
-            vi: 'Nguồn câu hỏi: Bộ luyện hiện tại',
-            ja: '出題元: 練習キュー',
-          );
-  }
-
-  String _scopeInfoLabel(AppLanguage language) {
-    return _isWeakDrill
-        ? _tr(
-            language,
-            en: 'Scope: $_activeScopeLabel weak set',
-            vi: 'Phạm vi: $_activeScopeLabel, chỉ phần yếu',
-            ja: '範囲: $_activeScopeLabel の弱点のみ',
-          )
-        : _tr(
-            language,
-            en: 'Scope: $_activeScopeLabel full mix',
-            vi: 'Phạm vi: $_activeScopeLabel, trộn toàn bộ',
-            ja: '範囲: $_activeScopeLabel 全体ミックス',
-          );
-  }
-
-  String _goalInfoLabel(AppLanguage language) {
-    switch (_goalProfile) {
-      case GrammarGoalProfile.balanced:
-        return _tr(
-          language,
-          en: 'Goal: Balanced JLPT',
-          vi: 'Mục tiêu: Ôn đều các dạng',
-          ja: '目標: JLPTバランス重視',
-        );
-      case GrammarGoalProfile.accuracy:
-        return _tr(
-          language,
-          en: 'Goal: Accuracy first',
-          vi: 'Mục tiêu: Ưu tiên làm đúng',
-          ja: '目標: 正確さ優先',
-        );
-      case GrammarGoalProfile.speed:
-        return _tr(
-          language,
-          en: 'Goal: Speed first',
-          vi: 'Mục tiêu: Ưu tiên tốc độ',
-          ja: '目標: 速度優先',
-        );
-    }
-  }
-
-  String _modeInfoLabel(AppLanguage language) {
-    switch (_blueprint) {
-      case GrammarPracticeBlueprint.learn:
-        return _tr(
-          language,
-          en: 'Mode: Learn',
-          vi: 'Chế độ: Học',
-          ja: 'モード: 学習',
-        );
-      case GrammarPracticeBlueprint.drill:
-        return _tr(
-          language,
-          en: 'Mode: Drill',
-          vi: 'Chế độ: Luyện',
-          ja: 'モード: ドリル',
-        );
-      case GrammarPracticeBlueprint.quiz:
-        return _tr(
-          language,
-          en: 'Mode: Quiz',
-          vi: 'Chế độ: Kiểm tra',
-          ja: 'モード: クイズ',
-        );
-    }
   }
 
   String qTypeLabel(AppLanguage language, GrammarQuestionType type) {

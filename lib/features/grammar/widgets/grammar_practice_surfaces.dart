@@ -125,12 +125,14 @@ class GrammarOptionTile extends StatelessWidget {
     required this.label,
     required this.state,
     required this.onTap,
+    this.compact = false,
   });
 
   final String marker;
   final String label;
   final GrammarOptionState state;
   final VoidCallback? onTap;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -146,61 +148,74 @@ class GrammarOptionTile extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(compact ? 16 : 22),
         onTap: onTap,
-        child: AnimatedContainer(
-          duration: reducedMotionDuration(
-            context,
-            const Duration(milliseconds: 180),
-          ),
-          curve: Curves.easeOut,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-          decoration: BoxDecoration(
-            color: scheme.background,
-            borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: scheme.border),
-            boxShadow: [
-              BoxShadow(
-                color: scheme.shadow,
-                blurRadius: 16,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 34,
-                height: 34,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: scheme.badgeBackground,
-                  borderRadius: BorderRadius.circular(999),
-                  border: Border.all(color: scheme.badgeBorder),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: compact ? 52 : 0),
+          child: AnimatedContainer(
+            duration: reducedMotionDuration(
+              context,
+              const Duration(milliseconds: 180),
+            ),
+            curve: Curves.easeOut,
+            padding: EdgeInsets.symmetric(
+              horizontal: compact ? 12 : 16,
+              vertical: compact ? 9 : 15,
+            ),
+            decoration: BoxDecoration(
+              color: scheme.background,
+              borderRadius: BorderRadius.circular(compact ? 16 : 22),
+              border: Border.all(color: scheme.border),
+              boxShadow: [
+                BoxShadow(
+                  color: scheme.shadow,
+                  blurRadius: compact ? 8 : 16,
+                  offset: Offset(0, compact ? 3 : 8),
                 ),
-                child: Text(
-                  marker,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: scheme.badgeText,
-                    fontWeight: FontWeight.w900,
+              ],
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: compact ? 28 : 34,
+                  height: compact ? 28 : 34,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: scheme.badgeBackground,
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(color: scheme.badgeBorder),
+                  ),
+                  child: Text(
+                    marker,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: scheme.badgeText,
+                      fontWeight: FontWeight.w900,
+                      fontSize: compact ? 12 : null,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Text(
-                  label,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: scheme.text,
-                    height: 1.45,
-                    fontWeight: FontWeight.w700,
+                SizedBox(width: compact ? 10 : 14),
+                Expanded(
+                  child: Text(
+                    label,
+                    maxLines: compact ? 3 : null,
+                    overflow: compact ? TextOverflow.ellipsis : null,
+                    style:
+                        (compact
+                                ? Theme.of(context).textTheme.bodyMedium
+                                : Theme.of(context).textTheme.bodyLarge)
+                            ?.copyWith(
+                              color: scheme.text,
+                              height: compact ? 1.24 : 1.45,
+                              fontWeight: FontWeight.w700,
+                            ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Icon(icon, color: scheme.icon, size: 22),
-            ],
+                SizedBox(width: compact ? 8 : 12),
+                Icon(icon, color: scheme.icon, size: compact ? 20 : 22),
+              ],
+            ),
           ),
         ),
       ),
