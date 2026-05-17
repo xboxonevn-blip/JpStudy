@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -13,12 +14,17 @@ import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/lesson/lesson_detail_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-UserLessonTermData _term(int id, String term, String definition) =>
+UserLessonTermData _term(
+  int id,
+  String term,
+  String definition, {
+  String reading = '',
+}) =>
     UserLessonTermData(
       id: id,
       lessonId: 1,
       term: term,
-      reading: '',
+      reading: reading,
       definition: definition,
       definitionEn: definition,
       mnemonicVi: '',
@@ -28,6 +34,17 @@ UserLessonTermData _term(int id, String term, String definition) =>
       isLearned: false,
       orderIndex: id,
     );
+
+double _contrast(Color foreground, Color background) {
+  final resolvedForeground = foreground.a < 1
+      ? Color.alphaBlend(foreground, background)
+      : foreground;
+  final foregroundLuminance = resolvedForeground.computeLuminance() + 0.05;
+  final backgroundLuminance = background.computeLuminance() + 0.05;
+  return foregroundLuminance > backgroundLuminance
+      ? foregroundLuminance / backgroundLuminance
+      : backgroundLuminance / foregroundLuminance;
+}
 
 Widget buildScreen(
   List<UserLessonTermData> terms, {
@@ -130,5 +147,30 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsWidgets);
     expect(find.text(AppLanguage.en.statsTotalLabel), findsNothing);
     expect(find.text('0'), findsNothing);
+  });
+
+  testWidgets('flashcard helper labels meet light-surface AA contrast', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      buildScreen([_term(1, '犬', 'dog', reading: 'いぬ')]),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    for (final label in [
+      AppLanguage.en.termLabel,
+      AppLanguage.en.readingLabel,
+      AppLanguage.en.meaningLabel,
+    ]) {
+      final text = tester.widget<Text>(find.text(label).first);
+      final color = text.style?.color;
+      expect(color, isNotNull, reason: label);
+      expect(
+        _contrast(color!, AppThemePalette.light.elevated),
+        greaterThanOrEqualTo(4.5),
+        reason: label,
+      );
+    }
   });
 }

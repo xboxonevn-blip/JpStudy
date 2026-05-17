@@ -115,7 +115,7 @@ class _LessonCard extends StatelessWidget {
                         onPressed: onEdit,
                         icon: Icon(
                           Icons.edit_outlined,
-                          color: palette.ink.withValues(alpha: 0.55),
+                          color: palette.ink.withValues(alpha: 0.64),
                           size: 22,
                         ),
                         tooltip: language.editLabel,
@@ -195,7 +195,7 @@ class _CardContent extends StatelessWidget {
           children: [
             Text(
               emptyLabel ?? '',
-              style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
+              style: TextStyle(color: palette.ink.withValues(alpha: 0.64)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -223,7 +223,7 @@ class _CardContent extends StatelessWidget {
       }
       return Text(
         label,
-        style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
+        style: TextStyle(color: palette.ink.withValues(alpha: 0.64)),
         textAlign: TextAlign.center,
       );
     }
@@ -251,7 +251,7 @@ class _CardContent extends StatelessWidget {
             language.termLabel,
             style: TextStyle(
               fontSize: 12,
-              color: palette.ink.withValues(alpha: 0.55),
+              color: palette.ink.withValues(alpha: 0.64),
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -271,7 +271,7 @@ class _CardContent extends StatelessWidget {
               language.readingLabel,
               style: TextStyle(
                 fontSize: 12,
-                color: palette.ink.withValues(alpha: 0.55),
+                color: palette.ink.withValues(alpha: 0.64),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -280,7 +280,7 @@ class _CardContent extends StatelessWidget {
               resolvedTerm.reading.trim(),
               style: TextStyle(
                 fontSize: 18,
-                color: palette.ink.withValues(alpha: 0.55),
+                color: palette.ink.withValues(alpha: 0.64),
               ),
               textAlign: TextAlign.center,
             ),
@@ -291,7 +291,7 @@ class _CardContent extends StatelessWidget {
               language.meaningLabel,
               style: TextStyle(
                 fontSize: 12,
-                color: palette.ink.withValues(alpha: 0.55),
+                color: palette.ink.withValues(alpha: 0.64),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -320,7 +320,7 @@ class _CardContent extends StatelessWidget {
               : language.meaningLabel,
           style: TextStyle(
             fontSize: 12,
-            color: palette.ink.withValues(alpha: 0.55),
+            color: palette.ink.withValues(alpha: 0.64),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -337,7 +337,7 @@ class _CardContent extends StatelessWidget {
             language.kanjiMeaningLabel,
             style: TextStyle(
               fontSize: 12,
-              color: palette.ink.withValues(alpha: 0.55),
+              color: palette.ink.withValues(alpha: 0.64),
               fontWeight: FontWeight.w600,
             ),
           ),
