@@ -474,3 +474,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: the page kept running the previous Flutter bundle and still showed `Nhánh học hiện tại` plus the N3 Kana soft-suggest modal after deploy, while a fresh `fetch('/main.dart.js', {cache: 'reload'})` already returned the new bundle with `Hướng học hiện tại`.
 - Delta: -35 percentage points on confidence that query-string reload alone defeats Flutter web service-worker/browser cache state.
 - Updated belief: post-deploy live evidence must clear service-worker/cache state or use a fresh cache-disabled browser context before judging source changes.
+
+## 2026-05-17T20:20+07:00 - Shell selection needed URL truth, not branch memory
+
+- Prior belief: replacing `navigationShell.goBranch()` with `GoRouter.go()` was enough to keep shell navigation and URL aligned.
+- Actual observation: live retest still showed Profile landing on the Learn/Vocab branch. The safer model is to give every visible shell item its canonical location and derive selected state from the active URL path.
+- Delta: -40 percentage points on confidence that shell currentIndex is trustworthy after mixed SPA navigation.
+- Updated belief: shell branch state is a cache; route path is the source of truth for both navigation target and selected UI state.
