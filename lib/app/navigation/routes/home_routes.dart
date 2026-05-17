@@ -24,12 +24,12 @@ StatefulShellBranch buildHomeBranch() {
       GoRoute(
         path: AppRoutePath.roadmap,
         name: AppRouteName.roadmap,
-        builder: (context, state) => const HomeScreen(),
+        redirect: (context, state) => AppRoutePath.home,
       ),
       GoRoute(
         path: AppRoutePath.today,
         name: AppRouteName.today,
-        builder: (context, state) => const HomeScreen(),
+        redirect: (context, state) => AppRoutePath.home,
       ),
       GoRoute(
         path: AppRoutePath.todaySessionSummary,

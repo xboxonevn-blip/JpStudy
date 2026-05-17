@@ -40,6 +40,8 @@ class AppRoutePath {
   static const lessonWriteMode = '/lesson/:id/write-mode';
   static const lessonMatchMode = '/lesson/:id/match-mode';
 
+  static const learn = '/learn';
+  static const review = '/review';
   static const memory = '/memory';
   static const studyHub = '/study-hub';
   static const mistakes = '/mistakes';
@@ -118,6 +120,8 @@ class AppRouteName {
   static const lessonWriteMode = 'lesson-write-mode';
   static const lessonMatchMode = 'lesson-match-mode';
 
+  static const learn = 'learn';
+  static const review = 'review';
   static const memory = 'memory';
   static const studyHub = 'study-hub';
   static const mistakes = 'mistakes';

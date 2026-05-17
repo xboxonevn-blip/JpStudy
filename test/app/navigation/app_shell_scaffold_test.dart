@@ -17,24 +17,12 @@ void main() {
     expect(source, contains('ExcludeSemantics('));
   });
 
-  test('N5 shell destinations include Kana branch', () {
-    expect(visibleShellBranchIndicesForLevel(StudyLevel.n5), [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-    ]);
-    expect(bottomShellBranchIndicesForLevel(StudyLevel.n5), [4, 1, 0, 7]);
+  test('N5 shell destinations use five primary branches', () {
+    expect(visibleShellBranchIndicesForLevel(StudyLevel.n5), [0, 1, 2, 3, 4]);
+    expect(bottomShellBranchIndicesForLevel(StudyLevel.n5), [0, 1, 2, 3, 4]);
   });
 
-  test('N4+ shell destinations hide Kana branch', () {
+  test('N4+ shell destinations use the same five primary branches', () {
     for (final level in [
       StudyLevel.n4,
       StudyLevel.n3,
@@ -42,25 +30,21 @@ void main() {
       StudyLevel.n1,
     ]) {
       final visible = visibleShellBranchIndicesForLevel(level);
-      expect(visible, hasLength(10));
-      expect(visible, isNot(contains(1)));
-      expect(bottomShellBranchIndicesForLevel(level), [4, 0, 7]);
+      expect(visible, [0, 1, 2, 3, 4]);
+      expect(bottomShellBranchIndicesForLevel(level), [0, 1, 2, 3, 4]);
     }
   });
 
-  test('desktop shell destinations are grouped with upgrade in footer', () {
-    expect(navigationGroupForShellBranch(0), NavigationGroup.learning);
-    expect(navigationGroupForShellBranch(1), NavigationGroup.learning);
-    expect(navigationGroupForShellBranch(2), NavigationGroup.learning);
-    expect(navigationGroupForShellBranch(3), NavigationGroup.learning);
-    expect(navigationGroupForShellBranch(4), NavigationGroup.progress);
-    expect(navigationGroupForShellBranch(5), NavigationGroup.progress);
-    expect(navigationGroupForShellBranch(6), NavigationGroup.progress);
-    expect(navigationGroupForShellBranch(7), NavigationGroup.other);
-    expect(navigationGroupForShellBranch(8), NavigationGroup.other);
-    expect(navigationGroupForShellBranch(10), NavigationGroup.other);
-    expect(navigationGroupForShellBranch(9), NavigationGroup.footer);
-  });
+  test(
+    'desktop shell destinations are grouped without product-sprawl branches',
+    () {
+      expect(navigationGroupForShellBranch(0), NavigationGroup.learning);
+      expect(navigationGroupForShellBranch(1), NavigationGroup.learning);
+      expect(navigationGroupForShellBranch(2), NavigationGroup.progress);
+      expect(navigationGroupForShellBranch(3), NavigationGroup.other);
+      expect(navigationGroupForShellBranch(4), NavigationGroup.other);
+    },
+  );
 
   test('desktop sidebar exposes compact dimensions for grouped layout', () {
     expect(sidebarItemHeightForTesting, 44);

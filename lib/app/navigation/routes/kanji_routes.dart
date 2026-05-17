@@ -8,49 +8,51 @@ import 'package:jpstudy/features/kanji_reading/screens/home_kanji_reading_screen
 import 'package:jpstudy/features/write/screens/home_handwriting_practice_screen.dart';
 
 StatefulShellBranch buildKanjiBranch() {
-  return StatefulShellBranch(
-    routes: [
-      GoRoute(
-        path: AppRoutePath.kanji,
-        name: AppRouteName.kanji,
-        builder: (context, state) => KanjiHubScreen(
-          initialKanjiId: int.tryParse(
-            state.uri.queryParameters['kanjiId'] ?? '',
-          ),
+  return StatefulShellBranch(routes: buildKanjiRoutes());
+}
+
+List<RouteBase> buildKanjiRoutes() {
+  return [
+    GoRoute(
+      path: AppRoutePath.kanji,
+      name: AppRouteName.kanji,
+      builder: (context, state) => KanjiHubScreen(
+        initialKanjiId: int.tryParse(
+          state.uri.queryParameters['kanjiId'] ?? '',
         ),
       ),
-      GoRoute(
-        path: AppRoutePath.kanjiPractice,
-        name: AppRouteName.kanjiPractice,
-        builder: (context, state) => KanjiPracticeHubScreen(
-          launchArgs: state.extra is KanjiPracticeArgs
-              ? state.extra as KanjiPracticeArgs
-              : null,
-        ),
+    ),
+    GoRoute(
+      path: AppRoutePath.kanjiPractice,
+      name: AppRouteName.kanjiPractice,
+      builder: (context, state) => KanjiPracticeHubScreen(
+        launchArgs: state.extra is KanjiPracticeArgs
+            ? state.extra as KanjiPracticeArgs
+            : null,
       ),
-      GoRoute(
-        path: AppRoutePath.handwritingPractice,
-        name: AppRouteName.handwritingPractice,
-        builder: (context, state) => HomeHandwritingPracticeScreen(
-          launchArgs: state.extra is KanjiPracticeArgs
-              ? state.extra as KanjiPracticeArgs
-              : null,
-        ),
+    ),
+    GoRoute(
+      path: AppRoutePath.handwritingPractice,
+      name: AppRouteName.handwritingPractice,
+      builder: (context, state) => HomeHandwritingPracticeScreen(
+        launchArgs: state.extra is KanjiPracticeArgs
+            ? state.extra as KanjiPracticeArgs
+            : null,
       ),
-      GoRoute(
-        path: AppRoutePath.kanjiReadingPractice,
-        name: AppRouteName.kanjiReadingPractice,
-        builder: (context, state) => HomeKanjiReadingScreen(
-          launchArgs: state.extra is KanjiPracticeArgs
-              ? state.extra as KanjiPracticeArgs
-              : null,
-        ),
+    ),
+    GoRoute(
+      path: AppRoutePath.kanjiReadingPractice,
+      name: AppRouteName.kanjiReadingPractice,
+      builder: (context, state) => HomeKanjiReadingScreen(
+        launchArgs: state.extra is KanjiPracticeArgs
+            ? state.extra as KanjiPracticeArgs
+            : null,
       ),
-      GoRoute(
-        path: AppRoutePath.kanjiDash,
-        name: AppRouteName.kanjiDash,
-        builder: (context, state) => const KanjiDashScreen(),
-      ),
-    ],
-  );
+    ),
+    GoRoute(
+      path: AppRoutePath.kanjiDash,
+      name: AppRouteName.kanjiDash,
+      builder: (context, state) => const KanjiDashScreen(),
+    ),
+  ];
 }

@@ -16,7 +16,7 @@ class _LevelPropagationProbe extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final hasFoundationsCard = level == StudyLevel.n5;
-    final hasKanaDestination = visibleShellBranchIndicesForLevel(
+    final hasLearnDestination = visibleShellBranchIndicesForLevel(
       level,
     ).contains(1);
 
@@ -26,7 +26,7 @@ class _LevelPropagationProbe extends ConsumerWidget {
           children: [
             Text('level:${level.name}'),
             if (hasFoundationsCard) const Text('home-foundations-card'),
-            if (hasKanaDestination) const Text('shell-kana-destination'),
+            if (hasLearnDestination) const Text('shell-learn-destination'),
             TextButton(
               onPressed: () => setPersistedStudyLevel(ref, StudyLevel.n5),
               child: const Text('Switch N5'),
@@ -89,14 +89,14 @@ void main() {
 
     expect(find.text('level:n4'), findsOneWidget);
     expect(find.text('home-foundations-card'), findsNothing);
-    expect(find.text('shell-kana-destination'), findsNothing);
+    expect(find.text('shell-learn-destination'), findsOneWidget);
 
     await tester.tap(find.text('Switch N5'));
     await tester.pump();
 
     expect(find.text('level:n5'), findsOneWidget);
     expect(find.text('home-foundations-card'), findsOneWidget);
-    expect(find.text('shell-kana-destination'), findsOneWidget);
+    expect(find.text('shell-learn-destination'), findsOneWidget);
     expect(prefs.getString(prefOnboardingLevel), StudyLevel.n5.name);
     expect(prefs.getString('foundations.kana.progress.katakana'), 'keep');
   });

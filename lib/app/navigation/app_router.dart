@@ -2,14 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_shell_scaffold.dart';
 import 'package:jpstudy/app/navigation/routes/exam_routes.dart';
-import 'package:jpstudy/app/navigation/routes/foundations_routes.dart';
-import 'package:jpstudy/app/navigation/routes/grammar_routes.dart';
 import 'package:jpstudy/app/navigation/routes/home_routes.dart';
-import 'package:jpstudy/app/navigation/routes/kanji_routes.dart';
-import 'package:jpstudy/app/navigation/routes/memory_routes.dart';
+import 'package:jpstudy/app/navigation/routes/learn_routes.dart';
 import 'package:jpstudy/app/navigation/routes/meta_routes.dart';
-import 'package:jpstudy/app/navigation/routes/practice_routes.dart';
-import 'package:jpstudy/app/navigation/routes/vocab_routes.dart';
+import 'package:jpstudy/app/navigation/routes/review_routes.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
@@ -49,16 +45,10 @@ class AppRouter {
           builder: (context, state, navigationShell) =>
               AppShellScaffold(navigationShell: navigationShell),
           branches: [
-            buildKanjiBranch(),
-            buildFoundationsBranch(),
-            buildVocabBranch(),
-            buildGrammarBranch(),
             buildHomeBranch(),
-            buildMemoryBranch(),
-            buildPracticeBranch(),
+            buildLearnBranch(),
+            buildReviewBranch(),
             buildExamBranch(),
-            buildLeaderboardBranch(),
-            buildPremiumBranch(),
             buildProfileBranch(),
           ],
         ),

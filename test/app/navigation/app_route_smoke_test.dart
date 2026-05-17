@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
+import 'package:jpstudy/app/navigation/app_router.dart';
+import 'package:jpstudy/features/learn/learn_hub_screen.dart';
 import 'package:jpstudy/features/me/screens/data_settings_screen.dart';
+import 'package:jpstudy/features/practice/practice_screen.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
 import 'package:jpstudy/features/study_hub/study_hub_screen.dart';
@@ -16,6 +19,12 @@ void main() {
     tester,
   ) async {
     await pumpReleaseSmokeApp(tester, size: const Size(1440, 1600));
+
+    await pumpSmokeRoute(tester, AppRoutePath.learn);
+    expect(find.byType(LearnHubScreen), findsOneWidget);
+
+    await pumpSmokeRoute(tester, AppRoutePath.review);
+    expect(find.byType(PracticeScreen), findsOneWidget);
 
     await pumpSmokeRoute(tester, AppRoutePath.studyHub);
     expect(find.byType(StudyHubScreen), findsOneWidget);
@@ -39,6 +48,20 @@ void main() {
     await pumpSmokeRoute(tester, '/terms');
     expect(find.text('Terms of Service'), findsWidgets);
     expect(find.textContaining('review-needed draft'), findsWidgets);
+
+    await disposeSmokeApp(tester);
+  });
+
+  testWidgets('legacy home aliases redirect to canonical home route', (
+    tester,
+  ) async {
+    await pumpReleaseSmokeApp(tester, size: const Size(1440, 1600));
+
+    await pumpSmokeRoute(tester, AppRoutePath.roadmap);
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/');
+
+    await pumpSmokeRoute(tester, AppRoutePath.today);
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/');
 
     await disposeSmokeApp(tester);
   });
