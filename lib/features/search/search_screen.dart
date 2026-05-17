@@ -71,7 +71,7 @@ final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
           item.kunyomi ?? '',
           item.meaning,
           item.meaningEn ?? '',
-          item.decomposition?.hanViet ?? '',
+          if (language == AppLanguage.vi) item.decomposition?.hanViet ?? '',
           for (final example in item.examples) ...[
             example.word,
             example.reading,

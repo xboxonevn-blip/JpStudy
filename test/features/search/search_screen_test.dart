@@ -62,6 +62,7 @@ const _kanji = [
     kunyomi: 'もり',
     meaning: 'rừng',
     meaningEn: 'forest',
+    decomposition: KanjiDecomposition(hanViet: 'Sâm'),
     examples: [],
     jlptLevel: 'N4',
   ),
@@ -78,12 +79,15 @@ double _contrast(Color foreground, Color background) {
       : backgroundLuminance / foregroundLuminance;
 }
 
-Widget buildSearchScreen({LessonRepository? repo}) {
+Widget buildSearchScreen({
+  LessonRepository? repo,
+  AppLanguage language = AppLanguage.en,
+}) {
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith(
-        (ref) => AppLanguageController.test(AppLanguage.en),
+        (ref) => AppLanguageController.test(language),
       ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
@@ -92,7 +96,10 @@ Widget buildSearchScreen({LessonRepository? repo}) {
   );
 }
 
-Widget buildSearchRouterApp({LessonRepository? repo}) {
+Widget buildSearchRouterApp({
+  LessonRepository? repo,
+  AppLanguage language = AppLanguage.en,
+}) {
   final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SearchScreen()),
@@ -113,7 +120,7 @@ Widget buildSearchRouterApp({LessonRepository? repo}) {
     retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith(
-        (ref) => AppLanguageController.test(AppLanguage.en),
+        (ref) => AppLanguageController.test(language),
       ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
@@ -333,6 +340,43 @@ void main() {
     expect(find.text('森'), findsOneWidget);
     expect(find.text('食べる'), findsNothing);
     expect(find.text('ねこ'), findsNothing);
+  });
+
+  testWidgets('Kanji search matches Han-Viet only in Vietnamese UI', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      buildSearchScreen(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'sâm');
+    await tester.pump(const Duration(milliseconds: 220));
+
+    expect(find.text('森'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
+
+    await tester.pumpWidget(
+      buildSearchScreen(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+        language: AppLanguage.vi,
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'sâm');
+    await tester.pump(const Duration(milliseconds: 220));
+
+    expect(find.text('森'), findsOneWidget);
   });
 
   testWidgets('shows load error when search index provider fails', (

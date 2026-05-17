@@ -558,3 +558,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: seed code copied `labels.meaningViDisplay` and mnemonics, but left `labels.hanViet` outside `decomposition_json`; live N5 `人` therefore showed Vietnamese title/mnemonic but no explicit Hán-Việt row.
 - Delta: -20 percentage points on confidence that canonical asset fields reach runtime models just because they exist in JSON.
 - Updated belief: every learner-facing canonical field needs a seed-path regression, especially when the runtime model stores it in a derived/nested field.
+
+## 2026-05-18 - Hidden language-specific fields can still affect Search
+
+- Prior belief: Search was safe once kanji subtitles/meanings switched per language.
+- Actual observation: the search keyword list still indexed `decomposition.hanViet` for EN/JA, so non-Vietnamese users could match a hidden Hán-Việt reading even though the UI did not display it.
+- Delta: -15 percentage points on confidence that display-only localization covers discovery behavior.
+- Updated belief: per-language UX also needs query-index tests; hidden teaching aids should not silently drive results outside their intended language.
