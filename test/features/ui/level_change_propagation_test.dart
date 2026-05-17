@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,6 +39,38 @@ class _LevelPropagationProbe extends ConsumerWidget {
 }
 
 void main() {
+  test('feature code changes study level through the persisted setter', () {
+    final featureFiles = Directory('lib/features')
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((file) => file.path.endsWith('.dart'));
+    final offenders = <String>[];
+
+    for (final file in featureFiles) {
+      final content = file.readAsStringSync();
+      if (content.contains('studyLevelProvider.notifier).state')) {
+        offenders.add(file.path);
+      }
+    }
+
+    expect(offenders, isEmpty, reason: offenders.join('\n'));
+  });
+
+  test(
+    'container setter updates level state and persisted preference',
+    () async {
+      SharedPreferences.setMockInitialValues({});
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+
+      await setPersistedStudyLevelInContainer(container, StudyLevel.n2);
+
+      final prefs = await SharedPreferences.getInstance();
+      expect(container.read(studyLevelProvider), StudyLevel.n2);
+      expect(prefs.getString(prefOnboardingLevel), StudyLevel.n2.name);
+    },
+  );
+
   testWidgets('level change re-renders home and shell gates immediately', (
     tester,
   ) async {

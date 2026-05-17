@@ -157,7 +157,7 @@ class _VocabCatalogBody extends ConsumerWidget {
     // Review path needs StudyLevel (for scoping queue to level)
     final level = StudyLevel.fromCode(section.levelCode);
     if (level == null) return;
-    ref.read(studyLevelProvider.notifier).state = level;
+    unawaited(setPersistedStudyLevel(ref, level));
 
     final minnaRange = _minnaLessonRange(section.levelCode, program.type);
     if (minnaRange != null) {

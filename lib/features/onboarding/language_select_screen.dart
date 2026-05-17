@@ -6,7 +6,6 @@ import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
-import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
@@ -39,9 +38,8 @@ class _LanguageSelectScreenState extends ConsumerState<LanguageSelectScreen> {
 
     if (selected == AppLanguage.ja) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(prefOnboardingLevel, StudyLevel.n3.name);
+      await setPersistedStudyLevel(ref, StudyLevel.n3);
       await prefs.setBool(prefOnboardingCompleted, true);
-      ref.read(studyLevelProvider.notifier).state = StudyLevel.n3;
       ref.read(onboardingDoneProvider.notifier).state = true;
       if (!mounted) {
         return;

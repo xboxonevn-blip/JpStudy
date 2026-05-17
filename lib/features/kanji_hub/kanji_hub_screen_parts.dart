@@ -698,8 +698,9 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                   children: [
                     TextButton.icon(
                       onPressed: () {
-                        ref.read(studyLevelProvider.notifier).state =
-                            widget.selectedLevel;
+                        unawaited(
+                          setPersistedStudyLevel(ref, widget.selectedLevel),
+                        );
                         context.push(
                           '/kanji/practice',
                           extra: KanjiPracticeArgs(
@@ -716,8 +717,9 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
-                        ref.read(studyLevelProvider.notifier).state =
-                            widget.selectedLevel;
+                        unawaited(
+                          setPersistedStudyLevel(ref, widget.selectedLevel),
+                        );
                         context.push(
                           '/kanji/practice',
                           extra: KanjiPracticeArgs(

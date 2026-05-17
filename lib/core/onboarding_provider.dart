@@ -41,6 +41,18 @@ List<Override> persistedAppBootstrapOverrides(SharedPreferences prefs) {
 
 Future<void> setPersistedStudyLevel(WidgetRef ref, StudyLevel level) async {
   ref.read(studyLevelProvider.notifier).state = level;
+  await persistStudyLevelPreference(level);
+}
+
+Future<void> setPersistedStudyLevelInContainer(
+  ProviderContainer container,
+  StudyLevel level,
+) async {
+  container.read(studyLevelProvider.notifier).state = level;
+  await persistStudyLevelPreference(level);
+}
+
+Future<void> persistStudyLevelPreference(StudyLevel level) async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.setString(prefOnboardingLevel, level.name);
 }

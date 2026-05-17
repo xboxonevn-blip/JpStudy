@@ -6,7 +6,6 @@ import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
-import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
@@ -31,9 +30,8 @@ class _LevelSelectScreenState extends ConsumerState<LevelSelectScreen> {
     setState(() => _isSaving = true);
 
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(prefOnboardingLevel, selected.name);
+    await setPersistedStudyLevel(ref, selected);
     await prefs.setBool(prefOnboardingCompleted, true);
-    ref.read(studyLevelProvider.notifier).state = selected;
     ref.read(onboardingDoneProvider.notifier).state = true;
 
     if (!mounted) {

@@ -11,6 +11,7 @@ import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/models/radical_item.dart';
@@ -163,7 +164,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
   }
 
   void _activateLevel(StudyLevel level, {bool refreshKanji = false}) {
-    ref.read(studyLevelProvider.notifier).state = level;
+    unawaited(setPersistedStudyLevel(ref, level));
     setState(() {
       final levelChanged = _selectedLevel != level;
       _selectedLevel = level;
@@ -447,10 +448,8 @@ void _launchLevelPractice(
 ) {
   final level = StudyLevel.fromCode(levelCode);
   if (level == null) return;
-  ProviderScope.containerOf(
-    context,
-    listen: false,
-  ).read(studyLevelProvider.notifier).state = level;
+  final container = ProviderScope.containerOf(context, listen: false);
+  unawaited(setPersistedStudyLevelInContainer(container, level));
   Navigator.of(context).pop();
   context.push(
     '/kanji/practice',
@@ -465,10 +464,8 @@ void _launchLevelPractice(
 void _launchKanjiUtility(BuildContext context, KanjiItem item, String route) {
   final level = StudyLevel.fromCode(item.jlptLevel);
   if (level != null) {
-    ProviderScope.containerOf(
-      context,
-      listen: false,
-    ).read(studyLevelProvider.notifier).state = level;
+    final container = ProviderScope.containerOf(context, listen: false);
+    unawaited(setPersistedStudyLevelInContainer(container, level));
   }
   Navigator.of(context).pop();
   if (route == '/practice/handwriting') {
@@ -490,10 +487,8 @@ void _launchKanjiUtility(BuildContext context, KanjiItem item, String route) {
 void _launchKanjiPractice(BuildContext context, KanjiItem item) {
   final level = StudyLevel.fromCode(item.jlptLevel);
   if (level != null) {
-    ProviderScope.containerOf(
-      context,
-      listen: false,
-    ).read(studyLevelProvider.notifier).state = level;
+    final container = ProviderScope.containerOf(context, listen: false);
+    unawaited(setPersistedStudyLevelInContainer(container, level));
   }
   Navigator.of(context).pop();
   context.push(
