@@ -1490,7 +1490,8 @@ _VocabCatalogSection _buildJlptSection({
         type: companionType,
         isInteractive: companionInteractive,
         isComingSoon: companionTermCount == 0,
-        badgeText: companionTermCount > 0
+        badgeText:
+            companionTermCount > 0 && companionType != _VocabProgramType.minna
             ? _programBadge(companionType, language)
             : null,
       ),

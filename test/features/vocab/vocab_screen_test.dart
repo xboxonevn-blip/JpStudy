@@ -720,7 +720,7 @@ void main() {
     await _pumpCatalog(tester);
 
     expect(find.text('Companion'), findsNothing);
-    expect(find.text('Bổ trợ'), findsWidgets);
+    expect(find.text('Bổ trợ'), findsNWidgets(2));
   });
 
   testWidgets('Minna catalog lesson card opens lesson detail route', (
