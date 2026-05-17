@@ -100,7 +100,6 @@ class GrammarRepository {
     await _db.grammarDao.updateSrsState(
       grammarId: grammarId,
       streak: newStreak,
-      ease: state.ease,
       stability: result.stability,
       difficulty: result.difficulty,
       nextReviewAt: result.nextReviewAt,

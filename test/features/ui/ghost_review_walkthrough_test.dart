@@ -55,7 +55,6 @@ void main() {
     await db.grammarDao.updateSrsState(
       grammarId: grammarId,
       streak: 0,
-      ease: 2.5,
       stability: 1.0,
       difficulty: 5.0,
       nextReviewAt: DateTime.now().subtract(const Duration(minutes: 5)),

@@ -28,9 +28,7 @@ void main() {
     await dao.initializeSrsState(vocabId);
     await dao.updateSrsState(
       vocabId: vocabId,
-      box: 1,
       repetitions: 1,
-      ease: 2.5,
       stability: stability,
       difficulty: 0.3,
       lastConfidence: 3,
@@ -247,9 +245,7 @@ void main() {
       await dao.initializeSrsState(9);
       await dao.updateSrsState(
         vocabId: 9,
-        box: 1,
         repetitions: 1,
-        ease: 2.5,
         stability: 8,
         difficulty: 4,
         lastConfidence: 4,
@@ -270,9 +266,7 @@ void main() {
       await insertState(11, nextReviewAt: past, stability: 2.3065);
       await dao.updateSrsState(
         vocabId: 11,
-        box: 1,
         repetitions: 1,
-        ease: 2.5,
         stability: 2.3065,
         difficulty: 5,
         lastConfidence: 3,
@@ -291,9 +285,7 @@ void main() {
         await insertState(12, nextReviewAt: past, stability: 0.5);
         await dao.updateSrsState(
           vocabId: 12,
-          box: 1,
           repetitions: 1,
-          ease: 2.5,
           stability: 0.5,
           difficulty: 5,
           lastConfidence: 3,

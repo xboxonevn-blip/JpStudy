@@ -103,7 +103,6 @@ void main() {
         // Since we can't inject 'now' into repo easily without clock abstraction, we check it's close to test's 'now'
         final diff = state.nextReviewAt.difference(now).inSeconds.abs();
         expect(diff < 10, true, reason: 'nextReviewAt should be close to now');
-        expect(state.box, 1);
         expect(state.repetitions, 0);
       }
 

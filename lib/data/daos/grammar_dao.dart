@@ -46,7 +46,6 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
         grammarId: grammarId,
         nextReviewAt: DateTime.now(),
         streak: const Value(0),
-        ease: const Value(2.5),
         fsrsState: Value(FsrsCardState.learning.dbValue),
         fsrsStep: const Value(0),
       ),
@@ -58,7 +57,6 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
   Future<void> updateSrsState({
     required int grammarId,
     required int streak,
-    required double ease,
     required double stability,
     required double difficulty,
     required DateTime nextReviewAt,
@@ -71,7 +69,6 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
     )..where((t) => t.grammarId.equals(grammarId))).write(
       GrammarSrsStateCompanion(
         streak: Value(streak),
-        ease: Value(ease),
         stability: Value(stability),
         difficulty: Value(difficulty),
         lastReviewedAt: Value(DateTime.now()),

@@ -24,9 +24,7 @@ void main() {
     await dao.initializeSrsState(vocabId);
     await dao.updateSrsState(
       vocabId: vocabId,
-      box: 1,
       repetitions: 1,
-      ease: 2.5,
       stability: stability,
       difficulty: 0.3,
       lastConfidence: 3,

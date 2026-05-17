@@ -37,7 +37,6 @@ void main() {
       await dao.updateSrsState(
         grammarId: grammarId,
         streak: 1,
-        ease: 2.5,
         stability: 2.3065,
         difficulty: 5,
         nextReviewAt: past,
@@ -57,7 +56,6 @@ void main() {
         await dao.updateSrsState(
           grammarId: grammarId,
           streak: 1,
-          ease: 2.5,
           stability: 0.5,
           difficulty: 5,
           nextReviewAt: past,

@@ -2868,9 +2868,7 @@ class LessonRepository {
 
     await _db.srsDao.updateSrsState(
       vocabId: termId,
-      box: srsState.box,
       repetitions: srsState.repetitions + 1,
-      ease: srsState.ease,
       stability: result.stability,
       difficulty: result.difficulty,
       lastConfidence: quality,
@@ -2908,9 +2906,7 @@ class LessonRepository {
           _db.srsState,
           SrsStateCompanion.insert(
             vocabId: termId,
-            box: const Value(1),
             repetitions: const Value(0),
-            ease: const Value(2.5),
             stability: const Value(1.0),
             difficulty: const Value(5.0),
             nextReviewAt: now,
@@ -3220,9 +3216,7 @@ class LessonRepository {
 
   Future<void> upsertSrsState({
     required int termId,
-    required int box,
     required int repetitions,
-    required double ease,
     required double stability,
     required double difficulty,
     required DateTime nextReviewAt,
@@ -3235,9 +3229,7 @@ class LessonRepository {
         .insertOnConflictUpdate(
           SrsStateCompanion(
             vocabId: Value(termId),
-            box: Value(box),
             repetitions: Value(repetitions),
-            ease: Value(ease),
             stability: Value(stability),
             difficulty: Value(difficulty),
             lastReviewedAt: Value(lastReviewedAt),
@@ -3548,9 +3540,7 @@ class LessonRepository {
           _db.srsState,
           SrsStateCompanion.insert(
             vocabId: term.id,
-            box: const Value(1),
             repetitions: const Value(0),
-            ease: const Value(2.5),
             stability: const Value(1.0),
             difficulty: const Value(5.0),
             nextReviewAt: now, // Due immediately

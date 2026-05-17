@@ -500,9 +500,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       final now = DateTime.now();
       await repo.upsertSrsState(
         termId: term.id,
-        box: 1,
         repetitions: 0,
-        ease: 2.5,
         stability: 1.0,
         difficulty: 5.0,
         nextReviewAt: now.add(const Duration(days: 1)),

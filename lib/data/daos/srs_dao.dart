@@ -47,9 +47,7 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   /// Update SRS state after a review
   Future<void> updateSrsState({
     required int vocabId,
-    required int box,
     required int repetitions,
-    required double ease,
     required double stability,
     required double difficulty,
     required int lastConfidence,
@@ -59,9 +57,7 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   }) {
     return (update(srsState)..where((t) => t.vocabId.equals(vocabId))).write(
       SrsStateCompanion(
-        box: Value(box),
         repetitions: Value(repetitions),
-        ease: Value(ease),
         stability: Value(stability),
         difficulty: Value(difficulty),
         lastConfidence: Value(lastConfidence),
