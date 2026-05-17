@@ -537,3 +537,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: live mobile test mode still forced the header into vertical text because the status chips and question map consumed the answer viewport before the question rendered.
 - Delta: -30 percentage points on confidence that component-level compacting solves screen-level quiz UX.
 - Updated belief: quiz verification must include the whole route shell at mobile size, not just the answer widget.
+
+## 2026-05-17 - Flutter web compact layout needed viewport fallback
+
+- Prior belief: `LayoutBuilder` constraints and `MediaQuery.sizeOf(context).width` would reliably identify the 390px mobile shell.
+- Actual observation: live Flutter web still rendered the non-compact lesson-test prompt inside a 390x640 Playwright viewport until the compact flag used the physical `View` size and separated answer compacting from navigation button visibility.
+- Delta: -25 percentage points on confidence that widget-test viewport constraints match deployed Flutter web shell constraints.
+- Updated belief: mobile quiz fixes need both widget guards and cache-cleared live proof; compact answer layout should be driven by the actual view size, while desktop navigation affordances should stay width-based.
