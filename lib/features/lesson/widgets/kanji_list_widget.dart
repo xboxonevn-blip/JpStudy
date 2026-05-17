@@ -207,8 +207,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, s) =>
-          Center(child: Text(language.kanjiListLoadErrorLabel('$e'))),
+      error: (e, s) => Center(child: Text(language.kanjiListLoadErrorLabel())),
     );
   }
 

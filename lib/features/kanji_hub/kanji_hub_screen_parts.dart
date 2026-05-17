@@ -847,7 +847,11 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                         return const Center(child: CircularProgressIndicator());
                       }
                       if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
+                        return Center(
+                          child: Text(
+                            widget.language.kanjiListLoadErrorLabel(),
+                          ),
+                        );
                       }
                       var items = snapshot.data ?? [];
                       if (_selectedStrokeCount != null) {
@@ -1094,7 +1098,11 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                         return const Center(child: CircularProgressIndicator());
                       }
                       if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
+                        return Center(
+                          child: Text(
+                            widget.language.kanjiListLoadErrorLabel(),
+                          ),
+                        );
                       }
                       var items = snapshot.data ?? [];
 

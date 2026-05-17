@@ -133,13 +133,19 @@ void main() {
       expect(find.text('Chưa có dữ liệu kanji cho bài này.'), findsOneWidget);
     });
 
-    testWidgets('error state shows kanjiListLoadErrorLabel', (tester) async {
+    testWidgets('error state shows localized learner-safe copy', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(error: Exception('db connection failed')),
       );
       await _pump(tester);
 
-      expect(find.textContaining('Failed to load kanji:'), findsOneWidget);
+      expect(
+        find.text('Kanji data could not be loaded. Please try again.'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('db connection failed'), findsNothing);
     });
   });
 

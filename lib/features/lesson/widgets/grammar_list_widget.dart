@@ -219,9 +219,9 @@ class _GrammarListWidgetState extends ConsumerState<GrammarListWidget> {
         child: Text(
           _tr(
             widget.language,
-            en: 'Error: $err',
-            vi: 'Lỗi: $err',
-            ja: 'エラー: $err',
+            en: 'Grammar data could not be loaded. Please try again.',
+            vi: 'Chưa tải được dữ liệu ngữ pháp. Vui lòng thử lại.',
+            ja: '文法データを読み込めませんでした。もう一度お試しください。',
           ),
         ),
       ),

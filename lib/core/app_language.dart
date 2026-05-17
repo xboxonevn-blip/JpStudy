@@ -4865,14 +4865,14 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
-  String kanjiListLoadErrorLabel(String error) {
+  String kanjiListLoadErrorLabel([String? _]) {
     switch (this) {
       case AppLanguage.en:
-        return 'Failed to load kanji: $error';
+        return 'Kanji data could not be loaded. Please try again.';
       case AppLanguage.vi:
-        return 'Lỗi tải dữ liệu kanji: $error';
+        return 'Chưa tải được dữ liệu kanji. Vui lòng thử lại.';
       case AppLanguage.ja:
-        return '漢字データの読み込みに失敗しました: $error';
+        return '漢字データを読み込めませんでした。もう一度お試しください。';
     }
   }
 

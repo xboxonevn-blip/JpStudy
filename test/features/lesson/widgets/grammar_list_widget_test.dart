@@ -155,12 +155,18 @@ void main() {
       expect(find.text('Chưa có dữ liệu ngữ pháp.'), findsOneWidget);
     });
 
-    testWidgets('error state shows error message', (tester) async {
+    testWidgets('error state shows localized learner-safe copy', (
+      tester,
+    ) async {
       _largeViewport(tester);
       await tester.pumpWidget(_buildHarness(error: Exception('load failed')));
       await _pump(tester);
 
-      expect(find.textContaining('Error:'), findsOneWidget);
+      expect(
+        find.text('Grammar data could not be loaded. Please try again.'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('load failed'), findsNothing);
     });
   });
 
