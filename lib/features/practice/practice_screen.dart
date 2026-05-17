@@ -233,9 +233,9 @@ class PracticeScreen extends ConsumerWidget {
   }
 
   String _title(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Study',
-    AppLanguage.vi => 'Học',
-    AppLanguage.ja => '学習',
+    AppLanguage.en => 'Review',
+    AppLanguage.vi => 'Ôn tập',
+    AppLanguage.ja => '復習',
   };
 
   String _searchLabel(AppLanguage language) => switch (language) {

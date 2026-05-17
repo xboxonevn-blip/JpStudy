@@ -58,11 +58,11 @@ Widget _buildScreen({
 
 void main() {
   group('PracticeScreen — rendering', () {
-    testWidgets('shows app bar with Practice title', (tester) async {
+    testWidgets('shows app bar with Review title', (tester) async {
       await tester.pumpWidget(_buildScreen());
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
-      expect(find.text('Study'), findsOneWidget);
+      expect(find.text('Review'), findsOneWidget);
     });
 
     testWidgets('shows search icon button', (tester) async {
