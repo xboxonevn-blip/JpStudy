@@ -30,6 +30,25 @@ test('buildDeletionReadiness reports operator blockers without deleting data', (
   ]);
 });
 
+test('buildDeletionReadiness does not mark unknown BigQuery as absent', () => {
+  const readiness = buildDeletionReadiness({
+    identifiers: { uid: 'uid-1' },
+    storage: { ready: true, deferred: true, reason: 'storage-descoped-for-beta' },
+    ga4: { adminRetention: { ok: false, status: 'skipped' } },
+    bigQuery: { datasetExists: null, tableCount: 0 },
+    localTools: {
+      firebaseAdminDependency: true,
+      adminDeleteUserTool: true,
+      gcloudAvailable: false,
+    },
+  });
+
+  assert.equal(
+    readiness.nextActions.includes('Record BigQuery cleanup as not applicable: dataset absent.'),
+    false,
+  );
+});
+
 test('buildDeletionReadiness blocks UID-scoped deletion when UID is missing', () => {
   const readiness = buildDeletionReadiness({
     identifiers: {},

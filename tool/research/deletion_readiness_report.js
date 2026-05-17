@@ -238,7 +238,7 @@ async function main(argv = process.argv.slice(2)) {
           reason: 'storage-descoped-for-beta',
         },
         ga4: { adminRetention: { ok: false, status: 'skipped' } },
-        bigQuery: { datasetExists: false, tableCount: 0 },
+        bigQuery: { datasetExists: null, tableCount: 0 },
         localTools: {
           firebaseAdminDependency: hasFirebaseAdminDependency(),
           adminDeleteUserTool: hasAdminDeleteUserTool(),
