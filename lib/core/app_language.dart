@@ -385,6 +385,21 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String curriculumLessonTitle(String levelCode, int number) {
+    final normalized = levelCode.trim().toUpperCase();
+    if (normalized == 'N3' || normalized == 'N2' || normalized == 'N1') {
+      switch (this) {
+        case AppLanguage.en:
+          return 'Shin Kanzen $normalized Lesson $number';
+        case AppLanguage.vi:
+          return 'Shin Kanzen $normalized B\u00e0i $number';
+        case AppLanguage.ja:
+          return '\u65b0\u5b8c\u5168\u30de\u30b9\u30bf\u30fc $normalized $number';
+      }
+    }
+    return lessonTitle(number);
+  }
+
   String lessonSubtitle(int termCount) {
     switch (this) {
       case AppLanguage.en:

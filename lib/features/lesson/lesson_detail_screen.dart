@@ -106,7 +106,10 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       level.shortLabel,
       widget.lessonId,
     );
-    final fallbackTitle = language.lessonTitle(sourceLessonId);
+    final fallbackTitle = language.curriculumLessonTitle(
+      level.shortLabel,
+      sourceLessonId,
+    );
     final titleAsync = ref.watch(
       lessonTitleProvider(LessonTitleArgs(storageLessonId, fallbackTitle)),
     );
@@ -601,7 +604,10 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     // Refresh providers to update UI
     ref.invalidate(lessonDueTermsProvider(storageLessonId));
 
-    final fallbackTitle = language.lessonTitle(sourceLessonId);
+    final fallbackTitle = language.curriculumLessonTitle(
+      level.shortLabel,
+      sourceLessonId,
+    );
 
     ref.invalidate(
       lessonTermsProvider(
@@ -852,7 +858,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
           LessonTermsArgs(
             storageLessonId,
             level.shortLabel,
-            language.lessonTitle(sourceLessonId),
+            language.curriculumLessonTitle(level.shortLabel, sourceLessonId),
             sourceLessonId: sourceLessonId,
           ),
         ),

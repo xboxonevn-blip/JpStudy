@@ -19,21 +19,20 @@ UserLessonTermData _term(
   String term,
   String definition, {
   String reading = '',
-}) =>
-    UserLessonTermData(
-      id: id,
-      lessonId: 1,
-      term: term,
-      reading: reading,
-      definition: definition,
-      definitionEn: definition,
-      mnemonicVi: '',
-      mnemonicEn: '',
-      kanjiMeaning: '',
-      isStarred: false,
-      isLearned: false,
-      orderIndex: id,
-    );
+}) => UserLessonTermData(
+  id: id,
+  lessonId: 1,
+  term: term,
+  reading: reading,
+  definition: definition,
+  definitionEn: definition,
+  mnemonicVi: '',
+  mnemonicEn: '',
+  kanjiMeaning: '',
+  isStarred: false,
+  isLearned: false,
+  orderIndex: id,
+);
 
 double _contrast(Color foreground, Color background) {
   final resolvedForeground = foreground.a < 1
@@ -49,32 +48,51 @@ double _contrast(Color foreground, Color background) {
 Widget buildScreen(
   List<UserLessonTermData> terms, {
   Future<List<UserLessonTermData>>? termsFuture,
+  StudyLevel level = StudyLevel.n5,
+  int lessonId = 1,
+  String? expectedFallbackTitle,
 }) {
-  final fallbackTitle = AppLanguage.en.lessonTitle(1);
+  final sourceLessonId = LessonRepository.curriculumSourceLessonId(
+    level.shortLabel,
+    lessonId,
+  );
+  final storageLessonId = LessonRepository.curriculumStorageLessonId(
+    level.shortLabel,
+    lessonId,
+  );
+  final fallbackTitle =
+      expectedFallbackTitle ?? AppLanguage.en.lessonTitle(sourceLessonId);
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith(
         (ref) => AppLanguageController.test(AppLanguage.en),
       ),
-      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      studyLevelProvider.overrideWith((ref) => level),
       lessonTitleProvider(
-        LessonTitleArgs(1, fallbackTitle),
+        LessonTitleArgs(storageLessonId, fallbackTitle),
       ).overrideWith((ref) async => fallbackTitle),
       lessonTermsProvider(
-        LessonTermsArgs(1, 'N5', fallbackTitle, sourceLessonId: 1),
+        LessonTermsArgs(
+          storageLessonId,
+          level.shortLabel,
+          fallbackTitle,
+          sourceLessonId: sourceLessonId,
+        ),
       ).overrideWith((ref) => termsFuture ?? Future.value(terms)),
       lessonGrammarProvider(
-        const LessonTermsArgs(1, 'N5', ''),
+        LessonTermsArgs(sourceLessonId, level.shortLabel, ''),
       ).overrideWith((ref) async => const []),
       grammarDueCountProvider.overrideWith((ref) async => 0),
       grammarGhostCountProvider.overrideWith((ref) => Stream.value(0)),
       lessonKanjiProvider(1).overrideWith((ref) async => const []),
       lessonDueTermsProvider(
-        1,
+        storageLessonId,
       ).overrideWith((ref) async => const <UserLessonTermData>[]),
       srsStateProvider(1).overrideWith((ref) async => null),
     ],
-    child: const MaterialApp(home: LessonDetailScreen(lessonId: 1)),
+    child: MaterialApp(
+      home: LessonDetailScreen(lessonId: lessonId, levelCode: level.shortLabel),
+    ),
   );
 }
 
@@ -87,6 +105,23 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.byIcon(Icons.chevron_left), findsOneWidget);
     expect(find.byType(TabBar), findsOneWidget);
+  });
+
+  testWidgets('upper JLPT lesson title uses Shin Kanzen source label', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      buildScreen(
+        [_term(1, '相変わらず', 'as ever')],
+        level: StudyLevel.n2,
+        expectedFallbackTitle: 'Shin Kanzen N2 Lesson 1',
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    expect(find.textContaining('N2 / Shin Kanzen N2 Lesson 1'), findsOneWidget);
+    expect(find.textContaining('N2 / Minna No Nihongo 1'), findsNothing);
   });
 
   testWidgets('shows tab bar with Vocab, Grammar, Kanji tabs', (tester) async {
@@ -152,9 +187,7 @@ void main() {
   testWidgets('flashcard helper labels meet light-surface AA contrast', (
     tester,
   ) async {
-    await tester.pumpWidget(
-      buildScreen([_term(1, '犬', 'dog', reading: 'いぬ')]),
-    );
+    await tester.pumpWidget(buildScreen([_term(1, '犬', 'dog', reading: 'いぬ')]));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
 

@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
@@ -79,6 +78,48 @@ void main() {
 
     await pumpSmokeRoute(tester, AppRoutePath.today);
     expect(AppRouter.router.routeInformationProvider.value.uri.path, '/');
+
+    await disposeSmokeApp(tester);
+  });
+
+  testWidgets('desktop sidebar clicks keep URL and selected branch aligned', (
+    tester,
+  ) async {
+    await pumpReleaseSmokeApp(tester, size: const Size(1440, 1600));
+
+    await pumpSmokeRoute(tester, AppRoutePath.examCenter);
+    expect(
+      AppRouter.router.routeInformationProvider.value.uri.path,
+      '/exam-center',
+    );
+    expect(find.byType(ExamCenterHubScreen), findsOneWidget);
+
+    await tester.tap(
+      find
+          .ancestor(of: find.text('Profile'), matching: find.byType(InkWell))
+          .first,
+    );
+    await tester.pumpAndSettle(const Duration(milliseconds: 100));
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/me');
+    expect(find.byType(MeScreen), findsOneWidget);
+
+    await tester.tap(
+      find
+          .ancestor(of: find.text('Learn'), matching: find.byType(InkWell))
+          .first,
+    );
+    await tester.pumpAndSettle(const Duration(milliseconds: 100));
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/learn');
+    expect(find.byType(LearnHubScreen), findsOneWidget);
+
+    await tester.tap(
+      find
+          .ancestor(of: find.text('Profile'), matching: find.byType(InkWell))
+          .first,
+    );
+    await tester.pumpAndSettle(const Duration(milliseconds: 100));
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/me');
+    expect(find.byType(MeScreen), findsOneWidget);
 
     await disposeSmokeApp(tester);
   });

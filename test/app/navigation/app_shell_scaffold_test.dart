@@ -52,7 +52,7 @@ void main() {
     expect(sidebarEstimatedContentHeightForTesting, lessThan(600));
   });
 
-  test('shell branch tap uses one navigation mechanism', () {
+  test('shell branch tap uses deterministic URL navigation', () {
     final source = File(
       'lib/app/navigation/app_shell_scaffold.dart',
     ).readAsStringSync();
@@ -60,7 +60,8 @@ void main() {
       r'void _goToBranch[\s\S]*?\n  \}',
     ).firstMatch(source)!.group(0)!;
 
-    expect(goToBranchBody, contains('navigationShell.goBranch'));
-    expect(goToBranchBody, isNot(contains('GoRouter.of(context).go')));
+    expect(goToBranchBody, contains('GoRouter.of(context).go'));
+    expect(goToBranchBody, contains('_branchInitialLocations[index]'));
+    expect(goToBranchBody, isNot(contains('navigationShell.goBranch')));
   });
 }

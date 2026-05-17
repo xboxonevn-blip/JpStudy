@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
 import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
@@ -36,9 +38,21 @@ class LessonPracticeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
-    final fallbackTitle = language.lessonTitle(lessonId);
+    final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
+    final sourceLessonId = LessonRepository.curriculumSourceLessonId(
+      level.shortLabel,
+      lessonId,
+    );
+    final storageLessonId = LessonRepository.curriculumStorageLessonId(
+      level.shortLabel,
+      lessonId,
+    );
+    final fallbackTitle = language.curriculumLessonTitle(
+      level.shortLabel,
+      sourceLessonId,
+    );
     final titleAsync = ref.watch(
-      lessonTitleProvider(LessonTitleArgs(lessonId, fallbackTitle)),
+      lessonTitleProvider(LessonTitleArgs(storageLessonId, fallbackTitle)),
     );
     final lessonTitle = titleAsync.maybeWhen(
       data: (value) => value,
@@ -48,17 +62,17 @@ class LessonPracticeScreen extends ConsumerWidget {
     switch (mode) {
       case LessonPracticeMode.learn:
         return LearnModeIntegration(
-          lessonId: lessonId,
+          lessonId: storageLessonId,
           lessonTitle: lessonTitle,
         );
       case LessonPracticeMode.test:
         return TestModeIntegration(
-          lessonId: lessonId,
+          lessonId: storageLessonId,
           lessonTitle: lessonTitle,
         );
       case LessonPracticeMode.write:
         return WriteModeIntegration(
-          lessonId: lessonId,
+          lessonId: storageLessonId,
           lessonTitle: lessonTitle,
         );
     }
