@@ -7,13 +7,6 @@ void main() {
     'selected user-facing source files do not contain mojibake literals',
     () {
       final bannedByFile = <String, List<String>>{
-        'lib/features/custom_decks/custom_decks_screen.dart': [
-          "'?????'",
-          "'???????'",
-          "'????????'",
-          "'12???'",
-          "'????'",
-        ],
         'lib/features/flashcards/widgets/enhanced_flashcard.dart': [
           'Ð? nh?',
           "'??? \$pct%'",

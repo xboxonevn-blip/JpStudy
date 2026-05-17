@@ -4,12 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
-import 'package:jpstudy/features/custom_decks/custom_decks_screen.dart';
-import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/leaderboard/leaderboard_screen.dart';
 import 'package:jpstudy/features/premium/premium_screen.dart';
-import 'package:jpstudy/features/study_hub/providers/study_hub_board_provider.dart';
 
 Widget _wrap(Widget child) => ProviderScope(
   overrides: [
@@ -134,98 +131,5 @@ void main() {
     expect(find.text('17'), findsOneWidget);
     expect(find.text('90%'), findsOneWidget);
     expect(find.textContaining('17 reviewed'), findsOneWidget);
-  });
-
-  testWidgets('CustomDecksScreen switches study recipe content', (
-    tester,
-  ) async {
-    await tester.pumpWidget(_wrap(const CustomDecksScreen()));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Study sessions'), findsOneWidget);
-    expect(find.text('18 min'), findsOneWidget);
-
-    await tester.tap(find.text('Mixed practice'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('22 min'), findsOneWidget);
-    expect(find.text('18 high-frequency questions.'), findsOneWidget);
-  });
-
-  testWidgets('CustomDecksScreen uses study hub and continue data', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          appLanguageProvider.overrideWith(
-            (ref) => AppLanguageController.test(AppLanguage.en),
-          ),
-          studyHubDecksProvider.overrideWith(
-            (ref) async => const StudyHubDecksBoard(
-              nextUp: StudyHubLessonDeck(
-                id: 3,
-                title: 'Lesson 3',
-                progressPercent: 64,
-                dueCount: 5,
-                isFinished: false,
-              ),
-              activeDecks: [
-                StudyHubLessonDeck(
-                  id: 5,
-                  title: 'Lesson 5',
-                  progressPercent: 30,
-                  dueCount: 2,
-                  isFinished: false,
-                ),
-              ],
-              completedDecks: [
-                StudyHubLessonDeck(
-                  id: 1,
-                  title: 'Lesson 1',
-                  progressPercent: 100,
-                  dueCount: 0,
-                  isFinished: true,
-                ),
-              ],
-            ),
-          ),
-          continueActionProvider.overrideWith(
-            (ref) async => const ContinueAction(
-              type: ContinueActionType.vocabReview,
-              label: 'Review vocab',
-              count: 7,
-            ),
-          ),
-          dashboardProvider.overrideWith(
-            (ref) => Stream.value(
-              const DashboardState(
-                streak: 4,
-                todayXp: 12,
-                vocabDue: 7,
-                grammarDue: 3,
-                kanjiDue: 2,
-                vocabMistakeCount: 1,
-                grammarMistakeCount: 2,
-                kanjiMistakeCount: 0,
-                totalMistakeCount: 3,
-              ),
-            ),
-          ),
-        ],
-        child: const MaterialApp(home: CustomDecksScreen()),
-      ),
-    );
-    await tester.pumpAndSettle();
-
-    expect(find.textContaining('Lesson 3'), findsAtLeastNWidgets(1));
-    expect(
-      find.textContaining('7 items need quick attention.'),
-      findsOneWidget,
-    );
-    expect(
-      find.textContaining('1 active set available right now.'),
-      findsOneWidget,
-    );
   });
 }

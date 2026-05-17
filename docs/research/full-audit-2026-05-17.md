@@ -176,6 +176,8 @@ Verified source changes:
 - New navigation calls for lesson learn/write/match/flashcards/test use canonical practice routes.
 - Legacy `/active` and `/study` routes now redirect to canonical `/review`
   instead of exposing the old custom-deck/study surfaces.
+- The old custom-deck source module was removed so beta remains a fixed JLPT
+  curriculum, not a user-set builder.
 - Home no longer mounts a second inline onboarding system or mobile-only fallback path.
 - `CommunityScreen` was removed because Community was not a real community surface and now resolves to Profile.
 - Review screen title now matches the shell label.
