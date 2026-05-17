@@ -267,4 +267,34 @@ void main() {
     expect(terms.single.definition, 'như mọi khi; vẫn như cũ');
     expect(terms.single.definitionEn, 'as ever; as usual; the same');
   });
+
+  test('seedTermsIfEmpty loads canonical lesson vocab for every JLPT level', () async {
+    const cases = [
+      (level: 'N5', lessonId: 1, expectedTerm: '私'),
+      (level: 'N4', lessonId: 26, expectedTerm: '見ます'),
+      (level: 'N3', lessonId: 1, expectedTerm: '愛'),
+      (level: 'N2', lessonId: 1, expectedTerm: 'あいかわらず'),
+      (level: 'N1', lessonId: 1, expectedTerm: '嗚呼'),
+    ];
+
+    for (final item in cases) {
+      await db.delete(db.userLessonTerm).go();
+      await db.delete(db.userLesson).go();
+      await repository.ensureLesson(
+        lessonId: item.lessonId,
+        level: item.level,
+        title: '${item.level} lesson ${item.lessonId}',
+      );
+      await repository.seedTermsIfEmpty(item.lessonId, item.level);
+
+      final terms = await repository.fetchTerms(item.lessonId);
+      expect(terms, isNotEmpty, reason: '${item.level} lesson should load');
+      expect(terms.first.term, item.expectedTerm);
+      expect(
+        terms.every((term) => term.definition.trim().isNotEmpty),
+        isTrue,
+        reason: '${item.level} terms should have Vietnamese definitions',
+      );
+    }
+  });
 }
