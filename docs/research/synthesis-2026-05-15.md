@@ -13,17 +13,17 @@ orientation.
 
 The product is not ready for a broad 100-user mixed N5-N1 public beta without
 caveats. It is closer to a controlled pilot because the highest-risk unknowns
-are now explicit: GA4 BigQuery event export has appeared but learning-event rows
-are still missing from export, upper-level scope/routing still needs caveats
-despite clean machine/open-review audit counts, legal/error-monitoring/deploy
-automation need live operational proof, and several advanced-persona promises
-remain out of scope.
+are now explicit: GA4 BigQuery export exists and later ingested the learning
+events on 2026-05-17, upper-level scope/routing still needs caveats despite
+clean machine/open-review audit counts, legal/error-monitoring/deletion/GA4
+retention proof still need live operational evidence, and several
+advanced-persona promises remain out of scope.
 
 ## 8 Dimension Status
 
 | Dimension | Status | Current finding |
 | --- | --- | --- |
-| D1 Measurement | Complete, first real export sampled | `analytics_536663906.events_20260514` exists; first real NS is `0.00%` across `4` observed users, with no post-onboarding learning events yet. |
+| D1 Measurement | Complete, first real export sampled | `analytics_536663906.events_20260514` exists. Later 2026-05-17 export proof includes all three learning-event families and first source-verifiable NS `qualifiedUsers=1/5`. |
 | D2 Content | Controlled pilot content clean across N5-N1 | N5-N1 now have `0` machine/open-review items. N5/N4 are launch-tier; N3/N2/N1 have launch-tier editorial quality with user spot-check pending and incomplete N1 kanji scope. |
 | D3 Vietnamese | Complete, targeted cleanup active | Mojibake guards are green and key user strings moved into `AppLanguage`; copy remains decentralized. |
 | D4 Personas | Complete, retested | Onboarding/level/Kana gates now pass in live re-test; upper vocab discoverability was the main residual blocker before the latest unlock work. |
@@ -53,8 +53,9 @@ remain out of scope.
 
 ## Top 10 Findings
 
-1. Real North Star reporting is no longer export-blocked, but the first sample
-   is too small and lacks SRS/quiz/quality events.
+1. Real North Star reporting is no longer export-blocked. The first
+   source-verifiable sample is still too small for outcome claims, but it now
+   includes SRS/quiz/quality events and `qualifiedUsers=1/5`.
 2. Content volume is high and the current N5-N1 audit is clean for
    machine/open-review debt, but upper-level spot-check/user approval and N1
    kanji scope remain caveats.

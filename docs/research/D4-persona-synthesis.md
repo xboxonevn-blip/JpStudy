@@ -35,8 +35,9 @@ visual/persona UX pass for those routes.
 Updated verdict: the live direct-route N5 fallback blocker is closed for
 seeded N4/N3/N2/N1 hash routes. Broad beta still stays FAIL because persona-fit
 gaps and external launch proofs remain: legal approval, Sentry DSN/first issue,
-Storage/deletion proof, BigQuery-exported learning rows, GA4 UI retention proof,
-and App Check enforcement.
+deletion proof, GA4 UI retention proof, and App Check enforcement. Firebase
+Storage is beta-deferred, and BigQuery-exported learning rows were later proven
+on 2026-05-17.
 
 ## 2026-05-16 Source Route Bootstrap Addendum
 
@@ -74,7 +75,7 @@ Scope: seeded live `/#/vocab` checks for upper-level catalog availability after 
 | N2 | PASS - Hajimete N2 `1,793 mục từ` open; Shin Kanzen Master N2 `1,797 mục từ` open. |
 | N1 | PASS - Hajimete N1 `3,463 mục từ` open; Shin Kanzen Master N1 `3,476 mục từ` open; N1+ correctly remains `Sắp ra mắt`. |
 
-Updated verdict: the stale upper-vocab live blocker from the earlier addendum is cleared for N3/N2/N1. Broad beta still stays FAIL because public-launch blockers remain outside this catalog slice: the first GA4 export sample lacks learning-outcome events, Sentry has no live DSN/first issue, legal copy is still review-needed, and Firebase Storage migration is descoped for beta in favor of local file export/import backup.
+Updated verdict: the stale upper-vocab live blocker from the earlier addendum is cleared for N3/N2/N1. Broad beta still stays FAIL because public-launch blockers remain outside this catalog slice: Sentry has no live DSN/first issue, legal copy is still review-needed, GA4 retention/deletion proof remain missing, and Firebase Storage migration is descoped for beta in favor of local file export/import backup. The earlier GA4 learning-export gap closed on 2026-05-17.
 
 ## 2026-05-15 Live Re-Test Addendum
 

@@ -14,8 +14,9 @@ by the 2026-05-17 owner decision because new Storage buckets require Blaze and
 the beta remains local-first on Spark. D2 content now reports `0`
 machine/open-review items across N5-N1; N3/N2/N1 still need user spot-check
 before any human-approval claim. Remaining blockers before the pilot are legal
-approval, Sentry operational proof, deletion proof, GA4 retention proof,
-exported GA4 learning rows, and later App Check enforcement.
+approval, Sentry operational proof, deletion proof, GA4 retention proof, and
+later App Check enforcement. The earlier GA4 learning-event export blocker
+closed on 2026-05-17 when BigQuery ingested all three learning event families.
 
 ## Highest-Leverage Findings Shipped
 

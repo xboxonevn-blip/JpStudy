@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-17
 
-Timestamp: `2026-05-17T07:14:38+07:00`
+Timestamp: `2026-05-17T08:28:03+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -30,12 +30,12 @@ The active mission is complete only if all are true:
 | CI/deploy latest | GitHub Actions run `25976329271` for `a98fbcec`: `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all `success` | Passed |
 | Local verification latest content/storage cluster | `flutter analyze lib test` passed; `flutter test` passed with `2286` tests; `npm run test:research-tooling` passed `50`; `dart run tool/research/content_vi_status_report.dart` reports machine/open-review `0/0` | Passed |
 | Live route matrix | `docs/research/D4-persona-synthesis.md` records Playwright checks for N4/N3/N2/N1 across `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`, `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/exam-center`; `npm run report:live-route-matrix -- --json` passed `36/36` | Passed for N4-N1 seeded hash routes; sparse semantics caveat remains for some routes |
-| Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T07:13+07` | Failed |
+| Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T08:27+07` | Failed |
 | Sentry operational proof | `npm run report:sentry-readiness -- --json` at `2026-05-17T07:14+07`: source/workflow gates present, GitHub secrets have `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, `JPSTUDY_SENTRY_DSN=false` | Missing |
 | Storage migration proof | Owner decision 2026-05-17 descopes Firebase Storage for beta; `npm run report:storage-readiness -- --json --skip-emulator` now reports `storage-descoped-for-beta` | Deferred for beta |
 | Deletion proof | `npm run report:deletion-readiness -- --json` at `2026-05-17T07:14+07`: executable `false`; blocked by missing Support ID/Firebase UID, GA4 Admin/deletion access, and missing `gcloud` or console-equivalent proof | Missing |
 | GA4 retention proof | GA4 Admin API probe returns `403`; `docs/compliance/launch-proof-state.json` has `ga4Retention.verified=false` | Missing |
-| GA4 learning export | `npm run report:ga4-export -- --json` at `2026-05-17T07:13+07`: BigQuery tables `events_20260514` and `events_20260515`; event counts still only `page_view`, `user_engagement`, `session_start`, and `first_visit`; learning rows still missing | Missing |
+| GA4 learning export | `npm run report:ga4-export -- --json` at `2026-05-17T08:28+07`: BigQuery tables `events_20260514`/`15`/`16`; `srs_review_completed=69`, `n5_micro_quiz_completed=3`, `session_quality_rated=2`; `northStar.qualifiedUsers=1` | Passed |
 | App Check enforcement | `docs/compliance/launch-proof-state.json` has `appCheck.enforced=false`; enforcement intentionally deferred until monitoring window | Deferred/missing |
 
 ## Latest Readiness Result
@@ -49,14 +49,13 @@ npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-p
 Latest checked result:
 
 ```text
-generatedAt -> 2026-05-17T00:13:59.250Z
+generatedAt -> 2026-05-17T01:27:53.760Z
 complete -> false
 blockers:
 - legal-approval-missing
 - sentry-dsn-missing
 - deletion-proof-missing
 - ga4-retention-proof-missing
-- ga4-learning-events-missing
 - app-check-enforcement-deferred
 ```
 
@@ -68,8 +67,7 @@ These items cannot be honestly closed by repo edits alone:
 2. Sentry DSN, secret-backed smoke run with `sentry_smoke=true`, and first deployed issue URL.
 3. A real deletion proof against a dedicated test UID/support ID.
 4. GA4 Admin retention Console/API proof.
-5. BigQuery export ingestion of the already client-proven learning event rows.
-6. App Check enforcement after the beta monitoring window.
+5. App Check enforcement after the beta monitoring window.
 
 Firebase Storage note: cloud backup and legacy migration are not beta
 requirements. The project remains on Spark, Storage setup would require Blaze,

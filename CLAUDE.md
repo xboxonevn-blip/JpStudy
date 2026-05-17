@@ -176,8 +176,9 @@ Active workstream status (as of 2026-05-17):
   user can add that after item-level review.
 - Remaining blockers are operational/legal proofs: legal approval,
   Sentry DSN + first issue, first executed deletion proof, GA4 UI retention
-  proof, BigQuery-exported learning-event rows, and later App Check enforcement
-  proof. Firebase Storage is descoped for beta by owner decision on 2026-05-17
+  proof, and later App Check enforcement proof. GA4 BigQuery learning-event
+  export proof closed on 2026-05-17T08:28+07 with all three learning-event
+  families present. Firebase Storage is descoped for beta by owner decision on 2026-05-17
   because new buckets require Blaze and the beta stays Spark/local-first with
   file export/import backup. Keep Storage scaffolding gated for future cloud
   sync; do not require bucket provisioning for beta launch. The local
