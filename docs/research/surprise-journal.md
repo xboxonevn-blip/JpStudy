@@ -488,3 +488,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: live Review/Home next-lesson actions used `language.lessonTitle(storageLessonId)` directly, so scoped IDs such as `200001` rendered as `Minna No Nihongo 200001` even after lesson detail was correct.
 - Delta: -25 percentage points on confidence that lesson title correctness can be verified from `/lesson/:id` alone.
 - Updated belief: curriculum identity must be checked on every CTA surface that formats lesson IDs, especially Home/Review continuation providers.
+
+## 2026-05-17T21:30+07:00 - Copy leaks can hide in secondary badges
+
+- Prior belief: the vocab copy guard over central helpers covered the owner-reported `Companion` leak.
+- Actual observation: live semantics still exposed `Bổ trợ Companion Minna no Nihongo I` because a status badge used a private hardcoded `_programBadge()` path instead of the localized helper.
+- Delta: -20 percentage points on confidence that helper-level copy tests cover composite cards.
+- Updated belief: copy QA must include rendered widget text for dense catalog cards, not only string helper samples.

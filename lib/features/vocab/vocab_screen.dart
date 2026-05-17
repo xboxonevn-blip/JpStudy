@@ -413,14 +413,19 @@ class VocabScreen extends ConsumerWidget {
   }
 }
 
-String _programBadge(_VocabProgramType type) => switch (type) {
-  _VocabProgramType.minna => 'Companion',
-  _VocabProgramType.shinkanzen => 'Shin Kanzen',
-  _VocabProgramType.listening => 'Listening',
-  _VocabProgramType.advanced => 'Advanced',
-  _VocabProgramType.specialized => 'Specialized',
-  _ => 'Path',
-};
+String _programBadge(_VocabProgramType type, AppLanguage language) =>
+    switch (type) {
+      _VocabProgramType.minna => language.vocabProgramTypeLabel('minna'),
+      _VocabProgramType.shinkanzen => 'Shin Kanzen',
+      _VocabProgramType.listening => language.vocabProgramTypeLabel(
+        'listening',
+      ),
+      _VocabProgramType.advanced => language.vocabProgramTypeLabel('advanced'),
+      _VocabProgramType.specialized => language.vocabProgramTypeLabel(
+        'specialized',
+      ),
+      _ => language.vocabProgramTypeLabel('core'),
+    };
 
 int? _chapterCountForLevel(String levelCode) => switch (levelCode) {
   'N5' => 14,

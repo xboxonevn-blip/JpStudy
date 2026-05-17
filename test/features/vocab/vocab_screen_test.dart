@@ -697,6 +697,32 @@ void main() {
     expect(find.byKey(const ValueKey('minna_review_cta')), findsOneWidget);
   });
 
+  testWidgets('Vietnamese catalog does not leak English companion badge', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({'app.locale': 'vi'});
+    _prefs = await SharedPreferences.getInstance();
+    final repo = _FakeVocabLessonRepository(
+      bank: {
+        'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
+        'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
+        'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
+        'N2': List.generate(5, (i) => _item(i + 31, 'n2_$i', 'N2')),
+        'N1': List.generate(5, (i) => _item(i + 41, 'n1_$i', 'N1')),
+      },
+    );
+
+    await tester.pumpWidget(_buildRouterScreen(repo: repo));
+    await _pumpCatalog(tester);
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('program_n5_n5_companion')),
+    );
+    await _pumpCatalog(tester);
+
+    expect(find.text('Companion'), findsNothing);
+    expect(find.text('Bổ trợ'), findsWidgets);
+  });
+
   testWidgets('Minna catalog lesson card opens lesson detail route', (
     tester,
   ) async {
