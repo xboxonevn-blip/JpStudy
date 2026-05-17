@@ -1906,6 +1906,17 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get lessonVocabTabLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Vocab';
+      case AppLanguage.vi:
+        return 'T\u1eeb v\u1ef1ng';
+      case AppLanguage.ja:
+        return '\u8a9e\u5f59';
+    }
+  }
+
   String get reviewAction {
     switch (this) {
       case AppLanguage.en:

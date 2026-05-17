@@ -9,6 +9,7 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/lesson/lesson_detail_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,6 +46,12 @@ Widget buildScreen(
       lessonTermsProvider(
         LessonTermsArgs(1, 'N5', fallbackTitle, sourceLessonId: 1),
       ).overrideWith((ref) => termsFuture ?? Future.value(terms)),
+      lessonGrammarProvider(
+        const LessonTermsArgs(1, 'N5', ''),
+      ).overrideWith((ref) async => const []),
+      grammarDueCountProvider.overrideWith((ref) async => 0),
+      grammarGhostCountProvider.overrideWith((ref) => Stream.value(0)),
+      lessonKanjiProvider(1).overrideWith((ref) async => const []),
       lessonDueTermsProvider(
         1,
       ).overrideWith((ref) async => const <UserLessonTermData>[]),
@@ -65,15 +72,51 @@ void main() {
     expect(find.byType(TabBar), findsOneWidget);
   });
 
-  testWidgets('shows tab bar with Flashcards, Grammar, Kanji tabs', (
+  testWidgets('shows tab bar with Vocab, Grammar, Kanji tabs', (tester) async {
+    await tester.pumpWidget(buildScreen([_term(1, '犬', 'dog')]));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text(AppLanguage.en.lessonVocabTabLabel), findsWidgets);
+    expect(find.text(AppLanguage.en.flashcardsAction), findsWidgets);
+    expect(find.text(AppLanguage.en.grammarLabel), findsWidgets);
+    expect(find.text(AppLanguage.en.kanjiLabel), findsWidgets);
+  });
+
+  testWidgets('lesson tabs switch to grammar and kanji panels', (tester) async {
+    await tester.pumpWidget(buildScreen([_term(1, '犬', 'dog')]));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    await tester.tap(find.text(AppLanguage.en.grammarLabel));
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(
+      DefaultTabController.of(tester.element(find.byType(TabBar))).index,
+      1,
+    );
+
+    await tester.tap(find.text(AppLanguage.en.kanjiLabel));
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(
+      DefaultTabController.of(tester.element(find.byType(TabBar))).index,
+      2,
+    );
+  });
+
+  testWidgets('curriculum lesson menu hides user-set editing actions', (
     tester,
   ) async {
     await tester.pumpWidget(buildScreen([_term(1, '犬', 'dog')]));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
-    expect(find.text(AppLanguage.en.flashcardsAction), findsWidgets);
-    expect(find.text(AppLanguage.en.grammarLabel), findsWidgets);
-    expect(find.text(AppLanguage.en.kanjiLabel), findsWidgets);
+
+    await tester.tap(find.byIcon(Icons.more_horiz));
+    await tester.pumpAndSettle();
+
+    expect(find.text(AppLanguage.en.copySetLabel), findsNothing);
+    expect(find.text(AppLanguage.en.addTermLabel), findsNothing);
+    expect(find.text(AppLanguage.en.combineSetLabel), findsNothing);
+    expect(find.text(AppLanguage.en.resetProgressLabel), findsOneWidget);
+    expect(find.text(AppLanguage.en.reportLabel), findsOneWidget);
   });
 
   testWidgets('does not show zero totals while lesson terms are loading', (

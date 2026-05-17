@@ -26,7 +26,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 enum _LessonMode { flashcards, review }
 
-enum _MenuAction { edit, addTerm, reset, combine, report }
+enum _MenuAction { reset, report }
 
 class LessonDetailScreen extends ConsumerStatefulWidget {
   const LessonDetailScreen({super.key, required this.lessonId, this.levelCode});
@@ -39,8 +39,6 @@ class LessonDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
-  static final _whitespaceRe = RegExp(r'\s+');
-
   bool _showHints = true;
   bool _trackProgress = false;
   final FsrsService _fsrsService = FsrsService();
@@ -196,15 +194,8 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                   const SizedBox(width: 8),
                   _OverflowMenu(
                     language: language,
-                    onSelected: (action) => _handleMenu(
-                      action,
-                      context,
-                      language,
-                      level,
-                      storageLessonId,
-                      title,
-                      terms,
-                    ),
+                    onSelected: (action) =>
+                        _handleMenu(action, language, level, title, terms),
                   ),
                   const SizedBox(width: 12),
                 ],
@@ -213,9 +204,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                   unselectedLabelColor: palette.ink.withValues(alpha: 0.55),
                   indicatorColor: palette.primary,
                   tabs: [
-                    Tab(
-                      text: language.flashcardsAction,
-                    ), // Reuse Flashcards label for Vocab for now
+                    Tab(text: language.lessonVocabTabLabel),
                     Tab(text: language.grammarLabel),
                     Tab(text: language.kanjiLabel),
                   ],
@@ -321,8 +310,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                                     onShowHintsChanged: (value) =>
                                         _updateShowHints(value),
                                     onFlip: onFlip,
-                                    onEdit: () =>
-                                        context.openLessonEdit(storageLessonId),
+                                    onEdit: null,
                                     onStar: currentTerm == null
                                         ? null
                                         : () => _toggleStar(
@@ -689,17 +677,6 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     await prefs.setBool(key, value);
   }
 
-  String _termKey(String term, String reading, String definition) {
-    final cleanTerm = _normalizeKeyPart(term);
-    final cleanReading = _normalizeKeyPart(reading);
-    final cleanDefinition = _normalizeKeyPart(definition);
-    return '$cleanTerm|$cleanReading|$cleanDefinition';
-  }
-
-  String _normalizeKeyPart(String value) {
-    return value.trim().replaceAll(_whitespaceRe, ' ').toLowerCase();
-  }
-
   void _maybeSyncTermFlags(List<UserLessonTermData> terms) {
     final ids = terms.map((term) => term.id).toSet();
     final starred = terms
@@ -820,140 +797,19 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
 
   void _handleMenu(
     _MenuAction action,
-    BuildContext context,
     AppLanguage language,
     StudyLevel level,
-    int storageLessonId,
     String title,
     List<UserLessonTermData> terms,
   ) {
     switch (action) {
-      case _MenuAction.edit:
-        context.openLessonEdit(storageLessonId);
-        break;
-      case _MenuAction.addTerm:
-        _showQuickAddTerm(language, level);
-        break;
       case _MenuAction.reset:
         _resetProgress(language, level);
-        break;
-      case _MenuAction.combine:
-        _combineLesson(language, level, terms);
         break;
       case _MenuAction.report:
         _reportLesson(language, level, title, terms);
         break;
     }
-  }
-
-  Future<void> _showQuickAddTerm(AppLanguage language, StudyLevel level) async {
-    final termController = TextEditingController();
-    final readingController = TextEditingController();
-    final definitionController = TextEditingController();
-    var canSave = false;
-    final saved = await showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setDialogState) {
-            return AlertDialog(
-              title: Text(language.addTermLabel),
-              content: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      controller: termController,
-                      decoration: InputDecoration(
-                        labelText: language.termLabel,
-                      ),
-                      onChanged: (value) {
-                        final next = value.trim().isNotEmpty;
-                        if (next != canSave) {
-                          setDialogState(() => canSave = next);
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      controller: readingController,
-                      decoration: InputDecoration(
-                        labelText: language.readingLabel,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      controller: definitionController,
-                      decoration: InputDecoration(
-                        labelText: language.definitionLabel,
-                      ),
-                      maxLines: 3,
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text(
-                    MaterialLocalizations.of(context).cancelButtonLabel,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: canSave
-                      ? () => Navigator.of(context).pop(true)
-                      : null,
-                  child: Text(MaterialLocalizations.of(context).okButtonLabel),
-                ),
-              ],
-            );
-          },
-        );
-      },
-    );
-    if (saved != true || !context.mounted) {
-      termController.dispose();
-      readingController.dispose();
-      definitionController.dispose();
-      return;
-    }
-    final term = termController.text.trim();
-    final reading = readingController.text.trim();
-    final definition = definitionController.text.trim();
-    termController.dispose();
-    readingController.dispose();
-    definitionController.dispose();
-    if (term.isEmpty) {
-      return;
-    }
-    final repo = ref.read(lessonRepositoryProvider);
-    final sourceLessonId = LessonRepository.curriculumSourceLessonId(
-      level.shortLabel,
-      widget.lessonId,
-    );
-    final storageLessonId = LessonRepository.curriculumStorageLessonId(
-      level.shortLabel,
-      widget.lessonId,
-    );
-    await repo.appendTerms(storageLessonId, [
-      LessonTermDraft(
-        term: term,
-        reading: reading,
-        definition: definition,
-        kanjiMeaning: '',
-      ),
-    ]);
-    ref.invalidate(lessonMetaProvider(level.shortLabel));
-    ref.invalidate(
-      lessonTermsProvider(
-        LessonTermsArgs(
-          storageLessonId,
-          level.shortLabel,
-          language.lessonTitle(sourceLessonId),
-          sourceLessonId: sourceLessonId,
-        ),
-      ),
-    );
   }
 
   Future<void> _resetProgress(AppLanguage language, StudyLevel level) async {
@@ -1013,164 +869,6 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(language.resetProgressErrorLabel)));
-    }
-  }
-
-  Future<void> _combineLesson(
-    AppLanguage language,
-    StudyLevel level,
-    List<UserLessonTermData> terms,
-  ) async {
-    if (terms.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(language.combineEmptyLabel)));
-      return;
-    }
-    final repo = ref.read(lessonRepositoryProvider);
-    final lessons = await ref.read(lessonMetaProvider(level.shortLabel).future);
-    if (!mounted) {
-      return;
-    }
-    final options = lessons
-        .where((lesson) => lesson.id != widget.lessonId)
-        .toList();
-    final targetId = await showModalBottomSheet<int>(
-      context: context,
-      showDragHandle: true,
-      builder: (context) {
-        return SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.all(16),
-            shrinkWrap: true,
-            children: [
-              Text(
-                language.combineSetLabel,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 8),
-              ListTile(
-                leading: const Icon(Icons.add_circle_outline),
-                title: Text(language.combineNewLessonLabel),
-                onTap: () => Navigator.of(context).pop(-1),
-              ),
-              if (options.isNotEmpty) const Divider(),
-              for (final lesson in options)
-                ListTile(
-                  title: Text(lesson.title),
-                  subtitle: Text(language.termsCountLabel(lesson.termCount)),
-                  onTap: () => Navigator.of(context).pop(lesson.id),
-                ),
-            ],
-          ),
-        );
-      },
-    );
-    if (targetId == null) {
-      return;
-    }
-    if (!mounted) {
-      return;
-    }
-    int destinationId = targetId;
-    if (targetId == -1) {
-      final nextId = await repo.nextLessonId();
-      if (!mounted) {
-        return;
-      }
-      final defaultTitle = language.lessonTitle(nextId);
-      final controller = TextEditingController(text: defaultTitle);
-      final confirmed = await showDialog<bool>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(language.combineNewLessonLabel),
-          content: TextField(
-            controller: controller,
-            decoration: InputDecoration(hintText: defaultTitle),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text(language.createLessonLabel),
-            ),
-          ],
-        ),
-      );
-      if (confirmed != true) {
-        controller.dispose();
-        return;
-      }
-      final resolvedTitle = controller.text.trim().isEmpty
-          ? defaultTitle
-          : controller.text.trim();
-      final isCustomTitle = resolvedTitle != defaultTitle;
-      controller.dispose();
-      destinationId = await repo.createLesson(
-        level: level.shortLabel,
-        title: resolvedTitle,
-        isPublic: true,
-        isCustomTitle: isCustomTitle,
-      );
-    }
-    final drafts = terms
-        .map(
-          (term) => LessonTermDraft(
-            term: term.term,
-            reading: term.reading,
-            definition: term.definition,
-            kanjiMeaning: term.kanjiMeaning,
-          ),
-        )
-        .toList();
-    try {
-      final existing = await repo.fetchTerms(destinationId);
-      if (!mounted) {
-        return;
-      }
-      final existingKeys = existing
-          .map((term) => _termKey(term.term, term.reading, term.definition))
-          .toSet();
-      final filteredDrafts = <LessonTermDraft>[];
-      var skipped = 0;
-      for (final draft in drafts) {
-        final key = _termKey(draft.term, draft.reading, draft.definition);
-        if (existingKeys.add(key)) {
-          filteredDrafts.add(draft);
-        } else {
-          skipped += 1;
-        }
-      }
-      if (filteredDrafts.isEmpty) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(language.combineNoNewLabel)));
-        return;
-      }
-      await repo.appendTerms(destinationId, filteredDrafts);
-      ref.invalidate(lessonMetaProvider(level.shortLabel));
-      if (!mounted) {
-        return;
-      }
-      final message = skipped == 0
-          ? language.combineSuccessLabel
-          : language.combineSkippedLabel(skipped);
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(message)));
-    } catch (_) {
-      if (!mounted) {
-        return;
-      }
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(language.combineErrorLabel)));
     }
   }
 
@@ -1440,20 +1138,8 @@ class _OverflowMenu extends StatelessWidget {
       icon: const Icon(Icons.more_horiz),
       itemBuilder: (context) => [
         PopupMenuItem(
-          value: _MenuAction.edit,
-          child: Text(language.copySetLabel),
-        ),
-        PopupMenuItem(
-          value: _MenuAction.addTerm,
-          child: Text(language.addTermLabel),
-        ),
-        PopupMenuItem(
           value: _MenuAction.reset,
           child: Text(language.resetProgressLabel),
-        ),
-        PopupMenuItem(
-          value: _MenuAction.combine,
-          child: Text(language.combineSetLabel),
         ),
         PopupMenuItem(
           value: _MenuAction.report,
@@ -1543,7 +1229,7 @@ class _PracticeActions extends StatelessWidget {
       alignment: WrapAlignment.center,
       children: [
         _PracticeButton(
-          label: language.learnModeLabel,
+          label: language.flashcardsAction,
           onTap: () => context.openLessonLearn(lessonId, title: lessonTitle),
         ),
         _PracticeButton(
@@ -1551,17 +1237,8 @@ class _PracticeActions extends StatelessWidget {
           onTap: () => context.openLessonTest(lessonId, title: lessonTitle),
         ),
         _PracticeButton(
-          label: language.matchModeLabel,
-          onTap: () => context.openLessonMatch(lessonId, title: lessonTitle),
-        ),
-        _PracticeButton(
           label: language.writeModeLabel,
           onTap: () => context.openLessonWrite(lessonId, title: lessonTitle),
-        ),
-        _PracticeButton(
-          label: language.flashcardsAction,
-          onTap: () =>
-              context.openLessonFlashcards(lessonId, title: lessonTitle),
         ),
       ],
     );
@@ -1603,9 +1280,9 @@ class _LessonCard extends StatelessWidget {
     required this.isLearned,
     required this.onShowHintsChanged,
     required this.onFlip,
-    required this.onEdit,
     required this.onStar,
     required this.onLearned,
+    this.onEdit,
     this.onStartLearning,
     this.emptyLabel,
   });
@@ -1621,7 +1298,7 @@ class _LessonCard extends StatelessWidget {
   final bool isLearned;
   final ValueChanged<bool> onShowHintsChanged;
   final VoidCallback? onFlip;
-  final VoidCallback onEdit;
+  final VoidCallback? onEdit;
   final VoidCallback? onStar;
   final VoidCallback? onLearned;
   final VoidCallback? onStartLearning;
@@ -1699,21 +1376,23 @@ class _LessonCard extends StatelessWidget {
                         minHeight: AppTouchTargets.min,
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    IconButton(
-                      onPressed: onEdit,
-                      icon: Icon(
-                        Icons.edit_outlined,
-                        color: palette.ink.withValues(alpha: 0.55),
-                        size: 22,
+                    if (onEdit != null) ...[
+                      const SizedBox(width: 16),
+                      IconButton(
+                        onPressed: onEdit,
+                        icon: Icon(
+                          Icons.edit_outlined,
+                          color: palette.ink.withValues(alpha: 0.55),
+                          size: 22,
+                        ),
+                        tooltip: language.editLabel,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: AppTouchTargets.min,
+                          minHeight: AppTouchTargets.min,
+                        ),
                       ),
-                      tooltip: language.editLabel,
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(
-                        minWidth: AppTouchTargets.min,
-                        minHeight: AppTouchTargets.min,
-                      ),
-                    ),
+                    ],
                   ],
                 ),
               ],
