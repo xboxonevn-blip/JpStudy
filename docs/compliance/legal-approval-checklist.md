@@ -21,7 +21,7 @@ Review the source copy:
   - `legalDraftNotice`
 - `lib/features/legal/legal_document_screen.dart`
 
-Latest Codex live smoke on `2026-05-17T04:48+07:00`:
+Latest Codex live smoke on `2026-05-17T09:37+07:00`:
 
 - `https://jpstudy.web.app/#/privacy` rendered the Privacy draft screen.
 - `https://jpstudy.web.app/#/terms` rendered the Terms draft screen.
@@ -29,6 +29,9 @@ Latest Codex live smoke on `2026-05-17T04:48+07:00`:
 - Privacy copy stated beta backup uses local file export/import and account
   cloud backup is planned for a later release.
 - Terms copy stated account cloud backup is not part of the beta.
+- Note: Flutter CanvasKit does not expose all rendered text through
+  `document.body.innerText`; visual screenshot verification is required for
+  this smoke.
 
 This smoke verifies reachability and current product-state wording only. It is
 not legal approval.
