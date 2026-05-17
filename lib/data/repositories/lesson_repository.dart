@@ -560,15 +560,29 @@ class LessonRepository {
     if (existing == null) {
       return fallback;
     }
-    if (!existing.isCustomTitle || _isGeneratedLessonTitle(existing.title)) {
+    if (!existing.isCustomTitle ||
+        _isGeneratedLessonTitle(existing.title, lessonId: lessonId)) {
       return fallback;
     }
     return existing.title;
   }
 
-  bool _isGeneratedLessonTitle(String title) {
+  bool _isGeneratedLessonTitle(String title, {int? lessonId}) {
     final normalized = title.trim();
     if (normalized.isEmpty) {
+      return true;
+    }
+    final isUpperCurriculumLesson =
+        lessonId != null &&
+        _upperLevelLessonOffsets.values.any(
+          (offset) =>
+              lessonId > offset && lessonId <= offset + _defaultLessonCount,
+        );
+    if (isUpperCurriculumLesson &&
+        RegExp(
+          r'Minna\s+No?\s+Nihongo',
+          caseSensitive: false,
+        ).hasMatch(normalized)) {
       return true;
     }
     return RegExp(
