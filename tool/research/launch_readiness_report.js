@@ -99,6 +99,16 @@ function validateProofGate({
     };
   }
 
+  const placeholderFields = requiredFields.filter((field) =>
+    looksLikeProofPlaceholder(entry[field]),
+  );
+  if (placeholderFields.length > 0) {
+    return {
+      ok: false,
+      source: `proof-state ${gate} contains placeholder ${placeholderFields.join(', ')}`,
+    };
+  }
+
   const invalid = [];
   for (const [field, validate] of Object.entries(validators)) {
     const reason = validate(entry[field]);
@@ -115,6 +125,19 @@ function validateProofGate({
     ok: true,
     source: `proof-state ${proofState.path}`,
   };
+}
+
+function looksLikeProofPlaceholder(value) {
+  if (typeof value !== 'string') return false;
+  const normalized = value.trim().toLowerCase();
+  return (
+    normalized.includes('<') ||
+    normalized.includes('>') ||
+    normalized.includes('placeholder') ||
+    normalized.includes('owner/legal reviewer') ||
+    normalized === 'approved-copy-commit-hash' ||
+    normalized === 'dedicated-test-firebase-uid'
+  );
 }
 
 function isValidDate(value) {

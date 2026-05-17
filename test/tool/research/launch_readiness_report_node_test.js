@@ -225,6 +225,37 @@ test('collectEvidence ignores incomplete proof-state metadata', () => {
   assert.match(evidence.appCheck.source, /missing evidence/);
 });
 
+test('collectEvidence rejects proof-state template placeholders', () => {
+  const proofStatePath = writeTempProofState({
+    deletion: {
+      executed: true,
+      executedAt: '2026-05-17T10:00:00+07:00',
+      supportId: 'dedicated-test-firebase-uid',
+      evidence: 'Executed user-data deletion runbook for dedicated test UID.',
+    },
+    ga4Retention: {
+      verified: true,
+      verifiedAt: '2026-05-17T10:00:00+07:00',
+      retention: '2 months',
+      evidence: 'GA4 Admin Data retention UI for property <property-id> checked.',
+    },
+    appCheck: {
+      enforced: true,
+      enforcedAt: '2026-05-31T10:00:00+07:00',
+      evidence: 'Firebase App Check enforcement enabled for <app-id>.',
+    },
+  });
+
+  const evidence = collectEvidence({ skipLive: true, proofStatePath });
+
+  assert.equal(evidence.deletion.executed, false);
+  assert.match(evidence.deletion.source, /contains placeholder supportId/);
+  assert.equal(evidence.ga4.adminRetentionOk, false);
+  assert.match(evidence.ga4.adminRetentionSource, /contains placeholder evidence/);
+  assert.equal(evidence.appCheck.enforced, false);
+  assert.match(evidence.appCheck.source, /contains placeholder evidence/);
+});
+
 test('collectEvidence does not close gates from manual flags alone', () => {
   const evidence = collectEvidence({
     skipLive: true,
