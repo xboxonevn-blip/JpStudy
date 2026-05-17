@@ -99,9 +99,25 @@ void main() {
 
       await pumpSmokeRoute(tester, '/lesson/1/match-mode');
       uri = AppRouter.router.routeInformationProvider.value.uri;
-      expect(uri.path, '/lesson/1/practice/match');
+      expect(uri.path, '/lesson/1/practice/test');
+
+      await pumpSmokeRoute(tester, '/lesson/1/practice/match');
+      uri = AppRouter.router.routeInformationProvider.value.uri;
+      expect(uri.path, '/lesson/1/practice/test');
 
       await disposeSmokeApp(tester);
     },
   );
+
+  testWidgets('curriculum lesson edit route redirects to lesson detail', (
+    tester,
+  ) async {
+    await pumpReleaseSmokeApp(tester, size: const Size(1440, 1600));
+
+    await pumpSmokeRoute(tester, '/lesson/1/edit');
+    final uri = AppRouter.router.routeInformationProvider.value.uri;
+    expect(uri.path, '/lesson/1');
+
+    await disposeSmokeApp(tester);
+  });
 }

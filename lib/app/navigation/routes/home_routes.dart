@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_route_builders.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/features/home/home_screen.dart';
 import 'package:jpstudy/features/home/screens/daily_session_summary_screen.dart';
 import 'package:jpstudy/features/library/library_screen.dart';
 import 'package:jpstudy/features/lesson/lesson_detail_screen.dart';
-import 'package:jpstudy/features/lesson/lesson_edit_screen.dart';
 import 'package:jpstudy/features/lesson/lesson_practice_screen.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
@@ -59,12 +59,23 @@ StatefulShellBranch buildHomeBranch() {
       GoRoute(
         path: AppRoutePath.lessonEdit,
         name: AppRouteName.lessonEdit,
-        builder: (context, state) =>
-            LessonEditScreen(lessonId: routeInt(state, 'id')),
+        redirect: (context, state) =>
+            AppRouteLocation.lessonDetail(state.pathParameters['id']),
       ),
       GoRoute(
         path: AppRoutePath.lessonPractice,
         name: AppRouteName.lessonPractice,
+        redirect: (context, state) {
+          final modeValue = state.pathParameters['mode'] ?? 'learn';
+          if (modeValue == 'match') {
+            return AppRouteLocation.lessonPractice(
+              state.pathParameters['id'],
+              LessonPracticeMode.test,
+              title: state.uri.queryParameters['title'],
+            );
+          }
+          return null;
+        },
         builder: (context, state) {
           final modeValue = state.pathParameters['mode'] ?? 'learn';
           final mode =
@@ -91,7 +102,7 @@ StatefulShellBranch buildHomeBranch() {
         path: AppRoutePath.lessonMatchMode,
         name: AppRouteName.lessonMatchMode,
         redirect: (context, state) =>
-            redirectToLessonPractice(state, LessonPracticeMode.match),
+            redirectToLessonPractice(state, LessonPracticeMode.test),
       ),
     ],
   );

@@ -148,7 +148,7 @@ extension AppNavigationContext on BuildContext {
   void openLessonWrite(Object? lessonId, {String? title}) =>
       openLessonPractice(lessonId, LessonPracticeMode.write, title: title);
   void openLessonMatch(Object? lessonId, {String? title}) =>
-      openLessonPractice(lessonId, LessonPracticeMode.match, title: title);
+      openLessonPractice(lessonId, LessonPracticeMode.test, title: title);
   void openLessonFlashcards(Object? lessonId, {String? title}) =>
       openLessonPractice(lessonId, LessonPracticeMode.learn, title: title);
   void openLessonTest(Object? lessonId, {String? title}) =>

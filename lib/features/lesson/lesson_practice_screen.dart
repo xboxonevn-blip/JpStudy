@@ -3,12 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
-import 'package:jpstudy/features/games/match_game/lesson_match_screen.dart';
 import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
 import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
 import 'package:jpstudy/features/learn/integration/write_mode_integration.dart';
 
-enum LessonPracticeMode { learn, test, match, write }
+enum LessonPracticeMode { learn, test, write }
 
 LessonPracticeMode? lessonPracticeModeFromPath(String value) {
   switch (value) {
@@ -17,7 +16,7 @@ LessonPracticeMode? lessonPracticeModeFromPath(String value) {
     case 'test':
       return LessonPracticeMode.test;
     case 'match':
-      return LessonPracticeMode.match;
+      return LessonPracticeMode.test;
     case 'write':
       return LessonPracticeMode.write;
   }
@@ -57,8 +56,6 @@ class LessonPracticeScreen extends ConsumerWidget {
           lessonId: lessonId,
           lessonTitle: lessonTitle,
         );
-      case LessonPracticeMode.match:
-        return LessonMatchScreen(lessonId: lessonId, lessonTitle: lessonTitle);
       case LessonPracticeMode.write:
         return WriteModeIntegration(
           lessonId: lessonId,
