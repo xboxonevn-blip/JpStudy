@@ -9,6 +9,7 @@ class AppRoutePath {
   static const vocabReview = '/vocab/review';
   static const vocabMinna = '/vocab/minna';
   static const vocabHajimete = '/vocab/hajimete';
+  static const vocabShinkanzen = '/vocab/shinkanzen';
   static const vocabHajimeteChapter = '/vocab/hajimete/chapter';
   static const vocabMatchSession = '/vocab/match-session';
   static const vocabDetail = '/vocab/:id';
@@ -88,6 +89,7 @@ class AppRouteName {
   static const vocabReview = 'vocab-review';
   static const vocabMinna = 'vocab-minna';
   static const vocabHajimete = 'vocab-hajimete';
+  static const vocabShinkanzen = 'vocab-shinkanzen';
   static const vocabHajimeteChapter = 'vocab-hajimete-chapter';
   static const vocabMatchSession = 'vocab-match-session';
   static const vocabDetail = 'vocab-detail';

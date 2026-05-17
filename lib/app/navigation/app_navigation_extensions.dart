@@ -121,6 +121,18 @@ extension AppNavigationContext on BuildContext {
     ),
   );
 
+  void openShinkanzenCatalog({
+    required String levelCode,
+    required String title,
+    String? subtitle,
+  }) => push(
+    AppRouteLocation.shinkanzenCatalog(
+      levelCode: levelCode,
+      title: title,
+      subtitle: subtitle,
+    ),
+  );
+
   void openHajimeteChapter({
     required String levelCode,
     required int chapterId,

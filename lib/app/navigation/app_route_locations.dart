@@ -45,6 +45,16 @@ class AppRouteLocation {
     if (subtitle != null && subtitle.trim().isNotEmpty) 'subtitle': subtitle,
   });
 
+  static String shinkanzenCatalog({
+    required String levelCode,
+    required String title,
+    String? subtitle,
+  }) => _withQuery(AppRoutePath.vocabShinkanzen, {
+    'level': levelCode,
+    'title': title,
+    if (subtitle != null && subtitle.trim().isNotEmpty) 'subtitle': subtitle,
+  });
+
   static String hajimeteChapter({
     required String levelCode,
     required int chapterId,

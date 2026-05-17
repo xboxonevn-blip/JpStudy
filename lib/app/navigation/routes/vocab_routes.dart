@@ -6,6 +6,7 @@ import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
 import 'package:jpstudy/features/vocab/screens/hajimete_chapter_catalog_screen.dart';
 import 'package:jpstudy/features/vocab/screens/hajimete_chapter_detail_screen.dart';
 import 'package:jpstudy/features/vocab/screens/minna_lesson_catalog_screen.dart';
+import 'package:jpstudy/features/vocab/screens/shinkanzen_lesson_catalog_screen.dart';
 import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
 import 'package:jpstudy/features/vocab/screens/vocab_detail_screen.dart';
 import 'package:jpstudy/features/vocab/screens/vocab_match_session_screen.dart';
@@ -60,6 +61,19 @@ List<RouteBase> buildVocabRoutes() {
         return HajimeteChapterCatalogScreen(
           levelCode: query['level'] ?? 'N5',
           title: query['title'] ?? 'Hajimete no Nihongo Tango',
+          subtitle: query['subtitle'],
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutePath.vocabShinkanzen,
+      name: AppRouteName.vocabShinkanzen,
+      builder: (context, state) {
+        final query = state.uri.queryParameters;
+        final levelCode = query['level'] ?? 'N3';
+        return ShinkanzenLessonCatalogScreen(
+          levelCode: levelCode,
+          title: query['title'] ?? 'Shin Kanzen Master $levelCode',
           subtitle: query['subtitle'],
         );
       },

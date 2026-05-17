@@ -19,6 +19,7 @@ import 'package:jpstudy/features/vocab/screens/hajimete_chapter_catalog_screen.d
 import 'package:jpstudy/features/vocab/screens/hajimete_chapter_detail_screen.dart';
 import 'package:jpstudy/features/vocab/screens/hajimete_chapter_detail_support.dart';
 import 'package:jpstudy/features/vocab/screens/minna_lesson_catalog_screen.dart';
+import 'package:jpstudy/features/vocab/screens/shinkanzen_lesson_catalog_screen.dart';
 import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
 import 'package:jpstudy/features/flashcards/widgets/enhanced_flashcard.dart';
 import 'package:jpstudy/shared/widgets/confidence_rating.dart';
@@ -287,6 +288,14 @@ Widget _buildRouterScreen({
           levelCode: state.uri.queryParameters['level'] ?? 'N5',
           title:
               state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
+          subtitle: state.uri.queryParameters['subtitle'],
+        ),
+      ),
+      GoRoute(
+        path: '/vocab/shinkanzen',
+        builder: (context, state) => ShinkanzenLessonCatalogScreen(
+          levelCode: state.uri.queryParameters['level'] ?? 'N3',
+          title: state.uri.queryParameters['title'] ?? 'Shin Kanzen Master',
           subtitle: state.uri.queryParameters['subtitle'],
         ),
       ),
@@ -937,6 +946,44 @@ void main() {
       find.descendant(of: companionCard, matching: find.text('Shin Kanzen')),
       findsOneWidget,
     );
+  });
+
+  testWidgets('Shin Kanzen companion tracks open indexed non-empty catalogs', (
+    tester,
+  ) async {
+    final repo = _FakeVocabLessonRepository(
+      bank: {
+        'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
+        'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
+        'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
+        'N2': List.generate(5, (i) => _item(i + 31, 'n2_$i', 'N2')),
+        'N1': List.generate(5, (i) => _item(i + 41, 'n1_$i', 'N1')),
+      },
+    );
+
+    for (final caseData in const [
+      (
+        level: StudyLevel.n3,
+        cardKey: 'program_n3_n3_companion',
+        text: 'Nouns - General 1',
+      ),
+      (level: StudyLevel.n2, cardKey: 'program_n2_n2_companion', text: '1-74'),
+      (level: StudyLevel.n1, cardKey: 'program_n1_n1_companion', text: '1-140'),
+    ]) {
+      await tester.pumpWidget(
+        _buildRouterScreen(repo: repo, level: caseData.level),
+      );
+      await _pumpCatalog(tester);
+
+      await tester.ensureVisible(find.byKey(ValueKey(caseData.cardKey)));
+      await _pumpCatalog(tester);
+      await tester.tap(find.byKey(ValueKey(caseData.cardKey)));
+      await _pumpCatalog(tester);
+
+      expect(find.byType(ShinkanzenLessonCatalogScreen), findsOneWidget);
+      expect(find.textContaining(caseData.text), findsWidgets);
+      expect(find.text('0 terms'), findsNothing);
+    }
   });
 
   testWidgets(

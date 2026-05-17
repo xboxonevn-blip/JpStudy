@@ -171,6 +171,15 @@ class _VocabCatalogBody extends ConsumerWidget {
       return;
     }
 
+    if (program.type == _VocabProgramType.shinkanzen) {
+      context.openShinkanzenCatalog(
+        levelCode: section.levelCode,
+        title: '${program.titleTop} ${program.titleMain}'.trim(),
+        subtitle: _localizedProgramSubtitle(program, language),
+      );
+      return;
+    }
+
     context.push(
       '/vocab/review',
       extra: VocabReviewArgs(
