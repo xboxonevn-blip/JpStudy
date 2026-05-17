@@ -78,7 +78,7 @@ class EmptyStateWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: subtitleSize,
-                color: context.appPalette.ink.withValues(alpha: 0.55),
+                color: context.appPalette.ink.withValues(alpha: 0.64),
                 height: 1.4,
               ),
             ),

@@ -65,7 +65,7 @@ class ErrorStateWidget extends ConsumerWidget {
               style: TextStyle(
                 fontSize: titleSize,
                 fontWeight: FontWeight.w600,
-                color: palette.ink.withValues(alpha: 0.55),
+                color: palette.ink.withValues(alpha: 0.64),
                 height: 1.4,
               ),
             ),

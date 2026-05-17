@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/error_state_widget.dart';
@@ -39,6 +40,17 @@ Widget _buildWidget({
 Future<void> _pump(WidgetTester tester) async {
   await tester.pump();
   await tester.pump(const Duration(milliseconds: 100));
+}
+
+double _contrast(Color foreground, Color background) {
+  final resolvedForeground = foreground.a < 1
+      ? Color.alphaBlend(foreground, background)
+      : foreground;
+  final foregroundLuminance = resolvedForeground.computeLuminance() + 0.05;
+  final backgroundLuminance = background.computeLuminance() + 0.05;
+  return foregroundLuminance > backgroundLuminance
+      ? foregroundLuminance / backgroundLuminance
+      : backgroundLuminance / foregroundLuminance;
 }
 
 // ---------------------------------------------------------------------------
@@ -159,5 +171,22 @@ void main() {
 
     // JA genericErrorLabel
     expect(find.text('問題が発生しました。もう一度お試しください。'), findsOneWidget);
+  });
+
+  testWidgets('active error copy meets light-surface AA contrast', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_buildWidget());
+    await _pump(tester);
+
+    final text = tester.widget<Text>(
+      find.text('Something went wrong. Please try again.'),
+    );
+    final color = text.style?.color;
+    expect(color, isNotNull);
+    expect(
+      _contrast(color!, AppThemePalette.light.elevated),
+      greaterThanOrEqualTo(4.5),
+    );
   });
 }
