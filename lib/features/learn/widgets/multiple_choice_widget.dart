@@ -14,6 +14,7 @@ class MultipleChoiceWidget extends StatefulWidget {
   final bool revealCorrectAnswer;
   final AppLanguage language;
   final Function(String) onSelect;
+  final bool forceCompact;
 
   const MultipleChoiceWidget({
     super.key,
@@ -23,6 +24,7 @@ class MultipleChoiceWidget extends StatefulWidget {
     this.revealCorrectAnswer = false,
     required this.language,
     required this.onSelect,
+    this.forceCompact = false,
   });
 
   @override
@@ -54,7 +56,9 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
       builder: (context, constraints) {
         final palette = context.appPalette;
         final compact =
-            constraints.maxWidth < 520 || MediaQuery.sizeOf(context).width < 700;
+            widget.forceCompact ||
+            constraints.maxWidth < 520 ||
+            MediaQuery.sizeOf(context).width < 700;
         final options = widget.question.options ?? const <String>[];
         final useGrid = !compact && constraints.maxWidth >= 720;
         final selected = widget.showResult

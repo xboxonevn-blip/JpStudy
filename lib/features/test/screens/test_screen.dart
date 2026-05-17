@@ -383,8 +383,11 @@ class _TestScreenState extends ConsumerState<TestScreen> {
     );
   }
 
-  Widget _buildQuestionWidget(Question question, AppLanguage language) {
-    final compact = MediaQuery.sizeOf(context).width < 700;
+  Widget _buildQuestionWidget(
+    Question question,
+    AppLanguage language, {
+    bool compact = false,
+  }) {
     final chips = <Widget>[
       if (!compact)
         _buildStageChip(
@@ -419,7 +422,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
           ),
           SizedBox(height: compact ? AppSpacing.sm : AppSpacing.md),
         ],
-        _buildQuestionContent(question, language),
+        _buildQuestionContent(question, language, compact: compact),
       ],
     );
   }
@@ -462,7 +465,11 @@ class _TestScreenState extends ConsumerState<TestScreen> {
               },
               child: KeyedSubtree(
                 key: ValueKey(question.id),
-                child: _buildQuestionWidget(question, language),
+                child: _buildQuestionWidget(
+                  question,
+                  language,
+                  compact: compact,
+                ),
               ),
             ),
           ),
@@ -893,7 +900,11 @@ class _TestScreenState extends ConsumerState<TestScreen> {
     };
   }
 
-  Widget _buildQuestionContent(Question question, AppLanguage language) {
+  Widget _buildQuestionContent(
+    Question question,
+    AppLanguage language, {
+    bool compact = false,
+  }) {
     final revealCorrectAnswer =
         _showResult && (_isCorrect || widget.config.showCorrectAfterWrong);
     switch (question.type) {
@@ -905,6 +916,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
           revealCorrectAnswer: revealCorrectAnswer,
           language: language,
           onSelect: _handleMultipleChoiceSelect,
+          forceCompact: compact,
         );
 
       case QuestionType.trueFalse:
@@ -915,6 +927,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
           revealCorrectAnswer: revealCorrectAnswer,
           language: language,
           onSelect: _handleTrueFalseSelect,
+          forceCompact: compact,
         );
 
       case QuestionType.fillBlank:

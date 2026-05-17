@@ -14,6 +14,7 @@ class TrueFalseWidget extends StatelessWidget {
   final bool revealCorrectAnswer;
   final AppLanguage language;
   final Function(bool) onSelect;
+  final bool forceCompact;
 
   const TrueFalseWidget({
     super.key,
@@ -23,12 +24,13 @@ class TrueFalseWidget extends StatelessWidget {
     this.revealCorrectAnswer = false,
     required this.language,
     required this.onSelect,
+    this.forceCompact = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    final compact = MediaQuery.sizeOf(context).width < 700;
+    final compact = forceCompact || MediaQuery.sizeOf(context).width < 700;
     final isCorrectTrue =
         revealCorrectAnswer && question.isStatementTrue == true;
     final isCorrectFalse =
