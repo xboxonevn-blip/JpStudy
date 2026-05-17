@@ -155,6 +155,7 @@ void main() {
 
       expect(source, isNot(contains('OnboardingScreen(')));
       expect(source, isNot(contains('_MobileHomeFallback')));
+      expect(source, isNot(contains('showDialog')));
     },
   );
 

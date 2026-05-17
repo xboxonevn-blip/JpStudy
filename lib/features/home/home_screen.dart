@@ -18,12 +18,10 @@ import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/screens/learning_path_screen.dart';
 import 'package:jpstudy/features/home/widgets/header_bar.dart';
-import 'package:jpstudy/core/models/streak_milestone.dart';
 import 'package:jpstudy/features/learn/models/achievement.dart' as model;
 import 'package:jpstudy/features/learn/services/learn_session_service.dart';
 import 'package:jpstudy/features/me/providers/app_settings_controller.dart';
 import 'package:jpstudy/features/me/providers/data_settings_controller.dart';
-import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -185,11 +183,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       if (!mounted) {
         return;
       }
-      await showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) =>
-            _AchievementDialog(achievement: achievement, language: language),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            '${language.achievementUnlockedTitle}: ${achievement.type.title}',
+          ),
+        ),
       );
     }
   }
@@ -225,107 +225,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           },
         );
       },
-    );
-  }
-}
-
-class _AchievementDialog extends StatelessWidget {
-  const _AchievementDialog({required this.achievement, required this.language});
-
-  final model.Achievement achievement;
-  final AppLanguage language;
-
-  @override
-  Widget build(BuildContext context) {
-    final palette = context.appPalette;
-    final isStreak = achievement.type == model.AchievementType.streak;
-    final milestone = isStreak
-        ? StreakMilestone.forStreak(achievement.value)
-        : null;
-    final bgColor = milestone?.color ?? palette.error;
-    final borderColor = isStreak
-        ? bgColor.withValues(alpha: 0.7)
-        : palette.error.withValues(alpha: 0.7);
-
-    final bonusLabel = isStreak && milestone != null
-        ? '+${milestone.bonusXp} XP'
-        : null;
-
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (isStreak && milestone != null)
-            Text(milestone.emoji, style: const TextStyle(fontSize: 56)),
-          if (isStreak && milestone != null) const SizedBox(height: 8),
-          Transform.rotate(
-            angle: -0.09,
-            child: Container(
-              width: 160,
-              height: 160,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: bgColor,
-                border: Border.all(color: borderColor, width: 4),
-                boxShadow: [
-                  BoxShadow(
-                    color: palette.ink.withValues(alpha: 0.20),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    achievement.description,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      height: 1.2,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            achievement.type.title,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          if (bonusLabel != null) ...[
-            const SizedBox(height: 8),
-            Text(
-              bonusLabel,
-              style: TextStyle(
-                color: palette.warning,
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ],
-          const SizedBox(height: 24),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(
-              'OK',
-              style: TextStyle(
-                color: context.appPalette.primary,
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
