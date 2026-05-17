@@ -247,7 +247,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                 Text(
                                   _scopeNote(language, level),
                                   style: TextStyle(
-                                    color: palette.ink.withValues(alpha: 0.55),
+                                    color: palette.ink.withValues(alpha: 0.64),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -1056,7 +1056,7 @@ class _SearchSection extends StatelessWidget {
                     Text(
                       subtitle,
                       style: TextStyle(
-                        color: context.appPalette.ink.withValues(alpha: 0.55),
+                        color: context.appPalette.ink.withValues(alpha: 0.64),
                         fontSize: 12,
                       ),
                     ),
@@ -1320,7 +1320,7 @@ class _SearchTile extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: palette.ink.withValues(alpha: 0.55),
+                        color: palette.ink.withValues(alpha: 0.64),
                         fontSize: compact ? 11.5 : 12,
                       ),
                     ),

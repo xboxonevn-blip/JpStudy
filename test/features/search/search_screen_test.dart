@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -65,6 +66,17 @@ const _kanji = [
     jlptLevel: 'N4',
   ),
 ];
+
+double _contrast(Color foreground, Color background) {
+  final resolvedForeground = foreground.a < 1
+      ? Color.alphaBlend(foreground, background)
+      : foreground;
+  final foregroundLuminance = resolvedForeground.computeLuminance() + 0.05;
+  final backgroundLuminance = background.computeLuminance() + 0.05;
+  return foregroundLuminance > backgroundLuminance
+      ? foregroundLuminance / backgroundLuminance
+      : backgroundLuminance / foregroundLuminance;
+}
 
 Widget buildSearchScreen({LessonRepository? repo}) {
   return ProviderScope(
@@ -174,6 +186,37 @@ void main() {
     expect(find.text('食べる'), findsOneWidget);
     expect(find.text('ねこ'), findsOneWidget);
     expect(find.text('森'), findsOneWidget);
+  });
+
+  testWidgets('search helper captions meet light-surface AA contrast', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      buildSearchScreen(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    for (final label in [
+      'N5 lookup only: words, kanji, readings.',
+      'Words for this level',
+      'たべる / eat',
+    ]) {
+      final text = tester.widget<Text>(find.text(label).first);
+      final color = text.style?.color;
+      expect(color, isNotNull, reason: label);
+      expect(
+        _contrast(color!, AppThemePalette.light.elevated),
+        greaterThanOrEqualTo(4.5),
+        reason: label,
+      );
+    }
   });
 
   testWidgets('matches by reading and shows search results summary', (
