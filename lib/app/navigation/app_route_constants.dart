@@ -73,7 +73,6 @@ class AppRoutePath {
   static const mastery = '/mastery';
   static const meData = '/me/data';
   static const forecast = '/forecast';
-  static const designLab = '/design-lab';
   static const privacy = '/privacy';
   static const terms = '/terms';
 }
@@ -153,7 +152,6 @@ class AppRouteName {
   static const mastery = 'mastery';
   static const meData = 'me-data';
   static const forecast = 'forecast';
-  static const designLab = 'design-lab';
   static const privacy = 'privacy';
   static const terms = 'terms';
 }

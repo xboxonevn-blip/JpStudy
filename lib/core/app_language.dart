@@ -3138,28 +3138,6 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
-  String get designLabLabel {
-    switch (this) {
-      case AppLanguage.en:
-        return 'Design Lab';
-      case AppLanguage.vi:
-        return 'Ph\u00f2ng thi\u1ebft k\u1ebf';
-      case AppLanguage.ja:
-        return '\u30c7\u30b6\u30a4\u30f3\u30e9\u30dc';
-    }
-  }
-
-  String get designLabSubtitle {
-    switch (this) {
-      case AppLanguage.en:
-        return 'UI/UX process playground';
-      case AppLanguage.vi:
-        return 'Kh\u00f4ng gian th\u1eed nghi\u1ec7m quy tr\u00ecnh UI/UX';
-      case AppLanguage.ja:
-        return 'UI/UX\u6539\u5584\u3092\u8a66\u305b\u308b\u5b9f\u9a13\u30b9\u30da\u30fc\u30b9';
-    }
-  }
-
   String get handwritingStrokeGuideDefaultLabel {
     switch (this) {
       case AppLanguage.en:

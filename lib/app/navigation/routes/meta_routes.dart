@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
-import 'package:jpstudy/features/design_lab/design_lab_screen.dart';
 import 'package:jpstudy/features/leaderboard/leaderboard_screen.dart';
 import 'package:jpstudy/features/legal/legal_document_screen.dart';
 import 'package:jpstudy/features/me/me_screen.dart';
@@ -73,11 +72,6 @@ List<RouteBase> buildProfileRoutes() {
       path: AppRoutePath.forecast,
       name: AppRouteName.forecast,
       builder: (context, state) => const ReviewForecastScreen(),
-    ),
-    GoRoute(
-      path: AppRoutePath.designLab,
-      name: AppRouteName.designLab,
-      builder: (context, state) => const DesignLabScreen(),
     ),
     GoRoute(
       path: AppRoutePath.privacy,

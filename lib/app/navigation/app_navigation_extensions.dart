@@ -59,7 +59,6 @@ extension AppNavigationContext on BuildContext {
   void openMastery() => pushNamed(AppRouteName.mastery);
   void openForecast() => pushNamed(AppRouteName.forecast);
   void openAchievements() => pushNamed(AppRouteName.achievements);
-  void openDesignLab() => pushNamed(AppRouteName.designLab);
   void openPrivacy() => pushNamed(AppRouteName.privacy);
   void openTerms() => pushNamed(AppRouteName.terms);
   void openLearnRecoveryPack() => pushNamed(AppRouteName.learnRecoveryPack);

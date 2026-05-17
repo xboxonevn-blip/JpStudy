@@ -117,7 +117,7 @@
 
 - Dark mode is wired, but current evidence does not support a polished parity claim.
 - `AppTheme.dark` does not mirror several light-theme component families, including navigation bar, filled/outlined buttons, input decoration, and icon theme.
-- Hardcoded light surfaces remain in feature code, including Grammar repair prompts and Design Lab, and route-level dark visual coverage is currently narrow.
+- Hardcoded light surfaces remain in feature code, including Grammar repair prompts, and route-level dark visual coverage is currently narrow. The former Design Lab dev surface has since been removed from learner routing/source.
 
 ## 2026-05-14 - Q7.1 / E7.1
 

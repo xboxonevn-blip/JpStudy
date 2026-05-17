@@ -235,9 +235,8 @@ Verified source changes:
   phrasing were rewritten to concrete learner-language equivalents.
 - Updated tests that intentionally assert learner copy so they track the new
   Vietnamese/English wording instead of stale implementation jargon.
-- Removed the Profile entry point to the Design Lab dev surface. The direct
-  route remains for internal QA, but it is no longer advertised as a learner
-  tool.
+- Removed the Design Lab dev surface from learner routing instead of keeping a
+  hidden direct route.
 - Roadmap title fallback no longer returns raw phase IDs; unknown phases render
   a generic localized study-step label instead of leaking slugs such as
   `n1_vocab_grammar`.
