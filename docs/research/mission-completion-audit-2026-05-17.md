@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-17
 
-Timestamp: `2026-05-17T10:00:56+07:00`
+Timestamp: `2026-05-17T19:40:19+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -44,6 +44,7 @@ The active mission is complete only if all are true:
 | App coherence Phase 4 | Commits `c8fc618f`, `e4113890`, `35be6509`, `b9b082ba`, `f4619b8e`, `a34929fe`, `8a7952ee` rename the lesson tab to Vocab, hide curriculum edit/copy/add/combine controls, split lesson detail widgets, redirect curriculum edit/match routes, wire the Kanji flow card, remove blocking Home achievement dialogs, and stop live SRS updates from touching legacy SM-2 fields | Passed for source scope; old editor file and DB compatibility columns remain isolated/deferred |
 | App coherence Phase 5 | Current working-tree Phase 5 pass rewrites learner-facing copy across Home/Learn/Review/Exam/Kanji/Vocab/Grammar/Profile/Premium/Progress/Search/Library/practice surfaces; Design Lab is no longer linked from Profile; roadmap fallback no longer leaks raw phase IDs | `flutter analyze lib test` clean; UI string guard 0 candidates; content taxonomy 2/2; node tooling 53/53; full `flutter test` 2299/2299 |
 | App coherence Phase 6 | Commit `812b4e0` adds N5-only Kana soft-suggest gating, verifies search source/tests cover vocab/kanji/kana, and unifies remaining vocab CTA/path wording | `flutter analyze lib test` clean; UI string guard 0; content taxonomy 2/2; node tooling 53/53; focused Phase 6 tests 44/44; full `flutter test` 2300/2300; deployed to `hosting:jpstudy` and live-verified N3 `/vocab` without Kana prompt after cache-disabled reload |
+| D6.Q6.5 contrast follow-up | Commit `669347cf` raises Vocab flashcard tap-to-flip helper text from `ink 0.55` to `ink 0.64` and adds a regression test for light-surface AA contrast | `flutter test test\features\vocab\widgets\flashcard_widget_test.dart` passed 12/12; focused D6 widget set passed 49/49; `flutter analyze lib test` clean; UI string guard 0; built and deployed to `hosting:jpstudy`; primary Hosting `200`, legacy `404` |
 
 ## Latest Readiness Result
 
@@ -56,7 +57,7 @@ npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-p
 Latest checked result:
 
 ```text
-generatedAt -> 2026-05-17T03:00:56.242Z
+generatedAt -> 2026-05-17T12:40:04.921Z
 complete -> false
 blockers:
 - legal-approval-missing
