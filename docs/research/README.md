@@ -186,7 +186,7 @@ Current D6.Q6.3 blocker: loading states work but are uneven. `CircularProgressIn
 
 Current D6.Q6.4 blocker: error handling has good primitives but uneven adoption. `ErrorStateWidget` has `13` feature usages, broad error/retry grep finds `269` matches in `69` files, at least eight sampled error branches collapse with `SizedBox.shrink()`, and Foundations/Grammar/Recall Sprint can show raw exception text.
 
-Current D6.Q6.5 status: first token-level contrast remediation is shipped. Light semantic foregrounds now pass `>=4.5:1` on light surfaces, input hints moved from `ink 0.42` to `ink 0.68`, and shared status chips have regression coverage. Remaining contrast work is an ad hoc sweep of active helper captions still using low-alpha `ink 0.45`-`0.55`.
+Current D6.Q6.5 status: token-level and primary helper-caption contrast remediation is shipped. Light semantic foregrounds now pass `>=4.5:1` on light surfaces, input hints moved from `ink 0.42` to `ink 0.68`, shared status chips have regression coverage, and shared empty/error, lesson, Search, and Vocab flashcard helper captions now use `ink 0.64`. Remaining contrast work is an ad hoc sweep of active helper captions still using low-alpha `ink 0.45`-`0.55`.
 
 Current D6.Q6.6 status: min-touch remediation is largely shipped. `AppTouchTargets.min = 44` now guards compact top-bar notifications, Discover reorder/focus controls, mistake delete buttons, interactive `StarRating`, library/practice compact action CTAs, handwriting free-practice CTA, and lesson inline actions. Remaining work is a final grep/screenshot pass for active custom controls outside the audited risk list.
 

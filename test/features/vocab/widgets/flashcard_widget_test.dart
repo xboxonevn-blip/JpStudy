@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/features/vocab/widgets/flashcard_widget.dart';
@@ -76,6 +77,17 @@ Future<void> _tapAndFlip(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+double _contrast(Color foreground, Color background) {
+  final resolvedForeground = foreground.a < 1
+      ? Color.alphaBlend(foreground, background)
+      : foreground;
+  final foregroundLuminance = resolvedForeground.computeLuminance() + 0.05;
+  final backgroundLuminance = background.computeLuminance() + 0.05;
+  return foregroundLuminance > backgroundLuminance
+      ? foregroundLuminance / backgroundLuminance
+      : backgroundLuminance / foregroundLuminance;
+}
+
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
@@ -88,6 +100,21 @@ void main() {
 
       expect(find.text('食べる'), findsOneWidget);
       expect(find.text('Tap to flip'), findsOneWidget);
+    });
+
+    testWidgets('tap-to-flip hint meets light-surface AA contrast', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_buildHarness());
+      await _pump(tester);
+
+      final text = tester.widget<Text>(find.text('Tap to flip'));
+      final color = text.style?.color;
+      expect(color, isNotNull);
+      expect(
+        _contrast(color!, AppThemePalette.light.elevated),
+        greaterThanOrEqualTo(4.5),
+      );
     });
 
     testWidgets('VI locale shows Vietnamese tap-to-flip label', (tester) async {

@@ -154,7 +154,7 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
               Text(
                 widget.language.tapToFlipLabel,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: context.appPalette.ink.withValues(alpha: 0.55),
+                  color: context.appPalette.ink.withValues(alpha: 0.64),
                 ),
               ),
             ],
