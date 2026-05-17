@@ -121,6 +121,21 @@ stays `main`.
 Rollback strategy without branches: use `git revert <hash>` to
 back out a bad commit. Faster than branch-based rollback.
 
+### GitHub Actions log policy
+
+For CI logs/status, use GitHub CLI only:
+
+```bash
+gh run view <run-id> --log
+gh run view --job <job-id> --log
+gh api repos/xboxonevn-blip/JpStudy/actions/runs/<run-id>/...
+```
+
+Do not use `git credential fill` to extract a GitHub token into shell variables.
+Do not build raw `Invoke-WebRequest`/Bearer-token calls for Actions logs. If
+`gh` is missing on a machine, install GitHub CLI first (`winget install
+GitHub.cli`) and authenticate with `gh auth login`.
+
 ### Required env vars for full build
 
 | Variable | Source | Purpose |
