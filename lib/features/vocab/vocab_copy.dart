@@ -369,7 +369,7 @@ extension VocabCopy on AppLanguage {
 
   String vocabAvailableNowLabel() => switch (this) {
     AppLanguage.en => 'Available now',
-    AppLanguage.vi => 'Đã mở',
+    AppLanguage.vi => 'Học ngay',
     AppLanguage.ja => '利用可能',
   };
 
@@ -381,7 +381,7 @@ extension VocabCopy on AppLanguage {
 
   String vocabCatalogErrorTitle() => switch (this) {
     AppLanguage.en => 'Could not load vocab catalog',
-    AppLanguage.vi => 'Không tải được catalog từ vựng',
+    AppLanguage.vi => 'Không tải được danh mục từ vựng',
     AppLanguage.ja => '語彙カタログを読み込めませんでした',
   };
 

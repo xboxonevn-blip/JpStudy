@@ -293,7 +293,7 @@ class _VocabTodaySection extends ConsumerWidget {
               _TodayMetric(
                 key: const ValueKey('vocab_today_next'),
                 label: _nextWindowLabel(language),
-                value: _formatReviewTiming(home.nextReview),
+                value: _formatReviewTiming(language, home.nextReview),
               ),
             ],
           ),
@@ -1433,6 +1433,7 @@ class _VocabCatalogProgram {
 }
 
 _VocabCatalogSection _buildJlptSection({
+  required AppLanguage language,
   required String levelCode,
   required int liveCount,
   required int dueCount,
@@ -1450,8 +1451,8 @@ _VocabCatalogSection _buildJlptSection({
   final chapterCount = _chapterCountForLevel(levelCode);
   final coreInteractive = isInteractive && liveCount > 0;
   final coreBadge = dueCount > 0
-      ? '$dueCount due - ${_formatReviewTiming(nextReview)}'
-      : _formatReviewTiming(nextReview);
+      ? _formatDueBadge(language, dueCount, nextReview)
+      : _formatReviewTiming(language, nextReview);
   final companionTermCount = companionCountOverride ?? 0;
   final companionInteractive =
       isInteractive &&

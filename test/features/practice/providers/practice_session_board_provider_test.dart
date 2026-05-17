@@ -191,6 +191,49 @@ void main() {
       expect(args.source, 'practice_board_due');
     });
 
+    test('Vietnamese review board uses learner-facing copy', () {
+      final board = buildPracticeSessionBoard(
+        language: AppLanguage.vi,
+        level: StudyLevel.n5,
+        dashboard: const DashboardState(
+          streak: 0,
+          todayXp: 0,
+          vocabDue: 2,
+          grammarDue: 1,
+          kanjiDue: 1,
+          vocabMistakeCount: 0,
+          grammarMistakeCount: 0,
+          kanjiMistakeCount: 0,
+          totalMistakeCount: 0,
+        ),
+        continueAction: const ContinueAction(
+          type: ContinueActionType.kanjiReview,
+          label: 'Ôn kanji',
+          count: 1,
+        ),
+      );
+
+      final text = [
+        board.headline,
+        board.caption,
+        board.primaryAction.title,
+        board.primaryAction.subtitle,
+        board.primaryAction.ctaLabel,
+        for (final step in board.steps) ...[
+          step.title,
+          step.subtitle,
+          step.ctaLabel,
+        ],
+      ].join('\n');
+
+      expect(text, contains('Ôn các mục đến hạn'));
+      expect(text, isNot(contains('review')));
+      expect(text, isNot(contains('sprint')));
+      expect(text, isNot(contains('ghost')));
+      expect(text, isNot(contains('Dọn hàng')));
+      expect(text, isNot(contains('hàng đợi đang mở')));
+    });
+
     test('follows a specific weakness radar item before generic deepening', () {
       final board = buildPracticeSessionBoard(
         language: AppLanguage.en,

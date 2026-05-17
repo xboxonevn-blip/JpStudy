@@ -225,6 +225,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
 
   return [
     _buildJlptSection(
+      language: language,
       levelCode: 'N5',
       liveCount: n5Count,
       dueCount: dueCount,
@@ -241,6 +242,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       isInteractive: true,
     ),
     _buildJlptSection(
+      language: language,
       levelCode: 'N4',
       liveCount: n4Count,
       dueCount: dueCount,
@@ -257,6 +259,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       isInteractive: true,
     ),
     _buildJlptSection(
+      language: language,
       levelCode: 'N3',
       liveCount: n3Count,
       dueCount: dueCount,
@@ -276,6 +279,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       isInteractive: true,
     ),
     _buildJlptSection(
+      language: language,
       levelCode: 'N2',
       liveCount: n2Count,
       dueCount: dueCount,
@@ -295,6 +299,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       isInteractive: true,
     ),
     _buildJlptSection(
+      language: language,
       levelCode: 'N1',
       liveCount: n1Count,
       dueCount: dueCount,
@@ -483,7 +488,10 @@ String _todayReviewSubtitle(
   AppLanguage language,
   int dueCount,
   DateTime? nextReview,
-) => language.vocabReviewSubtitle(dueCount, _formatReviewTiming(nextReview));
+) => language.vocabReviewSubtitle(
+  dueCount,
+  _formatReviewTiming(language, nextReview),
+);
 
 String _currentTrackLine(AppLanguage language, VocabTrackSummary track) =>
     language.vocabCurrentTrackLine(track.title, track.termCount);
@@ -503,15 +511,50 @@ String _previewCatalogCaption(AppLanguage language) =>
 String _chapterSummaryLabel(int chapterCount, AppLanguage language) =>
     language.vocabChapterSummaryLabel(chapterCount);
 
-String _formatReviewTiming(DateTime? nextReview) {
-  if (nextReview == null) return 'Ready now';
+String _formatReviewTiming(AppLanguage language, DateTime? nextReview) {
+  if (nextReview == null) {
+    return switch (language) {
+      AppLanguage.en => 'Ready now',
+      AppLanguage.vi => 'Sẵn sàng',
+      AppLanguage.ja => '準備完了',
+    };
+  }
   final now = DateTime.now();
   final difference = nextReview.difference(now);
   final hours = difference.inHours;
-  if (hours <= 0) return 'Today';
-  if (hours < 24) return 'in ${hours}h';
+  if (hours <= 0) {
+    return switch (language) {
+      AppLanguage.en => 'Today',
+      AppLanguage.vi => 'Hôm nay',
+      AppLanguage.ja => '今日',
+    };
+  }
+  if (hours < 24) {
+    return switch (language) {
+      AppLanguage.en => 'in ${hours}h',
+      AppLanguage.vi => 'trong $hours giờ',
+      AppLanguage.ja => '$hours時間後',
+    };
+  }
   final days = difference.inDays;
-  return 'in ${days}d';
+  return switch (language) {
+    AppLanguage.en => 'in ${days}d',
+    AppLanguage.vi => 'trong $days ngày',
+    AppLanguage.ja => '$days日後',
+  };
+}
+
+String _formatDueBadge(
+  AppLanguage language,
+  int dueCount,
+  DateTime? nextReview,
+) {
+  final timing = _formatReviewTiming(language, nextReview);
+  return switch (language) {
+    AppLanguage.en => '$dueCount due - $timing',
+    AppLanguage.vi => '$dueCount mục đến hạn - $timing',
+    AppLanguage.ja => '$dueCount件期限 - $timing',
+  };
 }
 
 String _localizedSectionSubtitle(

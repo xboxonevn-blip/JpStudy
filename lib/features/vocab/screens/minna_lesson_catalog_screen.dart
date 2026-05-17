@@ -891,13 +891,13 @@ String _reviewBody(AppLanguage language, int start, int end) =>
 
 String _reviewButton(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Review',
-  AppLanguage.vi => 'Review',
+  AppLanguage.vi => 'Ôn tập',
   AppLanguage.ja => '復習',
 };
 
 String _emptyState(AppLanguage language) => switch (language) {
   AppLanguage.en => 'No lessons are available for this catalog yet.',
-  AppLanguage.vi => 'Chưa có bài học nào cho catalog này.',
+  AppLanguage.vi => 'Chưa có bài học nào cho danh mục này.',
   AppLanguage.ja => 'このカタログで利用できる課はまだありません。',
 };
 

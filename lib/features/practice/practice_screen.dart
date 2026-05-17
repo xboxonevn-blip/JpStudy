@@ -823,7 +823,7 @@ class _HeroFocusPanel extends StatelessWidget {
 
   String _mixTitle(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Queue and repair',
-    AppLanguage.vi => 'Hàng đợi và sửa lỗi',
+    AppLanguage.vi => 'Ôn tập và sửa lỗi',
     AppLanguage.ja => 'キューと補強',
   };
 
@@ -855,7 +855,7 @@ class _HeroFocusPanel extends StatelessWidget {
 
   String _grammarGhosts(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Grammar ghosts',
-    AppLanguage.vi => 'Grammar ghost',
+    AppLanguage.vi => 'Điểm yếu ngữ pháp',
     AppLanguage.ja => '文法ゴースト',
   };
 }

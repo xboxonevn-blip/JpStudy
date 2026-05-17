@@ -1615,19 +1615,19 @@ String _kanjiTabLabel(AppLanguage language) => switch (language) {
 };
 
 String _flashcardsLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Flashcards',
+  AppLanguage.vi => 'Thẻ ghi nhớ',
   AppLanguage.ja => 'フラッシュカード',
   AppLanguage.en => 'Flashcards',
 };
 
 String _reviewNowLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Review ngay',
+  AppLanguage.vi => 'Ôn ngay',
   AppLanguage.ja => '今すぐ復習',
   AppLanguage.en => 'Review now',
 };
 
 String _noReviewsNowLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Hiện chưa có mục nào đến hạn để review.',
+  AppLanguage.vi => 'Hiện chưa có mục nào đến hạn ôn tập.',
   AppLanguage.ja => '今は復習期限の項目がありません。',
   AppLanguage.en => 'No reviews due right now.',
 };
@@ -1657,25 +1657,25 @@ String _dueLabel(AppLanguage language) => switch (language) {
 };
 
 String _learnAction(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Learn',
+  AppLanguage.vi => 'Học',
   AppLanguage.ja => '学ぶ',
   AppLanguage.en => 'Learn',
 };
 
 String _testAction(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Test',
+  AppLanguage.vi => 'Kiểm tra',
   AppLanguage.ja => 'テスト',
   AppLanguage.en => 'Test',
 };
 
 String _matchAction(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Match',
+  AppLanguage.vi => 'Ghép từ',
   AppLanguage.ja => 'マッチ',
   AppLanguage.en => 'Match',
 };
 
 String _writeAction(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Write',
+  AppLanguage.vi => 'Viết',
   AppLanguage.ja => '書く',
   AppLanguage.en => 'Write',
 };
@@ -1687,19 +1687,19 @@ String _showHintsLabel(AppLanguage language) => switch (language) {
 };
 
 String _kanjiComingSoonTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Tab Kanji sẽ nối sau',
+  AppLanguage.vi => 'Phần kanji sẽ mở sau',
   AppLanguage.ja => '漢字タブは後で接続します',
   AppLanguage.en => 'Kanji tab will be connected later',
 };
 
 String _kanjiLoadErrorTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Không tải được tab Kanji',
+  AppLanguage.vi => 'Không tải được phần kanji',
   AppLanguage.ja => '漢字タブを読み込めませんでした',
   AppLanguage.en => 'Could not load the Kanji tab',
 };
 
 String _kanjiContractTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Contract data Kanji đã sẵn sàng',
+  AppLanguage.vi => 'Dữ liệu kanji đã sẵn sàng',
   AppLanguage.ja => '漢字データの契約は準備済みです',
   AppLanguage.en => 'The Kanji data contract is ready',
 };
@@ -1710,7 +1710,7 @@ String _kanjiContractSubtitle(
   String chapterTitle,
 ) => switch (language) {
   AppLanguage.vi =>
-    'Tab Kanji của $levelCode / $chapterTitle đang chờ asset Hajimete. Chỉ cần thêm file đúng format là UI này sẽ dùng ngay.',
+    'Phần kanji của $levelCode / $chapterTitle đang chờ dữ liệu Hajimete. Khi có dữ liệu đúng cấu trúc, màn này sẽ hiển thị ngay.',
   AppLanguage.ja =>
     '$levelCode / $chapterTitle の漢字タブは Hajimete のアセット待ちです。正しい形式のファイルを追加すればこの UI にそのまま表示されます。',
   AppLanguage.en =>
@@ -1718,14 +1718,14 @@ String _kanjiContractSubtitle(
 };
 
 String _kanjiLiveTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Kanji chapter đã sẵn sàng',
+  AppLanguage.vi => 'Kanji của chương đã sẵn sàng',
   AppLanguage.ja => 'このチャプターの漢字が利用可能です',
   AppLanguage.en => 'Kanji for this chapter is live',
 };
 
 String _kanjiLiveSubtitle(AppLanguage language, int count) =>
     switch (language) {
-      AppLanguage.vi => '$count mục Kanji đã được nạp vào tab này.',
+      AppLanguage.vi => '$count mục kanji đã được nạp vào phần này.',
       AppLanguage.ja => '$count 件の漢字がこのタブに読み込まれました。',
       AppLanguage.en => '$count Kanji entries are loaded into this tab.',
     };
@@ -1736,7 +1736,7 @@ String _kanjiComingSoonSubtitle(
   String chapterTitle,
 ) => switch (language) {
   AppLanguage.vi =>
-    'Mình đã chừa sẵn tab Kanji cho $levelCode / $chapterTitle. Khi bạn bổ sung data kanji của Hajimete, mình sẽ nối vào đây.',
+    'Phần kanji cho $levelCode / $chapterTitle đã được chuẩn bị. Khi dữ liệu Hajimete có kanji, nội dung sẽ hiện ở đây.',
   AppLanguage.ja =>
     '$levelCode / $chapterTitle 用に漢字タブを準備しています。Hajimete の漢字データが追加されたらここへ接続します。',
   AppLanguage.en =>
@@ -1744,19 +1744,19 @@ String _kanjiComingSoonSubtitle(
 };
 
 String _emptyTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Không tìm thấy chapter',
+  AppLanguage.vi => 'Không tìm thấy chương',
   AppLanguage.ja => 'チャプターが見つかりません',
   AppLanguage.en => 'Chapter not found',
 };
 
 String _emptySubtitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Chapter này chưa có dữ liệu để hiển thị.',
+  AppLanguage.vi => 'Chương này chưa có dữ liệu để hiển thị.',
   AppLanguage.ja => 'このチャプターの表示データはまだありません。',
   AppLanguage.en => 'This chapter does not have display data yet.',
 };
 
 String _errorTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Không tải được chapter',
+  AppLanguage.vi => 'Không tải được chương',
   AppLanguage.ja => 'チャプターを読み込めませんでした',
   AppLanguage.en => 'Could not load chapter',
 };

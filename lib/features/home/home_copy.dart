@@ -461,7 +461,7 @@ extension HomeCopyX on AppLanguage {
       },
       'immersion_n1' => switch (this) {
         AppLanguage.en => 'N1 news + manga immersion',
-        AppLanguage.vi => 'N1 tin tức + manga immersion',
+        AppLanguage.vi => 'N1 tin tức + đọc manga',
         AppLanguage.ja => 'N1ニュース + マンガ多読',
       },
       _ => resourceKey,

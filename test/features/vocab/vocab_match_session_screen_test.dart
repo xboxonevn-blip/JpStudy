@@ -175,7 +175,7 @@ void main() {
     await tester.pumpWidget(_buildScreen(language: AppLanguage.vi));
     await _pump(tester);
 
-    expect(find.text('Ghép đúng term và nghĩa'), findsOneWidget);
-    expect(find.text('Bắt đầu match'), findsOneWidget);
+    expect(find.text('Ghép đúng từ và nghĩa'), findsOneWidget);
+    expect(find.text('Bắt đầu ghép từ'), findsOneWidget);
   });
 }

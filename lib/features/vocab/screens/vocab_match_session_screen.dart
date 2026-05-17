@@ -246,13 +246,13 @@ class _VocabMatchSessionScreenState
 }
 
 String _matchTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Match',
+  AppLanguage.vi => 'Ghép từ',
   AppLanguage.ja => 'マッチ',
   AppLanguage.en => 'Match',
 };
 
 String _matchIntroTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Ghép đúng term và nghĩa',
+  AppLanguage.vi => 'Ghép đúng từ và nghĩa',
   AppLanguage.ja => '単語と意味をマッチさせましょう',
   AppLanguage.en => 'Match the term with its meaning',
 };
@@ -262,14 +262,14 @@ String _matchIntroSubtitle(
   int count,
 ) => switch (language) {
   AppLanguage.vi =>
-    'Session này lấy từ chapter hiện tại với $count từ để luyện nhanh.',
+    'Phiên này lấy $count từ trong chương hiện tại để luyện nhanh.',
   AppLanguage.ja => 'このセッションでは現在のチャプターから $count 語を使って練習します。',
   AppLanguage.en =>
     'This session uses the current chapter and pulls from ${AppLanguage.en.termsCountLabel(count)} for a quick match round.',
 };
 
 String _startMatchLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Bắt đầu match',
+  AppLanguage.vi => 'Bắt đầu ghép từ',
   AppLanguage.ja => 'マッチ開始',
   AppLanguage.en => 'Start match',
 };
@@ -282,7 +282,7 @@ String _matchTimerLabel(AppLanguage language, int seconds) =>
     };
 
 String _matchDoneTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Hoàn thành vòng match',
+  AppLanguage.vi => 'Hoàn thành vòng ghép từ',
   AppLanguage.ja => 'マッチ完了',
   AppLanguage.en => 'Match round completed',
 };

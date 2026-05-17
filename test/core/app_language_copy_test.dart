@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 
 void main() {
   test('Vietnamese copy follows D3 terminology glossary seed', () {
@@ -119,6 +120,23 @@ void main() {
       expect(sample, isNot(contains('??')));
       expect(sample, isNot(contains('kh?ng')));
       expect(sample, isNot(contains('h?p')));
+    }
+  });
+
+  test('Vietnamese vocab copy avoids English launch-audit terms', () {
+    final samples = <String>[
+      AppLanguage.vi.vocabLiveCatalogTitle(),
+      AppLanguage.vi.vocabChapterSummaryLabel(14),
+      AppLanguage.vi.vocabCatalogErrorTitle(),
+      AppLanguage.vi.vocabProgramTypeLabel('minna'),
+      AppLanguage.vi.vocabAvailableNowLabel(),
+    ];
+
+    for (final sample in samples) {
+      expect(sample, isNot(contains(RegExp(r'\bCatalog\b'))));
+      expect(sample, isNot(contains(RegExp(r'\bCompanion\b'))));
+      expect(sample, isNot(contains(RegExp(r'\bchapter\b'))));
+      expect(sample, isNot(contains(RegExp(r'\bReady\b'))));
     }
   });
 }

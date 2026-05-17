@@ -723,20 +723,20 @@ String _liveLaneLabel(AppLanguage language) => switch (language) {
 };
 
 String _chapterTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Catalog theo chapter',
+  AppLanguage.vi => 'Danh mục theo chương',
   AppLanguage.ja => 'チャプター別カタログ',
   AppLanguage.en => 'Chapter catalog',
 };
 
 String _chapterCaption(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => '$count chapter có thể mở trực tiếp.',
+  AppLanguage.vi => '$count chương có thể mở trực tiếp.',
   AppLanguage.ja => '$count 個のチャプターを直接開けます。',
   AppLanguage.en => '$count chapters are ready to open directly.',
 };
 
 String _chapterCountLabel(AppLanguage language, int count) =>
     switch (language) {
-      AppLanguage.vi => '$count chapter',
+      AppLanguage.vi => '$count chương',
       AppLanguage.ja => '$count チャプター',
       AppLanguage.en => '$count chapters',
     };
@@ -772,7 +772,7 @@ String _reviewWholeLaneLabel(AppLanguage language) => switch (language) {
 };
 
 String _openChapterLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Xem chapter',
+  AppLanguage.vi => 'Xem chương',
   AppLanguage.ja => 'チャプターを見る',
   AppLanguage.en => 'View chapter',
 };
@@ -804,7 +804,7 @@ String _dueCountLabel(AppLanguage language, int count) => switch (language) {
 };
 
 String _chapterMeta(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => '$count mục từ trong chapter này',
+  AppLanguage.vi => '$count mục từ trong chương này',
   AppLanguage.ja => 'このチャプターに $count 語があります',
   AppLanguage.en => '${language.termsCountLabel(count)} inside this chapter',
 };
@@ -820,13 +820,13 @@ String _chapterChipLabel(AppLanguage language, int chapterId, int entryCount) {
 }
 
 String _noPreviewTermsLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Chapter này chưa có term preview.',
+  AppLanguage.vi => 'Chương này chưa có mục từ xem trước.',
   AppLanguage.ja => 'このチャプターのプレビュー語彙はまだありません。',
   AppLanguage.en => 'No preview terms are available for this chapter yet.',
 };
 
 String _emptyTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Chưa có chapter nào sẵn sàng',
+  AppLanguage.vi => 'Chưa có chương nào sẵn sàng',
   AppLanguage.ja => '利用可能なチャプターはまだありません',
   AppLanguage.en => 'No chapters are ready yet',
 };
@@ -840,7 +840,7 @@ String _emptySubtitle(AppLanguage language) => switch (language) {
 };
 
 String _errorTitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Không tải được catalog Hajimete',
+  AppLanguage.vi => 'Không tải được danh mục Hajimete',
   AppLanguage.ja => 'Hajimete カタログを読み込めませんでした',
   AppLanguage.en => 'Could not load the Hajimete catalog',
 };

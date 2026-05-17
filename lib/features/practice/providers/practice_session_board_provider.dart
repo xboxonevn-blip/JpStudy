@@ -294,7 +294,7 @@ PracticeSessionAction _recallSprintAction({
     title: _l(
       language,
       en: 'Run Recall Sprint first',
-      vi: 'Chạy Recall Sprint trước',
+      vi: 'Ôn các mục đến hạn trước',
       ja: 'まずRecall Sprintから入る',
     ),
     subtitle: _l(
@@ -303,7 +303,7 @@ PracticeSessionAction _recallSprintAction({
       vi: '${pieces.join(' · ')} đều đã đến hạn. Làm một lượt ôn tổng hợp ngắn trước khi vào bài sâu hơn.',
       ja: '${pieces.join(' · ')} が同時に動いています。先に混合キューを一掃してから深いレーンへ進みましょう。',
     ),
-    ctaLabel: _l(language, en: 'Open sprint', vi: 'Mở sprint', ja: 'スプリント開始'),
+    ctaLabel: _l(language, en: 'Open sprint', vi: 'Bắt đầu ôn', ja: 'スプリント開始'),
     route: AppRoutePath.practiceRecallSprint,
     extra: RecallSprintArgs(
       strategy: preferredTermIds.isNotEmpty
@@ -314,7 +314,7 @@ PracticeSessionAction _recallSprintAction({
       titleOverride: _l(
         language,
         en: 'Recall Sprint',
-        vi: 'Recall Sprint',
+        vi: 'Ôn nhanh',
         ja: 'リコールスプリント',
       ),
       subtitleOverride: preferredTermIds.isNotEmpty
@@ -327,7 +327,7 @@ PracticeSessionAction _recallSprintAction({
           : _l(
               language,
               en: 'Run a fast mixed review across items due now.',
-              vi: 'Chạy một lượt nhanh trên hàng đợi review đang mở.',
+              vi: 'Ôn nhanh các mục đang đến hạn.',
               ja: '動いているレビューキューを短く横断します。',
             ),
     ),
@@ -364,7 +364,7 @@ PracticeSessionAction _specificDueAction({
         title: _l(
           language,
           en: 'Clear due grammar',
-          vi: 'Dọn hàng ngữ pháp',
+          vi: 'Ôn ngữ pháp đến hạn',
           ja: '文法キューを片づける',
         ),
         subtitle: _l(
@@ -396,7 +396,7 @@ PracticeSessionAction _specificDueAction({
         title: _l(
           language,
           en: 'Clear due vocab',
-          vi: 'Dọn hàng từ vựng',
+          vi: 'Ôn từ vựng đến hạn',
           ja: '語彙キューを片づける',
         ),
         subtitle: _l(
@@ -414,7 +414,7 @@ PracticeSessionAction _specificDueAction({
             subtitle: _l(
               language,
               en: 'Due vocab from today\'s board',
-              vi: 'Hàng đợi từ vựng đến hạn từ bảng hôm nay',
+              vi: 'Từ vựng đến hạn hôm nay',
               ja: '今日のボードから開く語彙レビュー',
             ),
           ),
@@ -434,7 +434,7 @@ PracticeSessionAction _specificDueAction({
         title: _l(
           language,
           en: 'Clear due kanji',
-          vi: 'Dọn hàng kanji',
+          vi: 'Ôn kanji đến hạn',
           ja: '漢字キューを片づける',
         ),
         subtitle: _l(
@@ -471,16 +471,16 @@ PracticeSessionAction _specificDueAction({
     title: _l(
       language,
       en: 'Clear due reviews',
-      vi: 'Dọn review đến hạn',
+      vi: 'Ôn các mục đến hạn',
       ja: '期限レビューを片づける',
     ),
     subtitle: _l(
       language,
       en: 'Start with the items that are already due.',
-      vi: 'Bắt đầu từ hàng đợi đang xin được xử lý trước.',
+      vi: 'Bắt đầu với các mục đã đến hạn ôn tập.',
       ja: 'すでに注意を求めているキューから始めましょう。',
     ),
-    ctaLabel: _l(language, en: 'Open review', vi: 'Mở review', ja: 'レビューへ'),
+    ctaLabel: _l(language, en: 'Open review', vi: 'Mở ôn tập', ja: 'レビューへ'),
     route: AppRoutePath.practiceRecallSprint,
     icon: Icons.schedule_rounded,
     color: const Color(0xFF2563EB),
@@ -524,7 +524,7 @@ PracticeSessionAction _grammarGhostAction(AppLanguage language, int count) {
     title: _l(
       language,
       en: 'Repair grammar ghosts',
-      vi: 'Sửa grammar ghost',
+      vi: 'Sửa điểm yếu ngữ pháp',
       ja: '文法ゴーストを補強する',
     ),
     subtitle: _l(
@@ -533,7 +533,12 @@ PracticeSessionAction _grammarGhostAction(AppLanguage language, int count) {
       vi: '$count điểm ngữ pháp yếu vẫn còn đủ mới để sửa rất nhanh.',
       ja: '$count件の弱い文法ポイントは今なら素早く補強できます。',
     ),
-    ctaLabel: _l(language, en: 'Open ghosts', vi: 'Mở ghost', ja: 'ゴーストへ'),
+    ctaLabel: _l(
+      language,
+      en: 'Open ghosts',
+      vi: 'Mở ngữ pháp yếu',
+      ja: 'ゴーストへ',
+    ),
     route: AppRoutePath.grammarPractice,
     extra: GrammarPracticeMode.ghost,
     icon: Icons.auto_fix_high_rounded,
@@ -645,7 +650,7 @@ PracticeSessionAction _immersionAction(AppLanguage language) {
       vi: 'Đọc ngắn, lưu từ lạ, và giữ nhịp tiếp xúc với tiếng Nhật luôn nóng.',
       ja: '短く読み、未知語を保存し、日本語との接触を温かく保ちましょう。',
     ),
-    ctaLabel: _l(language, en: 'Open immersion', vi: 'Mở immersion', ja: '没入へ'),
+    ctaLabel: _l(language, en: 'Open immersion', vi: 'Mở bài đọc', ja: '没入へ'),
     route: AppRoutePath.immersion,
     icon: Icons.article_rounded,
     color: const Color(0xFF059669),
@@ -666,13 +671,13 @@ PracticeSessionAction _immersionAction(AppLanguage language) {
       _l(
         language,
         en: 'Finish due reviews first',
-        vi: 'Chặn hàng review trước',
+        vi: 'Ôn các mục đến hạn trước',
         ja: 'まずレビューキューを守る',
       ),
       _l(
         language,
         en: 'Today gets lighter once due reviews stop pulling at your attention.',
-        vi: 'Hôm nay sẽ nhẹ hẳn đi khi hàng đợi đang mở không còn kéo bạn liên tục nữa.',
+        vi: 'Hôm nay sẽ nhẹ hơn sau khi bạn xử lý xong các mục cần ôn.',
         ja: '今動いているキューを止めるだけで、今日の学習はかなり軽くなります。',
       ),
     );

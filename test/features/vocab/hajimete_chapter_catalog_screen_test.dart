@@ -233,7 +233,7 @@ void main() {
     await _pump(tester);
 
     expect(find.text('Quay lại từ vựng'), findsOneWidget);
-    expect(find.text('Catalog theo chapter'), findsOneWidget);
+    expect(find.text('Danh mục theo chương'), findsOneWidget);
   });
 
   testWidgets('JA locale shows Japanese back button and section labels', (

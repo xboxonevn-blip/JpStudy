@@ -451,13 +451,13 @@ class _SprintBody extends StatelessWidget {
 
   String _startLabel(AppLanguage l) => switch (l) {
     AppLanguage.en => 'Start sprint',
-    AppLanguage.vi => 'Bắt đầu sprint',
+    AppLanguage.vi => 'Bắt đầu ôn nhanh',
     AppLanguage.ja => 'スプリント開始',
   };
 
   String _completedLabel(AppLanguage l) => switch (l) {
     AppLanguage.en => 'Sprint complete',
-    AppLanguage.vi => 'Hoàn thành sprint',
+    AppLanguage.vi => 'Hoàn thành ôn nhanh',
     AppLanguage.ja => 'スプリント完了',
   };
 

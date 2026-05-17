@@ -445,7 +445,7 @@ ProgressCoachAction _immersionAction(AppLanguage language) {
       vi: 'Đọc ngắn, lưu từ lạ, và giữ nhịp học luôn đều.',
       ja: '短く読んで未知語を保存し、学習ループを保ちましょう。',
     ),
-    ctaLabel: _l(language, en: 'Open immersion', vi: 'Mở immersion', ja: '没入へ'),
+    ctaLabel: _l(language, en: 'Open immersion', vi: 'Mở bài đọc', ja: '没入へ'),
     route: AppRoutePath.immersion,
     icon: Icons.article_rounded,
     color: const Color(0xFF059669),
