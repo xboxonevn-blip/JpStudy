@@ -919,7 +919,10 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   String _seriesForCanonicalLevel(String level) {
-    return level == 'N3' ? 'ShinKanzen' : 'minna';
+    final normalized = level.trim().toUpperCase();
+    return normalized == 'N3' || normalized == 'N2' || normalized == 'N1'
+        ? 'ShinKanzen'
+        : 'minna';
   }
 
   static final _seriesNormalizeRe = RegExp(r'[^a-z0-9]+');

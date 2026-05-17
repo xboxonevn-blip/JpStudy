@@ -221,4 +221,50 @@ void main() {
       expect(points.every((item) => item.point.jlptLevel == 'N3'), isTrue);
     },
   );
+
+  test('seedTermsIfEmpty reads upper-level ShinKanzen lesson tags', () async {
+    const lessonId = 901;
+    await repository.ensureLesson(
+      lessonId: lessonId,
+      level: 'N2',
+      title: 'N2 source-aware test',
+    );
+    for (var i = 0; i < 55; i++) {
+      await contentDb
+          .into(contentDb.vocab)
+          .insert(
+            VocabCompanion.insert(
+              id: Value(100000 + i),
+              term: '別語$i',
+              reading: Value('べつご$i'),
+              meaning: 'nhiễu $i',
+              series: const Value('ShinKanzen'),
+              level: 'N2',
+              tags: const Value('shinkanzen_999,tanos,jlpt-vocab'),
+            ),
+          );
+    }
+    await contentDb
+        .into(contentDb.vocab)
+        .insert(
+          VocabCompanion.insert(
+            id: const Value(100901),
+            term: '相変わらず',
+            reading: const Value('あいかわらず'),
+            meaning: 'như mọi khi; vẫn như cũ',
+            meaningEn: const Value('as ever; as usual; the same'),
+            series: const Value('ShinKanzen'),
+            level: 'N2',
+            tags: const Value('shinkanzen_901,tanos,jlpt-vocab'),
+          ),
+        );
+
+    await repository.seedTermsIfEmpty(lessonId, 'N2');
+
+    final terms = await repository.fetchTerms(lessonId);
+    expect(terms, hasLength(1));
+    expect(terms.single.term, '相変わらず');
+    expect(terms.single.definition, 'như mọi khi; vẫn như cũ');
+    expect(terms.single.definitionEn, 'as ever; as usual; the same');
+  });
 }

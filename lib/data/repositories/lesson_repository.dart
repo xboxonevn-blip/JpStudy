@@ -1176,21 +1176,25 @@ class LessonRepository {
     String currentLevelLabel,
   ) async {
     final dbLevel = currentLevelLabel; // e.g. "N5", "N4"
-    final idStr = lessonId.toString();
+    final canonicalSeries = _seriesForCanonicalLevel(dbLevel);
+    final lessonTag = _lessonSeriesTag(canonicalSeries, lessonId);
     var vocabList =
         await (_contentDb.select(_contentDb.vocab)..where((tbl) {
               return tbl.level.equals(dbLevel) &
+                  tbl.series.equals(canonicalSeries) &
                   tbl.term.like('%?%').not() &
                   tbl.reading.like('%?%').not() &
-                  (tbl.tags.like('minna_$idStr,%') |
-                      tbl.tags.equals('minna_$idStr') |
-                      tbl.tags.like('%,minna_$idStr,%') |
-                      tbl.tags.like('%,minna_$idStr'));
+                  (tbl.tags.like('$lessonTag,%') |
+                      tbl.tags.equals(lessonTag) |
+                      tbl.tags.like('%,$lessonTag,%') |
+                      tbl.tags.like('%,$lessonTag'));
             }))
             .get();
 
-    // Fallback to offset if tag lookup failed (e.g. old data or manual lessons)
-    if (vocabList.isEmpty) {
+    // Fallback to offset for legacy Minna data only. Upper JLPT sources use
+    // indexed ShinKanzen assets and must not borrow unrelated level rows.
+    if (vocabList.isEmpty &&
+        (currentLevelLabel == 'N5' || currentLevelLabel == 'N4')) {
       int limit = 50;
       int offset = 0;
 
@@ -1469,7 +1473,10 @@ class LessonRepository {
   }
 
   String _seriesForCanonicalLevel(String level) {
-    return level == 'N3' ? 'ShinKanzen' : 'minna';
+    final normalized = level.trim().toUpperCase();
+    return normalized == 'N3' || normalized == 'N2' || normalized == 'N1'
+        ? 'ShinKanzen'
+        : 'minna';
   }
 
   String _lessonSeriesTag(String series, int lessonId) {
