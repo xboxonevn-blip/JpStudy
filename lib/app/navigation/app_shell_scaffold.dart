@@ -47,6 +47,11 @@ class AppShellScaffold extends ConsumerWidget {
         allItems[branchIndex],
     ];
     final palette = context.appPalette;
+    final selectedBranchIndex = shellBranchIndexForLocation(
+      GoRouterState.of(context).uri.path,
+    );
+    final currentBranchIndex =
+        selectedBranchIndex ?? navigationShell.currentIndex;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -74,8 +79,8 @@ class AppShellScaffold extends ConsumerWidget {
                             _Sidebar(
                               language: language,
                               items: items,
-                              currentIndex: navigationShell.currentIndex,
-                              onTap: (index) => _goToBranch(context, index),
+                              currentIndex: currentBranchIndex,
+                              onTap: (item) => _goToBranch(context, item),
                             ),
                             const SizedBox(width: 18),
                             Expanded(
@@ -99,7 +104,7 @@ class AppShellScaffold extends ConsumerWidget {
           for (final branchIndex in bottomBranchIndices) allItems[branchIndex],
         ];
         final bottomSelected = bottomItems.indexWhere(
-          (item) => item.branchIndex == navigationShell.currentIndex,
+          (item) => item.branchIndex == currentBranchIndex,
         );
         final selectedIndex = bottomSelected == -1
             ? bottomItems.length
@@ -139,7 +144,7 @@ class AppShellScaffold extends ConsumerWidget {
                       selectedIndex: selectedIndex,
                       onDestinationSelected: (index) {
                         if (index < bottomItems.length) {
-                          _goToBranch(context, bottomItems[index].branchIndex);
+                          _goToBranch(context, bottomItems[index]);
                           return;
                         }
                         _showMoreSheet(context, items, bottomBranchIndices);
@@ -184,7 +189,7 @@ class AppShellScaffold extends ConsumerWidget {
                 title: Text(item.label),
                 onTap: () {
                   Navigator.of(sheetContext).pop();
-                  _goToBranch(context, item.branchIndex);
+                  _goToBranch(context, item);
                 },
               );
             },
@@ -194,17 +199,15 @@ class AppShellScaffold extends ConsumerWidget {
     );
   }
 
-  void _goToBranch(BuildContext context, int index) {
-    if (index < 0 || index >= _branchInitialLocations.length) {
-      return;
-    }
-    GoRouter.of(context).go(_branchInitialLocations[index]);
+  void _goToBranch(BuildContext context, _ShellItem item) {
+    GoRouter.of(context).go(item.location);
   }
 
   List<_ShellItem> _buildItems(AppLanguage language) {
     return [
       _ShellItem(
         branchIndex: 0,
+        location: AppRoutePath.home,
         group: NavigationGroup.learning,
         label: _home(language),
         icon: Icons.home_outlined,
@@ -212,6 +215,7 @@ class AppShellScaffold extends ConsumerWidget {
       ),
       _ShellItem(
         branchIndex: 1,
+        location: AppRoutePath.learn,
         group: NavigationGroup.learning,
         label: _learn(language),
         icon: Icons.auto_stories_outlined,
@@ -219,6 +223,7 @@ class AppShellScaffold extends ConsumerWidget {
       ),
       _ShellItem(
         branchIndex: 2,
+        location: AppRoutePath.review,
         group: NavigationGroup.progress,
         label: _review(language),
         icon: Icons.psychology_alt_outlined,
@@ -226,6 +231,7 @@ class AppShellScaffold extends ConsumerWidget {
       ),
       _ShellItem(
         branchIndex: 3,
+        location: AppRoutePath.examCenter,
         group: NavigationGroup.other,
         label: _exam(language),
         icon: Icons.fact_check_outlined,
@@ -233,6 +239,7 @@ class AppShellScaffold extends ConsumerWidget {
       ),
       _ShellItem(
         branchIndex: 4,
+        location: AppRoutePath.me,
         group: NavigationGroup.other,
         label: _profile(language),
         icon: Icons.person_outline_rounded,
@@ -338,7 +345,7 @@ class _Sidebar extends StatelessWidget {
   final AppLanguage language;
   final List<_ShellItem> items;
   final int currentIndex;
-  final ValueChanged<int> onTap;
+  final ValueChanged<_ShellItem> onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -421,7 +428,7 @@ class _Sidebar extends StatelessWidget {
                       _SidebarItem(
                         item: item,
                         selected: item.branchIndex == currentIndex,
-                        onTap: () => onTap(item.branchIndex),
+                        onTap: () => onTap(item),
                       ),
                     if (group != NavigationGroup.other)
                       const SizedBox(height: _sidebarGroupGap),
@@ -446,7 +453,7 @@ class _Sidebar extends StatelessWidget {
                     _SidebarItem(
                       item: item,
                       selected: item.branchIndex == currentIndex,
-                      onTap: () => onTap(item.branchIndex),
+                      onTap: () => onTap(item),
                       height: _sidebarFooterItemHeight,
                       compact: true,
                     ),
@@ -658,6 +665,7 @@ String _navigationGroupLabel(AppLanguage language, NavigationGroup group) {
 class _ShellItem {
   const _ShellItem({
     required this.branchIndex,
+    required this.location,
     required this.group,
     required this.label,
     required this.icon,
@@ -665,10 +673,86 @@ class _ShellItem {
   });
 
   final int branchIndex;
+  final String location;
   final NavigationGroup group;
   final String label;
   final IconData icon;
   final IconData selectedIcon;
+}
+
+@visibleForTesting
+int? shellBranchIndexForLocation(String location) {
+  final path = location.trim().isEmpty ? AppRoutePath.home : location.trim();
+  if (path == AppRoutePath.home ||
+      path.startsWith('${AppRoutePath.roadmap}/') ||
+      path == AppRoutePath.roadmap ||
+      path.startsWith('${AppRoutePath.today}/') ||
+      path == AppRoutePath.today ||
+      path.startsWith('${AppRoutePath.progress}/') ||
+      path == AppRoutePath.progress ||
+      path.startsWith('${AppRoutePath.library}/') ||
+      path == AppRoutePath.library ||
+      path.startsWith('${AppRoutePath.search}/') ||
+      path == AppRoutePath.search ||
+      path.startsWith('/lesson/')) {
+    return 0;
+  }
+  if (path == AppRoutePath.learn ||
+      path.startsWith('${AppRoutePath.learn}/') ||
+      path == AppRoutePath.kanji ||
+      path.startsWith('${AppRoutePath.kanji}/') ||
+      path == AppRoutePath.vocab ||
+      path.startsWith('${AppRoutePath.vocab}/') ||
+      path == AppRoutePath.grammar ||
+      path.startsWith('${AppRoutePath.grammar}/') ||
+      path == AppRoutePath.foundations ||
+      path.startsWith('${AppRoutePath.foundations}/')) {
+    return 1;
+  }
+  if (path == AppRoutePath.review ||
+      path.startsWith('${AppRoutePath.review}/') ||
+      path == AppRoutePath.memory ||
+      path.startsWith('${AppRoutePath.memory}/') ||
+      path == AppRoutePath.studyHub ||
+      path.startsWith('${AppRoutePath.studyHub}/') ||
+      path == AppRoutePath.mistakes ||
+      path.startsWith('${AppRoutePath.mistakes}/') ||
+      path == AppRoutePath.active ||
+      path.startsWith('${AppRoutePath.active}/') ||
+      path == AppRoutePath.study ||
+      path.startsWith('${AppRoutePath.study}/') ||
+      path == AppRoutePath.practice ||
+      path.startsWith('${AppRoutePath.practice}/') ||
+      path == AppRoutePath.match ||
+      path.startsWith('${AppRoutePath.match}/') ||
+      path == AppRoutePath.immersion ||
+      path.startsWith('${AppRoutePath.immersion}/')) {
+    return 2;
+  }
+  if (path == AppRoutePath.examCenter ||
+      path.startsWith('${AppRoutePath.examCenter}/') ||
+      path == AppRoutePath.exam ||
+      path.startsWith('${AppRoutePath.exam}/') ||
+      path.startsWith('/jlpt/')) {
+    return 3;
+  }
+  if (path == AppRoutePath.me ||
+      path.startsWith('${AppRoutePath.me}/') ||
+      path == AppRoutePath.leaderboard ||
+      path.startsWith('${AppRoutePath.leaderboard}/') ||
+      path == AppRoutePath.premium ||
+      path.startsWith('${AppRoutePath.premium}/') ||
+      path == AppRoutePath.community ||
+      path.startsWith('${AppRoutePath.community}/') ||
+      path == AppRoutePath.mastery ||
+      path.startsWith('${AppRoutePath.mastery}/') ||
+      path == AppRoutePath.forecast ||
+      path.startsWith('${AppRoutePath.forecast}/') ||
+      path == AppRoutePath.privacy ||
+      path == AppRoutePath.terms) {
+    return 4;
+  }
+  return null;
 }
 
 @visibleForTesting

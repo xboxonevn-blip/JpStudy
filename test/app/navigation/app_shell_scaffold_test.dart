@@ -61,7 +61,9 @@ void main() {
     ).firstMatch(source)!.group(0)!;
 
     expect(goToBranchBody, contains('GoRouter.of(context).go'));
-    expect(goToBranchBody, contains('_branchInitialLocations[index]'));
+    expect(goToBranchBody, contains('item.location'));
     expect(goToBranchBody, isNot(contains('navigationShell.goBranch')));
+    expect(source, contains('required this.location'));
+    expect(source, contains('location: AppRoutePath.me'));
   });
 }

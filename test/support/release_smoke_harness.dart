@@ -117,6 +117,7 @@ Future<void> seedSmokeGrammarPoint(
 Future<void> pumpReleaseSmokeApp(
   WidgetTester tester, {
   required Size size,
+  AppLanguage language = AppLanguage.en,
   List<Override> extraOverrides = const [],
 }) async {
   tester.view.physicalSize = size;
@@ -180,7 +181,7 @@ Future<void> pumpReleaseSmokeApp(
   final container = ProviderContainer(
     overrides: [
       appLanguageProvider.overrideWith(
-        (ref) => AppLanguageController.test(AppLanguage.en),
+        (ref) => AppLanguageController.test(language),
       ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       onboardingDoneProvider.overrideWith((ref) => true),
