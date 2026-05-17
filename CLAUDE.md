@@ -154,11 +154,13 @@ Active workstream status (as of 2026-05-17):
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
-- Latest source/CI/deploy proof: commit `60a95a4f`, GitHub Actions run
-  `25972622502` succeeded. `ui-string-guard`, `firebase-security-rules`,
-  and secret-backed `deploy-hosting` all completed with `success`, including
-  production build, primary deploy, primary/legacy smoke, live resource smoke,
-  and Lighthouse live gate.
+- Latest exact source/CI/deploy proof changes with each main commit. Check
+  `docs/compliance/beta-launch-proof-checklist-2026-05-15.md` or the current
+  GitHub Actions run for the newest run ID. The tracked deploy gate must show
+  `ui-string-guard`, `firebase-security-rules`, and secret-backed
+  `deploy-hosting` all completed with `success`, including production build,
+  primary deploy, primary/legacy smoke, live resource smoke, and Lighthouse
+  live gate.
 - Latest live route-matrix proof: `558fc151` fixed Flutter web hash-route
   bootstrap by seeding persisted providers before `runApp`. `17100cb1` adds
   `npm run report:live-route-matrix`, and the latest run passed `36/36` N4/N3/N2/N1
@@ -232,14 +234,15 @@ flutter build web --release `
   project for local dev to retire localhost domain.
 □ Register App Check for jpstudy (android), jpstudy (ios), jpstudy
   (windows) — currently only jpstudy (web) registered.
-□ Set up Firebase Storage for `jpstudy-v2` before enabling legacy
-  migration. Current Spark/new-bucket state blocks Storage setup from CLI, and
-  Firebase currently requires the pay-as-you-go Blaze plan to use Cloud Storage
-  for Firebase. Keep `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` unset/false
-  until billing/location, bucket, rules deploy, and CORS preflight are verified.
+□ Future-only: set up Firebase Storage for `jpstudy-v2` only if cloud backup
+  or legacy migration is reintroduced after beta. Current Spark/new-bucket
+  state blocks Storage setup from CLI, and Firebase currently requires the
+  pay-as-you-go Blaze plan to use Cloud Storage for Firebase. Keep
+  `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` unset/false until billing/location,
+  bucket, rules deploy, and CORS preflight are verified.
 □ After 1-2 weeks monitoring, switch App Check from monitoring to
-  enforce mode (Firebase Console → App Check → APIs tab → Storage →
-  Enforce).
+  enforce mode for applicable beta Firebase APIs. Storage enforcement is
+  future-only unless cloud backup/migration returns.
 ✓ GitHub Actions secrets `FIREBASE_TOKEN` and
   `JPSTUDY_RECAPTCHA_SITE_KEY` are set; secret-backed deploy is proven.
   Optional: set `JPSTUDY_SENTRY_DSN` for beta error monitoring.
