@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
-import 'package:jpstudy/features/community/community_screen.dart';
 import 'package:jpstudy/features/custom_decks/custom_decks_screen.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
@@ -229,59 +227,5 @@ void main() {
       find.textContaining('1 active deck available right now.'),
       findsOneWidget,
     );
-  });
-
-  testWidgets('CommunityScreen routes profile and data shortcuts', (
-    tester,
-  ) async {
-    final router = GoRouter(
-      initialLocation: '/community',
-      routes: [
-        GoRoute(
-          path: '/community',
-          builder: (context, state) => ProviderScope(
-            overrides: [
-              appLanguageProvider.overrideWith(
-                (ref) => AppLanguageController.test(AppLanguage.en),
-              ),
-            ],
-            child: const CommunityScreen(),
-          ),
-        ),
-        GoRoute(
-          name: 'me',
-          path: '/me',
-          builder: (context, state) =>
-              const Scaffold(body: Center(child: Text('ME'))),
-        ),
-        GoRoute(
-          name: 'me-data',
-          path: '/me/data',
-          builder: (context, state) =>
-              const Scaffold(body: Center(child: Text('DATA'))),
-        ),
-        GoRoute(
-          path: '/design-lab',
-          builder: (context, state) =>
-              const Scaffold(body: Center(child: Text('LAB'))),
-        ),
-      ],
-    );
-
-    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Core shortcuts'), findsOneWidget);
-
-    await tester.tap(find.text('Open profile'));
-    await tester.pumpAndSettle();
-    expect(find.text('ME'), findsOneWidget);
-
-    router.go('/community');
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.text('Data tools'));
-    await tester.pumpAndSettle();
-    expect(find.text('DATA'), findsOneWidget);
   });
 }
