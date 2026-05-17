@@ -40,11 +40,12 @@ class _HomeHandwritingPracticeScreenState
   StudyLevel? _loadedLevel;
   int _sessionShuffleSeed = DateTime.now().microsecondsSinceEpoch;
   bool _freeMode = false;
+  static const int _randomSeedMax = 0x7fffffff;
 
   int _newSeed() =>
       DateTime.now().microsecondsSinceEpoch ^
       identityHashCode(this) ^
-      Random().nextInt(1 << 32);
+      Random().nextInt(_randomSeedMax);
 
   @override
   void didUpdateWidget(covariant HomeHandwritingPracticeScreen oldWidget) {

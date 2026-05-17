@@ -565,3 +565,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: the search keyword list still indexed `decomposition.hanViet` for EN/JA, so non-Vietnamese users could match a hidden Hán-Việt reading even though the UI did not display it.
 - Delta: -15 percentage points on confidence that display-only localization covers discovery behavior.
 - Updated belief: per-language UX also needs query-index tests; hidden teaching aids should not silently drive results outside their intended language.
+
+## 2026-05-17 - Handwriting seed failed only after web compilation
+
+- Prior belief: the handwriting practice path was covered by widget tests and only needed language-copy proof.
+- Actual observation: live web blanked the `書く` practice surface because `Random().nextInt(1 << 32)` compiled to a zero max on web and threw `RangeError`.
+- Delta: -20 percentage points on confidence that Dart VM widget coverage catches Flutter web numeric edge cases.
+- Updated belief: any random/bitwise seed logic used by learner routes needs a web-safe constant and live route proof, not only VM widget tests.

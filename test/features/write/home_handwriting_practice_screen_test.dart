@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -126,6 +128,14 @@ Widget buildScreenWithContainer({
 );
 
 void main() {
+  test('random seed generation avoids web-unsafe 32-bit shift max', () {
+    final source = File(
+      'lib/features/write/screens/home_handwriting_practice_screen.dart',
+    ).readAsStringSync();
+
+    expect(source, isNot(contains('nextInt(1 << 32)')));
+  });
+
   late AppDatabase appDb;
   late ContentDatabase contentDb;
 
