@@ -39,4 +39,6 @@
 - Verified locally: grammar multiple-choice questions now require select -> confirm; tapping an option no longer commits immediately.
 - Verified locally: four-answer grammar multiple-choice uses a 2x2 grid on wide layouts and a compact one-column mobile layout with all options plus the confirm button hit-testable inside a 390x640 viewport.
 - Verified locally: grammar practice no longer repeats the full mode/config card on every question; the top row is reduced to question count, progress, and question type.
-- Still pending: one shared quiz component across lesson test, grammar gate, and JLPT mock/exam; live desktop/mobile proof after deploy.
+- Verified live after deploy `4622e4c5`: desktop `/#/grammar-practice` shows one slim top row, four answers in a 2x2 grid, and disabled `Answer` until selection; mobile 390x640 shows question, four compact answer rows, and `Answer` in one viewport.
+- Verified live after deploy `4622e4c5`: tapping a mobile answer then `Answer` advances from question 1 to question 2, proving select -> confirm is active.
+- Still pending: one shared quiz component across lesson test, grammar gate, and JLPT mock/exam.
