@@ -449,3 +449,7 @@ Live `/lesson/1` and `/lesson/26` still showed `Tổng 0` with a spinner after t
 ## 2026-05-17 - P0 Lesson Fix Needed Storage Identity Too
 
 The first P0 hypothesis focused on UI loading semantics, but repository tests exposed a second failure mode: N5 and N3 lesson `1` could share the same persisted lesson row. Fixing only `/lesson/:id` links would still leave progress rows vulnerable after level switches. Mental model update: curriculum identity must be storage-level scoped, not just route-level scoped; user-visible source lesson numbers and persisted lesson IDs are separate concepts.
+
+## 2026-05-17 - Exam Navigation Uses Exam Center, Not Exam Route
+
+Phase 2 first fixed the selected-level copy in `ExamScreen`, but the sidebar branch actually lands on `/exam-center`. Live checks still showed stale N5 cards until `ExamCenterHubScreen` was updated too. Mental model update: route labels and branch targets are the product surface; fixing a similarly named route is insufficient unless the shell wiring proves it is the live destination.

@@ -85,6 +85,15 @@ and removed the double navigation in shell branch taps. Live deploy rechecked
 `/#/vocab`, `/#/premium`, and `/#/search`. Remaining work: Phase 2 level-store
 unification and IA cleanup.
 
+Phase 2 update: level changes now persist through one helper path instead of
+feature-local direct writes. Kanji, Vocab, Onboarding, Home, Search, Library,
+Memory, Profile, Grammar, and Exam surfaces read the same persisted study level
+after route reloads and direct hash entry. A guard test prevents new
+`studyLevelProvider.notifier.state` writes under `lib/features`. The follow-up
+live check used a fresh browser context with `flutter.onboarding.level=n2` and
+confirmed `/exam-center` renders N2-specific heading/cards. Remaining work:
+Phase 3 information-architecture cleanup and route consolidation.
+
 Full live audit note: `full-audit-2026-05-17.md` supersedes the prior IA-first
 ordering. P0 source fixes were built, deployed, and live-verified on
 2026-05-17T14:13+07:00. Lesson study is no longer blocked by zero vocab totals
