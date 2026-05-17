@@ -925,7 +925,7 @@ String _lessonTheme(AppLanguage language, int lessonId) {
   final themes = _lessonThemes[lessonId];
   if (themes == null) {
     return switch (language) {
-      AppLanguage.en => 'Core expressions and vocabulary flow',
+      AppLanguage.en => 'Core expressions and vocabulary order',
       AppLanguage.vi => 'Mạch từ vựng và mẫu câu cốt lõi',
       AppLanguage.ja => '基礎表現と語彙の流れ',
     };

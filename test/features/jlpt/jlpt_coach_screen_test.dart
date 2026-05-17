@@ -80,7 +80,7 @@ void main() {
     await tester.pumpWidget(buildCoach(db));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 200));
-    expect(find.text('JLPT N5 prep hub'), findsOneWidget);
+    expect(find.text('JLPT N5 exam prep'), findsOneWidget);
     await tester.pumpWidget(Container());
     await tester.pump(const Duration(milliseconds: 100));
     await db.close();

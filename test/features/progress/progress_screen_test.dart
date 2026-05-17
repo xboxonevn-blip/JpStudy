@@ -42,7 +42,7 @@ const _kDashboard = DashboardState(
 );
 
 ProgressCoachBoard buildCoachBoard({
-  String headline = 'Protect the queue first',
+  String headline = 'Finish due reviews first',
   String caption =
       'Progress says overdue reviews are the biggest source of drag right now.',
   ProgressCoachAction? primaryAction,
@@ -58,7 +58,7 @@ ProgressCoachBoard buildCoachBoard({
     ),
     ProgressCoachSignal(
       id: 'retention',
-      label: 'Retention',
+      label: 'Review health',
       value: '35 fragile',
       detail: '65 mature cards are now doing the heavy lifting.',
       icon: Icons.stacked_bar_chart_rounded,
@@ -83,7 +83,7 @@ ProgressCoachBoard buildCoachBoard({
         const ProgressCoachAction(
           id: 'due_reviews',
           title: 'Review 6 due items now',
-          subtitle: '3 vocab · 2 grammar · 1 kanji are waiting in the queue.',
+          subtitle: '3 vocab · 2 grammar · 1 kanji are due now.',
           ctaLabel: 'Start due session',
           route: AppRoutePath.grammarPractice,
           icon: Icons.schedule_rounded,
@@ -282,7 +282,7 @@ void main() {
       find.byKey(const ValueKey('progress_focus_headline')),
       findsOneWidget,
     );
-    expect(find.text('Protect the queue first'), findsOneWidget);
+    expect(find.text('Finish due reviews first'), findsOneWidget);
     expect(find.text('Review 6 due items now'), findsOneWidget);
     expect(find.text('Start due session'), findsOneWidget);
   });
@@ -295,7 +295,7 @@ void main() {
           coachBoard: buildCoachBoard(
             headline: 'Repair the weak spots',
             caption:
-                'Your queue is manageable, so targeted repair gives the fastest lift.',
+                'Due reviews are manageable, so targeted repair gives the fastest lift.',
             primaryAction: const ProgressCoachAction(
               id: 'grammar_mistakes',
               title: 'Grammar slipping: 〜てしまう',
@@ -349,7 +349,7 @@ void main() {
             ),
             ProgressCoachSignal(
               id: 'retention',
-              label: 'Retention',
+              label: 'Review health',
               value: '35 fragile',
               detail: '65 mature cards are now doing the heavy lifting.',
               icon: Icons.stacked_bar_chart_rounded,

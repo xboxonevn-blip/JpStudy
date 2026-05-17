@@ -233,28 +233,28 @@ List<_PremiumFeature> _features(AppLanguage language) => switch (language) {
     _PremiumFeature(
       Icons.library_books_rounded,
       'Full reading library',
-      'Unlock longer reading sets, guided comprehension, and richer sample banks.',
+      'Unlock longer reading sets, guided comprehension, and richer examples.',
       'Content',
       AppStatusTone.primary,
     ),
     _PremiumFeature(
       Icons.insights_rounded,
-      'Advanced analytics',
-      'See weekly weak-point trends, retention breakdowns, and coach-style recovery ideas.',
+      'Advanced study stats',
+      'See weekly weak-point trends, review health, and recovery ideas.',
       'Insight',
       AppStatusTone.success,
     ),
     _PremiumFeature(
       Icons.fact_check_rounded,
       'Unlimited mock exams',
-      'Run exam prep blocks without soft caps and keep retry history longer.',
+      'Run exam prep sessions with fewer limits and keep retry history longer.',
       'Exam',
       AppStatusTone.warning,
     ),
     _PremiumFeature(
       Icons.offline_bolt_rounded,
       'Offline packs',
-      'Keep focused study bundles ready for commute sessions and low-connection time.',
+      'Keep focused study sets ready for commute sessions and low-connection time.',
       'New',
       AppStatusTone.neutral,
     ),
@@ -263,28 +263,28 @@ List<_PremiumFeature> _features(AppLanguage language) => switch (language) {
     _PremiumFeature(
       Icons.library_books_rounded,
       'Thư viện đọc đầy đủ',
-      'Mở khóa bài đọc dài hơn, hướng dẫn hiểu bài và ngân hàng mẫu phong phú hơn.',
+      'Mở khóa bài đọc dài hơn, hướng dẫn hiểu bài và nhiều mẫu câu phong phú hơn.',
       'Nội dung',
       AppStatusTone.primary,
     ),
     _PremiumFeature(
       Icons.insights_rounded,
       'Phân tích nâng cao',
-      'Xem xu hướng điểm yếu theo tuần, retention và gợi ý phục hồi kiểu coach.',
-      'Insight',
+      'Xem xu hướng điểm yếu theo tuần, sức khỏe ôn tập và gợi ý cải thiện.',
+      'Thống kê',
       AppStatusTone.success,
     ),
     _PremiumFeature(
       Icons.fact_check_rounded,
       'Thi thử không giới hạn',
-      'Chạy block luyện thi không bị soft cap và giữ lịch sử retry lâu hơn.',
+      'Luyện đề nhiều lượt hơn và giữ lịch sử làm lại lâu hơn.',
       'Thi cử',
       AppStatusTone.warning,
     ),
     _PremiumFeature(
       Icons.offline_bolt_rounded,
       'Gói offline',
-      'Giữ sẵn các bundle tập trung cho lúc di chuyển hoặc mạng yếu.',
+      'Giữ sẵn bài học tập trung cho lúc di chuyển hoặc mạng yếu.',
       'Mới',
       AppStatusTone.neutral,
     ),
@@ -293,7 +293,7 @@ List<_PremiumFeature> _features(AppLanguage language) => switch (language) {
     _PremiumFeature(
       Icons.library_books_rounded,
       '読解ライブラリ拡張',
-      '長文セット、理解ガイド、サンプルバンクをより豊かに使えます。',
+      '長文セット、理解ガイド、豊富な例文を使えます。',
       'コンテンツ',
       AppStatusTone.primary,
     ),
@@ -307,14 +307,14 @@ List<_PremiumFeature> _features(AppLanguage language) => switch (language) {
     _PremiumFeature(
       Icons.fact_check_rounded,
       '模試回数無制限',
-      '模試ブロックを上限なく回し、再挑戦履歴も長く残せます。',
+      '模試を多く練習でき、再挑戦履歴も長く残せます。',
       '試験',
       AppStatusTone.warning,
     ),
     _PremiumFeature(
       Icons.offline_bolt_rounded,
       'オフラインパック',
-      '通学や通信不安定な時間向けに集中パックを保持します。',
+      '通学や通信不安定な時間向けに集中学習を保持します。',
       '新着',
       AppStatusTone.neutral,
     ),
@@ -324,7 +324,7 @@ List<_PremiumFeature> _features(AppLanguage language) => switch (language) {
 List<_PlanItem> _plans(AppLanguage language) => switch (language) {
   AppLanguage.en => const [
     _PlanItem(
-      'Starter',
+      'Basic',
       '4.99 / mo',
       '7 days',
       'Monthly billing',
@@ -334,9 +334,9 @@ List<_PlanItem> _plans(AppLanguage language) => switch (language) {
       'Best for trying premium after your daily streak is stable.',
       0,
       [
-        'Long-form reading and premium sample decks',
+        'Long-form reading and premium example sets',
         'Exam retries with longer history',
-        'Basic analytics upgrades',
+        'Clearer study stats',
       ],
     ),
     _PlanItem(
@@ -350,9 +350,9 @@ List<_PlanItem> _plans(AppLanguage language) => switch (language) {
       'Best value if you use the roadmap, memory hub, and exams every week.',
       18,
       [
-        'Everything in Starter plus deeper analytics',
-        'Priority access to new study flows',
-        'Unlimited mock blocks and archive retention',
+        'Everything in Basic plus deeper study stats',
+        'Priority access to new study paths',
+        'Unlimited mock exams and longer history',
       ],
     ),
     _PlanItem(
@@ -363,30 +363,30 @@ List<_PlanItem> _plans(AppLanguage language) => switch (language) {
       'High',
       1,
       0.9,
-      'Best for heavy learners who want full exam cadence and active-learning packs.',
+      'Best for heavy learners who want a steady exam plan and guided practice.',
       28,
       [
-        'Everything in Pro plus premium challenge tracks',
+        'Everything in Pro plus premium weekly goals',
         'Larger offline packs and coach reports',
-        'Expanded community events and advanced labs',
+        'Expanded group events and advanced practice tools',
       ],
     ),
   ],
   AppLanguage.vi => const [
     _PlanItem(
-      'Starter',
+      'Gói cơ bản',
       '119k / tháng',
       '7 ngày',
       'Thanh toán theo tháng',
       'Nhẹ',
       0.58,
       0.38,
-      'Hợp khi muốn thử premium sau khi đã ổn định streak hằng ngày.',
+      'Hợp khi muốn thử bản nâng cấp sau khi đã học đều hằng ngày.',
       0,
       [
-        'Bài đọc dài và deck mẫu cao cấp',
+        'Bài đọc dài và bộ ví dụ cao cấp',
         'Retry đề thi với lịch sử dài hơn',
-        'Nâng cấp analytics cơ bản',
+        'Thống kê học tập rõ hơn',
       ],
     ),
     _PlanItem(
@@ -400,9 +400,9 @@ List<_PlanItem> _plans(AppLanguage language) => switch (language) {
       'Giá trị nhất nếu bạn dùng lộ trình, ghi nhớ và đề thi mỗi tuần.',
       18,
       [
-        'Mọi thứ của Starter cộng analytics sâu hơn',
-        'Ưu tiên trải nghiệm flow học mới',
-        'Mock block không giới hạn và lưu lịch sử lâu hơn',
+        'Mọi thứ của gói cơ bản, cộng thống kê học tập sâu hơn',
+        'Ưu tiên trải nghiệm hướng học mới',
+        'Lượt đề thi thử không giới hạn và lưu lịch sử lâu hơn',
       ],
     ),
     _PlanItem(
@@ -413,12 +413,12 @@ List<_PlanItem> _plans(AppLanguage language) => switch (language) {
       'Cao',
       1,
       0.9,
-      'Hợp cho người học nặng muốn cadence thi đầy đủ và active-learning pack.',
+      'Hợp cho người học nhiều muốn lộ trình luyện đề đều và bài luyện có hướng dẫn.',
       28,
       [
-        'Mọi thứ của Pro cộng challenge cao cấp',
-        'Offline pack lớn hơn và báo cáo coach',
-        'Sự kiện cộng đồng và design lab mở rộng',
+        'Mọi thứ của Pro cộng mục tiêu tuần cao cấp',
+        'Gói offline lớn hơn và báo cáo học tập',
+        'Sự kiện nhóm học và công cụ luyện nâng cao',
       ],
     ),
   ],
@@ -445,7 +445,7 @@ List<_PlanItem> _plans(AppLanguage language) => switch (language) {
       0.72,
       'ロードマップ、記憶、試験を毎週使う人に最適です。',
       18,
-      ['Starter に加えて深い分析', '新しい学習フローへの優先アクセス', '模試ブロック無制限と長期履歴保持'],
+      ['基本プランに加えて深い分析', '新しい学習メニューへの優先アクセス', '模試回数無制限と長期履歴保持'],
     ),
     _PlanItem(
       'Coach',
@@ -455,13 +455,9 @@ List<_PlanItem> _plans(AppLanguage language) => switch (language) {
       '高強度',
       1,
       0.9,
-      '本格学習者向けに試験 cadence と active-learning pack を広げます。',
+      '本格学習者向けに試験計画とガイド練習を広げます。',
       28,
-      [
-        'Pro に加えてプレミアム challenge',
-        '大きな offline pack と coach report',
-        '拡張 community event と lab',
-      ],
+      ['Pro に加えてプレミアム週目標', '大きなオフラインパックと学習レポート', 'グループ学習イベントと上級練習ツール'],
     ),
   ],
 };
@@ -474,21 +470,21 @@ List<_MatrixRow> _matrix(
     _MatrixRow(
       Icons.menu_book_rounded,
       'Reading depth',
-      'Short decks on Free, guided reading and long sets on ${selected.name}.',
-      selected.name == 'Starter' ? 'Boosted' : 'Expanded',
+      'Short reading sets on Free, guided reading and long sets on ${selected.name}.',
+      selected.name == 'Basic' ? 'Boosted' : 'Expanded',
       AppStatusTone.primary,
     ),
     _MatrixRow(
       Icons.analytics_rounded,
       'Insights',
-      'Streak and XP remain free; weak-point trends and retention become much deeper.',
+      'Streak and XP remain free; weak-point trends and review health become much deeper.',
       selected.name == 'Coach' ? 'Full' : 'Upgraded',
       AppStatusTone.success,
     ),
     _MatrixRow(
       Icons.flight_takeoff_rounded,
       'Study pace',
-      'Keep the same shell and flow, but remove friction around exams and active sessions.',
+      'Keep the same app layout, but remove friction around exams and active sessions.',
       selected.fit,
       AppStatusTone.warning,
     ),
@@ -497,21 +493,21 @@ List<_MatrixRow> _matrix(
     _MatrixRow(
       Icons.menu_book_rounded,
       'Độ sâu bài đọc',
-      'Bản Free có deck ngắn; ${selected.name} mở bài đọc dài và hướng dẫn đọc.',
-      selected.name == 'Starter' ? 'Tăng nhẹ' : 'Mở rộng',
+      'Bản Free có bài đọc ngắn; ${selected.name} mở bài đọc dài và hướng dẫn đọc.',
+      selected.name == 'Gói cơ bản' ? 'Tăng nhẹ' : 'Mở rộng',
       AppStatusTone.primary,
     ),
     _MatrixRow(
       Icons.analytics_rounded,
       'Insight',
-      'Streak và XP vẫn miễn phí; điểm yếu và retention sâu hơn nhiều.',
+      'Streak và XP vẫn miễn phí; điểm yếu và sức khỏe ôn tập sâu hơn nhiều.',
       selected.name == 'Coach' ? 'Đầy đủ' : 'Nâng cấp',
       AppStatusTone.success,
     ),
     _MatrixRow(
       Icons.flight_takeoff_rounded,
       'Nhịp học',
-      'Giữ nguyên shell và flow, nhưng giảm ma sát quanh đề thi và phiên chủ động.',
+      'Giữ bố cục quen thuộc, nhưng giảm ma sát quanh đề thi và phiên học.',
       selected.fit,
       AppStatusTone.warning,
     ),
@@ -534,7 +530,7 @@ List<_MatrixRow> _matrix(
     _MatrixRow(
       Icons.flight_takeoff_rounded,
       '学習テンポ',
-      'shell と flow はそのままに、試験と active session の摩擦を減らします。',
+      '同じ画面構成のまま、試験と学習セッションの摩擦を減らします。',
       selected.fit,
       AppStatusTone.warning,
     ),
@@ -553,9 +549,9 @@ String _heroTitle(AppLanguage language) => switch (language) {
 };
 String _heroSubtitle(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Keep the same app feel, but unlock stronger reading, deeper analytics, and steadier exam prep.',
+    'Keep the same app feel, but unlock stronger reading, deeper study stats, and steadier exam prep.',
   AppLanguage.vi =>
-    'Giữ nguyên cảm giác app, nhưng mở khóa đọc sâu hơn, analytics mạnh hơn và luyện thi ổn định hơn.',
+    'Giữ nguyên cảm giác app, nhưng mở khóa đọc sâu hơn, thống kê rõ hơn và luyện thi ổn định hơn.',
   AppLanguage.ja => 'アプリの雰囲気はそのままに、読解・分析・試験対策をさらに強化します。',
 };
 String _upgradeLabel(AppLanguage language) => switch (language) {

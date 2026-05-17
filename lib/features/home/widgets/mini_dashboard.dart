@@ -290,9 +290,9 @@ class MiniDashboard extends ConsumerWidget {
   }
 
   String _compactEyebrow(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Today snapshot',
+    AppLanguage.en => 'Today overview',
     AppLanguage.vi => 'Tổng quan hôm nay',
-    AppLanguage.ja => '今日のスナップショット',
+    AppLanguage.ja => '今日の概要',
   };
 }
 

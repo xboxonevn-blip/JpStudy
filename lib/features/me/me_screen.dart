@@ -410,13 +410,6 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             subtitle: _achievementsHint(language),
             onTap: () => context.openAchievements(),
           ),
-          const SizedBox(height: AppSpacing.sm),
-          _ActionTile(
-            icon: Icons.design_services_outlined,
-            title: language.designLabLabel,
-            subtitle: language.designLabSubtitle,
-            onTap: () => context.openDesignLab(),
-          ),
         ],
       ),
     );
@@ -559,9 +552,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
   String _progressHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'View streak, XP, retention, and history.';
+        return 'View streak, XP, review health, and history.';
       case AppLanguage.vi:
-        return 'Xem streak, XP, retention và lịch sử.';
+        return 'Xem streak, XP, sức khỏe ôn tập và lịch sử.';
       case AppLanguage.ja:
         return '連続記録、XP、定着率、履歴を確認します。';
     }
@@ -581,7 +574,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
   String _masteryHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Track mastery across vocab, grammar, and kanji per level.';
+        return 'Follow mastery across vocab, grammar, and kanji per level.';
       case AppLanguage.vi:
         return 'Theo dõi tiến trình từ vựng, ngữ pháp, hán tự theo cấp.';
       case AppLanguage.ja:
@@ -603,9 +596,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
   String _forecastHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'See upcoming reviews, memory strength, and SRS analytics.';
+        return 'See upcoming reviews, memory strength, and SRS study stats.';
       case AppLanguage.vi:
-        return 'Xem lịch ôn tập, sức mạnh trí nhớ và phân tích SRS.';
+        return 'Xem lịch ôn tập, sức mạnh trí nhớ và thống kê SRS.';
       case AppLanguage.ja:
         return '今後の復習、記憶強度、SRS分析を確認します。';
     }

@@ -433,9 +433,9 @@ class _GrammarLessonHeader extends StatelessWidget {
         Text(
           _tr(
             language,
-            en: 'Study the grammar cards below, then start the mastery flow.',
+            en: 'Study the grammar cards below, then start guided practice.',
             vi: 'Xem các thẻ ngữ pháp bên dưới, rồi bắt đầu luyện.',
-            ja: '下の文法カードを確認してから、習得フローを開始してください。',
+            ja: '下の文法カードを確認してから、ガイド練習を始めてください。',
           ),
           style: TextStyle(
             fontSize: 12,
@@ -451,9 +451,9 @@ class _GrammarLessonHeader extends StatelessWidget {
             label: Text(
               _tr(
                 language,
-                en: 'Start Learn Flow (25)',
+                en: 'Start Guided Practice (25)',
                 vi: 'Bắt đầu học (25 câu)',
-                ja: '学習フロー開始（25）',
+                ja: 'ガイド練習開始（25）',
               ),
             ),
           ),
@@ -509,9 +509,9 @@ class _GrammarLessonHeader extends StatelessWidget {
           label: Text(
             _tr(
               language,
-              en: 'Weak Queue ($ghostCount)',
+              en: 'Weak Items ($ghostCount)',
               vi: 'Luyện điểm yếu ($ghostCount)',
-              ja: '弱点キュー ($ghostCount)',
+              ja: '弱点項目 ($ghostCount)',
             ),
           ),
         ),
@@ -524,7 +524,12 @@ class _GrammarLessonHeader extends StatelessWidget {
       children: [
         _quizTile(
           palette: palette,
-          title: _tr(language, en: 'Quick 10', vi: 'Quick 10', ja: 'クイック10'),
+          title: _tr(
+            language,
+            en: 'Quick 10',
+            vi: 'Luyện nhanh 10',
+            ja: 'クイック10',
+          ),
           subtitle: _tr(
             language,
             en: '2-3 minutes, exam-like mixed set.',
@@ -604,9 +609,9 @@ class _GrammarLessonHeader extends StatelessWidget {
       ),
       _GrammarLessonViewMode.quiz => _tr(
         language,
-        en: 'Quiz: exam-focused flow with less guidance.',
+        en: 'Quiz: exam-focused questions with less guidance.',
         vi: 'Kiểm tra: Sát thi thật, ít gợi ý.',
-        ja: 'クイズ: 試験重視のフロー（ガイダンス少なめ）。',
+        ja: 'クイズ: 試験重視の問題（ガイダンス少なめ）。',
       ),
     };
 

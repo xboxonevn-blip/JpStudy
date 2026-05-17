@@ -53,7 +53,7 @@ class ExamCenterHubScreen extends ConsumerWidget {
                   Text(
                     _text(
                       language,
-                      'JLPT $levelLabel practice hub',
+                      'JLPT $levelLabel exam practice',
                       'Trung t\u00e2m luy\u1ec7n \u0111\u1ec1 JLPT $levelLabel',
                       'JLPT $levelLabel \u5bfe\u7b56',
                     ),
@@ -65,8 +65,8 @@ class ExamCenterHubScreen extends ConsumerWidget {
                   Text(
                     _text(
                       language,
-                      'Mock exams, reading drills, coach recommendations, and history in one place.',
-                      'Thi th\u1eed, luy\u1ec7n \u0111\u1ecdc, coach \u0111i\u1ec3m y\u1ebfu v\u00e0 l\u1ecbch s\u1eed l\u00e0m b\u00e0i trong m\u1ed9t n\u01a1i.',
+                      'Mock exams, reading practice, weak-point recommendations, and history in one place.',
+                      'Thi th\u1eed, luy\u1ec7n \u0111\u1ecdc, g\u1ee3i \u00fd \u0111i\u1ec3m y\u1ebfu v\u00e0 l\u1ecbch s\u1eed l\u00e0m b\u00e0i trong m\u1ed9t n\u01a1i.',
                       '\u6a21\u8a66\u3001\u8aad\u89e3\u3001\u5f31\u70b9\u30b3\u30fc\u30c1\u3001\u5c65\u6b74\u3092\u307e\u3068\u3081\u3066\u78ba\u8a8d\u3067\u304d\u307e\u3059\u3002',
                     ),
                   ),
@@ -94,7 +94,7 @@ class ExamCenterHubScreen extends ConsumerWidget {
                       AppStatusChip(
                         label: _text(
                           language,
-                          '105-min full mock',
+                          '105-min mock exam',
                           'Thi th\u1eed 105 ph\u00fat',
                           '105\u5206\u6a21\u8a66',
                         ),
@@ -169,8 +169,8 @@ class ExamCenterHubScreen extends ConsumerWidget {
                   ),
                   primaryLabel: _text(
                     language,
-                    'Open coach',
-                    'M\u1edf coach',
+                    'Open recommendations',
+                    'M\u1edf g\u1ee3i \u00fd',
                     '\u958b\u304f',
                   ),
                   onPrimaryTap: () => context.go(AppRoutePath.jlptCoach),

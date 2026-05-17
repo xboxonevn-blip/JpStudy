@@ -15,8 +15,8 @@ void main() {
     expect(AppLanguage.en.itemsCountLabel(2), '2 items');
     expect(AppLanguage.en.questionsCountLabel(1), '1 question');
     expect(AppLanguage.en.questionsCountLabel(2), '2 questions');
-    expect(AppLanguage.en.decksCountLabel(1), '1 deck');
-    expect(AppLanguage.en.decksCountLabel(2), '2 decks');
+    expect(AppLanguage.en.decksCountLabel(1), '1 set');
+    expect(AppLanguage.en.decksCountLabel(2), '2 sets');
     expect(AppLanguage.en.sectionsCountLabel(1), '1 section');
     expect(AppLanguage.en.sectionsCountLabel(2), '2 sections');
     expect(AppLanguage.en.minutesCountLabel(1), '1 minute');

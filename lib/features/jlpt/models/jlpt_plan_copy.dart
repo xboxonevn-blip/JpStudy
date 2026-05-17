@@ -37,7 +37,7 @@ String jlptActionOpenCheckpoint(AppLanguage language) => switch (language) {
 };
 
 String jlptActionOpenGrammarDrill(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Open grammar drill',
+  AppLanguage.en => 'Open grammar practice',
   AppLanguage.vi => 'Mở bài luyện ngữ pháp',
   AppLanguage.ja => '文法ドリルを開く',
 };
@@ -49,7 +49,7 @@ String jlptActionOpenSpeedQuiz(AppLanguage language) => switch (language) {
 };
 
 String jlptActionOpenFillBlankDrill(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Open fill-in drill',
+  AppLanguage.en => 'Open fill-in practice',
   AppLanguage.vi => 'Mở bài luyện điền chỗ trống',
   AppLanguage.ja => '穴埋めドリルを開く',
 };
@@ -85,7 +85,7 @@ String jlptActionOpenImmersion(AppLanguage language) => switch (language) {
 };
 
 String jlptActionOpenReadingDrill(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Open reading drill',
+  AppLanguage.en => 'Open reading practice',
   AppLanguage.vi => 'Mở bài luyện đọc hiểu',
   AppLanguage.ja => '読解ドリルを開く',
 };

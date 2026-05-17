@@ -252,9 +252,9 @@ class PracticeScreen extends ConsumerWidget {
 
   String _featuredCaption(AppLanguage language) => switch (language) {
     AppLanguage.en =>
-      'The best lanes to switch into without scanning the full shelf.',
+      'The most useful practice choices without scanning every tool.',
     AppLanguage.vi =>
-      'Các lane đáng mở nhất nếu bạn muốn đổi nhịp mà không phải quét hết toàn bộ công cụ.',
+      'Các lựa chọn luyện tập đáng mở nhất mà không cần xem hết mọi công cụ.',
     AppLanguage.ja => '全体を見渡さなくても切り替えやすい集中レーンです。',
   };
 
@@ -266,7 +266,7 @@ class PracticeScreen extends ConsumerWidget {
 
   String _planCaption(AppLanguage language) => switch (language) {
     AppLanguage.en =>
-      'A short sequence to protect recall, repair weak spots, and keep momentum.',
+      'A short sequence to protect memory, repair weak spots, and keep momentum.',
     AppLanguage.vi =>
       'Một chuỗi ngắn để chặn rơi nhớ, vá điểm yếu, và giữ đà học tiếp.',
     AppLanguage.ja => '記憶を守り、弱点を補強し、勢いを保つための短い流れです。',
@@ -297,10 +297,10 @@ class PracticeScreen extends ConsumerWidget {
   };
 
   String _studyHubCaption(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Resources, textbook tracker, and exam checklist.',
+    AppLanguage.en => 'Resources, textbook progress, and exam checklist.',
     AppLanguage.vi =>
       'Tài nguyên, theo dõi giáo trình và danh sách chuẩn bị thi.',
-    AppLanguage.ja => 'リソース、教材トラッカー、試験チェックリスト。',
+    AppLanguage.ja => 'リソース、教材進捗、試験チェックリスト。',
   };
 
   String _studyHubLabel(AppLanguage language) => switch (language) {
@@ -829,9 +829,9 @@ class _HeroFocusPanel extends StatelessWidget {
 
   String _emptyMix(AppLanguage language) => switch (language) {
     AppLanguage.en =>
-      'No active due queue or grammar ghosts are waiting right now.',
+      'No due reviews or weak grammar points are waiting right now.',
     AppLanguage.vi =>
-      'Hiện chưa có hàng đến hạn hay grammar ghost nào đang chờ.',
+      'Hiện chưa có lượt ôn đến hạn hay điểm ngữ pháp yếu nào đang chờ.',
     AppLanguage.ja => '今は期限キューも文法ゴーストも待っていません。',
   };
 

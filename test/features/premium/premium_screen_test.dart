@@ -43,7 +43,7 @@ void main() {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
-    expect(find.text('Starter'), findsWidgets); // chip + plan card
+    expect(find.text('Basic'), findsWidgets); // chip + plan card
     expect(
       find.text('Pro'),
       findsWidgets,
@@ -55,12 +55,12 @@ void main() {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
-    // Default selected is Pro (index 1). Tap Starter (index 0).
-    await tester.tap(find.text('Starter'));
+    // Default selected is Pro (index 1). Tap Basic (index 0).
+    await tester.tap(find.text('Basic'));
     await _pump(tester);
 
-    // After selecting Starter, "Starter" plan name should appear in the plan card
-    expect(find.text('Starter'), findsWidgets);
+    // After selecting Basic, "Basic" plan name should appear in the plan card
+    expect(find.text('Basic'), findsWidgets);
   });
 
   testWidgets('"Upgrade now" tap shows checkout snackbar', (tester) async {

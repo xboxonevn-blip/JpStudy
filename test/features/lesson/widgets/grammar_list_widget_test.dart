@@ -210,14 +210,14 @@ void main() {
       expect(find.text('Quiz'), findsOneWidget);
     });
 
-    testWidgets('initial mode is Learn — shows Start Learn Flow button', (
+    testWidgets('initial mode is Learn — shows guided practice button', (
       tester,
     ) async {
       _largeViewport(tester);
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
 
-      expect(find.text('Start Learn Flow (25)'), findsOneWidget);
+      expect(find.text('Start Guided Practice (25)'), findsOneWidget);
     });
 
     testWidgets('tapping Drill segment switches to drill action buttons', (
@@ -235,8 +235,8 @@ void main() {
 
       // Drill mode now active
       expect(find.text('Sentence + Transform'), findsOneWidget);
-      // Learn flow button gone
-      expect(find.text('Start Learn Flow (25)'), findsNothing);
+      // Learn action button gone
+      expect(find.text('Start Guided Practice (25)'), findsNothing);
     });
   });
 

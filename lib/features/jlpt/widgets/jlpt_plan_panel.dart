@@ -233,23 +233,23 @@ String _planTitle(AppLanguage language) => switch (language) {
 
 String _planCaption(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Use the latest diagnosis to decide what to sharpen before the next mock.',
+    'Use the latest diagnosis to decide what to strengthen before the next mock exam.',
   AppLanguage.vi =>
-    'Dùng chẩn đoán gần nhất để chốt xem cần sharpen điều gì trước lần mock tiếp theo.',
+    'Dùng chẩn đoán gần nhất để chốt phần cần củng cố trước đề thi thử tiếp theo.',
   AppLanguage.ja => '直近の診断をもとに、次の模試までに何を磨くかを決めます。',
 };
 
 String _planEmptyTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'The plan unlocks after your first serious run',
-  AppLanguage.vi => 'Kế hoạch sẽ mở sau lần chạy nghiêm túc đầu tiên',
+  AppLanguage.en => 'The plan unlocks after your first timed attempt',
+  AppLanguage.vi => 'Kế hoạch sẽ mở sau lượt làm bài có bấm giờ đầu tiên',
   AppLanguage.ja => '最初の本格ランのあとにプランが開きます',
 };
 
 String _planEmptyBody(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Once you finish a reading drill or full mock, this area becomes a compact plan that tells you what to repair day by day.',
+    'Once you finish reading practice or a complete mock exam, this area becomes a compact day-by-day strengthening plan.',
   AppLanguage.vi =>
-    'Sau khi bạn xong reading drill hoặc full mock, khu vực này sẽ thành một plan gọn, chỉ rõ mỗi ngày nên sửa cái gì.',
+    'Sau khi bạn xong bài đọc hiểu hoặc đề thi thử đầy đủ, khu vực này sẽ thành kế hoạch củng cố gọn theo từng ngày.',
   AppLanguage.ja => '読解ドリルかフル模試を終えると、ここが日ごとの補強プランに変わります。',
 };
 

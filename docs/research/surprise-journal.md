@@ -460,3 +460,10 @@ Phase 3 reduced the visible shell to five branches, but old route paths still ma
 ## 2026-05-17T16:38+07:00 - Product identity leaks were mostly route affordances
 
 Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Quizlet-style leakage was mostly reachable UI and route affordances: edit/copy/add/combine controls, `/lesson/:id/edit`, and match-mode aliases. Hard-gating routes plus hiding curriculum controls removed the beta-facing confusion while keeping old editor/schema pieces isolated for possible future "My sets". Mental model update: beta product identity can be enforced at navigation and action boundaries before deleting compatibility schema.
+
+## 2026-05-17T17:35+07:00 - Copy debt lived outside central language helpers
+
+- Prior belief: most learner-copy cleanup would be concentrated in `app_language.dart` and a few route labels.
+- Actual observation: stale learner-hostile wording was spread across feature-local helpers and widgets: grammar lesson actions, custom practice, premium plan copy, mini-dashboard labels, roadmap fallback titles, and the Profile link to Design Lab.
+- Delta: -30 percentage points on confidence that central i18n tests alone catch copy quality regressions.
+- Updated belief: copy QA needs both centralized string tests and a feature-local literal sweep. Internal/dev surfaces should not have learner navigation entry points unless they have learner-ready language.

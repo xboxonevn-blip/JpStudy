@@ -344,7 +344,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                           children: [
                             Text(
                               switch (language) {
-                                AppLanguage.en => 'Current search bank',
+                                AppLanguage.en => 'Current search set',
                                 AppLanguage.vi => 'Kho tra cứu hiện tại',
                                 AppLanguage.ja => '現在の検索バンク',
                               },
@@ -390,9 +390,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 child: AppFeatureCard(
                   key: ValueKey('search_index_loading'),
                   icon: Icons.manage_search_rounded,
-                  title: 'Loading search bank',
+                  title: 'Loading search data',
                   subtitle:
-                      'Preparing vocab, kanji, and kana for the current JLPT lane.',
+                      'Preparing vocab, kanji, and kana for the current JLPT level.',
                   status: SizedBox(
                     width: 18,
                     height: 18,
@@ -883,9 +883,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   String _promptSubtitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Quick prompts to get into the bank faster.';
+        return 'Quick prompts to find study items faster.';
       case AppLanguage.vi:
-        return 'Một vài gợi ý nhanh để vào đúng bank tra cứu ngay.';
+        return 'Một vài gợi ý nhanh để tìm đúng mục cần học.';
       case AppLanguage.ja:
         return '検索バンクに素早く入るためのショートプロンプトです。';
     }
@@ -1371,7 +1371,7 @@ String _searchClearLabel(AppLanguage language) {
 String _searchShowAllLabel(AppLanguage language) {
   switch (language) {
     case AppLanguage.en:
-      return 'Show all lanes';
+      return 'Show all levels';
     case AppLanguage.vi:
       return 'Hiện mọi nhóm';
     case AppLanguage.ja:

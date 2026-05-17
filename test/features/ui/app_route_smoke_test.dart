@@ -25,7 +25,7 @@ void main() {
 
     await pumpSmokeRoute(tester, AppRoutePath.search);
     expect(find.text('Lookup'), findsAtLeastNWidgets(1));
-    expect(find.text('Current search bank'), findsOneWidget);
+    expect(find.text('Current search set'), findsOneWidget);
 
     await pumpSmokeRoute(tester, AppRoutePath.progress);
     expect(find.text('Progress (N5)'), findsWidgets);

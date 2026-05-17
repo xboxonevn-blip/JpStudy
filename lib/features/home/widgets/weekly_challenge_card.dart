@@ -49,8 +49,8 @@ class _ChallengeContent extends StatelessWidget {
       AppLanguage.ja => '残り$daysLeft日',
     };
     final headerLabel = switch (language) {
-      AppLanguage.en => 'WEEKLY CHALLENGE',
-      AppLanguage.vi => 'THỬ THÁCH TUẦN',
+      AppLanguage.en => 'WEEKLY GOAL',
+      AppLanguage.vi => 'MỤC TIÊU TUẦN',
       AppLanguage.ja => '週間チャレンジ',
     };
 
@@ -159,10 +159,10 @@ class _ChallengeContent extends StatelessWidget {
               Text(
                 switch (language) {
                   AppLanguage.en =>
-                    'Challenge complete! +${WeeklyChallenge.bonusXp} XP',
+                    'Weekly goal complete! +${WeeklyChallenge.bonusXp} XP',
                   AppLanguage.vi =>
-                    'Hoàn thành thử thách! +${WeeklyChallenge.bonusXp} XP',
-                  AppLanguage.ja => 'チャレンジ達成！ +${WeeklyChallenge.bonusXp} XP',
+                    'Hoàn thành mục tiêu tuần! +${WeeklyChallenge.bonusXp} XP',
+                  AppLanguage.ja => '週間目標達成！ +${WeeklyChallenge.bonusXp} XP',
                 },
                 style: TextStyle(
                   color: const Color(0xFFA7F3D0),

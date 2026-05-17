@@ -125,7 +125,7 @@ void main() {
       // progress=0.4 → '40%'
       expect(find.text('40%'), findsOneWidget);
       // trackProgressLabel.toUpperCase()
-      expect(find.text('TRACK PROGRESS'), findsOneWidget);
+      expect(find.text('PROGRESS'), findsOneWidget);
     });
 
     testWidgets('renders description subtitle when non-empty', (tester) async {

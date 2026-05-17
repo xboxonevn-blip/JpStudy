@@ -128,7 +128,7 @@ void main() {
     await tester.pumpWidget(buildExamCenter(level: StudyLevel.n2));
     await tester.pump();
 
-    expect(find.text('JLPT N2 practice hub'), findsOneWidget);
+    expect(find.text('JLPT N2 exam practice'), findsOneWidget);
     expect(find.text('N2 mock exam (105 min)'), findsOneWidget);
     expect(find.text('N2 reading practice'), findsOneWidget);
     expect(find.text('N5 mock exam (105 min)'), findsNothing);

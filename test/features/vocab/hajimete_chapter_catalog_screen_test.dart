@@ -153,7 +153,7 @@ void main() {
     // The _HeroTag for levelCode is always shown regardless of language
     expect(find.text('N5'), findsOneWidget);
     // EN tag labels
-    expect(find.text('Live lane'), findsOneWidget);
+    expect(find.text('Ready now'), findsOneWidget);
     expect(find.text('Topic-first'), findsOneWidget);
   });
 

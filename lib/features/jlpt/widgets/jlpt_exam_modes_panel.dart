@@ -341,9 +341,9 @@ String _fullMockTitle(AppLanguage language) => switch (language) {
 
 String _fullMockSubtitle(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Run the full exam flow with section timing, scoring, and instant diagnosis.',
+    'Run a complete mock exam with section timing, scoring, and instant diagnosis.',
   AppLanguage.vi =>
-    'Chạy đủ luồng thi với timer theo từng phần, chấm điểm và chẩn đoán ngay.',
+    'Làm đủ một đề thi thử với giờ từng phần, chấm điểm và chẩn đoán ngay.',
   AppLanguage.ja => 'セクション時間、採点、診断つきで本番に近い流れを回します。',
 };
 
@@ -358,7 +358,7 @@ String _quickMockSubtitle(
   StudyLevel level,
 ) => switch (language) {
   AppLanguage.en =>
-    'A shorter timed check built from the ${level.shortLabel} vocabulary bank already in the app.',
+    'A shorter timed check built from ${level.shortLabel} vocabulary already in the app.',
   AppLanguage.vi =>
     'Bài kiểm tra ngắn có bấm giờ, dùng từ vựng ${level.shortLabel} đã có sẵn trong app.',
   AppLanguage.ja => 'アプリ内の ${level.shortLabel} 語彙バンクから作る短い時間制チェックです。',
@@ -369,33 +369,30 @@ String _quickMockMeta(
   int questionCount,
 ) => switch (language) {
   AppLanguage.en =>
-    '${AppLanguage.en.questionsCountLabel(questionCount)} ready from your level bank',
-  AppLanguage.vi => '$questionCount câu hỏi sẵn sàng từ bank hiện tại',
+    '${AppLanguage.en.questionsCountLabel(questionCount)} ready for your level',
+  AppLanguage.vi => '$questionCount câu hỏi sẵn sàng cho cấp hiện tại',
   AppLanguage.ja => '$questionCount 問を現在レベルから使用',
 };
 
 String _comingSoonLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'No bank yet',
-  AppLanguage.vi => 'Chưa có bank',
+  AppLanguage.en => 'No questions yet',
+  AppLanguage.vi => 'Chưa có câu hỏi',
   AppLanguage.ja => '未準備',
 };
 
 String _readingDrillTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Reading drill',
+  AppLanguage.en => 'Reading practice',
   AppLanguage.vi => 'Đọc hiểu mục tiêu',
   AppLanguage.ja => '読解ドリル',
 };
 
-String _readingDrillSubtitle(
-  AppLanguage language,
-  StudyLevel level,
-) => switch (language) {
-  AppLanguage.en =>
-    'Practice timed passages that stay on the ${level.shortLabel} track only.',
-  AppLanguage.vi =>
-    'Luyện bài đọc có bấm giờ, chỉ giữ đúng track ${level.shortLabel}.',
-  AppLanguage.ja => '${level.shortLabel} だけに絞った時間つき読解を回します。',
-};
+String _readingDrillSubtitle(AppLanguage language, StudyLevel level) =>
+    switch (language) {
+      AppLanguage.en => 'Practice timed passages for ${level.shortLabel} only.',
+      AppLanguage.vi =>
+        'Luyện bài đọc có bấm giờ, chỉ theo đúng cấp ${level.shortLabel}.',
+      AppLanguage.ja => '${level.shortLabel} だけに絞った時間つき読解を回します。',
+    };
 
 String _readingDrillMeta(
   AppLanguage language, {
@@ -408,8 +405,8 @@ String _readingDrillMeta(
 };
 
 String _openLaneLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Open lane',
-  AppLanguage.vi => 'Mở lane',
+  AppLanguage.en => 'Open practice',
+  AppLanguage.vi => 'Mở bài luyện',
   AppLanguage.ja => '開く',
 };
 

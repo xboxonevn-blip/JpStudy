@@ -88,13 +88,13 @@ void main() {
       area: JlptSkillArea.vocabulary,
       minutes: 30,
       focus: 'Reset weak zone',
-      action: 'Review mistake notebook + quick drill block.',
+      action: 'Review mistake notebook + quick practice.',
     );
     const day3 = JlptPlanItem(
       dayOffset: 2,
       area: JlptSkillArea.vocabulary,
       minutes: 30,
-      focus: 'Speed + recall',
+      focus: 'Speed + memory',
       action: '1-3-7 due mistakes + fast response round.',
     );
 
@@ -235,7 +235,7 @@ void main() {
       area: JlptSkillArea.kanji,
       minutes: 20,
       focus: 'Speed',
-      action: 'Push faster kanji recall.',
+      action: 'Recognize kanji faster.',
     );
     const coverageItem = JlptPlanItem(
       dayOffset: 3,

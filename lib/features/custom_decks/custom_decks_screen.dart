@@ -292,13 +292,13 @@ String _templateLabel(AppLanguage language, _TemplateKind kind) {
   switch (kind) {
     case _TemplateKind.kanjiDeck:
       return switch (language) {
-        AppLanguage.en => 'Kanji deck',
+        AppLanguage.en => 'Kanji set',
         AppLanguage.vi => 'Bộ thẻ kanji',
         AppLanguage.ja => '漢字デッキ',
       };
     case _TemplateKind.grammarDrill:
       return switch (language) {
-        AppLanguage.en => 'Grammar drill',
+        AppLanguage.en => 'Grammar practice',
         AppLanguage.vi => 'Bài ngữ pháp',
         AppLanguage.ja => '文法ドリル',
       };
@@ -310,8 +310,8 @@ String _templateLabel(AppLanguage language, _TemplateKind kind) {
       };
     case _TemplateKind.sprintPack:
       return switch (language) {
-        AppLanguage.en => 'Sprint pack',
-        AppLanguage.vi => 'Gói sprint',
+        AppLanguage.en => 'Quick practice set',
+        AppLanguage.vi => 'Bộ luyện nhanh',
         AppLanguage.ja => 'スプリントパック',
       };
   }
@@ -365,42 +365,42 @@ List<_StudyRecipe> _recipes(
   return switch (language) {
     AppLanguage.en => [
       _StudyRecipe(
-        'Night cram',
-        'Fast catch-up session for overdue cards and weak items.',
+        'Tonight review',
+        'Catch up quickly on overdue cards and weak items.',
         language.unitMinutesLabel(nextUp != null ? 12 + nextUp.dueCount : 18),
-        'Recall',
+        'Review',
         'High',
-        'Power',
+        'Urgent',
         dueTotal > 0 ? 0.62 : 0.28,
         [
           nextUp != null
               ? 'Start from ${nextUp.title} because it has the highest immediate pressure.'
               : 'Pull the most overdue items first.',
           continueLabel != null
-              ? 'Use "$continueLabel" as the first lane so this workspace mirrors your home priority.'
-              : 'Mix mistakes and fast flashcards into one loop.',
-          'End with a 3-minute confidence recap.',
+              ? 'Start with "$continueLabel" so this session follows your home priority.'
+              : 'Practice saved mistakes and fast flashcards in one pass.',
+          'End with a 3-minute confidence check.',
         ],
         [
           _QueueItem(
             Icons.psychology_alt_rounded,
-            'Due queue',
+            'Due items',
             '${language.itemsCountLabel(continueCount == 0 ? dueTotal : continueCount)} need quick attention.',
             'Due',
             AppStatusTone.warning,
           ),
           _QueueItem(
             Icons.layers_rounded,
-            'Active decks',
-            '$activeCount active deck${activeCount == 1 ? '' : 's'} available right now.',
-            'Decks',
+            'Active sets',
+            '$activeCount active set${activeCount == 1 ? '' : 's'} available right now.',
+            'Sets',
             AppStatusTone.success,
           ),
         ],
       ),
       _StudyRecipe(
-        'Mixed sprint',
-        'Blend kanji, vocab, and grammar into one focused block.',
+        'Mixed practice',
+        'Blend kanji, vocab, and grammar into one focused session.',
         language.unitMinutesLabel(activeCount > 0 ? 18 + activeCount * 2 : 22),
         'Mixed',
         'Balanced',
@@ -408,33 +408,33 @@ List<_StudyRecipe> _recipes(
         activeCount > 0 ? 0.78 : 0.5,
         [
           nextUp != null
-              ? 'Warm up with ${nextUp.title} before switching lanes.'
+              ? 'Warm up with ${nextUp.title} before switching practice types.'
               : 'Warm up with kanji recognition.',
-          'Switch into vocab recall and one grammar drill.',
+          'Switch into vocab review and one grammar practice.',
           completedCount > 0
-              ? 'Reuse patterns from $completedCount completed deck${completedCount == 1 ? '' : 's'} for a faster sprint.'
-              : 'Finish with a short active review burst.',
+              ? 'Reuse patterns from $completedCount completed set${completedCount == 1 ? '' : 's'} for a faster sprint.'
+              : 'Finish with a short active review.',
         ],
         [
           _QueueItem(
             Icons.grid_view_rounded,
-            'Kanji lane',
-            '${dashboard?.kanjiDue ?? 12} recognition prompts.',
-            'Lane 1',
+            'Kanji practice',
+            '${dashboard?.kanjiDue ?? 12} recognition questions.',
+            'Part 1',
             AppStatusTone.primary,
           ),
           _QueueItem(
             Icons.translate_rounded,
-            'Vocab lane',
-            '${dashboard?.vocabDue ?? 18} high-frequency prompts.',
-            'Lane 2',
+            'Vocab practice',
+            '${dashboard?.vocabDue ?? 18} high-frequency questions.',
+            'Part 2',
             AppStatusTone.success,
           ),
         ],
       ),
       _StudyRecipe(
-        'Speaking loop',
-        'Build a compact loop for shadowing and speaking confidence.',
+        'Speaking practice',
+        'Build a short speaking session for listening and confidence.',
         language.unitMinutesLabel(15),
         'Output',
         'Medium',
@@ -443,24 +443,24 @@ List<_StudyRecipe> _recipes(
             ? 0.34
             : (dashboard.totalMistakeCount > 0 ? 0.51 : 0.24),
         [
-          'Start with phrase cards.',
-          'Repeat two short shadowing cycles.',
+          'Start with useful phrase cards.',
+          'Repeat two short listen-and-say rounds.',
           dashboard != null && dashboard.totalMistakeCount > 0
-              ? 'Mark ${dashboard.totalMistakeCount} weak items for tomorrow so they flow back into your recovery loop.'
+              ? 'Mark ${dashboard.totalMistakeCount} weak items for tomorrow so they return to review.'
               : 'Mark low-confidence phrases for tomorrow.',
         ],
         [
           _QueueItem(
             Icons.mic_rounded,
-            'Phrase loop',
+            'Phrase practice',
             '${(dashboard?.grammarDue ?? 4) + 4} useful lines for speaking practice.',
             'Voice',
             AppStatusTone.neutral,
           ),
           _QueueItem(
             Icons.hearing_rounded,
-            'Shadowing',
-            '${(dashboard?.kanjiMistakeCount ?? 0) > 0 ? 3 : 2} micro audio drills.',
+            'Listen and repeat',
+            '${(dashboard?.kanjiMistakeCount ?? 0) > 0 ? 3 : 2} short audio exercises.',
             'Audio',
             AppStatusTone.primary,
           ),
@@ -469,42 +469,42 @@ List<_StudyRecipe> _recipes(
     ],
     AppLanguage.vi => [
       _StudyRecipe(
-        'Nhồi tối',
+        'Ôn gấp tối nay',
         'Phiên bắt kịp nhanh cho thẻ quá hạn và mục yếu.',
         nextUp != null ? '${12 + nextUp.dueCount} phút' : '18 phút',
-        'Recall',
+        'Ôn',
         'Cao',
         'Mạnh',
         dueTotal > 0 ? 0.62 : 0.28,
         [
           nextUp != null
-              ? 'Bắt đầu từ ${nextUp.title} vì deck này đang chịu áp lực cao nhất.'
+              ? 'Bắt đầu từ ${nextUp.title} vì phần này đang cần xử lý nhất.'
               : 'Kéo các mục quá hạn nhất lên trước.',
           continueLabel != null
-              ? 'Dùng "$continueLabel" làm làn đầu để workspace này bám đúng ưu tiên ở màn chính.'
-              : 'Trộn mistake và flashcard nhanh vào một vòng.',
-          'Kết thúc bằng recap tự tin 3 phút.',
+              ? 'Bắt đầu bằng "$continueLabel" để phiên này bám đúng ưu tiên ở màn chính.'
+              : 'Ôn lỗi đã lưu và vài thẻ nhanh trong một lượt.',
+          'Kết thúc bằng tự đánh giá nhanh trong 3 phút.',
         ],
         [
           _QueueItem(
             Icons.psychology_alt_rounded,
-            'Hàng due',
+            'Mục đến hạn',
             '${continueCount == 0 ? dueTotal : continueCount} mục cần xử lý nhanh.',
             'Đến hạn',
             AppStatusTone.warning,
           ),
           _QueueItem(
             Icons.layers_rounded,
-            'Deck đang chạy',
-            '$activeCount deck đang hoạt động lúc này.',
-            'Deck',
+            'Bộ đang học',
+            '$activeCount bộ đang hoạt động lúc này.',
+            'Bộ',
             AppStatusTone.success,
           ),
         ],
       ),
       _StudyRecipe(
-        'Sprint hỗn hợp',
-        'Trộn kanji, từ vựng và ngữ pháp trong một block tập trung.',
+        'Luyện hỗn hợp',
+        'Trộn kanji, từ vựng và ngữ pháp trong một phiên tập trung.',
         activeCount > 0 ? '${18 + activeCount * 2} phút' : '22 phút',
         'Hỗn hợp',
         'Cân bằng',
@@ -512,51 +512,51 @@ List<_StudyRecipe> _recipes(
         activeCount > 0 ? 0.78 : 0.5,
         [
           nextUp != null
-              ? 'Khởi động bằng ${nextUp.title} trước khi chuyển làn.'
+              ? 'Khởi động bằng ${nextUp.title} trước khi đổi kiểu luyện.'
               : 'Khởi động bằng nhận diện kanji.',
-          'Chuyển sang recall từ vựng và một drill ngữ pháp.',
+          'Chuyển sang ôn từ vựng và một bài ngữ pháp.',
           completedCount > 0
-              ? 'Tái dùng pattern từ $completedCount deck đã xong để sprint mượt hơn.'
-              : 'Kết bằng một burst ôn chủ động ngắn.',
+              ? 'Tái dùng mẫu từ $completedCount bộ đã xong để luyện nhanh hơn.'
+              : 'Kết bằng một lượt ôn chủ động ngắn.',
         ],
         [
           _QueueItem(
             Icons.grid_view_rounded,
-            'Làn kanji',
-            '${dashboard?.kanjiDue ?? 12} prompt nhận diện.',
-            'Làn 1',
+            'Luyện kanji',
+            '${dashboard?.kanjiDue ?? 12} câu nhận diện.',
+            'Phần 1',
             AppStatusTone.primary,
           ),
           _QueueItem(
             Icons.translate_rounded,
-            'Làn từ vựng',
-            '${dashboard?.vocabDue ?? 18} prompt tần suất cao.',
-            'Làn 2',
+            'Luyện từ vựng',
+            '${dashboard?.vocabDue ?? 18} câu tần suất cao.',
+            'Phần 2',
             AppStatusTone.success,
           ),
         ],
       ),
       _StudyRecipe(
-        'Vòng nói',
-        'Tạo vòng ngắn cho shadowing và tăng tự tin khi nói.',
+        'Luyện nói ngắn',
+        'Tạo phiên ngắn để luyện nghe-nhại và tăng tự tin khi nói.',
         '15 phút',
-        'Output',
+        'Nói',
         'Vừa',
         'Beta',
         dashboard == null
             ? 0.34
             : (dashboard.totalMistakeCount > 0 ? 0.51 : 0.24),
         [
-          'Bắt đầu bằng phrase card.',
-          'Lặp hai chu kỳ shadowing ngắn.',
+          'Bắt đầu bằng các câu mẫu hữu ích.',
+          'Lặp hai lượt nghe-nhại ngắn.',
           dashboard != null && dashboard.totalMistakeCount > 0
-              ? 'Đánh dấu ${dashboard.totalMistakeCount} mục yếu cho ngày mai để quay lại recovery loop.'
+              ? 'Đánh dấu ${dashboard.totalMistakeCount} mục yếu cho ngày mai để ôn lại.'
               : 'Đánh dấu các câu chưa tự tin cho ngày mai.',
         ],
         [
           _QueueItem(
             Icons.mic_rounded,
-            'Vòng câu',
+            'Luyện câu',
             '${(dashboard?.grammarDue ?? 4) + 4} câu hữu ích để luyện nói.',
             'Giọng nói',
             AppStatusTone.neutral,
@@ -564,7 +564,7 @@ List<_StudyRecipe> _recipes(
           _QueueItem(
             Icons.hearing_rounded,
             'Luyện nhại',
-            '${(dashboard?.kanjiMistakeCount ?? 0) > 0 ? 3 : 2} drill âm thanh nhỏ.',
+            '${(dashboard?.kanjiMistakeCount ?? 0) > 0 ? 3 : 2} bài nghe ngắn.',
             'Âm thanh',
             AppStatusTone.primary,
           ),
@@ -573,94 +573,94 @@ List<_StudyRecipe> _recipes(
     ],
     AppLanguage.ja => [
       _StudyRecipe(
-        'Night cram',
+        '短時間復習',
         '期限切れカードと弱点項目を素早く回す補強セッションです。',
         nextUp != null ? '${12 + nextUp.dueCount}分' : '18分',
-        'Recall',
+        '復習',
         '高',
         '強化',
         dueTotal > 0 ? 0.62 : 0.28,
         [
           nextUp != null
-              ? '最初は ${nextUp.title} から始め、もっとも圧力の高い deck を先に処理します。'
+              ? '最初は ${nextUp.title} から始め、もっとも優先度の高い項目を先に処理します。'
               : '最も overdue な項目から先に回します。',
           continueLabel != null
-              ? 'ホームの優先と合わせるため、最初の lane は "$continueLabel" を使います。'
-              : 'mistake と高速 flashcard を1つの loop にまとめます。',
-          '最後に 3 分の confidence recap を行います。',
+              ? 'ホームの優先と合わせるため、最初は "$continueLabel" を使います。'
+              : '保存したミスと短いカード練習を1回分にまとめます。',
+          '最後に3分で自信度を確認します。',
         ],
         [
           _QueueItem(
             Icons.psychology_alt_rounded,
-            'Due queue',
+            '期限項目',
             '${continueCount == 0 ? dueTotal : continueCount} 件を先に処理します。',
             '期限',
             AppStatusTone.warning,
           ),
           _QueueItem(
             Icons.layers_rounded,
-            'Active decks',
-            '$activeCount 件の active deck を利用できます。',
-            'Deck',
+            '学習セット',
+            '$activeCount 件の学習セットを利用できます。',
+            'セット',
             AppStatusTone.success,
           ),
         ],
       ),
       _StudyRecipe(
-        'Mixed sprint',
-        'kanji、vocab、grammar を1つの集中 block にまとめます。',
+        '混合練習',
+        '漢字・語彙・文法を1つの集中セッションにまとめます。',
         activeCount > 0 ? '${18 + activeCount * 2}分' : '22分',
-        'Mixed',
+        '混合',
         'バランス',
         '新着',
         activeCount > 0 ? 0.78 : 0.5,
         [
           nextUp != null
-              ? '${nextUp.title} でウォームアップしてから lane を切り替えます。'
-              : 'kanji recognition でウォームアップ。',
-          'vocab recall と grammar drill へ切り替えます。',
+              ? '${nextUp.title} でウォームアップしてから練習を切り替えます。'
+              : '漢字の認識練習でウォームアップ。',
+          '語彙の復習と文法練習へ切り替えます。',
           completedCount > 0
-              ? '$completedCount 件の completed deck の型を使って sprint を速くします。'
-              : '短い active review burst で締めます。',
+              ? '$completedCount 件の完了セットの型を使って短く復習します。'
+              : '短い能動復習で締めます。',
         ],
         [
           _QueueItem(
             Icons.grid_view_rounded,
-            'Kanji lane',
-            '${dashboard?.kanjiDue ?? 12} 個の recognition prompt。',
-            'Lane 1',
+            '漢字練習',
+            '${dashboard?.kanjiDue ?? 12} 個の認識問題。',
+            'Part 1',
             AppStatusTone.primary,
           ),
           _QueueItem(
             Icons.translate_rounded,
-            'Vocab lane',
-            '${dashboard?.vocabDue ?? 18} 個の高頻度 prompt。',
-            'Lane 2',
+            '語彙練習',
+            '${dashboard?.vocabDue ?? 18} 個の高頻度問題。',
+            'Part 2',
             AppStatusTone.success,
           ),
         ],
       ),
       _StudyRecipe(
-        'Speaking loop',
-        'shadowing と発話の自信を高めるコンパクトな loop です。',
+        '短い会話練習',
+        '聞いてまねる練習と発話の自信を高める短いセッションです。',
         '15分',
-        'Output',
+        '発話',
         '中',
         'Beta',
         dashboard == null
             ? 0.34
             : (dashboard.totalMistakeCount > 0 ? 0.51 : 0.24),
         [
-          'phrase card から始めます。',
-          '短い shadowing cycle を2回行います。',
+          '使いやすいフレーズカードから始めます。',
+          '短い聞き取り・発話練習を2回行います。',
           dashboard != null && dashboard.totalMistakeCount > 0
-              ? '${dashboard.totalMistakeCount} 件の弱点を明日に回し、recovery loop へ戻します。'
-              : '自信の低い phrase を明日に回します。',
+              ? '${dashboard.totalMistakeCount} 件の弱点を明日に回し、復習に戻します。'
+              : '自信の低いフレーズを明日に回します。',
         ],
         [
           _QueueItem(
             Icons.mic_rounded,
-            'フレーズループ',
+            'フレーズ練習',
             '${(dashboard?.grammarDue ?? 4) + 4} フレーズを話す練習に使います。',
             '音声',
             AppStatusTone.neutral,
@@ -668,7 +668,7 @@ List<_StudyRecipe> _recipes(
           _QueueItem(
             Icons.hearing_rounded,
             'シャドーイング',
-            '${(dashboard?.kanjiMistakeCount ?? 0) > 0 ? 3 : 2} 個の micro audio drill。',
+            '${(dashboard?.kanjiMistakeCount ?? 0) > 0 ? 3 : 2} 個の短い音声練習。',
             '音源',
             AppStatusTone.primary,
           ),
@@ -682,9 +682,9 @@ List<_ToolkitItem> _toolkit(AppLanguage language) => switch (language) {
   AppLanguage.en => [
     _ToolkitItem(
       Icons.layers_clear_rounded,
-      'Cram mode',
-      'Override the usual due queue for one urgent session tonight.',
-      'Power',
+      'Urgent review',
+      'Use tonight\'s due items first for one urgent session.',
+      'Urgent',
       AppStatusTone.warning,
       '',
       cramMode: true,
@@ -692,25 +692,25 @@ List<_ToolkitItem> _toolkit(AppLanguage language) => switch (language) {
     const _ToolkitItem(
       Icons.quiz_rounded,
       'Custom quiz',
-      'Blend kanji, vocab, and grammar into one targeted set.',
+      'Blend kanji, vocab, and grammar into one focused set.',
       'New',
       AppStatusTone.success,
-      'Custom quiz builder is still local-only for now.',
+      'Custom quiz creation stays on this device for now.',
     ),
     const _ToolkitItem(
       Icons.repeat_rounded,
-      'Flashcard loop',
-      'Run a rapid loop for pronunciation, recall, and confidence rating.',
-      'Loop',
+      'Quick flashcards',
+      'Run a quick pass for pronunciation, memory, and confidence rating.',
+      'Quick',
       AppStatusTone.primary,
-      'Loop settings will be connected to saved presets later.',
+      'Quick-pass settings will be connected to saved presets later.',
     ),
   ],
   AppLanguage.vi => [
     _ToolkitItem(
       Icons.layers_clear_rounded,
-      'Chế độ nhồi nhanh',
-      'Ghi đè hàng due thông thường cho một phiên gấp tối nay.',
+      'Ôn gấp',
+      'Ưu tiên các mục đến hạn cho một phiên gấp tối nay.',
       'Mạnh',
       AppStatusTone.warning,
       '',
@@ -719,25 +719,25 @@ List<_ToolkitItem> _toolkit(AppLanguage language) => switch (language) {
     const _ToolkitItem(
       Icons.quiz_rounded,
       'Quiz tùy chọn',
-      'Trộn kanji, từ vựng và ngữ pháp thành một bộ tập trung.',
+      'Trộn kanji, từ vựng và ngữ pháp thành một bộ luyện tập trung.',
       'Mới',
       AppStatusTone.success,
-      'Trình tạo custom quiz hiện vẫn là local-only.',
+      'Trình tạo quiz tùy chọn hiện chỉ lưu trên máy.',
     ),
     const _ToolkitItem(
       Icons.repeat_rounded,
-      'Vòng flashcard',
-      'Chạy vòng nhanh cho phát âm, recall và tự chấm độ tự tin.',
-      'Vòng',
+      'Ôn thẻ nhanh',
+      'Luyện nhanh phát âm, ghi nhớ và tự chấm độ tự tin.',
+      'Nhanh',
       AppStatusTone.primary,
-      'Thiết lập loop sẽ được nối với preset lưu sau.',
+      'Thiết lập lượt ôn nhanh sẽ được nối với mẫu đã lưu sau.',
     ),
   ],
   AppLanguage.ja => [
     _ToolkitItem(
       Icons.layers_clear_rounded,
-      'Cram mode',
-      '今夜だけ通常の due queue を上書きして急ぎの session を作ります。',
+      'Urgent review',
+      '今夜の期限項目を優先して、急ぎのセッションを作ります。',
       '強化',
       AppStatusTone.warning,
       '',
@@ -745,47 +745,44 @@ List<_ToolkitItem> _toolkit(AppLanguage language) => switch (language) {
     ),
     const _ToolkitItem(
       Icons.quiz_rounded,
-      'Custom quiz',
-      'kanji、vocab、grammar を1つの targeted set にまとめます。',
+      'カスタムクイズ',
+      '漢字・語彙・文法を1つの集中セットにまとめます。',
       '新着',
       AppStatusTone.success,
-      'custom quiz builder はまだ local-only です。',
+      'カスタムクイズ作成はまだ端末内のみです。',
     ),
     const _ToolkitItem(
       Icons.repeat_rounded,
-      'フラッシュカードループ',
-      '発音、recall、自信評価を高速 loop で回します。',
-      'ループ',
+      '短いカード練習',
+      '発音・記憶・自信評価を短く練習します。',
+      '短時間',
       AppStatusTone.primary,
-      'loop 設定は後で保存 preset に接続します。',
+      '短時間練習の設定は後で保存プリセットに接続します。',
     ),
   ],
 };
 
 String _title(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Active Learning',
-  AppLanguage.vi => 'Chủ động',
+  AppLanguage.en => 'Practice',
+  AppLanguage.vi => 'Luyện tập',
   AppLanguage.ja => '能動学習',
 };
 String _heroTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en =>
-    'Build focused sessions without leaving the current app flow',
-  AppLanguage.vi =>
-    'Tạo phiên học tập trung mà không rời flow hiện tại của app',
-  AppLanguage.ja => '今の app flow を崩さずに集中 session を組み立てる',
+  AppLanguage.en => 'Build focused sessions without leaving your study area',
+  AppLanguage.vi => 'Tạo phiên học tập trung mà không rời khu học hiện tại',
+  AppLanguage.ja => '今の学習画面から集中セッションを組み立てる',
 };
 String _heroSubtitle(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'This screen now behaves like an active study workspace with recipes, queue logic, and starter packs.',
+    'Choose a ready study session, review what is due, and start quickly.',
   AppLanguage.vi =>
-    'Màn này giờ giống một workspace học chủ động với recipe, queue logic và starter pack.',
-  AppLanguage.ja =>
-    'recipe、queue logic、starter pack を備えた active study workspace として機能します。',
+    'Chọn một phiên học có sẵn, xem phần đến hạn và bắt đầu nhanh.',
+  AppLanguage.ja => '用意された学習セッションを選び、期限項目からすぐ始められます。',
 };
 String _createDeckLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Create deck',
-  AppLanguage.vi => 'Tạo deck',
-  AppLanguage.ja => 'デッキ作成',
+  AppLanguage.en => 'Create practice',
+  AppLanguage.vi => 'Tạo bài luyện',
+  AppLanguage.ja => '練習作成',
 };
 String _quickQuizLabel(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Quick quiz',
@@ -793,20 +790,20 @@ String _quickQuizLabel(AppLanguage language) => switch (language) {
   AppLanguage.ja => 'クイッククイズ',
 };
 String _recipeTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Study recipes',
-  AppLanguage.vi => 'Recipe học',
-  AppLanguage.ja => 'study recipe',
+  AppLanguage.en => 'Study sessions',
+  AppLanguage.vi => 'Phiên học gợi ý',
+  AppLanguage.ja => '学習セッション',
 };
 String _recipeCaption(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Choose a ready-made flow and inspect how the queue would behave.',
-  AppLanguage.vi => 'Chọn flow dựng sẵn và xem queue sẽ vận hành thế nào.',
-  AppLanguage.ja => '出来合いの flow を選び、queue がどう動くか確認できます。',
+    'Choose a ready-made session and see what you will study first.',
+  AppLanguage.vi => 'Chọn phiên dựng sẵn và xem phần nào sẽ học trước.',
+  AppLanguage.ja => '用意されたセッションを選び、最初に学ぶ項目を確認できます。',
 };
 String _startRecipeLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Start recipe',
-  AppLanguage.vi => 'Bắt đầu recipe',
-  AppLanguage.ja => 'recipe 開始',
+  AppLanguage.en => 'Start session',
+  AppLanguage.vi => 'Bắt đầu phiên học',
+  AppLanguage.ja => 'セッション開始',
 };
 String _durationLabel(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Duration',
@@ -824,9 +821,9 @@ String _energyLabel(AppLanguage language) => switch (language) {
   AppLanguage.ja => '強度',
 };
 String _queueTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Queue preview',
-  AppLanguage.vi => 'Xem trước queue',
-  AppLanguage.ja => 'queue preview',
+  AppLanguage.en => 'What comes next',
+  AppLanguage.vi => 'Phần học tiếp theo',
+  AppLanguage.ja => '次に学ぶ内容',
 };
 String _queueCaption(AppLanguage language) => switch (language) {
   AppLanguage.en =>
@@ -836,47 +833,45 @@ String _queueCaption(AppLanguage language) => switch (language) {
   AppLanguage.ja => '期限・最近のフォーカス・エネルギーレベルをもとにした次の学習セッションです。',
 };
 String _toolkitTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Active toolkit',
-  AppLanguage.vi => 'Bộ công cụ chủ động',
-  AppLanguage.ja => 'active toolkit',
+  AppLanguage.en => 'Practice tools',
+  AppLanguage.vi => 'Công cụ luyện tập',
+  AppLanguage.ja => '能動練習ツール',
 };
 String _toolkitCaption(AppLanguage language) => switch (language) {
-  AppLanguage.en =>
-    'Shortcuts for targeted practice without changing the shell.',
-  AppLanguage.vi => 'Các lối tắt cho luyện tập có mục tiêu mà không đổi shell.',
-  AppLanguage.ja => 'shell を変えずに targeted practice へ入るショートカットです。',
+  AppLanguage.en => 'Shortcuts for focused practice without changing screens.',
+  AppLanguage.vi => 'Các lối tắt cho luyện tập có mục tiêu mà không đổi màn.',
+  AppLanguage.ja => '画面を変えずに目的別の練習へ入るショートカットです。',
 };
 String _templatesTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Starter templates',
-  AppLanguage.vi => 'Mẫu khởi đầu',
-  AppLanguage.ja => 'starter template',
+  AppLanguage.en => 'Quick starts',
+  AppLanguage.vi => 'Bắt đầu nhanh',
+  AppLanguage.ja => 'すぐ始める',
 };
 String _templatesCaption(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Small packs that make this screen feel stocked instead of empty.',
-  AppLanguage.vi =>
-    'Các gói nhỏ giúp màn này có cảm giác đầy đặn thay vì trống.',
-  AppLanguage.ja => 'この画面が空に見えないようにする小さな pack です。',
+    'Small practice choices so this screen is useful immediately.',
+  AppLanguage.vi => 'Các lựa chọn nhỏ giúp màn này hữu ích ngay.',
+  AppLanguage.ja => 'すぐ試せる小さな練習セットです。',
 };
 String _comingSoon(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Deck creation flow will be connected later.',
-  AppLanguage.vi => 'Flow tạo deck sẽ được nối sau.',
-  AppLanguage.ja => 'deck 作成 flow は後で接続されます。',
+  AppLanguage.en => 'Custom practice creation will be connected later.',
+  AppLanguage.vi => 'Tạo bài luyện riêng sẽ được nối sau.',
+  AppLanguage.ja => 'カスタム練習作成は後で接続されます。',
 };
 String _quickQuizSoon(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Quick quiz builder is still being connected.',
-  AppLanguage.vi => 'Quick quiz builder vẫn đang được nối.',
-  AppLanguage.ja => 'quick quiz builder はまだ接続中です。',
+  AppLanguage.en => 'Quick quiz creation is still being connected.',
+  AppLanguage.vi => 'Trình tạo quiz nhanh vẫn đang được nối.',
+  AppLanguage.ja => 'クイッククイズ作成はまだ接続中です。',
 };
 String _recipeSoon(AppLanguage language, String recipe) => switch (language) {
-  AppLanguage.en => '$recipe will become a saved active flow later.',
-  AppLanguage.vi => '$recipe sau này sẽ thành flow chủ động có thể lưu.',
-  AppLanguage.ja => '$recipe は後で保存できる active flow になります。',
+  AppLanguage.en => '$recipe will become a saved session later.',
+  AppLanguage.vi => '$recipe sau này sẽ thành phiên học có thể lưu.',
+  AppLanguage.ja => '$recipe は後で保存できるセッションになります。',
 };
 String _cramSessionTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Night Cram',
+  AppLanguage.en => 'Tonight Review',
   AppLanguage.vi => 'Nhồi nhanh',
-  AppLanguage.ja => 'Night Cram',
+  AppLanguage.ja => 'Tonight Review',
 };
 
 class _StudyRecipe {
@@ -903,9 +898,9 @@ class _StudyRecipe {
   final List<_QueueItem> queueItems;
 
   String progressLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Prototype readiness ${(progress * 100).round()}%',
-    AppLanguage.vi => 'Mức sẵn sàng prototype ${(progress * 100).round()}%',
-    AppLanguage.ja => 'prototype readiness ${(progress * 100).round()}%',
+    AppLanguage.en => 'Ready ${(progress * 100).round()}%',
+    AppLanguage.vi => 'Sẵn sàng ${(progress * 100).round()}%',
+    AppLanguage.ja => '準備 ${(progress * 100).round()}%',
   };
 }
 

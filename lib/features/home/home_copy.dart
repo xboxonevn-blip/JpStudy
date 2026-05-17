@@ -3,9 +3,9 @@ import 'package:jpstudy/core/app_language.dart';
 extension HomeCopyX on AppLanguage {
   String learningPathStudyPromptSubtitle() => switch (this) {
     AppLanguage.en =>
-      'This home screen now leads with sessions, drills, and clear next moves.',
+      'Start with one clear study session, then continue with practice or reading.',
     AppLanguage.vi =>
-      'Màn hình này giờ ưu tiên buổi học, bài luyện và bước tiếp theo thật rõ ràng.',
+      'Bắt đầu bằng một buổi học rõ ràng, rồi tiếp tục luyện tập hoặc đọc.',
     AppLanguage.ja => 'このホームは一覧より先に、学習セッションと次の一手を見せます。',
   };
 
@@ -25,7 +25,7 @@ extension HomeCopyX on AppLanguage {
 
   String learningPathFocusChipLabel(int dueCount) => switch (this) {
     AppLanguage.en =>
-      dueCount > 0 ? '$dueCount reviews waiting' : 'Review queue is clear',
+      dueCount > 0 ? '$dueCount reviews waiting' : 'No reviews due',
     AppLanguage.vi =>
       dueCount > 0 ? '$dueCount lượt ôn đang chờ' : 'Hàng ôn tập đang trống',
     AppLanguage.ja => dueCount > 0 ? '$dueCount件の復習が待機中' : '復習キューは空です',
@@ -44,7 +44,7 @@ extension HomeCopyX on AppLanguage {
   };
 
   String learningPathMomentumChipLabel(String levelCode) => switch (this) {
-    AppLanguage.en => '$levelCode momentum lane',
+    AppLanguage.en => '$levelCode study rhythm',
     AppLanguage.vi => 'Nhịp tăng lực $levelCode',
     AppLanguage.ja => '$levelCode の勢いレーン',
   };
@@ -52,7 +52,7 @@ extension HomeCopyX on AppLanguage {
   String learningHeroTitle({required int dueCount, required int weakCount}) {
     if (dueCount > 0) {
       return switch (this) {
-        AppLanguage.en => 'Clear the review queue first',
+        AppLanguage.en => 'Clear due reviews first',
         AppLanguage.vi => 'Dọn hàng ôn tập trước',
         AppLanguage.ja => 'まず復習キューを片づける',
       };
@@ -88,7 +88,7 @@ extension HomeCopyX on AppLanguage {
     if (weakCount > 0) {
       return switch (this) {
         AppLanguage.en =>
-          '$weakCount weak spots are still warm. Repair them now while recall is close.',
+          '$weakCount weak spots are still fresh. Repair them now while memory is close.',
         AppLanguage.vi =>
           'Còn $weakCount điểm yếu vẫn còn “nóng”. Vá ngay lúc này sẽ giữ nhớ tốt hơn.',
         AppLanguage.ja => '$weakCount件の弱点がまだ新しいうちに補強すると、記憶が安定しやすくなります。',
@@ -97,12 +97,12 @@ extension HomeCopyX on AppLanguage {
     return switch (this) {
       AppLanguage.en =>
         hasStartedToday
-            ? 'Your rhythm is already open. Pick one strong lane and keep the momentum moving.'
-            : 'No urgent queue right now. Start one focused lane to keep Japanese active today.',
+            ? 'You have already started today. Pick one useful activity and keep going.'
+            : 'Nothing urgent is waiting. Start one focused activity to keep Japanese active today.',
       AppLanguage.vi =>
         hasStartedToday
             ? 'Bạn đã mở nhịp rồi. Chọn một hướng học mạnh và giữ đà đi tiếp.'
-            : 'Hiện chưa có hàng chờ gấp. Mở một hướng học tập trung để giữ tiếng Nhật hoạt động hôm nay.',
+            : 'Hiện chưa có phần gấp. Mở một hướng học tập trung để giữ tiếng Nhật hoạt động hôm nay.',
       AppLanguage.ja =>
         hasStartedToday
             ? '今日はもう流れができています。1つのレーンに集中して勢いを保ちましょう。'
@@ -135,33 +135,33 @@ extension HomeCopyX on AppLanguage {
   };
 
   String learningLanesTitle() => switch (this) {
-    AppLanguage.en => 'Pick your training lane',
+    AppLanguage.en => 'Pick what to study',
     AppLanguage.vi => 'Chọn hướng luyện hôm nay',
     AppLanguage.ja => '学習レーンを選ぶ',
   };
 
   String learningLanesSubtitle() => switch (this) {
     AppLanguage.en =>
-      'Every lane is action-first: drill, exam, or real reading.',
+      'Choose one clear action: practice, exam prep, or real reading.',
     AppLanguage.vi =>
       'Mỗi hướng đều đi thẳng vào hành động: bài luyện, ôn thi, hoặc đọc tiếng Nhật thật.',
     AppLanguage.ja => '記事一覧ではなく、ドリル・試験・実読の3レーンから始めます。',
   };
 
   String learningStudyLaneTitle() => switch (this) {
-    AppLanguage.en => 'Drill hub',
-    AppLanguage.vi => 'Hub luyện tập',
+    AppLanguage.en => 'Practice',
+    AppLanguage.vi => 'Luyện tập',
     AppLanguage.ja => 'ドリルハブ',
   };
 
   String learningStudyLaneSubtitle(int dueCount) => switch (this) {
     AppLanguage.en =>
       dueCount > 0
-          ? 'Clear due items, fix ghosts, and hit the highest-priority drills.'
+          ? 'Clear due items, review weak spots, and start the most useful practice.'
           : 'Jump into vocab, kanji, grammar, and focus drills right away.',
     AppLanguage.vi =>
       dueCount > 0
-          ? 'Dọn mục đến hạn, sửa ghost rồi vào ngay bài luyện ưu tiên nhất.'
+          ? 'Dọn mục đến hạn, ôn điểm yếu rồi vào ngay bài luyện ưu tiên nhất.'
           : 'Vào thẳng từ vựng, kanji, ngữ pháp và các bài luyện tập trung.',
     AppLanguage.ja =>
       dueCount > 0 ? '期限項目を処理し、ゴーストを直して、優先ドリルへ入ります。' : '語彙・漢字・文法・集中ドリルへすぐ入れます。',
@@ -175,9 +175,9 @@ extension HomeCopyX on AppLanguage {
 
   String learningJlptLaneSubtitle(String levelCode) => switch (this) {
     AppLanguage.en =>
-      'Keep $levelCode exam shape with full mock, reading drills, diagnosis, and a repair plan.',
+      'Keep $levelCode exam shape with complete mock exams, reading practice, diagnosis, and a repair plan.',
     AppLanguage.vi =>
-      'Giữ form thi $levelCode bằng full mock, đọc hiểu, chẩn đoán và kế hoạch vá lỗ hổng.',
+      'Giữ form thi $levelCode bằng đề thi thử đầy đủ, đọc hiểu, chẩn đoán và kế hoạch vá lỗ hổng.',
     AppLanguage.ja => '$levelCode 対策として、フル模試・読解・診断・補強プランをまとめて回せます。',
   };
 
@@ -190,8 +190,8 @@ extension HomeCopyX on AppLanguage {
   String learningImmersionLaneSubtitle(int weakCount) => switch (this) {
     AppLanguage.en =>
       weakCount > 0
-          ? 'Use level-based reading sets to repair recall in real sentences.'
-          : 'Build real Japanese speed with level lanes, saved words, and repeat reads.',
+          ? 'Use level-based reading sets to repair memory in real sentences.'
+          : 'Build real Japanese speed with level-based reading, saved words, and repeat reads.',
     AppLanguage.vi =>
       weakCount > 0
           ? 'Dùng bài đọc theo cấp độ để vá trí nhớ ngay trong câu thật.'
@@ -203,7 +203,7 @@ extension HomeCopyX on AppLanguage {
   };
 
   String learningOpenLaneLabel() => switch (this) {
-    AppLanguage.en => 'Open lane',
+    AppLanguage.en => 'Open',
     AppLanguage.vi => 'Mở hướng này',
     AppLanguage.ja => 'レーンを開く',
   };
@@ -329,15 +329,20 @@ extension HomeCopyX on AppLanguage {
           AppLanguage.vi => 'Đề N4 + luyện đọc',
           AppLanguage.ja => 'N4模試 + 読解練習',
         },
+        'n1_vocab_grammar' => switch (this) {
+          AppLanguage.en => 'Hajimete N1 + Shin Kanzen vocabulary and grammar',
+          AppLanguage.vi => 'Hajimete N1 + Shin Kanzen từ vựng và ngữ pháp',
+          AppLanguage.ja => 'はじめてN1 + 新完全マスター語彙・文法',
+        },
         _ when phaseId.endsWith('_vocab') => switch (this) {
           AppLanguage.en => 'Hajimete $levelCode + Shin Kanzen vocabulary',
           AppLanguage.vi => 'Hajimete $levelCode + Shin Kanzen từ vựng',
           AppLanguage.ja => 'はじめて$levelCode + 新完全マスター語彙',
         },
         _ when phaseId.endsWith('_reading_listening_kanji') => switch (this) {
-          AppLanguage.en => 'Reading, listening, and kanji tracks',
-          AppLanguage.vi => 'Mạch đọc hiểu, nghe và kanji',
-          AppLanguage.ja => '読解・聴解・漢字トラック',
+          AppLanguage.en => 'Reading, listening, and kanji practice',
+          AppLanguage.vi => 'Đọc hiểu, nghe và kanji',
+          AppLanguage.ja => '読解・聴解・漢字',
         },
         _ when phaseId.endsWith('_mock_repair') => switch (this) {
           AppLanguage.en => '$levelCode mock exams + weak-area drill',
@@ -345,16 +350,20 @@ extension HomeCopyX on AppLanguage {
           AppLanguage.ja => '$levelCode 模試 + 弱点補強',
         },
         _ when phaseId.endsWith('_retention') => switch (this) {
-          AppLanguage.en => 'Retention cycle',
+          AppLanguage.en => 'Review cycle',
           AppLanguage.vi => 'Vòng giữ nhịp',
           AppLanguage.ja => '定着サイクル',
         },
         'n1_immersion' => switch (this) {
-          AppLanguage.en => 'N1 immersion: news, long reads, manga',
-          AppLanguage.vi => 'N1 immersion: tin tức, bài đọc dài, manga',
+          AppLanguage.en => 'N1 reading: news, long reads, manga',
+          AppLanguage.vi => 'N1 đọc hiểu: tin tức, bài đọc dài, manga',
           AppLanguage.ja => 'N1多読: ニュース・長文・マンガ',
         },
-        _ => phaseId,
+        _ => switch (this) {
+          AppLanguage.en => '$levelCode study step',
+          AppLanguage.vi => 'Bước học $levelCode',
+          AppLanguage.ja => '$levelCode 学習ステップ',
+        },
       };
 
   String textbookRoadmapPhaseDescription(
@@ -384,14 +393,14 @@ extension HomeCopyX on AppLanguage {
     },
     _ when phaseId.endsWith('_vocab') => switch (this) {
       AppLanguage.en =>
-        'Start $levelCode with vocabulary and grammar so reading drills have traction.',
+        'Start $levelCode with vocabulary and grammar so reading practice has traction.',
       AppLanguage.vi =>
         'Mở $levelCode bằng từ vựng và ngữ pháp để bài đọc có nền.',
       AppLanguage.ja => '$levelCode は語彙と文法から始め、読解の足場を作ります。',
     },
     _ when phaseId.endsWith('_reading_listening_kanji') => switch (this) {
       AppLanguage.en =>
-        'Shift from item learning to skill lanes: reading, listening, kanji.',
+        'Shift from single items to skill practice: reading, listening, kanji.',
       AppLanguage.vi =>
         'Chuyển từ học mục rời sang mạch kỹ năng: đọc, nghe, kanji.',
       AppLanguage.ja => '単項目学習から、読解・聴解・漢字の技能レーンへ移ります。',

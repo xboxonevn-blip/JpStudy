@@ -198,29 +198,29 @@ String _readinessTitle(AppLanguage language) => switch (language) {
 
 String _readinessCaption(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Your latest exam baseline is translated into skill-by-skill weak points.',
+    'Your latest exam result is translated into skill-by-skill weak points.',
   AppLanguage.vi =>
-    'Baseline gần nhất được đổi thành các điểm yếu rõ ràng theo từng kỹ năng.',
+    'Kết quả gần nhất được đổi thành các điểm yếu rõ ràng theo từng kỹ năng.',
   AppLanguage.ja => '直近の結果を技能ごとの弱点として見やすく整理します。',
 };
 
 String _readinessEmptyTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'No personal baseline yet',
-  AppLanguage.vi => 'Chưa có baseline cá nhân',
+  AppLanguage.en => 'No personal result yet',
+  AppLanguage.vi => 'Chưa có kết quả cá nhân',
   AppLanguage.ja => '個人ベースラインはまだありません',
 };
 
 String _readinessEmptyBody(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Finish one reading drill or one full mock and this area will turn into a personalized readiness map with a repair plan.',
+    'Finish one reading practice or one complete mock exam and this area will show what to strengthen next.',
   AppLanguage.vi =>
-    'Hoàn thành 1 bài reading drill hoặc 1 full mock, khu vực này sẽ đổi thành readiness map và kế hoạch sửa lỗ hổng cho riêng bạn.',
+    'Hoàn thành 1 bài đọc hiểu hoặc 1 đề thi thử đầy đủ, khu vực này sẽ chỉ rõ phần cần củng cố tiếp theo.',
   AppLanguage.ja => '読解ドリルかフル模試を1回終えると、ここが個別の準備度マップと補強プランに変わります。',
 };
 
 String _baselineChip(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'First run creates the baseline',
-  AppLanguage.vi => 'Lần đầu sẽ tạo baseline',
+  AppLanguage.en => 'First attempt creates your starting point',
+  AppLanguage.vi => 'Lượt đầu tạo mốc bắt đầu',
   AppLanguage.ja => '初回で基準を作成',
 };
 
@@ -249,14 +249,14 @@ String _snapshotSourceLabel(AppLanguage language, String source) {
   switch (source) {
     case 'jlpt_mock_pro':
       return switch (language) {
-        AppLanguage.en => 'Source: full mock',
-        AppLanguage.vi => 'Nguồn: full mock',
+        AppLanguage.en => 'Source: complete mock exam',
+        AppLanguage.vi => 'Nguồn: đề thi thử đầy đủ',
         AppLanguage.ja => '元データ: フル模試',
       };
     case 'jlpt_reading':
       return switch (language) {
-        AppLanguage.en => 'Source: reading drill',
-        AppLanguage.vi => 'Nguồn: reading drill',
+        AppLanguage.en => 'Source: reading practice',
+        AppLanguage.vi => 'Nguồn: bài đọc hiểu',
         AppLanguage.ja => '元データ: 読解ドリル',
       };
     default:

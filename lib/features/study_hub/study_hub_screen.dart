@@ -38,11 +38,14 @@ String _jlptCardSubtitle(AppLanguage l, StudyLevel level) => _tr(
   ja: '${level.shortLabel}の模擬試験・読解・総合対策。',
 );
 
+String _startPrepLabel(AppLanguage l) =>
+    _tr(l, en: 'Start exam prep', vi: 'Bắt đầu ôn thi', ja: '試験対策を始める');
+
 String _textbookSectionTitle(AppLanguage l) =>
     _tr(l, en: 'Textbook Tracker', vi: 'Theo dõi giáo trình', ja: '教材トラッカー');
 
 String _lessonDecksSectionTitle(AppLanguage l) =>
-    _tr(l, en: 'My Lesson Decks', vi: 'Bộ bài học của tôi', ja: 'マイレッスン');
+    _tr(l, en: 'My Lessons', vi: 'Bài học của tôi', ja: 'マイレッスン');
 
 String _lessonDecksSectionCaption(AppLanguage l) => _tr(
   l,
@@ -66,8 +69,8 @@ String _lessonProgressLabel(AppLanguage l, int percent, int dueCount) => _tr(
 
 String _lessonDecksEmptyLabel(AppLanguage l) => _tr(
   l,
-  en: 'Start a lesson or build review progress to unlock live lesson decks here.',
-  vi: 'Hãy bắt đầu bài học hoặc tạo tiến độ ôn tập để mở phần bộ bài học trực tiếp ở đây.',
+  en: 'Start a lesson or build review progress to show active lessons here.',
+  vi: 'Hãy bắt đầu bài học hoặc tạo tiến độ ôn tập để hiện bài học đang học ở đây.',
   ja: 'レッスンや復習を始めると、ここにライブのレッスン一覧が表示されます。',
 );
 
@@ -136,7 +139,7 @@ class StudyHubScreen extends ConsumerWidget {
               icon: Icons.school_rounded,
               title: _jlptCardTitle(language),
               subtitle: _jlptCardSubtitle(language, level),
-              primaryLabel: 'Start prep',
+              primaryLabel: _startPrepLabel(language),
               onPrimaryTap: () => context.openJlptCoach(),
               status: AppStatusChip(
                 label: level.shortLabel,

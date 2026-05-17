@@ -60,9 +60,9 @@ extension KanjiCopy on AppLanguage {
 
   String kanjiTodayCaption(String levelCode) => switch (this) {
     AppLanguage.en =>
-      'Use $levelCode as the active lane, then drop into explore only when you need a lookup.',
+      'Use $levelCode as today\'s kanji level, then explore only when you need a lookup.',
     AppLanguage.vi =>
-      'Dùng $levelCode làm lane chính, rồi chỉ xuống phần khám phá khi cần tra cứu.',
+      'Dùng $levelCode làm cấp kanji hôm nay, rồi chỉ khám phá thêm khi cần tra cứu.',
     AppLanguage.ja => '$levelCode を学習レーンの中心にして、調べたいときだけ探索へ進みます。',
   };
 
@@ -134,9 +134,9 @@ extension KanjiCopy on AppLanguage {
   };
 
   String kanjiRelatedKanjiLabel() => switch (this) {
-    AppLanguage.en => 'JP Study Flow',
-    AppLanguage.vi => 'JP Study Flow',
-    AppLanguage.ja => 'JP Study Flow',
+    AppLanguage.en => 'Related Kanji Study',
+    AppLanguage.vi => 'Học kanji liên quan',
+    AppLanguage.ja => '関連漢字学習',
   };
 
   String kanjiRelatedCountLabel() => switch (this) {
@@ -171,8 +171,8 @@ extension KanjiCopy on AppLanguage {
 
   String kanjiRelatedLevelSectionLabel(String level, int count) =>
       switch (this) {
-        AppLanguage.en => '$level lane \u2014 $count kanji',
-        AppLanguage.vi => 'Lane $level \u2014 $count kanji',
+        AppLanguage.en => '$level group \u2014 $count kanji',
+        AppLanguage.vi => 'Nhóm $level \u2014 $count kanji',
         AppLanguage.ja => '$level \u30ec\u30fc\u30f3 \u2014 $count\u6f22\u5b57',
       };
 
@@ -373,9 +373,9 @@ extension KanjiCopy on AppLanguage {
 
   String kanjiSummaryLoadingSubtitle() => switch (this) {
     AppLanguage.en =>
-      'Checking due reviews, new items, and the active practice lane for this level.',
+      'Checking due reviews, new items, and current practice for this level.',
     AppLanguage.vi =>
-      'Đang kiểm tra phần đến hạn, mục mới và lane luyện tập hiện tại của cấp này.',
+      'Đang kiểm tra phần đến hạn, mục mới và bài luyện hiện tại của cấp này.',
     AppLanguage.ja => 'このレベルの期限レビュー・新規項目・現在の練習レーンを確認しています。',
   };
 
@@ -387,9 +387,9 @@ extension KanjiCopy on AppLanguage {
 
   String kanjiSummaryErrorSubtitle() => switch (this) {
     AppLanguage.en =>
-      'You can retry the summary or go straight to explore mode for this lane.',
+      'You can retry the summary or go straight to explore mode for this level.',
     AppLanguage.vi =>
-      'Bạn có thể tải lại tóm tắt hoặc vào thẳng chế độ khám phá của lane này.',
+      'Bạn có thể tải lại tóm tắt hoặc vào thẳng chế độ khám phá của cấp này.',
     AppLanguage.ja => 'サマリーを再試行するか、このレーンの探索モードへ直接進めます。',
   };
 
@@ -491,7 +491,7 @@ extension KanjiCopy on AppLanguage {
     if (_isDuePracticeSource(source) && dueCount != null) {
       return switch (this) {
         AppLanguage.en =>
-          '$dueCount kanji ready – reinforce recall through handwriting.',
+          '$dueCount kanji ready – reinforce memory through handwriting.',
         AppLanguage.vi =>
           '$dueCount kanji sẵn sàng – củng cố ký ức bằng viết tay.',
         AppLanguage.ja => '$dueCount 件準備完了 – 手書きで記憶を強化。',
@@ -514,8 +514,8 @@ extension KanjiCopy on AppLanguage {
       };
     }
     return switch (this) {
-      AppLanguage.en => 'Practice stroke shape and recall through handwriting.',
-      AppLanguage.vi => 'Luyện nét viết và khả năng nhớ lại bằng handwriting.',
+      AppLanguage.en => 'Practice stroke shape and memory through handwriting.',
+      AppLanguage.vi => 'Luyện nét viết và khả năng nhớ lại bằng viết tay.',
       AppLanguage.ja => '手書きで字形と想起を練習します。',
     };
   }
@@ -618,9 +618,9 @@ extension KanjiCopy on AppLanguage {
     AppLanguage.ja => 'このレベルの漢字',
   };
 
-  // ── Study Flow mindmap ────────────────────────────────────────────────────
+  // ── Related study mindmap ────────────────────────────────────────────────
   String kanjiStudyFlowTitle() => switch (this) {
-    AppLanguage.en => 'JP Study Flow',
+    AppLanguage.en => 'Related Kanji Study',
     AppLanguage.vi => 'Lộ Trình Học Tiếng Nhật',
     AppLanguage.ja => '日本語学習フロー',
   };

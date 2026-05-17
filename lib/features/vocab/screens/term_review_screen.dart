@@ -425,8 +425,8 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   }
 
   String _sessionKindLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Companion track',
-    AppLanguage.vi => 'Track đồng hành',
+    AppLanguage.en => 'Companion path',
+    AppLanguage.vi => 'Hướng học đồng hành',
     AppLanguage.ja => '補助トラック',
   };
 

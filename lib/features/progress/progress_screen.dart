@@ -1074,7 +1074,7 @@ String _overviewTitle(AppLanguage language) {
 String _overviewCaption(AppLanguage language) {
   switch (language) {
     case AppLanguage.en:
-      return 'Track streak, XP, attempts, and long-term retention in one place.';
+      return 'See streak, XP, attempts, and long-term review health in one place.';
     case AppLanguage.vi:
       return 'Theo dõi chuỗi học, XP, số lần luyện và độ nhớ dài hạn trong một màn hình.';
     case AppLanguage.ja:
@@ -1162,9 +1162,9 @@ String _coachLoadingLabel(AppLanguage language) {
 String _coachFallbackLabel(AppLanguage language) {
   switch (language) {
     case AppLanguage.en:
-      return 'Progress details are still loading, but you can jump straight into a short study block.';
+      return 'Progress details are still loading, but you can jump straight into a short study session.';
     case AppLanguage.vi:
-      return 'Chi tiết tiến độ đang tải, nhưng bạn vẫn có thể vào thẳng một block học ngắn.';
+      return 'Chi tiết tiến độ đang tải, nhưng bạn vẫn có thể vào thẳng một phiên học ngắn.';
     case AppLanguage.ja:
       return '進捗詳細は読み込み中ですが、短い学習ブロックにはすぐ入れます。';
   }

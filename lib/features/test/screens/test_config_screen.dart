@@ -155,7 +155,7 @@ class _TestConfigScreenState extends ConsumerState<TestConfigScreen> {
           title: language.questionTypesLabel,
           subtitle: _tr(
             language,
-            'Mix recognition and recall so the test also teaches you.',
+            'Mix recognition and memory checks so the test also teaches you.',
             'Kết hợp nhận diện và nhớ lại để bài test vừa chấm vừa dạy.',
             '認識問題と想起問題を混ぜて、テスト自体を学習にします。',
           ),
@@ -1033,7 +1033,7 @@ class _TestConfigScreenState extends ConsumerState<TestConfigScreen> {
         title: _tr(language, 'Memory check', 'Kiểm tra nhớ nhanh', '記憶チェック'),
         summary: _tr(
           language,
-          'Start light and wake your recall up without pressure.',
+          'Start light and wake your memory up without pressure.',
           'Vào bài nhẹ để khởi động trí nhớ mà không bị áp lực.',
           '負荷を上げすぎずに、まず記憶を起こすための軽いチェックです。',
         ),
@@ -1071,7 +1071,7 @@ class _TestConfigScreenState extends ConsumerState<TestConfigScreen> {
         title: _tr(language, 'Active review', 'Ôn chủ động', '定着レビュー'),
         summary: _tr(
           language,
-          'Mix recognition and recall, then recycle weak points in new forms.',
+          'Mix recognition and memory checks, then recycle weak points in new forms.',
           'Kết hợp nhận diện và nhớ lại, rồi đưa điểm yếu quay lại ở dạng mới.',
           '認識問題と想起問題を混ぜ、弱点は別形式で再確認します。',
         ),

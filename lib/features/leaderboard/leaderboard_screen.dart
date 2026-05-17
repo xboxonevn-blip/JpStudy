@@ -297,7 +297,7 @@ List<_LeaderboardRange> _ranges(AppLanguage language) => switch (language) {
     _LeaderboardRange(
       'Friends',
       'Private',
-      'Friends mini ladder',
+      'Friends mini ranking',
       'Badge reward',
       0.81,
       1.6,
@@ -352,7 +352,7 @@ List<_LeaderboardRange> _ranges(AppLanguage language) => switch (language) {
       4.2,
       11,
     ),
-    _LeaderboardRange('友達', 'プライベート', '友達だけのミニ ladder', 'バッジ報酬', 0.81, 1.6, 4),
+    _LeaderboardRange('友達', 'プライベート', '友達だけのミニランキング', 'バッジ報酬', 0.81, 1.6, 4),
   ],
 };
 
@@ -444,20 +444,20 @@ String _heroTitle(AppLanguage language) => switch (language) {
 };
 String _heroSubtitle(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'Weekly leagues, monthly ladders, and friends races that fit your current study rhythm.',
+    'Weekly groups, monthly rankings, and friends races that fit your current study rhythm.',
   AppLanguage.vi =>
-    'Giải tuần, ladder tháng và cuộc đua bạn bè vừa với nhịp học hiện tại của bạn.',
-  AppLanguage.ja => '今の学習リズムに合う週間リーグ、月間 ladder、友達レースです。',
+    'Giải tuần, bảng tháng và cuộc đua bạn bè vừa với nhịp học hiện tại của bạn.',
+  AppLanguage.ja => '今の学習リズムに合う週間リーグ、月間ランキング、友達レースです。',
 };
 String _joinLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Join challenge',
-  AppLanguage.vi => 'Vào thử thách',
+  AppLanguage.en => 'Join goal',
+  AppLanguage.vi => 'Vào mục tiêu',
   AppLanguage.ja => 'チャレンジ参加',
 };
 String _shareLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Share snapshot',
-  AppLanguage.vi => 'Chia sẻ snapshot',
-  AppLanguage.ja => 'スナップ共有',
+  AppLanguage.en => 'Share progress',
+  AppLanguage.vi => 'Chia sẻ tiến độ',
+  AppLanguage.ja => '進捗を共有',
 };
 String _rangeTitle(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Ranking range',
@@ -500,8 +500,8 @@ String _bestRunLabel(AppLanguage language) => switch (language) {
   AppLanguage.ja => 'ベスト',
 };
 String _challengeTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Featured challenge',
-  AppLanguage.vi => 'Thử thách nổi bật',
+  AppLanguage.en => 'Featured goal',
+  AppLanguage.vi => 'Mục tiêu nổi bật',
   AppLanguage.ja => '注目チャレンジ',
 };
 String _challengeCaption(AppLanguage language, String challenge) =>
@@ -549,9 +549,9 @@ String _you(AppLanguage language) => switch (language) {
   AppLanguage.ja => 'あなた',
 };
 String _joinSoon(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Challenge enrollment will connect to live events later.',
-  AppLanguage.vi => 'Đăng ký thử thách sẽ được nối với sự kiện thật sau.',
-  AppLanguage.ja => 'チャレンジ参加は後で live event と接続されます。',
+  AppLanguage.en => 'Goal joining will connect to live events later.',
+  AppLanguage.vi => 'Tham gia mục tiêu sẽ được nối với sự kiện thật sau.',
+  AppLanguage.ja => '目標参加は後で実イベントと接続されます。',
 };
 String _snapshotText(
   AppLanguage language, {

@@ -166,8 +166,8 @@ PracticeSessionBoard buildPracticeSessionBoard({
               )
             : _l(
                 language,
-                en: '$mistakeCount saved mistakes and $grammarGhostCount grammar ghosts still need a pass.',
-                vi: '$mistakeCount lỗi đã lưu và $grammarGhostCount grammar ghost vẫn cần một lượt sửa.',
+                en: '$mistakeCount saved mistakes and $grammarGhostCount grammar weak spots still need a pass.',
+                vi: '$mistakeCount lỗi đã lưu và $grammarGhostCount điểm yếu ngữ pháp vẫn cần một lượt sửa.',
                 ja: '$mistakeCount件の保存ミスと$grammarGhostCount件の文法ゴーストが残っています。',
               ),
         icon: Icons.healing_rounded,
@@ -178,8 +178,8 @@ PracticeSessionBoard buildPracticeSessionBoard({
         value: level.shortLabel,
         detail: _l(
           language,
-          en: 'Deep work and exam prep stay tuned to ${level.shortLabel}.',
-          vi: 'Các block đào sâu và ôn thi đang bám theo ${level.shortLabel}.',
+          en: 'Deep practice and exam prep stay tuned to ${level.shortLabel}.',
+          vi: 'Các bài luyện sâu và ôn thi đang bám theo ${level.shortLabel}.',
           ja: '深掘りと試験対策は${level.shortLabel}に合わせています。',
         ),
         icon: Icons.school_rounded,
@@ -299,8 +299,8 @@ PracticeSessionAction _recallSprintAction({
     ),
     subtitle: _l(
       language,
-      en: '${pieces.join(' · ')} are all pulling at once. Sweep the mixed queue before choosing a deeper lane.',
-      vi: '${pieces.join(' · ')} đang kéo cùng lúc. Quét nhanh hàng đợi tổng hợp trước rồi mới vào lane sâu hơn.',
+      en: '${pieces.join(' · ')} are all due. Finish a short mixed review before choosing deeper practice.',
+      vi: '${pieces.join(' · ')} đều đã đến hạn. Làm một lượt ôn tổng hợp ngắn trước khi vào bài sâu hơn.',
       ja: '${pieces.join(' · ')} が同時に動いています。先に混合キューを一掃してから深いレーンへ進みましょう。',
     ),
     ctaLabel: _l(language, en: 'Open sprint', vi: 'Mở sprint', ja: 'スプリント開始'),
@@ -326,7 +326,7 @@ PracticeSessionAction _recallSprintAction({
             )
           : _l(
               language,
-              en: 'Run a fast mixed pass across the live review queue.',
+              en: 'Run a fast mixed review across items due now.',
               vi: 'Chạy một lượt nhanh trên hàng đợi review đang mở.',
               ja: '動いているレビューキューを短く横断します。',
             ),
@@ -363,7 +363,7 @@ PracticeSessionAction _specificDueAction({
         id: 'grammar_due',
         title: _l(
           language,
-          en: 'Clear the grammar queue',
+          en: 'Clear due grammar',
           vi: 'Dọn hàng ngữ pháp',
           ja: '文法キューを片づける',
         ),
@@ -383,7 +383,7 @@ PracticeSessionAction _specificDueAction({
         extra: ids is List ? List<int>.from(ids) : null,
         icon: Icons.auto_stories_rounded,
         color: const Color(0xFF7C3AED),
-        badge: _l(language, en: 'Due lane', vi: 'Lane đến hạn', ja: '期限レーン'),
+        badge: _l(language, en: 'Due now', vi: 'Đến hạn', ja: '期限あり'),
         estimatedMinutes: _estimateMinutes(
           dashboard?.grammarDue ?? 0,
           floor: 5,
@@ -395,7 +395,7 @@ PracticeSessionAction _specificDueAction({
         id: 'vocab_due',
         title: _l(
           language,
-          en: 'Clear the vocab queue',
+          en: 'Clear due vocab',
           vi: 'Dọn hàng từ vựng',
           ja: '語彙キューを片づける',
         ),
@@ -413,7 +413,7 @@ PracticeSessionAction _specificDueAction({
             title: language.vocabReviewTitle(level.shortLabel),
             subtitle: _l(
               language,
-              en: 'Due vocab queue from today\'s board',
+              en: 'Due vocab from today\'s board',
               vi: 'Hàng đợi từ vựng đến hạn từ bảng hôm nay',
               ja: '今日のボードから開く語彙レビュー',
             ),
@@ -421,7 +421,7 @@ PracticeSessionAction _specificDueAction({
         ),
         icon: Icons.translate_rounded,
         color: const Color(0xFF0EA5E9),
-        badge: _l(language, en: 'Due lane', vi: 'Lane đến hạn', ja: '期限レーン'),
+        badge: _l(language, en: 'Due now', vi: 'Đến hạn', ja: '期限あり'),
         estimatedMinutes: _estimateMinutes(
           dashboard?.vocabDue ?? 0,
           floor: 5,
@@ -433,7 +433,7 @@ PracticeSessionAction _specificDueAction({
         id: 'kanji_due',
         title: _l(
           language,
-          en: 'Clear the kanji queue',
+          en: 'Clear due kanji',
           vi: 'Dọn hàng kanji',
           ja: '漢字キューを片づける',
         ),
@@ -452,7 +452,7 @@ PracticeSessionAction _specificDueAction({
         ),
         icon: Icons.flash_on_rounded,
         color: const Color(0xFFF59E0B),
-        badge: _l(language, en: 'Due lane', vi: 'Lane đến hạn', ja: '期限レーン'),
+        badge: _l(language, en: 'Due now', vi: 'Đến hạn', ja: '期限あり'),
         estimatedMinutes: _estimateMinutes(
           dashboard?.kanjiDue ?? 0,
           floor: 5,
@@ -476,7 +476,7 @@ PracticeSessionAction _specificDueAction({
     ),
     subtitle: _l(
       language,
-      en: 'Start with the queue that is already asking for attention.',
+      en: 'Start with the items that are already due.',
       vi: 'Bắt đầu từ hàng đợi đang xin được xử lý trước.',
       ja: 'すでに注意を求めているキューから始めましょう。',
     ),
@@ -484,7 +484,7 @@ PracticeSessionAction _specificDueAction({
     route: AppRoutePath.practiceRecallSprint,
     icon: Icons.schedule_rounded,
     color: const Color(0xFF2563EB),
-    badge: _l(language, en: 'Due lane', vi: 'Lane đến hạn', ja: '期限レーン'),
+    badge: _l(language, en: 'Due now', vi: 'Đến hạn', ja: '期限あり'),
     estimatedMinutes: 5,
   );
 }
@@ -506,7 +506,7 @@ PracticeSessionAction? _weaknessAction({
       extra: item.extra,
       icon: item.icon,
       color: item.color,
-      badge: _l(language, en: 'Repair lane', vi: 'Lane sửa lỗi', ja: '補強レーン'),
+      badge: _l(language, en: 'Weak-point review', vi: 'Ôn điểm yếu', ja: '補強'),
     );
   }
   if (grammarGhostCount > 0) {
@@ -538,7 +538,7 @@ PracticeSessionAction _grammarGhostAction(AppLanguage language, int count) {
     extra: GrammarPracticeMode.ghost,
     icon: Icons.auto_fix_high_rounded,
     color: const Color(0xFFF43F5E),
-    badge: _l(language, en: 'Repair lane', vi: 'Lane sửa lỗi', ja: '補強レーン'),
+    badge: _l(language, en: 'Weak-point review', vi: 'Ôn điểm yếu', ja: '補強'),
     estimatedMinutes: _estimateMinutes(count, floor: 5, rateSeconds: 12),
   );
 }
@@ -548,9 +548,9 @@ PracticeSessionAction _mistakeBankAction(AppLanguage language, int count) {
     id: 'mistake_bank',
     title: _l(
       language,
-      en: 'Clean up the mistake bank',
-      vi: 'Dọn ngân hàng lỗi',
-      ja: 'ミスバンクを整理する',
+      en: 'Review saved mistakes',
+      vi: 'Ôn lỗi đã lưu',
+      ja: '保存したミスを整理する',
     ),
     subtitle: _l(
       language,
@@ -562,7 +562,7 @@ PracticeSessionAction _mistakeBankAction(AppLanguage language, int count) {
     route: AppRoutePath.mistakes,
     icon: Icons.warning_amber_rounded,
     color: const Color(0xFFDC2626),
-    badge: _l(language, en: 'Repair lane', vi: 'Lane sửa lỗi', ja: '補強レーン'),
+    badge: _l(language, en: 'Weak-point review', vi: 'Ôn điểm yếu', ja: '補強'),
     estimatedMinutes: _estimateMinutes(count, floor: 5, rateSeconds: 12),
   );
 }
@@ -606,20 +606,20 @@ PracticeSessionAction _examAction(AppLanguage language, StudyLevel level) {
     id: 'exam_lane',
     title: _l(
       language,
-      en: 'Run one ${level.shortLabel} exam block',
-      vi: 'Làm một block đề ${level.shortLabel}',
+      en: 'Run one ${level.shortLabel} exam practice',
+      vi: 'Làm một bài ôn đề ${level.shortLabel}',
       ja: '${level.shortLabel}の試験ブロックを1本やる',
     ),
     subtitle: _l(
       language,
       en: 'Use JLPT Prep when you want something more test-shaped than daily review.',
-      vi: 'Dùng JLPT Prep khi bạn muốn một block giống đề thi hơn review hằng ngày.',
+      vi: 'Dùng ôn thi JLPT khi bạn muốn luyện giống đề thi hơn ôn hằng ngày.',
       ja: '日々のレビューより試験寄りの形で進めたい時に向いています。',
     ),
     ctaLabel: _l(
       language,
       en: 'Open JLPT prep',
-      vi: 'Mở JLPT Prep',
+      vi: 'Mở ôn thi JLPT',
       ja: 'JLPT対策へ',
     ),
     route: AppRoutePath.jlptCoach,
@@ -635,8 +635,8 @@ PracticeSessionAction _immersionAction(AppLanguage language) {
     id: 'immersion',
     title: _l(
       language,
-      en: 'Open one immersion block',
-      vi: 'Mở một block immersion',
+      en: 'Open one reading session',
+      vi: 'Mở một phiên đọc ngữ cảnh',
       ja: '没入ブロックを1本開く',
     ),
     subtitle: _l(
@@ -665,13 +665,13 @@ PracticeSessionAction _immersionAction(AppLanguage language) {
     return (
       _l(
         language,
-        en: 'Protect the review queue first',
+        en: 'Finish due reviews first',
         vi: 'Chặn hàng review trước',
         ja: 'まずレビューキューを守る',
       ),
       _l(
         language,
-        en: 'Today gets lighter once the live queue stops pulling at your attention.',
+        en: 'Today gets lighter once due reviews stop pulling at your attention.',
         vi: 'Hôm nay sẽ nhẹ hẳn đi khi hàng đợi đang mở không còn kéo bạn liên tục nữa.',
         ja: '今動いているキューを止めるだけで、今日の学習はかなり軽くなります。',
       ),
@@ -712,14 +712,14 @@ PracticeSessionAction _immersionAction(AppLanguage language) {
   return (
     _l(
       language,
-      en: 'Keep the study loop warm',
-      vi: 'Giữ vòng học luôn ấm',
+      en: 'Keep study momentum warm',
+      vi: 'Giữ nhịp học đều',
       ja: '学習ループを温め続ける',
     ),
     _l(
       language,
-      en: 'No pressure is flashing, so one intentional block is enough to keep momentum alive.',
-      vi: 'Chưa có áp lực nào chớp đỏ, nên chỉ cần một block có chủ đích là đủ giữ đà.',
+      en: 'Nothing is urgent, so one intentional practice is enough to keep momentum alive.',
+      vi: 'Chưa có áp lực nào quá gấp, nên chỉ cần một bài luyện có chủ đích là đủ giữ đà.',
       ja: '差し迫った圧はないので、意図のある1ブロックで勢いを保てます。',
     ),
   );

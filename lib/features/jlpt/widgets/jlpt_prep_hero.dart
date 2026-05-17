@@ -366,30 +366,30 @@ class _HeroMetricRow extends StatelessWidget {
 }
 
 String _eyebrow(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'EXAM PREP • JLPT TRACK',
-  AppLanguage.vi => 'ÔN THI • JLPT TRACK',
+  AppLanguage.en => 'EXAM PREP • JLPT LEVEL',
+  AppLanguage.vi => 'ÔN THI • CẤP JLPT',
   AppLanguage.ja => '試験対策 • JLPTトラック',
 };
 
 String _title(AppLanguage language, StudyLevel level) => switch (language) {
-  AppLanguage.en => 'JLPT ${level.shortLabel} prep hub',
-  AppLanguage.vi => 'Hub ôn thi ${level.shortLabel}',
+  AppLanguage.en => 'JLPT ${level.shortLabel} exam prep',
+  AppLanguage.vi => 'Ôn thi ${level.shortLabel}',
   AppLanguage.ja => '${level.shortLabel} JLPT対策ハブ',
 };
 
 String _subtitle(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'One focused hub for full mock, quick checks, reading drills, diagnosis, and a 7-day repair plan.',
+    'One focused place for complete mock exams, quick checks, reading practice, diagnosis, and a 7-day repair plan.',
   AppLanguage.vi =>
-    'Một hub thống nhất cho thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán và kế hoạch vá lỗ hổng 7 ngày.',
+    'Một nơi rõ ràng cho thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán và kế hoạch vá lỗ hổng 7 ngày.',
   AppLanguage.ja => 'フル模試、クイックチェック、読解、診断、7日補強プランをひとつにまとめた入口です。',
 };
 
 String _readinessLabel(AppLanguage language, JlptCoachSnapshot? snapshot) {
   if (snapshot == null) {
     return switch (language) {
-      AppLanguage.en => 'Need baseline',
-      AppLanguage.vi => 'Cần baseline',
+      AppLanguage.en => 'Need first result',
+      AppLanguage.vi => 'Cần kết quả đầu tiên',
       AppLanguage.ja => '基準作成が必要',
     };
   }
@@ -414,13 +414,13 @@ String _metricReadiness(AppLanguage language) => switch (language) {
 
 String _metricFullMock(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Full mock',
-  AppLanguage.vi => 'Full mock',
+  AppLanguage.vi => 'Thi thử đầy đủ',
   AppLanguage.ja => 'フル模試',
 };
 
 String _metricLevelBank(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Current level bank',
-  AppLanguage.vi => 'Bank level hiện tại',
+  AppLanguage.en => 'Current level questions',
+  AppLanguage.vi => 'Câu hỏi cấp hiện tại',
   AppLanguage.ja => '現在レベルのバンク',
 };
 
@@ -437,13 +437,13 @@ String _loadingLabel(AppLanguage language) => switch (language) {
 };
 
 String _startFullMockLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Start full mock',
-  AppLanguage.vi => 'Bắt đầu full mock',
+  AppLanguage.en => 'Start complete mock exam',
+  AppLanguage.vi => 'Bắt đầu đề thi thử đầy đủ',
   AppLanguage.ja => 'フル模試を開始',
 };
 
 String _startReadingLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Start reading drill',
-  AppLanguage.vi => 'Mở reading drill',
+  AppLanguage.en => 'Start reading practice',
+  AppLanguage.vi => 'Mở luyện đọc hiểu',
   AppLanguage.ja => '読解ドリルへ',
 };

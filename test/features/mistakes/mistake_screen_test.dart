@@ -84,12 +84,12 @@ Widget buildScreen(
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  testWidgets('shows Mistake Bank app bar title', (tester) async {
+  testWidgets('shows Saved Mistakes app bar title', (tester) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
     final cdb = ContentDatabase(executor: NativeDatabase.memory());
     await tester.pumpWidget(buildScreen(db, cdb));
     await tester.pump();
-    expect(find.text('Mistake Bank'), findsOneWidget);
+    expect(find.text('Saved Mistakes'), findsOneWidget);
     await tester.pumpWidget(Container());
     await tester.pump(const Duration(milliseconds: 100));
     await db.close();

@@ -1462,7 +1462,7 @@ _VocabCatalogSection _buildJlptSection({
   return _VocabCatalogSection(
     key: levelCode.toLowerCase(),
     levelCode: levelCode,
-    subtitle: 'JLPT $levelCode vocabulary lane',
+    subtitle: 'JLPT $levelCode vocabulary path',
     accent: accent,
     programs: [
       _VocabCatalogProgram(
@@ -1472,7 +1472,7 @@ _VocabCatalogSection _buildJlptSection({
         termCount: liveCount,
         chapterCount: chapterCount,
         subtitle:
-            'Chapter-based Hajimete track for $levelCode with seeded catalog data.',
+            'Chapter-based Hajimete study path for $levelCode vocabulary.',
         type: _VocabProgramType.core,
         isInteractive: coreInteractive,
         isComingSoon: liveCount == 0,
@@ -1694,7 +1694,7 @@ String _vocabSearchClear(AppLanguage language) => switch (language) {
 
 String _vocabSearchEmpty(AppLanguage language, String query) =>
     switch (language) {
-      AppLanguage.vi => 'Chưa tìm thấy "$query" trong lane hiện tại.',
+      AppLanguage.vi => 'Chưa tìm thấy "$query" trong cấp hiện tại.',
       AppLanguage.ja => '現在のレーンに「$query」は見つかりません。',
-      AppLanguage.en => 'No matches for "$query" in the current lane.',
+      AppLanguage.en => 'No matches for "$query" at the current level.',
     };

@@ -272,7 +272,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       companionCountOverride: shinkanzenN3TermCount,
       companionStructureCount: shinkanzenRouteCount(shinkanzenN3Summary),
       companionPreviewBody:
-          'Official 3A category route mapped for N3. ${shinkanzenN3Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN3Summary)} route blocks are already imported with $shinkanzenN3TermCount seeded terms in JP Study.',
+          'Shin Kanzen N3 vocabulary is ready for study: ${shinkanzenN3Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN3Summary)} sections and $shinkanzenN3TermCount terms are available.',
       isInteractive: true,
     ),
     _buildJlptSection(
@@ -291,7 +291,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       companionCountOverride: shinkanzenN2TermCount,
       companionStructureCount: shinkanzenRouteCount(shinkanzenN2Summary),
       companionPreviewBody:
-          'Official 3A confirmation-test route mapped for N2. ${shinkanzenN2Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN2Summary)} tests are already imported with $shinkanzenN2TermCount seeded terms in JP Study.',
+          'Shin Kanzen N2 vocabulary is ready for study: ${shinkanzenN2Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN2Summary)} sections and $shinkanzenN2TermCount terms are available.',
       isInteractive: true,
     ),
     _buildJlptSection(
@@ -310,7 +310,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       companionCountOverride: shinkanzenN1TermCount,
       companionStructureCount: shinkanzenRouteCount(shinkanzenN1Summary),
       companionPreviewBody:
-          'Official 3A confirmation-test route mapped for N1. ${shinkanzenN1Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN1Summary)} tests are imported with $shinkanzenN1TermCount seeded terms so far.',
+          'Shin Kanzen N1 vocabulary is ready for study: ${shinkanzenN1Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN1Summary)} sections and $shinkanzenN1TermCount terms are available.',
       extraPrograms: const [
         _VocabCatalogProgram(
           key: 'advanced_n1',
@@ -330,12 +330,12 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
     _VocabCatalogSection(
       key: 'se',
       levelCode: 'SE',
-      subtitle: 'Specialized Japanese for software teams',
+      subtitle: 'Workplace Japanese for software teams',
       accent: AppThemePalette.light.ink,
       programs: const [
         _VocabCatalogProgram(
           key: 'se_track',
-          titleTop: 'Tech Japanese Track',
+          titleTop: 'Technical Japanese',
           titleMain: 'SE',
           termCount: 0,
           subtitle:
@@ -414,7 +414,7 @@ String _programBadge(_VocabProgramType type) => switch (type) {
   _VocabProgramType.listening => 'Listening',
   _VocabProgramType.advanced => 'Advanced',
   _VocabProgramType.specialized => 'Specialized',
-  _ => 'Track',
+  _ => 'Path',
 };
 
 int? _chapterCountForLevel(String levelCode) => switch (levelCode) {

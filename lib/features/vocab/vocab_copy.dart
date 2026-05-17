@@ -9,9 +9,9 @@ extension VocabCopy on AppLanguage {
 
   String vocabTodayCaption() => switch (this) {
     AppLanguage.en =>
-      'Start from the active lane, then browse the catalog only when you need it.',
+      'Start with the current study path, then browse more lists only when you need them.',
     AppLanguage.vi =>
-      'Bắt đầu từ lane đang học, rồi mới mở catalog khi thật sự cần.',
+      'Bắt đầu từ hướng học hiện tại, rồi mở danh sách khác khi thật sự cần.',
     AppLanguage.ja => 'まず学習中のレーンから始め、必要なときだけカタログを開きます。',
   };
 
@@ -22,7 +22,7 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabActiveLaneLabel() => switch (this) {
-    AppLanguage.en => 'Active lane',
+    AppLanguage.en => 'Current path',
     AppLanguage.vi => 'Nhánh học hiện tại',
     AppLanguage.ja => '現在のレーン',
   };
@@ -40,7 +40,7 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabCompanionShortcutLabel() => switch (this) {
-    AppLanguage.en => 'Open companion lane',
+    AppLanguage.en => 'Open companion path',
     AppLanguage.vi => 'Mở nhánh học đồng hành',
     AppLanguage.ja => '補助レーンを開く',
   };
@@ -65,14 +65,14 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabLiveCatalogTitle() => switch (this) {
-    AppLanguage.en => 'Live catalog',
+    AppLanguage.en => 'Ready to study',
     AppLanguage.vi => 'Danh mục đang mở',
     AppLanguage.ja => '利用可能なカタログ',
   };
 
   String vocabLiveCatalogCaption() => switch (this) {
-    AppLanguage.en => 'Tracks you can study right now.',
-    AppLanguage.vi => 'Các track có thể học ngay bây giờ.',
+    AppLanguage.en => 'Vocabulary paths you can start now.',
+    AppLanguage.vi => 'Các hướng từ vựng có thể học ngay bây giờ.',
     AppLanguage.ja => '今すぐ学べるトラックです。',
   };
 
@@ -84,9 +84,8 @@ extension VocabCopy on AppLanguage {
 
   String vocabPreviewCatalogCaption() => switch (this) {
     AppLanguage.en =>
-      'Seeded data exists here, but the study flow is not fully live yet.',
-    AppLanguage.vi =>
-      'Các track này đã có dữ liệu seed, nhưng flow học chưa mở hoàn chỉnh.',
+      'Vocabulary is prepared here, but the learner path is not fully open yet.',
+    AppLanguage.vi => 'Từ vựng đã được chuẩn bị, nhưng lối học đầy đủ chưa mở.',
     AppLanguage.ja => 'データはありますが、学習フローはまだ完全には公開されていません。',
   };
 
@@ -98,7 +97,7 @@ extension VocabCopy on AppLanguage {
     AppLanguage.vi =>
       levelCode == 'SE'
           ? 'Tiếng Nhật chuyên ngành cho kỹ sư phần mềm'
-          : 'Lane từ vựng JLPT $levelCode',
+          : 'Hướng từ vựng JLPT $levelCode',
     AppLanguage.ja =>
       levelCode == 'SE' ? 'エンジニア向け専門日本語トラック' : 'JLPT $levelCode 語彙レーン',
   };
@@ -119,10 +118,10 @@ extension VocabCopy on AppLanguage {
         'Companion course that follows textbook pacing and lesson order.',
       (AppLanguage.vi, 'minna') =>
         levelCode == 'N5'
-            ? 'Track đồng hành theo giáo trình, bám nhịp bài học 1–25 và thứ tự từ vựng.'
+            ? 'Hướng học đồng hành theo giáo trình, bám nhịp bài học 1–25 và thứ tự từ vựng.'
             : levelCode == 'N4'
-            ? 'Track đồng hành theo giáo trình, bám nhịp bài học 26–50 và thứ tự từ vựng.'
-            : 'Track đồng hành theo giáo trình, bám nhịp bài học và thứ tự từ vựng.',
+            ? 'Hướng học đồng hành theo giáo trình, bám nhịp bài học 26–50 và thứ tự từ vựng.'
+            : 'Hướng học đồng hành theo giáo trình, bám nhịp bài học và thứ tự từ vựng.',
       (AppLanguage.ja, 'minna') =>
         levelCode == 'N5'
             ? '教科書の第1課〜25課に沿って語彙順で学ぶ補助トラックです。'
@@ -145,9 +144,9 @@ extension VocabCopy on AppLanguage {
         'Tiếng Nhật chuyên ngành cho sản phẩm, kỹ thuật, meeting và tài liệu.',
       (AppLanguage.ja, 'specialized') => 'プロダクト・開発・会議・仕様書向けの専門日本語です。',
       (AppLanguage.en, _) =>
-        'Usage-first vocabulary track for $levelCode with review-ready structure.',
+        'Usage-first vocabulary path for $levelCode with review built in.',
       (AppLanguage.vi, _) =>
-        'Track từ vựng ưu tiên cách dùng cho $levelCode, sẵn để vào review.',
+        'Hướng từ vựng ưu tiên cách dùng cho $levelCode, sẵn để ôn tập.',
       (AppLanguage.ja, _) => '$levelCode の語彙を用法重視で学び、そのまま復習へつなげます。',
     };
   }
@@ -166,23 +165,23 @@ extension VocabCopy on AppLanguage {
 
   String vocabHeroSubtitle() => switch (this) {
     AppLanguage.en =>
-      'A catalog-style workspace for JLPT and companion vocab tracks.',
+      'A clear place to choose JLPT vocabulary and textbook companion paths.',
     AppLanguage.vi =>
-      'Một workspace kiểu catalog cho lane JLPT và các track bổ trợ.',
+      'Một nơi rõ ràng để chọn từ vựng JLPT và hướng học bám giáo trình.',
     AppLanguage.ja => 'JLPTと補助トラックを一つにまとめたカタログ型ワークスペースです。',
   };
 
   String vocabHeroDescription() => switch (this) {
     AppLanguage.en =>
-      'Browse by lane, compare tracks side-by-side, and jump straight into review when a level is live.',
+      'Choose a level, compare available vocab lists, and start review when the content is ready.',
     AppLanguage.vi =>
-      'Duyệt theo từng lane, so sánh các track song song, rồi nhảy thẳng vào review khi level đã mở.',
+      'Chọn cấp độ, so sánh các danh sách từ vựng đang có, rồi vào ôn tập khi nội dung đã sẵn sàng.',
     AppLanguage.ja => 'レーンごとに比較しながら選び、利用可能なレベルはそのまま復習に入れます。',
   };
 
   String vocabHeroScopeAllLabel() => switch (this) {
-    AppLanguage.en => 'All lanes',
-    AppLanguage.vi => 'Toàn bộ lane',
+    AppLanguage.en => 'All paths',
+    AppLanguage.vi => 'Tất cả hướng học',
     AppLanguage.ja => 'すべてのレーン',
   };
 
@@ -193,28 +192,28 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabHeroMemoryLabel() => switch (this) {
-    AppLanguage.en => 'Spaced repetition ready',
-    AppLanguage.vi => 'Sẵn cho spaced repetition',
+    AppLanguage.en => 'Review schedule ready',
+    AppLanguage.vi => 'Sẵn lịch ôn tập',
     AppLanguage.ja => '間隔反復に対応',
   };
 
   String vocabHeroUsageLabel() => switch (this) {
-    AppLanguage.en => 'Usage-first catalog',
-    AppLanguage.vi => 'Catalog ưu tiên cách dùng',
+    AppLanguage.en => 'Usage-first list',
+    AppLanguage.vi => 'Danh sách ưu tiên cách dùng',
     AppLanguage.ja => '用法重視カタログ',
   };
 
   String vocabHeroPanelTitle() => switch (this) {
-    AppLanguage.en => 'Catalog overview',
-    AppLanguage.vi => 'Tổng quan catalog',
+    AppLanguage.en => 'Vocabulary overview',
+    AppLanguage.vi => 'Tổng quan từ vựng',
     AppLanguage.ja => 'カタログ概要',
   };
 
   String vocabHeroPanelSubtitle() => switch (this) {
     AppLanguage.en =>
-      'A quick snapshot of how many vocab paths are already ready inside JP Study.',
+      'A quick count of how much vocabulary is ready to study in JpStudy.',
     AppLanguage.vi =>
-      'Ảnh chụp nhanh số lane và track từ vựng đã sẵn sàng trong JP Study.',
+      'Số lượng hướng học và từ vựng đã sẵn sàng trong JpStudy.',
     AppLanguage.ja => 'JP Study 内で利用できる語彙トラックの状況をすばやく確認できます。',
   };
 
@@ -237,8 +236,8 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabTrackLabel() => switch (this) {
-    AppLanguage.en => 'Core track',
-    AppLanguage.vi => 'Track lõi',
+    AppLanguage.en => 'Core path',
+    AppLanguage.vi => 'Hướng cốt lõi',
     AppLanguage.ja => 'コアトラック',
   };
 
@@ -257,14 +256,14 @@ extension VocabCopy on AppLanguage {
         (AppLanguage.vi, 'specialized') => 'Chuyên ngành',
         (AppLanguage.ja, 'specialized') => '専門',
         (_, 'shinkanzen') => switch (this) {
-          AppLanguage.en => 'Track',
-          AppLanguage.vi => 'Track',
+          AppLanguage.en => 'Path',
+          AppLanguage.vi => 'Hướng học',
           AppLanguage.ja => 'トラック',
         },
         (_, 'core') => vocabTrackLabel(),
         (_, _) => switch (this) {
-          AppLanguage.en => 'Track',
-          AppLanguage.vi => 'Track',
+          AppLanguage.en => 'Path',
+          AppLanguage.vi => 'Hướng học',
           AppLanguage.ja => 'トラック',
         },
       };
@@ -284,7 +283,7 @@ extension VocabCopy on AppLanguage {
         (AppLanguage.vi, 'specialized') => 'Gói ngôn ngữ theo chuyên ngành',
         (AppLanguage.ja, 'specialized') => '専門領域向けパック',
         (AppLanguage.en, _) => 'Usage-first review path',
-        (AppLanguage.vi, _) => 'Track review ưu tiên cách dùng',
+        (AppLanguage.vi, _) => 'Ôn tập theo cách dùng',
         (AppLanguage.ja, _) => '用法重視の復習導線',
       };
 
@@ -295,8 +294,8 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabChapterSummaryLabel(int chapterCount) => switch (this) {
-    AppLanguage.en => '$chapterCount chapters seeded',
-    AppLanguage.vi => 'Đã seed $chapterCount chương',
+    AppLanguage.en => '$chapterCount chapters ready',
+    AppLanguage.vi => '$chapterCount chương đã sẵn sàng',
     AppLanguage.ja => '$chapterCount章を用意済み',
   };
 
@@ -313,8 +312,8 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabPreviewDialogTitle() => switch (this) {
-    AppLanguage.en => 'Track preview',
-    AppLanguage.vi => 'Xem trước track',
+    AppLanguage.en => 'Path preview',
+    AppLanguage.vi => 'Xem trước hướng học',
     AppLanguage.ja => 'トラックのプレビュー',
   };
 
@@ -326,9 +325,9 @@ extension VocabCopy on AppLanguage {
 
   String vocabDefaultPreviewDialogBody() => switch (this) {
     AppLanguage.en =>
-      'This track already has seeded vocabulary data inside JP Study. The catalog volume and content are ready for preview.',
+      'This path already has vocabulary inside JpStudy. You can preview the word volume and content now.',
     AppLanguage.vi =>
-      'Track này đã có dữ liệu từ vựng trong JP Study. Dữ liệu và cấu trúc catalog đã sẵn sàng để xem trước.',
+      'Hướng học này đã có từ vựng trong JpStudy. Bạn có thể xem trước số lượng và nội dung ngay.',
     AppLanguage.ja => 'このトラックにはすでに JP Study 内の語彙データがあります。カタログ内容は確認できます。',
   };
 
@@ -339,26 +338,26 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabUsageFlowLabel() => switch (this) {
-    AppLanguage.en => 'Usage flow',
-    AppLanguage.vi => 'Luồng cách dùng',
+    AppLanguage.en => 'Usage order',
+    AppLanguage.vi => 'Thứ tự theo cách dùng',
     AppLanguage.ja => '用法フロー',
   };
 
   String vocabReviewReadyLabel() => switch (this) {
-    AppLanguage.en => 'Review-ready',
-    AppLanguage.vi => 'Sẵn để review',
+    AppLanguage.en => 'Ready to review',
+    AppLanguage.vi => 'Sẵn để ôn',
     AppLanguage.ja => '復習対応',
   };
 
   String vocabOpenLaneLabel() => switch (this) {
-    AppLanguage.en => 'Open lane',
-    AppLanguage.vi => 'Mở lane',
+    AppLanguage.en => 'Open path',
+    AppLanguage.vi => 'Mở hướng học',
     AppLanguage.ja => 'レーンを開く',
   };
 
   String vocabJoinTrackLabel() => switch (this) {
-    AppLanguage.en => 'Open track',
-    AppLanguage.vi => 'Mở track',
+    AppLanguage.en => 'Open path',
+    AppLanguage.vi => 'Mở hướng học',
     AppLanguage.ja => 'トラックを開く',
   };
 
@@ -399,8 +398,8 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabSessionKindLabel() => switch (this) {
-    AppLanguage.en => 'Companion track',
-    AppLanguage.vi => 'Track đồng hành',
+    AppLanguage.en => 'Companion path',
+    AppLanguage.vi => 'Hướng học đồng hành',
     AppLanguage.ja => '補助トラック',
   };
 

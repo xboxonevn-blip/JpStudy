@@ -111,16 +111,16 @@ class JlptSupportPanel extends StatelessWidget {
 }
 
 String _supportTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Support lanes',
-  AppLanguage.vi => 'Lane hỗ trợ',
+  AppLanguage.en => 'Support practice',
+  AppLanguage.vi => 'Luyện hỗ trợ',
   AppLanguage.ja => '補助レーン',
 };
 
 String _supportCaption(AppLanguage language) => switch (language) {
   AppLanguage.en =>
-    'These lanes help you repair what the mock and reading flow expose.',
+    'Use these practice areas to review what mock exams and reading reveal.',
   AppLanguage.vi =>
-    'Đây là các lane để vá lại những chỗ mock và reading đang làm lộ ra.',
+    'Dùng các phần luyện này để ôn lại điểm yếu lộ ra khi thi thử và đọc hiểu.',
   AppLanguage.ja => '模試や読解で出た弱点を、ここから埋め直します。',
 };
 
@@ -137,11 +137,11 @@ String _weakPointsSubtitle(
   AppLanguage.en =>
     buckets.totalDue > 0
         ? 'D1 ${buckets.due1d} • D3 ${buckets.due3d} • D7 ${buckets.due7d} are ready for repair.'
-        : 'No urgent weak points right now. Keep this lane for post-mock repair.',
+        : 'No urgent weak points right now. Keep this area for post-mock review.',
   AppLanguage.vi =>
     buckets.totalDue > 0
         ? 'D1 ${buckets.due1d} • D3 ${buckets.due3d} • D7 ${buckets.due7d} đang chờ xử lý.'
-        : 'Chưa có điểm yếu gấp. Giữ lane này để sửa sau mỗi lần mock.',
+        : 'Chưa có điểm yếu gấp. Giữ phần này để sửa sau mỗi lần thi thử.',
   AppLanguage.ja =>
     buckets.totalDue > 0
         ? 'D1 ${buckets.due1d} • D3 ${buckets.due3d} • D7 ${buckets.due7d} を補強できます。'
@@ -155,8 +155,8 @@ String _readyShortLabel(AppLanguage language) => switch (language) {
 };
 
 String _studyLaneTitle(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Focused drill hub',
-  AppLanguage.vi => 'Hub drill tập trung',
+  AppLanguage.en => 'Focused practice',
+  AppLanguage.vi => 'Luyện tập trung',
   AppLanguage.ja => '集中ドリルハブ',
 };
 
@@ -192,8 +192,8 @@ String _immersionSubtitle(
   StudyLevel level,
 ) => switch (language) {
   AppLanguage.en =>
-    'Read real Japanese on the ${level.shortLabel} lane, save words, and keep exam stamina natural.',
+    'Read real Japanese at ${level.shortLabel}, save words, and build exam stamina.',
   AppLanguage.vi =>
-    'Đọc tiếng Nhật thật trên lane ${level.shortLabel}, lưu từ và giữ sức bền khi vào đề.',
+    'Đọc tiếng Nhật thật ở cấp ${level.shortLabel}, lưu từ và rèn sức bền khi vào đề.',
   AppLanguage.ja => '${level.shortLabel} レーンで実際の日本語を読み、語彙を保存しながら本番の持久力を整えます。',
 };

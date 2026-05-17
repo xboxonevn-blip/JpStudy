@@ -52,7 +52,7 @@ void main() {
 
     expect(find.text('Study Hub'), findsOneWidget);
     expect(find.text('JLPT Prep'), findsOneWidget);
-    expect(find.text('My Lesson Decks'), findsOneWidget);
+    expect(find.text('My Lessons'), findsOneWidget);
     expect(find.text('Textbook Tracker'), findsOneWidget);
     expect(find.text('Onboarding Roadmap'), findsOneWidget);
     expect(find.text('Exam Checklist'), findsOneWidget);
@@ -74,7 +74,7 @@ void main() {
     await tester.pumpWidget(_buildScreen());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Start prep'));
+    await tester.tap(find.text('Start exam prep'));
     await tester.pumpAndSettle();
 
     expect(find.text('JLPT Coach'), findsOneWidget);

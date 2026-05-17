@@ -230,14 +230,14 @@ ProgressCoachAction _buildDueAction({
     subtitle: parts.isEmpty
         ? _l(
             language,
-            en: 'Clear the queue before more weak spots pile up.',
-            vi: 'Dọn hàng đợi trước khi điểm yếu chồng thêm.',
+            en: 'Finish due reviews before more weak spots pile up.',
+            vi: 'Dọn lượt ôn đến hạn trước khi điểm yếu chồng thêm.',
             ja: '弱点が増える前にキューを片付けましょう。',
           )
         : _l(
             language,
-            en: '${parts.join(' · ')} are waiting in the queue.',
-            vi: '${parts.join(' · ')} đang chờ trong hàng đợi.',
+            en: '${parts.join(' · ')} are due now.',
+            vi: '${parts.join(' · ')} đang đến hạn.',
             ja: '${parts.join(' · ')} がキューで待っています。',
           ),
     ctaLabel: _l(
@@ -323,8 +323,8 @@ ProgressCoachAction? _actionFromContinue({
         ),
         subtitle: _l(
           language,
-          en: 'Use a focused grammar block to clean up the current queue.',
-          vi: 'Dùng một block ngữ pháp tập trung để dọn hàng đợi hiện tại.',
+          en: 'Use focused grammar practice to clear current due items.',
+          vi: 'Dùng một bài ngữ pháp tập trung để dọn các mục đến hạn.',
           ja: '集中的な文法ブロックで今のキューを片付けましょう。',
         ),
         ctaLabel: _l(
@@ -343,8 +343,8 @@ ProgressCoachAction? _actionFromContinue({
         id: 'continue_mistakes',
         title: _l(
           language,
-          en: 'Clean up the mistake bank',
-          vi: 'Dọn ngân hàng lỗi',
+          en: 'Review saved mistakes',
+          vi: 'Ôn lỗi đã lưu',
           ja: 'ミスバンクを整理する',
         ),
         subtitle: _l(
@@ -368,8 +368,8 @@ ProgressCoachAction? _actionFromContinue({
         id: 'continue_mixed',
         title: _l(
           language,
-          en: 'Run one short mixed block',
-          vi: 'Chạy một block tổng hợp ngắn',
+          en: 'Run one short mixed practice',
+          vi: 'Làm một bài luyện tổng hợp ngắn',
           ja: '短いミックス練習を回す',
         ),
         subtitle: _l(
@@ -401,17 +401,17 @@ ProgressCoachAction _examAction(
     id: 'exam_lane',
     title: _l(
       language,
-      en: 'Run one ${level.shortLabel} exam-prep block',
-      vi: 'Chạy một block ôn thi ${level.shortLabel}',
+      en: 'Run one ${level.shortLabel} exam-prep session',
+      vi: 'Làm một phiên ôn thi ${level.shortLabel}',
       ja: '${level.shortLabel}試験対策を1ブロック進める',
     ),
     subtitle: _l(
       language,
       en: recentAccuracy == null
-          ? 'Use JLPT Coach to turn progress into a more test-shaped session.'
+          ? 'Use JLPT prep to turn progress into a more test-shaped session.'
           : 'Recent mock trend$accuracyLabel says exam rhythm still needs another pass.',
       vi: recentAccuracy == null
-          ? 'Dùng JLPT Coach để biến tiến độ hiện tại thành một buổi ôn kiểu đề thi.'
+          ? 'Dùng phần ôn thi JLPT để biến tiến độ hiện tại thành một buổi ôn kiểu đề thi.'
           : 'Xu hướng mock gần đây$accuracyLabel cho thấy nhịp làm đề vẫn cần thêm một lượt.',
       ja: recentAccuracy == null
           ? 'JLPT Coachで進捗を試験型のセッションに変えましょう。'
@@ -419,8 +419,8 @@ ProgressCoachAction _examAction(
     ),
     ctaLabel: _l(
       language,
-      en: 'Open JLPT coach',
-      vi: 'Mở JLPT Coach',
+      en: 'Open JLPT prep',
+      vi: 'Mở ôn thi JLPT',
       ja: 'JLPT Coachへ',
     ),
     route: AppRoutePath.jlptCoach,
@@ -441,8 +441,8 @@ ProgressCoachAction _immersionAction(AppLanguage language) {
     ),
     subtitle: _l(
       language,
-      en: 'Read briefly, save unknown words, and keep the loop alive.',
-      vi: 'Đọc ngắn, lưu từ lạ, và giữ vòng học luôn sống.',
+      en: 'Read briefly, save unknown words, and keep study momentum alive.',
+      vi: 'Đọc ngắn, lưu từ lạ, và giữ nhịp học luôn đều.',
       ja: '短く読んで未知語を保存し、学習ループを保ちましょう。',
     ),
     ctaLabel: _l(language, en: 'Open immersion', vi: 'Mở immersion', ja: '没入へ'),
@@ -512,7 +512,7 @@ ProgressCoachSignal _buildRetentionSignal(
 
   return ProgressCoachSignal(
     id: 'retention',
-    label: _l(language, en: 'Retention', vi: 'Độ nhớ', ja: '定着'),
+    label: _l(language, en: 'Review health', vi: 'Độ bền ôn tập', ja: '定着'),
     value: retention.total == 0
         ? _l(language, en: 'New', vi: 'Mới', ja: '開始前')
         : _l(
@@ -524,12 +524,12 @@ ProgressCoachSignal _buildRetentionSignal(
     detail: _l(
       language,
       en: retention.total == 0
-          ? 'Your SRS deck is still warming up.'
+          ? 'Your review history is still warming up.'
           : fragile > retention.mature
           ? '${retention.mature} mature cards are carrying ${retention.total} total reviews.'
           : '${retention.mature} mature cards are now doing the heavy lifting.',
       vi: retention.total == 0
-          ? 'Deck SRS của bạn vẫn đang khởi động.'
+          ? 'Lịch sử ôn tập của bạn vẫn đang khởi động.'
           : fragile > retention.mature
           ? '${retention.mature} thẻ trưởng thành đang gánh ${retention.total} lượt ôn tổng.'
           : '${retention.mature} thẻ trưởng thành đang gánh phần nặng của độ nhớ.',
@@ -618,8 +618,8 @@ ProgressCoachSignal _buildPerformanceSignal({
     return (
       _l(
         language,
-        en: 'Protect the queue first',
-        vi: 'Chặn hàng đợi trước',
+        en: 'Finish due reviews first',
+        vi: 'Dọn lượt ôn đến hạn trước',
         ja: 'まずキューを守る',
       ),
       _l(
@@ -641,8 +641,8 @@ ProgressCoachSignal _buildPerformanceSignal({
       ),
       _l(
         language,
-        en: 'Your queue is manageable, so targeted repair gives the fastest lift.',
-        vi: 'Hàng đợi đang kiểm soát được, nên sửa trúng điểm yếu sẽ cho hiệu quả nhanh nhất.',
+        en: 'Due reviews are manageable, so targeted repair gives the fastest lift.',
+        vi: 'Lượt ôn đến hạn đang kiểm soát được, nên sửa trúng điểm yếu sẽ hiệu quả nhất.',
         ja: 'キューは管理できているので、弱点補強が最短の改善になります。',
       ),
     );
@@ -673,8 +673,8 @@ ProgressCoachSignal _buildPerformanceSignal({
       ),
       _l(
         language,
-        en: 'Recent saved attempts say a short exam-shaped block would pay off.',
-        vi: 'Các lần làm gần đây cho thấy một block ôn kiểu đề sẽ rất đáng làm.',
+        en: 'Recent saved attempts say a short exam-shaped practice would pay off.',
+        vi: 'Các lần làm gần đây cho thấy một bài ôn kiểu đề sẽ rất đáng làm.',
         ja: '最近の結果から、試験型ブロックを一度入れる価値があります。',
       ),
     );
@@ -682,14 +682,14 @@ ProgressCoachSignal _buildPerformanceSignal({
   return (
     _l(
       language,
-      en: 'Keep the loop warm',
-      vi: 'Giữ vòng học luôn ấm',
+      en: 'Keep study momentum warm',
+      vi: 'Giữ nhịp học đều',
       ja: '学習ループを温める',
     ),
     _l(
       language,
-      en: 'Nothing is on fire, so use one intentional block to keep momentum alive.',
-      vi: 'Chưa có gì quá gấp, nên chỉ cần một block có chủ đích để giữ đà.',
+      en: 'Nothing is urgent, so use one intentional practice to keep momentum alive.',
+      vi: 'Chưa có gì quá gấp, nên chỉ cần một bài luyện có chủ đích để giữ đà.',
       ja: '急ぎはないので、意図のある1ブロックで勢いを保ちましょう。',
     ),
   );
@@ -708,8 +708,8 @@ ProgressCoachSignal _buildPerformanceSignal({
       title: language.vocabReviewTitle(level.shortLabel),
       subtitle: _l(
         language,
-        en: 'Due queue from progress',
-        vi: 'Hàng đợi đến hạn từ tiến độ',
+        en: 'Due reviews from progress',
+        vi: 'Lượt ôn đến hạn từ tiến độ',
         ja: '進捗からの復習キュー',
       ),
     );

@@ -42,7 +42,7 @@ void main() {
 
       expect(board.primaryAction.route, AppRoutePath.practiceRecallSprint);
       expect(board.steps[1].route, AppRoutePath.grammarPractice);
-      expect(board.headline, 'Protect the review queue first');
+      expect(board.headline, 'Finish due reviews first');
       expect(board.primaryAction.extra, isA<RecallSprintArgs>());
     });
 
@@ -152,7 +152,7 @@ void main() {
         source: 'practice_board',
         levelCode: 'N4',
         title: 'N4 review',
-        subtitle: 'Due vocab queue from today\'s board',
+        subtitle: 'Due vocab from today\'s board',
       );
       expect(
         board.primaryAction.route,

@@ -365,8 +365,8 @@ class _KanjiHubBody extends ConsumerWidget {
   String _subtitle(_KanjiReadingSessionSource source, int itemCount) {
     if (launchArgs?.preferredKanjiId != null) {
       return switch (language) {
-        AppLanguage.en => 'Focused reading drill for a selected kanji.',
-        AppLanguage.vi => 'Drill am doc tap trung cho kanji da chon.',
+        AppLanguage.en => 'Focused reading practice for a selected kanji.',
+        AppLanguage.vi => 'Luyện âm đọc tập trung cho kanji đã chọn.',
         AppLanguage.ja => '選択した漢字の読みを集中的に練習します。',
       };
     }
@@ -374,14 +374,14 @@ class _KanjiHubBody extends ConsumerWidget {
       return switch (language) {
         AppLanguage.en => '$itemCount kanji ready for a due reading review.',
         AppLanguage.vi =>
-          '$itemCount kanji san sang cho mot dot on doc den han.',
+          '$itemCount kanji sẵn sàng cho một lượt ôn đọc đến hạn.',
         AppLanguage.ja => '$itemCount件の期限漢字で読みの復習を始めます。',
       };
     }
     if (source == _KanjiReadingSessionSource.newBatch) {
       return switch (language) {
-        AppLanguage.en => '$itemCount new kanji ready for reading drills.',
-        AppLanguage.vi => '$itemCount kanji moi san sang cho drill am doc.',
+        AppLanguage.en => '$itemCount new kanji ready for reading practice.',
+        AppLanguage.vi => '$itemCount kanji mới sẵn sàng cho luyện âm đọc.',
         AppLanguage.ja => '$itemCount件の新出漢字で読みドリルを始めます。',
       };
     }
@@ -390,7 +390,7 @@ class _KanjiHubBody extends ConsumerWidget {
         AppLanguage.en =>
           '$itemCount kanji ready. Start here, then continue with writing.',
         AppLanguage.vi =>
-          '$itemCount kanji san sang. Bat dau o day roi tiep tuc sang viet.',
+          '$itemCount kanji sẵn sàng. Bắt đầu ở đây rồi tiếp tục sang viết.',
         AppLanguage.ja => '$itemCount件の漢字が準備できています。ここから始めて次に書きを続けます。',
       };
     }

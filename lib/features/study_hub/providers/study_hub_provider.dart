@@ -618,7 +618,7 @@ const onboardingSteps = <OnboardingStep>[
   OnboardingStep(
     id: 'kanji_daily',
     title: 'Daily Kanji Core',
-    description: 'Study 5-10 kanji/day with writing and recall.',
+    description: 'Study 5-10 kanji/day with writing and memory checks.',
   ),
   OnboardingStep(
     id: 'immersion',
@@ -655,8 +655,8 @@ const examChecklistItems = <ExamChecklistItem>[
   ),
   ExamChecklistItem(
     id: 'exam_mock',
-    title: 'Complete at least 3 full mock exams',
-    description: 'Track timing, weak sections, and retry after 3 days.',
+    title: 'Complete at least 3 mock exams',
+    description: 'Record timing, weak sections, and retry after 3 days.',
   ),
   ExamChecklistItem(
     id: 'exam_day',
@@ -688,7 +688,7 @@ final studyResources = <StudyResource>[
   ),
   StudyResource(
     id: 'res_003',
-    title: 'Kanji Starter Deck 300',
+    title: 'Kanji Starter Set 300',
     subtitle: 'Most frequent beginner kanji with writing hints.',
     level: StudyResourceLevel.beginner,
     topic: StudyResourceTopic.kanji,

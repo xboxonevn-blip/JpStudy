@@ -104,7 +104,7 @@ void main() {
     expect(find.text('JLPT prep'), findsAtLeastNWidgets(1));
     expect(find.widgetWithText(FilledButton, 'Start session'), findsOneWidget);
     expect(find.widgetWithText(OutlinedButton, 'JLPT prep'), findsOneWidget);
-    expect(find.text('Clear the review queue first'), findsOneWidget);
+    expect(find.text('Clear due reviews first'), findsOneWidget);
   });
 
   testWidgets('AppRouter opens the Recall Sprint route', (tester) async {
@@ -202,8 +202,8 @@ void main() {
 
     expect(find.text('Review'), findsAtLeastNWidgets(1));
     expect(find.text('Today plan'), findsOneWidget);
-    expect(find.text('Clear the vocab queue'), findsAtLeastNWidgets(1));
-    expect(find.text('Clean up the mistake bank'), findsAtLeastNWidgets(1));
+    expect(find.text('Clear due vocab'), findsAtLeastNWidgets(1));
+    expect(find.text('Review saved mistakes'), findsAtLeastNWidgets(1));
     expect(find.text('JLPT prep'), findsAtLeastNWidgets(1));
     expect(find.byType(FilledButton), findsAtLeastNWidgets(1));
   });

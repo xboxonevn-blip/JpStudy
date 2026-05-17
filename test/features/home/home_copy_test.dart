@@ -8,7 +8,7 @@ void main() {
   test('learning path Vietnamese copy avoids mixed lane/session wording', () {
     expect(
       AppLanguage.vi.learningPathStudyPromptSubtitle(),
-      'Màn hình này giờ ưu tiên buổi học, bài luyện và bước tiếp theo thật rõ ràng.',
+      'Bắt đầu bằng một buổi học rõ ràng, rồi tiếp tục luyện tập hoặc đọc.',
     );
     expect(AppLanguage.vi.learningHeroPrimaryLabel(), 'Bắt đầu học');
     expect(AppLanguage.vi.learningOpenLaneLabel(), 'Mở hướng này');

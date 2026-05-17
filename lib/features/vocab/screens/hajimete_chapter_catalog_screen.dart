@@ -710,17 +710,16 @@ String _backLabel(AppLanguage language) => switch (language) {
 };
 
 String _heroSubtitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi =>
-    'Chọn chapter hoặc chủ đề để vào đúng lane học, thay vì nhảy thẳng vào một phiên review tổng.',
+  AppLanguage.vi => 'Chọn chương hoặc chủ đề trước khi ôn tổng hợp.',
   AppLanguage.ja => '総レビューへ飛ぶ前に、章ごとのテーマから学習レーンを選べます。',
   AppLanguage.en =>
-    'Choose a chapter or topic first so the lane feels structured before you jump into a full review session.',
+    'Choose a chapter or topic first before jumping into a full review session.',
 };
 
 String _liveLaneLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Lane đang mở',
+  AppLanguage.vi => 'Đang học được',
   AppLanguage.ja => '利用可能',
-  AppLanguage.en => 'Live lane',
+  AppLanguage.en => 'Ready now',
 };
 
 String _chapterTitle(AppLanguage language) => switch (language) {
@@ -755,9 +754,9 @@ String _topicHintLabel(AppLanguage language) => switch (language) {
 };
 
 String _structuredLaneLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Flow học rõ ràng',
+  AppLanguage.vi => 'Thứ tự học rõ',
   AppLanguage.ja => '整理された学習フロー',
-  AppLanguage.en => 'Structured study flow',
+  AppLanguage.en => 'Clear study order',
 };
 
 String _highlightTitle(AppLanguage language) => switch (language) {
@@ -767,9 +766,9 @@ String _highlightTitle(AppLanguage language) => switch (language) {
 };
 
 String _reviewWholeLaneLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Review toàn lane',
+  AppLanguage.vi => 'Ôn toàn bộ',
   AppLanguage.ja => 'レーン全体を復習',
-  AppLanguage.en => 'Review full lane',
+  AppLanguage.en => 'Review all',
 };
 
 String _openChapterLabel(AppLanguage language) => switch (language) {

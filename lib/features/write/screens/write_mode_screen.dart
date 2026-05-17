@@ -168,9 +168,9 @@ class WriteModeScreen extends ConsumerWidget {
   }) {
     switch (language) {
       case AppLanguage.en:
-        return 'Choose typing for recall speed or handwriting for stroke memory. $vocabCount vocab items and $kanjiCount kanji are ready.';
+        return 'Choose typing for memory speed or handwriting for stroke memory. $vocabCount vocab items and $kanjiCount kanji are ready.';
       case AppLanguage.vi:
-        return 'Chọn typing để tăng recall tốc độ hoặc handwriting để khóa trí nhớ nét viết. Hiện có $vocabCount mục vocab và $kanjiCount kanji sẵn sàng.';
+        return 'Chọn gõ để nhớ nhanh hơn hoặc viết tay để khóa trí nhớ nét viết. Hiện có $vocabCount mục từ vựng và $kanjiCount kanji sẵn sàng.';
       case AppLanguage.ja:
         return 'typing で想起速度を上げるか、handwriting で筆順記憶を固めるかを選べます。$vocabCount 件の語彙と $kanjiCount 件の漢字が準備できています。';
     }
@@ -204,9 +204,9 @@ class WriteModeScreen extends ConsumerWidget {
 
   String _modeCaption(AppLanguage language) => switch (language) {
     AppLanguage.en =>
-      'One entry for typing recall, one entry for handwriting focus.',
+      'One entry for typing memory, one entry for handwriting focus.',
     AppLanguage.vi =>
-      'Một lối vào cho typing recall, một lối vào cho handwriting tập trung.',
+      'Một lối vào để gõ nhớ nhanh, một lối vào để tập trung viết tay.',
     AppLanguage.ja => 'typing 想起用と handwriting 集中用の 2 つの入口です。',
   };
 }

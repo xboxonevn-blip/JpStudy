@@ -187,7 +187,7 @@ void main() {
 
       expect(find.text('Read Kanji (N4)'), findsOneWidget);
       expect(
-        find.text('Focused reading drill for a selected kanji.'),
+        find.text('Focused reading practice for a selected kanji.'),
         findsOneWidget,
       );
       expect(find.text('Start'), findsOneWidget);
@@ -244,7 +244,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        find.text('1 new kanji ready for reading drills.'),
+        find.text('1 new kanji ready for reading practice.'),
         findsOneWidget,
       );
       expect(find.text('Start'), findsOneWidget);

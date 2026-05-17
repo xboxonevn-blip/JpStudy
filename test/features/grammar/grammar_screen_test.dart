@@ -145,7 +145,7 @@ void main() {
       expect(find.text('Grammar'), findsWidgets);
       expect(find.text('All clear'), findsWidgets);
       // Hero metric tiles are always shown
-      expect(find.text('Deck size'), findsOneWidget);
+      expect(find.text('Total points'), findsOneWidget);
       expect(find.text('Learned'), findsWidgets);
       expect(find.text('Ready now'), findsOneWidget);
       expect(find.text('Weak spots'), findsOneWidget);

@@ -101,7 +101,7 @@ void main() {
       }
     }
 
-    expect(find.text('N4 track'), findsOneWidget);
+    expect(find.text('N4 reading'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();

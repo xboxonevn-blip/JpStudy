@@ -265,7 +265,7 @@ LibraryRoadmapAction _nextLessonAction(
     subtitle: isFresh
         ? _l(
             language,
-            en: '${AppLanguage.en.termsCountLabel(lesson.termCount)} are waiting in a clean lesson block.',
+            en: '${AppLanguage.en.termsCountLabel(lesson.termCount)} are waiting in a clear lesson set.',
             vi: '${lesson.termCount} mục đang chờ trong một lesson còn sạch.',
             ja: '${lesson.termCount}項目の新しいレッスンが待っています。',
           )
@@ -326,8 +326,8 @@ LibraryRoadmapAction _lookupAction(AppLanguage language, StudyLevel level) {
     id: 'lookup',
     title: _l(
       language,
-      en: 'Search the ${level.shortLabel} bank faster',
-      vi: 'Tra nhanh bank ${level.shortLabel}',
+      en: 'Search ${level.shortLabel} content faster',
+      vi: 'Tra nhanh nội dung ${level.shortLabel}',
       ja: '${level.shortLabel}バンクを素早く検索する',
     ),
     subtitle: _l(
@@ -355,8 +355,8 @@ LibraryRoadmapAction _emptyAction(AppLanguage language, int fallbackLessonId) {
     ),
     subtitle: _l(
       language,
-      en: 'This level has no tracked lesson progress yet, so start from the first block.',
-      vi: 'Level này chưa có tiến độ lesson nào được theo dõi, nên hãy vào block đầu tiên.',
+      en: 'This level has no tracked lesson progress yet, so start from the first lesson set.',
+      vi: 'Cấp này chưa có tiến độ bài học nào được theo dõi, nên hãy vào nhóm bài đầu tiên.',
       ja: 'このレベルにはまだ進捗がないので、最初のブロックから始めましょう。',
     ),
     ctaLabel: _l(

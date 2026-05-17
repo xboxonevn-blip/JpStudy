@@ -168,8 +168,8 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
 
   String _seriousHint(AppLanguage language) => _tr(
     language,
-    'Serious mode: timer, score, and diagnosis appear in one focused flow.',
-    'Chế độ nghiêm túc: timer, điểm số và chẩn đoán nằm trong một luồng tập trung.',
+    'Focused mode: timer, score, and diagnosis stay on one screen.',
+    'Chế độ tập trung: giờ, điểm số và chẩn đoán nằm trong một màn hình.',
     '集中モード: タイマー、得点、診断を1つの流れで確認できます。',
   );
 
@@ -207,7 +207,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
   );
 
   String _trackLabel(AppLanguage language, String level) =>
-      _tr(language, '$level track', 'Lộ trình $level', '$level トラック');
+      _tr(language, '$level reading', 'Đọc hiểu $level', '$level 読解');
 
   String _setsCountLabel(AppLanguage language, int count) =>
       _tr(language, '$count sets', '$count bộ đọc', '$count セット');
@@ -475,8 +475,8 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                           ),
                           message: _tr(
                             language,
-                            'Switch the JLPT level or add passages for this track.',
-                            'Hãy đổi cấp JLPT hoặc bổ sung bài đọc cho track này.',
+                            'Switch the JLPT level or add reading passages for this level.',
+                            'Hãy đổi cấp JLPT hoặc bổ sung bài đọc cho cấp này.',
                             'JLPTレベルを変更するか、このトラックの読解を追加してください。',
                           ),
                         )

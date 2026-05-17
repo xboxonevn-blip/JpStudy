@@ -469,9 +469,9 @@ class _SprintBody extends StatelessWidget {
 
   String _completedBody(AppLanguage l) => switch (l) {
     AppLanguage.en =>
-      'You cleared the current recall set. Run it again to build speed.',
+      'You cleared the current memory set. Run it again to build speed.',
     AppLanguage.vi =>
-      'Bạn đã hoàn thành lượt recall hiện tại. Chạy lại để tăng tốc độ.',
+      'Bạn đã hoàn thành lượt nhớ hiện tại. Chạy lại để tăng tốc độ.',
     AppLanguage.ja => '現在のリコールセットを完了しました。もう一度行ってスピードを上げましょう。',
   };
 

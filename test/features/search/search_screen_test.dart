@@ -136,7 +136,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Lookup'), findsAtLeastNWidgets(1));
-    expect(find.text('Current search bank'), findsOneWidget);
+    expect(find.text('Current search set'), findsOneWidget);
     expect(find.text('All'), findsOneWidget);
     expect(find.text('Vocab'), findsAtLeastNWidgets(1));
     expect(find.text('Kanji'), findsAtLeastNWidgets(1));
@@ -344,7 +344,7 @@ void main() {
 
     expect(find.byKey(const ValueKey('search_empty_state')), findsOneWidget);
     expect(find.text('Clear search'), findsOneWidget);
-    expect(find.text('Show all lanes'), findsOneWidget);
+    expect(find.text('Show all levels'), findsOneWidget);
   });
 
   testWidgets('tap vocab result deep-links to vocab detail route', (

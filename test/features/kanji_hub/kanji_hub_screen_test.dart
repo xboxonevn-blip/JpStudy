@@ -482,7 +482,7 @@ void main() {
     expect(find.text('\u660e'), findsNothing);
   });
 
-  testWidgets('kanji detail dialog includes JP Study Flow related lanes', (
+  testWidgets('kanji detail dialog includes related kanji study groups', (
     tester,
   ) async {
     tester.view.physicalSize = const Size(1200, 1400);
@@ -505,7 +505,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Mở tất cả (2)'), findsOneWidget);
-    expect(find.text('Lane N4 \u2014 1 kanji'), findsOneWidget);
-    expect(find.text('Lane N3 \u2014 1 kanji'), findsOneWidget);
+    expect(find.text('Nhóm N4 \u2014 1 kanji'), findsOneWidget);
+    expect(find.text('Nhóm N3 \u2014 1 kanji'), findsOneWidget);
   });
 }

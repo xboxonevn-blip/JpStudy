@@ -209,8 +209,8 @@ JlptPlanPresentation _vocabResetPresentation(
   return JlptPlanPresentation(
     phaseLabel: jlptPlanPhaseLabel(language, JlptPlanPhase.reset),
     title: switch (language) {
-      AppLanguage.en => 'Reset weak vocab recall',
-      AppLanguage.vi => 'Dựng lại recall từ vựng yếu',
+      AppLanguage.en => 'Rebuild weak vocabulary memory',
+      AppLanguage.vi => 'Củng cố lại từ vựng yếu',
       AppLanguage.ja => '弱い語彙の想起を立て直す',
     },
     body: switch (language) {
@@ -294,9 +294,9 @@ JlptPlanPresentation _vocabSpeedPresentation(
     },
     body: switch (language) {
       AppLanguage.en =>
-        'Come back on Day ${item.dayOffset + 1} with a shorter timed block so you can check whether the words still hold when the pace rises.',
+        'Come back on Day ${item.dayOffset + 1} with a shorter timed round so you can check whether the words still hold when the pace rises.',
       AppLanguage.vi =>
-        'Quay lại ở ngày ${item.dayOffset + 1} với một block ngắn có bấm giờ để kiểm tra từ vựng còn giữ được khi tăng nhịp hay không.',
+        'Quay lại ở ngày ${item.dayOffset + 1} với một lượt ngắn có bấm giờ để kiểm tra từ vựng còn giữ được khi tăng nhịp hay không.',
       AppLanguage.ja =>
         '${item.dayOffset + 1}日目は短い時間制ブロックで、ペースが上がっても語彙が保てるかを確かめます。',
     },
@@ -341,9 +341,9 @@ JlptPlanPresentation _vocabTimedPresentation(
     },
     body: switch (language) {
       AppLanguage.en =>
-        'Use about ${item.minutes} minutes to rehearse the level vocab bank under exam rhythm, not just recognition comfort.',
+        'Use about ${item.minutes} minutes to rehearse this level\'s vocabulary under exam rhythm, not just recognition comfort.',
       AppLanguage.vi =>
-        'Dùng khoảng ${item.minutes} phút để rà lại bank từ vựng theo nhịp thi thật, không chỉ dừng ở cảm giác nhận ra.',
+        'Dùng khoảng ${item.minutes} phút để rà lại từ vựng của cấp này theo nhịp thi thật, không chỉ dừng ở cảm giác nhận ra.',
       AppLanguage.ja => '${item.minutes}分ほどで、語彙バンクを「見れば分かる」ではなく試験リズムで回し直します。',
     },
     actionLabel: jlptActionOpenCoverageCheck(language),
@@ -421,9 +421,9 @@ JlptPlanPresentation _grammarAccuracyPresentation(
     },
     body: switch (language) {
       AppLanguage.en =>
-        'Keep this ${item.minutes}-minute block focused on exact patterns, so the same structure stops tripping you in later sections.',
+        'Keep these ${item.minutes} minutes focused on exact patterns, so the same structure stops tripping you in later sections.',
       AppLanguage.vi =>
-        'Giữ block ${item.minutes} phút này tập trung vào đúng mẫu câu để cùng một lỗi không lặp lại ở các phần sau.',
+        'Dùng ${item.minutes} phút này để tập trung vào đúng mẫu câu, để cùng một lỗi không lặp lại ở các phần sau.',
       AppLanguage.ja =>
         '${item.minutes}分は文型を正確に当て直し、後半のセクションでも同じ崩れを繰り返さないようにします。',
     },
@@ -507,15 +507,15 @@ JlptPlanPresentation _grammarTimedPresentation(
   return JlptPlanPresentation(
     phaseLabel: jlptPlanPhaseLabel(language, JlptPlanPhase.timed),
     title: switch (language) {
-      AppLanguage.en => 'Run a timed grammar block',
-      AppLanguage.vi => 'Chạy một block ngữ pháp có giờ',
+      AppLanguage.en => 'Run timed grammar practice',
+      AppLanguage.vi => 'Luyện ngữ pháp có bấm giờ',
       AppLanguage.ja => '時間つき文法ブロックを回す',
     },
     body: switch (language) {
       AppLanguage.en =>
-        'This ${item.minutes}-minute block should feel closer to exam rhythm, so your grammar repairs survive when decisions have to be fast.',
+        'This ${item.minutes}-minute practice should feel closer to exam rhythm, so your grammar fixes still hold when decisions have to be fast.',
       AppLanguage.vi =>
-        'Block ${item.minutes} phút này nên gần với nhịp thi hơn, để phần sửa ngữ pháp vẫn giữ được khi phải quyết định nhanh.',
+        'Bài ${item.minutes} phút này nên gần với nhịp thi hơn, để phần ngữ pháp đã sửa vẫn giữ được khi phải quyết định nhanh.',
       AppLanguage.ja =>
         '${item.minutes}分のブロックで本番に近いリズムを作り、速い判断でも補強した文法が崩れないようにします。',
     },
@@ -608,8 +608,8 @@ JlptPlanPresentation _kanjiSpeedPresentation(
   return JlptPlanPresentation(
     phaseLabel: jlptPlanPhaseLabel(language, JlptPlanPhase.speed),
     title: switch (language) {
-      AppLanguage.en => 'Push faster kanji recall',
-      AppLanguage.vi => 'Đẩy recall kanji nhanh hơn',
+      AppLanguage.en => 'Recognize kanji faster',
+      AppLanguage.vi => 'Nhận ra kanji nhanh hơn',
       AppLanguage.ja => '漢字想起をもっと速くする',
     },
     body: switch (language) {
@@ -646,7 +646,7 @@ JlptPlanPresentation _kanjiCoveragePresentation(
     },
     body: switch (language) {
       AppLanguage.en =>
-        'Use ${item.minutes} minutes to widen recognition and reading coverage, not just handwritten recall.',
+        'Use ${item.minutes} minutes to widen recognition and reading coverage, not just handwriting memory.',
       AppLanguage.vi =>
         'Dùng ${item.minutes} phút để mở rộng độ phủ nhận diện và cách đọc, không chỉ nhớ viết tay.',
       AppLanguage.ja => '${item.minutes}分で、手書き想起だけでなく認識と読みの広がりも整えます。',
@@ -713,9 +713,9 @@ JlptPlanPresentation _readingCoveragePresentation(
     },
     body: switch (language) {
       AppLanguage.en =>
-        'Keep a ${item.minutes}-minute immersion block so your eyes stay comfortable with real Japanese between harder drill days.',
+        'Keep a ${item.minutes}-minute reading session so your eyes stay comfortable with real Japanese between harder practice days.',
       AppLanguage.vi =>
-        'Giữ một block immersion ${item.minutes} phút để mắt quen với tiếng Nhật thật giữa các ngày luyện nặng hơn.',
+        'Giữ một phiên đọc ${item.minutes} phút để mắt quen với tiếng Nhật thật giữa các ngày luyện nặng hơn.',
       AppLanguage.ja =>
         '${item.minutes}分のイマージョンで、重いドリル日の合間にも実際の日本語に目を慣らしておきます。',
     },
@@ -737,9 +737,9 @@ JlptPlanPresentation _readingTimedPresentation(
     },
     body: switch (language) {
       AppLanguage.en =>
-        'Use a ${item.minutes}-minute reading drill so pace and comprehension stay calm when the timer is visible.',
+        'Use ${item.minutes} minutes of reading practice so pace and comprehension stay calm when the timer is visible.',
       AppLanguage.vi =>
-        'Dùng một bài reading drill ${item.minutes} phút để tốc độ và hiểu bài vẫn giữ được khi thấy đồng hồ.',
+        'Dùng ${item.minutes} phút luyện đọc để tốc độ và hiểu bài vẫn ổn khi thấy đồng hồ.',
       AppLanguage.ja => '${item.minutes}分の読解ドリルで、タイマーが見えていても理解と速度を安定させます。',
     },
     actionLabel: jlptActionOpenReadingDrill(language),

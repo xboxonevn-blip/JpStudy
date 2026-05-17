@@ -16,15 +16,15 @@ void main() {
     (jlptActionOpenTimedCheck, 'Open timed check'),
     (jlptActionOpenCoverageCheck, 'Open coverage check'),
     (jlptActionOpenCheckpoint, 'Open checkpoint'),
-    (jlptActionOpenGrammarDrill, 'Open grammar drill'),
+    (jlptActionOpenGrammarDrill, 'Open grammar practice'),
     (jlptActionOpenSpeedQuiz, 'Open speed quiz'),
-    (jlptActionOpenFillBlankDrill, 'Open fill-in drill'),
+    (jlptActionOpenFillBlankDrill, 'Open fill-in practice'),
     (jlptActionOpenTimedGrammar, 'Open timed grammar'),
     (jlptActionOpenHandwriting, 'Open handwriting'),
     (jlptActionOpenKanjiPractice, 'Open kanji practice'),
     (jlptActionOpenKanjiReading, 'Open kanji reading'),
     (jlptActionOpenImmersion, 'Open immersion'),
-    (jlptActionOpenReadingDrill, 'Open reading drill'),
+    (jlptActionOpenReadingDrill, 'Open reading practice'),
     (jlptActionOpenFinalReadingCheck, 'Open final reading check'),
   ];
 

@@ -78,9 +78,9 @@ class ChallengeHistoryCard extends ConsumerWidget {
   String _title(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Challenge History';
+        return 'Goal History';
       case AppLanguage.vi:
-        return 'Lịch sử thử thách';
+        return 'Lịch sử mục tiêu';
       case AppLanguage.ja:
         return 'チャレンジ履歴';
     }

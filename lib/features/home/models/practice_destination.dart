@@ -263,7 +263,7 @@ String _jlptCoachTitle(AppLanguage language) {
 String _jlptCoachSubtitle(AppLanguage language) {
   switch (language) {
     case AppLanguage.en:
-      return 'Full mock, quick mock, reading drills, diagnosis, 7-day plan.';
+      return 'Full mock exams, quick checks, reading practice, diagnosis, 7-day plan.';
     case AppLanguage.vi:
       return 'Thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán, kế hoạch 7 ngày.';
     case AppLanguage.ja:

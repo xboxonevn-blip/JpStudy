@@ -218,3 +218,45 @@ ui string guard -> 0 candidates before Phase 4 commits
 ```
 
 Remaining caveat: the old `LessonEditScreen` file and generated `box/ease` schema fields still exist for compatibility and possible future "My sets" isolation. They are no longer reachable or updated from the fixed curriculum learner path.
+
+## Phase 5 Learner Copy Update
+
+Timestamp: `2026-05-17T17:35+07:00`
+
+Source scope: learner-facing copy cleanup across Home, Learn, Review, Exam,
+Kanji, Vocab, Grammar, Profile, Premium, Progress, Search, Library, and
+practice surfaces.
+
+Verified source changes:
+
+- Removed developer/product jargon from visible labels and subtitles where it
+  leaked to learners: `workspace`, `control center`, `lane`, `track`, `flow`,
+  `queue`, `deck`, `bank`, `analytics`, `snapshot`, `Starter sets`, and similar
+  phrasing were rewritten to concrete learner-language equivalents.
+- Updated tests that intentionally assert learner copy so they track the new
+  Vietnamese/English wording instead of stale implementation jargon.
+- Removed the Profile entry point to the Design Lab dev surface. The direct
+  route remains for internal QA, but it is no longer advertised as a learner
+  tool.
+- Roadmap title fallback no longer returns raw phase IDs; unknown phases render
+  a generic localized study-step label instead of leaking slugs such as
+  `n1_vocab_grammar`.
+- Premium/privacy-adjacent learner copy no longer describes beta value in terms
+  of analytics jargon; it uses study stats, reading depth, exam practice, and
+  local learner outcomes.
+
+Verification run after Phase 5:
+
+```text
+flutter analyze lib test -> No issues found
+python tooling/audit_ui_string_literals.py --check -> 0 remaining candidates
+flutter test test/data/content_review_taxonomy_integrity_test.dart -> 2/2 passed
+node --test test/tool/research/*.js -> 53/53 passed
+flutter test -> 2299 passed
+learn_screen_test.dart -> passed 11/11; caught Firebase auto-upload warning is non-fatal
+```
+
+Remaining caveat: Phase 6 polish and the new 2026-05-17 full-app P0 audit
+remain separate workstreams. Search/vocab/kana completeness, "Mở track" live
+behavior, and level-state live consistency still need their own verification
+after the copy cleanup commit.

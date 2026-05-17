@@ -135,8 +135,8 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
 
   String _sectionTitle(AppLanguage language, String levelLabel) =>
       switch (language) {
-        AppLanguage.en => '$levelLabel reading deck',
-        AppLanguage.vi => 'Deck đọc $levelLabel',
+        AppLanguage.en => '$levelLabel reading set',
+        AppLanguage.vi => 'Bài đọc $levelLabel',
         AppLanguage.ja => '$levelLabel 読解デッキ',
       };
 
@@ -303,15 +303,15 @@ class _HeroCard extends StatelessWidget {
 
   String _subtitle(AppLanguage language) => switch (language) {
     AppLanguage.en =>
-      'Choose a level-based reading deck, tap words, and keep Japanese active. ${AppLanguage.en.decksCountLabel(readCount)} finished.',
+      'Choose level-based reading, tap words, and keep Japanese active. ${AppLanguage.en.decksCountLabel(readCount)} finished.',
     AppLanguage.vi =>
-      'Chọn deck bài đọc theo level, chạm từ và giữ nhịp tiếng Nhật. Đã xong $readCount deck.',
+      'Chọn bài đọc theo cấp độ, chạm từ và giữ nhịp tiếng Nhật. Đã xong $readCount bài.',
     AppLanguage.ja => 'レベル別の読解デッキで、単語を確認しながら日本語を動かします。$readCount デッキ完了。',
   };
 
   String _primaryLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => hasArticle ? 'Start next deck' : 'Loading',
-    AppLanguage.vi => hasArticle ? 'Mở deck tiếp theo' : 'Đang tải',
+    AppLanguage.en => hasArticle ? 'Start next reading' : 'Loading',
+    AppLanguage.vi => hasArticle ? 'Mở bài đọc tiếp theo' : 'Đang tải',
     AppLanguage.ja => hasArticle ? '次のデッキを開く' : '読み込み中',
   };
 
@@ -323,8 +323,8 @@ class _HeroCard extends StatelessWidget {
 
   String _statusLabel(AppLanguage language, String currentLevel) =>
       switch (language) {
-        AppLanguage.en => '$currentLevel track',
-        AppLanguage.vi => 'Track $currentLevel',
+        AppLanguage.en => '$currentLevel level',
+        AppLanguage.vi => 'Cấp $currentLevel',
         AppLanguage.ja => '$currentLevel トラック',
       };
 }
@@ -412,20 +412,18 @@ class _ReadingOverviewCard extends StatelessWidget {
     AppLanguage.ja => '読解ルート',
   };
 
-  String _subtitle(
-    AppLanguage language,
-    String currentLevel,
-  ) => switch (language) {
-    AppLanguage.en =>
-      'Only $currentLevel reading decks are shown for your current study level.',
-    AppLanguage.vi =>
-      'Chỉ hiển thị deck đọc $currentLevel theo level học hiện tại của bạn.',
-    AppLanguage.ja => '現在の学習レベルに合わせて、$currentLevel の読解デッキだけを表示します。',
-  };
+  String _subtitle(AppLanguage language, String currentLevel) =>
+      switch (language) {
+        AppLanguage.en =>
+          'Only $currentLevel readings are shown for your current study level.',
+        AppLanguage.vi =>
+          'Chỉ hiển thị bài đọc $currentLevel theo cấp học hiện tại của bạn.',
+        AppLanguage.ja => '現在の学習レベルに合わせて、$currentLevel の読解デッキだけを表示します。',
+      };
 
   String _availableLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Decks',
-    AppLanguage.vi => 'Deck',
+    AppLanguage.en => 'Readings',
+    AppLanguage.vi => 'Bài đọc',
     AppLanguage.ja => 'デッキ',
   };
 
@@ -436,8 +434,8 @@ class _ReadingOverviewCard extends StatelessWidget {
   };
 
   String _trackLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Track',
-    AppLanguage.vi => 'Track',
+    AppLanguage.en => 'Level',
+    AppLanguage.vi => 'Cấp',
     AppLanguage.ja => 'トラック',
   };
 }
@@ -765,7 +763,7 @@ class _ArticleCard extends StatelessWidget {
   }
 
   String _paragraphLabel(AppLanguage language, int count) => switch (language) {
-    AppLanguage.en => '$count blocks',
+    AppLanguage.en => '$count sections',
     AppLanguage.vi => '$count đoạn',
     AppLanguage.ja => '$count ブロック',
   };
@@ -783,8 +781,8 @@ class _ArticleCard extends StatelessWidget {
   };
 
   String _ctaLabel(AppLanguage language, bool isRead) => switch (language) {
-    AppLanguage.en => isRead ? 'Read again' : 'Start deck',
-    AppLanguage.vi => isRead ? 'Đọc lại' : 'Vào deck',
+    AppLanguage.en => isRead ? 'Read again' : 'Start reading',
+    AppLanguage.vi => isRead ? 'Đọc lại' : 'Vào bài đọc',
     AppLanguage.ja => isRead ? 'もう一度読む' : 'デッキ開始',
   };
 }

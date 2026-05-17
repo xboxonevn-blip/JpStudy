@@ -741,11 +741,11 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsConsentBody {
     switch (this) {
       case AppLanguage.en:
-        return 'Allow anonymous Firebase Analytics so we can understand feature usage. You can decline and keep using the app.';
+        return 'Allow anonymous usage data so we can improve the app. You can decline and keep using JpStudy.';
       case AppLanguage.vi:
-        return 'Cho phép Firebase Analytics ẩn danh để nhóm hiểu cách dùng tính năng. Bạn có thể từ chối và vẫn dùng app bình thường.';
+        return 'Cho phép gửi dữ liệu sử dụng ẩn danh để nhóm cải thiện app. Bạn có thể từ chối và vẫn dùng JpStudy.';
       case AppLanguage.ja:
-        return '匿名のFirebase Analyticsを許可すると、機能の利用状況を把握できます。拒否してもアプリは使えます。';
+        return '匿名の利用データ送信を許可すると、アプリ改善に役立ちます。拒否してもJpStudyは使えます。';
     }
   }
 
@@ -774,9 +774,9 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsDataSectionTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Analytics data';
+        return 'Usage data';
       case AppLanguage.vi:
-        return 'Dữ liệu phân tích';
+        return 'Dữ liệu sử dụng';
       case AppLanguage.ja:
         return '分析データ';
     }
@@ -785,9 +785,9 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsResetDeviceLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Reset analytics on this device';
+        return 'Reset usage data on this device';
       case AppLanguage.vi:
-        return 'Đặt lại Analytics trên thiết bị này';
+        return 'Đặt lại dữ liệu sử dụng trên thiết bị này';
       case AppLanguage.ja:
         return 'この端末の分析データをリセット';
     }
@@ -796,20 +796,20 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsResetDeviceBody {
     switch (this) {
       case AppLanguage.en:
-        return 'Clears the local Firebase Analytics app instance ID where the SDK supports it. This does not erase reports already received by Google.';
+        return 'Clears this device\'s local usage identifier where supported. This does not erase reports already received by Google.';
       case AppLanguage.vi:
-        return 'Xóa app instance ID Firebase Analytics cục bộ khi SDK hỗ trợ. Thao tác này không xóa các báo cáo Google đã nhận.';
+        return 'Xóa mã định danh sử dụng cục bộ trên thiết bị này khi được hỗ trợ. Thao tác này không xóa báo cáo Google đã nhận.';
       case AppLanguage.ja:
-        return 'SDKが対応している場合、この端末のFirebase AnalyticsアプリインスタンスIDを消去します。Googleが受信済みのレポートは削除されません。';
+        return '対応している場合、この端末のローカル利用IDを消去します。Googleが受信済みのレポートは削除されません。';
     }
   }
 
   String get analyticsResetConfirmTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Reset device analytics?';
+        return 'Reset this device\'s usage data?';
       case AppLanguage.vi:
-        return 'Đặt lại Analytics của thiết bị?';
+        return 'Đặt lại dữ liệu sử dụng của thiết bị?';
       case AppLanguage.ja:
         return '端末の分析データをリセットしますか？';
     }
@@ -818,20 +818,20 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsResetConfirmBody {
     switch (this) {
       case AppLanguage.en:
-        return 'JpStudy will ask Firebase Analytics to reset local analytics identifiers on this device.';
+        return 'JpStudy will ask the app data service to reset local usage identifiers on this device.';
       case AppLanguage.vi:
-        return 'JpStudy sẽ yêu cầu Firebase Analytics đặt lại mã định danh phân tích cục bộ trên thiết bị này.';
+        return 'JpStudy sẽ yêu cầu dịch vụ dữ liệu đặt lại mã định danh sử dụng cục bộ trên thiết bị này.';
       case AppLanguage.ja:
-        return 'JpStudyは、この端末のローカル分析IDをリセットするようFirebase Analyticsに要求します。';
+        return 'JpStudyは、この端末のローカル利用IDをリセットするようデータサービスに要求します。';
     }
   }
 
   String get analyticsResetConfirmLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Reset analytics';
+        return 'Reset usage data';
       case AppLanguage.vi:
-        return 'Đặt lại Analytics';
+        return 'Đặt lại dữ liệu sử dụng';
       case AppLanguage.ja:
         return '分析をリセット';
     }
@@ -840,9 +840,9 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsResetSuccessLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Analytics data reset on this device.';
+        return 'Usage data reset on this device.';
       case AppLanguage.vi:
-        return 'Đã đặt lại dữ liệu Analytics trên thiết bị này.';
+        return 'Đã đặt lại dữ liệu sử dụng trên thiết bị này.';
       case AppLanguage.ja:
         return 'この端末の分析データをリセットしました。';
     }
@@ -851,9 +851,9 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsResetUnsupportedLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Firebase Analytics reset is not supported on this platform.';
+        return 'Usage-data reset is not supported on this platform.';
       case AppLanguage.vi:
-        return 'Nền tảng này chưa hỗ trợ đặt lại Firebase Analytics.';
+        return 'Nền tảng này chưa hỗ trợ đặt lại dữ liệu sử dụng.';
       case AppLanguage.ja:
         return 'このプラットフォームではFirebase Analyticsのリセットはサポートされていません。';
     }
@@ -862,9 +862,9 @@ extension AppLanguageLabels on AppLanguage {
   String get analyticsResetErrorLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Failed to reset analytics data.';
+        return 'Failed to reset usage data.';
       case AppLanguage.vi:
-        return 'Không thể đặt lại dữ liệu Analytics.';
+        return 'Không thể đặt lại dữ liệu sử dụng.';
       case AppLanguage.ja:
         return '分析データをリセットできませんでした。';
     }
@@ -1315,9 +1315,9 @@ extension AppLanguageLabels on AppLanguage {
   String decksCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count ${count == 1 ? 'deck' : 'decks'}';
+        return '$count ${count == 1 ? 'set' : 'sets'}';
       case AppLanguage.vi:
-        return '$count deck';
+        return '$count bộ';
       case AppLanguage.ja:
         return '$countデッキ';
     }
@@ -1370,11 +1370,11 @@ extension AppLanguageLabels on AppLanguage {
   String get mistakeBankTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Mistake Bank';
+        return 'Saved Mistakes';
       case AppLanguage.vi:
-        return 'Kho l\u1ed7i sai';
+        return 'Sổ lỗi sai';
       case AppLanguage.ja:
-        return '\u30df\u30b9\u30d0\u30f3\u30af';
+        return '保存したミス';
     }
   }
 
@@ -4131,7 +4131,7 @@ extension AppLanguageLabels on AppLanguage {
   String get trackProgressLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Track progress';
+        return 'Progress';
       case AppLanguage.vi:
         return 'Theo d\xf5i ti\u1ebfn \u0111\u1ed9';
       case AppLanguage.ja:
@@ -4659,9 +4659,9 @@ extension AppLanguageLabels on AppLanguage {
   String get grammarScreenBody {
     switch (this) {
       case AppLanguage.en:
-        return 'Grammar quiz flow will live here.';
+        return 'Grammar practice will appear here.';
       case AppLanguage.vi:
-        return 'Lu\u1ed3ng quiz ng\u1eef ph\xe1p s\u1ebd hi\u1ec3n th\u1ecb \u1edf \u0111\xe2y.';
+        return 'Bài luyện ngữ pháp sẽ hiển thị ở đây.';
       case AppLanguage.ja:
         return '\u6587\u6cd5\u30af\u30a4\u30ba\u306e\u30d5\u30ed\u30fc\u306f\u3053\u3053\u306b\u8868\u793a\u3055\u308c\u307e\u3059\u3002';
     }
@@ -4670,9 +4670,9 @@ extension AppLanguageLabels on AppLanguage {
   String get examScreenBody {
     switch (this) {
       case AppLanguage.en:
-        return 'Mock exam flow will live here.';
+        return 'Mock exams will appear here.';
       case AppLanguage.vi:
-        return 'Lu\u1ed3ng thi th\u1eed s\u1ebd hi\u1ec3n th\u1ecb \u1edf \u0111\xe2y.';
+        return 'Đề thi thử sẽ hiển thị ở đây.';
       case AppLanguage.ja:
         return '\u6a21\u64ec\u8a66\u9a13\u306e\u30d5\u30ed\u30fc\u306f\u3053\u3053\u306b\u8868\u793a\u3055\u308c\u307e\u3059\u3002';
     }
@@ -6742,7 +6742,7 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionEmptyLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'No reading decks available.';
+        return 'No reading sets available.';
       case AppLanguage.vi:
         return 'Ch\u01b0a c\u00f3 b\u1ed9 th\u1ebb b\u00e0i \u0111\u1ecdc.';
       case AppLanguage.ja:
@@ -6852,9 +6852,9 @@ extension AppLanguageLabels on AppLanguage {
   String stillInReviewQueueLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count still in review queue';
+        return '$count still learning';
       case AppLanguage.vi:
-        return '$count m\u1ee5c c\u00f2n trong h\u00e0ng \u0111\u1ee3i \u00f4n';
+        return '$count mục còn cần ôn';
       case AppLanguage.ja:
         return '$count \u4ef6\u304c\u5fa9\u7fd2\u5f85\u3061';
     }
@@ -8270,19 +8270,19 @@ extension AppLanguageLabels on AppLanguage {
     switch (this) {
       case AppLanguage.en:
         return const [
-          'This is a review-needed draft for beta readiness. Have the final policy reviewed before public launch.',
+          'During beta, JpStudy keeps data use limited and focused on helping you study Japanese.',
           'JpStudy stores learning progress locally on your device. If you sign in, account identifiers may be handled through Firebase services.',
-          'Analytics events are intended to measure learning funnels, retention, performance, and content quality. They should not include prompts, answers, names, or free-text learner content.',
+          'Optional usage data helps us see which lessons are opened, whether study sessions finish, and where the app is slow. It should not include prompts, answers, names, or free-text learner content.',
           'For the beta, backup is available through local file export/import in Data controls. Account-based cloud backup is planned for a future release.',
-          'Contact support before launch to request data deletion or policy clarification.',
+          'Contact support to request data deletion or ask about this policy.',
         ];
       case AppLanguage.vi:
         return const [
-          '\u0110\u00e2y l\u00e0 b\u1ea3n nh\u00e1p c\u1ea7n r\u00e0 so\u00e1t cho beta. H\u00e3y r\u00e0 so\u00e1t ch\u00ednh s\u00e1ch cu\u1ed1i c\u00f9ng tr\u01b0\u1edbc khi ra m\u1eaft c\u00f4ng khai.',
+          'Trong giai đoạn beta, JpStudy chỉ dùng dữ liệu ở mức cần thiết để giúp bạn học tiếng Nhật.',
           'JpStudy l\u01b0u ti\u1ebfn \u0111\u1ed9 h\u1ecdc ch\u1ee7 y\u1ebfu tr\u00ean thi\u1ebft b\u1ecb. N\u1ebfu b\u1ea1n \u0111\u0103ng nh\u1eadp, m\u00e3 \u0111\u1ecbnh danh t\u00e0i kho\u1ea3n c\u00f3 th\u1ec3 \u0111\u01b0\u1ee3c x\u1eed l\u00fd qua Firebase.',
-          'S\u1ef1 ki\u1ec7n ph\u00e2n t\u00edch ch\u1ec9 n\u00ean d\u00f9ng \u0111\u1ec3 \u0111o funnel h\u1ecdc, retention, hi\u1ec7u n\u0103ng v\u00e0 ch\u1ea5t l\u01b0\u1ee3ng n\u1ed9i dung. Kh\u00f4ng \u0111\u01b0a prompt, c\u00e2u tr\u1ea3 l\u1eddi, t\u00ean ho\u1eb7c n\u1ed9i dung t\u1ef1 do c\u1ee7a ng\u01b0\u1eddi h\u1ecdc v\u00e0o telemetry.',
+          'Dữ liệu sử dụng tùy chọn giúp chúng tôi biết bài nào được mở, buổi học có hoàn thành không và màn nào tải chậm. Dữ liệu này không được chứa prompt, câu trả lời, tên hoặc nội dung tự do của người học.',
           'Trong beta, sao l\u01b0u d\u00f9ng file xu\u1ea5t/nh\u1eadp c\u1ee5c b\u1ed9 trong ph\u1ea7n D\u1eef li\u1ec7u. Sao l\u01b0u cloud theo t\u00e0i kho\u1ea3n \u0111\u01b0\u1ee3c d\u1ef1 ki\u1ebfn cho b\u1ea3n sau.',
-          'H\u00e3y li\u00ean h\u1ec7 h\u1ed7 tr\u1ee3 tr\u01b0\u1edbc khi ra m\u1eaft \u0111\u1ec3 y\u00eau c\u1ea7u x\u00f3a d\u1eef li\u1ec7u ho\u1eb7c l\u00e0m r\u00f5 ch\u00ednh s\u00e1ch.',
+          'Bạn có thể liên hệ hỗ trợ để yêu cầu xóa dữ liệu hoặc hỏi thêm về chính sách này.',
         ];
       case AppLanguage.ja:
         return legalPrivacyBodyForEnglish;
@@ -8293,19 +8293,19 @@ extension AppLanguageLabels on AppLanguage {
     switch (this) {
       case AppLanguage.en:
         return const [
-          'This is a review-needed draft for beta readiness. Have the final terms reviewed before public launch.',
+          'By using JpStudy beta, you agree to use it as a Japanese study tool and report serious issues when you find them.',
           'JpStudy is a study tool for Japanese learning. It does not guarantee exam results, certification outcomes, or uninterrupted service.',
           'You are responsible for keeping your account credentials and backup files safe.',
-          'Do not abuse Firebase-backed services or attempt to disrupt the app for other learners.',
-          'JpStudy may change beta features, telemetry, and backup behavior as the product is hardened. Account cloud backup is not part of the beta.',
+          'Do not try to break the app, bypass access controls, or disrupt study for other learners.',
+          'JpStudy may change beta features and backup behavior while the product improves. Account cloud backup is not part of the beta.',
         ];
       case AppLanguage.vi:
         return const [
-          '\u0110\u00e2y l\u00e0 b\u1ea3n nh\u00e1p c\u1ea7n r\u00e0 so\u00e1t cho beta. H\u00e3y r\u00e0 so\u00e1t \u0111i\u1ec1u kho\u1ea3n cu\u1ed1i c\u00f9ng tr\u01b0\u1edbc khi ra m\u1eaft c\u00f4ng khai.',
+          'Khi dùng JpStudy beta, bạn đồng ý dùng app như công cụ học tiếng Nhật và báo lỗi nghiêm trọng nếu gặp.',
           'JpStudy l\u00e0 c\u00f4ng c\u1ee5 h\u1ed7 tr\u1ee3 h\u1ecdc ti\u1ebfng Nh\u1eadt. App kh\u00f4ng \u0111\u1ea3m b\u1ea3o k\u1ebft qu\u1ea3 thi, ch\u1ee9ng ch\u1ec9 ho\u1eb7c d\u1ecbch v\u1ee5 kh\u00f4ng gi\u00e1n \u0111o\u1ea1n.',
           'B\u1ea1n ch\u1ecbu tr\u00e1ch nhi\u1ec7m gi\u1eef an to\u00e0n th\u00f4ng tin t\u00e0i kho\u1ea3n v\u00e0 file sao l\u01b0u.',
-          'Kh\u00f4ng l\u1ea1m d\u1ee5ng d\u1ecbch v\u1ee5 d\u1ef1a tr\u00ean Firebase ho\u1eb7c c\u1ed1 t\u00ecnh g\u00e2y gi\u00e1n \u0111o\u1ea1n app cho ng\u01b0\u1eddi h\u1ecdc kh\u00e1c.',
-          'JpStudy c\u00f3 th\u1ec3 thay \u0111\u1ed5i t\u00ednh n\u0103ng beta, telemetry v\u00e0 c\u00e1ch sao l\u01b0u trong qu\u00e1 tr\u00ecnh harden s\u1ea3n ph\u1ea9m. Sao l\u01b0u cloud theo t\u00e0i kho\u1ea3n kh\u00f4ng n\u1eb1m trong beta.',
+          'Không cố tình phá app, vượt quyền truy cập hoặc gây gián đoạn việc học của người khác.',
+          'JpStudy có thể thay đổi tính năng beta và cách sao lưu trong quá trình hoàn thiện. Sao lưu cloud theo tài khoản không nằm trong beta.',
         ];
       case AppLanguage.ja:
         return legalTermsBodyForEnglish;
@@ -8313,18 +8313,18 @@ extension AppLanguageLabels on AppLanguage {
   }
 
   List<String> get legalPrivacyBodyForEnglish => const [
-    'This is a review-needed draft for beta readiness. Have the final policy reviewed before public launch.',
+    'During beta, JpStudy keeps data use limited and focused on helping you study Japanese.',
     'JpStudy stores learning progress locally on your device. If you sign in, account identifiers may be handled through Firebase services.',
-    'Analytics events are intended to measure learning funnels, retention, performance, and content quality. They should not include prompts, answers, names, or free-text learner content.',
+    'Optional usage data helps us see which lessons are opened, whether study sessions finish, and where the app is slow. It should not include prompts, answers, names, or free-text learner content.',
     'For the beta, backup is available through local file export/import in Data controls. Account-based cloud backup is planned for a future release.',
-    'Contact support before launch to request data deletion or policy clarification.',
+    'Contact support to request data deletion or ask about this policy.',
   ];
 
   List<String> get legalTermsBodyForEnglish => const [
-    'This is a review-needed draft for beta readiness. Have the final terms reviewed before public launch.',
+    'By using JpStudy beta, you agree to use it as a Japanese study tool and report serious issues when you find them.',
     'JpStudy is a study tool for Japanese learning. It does not guarantee exam results, certification outcomes, or uninterrupted service.',
     'You are responsible for keeping your account credentials and backup files safe.',
-    'Do not abuse Firebase-backed services or attempt to disrupt the app for other learners.',
-    'JpStudy may change beta features, telemetry, and backup behavior as the product is hardened. Account cloud backup is not part of the beta.',
+    'Do not try to break the app, bypass access controls, or disrupt study for other learners.',
+    'JpStudy may change beta features and backup behavior while the product improves. Account cloud backup is not part of the beta.',
   ];
 } // End extension

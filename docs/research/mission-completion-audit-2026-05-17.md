@@ -42,6 +42,7 @@ The active mission is complete only if all are true:
 | Full live app audit | `docs/research/full-audit-2026-05-17.md` verifies live lesson routes still show `Tổng 0` + spinner and traces root causes to route identity, unbounded async loading, double shell navigation, and fragmented level writers | P0 source fix deployed/rechecked: N5/N4/N3/N2/N1 lesson routes now render non-zero vocab totals; `/premium` and `/search` render matching screens |
 | App coherence Phase 3 | Commits `bf63a2ca`, `9e9693f8`, `5468a0d5`, `791cefb1`, `2b0faa9a`, `6268f760`, `0494c0f9` consolidate the shell to five branches, remove inline Home onboarding/mobile fallback, redirect legacy `/memory` and `/community`, redirect enhanced lesson aliases to canonical practice routes, align Review title, remove the dead Community placeholder, and keep `/progress` on one branch | Passed for IA cleanup source scope; Phase 4 lesson-screen/product-identity work remains |
 | App coherence Phase 4 | Commits `c8fc618f`, `e4113890`, `35be6509`, `b9b082ba`, `f4619b8e`, `a34929fe`, `8a7952ee` rename the lesson tab to Vocab, hide curriculum edit/copy/add/combine controls, split lesson detail widgets, redirect curriculum edit/match routes, wire the Kanji flow card, remove blocking Home achievement dialogs, and stop live SRS updates from touching legacy SM-2 fields | Passed for source scope; old editor file and DB compatibility columns remain isolated/deferred |
+| App coherence Phase 5 | Current working-tree Phase 5 pass rewrites learner-facing copy across Home/Learn/Review/Exam/Kanji/Vocab/Grammar/Profile/Premium/Progress/Search/Library/practice surfaces; Design Lab is no longer linked from Profile; roadmap fallback no longer leaks raw phase IDs | `flutter analyze lib test` clean; UI string guard 0 candidates; content taxonomy 2/2; node tooling 53/53; full `flutter test` 2299/2299 |
 
 ## Latest Readiness Result
 
@@ -119,6 +120,15 @@ Home achievement notifications are non-blocking, and the live SRS write path
 no longer updates legacy SM-2 `box`/`ease` values. Remaining work: Phase 5
 learner-copy cleanup and broader generated-schema/user-set isolation if "My
 sets" is revived after beta.
+
+Phase 5 update: learner-facing copy has been rewritten away from developer and
+product jargon. Stale test expectations were updated to assert the new copy,
+Design Lab was removed from the Profile tool list, premium plan copy now uses
+plain study outcomes rather than analytics/challenge jargon, and roadmap
+fallback titles no longer expose raw IDs. Local verification passed: analyze,
+UI string guard, content taxonomy guard, node research tooling, and full
+Flutter suite. Remaining work: commit/push, Phase 6 polish, and the newly added
+full-app P0 audit follow-up.
 
 ## Verdict
 

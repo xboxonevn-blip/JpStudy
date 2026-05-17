@@ -83,30 +83,28 @@ void main() {
     expect(find.text('League'), findsOneWidget);
   });
 
-  testWidgets('"Join challenge" tap shows snackbar (still a stub)', (
-    tester,
-  ) async {
+  testWidgets('"Join goal" tap shows snackbar (still a stub)', (tester) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
-    await tester.ensureVisible(find.text('Join challenge'));
+    await tester.ensureVisible(find.text('Join goal'));
     await _pump(tester);
 
-    await tester.tap(find.text('Join challenge'));
+    await tester.tap(find.text('Join goal'));
     await _pump(tester);
 
     expect(find.byType(SnackBar), findsOneWidget);
-    expect(find.textContaining('Challenge enrollment'), findsOneWidget);
+    expect(find.textContaining('Goal joining'), findsOneWidget);
   });
 
-  testWidgets('"Share snapshot" tap does NOT show a snackbar', (tester) async {
+  testWidgets('"Share progress" tap does NOT show a snackbar', (tester) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
-    await tester.ensureVisible(find.text('Share snapshot'));
+    await tester.ensureVisible(find.text('Share progress'));
     await _pump(tester);
 
-    await tester.tap(find.text('Share snapshot'));
+    await tester.tap(find.text('Share progress'));
     await _pump(tester);
 
     expect(find.byType(SnackBar), findsNothing);
@@ -158,8 +156,8 @@ void main() {
     await _pump(tester);
 
     expect(find.text('Xếp hạng'), findsOneWidget);
-    expect(find.text('Share snapshot'), findsNothing);
-    expect(find.text('Chia sẻ snapshot'), findsOneWidget);
+    expect(find.text('Share progress'), findsNothing);
+    expect(find.text('Chia sẻ tiến độ'), findsOneWidget);
   });
 
   testWidgets('JA locale shows Japanese app bar title', (tester) async {

@@ -33,7 +33,7 @@ void main() {
 
     expect(find.text('79.00 / year'), findsOneWidget);
     expect(
-      find.text('Expanded community events and advanced labs'),
+      find.text('Expanded group events and advanced practice tools'),
       findsOneWidget,
     );
   });
@@ -59,7 +59,7 @@ void main() {
     await tester.tap(find.text('Friends'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Friends mini ladder'), findsOneWidget);
+    expect(find.text('Friends mini ranking'), findsOneWidget);
     expect(find.text('Private'), findsAtLeastNWidgets(1));
   });
 
@@ -142,14 +142,14 @@ void main() {
     await tester.pumpWidget(_wrap(const CustomDecksScreen()));
     await tester.pumpAndSettle();
 
-    expect(find.text('Study recipes'), findsOneWidget);
+    expect(find.text('Study sessions'), findsOneWidget);
     expect(find.text('18 min'), findsOneWidget);
 
-    await tester.tap(find.text('Mixed sprint'));
+    await tester.tap(find.text('Mixed practice'));
     await tester.pumpAndSettle();
 
     expect(find.text('22 min'), findsOneWidget);
-    expect(find.text('18 high-frequency prompts.'), findsOneWidget);
+    expect(find.text('18 high-frequency questions.'), findsOneWidget);
   });
 
   testWidgets('CustomDecksScreen uses study hub and continue data', (
@@ -224,7 +224,7 @@ void main() {
       findsOneWidget,
     );
     expect(
-      find.textContaining('1 active deck available right now.'),
+      find.textContaining('1 active set available right now.'),
       findsOneWidget,
     );
   });

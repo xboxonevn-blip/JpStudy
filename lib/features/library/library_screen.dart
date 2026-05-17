@@ -422,8 +422,8 @@ class _LibraryHero extends StatelessWidget {
   };
 
   String _secondaryLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Search bank',
-    AppLanguage.vi => 'Tra cứu bank',
+    AppLanguage.en => 'Search content',
+    AppLanguage.vi => 'Tra cứu nội dung',
     AppLanguage.ja => '検索バンク',
   };
 }
@@ -1367,17 +1367,17 @@ class _FilteredEmptyLibrary extends StatelessWidget {
         _LibraryFilter.fresh => switch (language) {
           AppLanguage.en => 'No untouched lesson is left in this level.',
           AppLanguage.vi =>
-            'Không còn lesson nào hoàn toàn mới trong level này.',
+            'Không còn bài học nào hoàn toàn mới trong cấp này.',
           AppLanguage.ja => 'このレベルに未着手レッスンは残っていません。',
         },
         _LibraryFilter.completed => switch (language) {
           AppLanguage.en => 'No completed lesson is tracked yet.',
-          AppLanguage.vi => 'Chưa có lesson hoàn thành nào được ghi nhận.',
+          AppLanguage.vi => 'Chưa có bài học hoàn thành nào được ghi nhận.',
           AppLanguage.ja => '完了済みレッスンはまだありません。',
         },
         _LibraryFilter.all => switch (language) {
-          AppLanguage.en => 'No lessons are available in this lane.',
-          AppLanguage.vi => 'Không có lesson nào trong lane này.',
+          AppLanguage.en => 'No lessons are available at this level.',
+          AppLanguage.vi => 'Không có bài học nào trong cấp này.',
           AppLanguage.ja => 'このレーンにはレッスンがありません。',
         },
       }),

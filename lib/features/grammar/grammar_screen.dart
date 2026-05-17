@@ -161,14 +161,14 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
               icon: Icons.psychology_alt_rounded,
               title: _tr(
                 language,
-                en: 'Today\'s review lane',
+                en: 'Today\'s review',
                 vi: 'L\u01b0\u1ee3t \u00f4n h\u00f4m nay',
                 ja: '\u4eca\u65e5\u306e\u5fa9\u7fd2\u30ec\u30fc\u30f3',
               ),
               subtitle: dueCount > 0
                   ? _tr(
                       language,
-                      en: 'Keep grammar active with a focused review session before the queue piles up.',
+                      en: 'Keep grammar active with a focused review before due items pile up.',
                       vi: 'Gi\u1eef ng\u1eef ph\u00e1p lu\u00f4n t\u01b0\u01a1i b\u1eb1ng m\u1ed9t phi\u00ean \u00f4n t\u1eadp ng\u1eafn tr\u01b0\u1edbc khi h\u00e0ng ch\u1edd d\u1ed3n l\u1ea1i.',
                       ja: '\u30ad\u30e5\u30fc\u304c\u3075\u304f\u3089\u3080\u524d\u306b\u3001\u77ed\u3044\u5fa9\u7fd2\u3067\u6587\u6cd5\u3092\u7dad\u6301\u3057\u307e\u3057\u3087\u3046\u3002',
                     )
@@ -240,7 +240,7 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
               primaryLabel: ghostCount == 0
                   ? _tr(
                       language,
-                      en: 'Browse the bank',
+                      en: 'Open grammar list',
                       vi: 'M\u1edf kho ng\u1eef ph\u00e1p',
                       ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
                     )
@@ -255,7 +255,7 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
               icon: Icons.library_books_rounded,
               title: _tr(
                 language,
-                en: '$levelLabel grammar bank',
+                en: '$levelLabel grammar list',
                 vi: 'Kho ng\u1eef ph\u00e1p $levelLabel',
                 ja: '$levelLabel \u6587\u6cd5\u30d0\u30f3\u30af',
               ),
@@ -268,7 +268,7 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
               status: AppStatusChip(label: levelLabel),
               primaryLabel: _tr(
                 language,
-                en: 'Browse the bank',
+                en: 'Open grammar list',
                 vi: 'M\u1edf kho ng\u1eef ph\u00e1p',
                 ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
               ),
@@ -299,14 +299,14 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
               AppSectionHeader(
                 title: _tr(
                   language,
-                  en: 'Grammar bank',
+                  en: 'Grammar list',
                   vi: 'Kho ng\u1eef ph\u00e1p',
                   ja: '\u6587\u6cd5\u30d0\u30f3\u30af',
                 ),
                 caption: _tr(
                   language,
-                  en: '$learnedCount of ${points.length} points marked learned in this lane.',
-                  vi: '\u0110\u00e3 \u0111\u00e1nh d\u1ea5u h\u1ecdc xong $learnedCount / ${points.length} \u0111i\u1ec3m ng\u1eef ph\u00e1p trong lane n\u00e0y.',
+                  en: '$learnedCount of ${points.length} points marked learned at this level.',
+                  vi: '\u0110\u00e3 \u0111\u00e1nh d\u1ea5u h\u1ecdc xong $learnedCount / ${points.length} \u0111i\u1ec3m ng\u1eef ph\u00e1p trong c\u1ea5p n\u00e0y.',
                   ja: '\u3053\u306e\u30ec\u30fc\u30f3\u3067 ${points.length} \u9805\u76ee\u4e2d $learnedCount \u9805\u76ee\u3092\u5b66\u7fd2\u6e08\u307f\u306b\u3057\u3066\u3044\u307e\u3059\u3002',
                 ),
                 actionLabel: dueCount > 0
@@ -508,8 +508,8 @@ class _GrammarHeroCard extends StatelessWidget {
             child: Text(
               _tr(
                 language,
-                en: '$levelLabel lane',
-                vi: 'Lane $levelLabel',
+                en: '$levelLabel grammar',
+                vi: 'Ngữ pháp $levelLabel',
                 ja: '$levelLabel \u30ec\u30fc\u30f3',
               ),
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -552,13 +552,13 @@ class _GrammarHeroCard extends StatelessWidget {
                 : ghostCount > 0
                 ? _tr(
                     language,
-                    en: 'Your main queue is calm, but $ghostCount weak spots still deserve a repair pass.',
+                    en: 'Your due reviews are calm, but $ghostCount weak spots still deserve repair.',
                     vi: 'H\u00e0ng ch\u1edd ch\u00ednh \u0111ang \u1ecfn, nh\u01b0ng $ghostCount \u0111i\u1ec3m y\u1ebfu v\u1eabn c\u1ea7n m\u1ed9t l\u01b0\u1ee3t s\u1eeda l\u1ea1i.',
                     ja: '\u4e3b\u306a\u30ad\u30e5\u30fc\u306f\u843d\u3061\u7740\u3044\u3066\u3044\u307e\u3059\u304c\u3001$ghostCount \u4ef6\u306e\u5f31\u70b9\u306f\u307e\u3060\u88dc\u5f37\u3059\u308b\u4fa1\u5024\u304c\u3042\u308a\u307e\u3059\u3002',
                   )
                 : _tr(
                     language,
-                    en: 'Everything is calm right now. Browse the bank, read a few examples, or run a short drill to keep momentum.',
+                    en: 'Nothing is urgent right now. Open the grammar list, read a few examples, or run a short drill to keep momentum.',
                     vi: 'Hi\u1ec7n m\u1ecdi th\u1ee9 \u0111ang \u1ecfn. H\u00e3y duy\u1ec7t kho ng\u1eef ph\u00e1p, xem m\u1ed9t v\u00e0i v\u00ed d\u1ee5 ho\u1eb7c l\u00e0m m\u1ed9t phi\u00ean ng\u1eafn \u0111\u1ec3 gi\u1eef nh\u1ecbp.',
                     ja: '\u4eca\u306f\u843d\u3061\u7740\u3044\u3066\u3044\u307e\u3059\u3002\u6587\u6cd5\u30d0\u30f3\u30af\u3092\u898b\u308b\u304b\u3001\u4f8b\u6587\u3092\u8aad\u3080\u304b\u3001\u77ed\u3044\u30c9\u30ea\u30eb\u3067\u30da\u30fc\u30b9\u3092\u4fdd\u3061\u307e\u3057\u3087\u3046\u3002',
                   ),
@@ -585,7 +585,7 @@ class _GrammarHeroCard extends StatelessWidget {
               _HeroMetricTile(
                 label: _tr(
                   language,
-                  en: 'Deck size',
+                  en: 'Total points',
                   vi: 'T\u1ed5ng m\u1ee5c',
                   ja: '\u9805\u76ee\u6570',
                 ),
@@ -765,8 +765,8 @@ class _EmptyGrammarBank extends StatelessWidget {
           Text(
             _tr(
               language,
-              en: 'When content for this lane is added, it will appear here with detail pages and practice entry points.',
-              vi: 'Khi n\u1ed9i dung cho lane n\u00e0y \u0111\u01b0\u1ee3c th\u00eam, n\u00f3 s\u1ebd xu\u1ea5t hi\u1ec7n t\u1ea1i \u0111\u00e2y c\u00f9ng trang chi ti\u1ebft v\u00e0 l\u1ed1i v\u00e0o b\u00e0i luy\u1ec7n.',
+              en: 'When content for this level is added, it will appear here with detail pages and practice entry points.',
+              vi: 'Khi nội dung cho cấp này được thêm, nó sẽ xuất hiện tại đây cùng trang chi tiết và lối vào bài luyện.',
               ja: '\u3053\u306e\u30ec\u30fc\u30f3\u306e\u30b3\u30f3\u30c6\u30f3\u30c4\u304c\u8ffd\u52a0\u3055\u308c\u308b\u3068\u3001\u8a73\u7d30\u30da\u30fc\u30b8\u3068\u7df4\u7fd2\u5165\u308a\u53e3\u3068\u4e00\u7dd2\u306b\u3053\u3053\u306b\u8868\u793a\u3055\u308c\u307e\u3059\u3002',
             ),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(

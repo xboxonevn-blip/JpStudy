@@ -379,7 +379,12 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   String _readinessStatus(AppLanguage language, JlptCoachSnapshot? snapshot) {
     if (snapshot == null) {
-      return _tr(language, 'No baseline yet', 'Chưa có baseline', 'まだ基準なし');
+      return _tr(
+        language,
+        'No first result yet',
+        'Chưa có kết quả đầu tiên',
+        'まだ基準なし',
+      );
     }
     final overall = (snapshot.profile.overallAccuracy * 100).round();
     return _tr(
@@ -398,8 +403,8 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     final predicted = _snapshotLooksReady(snapshot);
     return _tr(
       language,
-      'Current profile: $overall% • ${predicted ? 'projected pass' : 'needs more work'}',
-      'Profile hiện tại: $overall% • ${predicted ? 'đang ở ngưỡng đậu' : 'cần luyện thêm'}',
+      'Current result: $overall% • ${predicted ? 'projected pass' : 'needs more work'}',
+      'Kết quả hiện tại: $overall% • ${predicted ? 'đang ở ngưỡng đậu' : 'cần luyện thêm'}',
       '現在のプロファイル: $overall% • ${predicted ? '合格圏' : '補強が必要'}',
     );
   }
@@ -429,8 +434,8 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   String _readinessEmptyTitle(AppLanguage language) => _tr(
     language,
-    'Your first run will create the baseline',
-    'Lần chạy đầu sẽ tạo baseline',
+    'Your first attempt will create a starting point',
+    'Lượt làm đầu sẽ tạo mốc bắt đầu',
     '初回で基準データを作成します',
   );
 
@@ -453,7 +458,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   String _loadingBankLabel(AppLanguage language) => _tr(
     language,
-    'Loading current exam bank...',
+    'Loading current exam questions...',
     'Đang tải bộ đề hiện tại...',
     '現在の問題バンクを読み込み中...',
   );

@@ -326,16 +326,16 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Analytics data'), findsOneWidget);
+    expect(find.text('Usage data'), findsOneWidget);
     await tester.drag(find.byType(ListView), const Offset(0, -1800));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Reset analytics on this device'));
+    await tester.tap(find.text('Reset usage data on this device'));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Reset analytics'));
+    await tester.tap(find.text('Reset usage data'));
     await tester.pumpAndSettle();
 
     expect(fakeAnalytics.resetCount, 1);
-    expect(find.text('Analytics data reset on this device.'), findsOneWidget);
+    expect(find.text('Usage data reset on this device.'), findsOneWidget);
   });
 }

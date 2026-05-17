@@ -45,7 +45,7 @@ void main() {
       AppRoutePath.jlptCoach,
     );
     expect(find.text('JLPT Prep'), findsWidgets);
-    expect(find.text('JLPT N5 prep hub'), findsOneWidget);
+    expect(find.text('JLPT N5 exam prep'), findsOneWidget);
     expect(find.textContaining('mock'), findsWidgets);
     expect(find.textContaining('Reading'), findsWidgets);
 

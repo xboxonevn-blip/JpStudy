@@ -83,20 +83,20 @@ void main() {
   });
 
   testWidgets(
-    'Tapping Cram mode item navigates to /vocab/review with source=cram',
+    'Tapping urgent review item navigates to /vocab/review with source=cram',
     (tester) async {
       await tester.pumpWidget(_buildRouterScreen());
       await _pump(tester);
 
       // Scroll down to reveal the Active toolkit section (it's below the recipe card)
-      await tester.ensureVisible(find.text('Cram mode'));
+      await tester.ensureVisible(find.text('Urgent review'));
       await _pump(tester);
 
-      await tester.tap(find.text('Cram mode'));
+      await tester.tap(find.text('Urgent review'));
       await _pump(tester);
 
       expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);
-      expect(find.textContaining('title=Night Cram'), findsOneWidget);
+      expect(find.textContaining('title=Tonight Review'), findsOneWidget);
     },
   );
 
@@ -118,16 +118,16 @@ void main() {
     expect(find.byType(SnackBar), findsOneWidget);
   });
 
-  testWidgets('Cram mode in VI language navigates with title=Nhồi nhanh', (
+  testWidgets('Urgent review in VI language navigates with title=Nhồi nhanh', (
     tester,
   ) async {
     await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.vi));
     await _pump(tester);
 
-    await tester.ensureVisible(find.text('Chế độ nhồi nhanh'));
+    await tester.ensureVisible(find.text('Ôn gấp'));
     await _pump(tester);
 
-    await tester.tap(find.text('Chế độ nhồi nhanh'));
+    await tester.tap(find.text('Ôn gấp'));
     await _pump(tester);
 
     expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);
@@ -140,13 +140,13 @@ void main() {
     await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.vi));
     await _pump(tester);
 
-    await tester.ensureVisible(find.text('Mẫu khởi đầu'));
+    await tester.ensureVisible(find.text('Bắt đầu nhanh'));
     await _pump(tester);
 
     expect(find.text('Bộ thẻ kanji'), findsOneWidget);
     expect(find.text('Bài ngữ pháp'), findsOneWidget);
     expect(find.text('Luyện shadowing'), findsOneWidget);
-    expect(find.text('Gói sprint'), findsOneWidget);
+    expect(find.text('Bộ luyện nhanh'), findsOneWidget);
     expect(find.text('250 thẻ'), findsOneWidget);
     expect(find.text('12 bộ'), findsOneWidget);
     expect(find.text('Sẵn âm thanh'), findsOneWidget);
@@ -154,30 +154,31 @@ void main() {
     expect(find.text('Deck Kanji'), findsNothing);
   });
 
-  testWidgets('Cram mode in JA language navigates with title=Night Cram', (
-    tester,
-  ) async {
-    await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.ja));
-    await _pump(tester);
+  testWidgets(
+    'Urgent review in JA language navigates with title=Tonight Review',
+    (tester) async {
+      await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.ja));
+      await _pump(tester);
 
-    // JA uses 'Cram mode' as the title (same as EN)
-    await tester.ensureVisible(
-      find.byWidgetPredicate(
-        (w) => w is Text && w.data == 'Cram mode',
-        description: 'JA cram mode item',
-      ),
-    );
-    await _pump(tester);
+      // JA uses the same urgent-review title as EN.
+      await tester.ensureVisible(
+        find.byWidgetPredicate(
+          (w) => w is Text && w.data == 'Urgent review',
+          description: 'JA urgent review item',
+        ),
+      );
+      await _pump(tester);
 
-    await tester.tap(
-      find.byWidgetPredicate(
-        (w) => w is Text && w.data == 'Cram mode',
-        description: 'JA cram mode item',
-      ),
-    );
-    await _pump(tester);
+      await tester.tap(
+        find.byWidgetPredicate(
+          (w) => w is Text && w.data == 'Urgent review',
+          description: 'JA urgent review item',
+        ),
+      );
+      await _pump(tester);
 
-    expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);
-    expect(find.textContaining('title=Night Cram'), findsOneWidget);
-  });
+      expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);
+      expect(find.textContaining('title=Tonight Review'), findsOneWidget);
+    },
+  );
 }

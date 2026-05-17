@@ -94,7 +94,7 @@ void main() {
 
       expect(find.text('Today plan'), findsOneWidget);
       expect(find.text('Run Recall Sprint first'), findsWidgets);
-      expect(find.text('Clear the grammar queue'), findsAtLeastNWidgets(1));
+      expect(find.text('Clear due grammar'), findsAtLeastNWidgets(1));
       expect(find.text('Focus tools'), findsOneWidget);
     });
 
