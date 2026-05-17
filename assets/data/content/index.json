@@ -1,41 +1,139 @@
 {
-  "schemaVersion": 2,
-  "series": "minna",
+  "schemaVersion": 3,
+  "generatedAt": "2026-05-17",
   "datasets": {
     "vocab": {
-      "lessons": 75,
-      "entries": 3105,
+      "files": 278,
+      "entries": 16712,
       "levels": {
-        "N3": {
-          "lessons": 25,
-          "entries": 300
+        "N5": {
+          "files": 39,
+          "entries": 1989
         },
         "N4": {
-          "lessons": 25,
-          "entries": 1478
+          "files": 45,
+          "entries": 2110
         },
-        "N5": {
-          "lessons": 25,
-          "entries": 1327
+        "N3": {
+          "files": 54,
+          "entries": 2084
+        },
+        "N2": {
+          "files": 64,
+          "entries": 3590
+        },
+        "N1": {
+          "files": 76,
+          "entries": 6939
         }
+      },
+      "series": {
+        "ShinKanzen": 5573,
+        "hajimete": 8334,
+        "minna": 2805
       }
     },
     "kanji": {
-      "lessons": 75,
-      "entries": 529,
-      "uniqueCharacters": 432,
+      "files": 125,
+      "entries": 929,
       "levels": {
-        "N3": {
-          "lessons": 25,
-          "entries": 203
+        "N5": {
+          "files": 25,
+          "entries": 185
         },
         "N4": {
-          "lessons": 25,
+          "files": 25,
           "entries": 141
         },
+        "N3": {
+          "files": 25,
+          "entries": 203
+        },
+        "N2": {
+          "files": 25,
+          "entries": 200
+        },
+        "N1": {
+          "files": 25,
+          "entries": 200
+        }
+      }
+    },
+    "grammar": {
+      "files": 125,
+      "entries": 754,
+      "levels": {
         "N5": {
-          "lessons": 25,
-          "entries": 185
+          "files": 25,
+          "entries": 118
+        },
+        "N4": {
+          "files": 25,
+          "entries": 100
+        },
+        "N3": {
+          "files": 25,
+          "entries": 100
+        },
+        "N2": {
+          "files": 25,
+          "entries": 191
+        },
+        "N1": {
+          "files": 25,
+          "entries": 245
+        }
+      }
+    },
+    "grammarExamples": {
+      "files": 125,
+      "entries": 4924,
+      "levels": {
+        "N5": {
+          "files": 25,
+          "entries": 1180
+        },
+        "N4": {
+          "files": 25,
+          "entries": 1000
+        },
+        "N3": {
+          "files": 25,
+          "entries": 1000
+        },
+        "N2": {
+          "files": 25,
+          "entries": 764
+        },
+        "N1": {
+          "files": 25,
+          "entries": 980
+        }
+      }
+    },
+    "immersion": {
+      "files": 125,
+      "entries": 125,
+      "levels": {
+        "N5": {
+          "files": 25,
+          "entries": 25
+        },
+        "N4": {
+          "files": 25,
+          "entries": 25
+        },
+        "N3": {
+          "files": 25,
+          "entries": 25
+        },
+        "N2": {
+          "files": 25,
+          "entries": 25
+        },
+        "N1": {
+          "files": 25,
+          "entries": 25
         }
       }
     },
@@ -43,7 +141,8 @@
       "rules": 32,
       "sources": 5,
       "sourcePolicy": {
-        "blockedDomainsExcludedCount": 2
+        "blockedDomainsExcludedCount": 2,
+        "note": "Rules are paraphrased and normalized from allowed online learner sources. User-blocked domains were not accessed or cited. These are hints, not deterministic readings."
       }
     },
     "kana": {

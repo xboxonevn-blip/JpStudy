@@ -15,6 +15,7 @@
     "report:live-route-matrix": "node tool/research/live_route_matrix_report.js",
     "report:sentry-readiness": "node tool/research/sentry_readiness_report.js",
     "report:storage-readiness": "node tool/research/storage_readiness_report.js",
+    "generate:content-index": "node tool/research/generate_content_index.js",
     "test:research-tooling": "node --test test/tool/research/*.js",
     "test:storage-rules": "firebase emulators:exec --only storage --project jpstudy-v2-test \"jest tooling/firebase/storage.rules.test.js --runInBand\"",
     "test:web-resource-smoke": "node tool/research/web_resource_smoke.js --build-root build/web --max-resources 80 --max-json 5 --max-grammar 0",
