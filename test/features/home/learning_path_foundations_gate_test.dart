@@ -183,8 +183,11 @@ void main() {
     await pumpHome(tester, StudyLevel.n3);
 
     expect(find.text('Textbook roadmap'), findsOneWidget);
-    expect(find.textContaining('Hajimete N3'), findsWidgets);
+    expect(find.textContaining('Hajimete N3'), findsOneWidget);
     expect(find.textContaining('Shin Kanzen N3'), findsWidgets);
+    expect(find.textContaining('Listening'), findsNothing);
+    expect(find.textContaining('Month 1'), findsNothing);
+    expect(find.textContaining('At your pace'), findsWidgets);
     await cleanUp(tester);
   });
 }

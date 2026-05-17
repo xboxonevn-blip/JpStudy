@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/core/study_level.dart';
 
 class TextbookRoadmap {
@@ -11,58 +13,152 @@ class TextbookRoadmapPhase {
   const TextbookRoadmapPhase({
     required this.id,
     required this.durationKey,
-    required this.resourceKeys,
+    required this.resources,
   });
 
   final String id;
   final String durationKey;
-  final List<String> resourceKeys;
+  final List<TextbookRoadmapResource> resources;
+
+  List<String> get resourceKeys =>
+      resources.map((resource) => resource.key).toList(growable: false);
+}
+
+class TextbookRoadmapResource {
+  const TextbookRoadmapResource({
+    required this.key,
+    required this.destination,
+    this.optional = false,
+  });
+
+  final String key;
+  final String destination;
+  final bool optional;
 }
 
 TextbookRoadmap textbookRoadmapForLevel(StudyLevel level) {
   return switch (level) {
-    StudyLevel.n5 => const TextbookRoadmap(
+    StudyLevel.n5 => TextbookRoadmap(
       level: StudyLevel.n5,
       phases: [
         TextbookRoadmapPhase(
           id: 'n5_kana_kanji',
           durationKey: 'n5_weeks_1_2',
-          resourceKeys: ['kana', 'kanji_n5_core'],
+          resources: [
+            TextbookRoadmapResource(
+              key: 'kana',
+              destination: AppRoutePath.foundations,
+            ),
+            TextbookRoadmapResource(
+              key: 'kanji_n5_core',
+              destination: AppRoutePath.kanji,
+            ),
+          ],
         ),
         TextbookRoadmapPhase(
           id: 'n5_minna_1_12',
           durationKey: 'n5_weeks_3_6',
-          resourceKeys: ['minna_i', 'minna_i_l1_12'],
+          resources: [
+            TextbookRoadmapResource(
+              key: 'minna_i_l1_12',
+              destination: AppRouteLocation.minnaCatalog(
+                levelCode: 'N5',
+                title: 'Minna no Nihongo I',
+                lessonStart: 1,
+                lessonEnd: 12,
+              ),
+            ),
+          ],
         ),
         TextbookRoadmapPhase(
           id: 'n5_minna_13_25',
           durationKey: 'n5_weeks_7_10',
-          resourceKeys: ['minna_i_l13_25', 'hajimete_n5', 'kanji_n5_plus'],
+          resources: [
+            TextbookRoadmapResource(
+              key: 'minna_i_l13_25',
+              destination: AppRouteLocation.minnaCatalog(
+                levelCode: 'N5',
+                title: 'Minna no Nihongo I',
+                lessonStart: 13,
+                lessonEnd: 25,
+              ),
+            ),
+            TextbookRoadmapResource(
+              key: 'hajimete_n5_optional',
+              destination: AppRouteLocation.hajimeteCatalog(
+                levelCode: 'N5',
+                title: 'Hajimete no Nihongo Tango N5',
+              ),
+              optional: true,
+            ),
+            TextbookRoadmapResource(
+              key: 'kanji_n5_plus',
+              destination: AppRoutePath.kanji,
+            ),
+          ],
         ),
         TextbookRoadmapPhase(
           id: 'n5_mock_review',
           durationKey: 'n5_weeks_11_12',
-          resourceKeys: ['jlpt_n5_mock', 'weak_point_review'],
+          resources: [
+            TextbookRoadmapResource(
+              key: 'jlpt_n5_mock',
+              destination: AppRoutePath.examCenter,
+            ),
+          ],
         ),
       ],
     ),
-    StudyLevel.n4 => const TextbookRoadmap(
+    StudyLevel.n4 => TextbookRoadmap(
       level: StudyLevel.n4,
       phases: [
         TextbookRoadmapPhase(
           id: 'n4_minna_26_37',
           durationKey: 'n4_weeks_1_4',
-          resourceKeys: ['minna_ii_l26_37', 'hajimete_n4_ch1_10'],
+          resources: [
+            TextbookRoadmapResource(
+              key: 'minna_ii_l26_37',
+              destination: AppRouteLocation.minnaCatalog(
+                levelCode: 'N4',
+                title: 'Minna no Nihongo II',
+                lessonStart: 26,
+                lessonEnd: 37,
+              ),
+            ),
+            TextbookRoadmapResource(
+              key: 'hajimete_n4_optional',
+              destination: AppRouteLocation.hajimeteCatalog(
+                levelCode: 'N4',
+                title: 'Hajimete no Nihongo Tango N4',
+              ),
+              optional: true,
+            ),
+          ],
         ),
         TextbookRoadmapPhase(
           id: 'n4_minna_38_50',
           durationKey: 'n4_weeks_5_8',
-          resourceKeys: ['minna_ii_l38_50', 'hajimete_n4_ch11_20'],
+          resources: [
+            TextbookRoadmapResource(
+              key: 'minna_ii_l38_50',
+              destination: AppRouteLocation.minnaCatalog(
+                levelCode: 'N4',
+                title: 'Minna no Nihongo II',
+                lessonStart: 38,
+                lessonEnd: 50,
+              ),
+            ),
+          ],
         ),
         TextbookRoadmapPhase(
           id: 'n4_mock_reading',
           durationKey: 'n4_weeks_9_12',
-          resourceKeys: ['jlpt_n4_mock', 'n4_reading_practice'],
+          resources: [
+            TextbookRoadmapResource(
+              key: 'jlpt_n4_mock',
+              destination: AppRoutePath.examCenter,
+            ),
+          ],
         ),
       ],
     ),
@@ -76,36 +172,63 @@ TextbookRoadmap textbookRoadmapForLevel(StudyLevel level) {
       levelCode: 'n2',
       hajimete: 'hajimete_n2',
     ),
-    StudyLevel.n1 => const TextbookRoadmap(
+    StudyLevel.n1 => TextbookRoadmap(
       level: StudyLevel.n1,
       phases: [
         TextbookRoadmapPhase(
-          id: 'n1_vocab_grammar',
-          durationKey: 'upper_month_1',
-          resourceKeys: [
-            'hajimete_n1',
-            'shin_kanzen_n1_vocab',
-            'shin_kanzen_n1_grammar',
+          id: 'n1_vocab',
+          durationKey: 'upper_vocab_hours',
+          resources: [
+            TextbookRoadmapResource(
+              key: 'shin_kanzen_n1_vocab',
+              destination: AppRouteLocation.shinkanzenCatalog(
+                levelCode: 'N1',
+                title: 'Shin Kanzen Master N1',
+              ),
+            ),
+            TextbookRoadmapResource(
+              key: 'hajimete_n1_optional',
+              destination: AppRouteLocation.hajimeteCatalog(
+                levelCode: 'N1',
+                title: 'Hajimete no Nihongo Tango N1',
+              ),
+              optional: true,
+            ),
           ],
         ),
         TextbookRoadmapPhase(
-          id: 'n1_reading_listening_kanji',
-          durationKey: 'upper_month_2',
-          resourceKeys: [
-            'shin_kanzen_n1_reading',
-            'shin_kanzen_n1_listening',
-            'shin_kanzen_n1_kanji',
+          id: 'n1_grammar',
+          durationKey: 'upper_grammar_hours',
+          resources: [
+            TextbookRoadmapResource(
+              key: 'grammar_n1',
+              destination: AppRoutePath.grammar,
+            ),
+          ],
+        ),
+        TextbookRoadmapPhase(
+          id: 'n1_reading_kanji',
+          durationKey: 'upper_skill_hours',
+          resources: [
+            TextbookRoadmapResource(
+              key: 'kanji_n1',
+              destination: AppRoutePath.kanji,
+            ),
+            TextbookRoadmapResource(
+              key: 'immersion_n1',
+              destination: AppRoutePath.immersion,
+            ),
           ],
         ),
         TextbookRoadmapPhase(
           id: 'n1_mock_repair',
-          durationKey: 'upper_month_3',
-          resourceKeys: ['jlpt_n1_mock', 'weak_point_review'],
-        ),
-        TextbookRoadmapPhase(
-          id: 'n1_immersion',
-          durationKey: 'n1_immersion',
-          resourceKeys: ['immersion_n1'],
+          durationKey: 'upper_mock_hours',
+          resources: [
+            TextbookRoadmapResource(
+              key: 'jlpt_n1_mock',
+              destination: AppRoutePath.examCenter,
+            ),
+          ],
         ),
       ],
     ),
@@ -122,31 +245,58 @@ TextbookRoadmap _upperRoadmap({
     phases: [
       TextbookRoadmapPhase(
         id: '${levelCode}_vocab',
-        durationKey: 'upper_month_1',
-        resourceKeys: [
-          hajimete,
-          'shin_kanzen_${levelCode}_vocab',
-          'shin_kanzen_${levelCode}_grammar',
+        durationKey: 'upper_vocab_hours',
+        resources: [
+          TextbookRoadmapResource(
+            key: 'shin_kanzen_${levelCode}_vocab',
+            destination: AppRouteLocation.shinkanzenCatalog(
+              levelCode: level.shortLabel,
+              title: 'Shin Kanzen Master ${level.shortLabel}',
+            ),
+          ),
+          TextbookRoadmapResource(
+            key: '${hajimete}_optional',
+            destination: AppRouteLocation.hajimeteCatalog(
+              levelCode: level.shortLabel,
+              title: 'Hajimete no Nihongo Tango ${level.shortLabel}',
+            ),
+            optional: true,
+          ),
         ],
       ),
       TextbookRoadmapPhase(
-        id: '${levelCode}_reading_listening_kanji',
-        durationKey: 'upper_month_2',
-        resourceKeys: [
-          'shin_kanzen_${levelCode}_reading',
-          'shin_kanzen_${levelCode}_listening',
-          'shin_kanzen_${levelCode}_kanji',
+        id: '${levelCode}_grammar',
+        durationKey: 'upper_grammar_hours',
+        resources: [
+          TextbookRoadmapResource(
+            key: 'grammar_$levelCode',
+            destination: AppRoutePath.grammar,
+          ),
+        ],
+      ),
+      TextbookRoadmapPhase(
+        id: '${levelCode}_reading_kanji',
+        durationKey: 'upper_skill_hours',
+        resources: [
+          TextbookRoadmapResource(
+            key: 'kanji_$levelCode',
+            destination: AppRoutePath.kanji,
+          ),
+          TextbookRoadmapResource(
+            key: 'immersion_$levelCode',
+            destination: AppRoutePath.immersion,
+          ),
         ],
       ),
       TextbookRoadmapPhase(
         id: '${levelCode}_mock_repair',
-        durationKey: 'upper_month_3',
-        resourceKeys: ['jlpt_${levelCode}_mock', 'weak_point_review'],
-      ),
-      TextbookRoadmapPhase(
-        id: '${levelCode}_retention',
-        durationKey: 'upper_mock_cycle',
-        resourceKeys: ['reading_replay', 'weak_point_review'],
+        durationKey: 'upper_mock_hours',
+        resources: [
+          TextbookRoadmapResource(
+            key: 'jlpt_${levelCode}_mock',
+            destination: AppRoutePath.examCenter,
+          ),
+        ],
       ),
     ],
   );

@@ -502,3 +502,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: N3/N2/N1 `ShinKanzen/index.json` files and lesson assets were present, but the catalog card used the generic review fallback instead of a source-specific catalog/detail route.
 - Delta: -30 percentage points on confidence that non-empty content inventory implies a reachable learner path.
 - Updated belief: every content source needs a route owner and a rendered non-zero catalog test; source data plus aggregate counts can still produce a hollow track.
+
+## 2026-05-17T23:05+07:00 - Roadmap honesty needed route-owned chips
+
+- Prior belief: the textbook roadmap could stay as static guidance once the underlying catalogs loaded.
+- Actual observation: the roadmap copy claimed "content actually shipped" but its tags were inert strings, included unavailable listening tracks, and implied fixed month pacing for upper levels.
+- Delta: -25 percentage points on confidence that content-backed hubs make roadmap stages trustworthy automatically.
+- Updated belief: curriculum roadmaps need the same route ownership as catalogs: every visible chip should know its destination, and unavailable modalities should be absent or explicitly deferred.

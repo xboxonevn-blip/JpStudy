@@ -607,9 +607,15 @@ class _TextbookPhaseRow extends StatelessWidget {
                 spacing: 6,
                 runSpacing: 6,
                 children: [
-                  for (final key in phase.resourceKeys)
+                  for (final resource in phase.resources)
                     _TextbookResourceChip(
-                      label: language.textbookRoadmapResourceLabel(key),
+                      label: language.textbookRoadmapResourceLabel(
+                        resource.key,
+                      ),
+                      optionalLabel: resource.optional
+                          ? language.textbookRoadmapOptionalLabel()
+                          : null,
+                      destination: resource.destination,
                       color: color,
                     ),
                 ],
@@ -623,27 +629,38 @@ class _TextbookPhaseRow extends StatelessWidget {
 }
 
 class _TextbookResourceChip extends StatelessWidget {
-  const _TextbookResourceChip({required this.label, required this.color});
+  const _TextbookResourceChip({
+    required this.label,
+    required this.destination,
+    required this.color,
+    this.optionalLabel,
+  });
 
   final String label;
+  final String destination;
   final Color color;
+  final String? optionalLabel;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: color.withValues(alpha: 0.16)),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: color,
-          fontSize: 10.5,
-          fontWeight: FontWeight.w800,
-          height: 1.15,
+    final displayLabel = optionalLabel == null
+        ? label
+        : '$label · $optionalLabel';
+    return Material(
+      color: Colors.transparent,
+      child: ActionChip(
+        onPressed: () => context.go(destination),
+        visualDensity: VisualDensity.compact,
+        side: BorderSide(color: color.withValues(alpha: 0.18)),
+        backgroundColor: color.withValues(alpha: 0.08),
+        label: Text(
+          displayLabel,
+          style: TextStyle(
+            color: color,
+            fontSize: 10.5,
+            fontWeight: FontWeight.w800,
+            height: 1.15,
+          ),
         ),
       ),
     );

@@ -264,20 +264,25 @@ extension HomeCopyX on AppLanguage {
       AppLanguage.vi => 'Tuần 9-12',
       AppLanguage.ja => '9-12週目',
     },
-    'upper_month_1' => switch (this) {
-      AppLanguage.en => 'Month 1',
-      AppLanguage.vi => 'Tháng 1',
-      AppLanguage.ja => '1か月目',
+    'upper_vocab_hours' => switch (this) {
+      AppLanguage.en => 'At your pace - 25-40 hours',
+      AppLanguage.vi => 'Theo nhịp của bạn - 25-40 giờ',
+      AppLanguage.ja => '自分のペース - 25-40時間',
     },
-    'upper_month_2' => switch (this) {
-      AppLanguage.en => 'Month 2',
-      AppLanguage.vi => 'Tháng 2',
-      AppLanguage.ja => '2か月目',
+    'upper_grammar_hours' => switch (this) {
+      AppLanguage.en => 'At your pace - 25-35 hours',
+      AppLanguage.vi => 'Theo nhịp của bạn - 25-35 giờ',
+      AppLanguage.ja => '自分のペース - 25-35時間',
     },
-    'upper_month_3' => switch (this) {
-      AppLanguage.en => 'Month 3',
-      AppLanguage.vi => 'Tháng 3',
-      AppLanguage.ja => '3か月目',
+    'upper_skill_hours' => switch (this) {
+      AppLanguage.en => 'At your pace - 30-45 hours',
+      AppLanguage.vi => 'Theo nhịp của bạn - 30-45 giờ',
+      AppLanguage.ja => '自分のペース - 30-45時間',
+    },
+    'upper_mock_hours' => switch (this) {
+      AppLanguage.en => 'At your pace - 15-25 hours',
+      AppLanguage.vi => 'Theo nhịp của bạn - 15-25 giờ',
+      AppLanguage.ja => '自分のペース - 15-25時間',
     },
     'upper_mock_cycle' => switch (this) {
       AppLanguage.en => 'Mock cycle',
@@ -330,19 +335,24 @@ extension HomeCopyX on AppLanguage {
           AppLanguage.ja => 'N4模試 + 読解練習',
         },
         'n1_vocab_grammar' => switch (this) {
-          AppLanguage.en => 'Hajimete N1 + Shin Kanzen vocabulary and grammar',
-          AppLanguage.vi => 'Hajimete N1 + Shin Kanzen từ vựng và ngữ pháp',
-          AppLanguage.ja => 'はじめてN1 + 新完全マスター語彙・文法',
+          AppLanguage.en => 'Shin Kanzen N1 vocabulary first',
+          AppLanguage.vi => 'Shin Kanzen N1: ưu tiên từ vựng',
+          AppLanguage.ja => '新完全マスターN1語彙から開始',
         },
         _ when phaseId.endsWith('_vocab') => switch (this) {
-          AppLanguage.en => 'Hajimete $levelCode + Shin Kanzen vocabulary',
-          AppLanguage.vi => 'Hajimete $levelCode + Shin Kanzen từ vựng',
-          AppLanguage.ja => 'はじめて$levelCode + 新完全マスター語彙',
+          AppLanguage.en => 'Shin Kanzen $levelCode vocabulary first',
+          AppLanguage.vi => 'Shin Kanzen $levelCode: ưu tiên từ vựng',
+          AppLanguage.ja => '新完全マスター$levelCode語彙から開始',
         },
-        _ when phaseId.endsWith('_reading_listening_kanji') => switch (this) {
-          AppLanguage.en => 'Reading, listening, and kanji practice',
-          AppLanguage.vi => 'Đọc hiểu, nghe và kanji',
-          AppLanguage.ja => '読解・聴解・漢字',
+        _ when phaseId.endsWith('_grammar') => switch (this) {
+          AppLanguage.en => '$levelCode grammar after vocabulary',
+          AppLanguage.vi => '$levelCode: chuyển sang ngữ pháp sau từ vựng',
+          AppLanguage.ja => '$levelCode 語彙の後に文法へ',
+        },
+        _ when phaseId.endsWith('_reading_kanji') => switch (this) {
+          AppLanguage.en => 'Reading input and kanji',
+          AppLanguage.vi => 'Đọc mở rộng và kanji',
+          AppLanguage.ja => '読解入力と漢字',
         },
         _ when phaseId.endsWith('_mock_repair') => switch (this) {
           AppLanguage.en => '$levelCode mock exams + weak-area drill',
@@ -393,17 +403,24 @@ extension HomeCopyX on AppLanguage {
     },
     _ when phaseId.endsWith('_vocab') => switch (this) {
       AppLanguage.en =>
-        'Start $levelCode with vocabulary and grammar so reading practice has traction.',
+        'Start with the live Shin Kanzen vocabulary catalog. Use Hajimete only as an optional supplement.',
       AppLanguage.vi =>
-        'Mở $levelCode bằng từ vựng và ngữ pháp để bài đọc có nền.',
-      AppLanguage.ja => '$levelCode は語彙と文法から始め、読解の足場を作ります。',
+        'Bắt đầu bằng danh sách từ vựng Shin Kanzen đang tải được. Hajimete chỉ là phần bổ trợ tùy chọn.',
+      AppLanguage.ja => '読み込める新完全マスター語彙から始め、はじめては任意補助にします。',
     },
-    _ when phaseId.endsWith('_reading_listening_kanji') => switch (this) {
+    _ when phaseId.endsWith('_grammar') => switch (this) {
       AppLanguage.en =>
-        'Shift from single items to skill practice: reading, listening, kanji.',
+        'Add grammar after the vocabulary base is moving, instead of opening every track at once.',
       AppLanguage.vi =>
-        'Chuyển từ học mục rời sang mạch kỹ năng: đọc, nghe, kanji.',
-      AppLanguage.ja => '単項目学習から、読解・聴解・漢字の技能レーンへ移ります。',
+        'Thêm ngữ pháp sau khi mạch từ vựng đã chạy, không mở nhiều hướng cùng lúc.',
+      AppLanguage.ja => '語彙が進み始めてから文法を足し、複数レーン同時開始を避けます。',
+    },
+    _ when phaseId.endsWith('_reading_kanji') => switch (this) {
+      AppLanguage.en =>
+        'Use available reading input and kanji practice. Audio work is deferred until real audio content exists.',
+      AppLanguage.vi =>
+        'Dùng phần đọc và kanji đang có. Phần âm thanh sẽ mở sau khi có dữ liệu thật.',
+      AppLanguage.ja => '利用可能な読解入力と漢字を使います。音声データが整ってから音声学習を追加します。',
     },
     _
         when phaseId.endsWith('_mock_repair') ||
@@ -425,8 +442,10 @@ extension HomeCopyX on AppLanguage {
   };
 
   String textbookRoadmapResourceLabel(String resourceKey) {
-    final level = RegExp(r'_n([1-5])').firstMatch(resourceKey)?.group(1);
-    final levelCode = level == null ? null : 'N$level';
+    final level = RegExp(
+      r'_(n[1-5])(?:_|$)',
+    ).firstMatch(resourceKey)?.group(1)?.toUpperCase();
+    final levelCode = level;
     return switch (resourceKey) {
       'kana' => switch (this) {
         AppLanguage.en => 'Hiragana + Katakana',
@@ -439,9 +458,18 @@ extension HomeCopyX on AppLanguage {
       'minna_i_l13_25' => 'Minna I L13-25',
       'minna_ii_l26_37' => 'Minna II L26-37',
       'minna_ii_l38_50' => 'Minna II L38-50',
-      'hajimete_n4_ch1_10' => 'Hajimete N4 ch1-10',
-      'hajimete_n4_ch11_20' => 'Hajimete N4 ch11-20',
       _ when resourceKey.startsWith('hajimete_') => 'Hajimete $levelCode',
+      _ when resourceKey.startsWith('grammar_') => switch (this) {
+        AppLanguage.en => '$levelCode grammar',
+        AppLanguage.vi => 'Ngữ pháp $levelCode',
+        AppLanguage.ja => '$levelCode 文法',
+      },
+      _ when resourceKey.startsWith('kanji_') => 'Kanji $levelCode',
+      _ when resourceKey.startsWith('immersion_') => switch (this) {
+        AppLanguage.en => '$levelCode reading input',
+        AppLanguage.vi => 'Đọc mở rộng $levelCode',
+        AppLanguage.ja => '$levelCode 読解入力',
+      },
       _ when resourceKey.startsWith('shin_kanzen_') => _shinKanzenResourceLabel(
         resourceKey,
         levelCode ?? '',
@@ -467,6 +495,12 @@ extension HomeCopyX on AppLanguage {
       _ => resourceKey,
     };
   }
+
+  String textbookRoadmapOptionalLabel() => switch (this) {
+    AppLanguage.en => 'optional',
+    AppLanguage.vi => 'tùy chọn',
+    AppLanguage.ja => '任意',
+  };
 
   String _shinKanzenResourceLabel(String resourceKey, String levelCode) {
     final track = switch (resourceKey.split('_').last) {
