@@ -495,3 +495,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: live semantics still exposed `Bổ trợ Companion Minna no Nihongo I` because a status badge used a private hardcoded `_programBadge()` path instead of the localized helper.
 - Delta: -20 percentage points on confidence that helper-level copy tests cover composite cards.
 - Updated belief: copy QA must include rendered widget text for dense catalog cards, not only string helper samples.
+
+## 2026-05-17T22:20+07:00 - Shin Kanzen data existed but had no catalog owner
+
+- Prior belief: empty Shin Kanzen tracks were likely another data-manifest or seeding gap.
+- Actual observation: N3/N2/N1 `ShinKanzen/index.json` files and lesson assets were present, but the catalog card used the generic review fallback instead of a source-specific catalog/detail route.
+- Delta: -30 percentage points on confidence that non-empty content inventory implies a reachable learner path.
+- Updated belief: every content source needs a route owner and a rendered non-zero catalog test; source data plus aggregate counts can still produce a hollow track.
