@@ -233,13 +233,14 @@ class _TestScreenState extends ConsumerState<TestScreen> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final wide = constraints.maxWidth >= 1180;
-              final compact = constraints.maxWidth < 700;
+              final navCompact = constraints.maxWidth < 700;
+              final answerCompact = navCompact || _isCompactViewport(context);
               return Padding(
                 padding: EdgeInsets.fromLTRB(
-                  compact ? AppSpacing.md : AppSpacing.lg,
+                  answerCompact ? AppSpacing.md : AppSpacing.lg,
                   AppSpacing.sm,
-                  compact ? AppSpacing.md : AppSpacing.lg,
-                  compact ? AppSpacing.sm : AppSpacing.lg,
+                  answerCompact ? AppSpacing.md : AppSpacing.lg,
+                  answerCompact ? AppSpacing.sm : AppSpacing.lg,
                 ),
                 child: Align(
                   alignment: Alignment.topCenter,
@@ -250,7 +251,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
                         _buildSessionOverview(
                           language,
                           question,
-                          compact: compact,
+                          compact: answerCompact,
                         ),
                         const SizedBox(height: AppSpacing.md),
                         Expanded(
@@ -281,7 +282,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
                                 )
                               : Column(
                                   children: [
-                                    if (!compact) ...[
+                                    if (!answerCompact) ...[
                                       _buildQuestionNavigatorCard(),
                                       const SizedBox(height: AppSpacing.md),
                                     ],
@@ -290,13 +291,13 @@ class _TestScreenState extends ConsumerState<TestScreen> {
                                         question,
                                         language,
                                         wide: false,
-                                        compact: compact,
+                                        compact: answerCompact,
                                       ),
                                     ),
                                   ],
                                 ),
                         ),
-                        if (wide || !compact || _showResult) ...[
+                        if (wide || !navCompact || _showResult) ...[
                           const SizedBox(height: AppSpacing.md),
                           _buildNavigationButtons(language),
                         ],
@@ -344,6 +345,17 @@ class _TestScreenState extends ConsumerState<TestScreen> {
         ],
       ),
     );
+  }
+
+  bool _isCompactViewport(BuildContext context) {
+    final mediaSize = MediaQuery.sizeOf(context);
+    final view = View.of(context);
+    final viewWidth = view.physicalSize.width / view.devicePixelRatio;
+    final viewHeight = view.physicalSize.height / view.devicePixelRatio;
+    return mediaSize.width < 700 ||
+        mediaSize.height < 700 ||
+        viewWidth < 700 ||
+        viewHeight < 700;
   }
 
   Widget _buildQuestionNavigatorCard() {

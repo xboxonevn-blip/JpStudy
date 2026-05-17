@@ -30,7 +30,7 @@ class TrueFalseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    final compact = forceCompact || MediaQuery.sizeOf(context).width < 700;
+    final compact = forceCompact || _isCompactViewport(context);
     final isCorrectTrue =
         revealCorrectAnswer && question.isStatementTrue == true;
     final isCorrectFalse =
@@ -96,5 +96,16 @@ class TrueFalseWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool _isCompactViewport(BuildContext context) {
+    final mediaSize = MediaQuery.sizeOf(context);
+    final view = View.of(context);
+    final viewWidth = view.physicalSize.width / view.devicePixelRatio;
+    final viewHeight = view.physicalSize.height / view.devicePixelRatio;
+    return mediaSize.width < 700 ||
+        mediaSize.height < 700 ||
+        viewWidth < 700 ||
+        viewHeight < 700;
   }
 }

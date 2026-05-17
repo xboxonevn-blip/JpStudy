@@ -58,7 +58,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
         final compact =
             widget.forceCompact ||
             constraints.maxWidth < 520 ||
-            MediaQuery.sizeOf(context).width < 700;
+            _isCompactViewport(context);
         final options = widget.question.options ?? const <String>[];
         final useGrid = !compact && constraints.maxWidth >= 720;
         final selected = widget.showResult
@@ -157,5 +157,16 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
               });
             },
     );
+  }
+
+  bool _isCompactViewport(BuildContext context) {
+    final mediaSize = MediaQuery.sizeOf(context);
+    final view = View.of(context);
+    final viewWidth = view.physicalSize.width / view.devicePixelRatio;
+    final viewHeight = view.physicalSize.height / view.devicePixelRatio;
+    return mediaSize.width < 700 ||
+        mediaSize.height < 700 ||
+        viewWidth < 700 ||
+        viewHeight < 700;
   }
 }
