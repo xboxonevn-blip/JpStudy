@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import '../../../../core/level_provider.dart';
 import '../../../data/repositories/grammar_repository.dart';
 import '../../../data/repositories/lesson_repository.dart';
@@ -87,7 +89,7 @@ final continueActionProvider = FutureProvider<ContinueAction>((ref) async {
     if (nextLessonId != null) {
       return ContinueAction(
         type: ContinueActionType.nextLesson,
-        label: language.lessonTitle(nextLessonId),
+        label: continueLessonLabelForTesting(language, level, nextLessonId),
         data: nextLessonId,
       );
     }
@@ -100,6 +102,19 @@ final continueActionProvider = FutureProvider<ContinueAction>((ref) async {
     count: null,
   );
 });
+
+@visibleForTesting
+String continueLessonLabelForTesting(
+  AppLanguage language,
+  StudyLevel level,
+  int lessonId,
+) {
+  final sourceLessonId = LessonRepository.curriculumSourceLessonId(
+    level.shortLabel,
+    lessonId,
+  );
+  return language.curriculumLessonTitle(level.shortLabel, sourceLessonId);
+}
 
 enum ContinueActionType {
   grammarReview,

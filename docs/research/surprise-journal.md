@@ -481,3 +481,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: live retest still showed Profile landing on the Learn/Vocab branch. The safer model is to give every visible shell item its canonical location and derive selected state from the active URL path.
 - Delta: -40 percentage points on confidence that shell currentIndex is trustworthy after mixed SPA navigation.
 - Updated belief: shell branch state is a cache; route path is the source of truth for both navigation target and selected UI state.
+
+## 2026-05-17T21:05+07:00 - Lesson title fixes need every action surface
+
+- Prior belief: fixing lesson detail/repository fallback would remove the visible Minna title leak for N2/N3/N1.
+- Actual observation: live Review/Home next-lesson actions used `language.lessonTitle(storageLessonId)` directly, so scoped IDs such as `200001` rendered as `Minna No Nihongo 200001` even after lesson detail was correct.
+- Delta: -25 percentage points on confidence that lesson title correctness can be verified from `/lesson/:id` alone.
+- Updated belief: curriculum identity must be checked on every CTA surface that formats lesson IDs, especially Home/Review continuation providers.
