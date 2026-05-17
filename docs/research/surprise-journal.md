@@ -457,3 +457,6 @@ Phase 2 first fixed the selected-level copy in `ExamScreen`, but the sidebar bra
 ## 2026-05-17 - IA Cleanup Needed Legacy Route Ownership
 
 Phase 3 reduced the visible shell to five branches, but old route paths still mattered: `/memory`, `/community`, enhanced lesson-mode URLs, and duplicate `/progress` ownership could keep stale mental models alive even after the sidebar looked clean. Mental model update: IA consolidation is not complete when navigation labels change; every legacy path must either redirect to a canonical owner or be removed with tests.
+## 2026-05-17T16:38+07:00 - Product identity leaks were mostly route affordances
+
+Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Quizlet-style leakage was mostly reachable UI and route affordances: edit/copy/add/combine controls, `/lesson/:id/edit`, and match-mode aliases. Hard-gating routes plus hiding curriculum controls removed the beta-facing confusion while keeping old editor/schema pieces isolated for possible future "My sets". Mental model update: beta product identity can be enforced at navigation and action boundaries before deleting compatibility schema.

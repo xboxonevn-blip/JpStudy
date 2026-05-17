@@ -188,3 +188,33 @@ python tooling/audit_ui_string_literals.py --check -> 0 remaining candidates
 ```
 
 Remaining caveat: Phase 3 IA source cleanup is not the same as Phase 4 lesson-screen/product-identity cleanup. `lesson_detail_screen.dart` is still monolithic, curriculum lesson edit/copy/create affordances still need hard-gating or isolation, and practice-mode copy still needs learner-language polish.
+
+## Phase 4 Lesson/Product Identity Update
+
+Timestamp: `2026-05-17T16:38+07:00`
+
+Source commits through `8a7952ee refactor(srs): stop updating legacy SM2 fields`.
+
+Verified source changes:
+
+- Lesson detail first tab is now `Vocab` / `Từ vựng` / `語彙`, not the reused Flashcards label.
+- Curriculum lesson detail no longer exposes copy-set, add-term, combine-set, or inline edit controls.
+- Curriculum `/lesson/:id/edit` redirects back to `/lesson/:id`, so the Quizlet-style editor is not reachable from fixed curriculum lessons.
+- Lesson practice CTAs are reduced to Flashcards, Test, and Write. Legacy `match-mode` and `/lesson/:id/practice/match` redirect to Test.
+- `lesson_detail_screen.dart` was split into focused `lesson_detail_controls.dart` and `lesson_detail_card.dart`; the main screen is now `883` lines.
+- The Kanji study-flow card now returns users from the 214-radicals view to the level kanji grid instead of being a dead tap target.
+- Home achievement notifications no longer use blocking dialogs on load; pending achievements surface as non-blocking SnackBars.
+- Vocab/grammar SRS update APIs no longer accept or write legacy SM-2 `box` / `ease` values. The generated DB columns remain for backward-compatible schema/export shape, but the live scheduler path is FSRS-only (`stability`, `difficulty`, `fsrs_state`, `fsrs_step`).
+
+Verification run for Phase 4 chunks:
+
+```text
+flutter analyze lib test -> passed before/after scoped chunks
+flutter test -> passed 2297 before Phase 4 chunking
+kanji_hub_screen_test.dart -> passed 9/9
+home_screen_test.dart -> passed 12/12
+SRS DAO/repository/ghost focused tests -> passed 40/40
+ui string guard -> 0 candidates before Phase 4 commits
+```
+
+Remaining caveat: the old `LessonEditScreen` file and generated `box/ease` schema fields still exist for compatibility and possible future "My sets" isolation. They are no longer reachable or updated from the fixed curriculum learner path.

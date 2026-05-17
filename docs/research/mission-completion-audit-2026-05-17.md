@@ -41,6 +41,7 @@ The active mission is complete only if all are true:
 | App coherence Phase 1 | `docs/research/app-coherence-phase1-content-pipeline-2026-05-17.md`; commits `2dcd5938`, `39020712`, `98cad1bf` make lesson vocab source-aware, regenerate/guard the content manifest, and cover N5-N1 lesson vocab seeding | Passed for runtime vocab availability; level-ID collision caveat remains |
 | Full live app audit | `docs/research/full-audit-2026-05-17.md` verifies live lesson routes still show `Tổng 0` + spinner and traces root causes to route identity, unbounded async loading, double shell navigation, and fragmented level writers | P0 source fix deployed/rechecked: N5/N4/N3/N2/N1 lesson routes now render non-zero vocab totals; `/premium` and `/search` render matching screens |
 | App coherence Phase 3 | Commits `bf63a2ca`, `9e9693f8`, `5468a0d5`, `791cefb1`, `2b0faa9a`, `6268f760`, `0494c0f9` consolidate the shell to five branches, remove inline Home onboarding/mobile fallback, redirect legacy `/memory` and `/community`, redirect enhanced lesson aliases to canonical practice routes, align Review title, remove the dead Community placeholder, and keep `/progress` on one branch | Passed for IA cleanup source scope; Phase 4 lesson-screen/product-identity work remains |
+| App coherence Phase 4 | Commits `c8fc618f`, `e4113890`, `35be6509`, `b9b082ba`, `f4619b8e`, `a34929fe`, `8a7952ee` rename the lesson tab to Vocab, hide curriculum edit/copy/add/combine controls, split lesson detail widgets, redirect curriculum edit/match routes, wire the Kanji flow card, remove blocking Home achievement dialogs, and stop live SRS updates from touching legacy SM-2 fields | Passed for source scope; old editor file and DB compatibility columns remain isolated/deferred |
 
 ## Latest Readiness Result
 
@@ -109,6 +110,15 @@ Community placeholder module was removed, Review screen title now matches the
 Review shell label, and duplicate `/progress` routing was reduced to the Home
 branch. Remaining work: Phase 4 lesson detail decomposition, product-identity
 cleanup, practice-mode reduction, and copy polish.
+
+Phase 4 update: lesson detail is split into screen/controls/card parts, fixed
+curriculum lessons no longer expose user-set edit/add/combine/copy affordances,
+`/lesson/:id/edit` redirects to the lesson detail route, old match practice
+aliases redirect to Test, the Kanji study-flow card now opens the kanji grid,
+Home achievement notifications are non-blocking, and the live SRS write path
+no longer updates legacy SM-2 `box`/`ease` values. Remaining work: Phase 5
+learner-copy cleanup and broader generated-schema/user-set isolation if "My
+sets" is revived after beta.
 
 ## Verdict
 
