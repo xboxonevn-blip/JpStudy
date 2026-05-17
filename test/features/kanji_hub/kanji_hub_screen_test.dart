@@ -411,6 +411,38 @@ void main() {
     expect(find.text('\u9b31'), findsOneWidget);
   });
 
+  testWidgets('study flow kanji card returns from radicals to kanji grid', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1600, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(_buildSubject(repo: _buildRepo()));
+    await _pumpKanjiHub(tester);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('kanji_collection_radicals')),
+    );
+    await tester.tap(find.byKey(const ValueKey('kanji_collection_radicals')));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('\u660e'), findsNothing);
+    expect(find.text('\u65e5'), findsWidgets);
+
+    await tester.ensureVisible(find.byKey(const ValueKey('kanji_flow_target')));
+    final kanjiFlowTopLeft = tester.getTopLeft(
+      find.byKey(const ValueKey('kanji_flow_target')),
+    );
+    await tester.tapAt(kanjiFlowTopLeft + const Offset(12, 12));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.text('\u660e'), findsWidgets);
+  });
+
   testWidgets('kanji hub follows async persisted level after first frame', (
     tester,
   ) async {

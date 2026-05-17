@@ -1695,8 +1695,12 @@ class _KanjiDetailDialogState extends State<_KanjiDetailDialog> {
 }
 
 class _KanjiMindmapPanel extends StatefulWidget {
-  const _KanjiMindmapPanel({required this.language});
+  const _KanjiMindmapPanel({
+    required this.language,
+    required this.onExploreKanji,
+  });
   final AppLanguage language;
+  final VoidCallback onExploreKanji;
 
   @override
   State<_KanjiMindmapPanel> createState() => _KanjiMindmapPanelState();
@@ -1784,10 +1788,11 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel>
                   right: 20,
                   top: 10,
                   child: _FlowTargetCard(
+                    key: const ValueKey('kanji_flow_target'),
                     title: widget.language.kanjiFlowKanjiCardTitle(),
                     subtitle: widget.language.kanjiFlowKanjiCardSubtitle(),
                     icon: Icons.font_download,
-                    onTap: () {}, // stay on kanji hub
+                    onTap: widget.onExploreKanji,
                   ),
                 ),
                 Positioned(
@@ -1919,6 +1924,7 @@ class _FlowHubNodeState extends State<_FlowHubNode>
 
 class _FlowTargetCard extends StatefulWidget {
   const _FlowTargetCard({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.icon,

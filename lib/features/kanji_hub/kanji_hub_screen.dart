@@ -219,6 +219,25 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
     _focusCandidateKanji(kanji);
   }
 
+  void _openKanjiExplorePanel() {
+    _onClearRequested();
+    _onCollectionSelected(_collectionFromLevel(_selectedLevel));
+    final ctx = _gridPanelKey.currentContext;
+    if (ctx != null) {
+      unawaited(
+        Scrollable.ensureVisible(
+          ctx,
+          duration: reducedMotionDuration(
+            context,
+            const Duration(milliseconds: 350),
+          ),
+          curve: Curves.easeOut,
+          alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+        ),
+      );
+    }
+  }
+
   void _onClearRequested() {
     _searchDrawKey.currentState?._clearCanvas();
   }
@@ -292,25 +311,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                         levelCode: _selectedLevel.shortLabel,
                       ),
                     ),
-                    onExplore: () {
-                      _onClearRequested();
-                      _onCollectionSelected(
-                        _collectionFromLevel(_selectedLevel),
-                      );
-                      final ctx = _gridPanelKey.currentContext;
-                      if (ctx != null) {
-                        Scrollable.ensureVisible(
-                          ctx,
-                          duration: reducedMotionDuration(
-                            context,
-                            const Duration(milliseconds: 350),
-                          ),
-                          curve: Curves.easeOut,
-                          alignmentPolicy:
-                              ScrollPositionAlignmentPolicy.keepVisibleAtStart,
-                        );
-                      }
-                    },
+                    onExplore: _openKanjiExplorePanel,
                   ),
                   loading: () => AppFeatureCard(
                     key: const ValueKey('kanji_today_loading'),
@@ -333,11 +334,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                     onPrimaryTap: () =>
                         ref.invalidate(kanjiHomeSummaryProvider),
                     secondaryLabel: _kanjiExploreActionLabel(language),
-                    onSecondaryTap: () {
-                      _onCollectionSelected(
-                        _collectionFromLevel(_selectedLevel),
-                      );
-                    },
+                    onSecondaryTap: _openKanjiExplorePanel,
                     compact: true,
                   ),
                 ),
@@ -358,7 +355,10 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                               onCandidatesFound: _onCandidatesFound,
                             ),
                             const SizedBox(height: AppSpacing.xl),
-                            _KanjiMindmapPanel(language: language),
+                            _KanjiMindmapPanel(
+                              language: language,
+                              onExploreKanji: _openKanjiExplorePanel,
+                            ),
                           ],
                         ),
                       ),
@@ -410,7 +410,10 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                         onCandidatesFound: _onCandidatesFound,
                       ),
                       const SizedBox(height: AppSpacing.xl),
-                      _KanjiMindmapPanel(language: language),
+                      _KanjiMindmapPanel(
+                        language: language,
+                        onExploreKanji: _openKanjiExplorePanel,
+                      ),
                     ],
                   ),
               ],
