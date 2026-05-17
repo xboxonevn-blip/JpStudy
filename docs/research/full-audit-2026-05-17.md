@@ -285,6 +285,21 @@ Focused verification:
 flutter test test/features/foundations/foundations_soft_suggest_gate_test.dart test/features/search/search_screen_test.dart test/features/vocab/vocab_screen_test.dart test/features/vocab/hajimete_chapter_catalog_screen_test.dart -> 44/44 passed
 ```
 
-Remaining caveat: this is source/test verification. Live deploy verification of
-N3+ no-Kana-suggest and search/vocab behavior should be done after the Phase 6
-commit is deployed.
+Post-deploy live verification:
+
+```text
+commit 812b4e0 -> built with JPSTUDY_RECAPTCHA_SITE_KEY and deployed to hosting:jpstudy
+https://jpstudy.web.app/?primary-check=phase6 -> 200
+https://jpstudy-v2.web.app/?legacy-check=phase6 -> 404
+/#/lesson/1 seeded N5 -> Vocab total 51, first card 私 / tôi
+/#/lesson/26?level=N4 seeded N4 -> Vocab total 68, first card 見ます
+/#/search seeded N5 -> vocab 988, kanji 185, Hiragana/Kana 339
+/#/premium seeded N5 -> Upgrade screen, not Leaderboard
+/#/vocab seeded N3 after browser cache disabled -> no Kana soft-suggest modal, label reads Hướng học hiện tại
+```
+
+Surprise during live verification: an already-open Playwright browser context
+kept running the previous Flutter bundle after deploy, even though a fresh
+`fetch('/main.dart.js', {cache: 'reload'})` returned the new bundle with
+`Hướng học hiện tại`. Disabling browser cache/clearing service-worker state was
+required before using that context as live evidence.

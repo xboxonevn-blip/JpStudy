@@ -467,3 +467,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: stale learner-hostile wording was spread across feature-local helpers and widgets: grammar lesson actions, custom practice, premium plan copy, mini-dashboard labels, roadmap fallback titles, and the Profile link to Design Lab.
 - Delta: -30 percentage points on confidence that central i18n tests alone catch copy quality regressions.
 - Updated belief: copy QA needs both centralized string tests and a feature-local literal sweep. Internal/dev surfaces should not have learner navigation entry points unless they have learner-ready language.
+
+## 2026-05-17T18:58+07:00 - Live verification can be stale after deploy
+
+- Prior belief: a cache-busted `https://jpstudy.web.app/?fresh=...#/route` load in an existing Playwright context was enough to prove the latest Firebase Hosting release.
+- Actual observation: the page kept running the previous Flutter bundle and still showed `Nhánh học hiện tại` plus the N3 Kana soft-suggest modal after deploy, while a fresh `fetch('/main.dart.js', {cache: 'reload'})` already returned the new bundle with `Hướng học hiện tại`.
+- Delta: -35 percentage points on confidence that query-string reload alone defeats Flutter web service-worker/browser cache state.
+- Updated belief: post-deploy live evidence must clear service-worker/cache state or use a fresh cache-disabled browser context before judging source changes.
