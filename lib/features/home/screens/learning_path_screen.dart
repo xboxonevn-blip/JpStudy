@@ -355,7 +355,7 @@ class LearningPathScreen extends ConsumerWidget {
       case ContinueActionType.nextLesson:
         final lessonId = action.data as int?;
         if (lessonId != null) {
-          context.openLesson(lessonId);
+          context.openLesson(lessonId, levelCode: level.shortLabel);
         } else {
           context.openLibrary();
         }

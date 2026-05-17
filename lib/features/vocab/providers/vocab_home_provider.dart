@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/vocab/vocab_content_timeout.dart';
 
 class VocabTrackSummary {
   const VocabTrackSummary({
@@ -69,7 +70,10 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final dueTermsFuture = ref.watch(allDueTermsProvider.future);
   final nextReview = ref.watch(vocabNextReviewSnapshotProvider);
 
-  final dueCount = (await dueTermsFuture).length;
+  final dueCount = (await withVocabContentTimeout(
+    dueTermsFuture,
+    ref: ref,
+  )).length;
 
   // Fire all remaining independent queries concurrently.
   final n5Future = repo.countVocabByLevelAndSeries('N5', 'hajimete');
@@ -83,13 +87,25 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final minnaN5Future = repo.countVocabByLevelAndSeries('N5', 'minna');
   final minnaN4Future = repo.countVocabByLevelAndSeries('N4', 'minna');
 
-  final n5Core = await n5Future;
-  final n4Core = await n4Future;
-  final n3Core = await n3Future;
-  final n2Core = await n2Future;
-  final n1Core = await n1Future;
-  final minnaN5 = await minnaN5Future;
-  final minnaN4 = await minnaN4Future;
+  final counts = await withVocabContentTimeout(
+    Future.wait<int>([
+      n5Future,
+      n4Future,
+      n3Future,
+      n2Future,
+      n1Future,
+      minnaN5Future,
+      minnaN4Future,
+    ]),
+    ref: ref,
+  );
+  final n5Core = counts[0];
+  final n4Core = counts[1];
+  final n3Core = counts[2];
+  final n2Core = counts[3];
+  final n1Core = counts[4];
+  final minnaN5 = counts[5];
+  final minnaN4 = counts[6];
 
   return VocabHomeSection(
     selectedLevelCode: selectedLevel.shortLabel,

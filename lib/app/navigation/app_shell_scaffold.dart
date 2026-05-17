@@ -77,7 +77,7 @@ class AppShellScaffold extends ConsumerWidget {
                               language: language,
                               items: items,
                               currentIndex: navigationShell.currentIndex,
-                              onTap: (index) => _goToBranch(context, index),
+                              onTap: _goToBranch,
                             ),
                             const SizedBox(width: 18),
                             Expanded(
@@ -141,7 +141,7 @@ class AppShellScaffold extends ConsumerWidget {
                       selectedIndex: selectedIndex,
                       onDestinationSelected: (index) {
                         if (index < bottomItems.length) {
-                          _goToBranch(context, bottomItems[index].branchIndex);
+                          _goToBranch(bottomItems[index].branchIndex);
                           return;
                         }
                         _showMoreSheet(context, items, bottomBranchIndices);
@@ -186,7 +186,7 @@ class AppShellScaffold extends ConsumerWidget {
                 title: Text(item.label),
                 onTap: () {
                   Navigator.of(sheetContext).pop();
-                  _goToBranch(context, item.branchIndex);
+                  _goToBranch(item.branchIndex);
                 },
               );
             },
@@ -196,10 +196,8 @@ class AppShellScaffold extends ConsumerWidget {
     );
   }
 
-  void _goToBranch(BuildContext context, int index) {
-    final location = _branchInitialLocations[index];
+  void _goToBranch(int index) {
     navigationShell.goBranch(index, initialLocation: true);
-    GoRouter.of(context).go(location);
   }
 
   List<_ShellItem> _buildItems(AppLanguage language) {

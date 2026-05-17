@@ -445,3 +445,7 @@ While verifying all-level lesson vocab seeding, a new coherence risk surfaced: l
 ## 2026-05-17 - Live Lesson Zero Was Not Missing Content
 
 Live `/lesson/1` and `/lesson/26` still showed `Tổng 0` with a spinner after the content manifest and source-aware query were fixed. Actual root cause is stronger than "missing vocab": route identity omits level, pending async providers are rendered as empty lists, and content seeding has no timeout/error contract. Mental model update: authored assets plus repository tests do not prove the learner loop works; direct route identity and loading-state semantics are part of the content pipeline.
+
+## 2026-05-17 - P0 Lesson Fix Needed Storage Identity Too
+
+The first P0 hypothesis focused on UI loading semantics, but repository tests exposed a second failure mode: N5 and N3 lesson `1` could share the same persisted lesson row. Fixing only `/lesson/:id` links would still leave progress rows vulnerable after level switches. Mental model update: curriculum identity must be storage-level scoped, not just route-level scoped; user-visible source lesson numbers and persisted lesson IDs are separate concepts.

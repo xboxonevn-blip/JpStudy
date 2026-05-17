@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,25 +28,31 @@ UserLessonTermData _term(int id, String term, String definition) =>
       orderIndex: id,
     );
 
-Widget buildScreen(List<UserLessonTermData> terms) => ProviderScope(
-  overrides: [
-    appLanguageProvider.overrideWith(
-      (ref) => AppLanguageController.test(AppLanguage.en),
-    ),
-    studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-    lessonTitleProvider(
-      const LessonTitleArgs(1, 'Lesson 1'),
-    ).overrideWith((ref) async => 'Lesson 1'),
-    lessonTermsProvider(
-      const LessonTermsArgs(1, 'N5', 'Lesson 1'),
-    ).overrideWith((ref) async => terms),
-    lessonDueTermsProvider(
-      1,
-    ).overrideWith((ref) async => const <UserLessonTermData>[]),
-    srsStateProvider(1).overrideWith((ref) async => null),
-  ],
-  child: const MaterialApp(home: LessonDetailScreen(lessonId: 1)),
-);
+Widget buildScreen(
+  List<UserLessonTermData> terms, {
+  Future<List<UserLessonTermData>>? termsFuture,
+}) {
+  final fallbackTitle = AppLanguage.en.lessonTitle(1);
+  return ProviderScope(
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
+      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      lessonTitleProvider(
+        LessonTitleArgs(1, fallbackTitle),
+      ).overrideWith((ref) async => fallbackTitle),
+      lessonTermsProvider(
+        LessonTermsArgs(1, 'N5', fallbackTitle, sourceLessonId: 1),
+      ).overrideWith((ref) => termsFuture ?? Future.value(terms)),
+      lessonDueTermsProvider(
+        1,
+      ).overrideWith((ref) async => const <UserLessonTermData>[]),
+      srsStateProvider(1).overrideWith((ref) async => null),
+    ],
+    child: const MaterialApp(home: LessonDetailScreen(lessonId: 1)),
+  );
+}
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -66,5 +74,18 @@ void main() {
     expect(find.text(AppLanguage.en.flashcardsAction), findsWidgets);
     expect(find.text(AppLanguage.en.grammarLabel), findsWidgets);
     expect(find.text(AppLanguage.en.kanjiLabel), findsWidgets);
+  });
+
+  testWidgets('does not show zero totals while lesson terms are loading', (
+    tester,
+  ) async {
+    final pending = Completer<List<UserLessonTermData>>().future;
+
+    await tester.pumpWidget(buildScreen(const [], termsFuture: pending));
+    await tester.pump();
+
+    expect(find.byType(CircularProgressIndicator), findsWidgets);
+    expect(find.text(AppLanguage.en.statsTotalLabel), findsNothing);
+    expect(find.text('0'), findsNothing);
   });
 }

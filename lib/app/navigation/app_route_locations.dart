@@ -55,11 +55,18 @@ class AppRouteLocation {
     'title': title,
   });
 
+  static Map<String, String> _levelQuery(String? levelCode) => {
+    if (levelCode != null && levelCode.trim().isNotEmpty)
+      'level': levelCode.trim().toUpperCase(),
+  };
+
   static String vocabDetail(Object? id) => '/vocab/$id';
   static String grammarDetail(Object? id) => '/grammar/$id';
-  static String lessonDetail(Object? id) => '/lesson/$id';
+  static String lessonDetail(Object? id, {String? levelCode}) =>
+      _withQuery('/lesson/$id', _levelQuery(levelCode));
   static String lessonEdit(Object? id) => '/lesson/$id/edit';
-  static String minnaLesson(Object? lessonId) => '/lesson/$lessonId';
+  static String minnaLesson(Object? lessonId, {String? levelCode}) =>
+      lessonDetail(lessonId, levelCode: levelCode);
 
   static String lessonPractice(
     Object? lessonId,

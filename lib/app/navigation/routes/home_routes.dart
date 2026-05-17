@@ -54,8 +54,10 @@ StatefulShellBranch buildHomeBranch() {
       GoRoute(
         path: AppRoutePath.lessonDetail,
         name: AppRouteName.lessonDetail,
-        builder: (context, state) =>
-            LessonDetailScreen(lessonId: routeInt(state, 'id')),
+        builder: (context, state) => LessonDetailScreen(
+          lessonId: routeInt(state, 'id'),
+          levelCode: state.uri.queryParameters['level'],
+        ),
       ),
       GoRoute(
         path: AppRoutePath.lessonEdit,

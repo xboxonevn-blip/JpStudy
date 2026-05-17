@@ -29,9 +29,10 @@ enum _LessonMode { flashcards, review }
 enum _MenuAction { edit, addTerm, reset, combine, report }
 
 class LessonDetailScreen extends ConsumerStatefulWidget {
-  const LessonDetailScreen({super.key, required this.lessonId});
+  const LessonDetailScreen({super.key, required this.lessonId, this.levelCode});
 
   final int lessonId;
+  final String? levelCode;
 
   @override
   ConsumerState<LessonDetailScreen> createState() => _LessonDetailScreenState();
@@ -92,14 +93,30 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
-    final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-    final fallbackTitle = language.lessonTitle(widget.lessonId);
+    final level =
+        StudyLevel.fromCode(widget.levelCode ?? '') ??
+        ref.watch(studyLevelProvider) ??
+        StudyLevel.n5;
+    final sourceLessonId = LessonRepository.curriculumSourceLessonId(
+      level.shortLabel,
+      widget.lessonId,
+    );
+    final storageLessonId = LessonRepository.curriculumStorageLessonId(
+      level.shortLabel,
+      widget.lessonId,
+    );
+    final fallbackTitle = language.lessonTitle(sourceLessonId);
     final titleAsync = ref.watch(
-      lessonTitleProvider(LessonTitleArgs(widget.lessonId, fallbackTitle)),
+      lessonTitleProvider(LessonTitleArgs(storageLessonId, fallbackTitle)),
     );
     final termsAsync = ref.watch(
       lessonTermsProvider(
-        LessonTermsArgs(widget.lessonId, level.shortLabel, fallbackTitle),
+        LessonTermsArgs(
+          storageLessonId,
+          level.shortLabel,
+          fallbackTitle,
+          sourceLessonId: sourceLessonId,
+        ),
       ),
     );
 
@@ -109,7 +126,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     );
     final terms = termsAsync.asData?.value ?? const <UserLessonTermData>[];
     final dueAsync = _mode == _LessonMode.review
-        ? ref.watch(lessonDueTermsProvider(widget.lessonId))
+        ? ref.watch(lessonDueTermsProvider(storageLessonId))
         : const AsyncValue.data(<UserLessonTermData>[]);
     final activeTermsAsync = _mode == _LessonMode.review
         ? dueAsync
@@ -174,7 +191,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                     active: isSaved,
                     onTap: totalTerms == 0
                         ? null
-                        : () => _toggleSaved(terms, level),
+                        : () => _toggleSaved(terms, level, storageLessonId),
                   ),
                   const SizedBox(width: 8),
                   _OverflowMenu(
@@ -184,6 +201,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                       context,
                       language,
                       level,
+                      storageLessonId,
                       title,
                       terms,
                     ),
@@ -246,12 +264,13 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                             },
                           ),
                           const SizedBox(height: 12),
-                          _StatsRow(
-                            language: language,
-                            total: terms.length,
-                            learned: learnedCount,
-                            due: dueCount,
-                          ),
+                          if (!termsAsync.isLoading)
+                            _StatsRow(
+                              language: language,
+                              total: terms.length,
+                              learned: learnedCount,
+                              due: dueCount,
+                            ),
                           if (_mode == _LessonMode.review) ...[
                             const SizedBox(height: 8),
                             Text(language.reviewCountLabel(totalTerms)),
@@ -259,7 +278,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                           const SizedBox(height: 12),
                           _PracticeActions(
                             language: language,
-                            lessonId: widget.lessonId,
+                            lessonId: storageLessonId,
                             lessonTitle: title,
                           ),
                           const SizedBox(height: 20),
@@ -303,16 +322,21 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                                         _updateShowHints(value),
                                     onFlip: onFlip,
                                     onEdit: () =>
-                                        context.openLessonEdit(widget.lessonId),
+                                        context.openLessonEdit(storageLessonId),
                                     onStar: currentTerm == null
                                         ? null
-                                        : () => _toggleStar(currentTerm, level),
+                                        : () => _toggleStar(
+                                            currentTerm,
+                                            level,
+                                            storageLessonId,
+                                          ),
                                     onLearned:
                                         !_trackProgress || currentTerm == null
                                         ? null
                                         : () => _toggleLearned(
                                             currentTerm,
                                             level,
+                                            storageLessonId,
                                           ),
                                     onStartLearning:
                                         (_mode == _LessonMode.review &&
@@ -388,11 +412,11 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
               ),
             ),
             GrammarListWidget(
-              lessonId: widget.lessonId,
+              lessonId: sourceLessonId,
               level: level.shortLabel,
               language: language,
             ),
-            KanjiListWidget(lessonId: widget.lessonId),
+            KanjiListWidget(lessonId: sourceLessonId),
           ],
         ),
       ),
@@ -423,6 +447,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
   Future<void> _toggleSaved(
     List<UserLessonTermData> terms,
     StudyLevel level,
+    int storageLessonId,
   ) async {
     final repo = ref.read(lessonRepositoryProvider);
     final shouldStarAll = _starredTermIds.length != terms.length;
@@ -435,11 +460,15 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
         _starredTermIds.clear();
       }
     });
-    await repo.setStarredForLesson(widget.lessonId, shouldStarAll);
+    await repo.setStarredForLesson(storageLessonId, shouldStarAll);
     ref.invalidate(lessonMetaProvider(level.shortLabel));
   }
 
-  Future<void> _toggleStar(UserLessonTermData term, StudyLevel level) async {
+  Future<void> _toggleStar(
+    UserLessonTermData term,
+    StudyLevel level,
+    int storageLessonId,
+  ) async {
     final repo = ref.read(lessonRepositoryProvider);
     final nextValue = !_starredTermIds.contains(term.id);
     setState(() {
@@ -451,13 +480,17 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     });
     await repo.updateTermStar(
       term.id,
-      lessonId: widget.lessonId,
+      lessonId: storageLessonId,
       isStarred: nextValue,
     );
     ref.invalidate(lessonMetaProvider(level.shortLabel));
   }
 
-  Future<void> _toggleLearned(UserLessonTermData term, StudyLevel level) async {
+  Future<void> _toggleLearned(
+    UserLessonTermData term,
+    StudyLevel level,
+    int storageLessonId,
+  ) async {
     final repo = ref.read(lessonRepositoryProvider);
     final nextValue = !_learnedTermIds.contains(term.id);
     setState(() {
@@ -469,7 +502,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     });
     await repo.updateTermLearned(
       term.id,
-      lessonId: widget.lessonId,
+      lessonId: storageLessonId,
       isLearned: nextValue,
     );
     if (nextValue) {
@@ -487,7 +520,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       await repo.deleteSrsState(term.id);
     }
     ref.invalidate(lessonMetaProvider(level.shortLabel));
-    ref.invalidate(lessonDueTermsProvider(widget.lessonId));
+    ref.invalidate(lessonDueTermsProvider(storageLessonId));
   }
 
   Future<void> _reviewTerm(UserLessonTermData term, int quality) async {
@@ -544,7 +577,15 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       await mistakeRepo.markCorrect(type: 'vocab', itemId: term.id);
     }
 
-    ref.invalidate(lessonDueTermsProvider(widget.lessonId));
+    final level = ref.read(studyLevelProvider) ?? StudyLevel.n5;
+    ref.invalidate(
+      lessonDueTermsProvider(
+        LessonRepository.curriculumStorageLessonId(
+          level.shortLabel,
+          widget.lessonId,
+        ),
+      ),
+    );
     if (!mounted) {
       return;
     }
@@ -556,18 +597,31 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
 
   Future<void> _startLearning() async {
     final repo = ref.read(lessonRepositoryProvider);
-    await repo.initializeLessonSrs(widget.lessonId);
-
-    // Refresh providers to update UI
-    ref.invalidate(lessonDueTermsProvider(widget.lessonId));
-
     final language = ref.read(appLanguageProvider);
     final level = ref.read(studyLevelProvider) ?? StudyLevel.n5;
-    final fallbackTitle = language.lessonTitle(widget.lessonId);
+    final sourceLessonId = LessonRepository.curriculumSourceLessonId(
+      level.shortLabel,
+      widget.lessonId,
+    );
+    final storageLessonId = LessonRepository.curriculumStorageLessonId(
+      level.shortLabel,
+      widget.lessonId,
+    );
+    await repo.initializeLessonSrs(storageLessonId);
+
+    // Refresh providers to update UI
+    ref.invalidate(lessonDueTermsProvider(storageLessonId));
+
+    final fallbackTitle = language.lessonTitle(sourceLessonId);
 
     ref.invalidate(
       lessonTermsProvider(
-        LessonTermsArgs(widget.lessonId, level.shortLabel, fallbackTitle),
+        LessonTermsArgs(
+          storageLessonId,
+          level.shortLabel,
+          fallbackTitle,
+          sourceLessonId: sourceLessonId,
+        ),
       ),
     );
     ref.invalidate(lessonMetaProvider(level.shortLabel));
@@ -769,12 +823,13 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     BuildContext context,
     AppLanguage language,
     StudyLevel level,
+    int storageLessonId,
     String title,
     List<UserLessonTermData> terms,
   ) {
     switch (action) {
       case _MenuAction.edit:
-        context.openLessonEdit(widget.lessonId);
+        context.openLessonEdit(storageLessonId);
         break;
       case _MenuAction.addTerm:
         _showQuickAddTerm(language, level);
@@ -872,7 +927,15 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       return;
     }
     final repo = ref.read(lessonRepositoryProvider);
-    await repo.appendTerms(widget.lessonId, [
+    final sourceLessonId = LessonRepository.curriculumSourceLessonId(
+      level.shortLabel,
+      widget.lessonId,
+    );
+    final storageLessonId = LessonRepository.curriculumStorageLessonId(
+      level.shortLabel,
+      widget.lessonId,
+    );
+    await repo.appendTerms(storageLessonId, [
       LessonTermDraft(
         term: term,
         reading: reading,
@@ -884,9 +947,10 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     ref.invalidate(
       lessonTermsProvider(
         LessonTermsArgs(
-          widget.lessonId,
+          storageLessonId,
           level.shortLabel,
-          language.lessonTitle(widget.lessonId),
+          language.lessonTitle(sourceLessonId),
+          sourceLessonId: sourceLessonId,
         ),
       ),
     );
@@ -915,15 +979,24 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     }
     try {
       final repo = ref.read(lessonRepositoryProvider);
-      await repo.resetLessonProgress(widget.lessonId);
+      final sourceLessonId = LessonRepository.curriculumSourceLessonId(
+        level.shortLabel,
+        widget.lessonId,
+      );
+      final storageLessonId = LessonRepository.curriculumStorageLessonId(
+        level.shortLabel,
+        widget.lessonId,
+      );
+      await repo.resetLessonProgress(storageLessonId);
       ref.invalidate(lessonMetaProvider(level.shortLabel));
-      ref.invalidate(lessonDueTermsProvider(widget.lessonId));
+      ref.invalidate(lessonDueTermsProvider(storageLessonId));
       ref.invalidate(
         lessonTermsProvider(
           LessonTermsArgs(
-            widget.lessonId,
+            storageLessonId,
             level.shortLabel,
-            language.lessonTitle(widget.lessonId),
+            language.lessonTitle(sourceLessonId),
+            sourceLessonId: sourceLessonId,
           ),
         ),
       );

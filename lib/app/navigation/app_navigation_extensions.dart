@@ -134,8 +134,8 @@ extension AppNavigationContext on BuildContext {
     ),
   );
 
-  void openLesson(Object? lessonId) =>
-      push(AppRouteLocation.lessonDetail(lessonId));
+  void openLesson(Object? lessonId, {String? levelCode}) =>
+      push(AppRouteLocation.lessonDetail(lessonId, levelCode: levelCode));
   void openLessonEdit(Object? lessonId) =>
       push(AppRouteLocation.lessonEdit(lessonId));
   void openLessonPractice(

@@ -21,6 +21,7 @@ import 'package:jpstudy/features/foundations/widgets/foundations_soft_suggest_ga
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
 import 'package:jpstudy/features/vocab/vocab_copy.dart';
+import 'package:jpstudy/features/vocab/vocab_content_timeout.dart';
 import 'package:jpstudy/features/vocab/providers/vocab_home_provider.dart';
 
 part 'vocab_screen_parts.dart';
@@ -171,19 +172,42 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       )
       .then((items) => items.length);
 
-  final n5Count = await n5CountFuture;
-  final n4Count = await n4CountFuture;
-  final n3Count = await n3CountFuture;
-  final n2Count = await n2CountFuture;
-  final n1Count = await n1CountFuture;
-  final shinkanzenN3Count = await shinkanzenN3CountFuture;
-  final shinkanzenN2Count = await shinkanzenN2CountFuture;
-  final shinkanzenN1Count = await shinkanzenN1CountFuture;
-  final shinkanzenN3Summary = await shinkanzenN3SummaryFuture;
-  final shinkanzenN2Summary = await shinkanzenN2SummaryFuture;
-  final shinkanzenN1Summary = await shinkanzenN1SummaryFuture;
-  final minnaN5Count = await minnaN5CountFuture;
-  final minnaN4Count = await minnaN4CountFuture;
+  final counts = await withVocabContentTimeout(
+    Future.wait<int>([
+      n5CountFuture,
+      n4CountFuture,
+      n3CountFuture,
+      n2CountFuture,
+      n1CountFuture,
+      shinkanzenN3CountFuture,
+      shinkanzenN2CountFuture,
+      shinkanzenN1CountFuture,
+      minnaN5CountFuture,
+      minnaN4CountFuture,
+    ]),
+    ref: ref,
+  );
+  final summaries = await withVocabContentTimeout(
+    Future.wait<_SeriesManifestSummary>([
+      shinkanzenN3SummaryFuture,
+      shinkanzenN2SummaryFuture,
+      shinkanzenN1SummaryFuture,
+    ]),
+    ref: ref,
+  );
+  final n5Count = counts[0];
+  final n4Count = counts[1];
+  final n3Count = counts[2];
+  final n2Count = counts[3];
+  final n1Count = counts[4];
+  final shinkanzenN3Count = counts[5];
+  final shinkanzenN2Count = counts[6];
+  final shinkanzenN1Count = counts[7];
+  final minnaN5Count = counts[8];
+  final minnaN4Count = counts[9];
+  final shinkanzenN3Summary = summaries[0];
+  final shinkanzenN2Summary = summaries[1];
+  final shinkanzenN1Summary = summaries[2];
   final shinkanzenN3TermCount = shinkanzenN3Summary.importedTermCount > 0
       ? shinkanzenN3Summary.importedTermCount
       : shinkanzenN3Count;

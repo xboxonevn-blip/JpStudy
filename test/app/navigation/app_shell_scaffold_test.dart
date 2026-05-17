@@ -67,4 +67,16 @@ void main() {
     expect(sidebarFooterItemHeightForTesting, 36);
     expect(sidebarEstimatedContentHeightForTesting, lessThan(600));
   });
+
+  test('shell branch tap uses one navigation mechanism', () {
+    final source = File(
+      'lib/app/navigation/app_shell_scaffold.dart',
+    ).readAsStringSync();
+    final goToBranchBody = RegExp(
+      r'void _goToBranch[\s\S]*?\n  \}',
+    ).firstMatch(source)!.group(0)!;
+
+    expect(goToBranchBody, contains('navigationShell.goBranch'));
+    expect(goToBranchBody, isNot(contains('GoRouter.of(context).go')));
+  });
 }

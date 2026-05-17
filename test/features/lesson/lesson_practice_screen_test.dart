@@ -41,7 +41,11 @@ class FakeLessonPracticeRepository extends LessonRepository {
   }
 
   @override
-  Future<void> seedTermsIfEmpty(int lessonId, String currentLevelLabel) async {}
+  Future<void> seedTermsIfEmpty(
+    int lessonId,
+    String currentLevelLabel, {
+    int? sourceLessonId,
+  }) async {}
 
   @override
   Future<void> seedGrammarIfEmpty(

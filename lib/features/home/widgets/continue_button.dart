@@ -346,7 +346,7 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
         break;
       case ContinueActionType.nextLesson:
         if (action.data != null) {
-          context.openLesson(action.data);
+          context.openLesson(action.data, levelCode: levelCode);
         } else {
           context.openHome();
         }

@@ -8,6 +8,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/vocab/vocab_content_timeout.dart';
 
 class MinnaLessonCatalogArgs {
   const MinnaLessonCatalogArgs({
@@ -45,12 +46,18 @@ final minnaLessonCatalogProvider =
       args,
     ) async {
       final repo = ref.watch(lessonRepositoryProvider);
-      await repo.fetchTermsForLessonRange(
-        args.levelCode,
-        startLesson: args.lessonStart,
-        endLesson: args.lessonEnd,
+      await withVocabContentTimeout(
+        repo.fetchTermsForLessonRange(
+          args.levelCode,
+          startLesson: args.lessonStart,
+          endLesson: args.lessonEnd,
+        ),
+        ref: ref,
       );
-      final meta = await repo.fetchLessonMeta(args.levelCode);
+      final meta = await withVocabContentTimeout(
+        repo.fetchLessonMeta(args.levelCode),
+        ref: ref,
+      );
       final lessons =
           meta
               .where(
@@ -496,7 +503,7 @@ class _LessonCard extends StatelessWidget {
 
     return InkWell(
       key: ValueKey('minna_lesson_${lesson.id}'),
-      onTap: () => context.openLesson(lesson.id),
+      onTap: () => context.openLesson(lesson.id, levelCode: args.levelCode),
       borderRadius: BorderRadius.circular(24),
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.lg),

@@ -79,7 +79,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase({QueryExecutor? executor}) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 30;
+  int get schemaVersion => 31;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -331,11 +331,14 @@ class AppDatabase extends _$AppDatabase {
         await _safeAddColumn(migrator, kanaSrsState, kanaSrsState.fsrsStep);
         await _migrateFsrsCardState();
       }
+      if (from < 31) {
+        await _seedLessons();
+      }
     },
     beforeOpen: (details) async {
       // Only reseed on first install or after an upgrade — on routine opens
-      // all 75 INSERT OR IGNORE calls are guaranteed no-ops and waste
-      // 75 round-trips to the background isolate on every app start.
+      // all curriculum INSERT OR IGNORE calls are guaranteed no-ops and waste
+      // round-trips to the background isolate on every app start.
       if (details.wasCreated || details.hadUpgrade) {
         await _seedLessons();
       }
@@ -458,12 +461,13 @@ class AppDatabase extends _$AppDatabase {
     await batch((b) {
       for (final spec in _lessonSeedSpecs) {
         for (var i = spec.startLesson; i <= spec.endLesson; i++) {
+          final displayLessonId = spec.displayLessonId(i);
           b.insert(
             userLesson,
             UserLessonCompanion.insert(
               id: Value(i),
               level: spec.level,
-              title: 'Lesson $i',
+              title: 'Lesson $displayLessonId',
               description: const Value(''),
               isPublic: const Value(true),
               isCustomTitle: const Value(false),
@@ -507,16 +511,27 @@ class AppDatabase extends _$AppDatabase {
 }
 
 class _LessonSeedSpec {
-  const _LessonSeedSpec(this.level, this.startLesson, this.endLesson);
+  const _LessonSeedSpec(
+    this.level,
+    this.startLesson,
+    this.endLesson, {
+    this.displayOffset = 0,
+  });
 
   final String level;
   final int startLesson;
   final int endLesson;
+  final int displayOffset;
+
+  int displayLessonId(int storageLessonId) => storageLessonId - displayOffset;
 }
 
 const _lessonSeedSpecs = <_LessonSeedSpec>[
   _LessonSeedSpec('N5', 1, 25),
   _LessonSeedSpec('N4', 26, 50),
+  _LessonSeedSpec('N3', 300001, 300025, displayOffset: 300000),
+  _LessonSeedSpec('N2', 200001, 200025, displayOffset: 200000),
+  _LessonSeedSpec('N1', 100001, 100025, displayOffset: 100000),
 ];
 
 QueryExecutor _openConnection() {

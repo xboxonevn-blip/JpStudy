@@ -46,6 +46,7 @@ final lessonTermsProvider =
       args,
     ) async {
       final repo = ref.watch(lessonRepositoryProvider);
+      final sourceLessonId = args.resolvedSourceLessonId;
       await repo.ensureLesson(
         lessonId: args.lessonId,
         level: args.level,
@@ -53,8 +54,12 @@ final lessonTermsProvider =
       );
       // Vocab and grammar seeding touch independent tables — run concurrently.
       await Future.wait([
-        repo.seedTermsIfEmpty(args.lessonId, args.level),
-        repo.seedGrammarIfEmpty(args.lessonId, args.level),
+        repo.seedTermsIfEmpty(
+          args.lessonId,
+          args.level,
+          sourceLessonId: sourceLessonId,
+        ),
+        repo.seedGrammarIfEmpty(sourceLessonId, args.level),
       ]);
       return repo.fetchTerms(args.lessonId);
     });
@@ -248,8 +253,9 @@ final lessonGrammarProvider =
     ) async {
       final repo = ref.watch(lessonRepositoryProvider);
       // Ensure grammar is seeded before fetching
-      await repo.seedGrammarIfEmpty(args.lessonId, args.level);
-      return repo.fetchGrammarForLevel(args.level, args.lessonId);
+      final sourceLessonId = args.resolvedSourceLessonId;
+      await repo.seedGrammarIfEmpty(sourceLessonId, args.level);
+      return repo.fetchGrammarForLevel(args.level, sourceLessonId);
     });
 
 final lessonKanjiProvider = FutureProvider.family<List<KanjiItem>, int>((
@@ -279,22 +285,34 @@ final srsStateProvider = FutureProvider.family<SrsStateData?, int>((
 });
 
 class LessonTermsArgs {
-  const LessonTermsArgs(this.lessonId, this.level, this.fallbackTitle);
+  const LessonTermsArgs(
+    this.lessonId,
+    this.level,
+    this.fallbackTitle, {
+    this.sourceLessonId,
+  });
 
   final int lessonId;
   final String level;
   final String fallbackTitle;
+  final int? sourceLessonId;
+
+  int get resolvedSourceLessonId =>
+      sourceLessonId ??
+      LessonRepository.curriculumSourceLessonId(level, lessonId);
 
   @override
   bool operator ==(Object other) {
     return other is LessonTermsArgs &&
         other.lessonId == lessonId &&
         other.level == level &&
-        other.fallbackTitle == fallbackTitle;
+        other.fallbackTitle == fallbackTitle &&
+        other.sourceLessonId == sourceLessonId;
   }
 
   @override
-  int get hashCode => Object.hash(lessonId, level, fallbackTitle);
+  int get hashCode =>
+      Object.hash(lessonId, level, fallbackTitle, sourceLessonId);
 }
 
 class LessonRangeTermsArgs {
@@ -504,7 +522,36 @@ class LessonRepository {
   final AnalyticsService? _analyticsService;
   final FsrsService _fsrsService = FsrsService();
   static const int _defaultLessonCount = 25;
+  static const _upperLevelLessonOffsets = <String, int>{
+    'N1': 100000,
+    'N2': 200000,
+    'N3': 300000,
+  };
   static final _seriesNormalizeRe = RegExp(r'[^a-z0-9]+');
+
+  static int curriculumStorageLessonId(String level, int lessonId) {
+    final normalized = level.trim().toUpperCase();
+    final offset = _upperLevelLessonOffsets[normalized];
+    if (offset == null) {
+      return lessonId;
+    }
+    if (lessonId > offset && lessonId <= offset + _defaultLessonCount) {
+      return lessonId;
+    }
+    return offset + lessonId;
+  }
+
+  static int curriculumSourceLessonId(String level, int lessonId) {
+    final normalized = level.trim().toUpperCase();
+    final offset = _upperLevelLessonOffsets[normalized];
+    if (offset == null) {
+      return lessonId;
+    }
+    if (lessonId > offset && lessonId <= offset + _defaultLessonCount) {
+      return lessonId - offset;
+    }
+    return lessonId;
+  }
 
   Future<String> getLessonTitle(int lessonId, String fallback) async {
     final existing = await (_db.select(
@@ -947,16 +994,17 @@ class LessonRepository {
     // Phase 1: ensure + seed each lesson sequentially (FK dependency within
     // each lesson requires ordering: ensureLesson -> seedTermsIfEmpty).
     for (int lessonId = startLesson; lessonId <= endLesson; lessonId++) {
-      final title = await getLessonTitle(lessonId, 'Lesson $lessonId');
-      await ensureLesson(lessonId: lessonId, level: level, title: title);
-      await seedTermsIfEmpty(lessonId, level);
+      final storageLessonId = curriculumStorageLessonId(level, lessonId);
+      final title = await getLessonTitle(storageLessonId, 'Lesson $lessonId');
+      await ensureLesson(lessonId: storageLessonId, level: level, title: title);
+      await seedTermsIfEmpty(storageLessonId, level, sourceLessonId: lessonId);
     }
 
     // Phase 2: single bulk fetch for all lesson IDs — replaces N individual
     // fetchTerms(lessonId) calls with one WHERE lessonId IN (...) query.
     final lessonIds = List.generate(
       endLesson - startLesson + 1,
-      (i) => startLesson + i,
+      (i) => curriculumStorageLessonId(level, startLesson + i),
     );
     final terms =
         await (_db.select(_db.userLessonTerm)
@@ -1051,7 +1099,11 @@ class LessonRepository {
     return terms;
   }
 
-  Future<void> seedTermsIfEmpty(int lessonId, String currentLevelLabel) async {
+  Future<void> seedTermsIfEmpty(
+    int lessonId,
+    String currentLevelLabel, {
+    int? sourceLessonId,
+  }) async {
     final existing = await fetchTerms(lessonId);
 
     // Check if existing terms are the dummy ones and should be replaced
@@ -1068,7 +1120,12 @@ class LessonRepository {
         return;
       }
 
-      await _backfillEnglishDefinitions(lessonId, currentLevelLabel, existing);
+      await _backfillEnglishDefinitions(
+        lessonId,
+        currentLevelLabel,
+        existing,
+        sourceLessonId: sourceLessonId,
+      );
 
       // Re-fetch only to verify the backfill succeeded.
       final refreshed = await fetchTerms(lessonId);
@@ -1089,7 +1146,7 @@ class LessonRepository {
     }
 
     final vocabList = await _fetchLessonVocabFromContent(
-      lessonId,
+      sourceLessonId ?? lessonId,
       currentLevelLabel,
     );
     if (vocabList.isEmpty) {
@@ -1120,10 +1177,11 @@ class LessonRepository {
   Future<void> _backfillEnglishDefinitions(
     int lessonId,
     String currentLevelLabel,
-    List<UserLessonTermData> existing,
-  ) async {
+    List<UserLessonTermData> existing, {
+    int? sourceLessonId,
+  }) async {
     final vocabList = await _fetchLessonVocabFromContent(
-      lessonId,
+      sourceLessonId ?? lessonId,
       currentLevelLabel,
     );
     if (vocabList.isEmpty) {

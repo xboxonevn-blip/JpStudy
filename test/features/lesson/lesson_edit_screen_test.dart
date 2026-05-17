@@ -38,7 +38,11 @@ class FakeLessonEditRepository extends LessonRepository {
   }
 
   @override
-  Future<void> seedTermsIfEmpty(int lessonId, String currentLevelLabel) async {}
+  Future<void> seedTermsIfEmpty(
+    int lessonId,
+    String currentLevelLabel, {
+    int? sourceLessonId,
+  }) async {}
 
   @override
   Future<List<UserLessonTermData>> fetchTerms(int lessonId) async => const [];

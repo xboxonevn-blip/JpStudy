@@ -1104,7 +1104,10 @@ class _LessonSection extends StatelessWidget {
                     child: _LessonTile(
                       language: language,
                       lesson: lesson,
-                      onTap: () => context.openLesson(lesson.id),
+                      onTap: () => context.openLesson(
+                        lesson.id,
+                        levelCode: lesson.level,
+                      ),
                     ),
                   ),
               ],

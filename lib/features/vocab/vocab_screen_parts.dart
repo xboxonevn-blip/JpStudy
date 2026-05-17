@@ -1613,10 +1613,12 @@ Future<List<VocabItem>> _searchVocab(
 ) async {
   final safeQuery = query.trim();
   if (safeQuery.isEmpty || safeQuery.length > 80) return const [];
-  final items = await Future.wait([
-    repo.getVocabByLevelAndSeries(levelCode, 'minna'),
-    repo.getVocabByLevelAndSeries(levelCode, 'hajimete'),
-  ]);
+  final items = await withVocabContentTimeout(
+    Future.wait([
+      repo.getVocabByLevelAndSeries(levelCode, 'minna'),
+      repo.getVocabByLevelAndSeries(levelCode, 'hajimete'),
+    ]),
+  );
   final normalizedQuery = _normalizeVocabSearchText(safeQuery);
   final exactQuery = safeQuery.toLowerCase();
   final results = <VocabItem>[];

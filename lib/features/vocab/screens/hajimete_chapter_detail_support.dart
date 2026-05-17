@@ -4,6 +4,7 @@ import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/data/utils/hajimete_catalog_loader.dart';
+import 'package:jpstudy/features/vocab/vocab_content_timeout.dart';
 
 class HajimeteChapterDetailArgs {
   const HajimeteChapterDetailArgs({
@@ -33,7 +34,10 @@ final hajimeteChapterDetailProvider =
       ref,
       args,
     ) {
-      return loadHajimeteChapterDetail(args.levelCode, args.chapterId);
+      return withVocabContentTimeout(
+        loadHajimeteChapterDetail(args.levelCode, args.chapterId),
+        ref: ref,
+      );
     });
 
 final hajimeteChapterItemsProvider =
@@ -42,11 +46,14 @@ final hajimeteChapterItemsProvider =
       args,
     ) {
       final repo = ref.watch(lessonRepositoryProvider);
-      return repo.getVocabByLevelSeriesChapterRange(
-        args.levelCode,
-        series: 'hajimete',
-        startChapter: args.chapterId,
-        endChapter: args.chapterId,
+      return withVocabContentTimeout(
+        repo.getVocabByLevelSeriesChapterRange(
+          args.levelCode,
+          series: 'hajimete',
+          startChapter: args.chapterId,
+          endChapter: args.chapterId,
+        ),
+        ref: ref,
       );
     });
 
@@ -57,8 +64,9 @@ final hajimeteChapterDueItemsProvider =
     ) async {
       final repo = ref.watch(lessonRepositoryProvider);
       final items = await ref.watch(hajimeteChapterItemsProvider(args).future);
-      final states = await repo.getSrsStatesForIds(
-        items.map((item) => item.id).toList(),
+      final states = await withVocabContentTimeout(
+        repo.getSrsStatesForIds(items.map((item) => item.id).toList()),
+        ref: ref,
       );
       final now = DateTime.now();
       return items.where((item) {
@@ -74,7 +82,10 @@ final hajimeteChapterSrsStatesProvider =
     ) async {
       final repo = ref.watch(lessonRepositoryProvider);
       final items = await ref.watch(hajimeteChapterItemsProvider(args).future);
-      return repo.getSrsStatesForIds(items.map((item) => item.id).toList());
+      return withVocabContentTimeout(
+        repo.getSrsStatesForIds(items.map((item) => item.id).toList()),
+        ref: ref,
+      );
     });
 
 final hajimeteChapterUserTermsProvider =
@@ -83,10 +94,13 @@ final hajimeteChapterUserTermsProvider =
       args,
     ) {
       final repo = ref.watch(lessonRepositoryProvider);
-      return repo.fetchTermsForHajimeteChapter(
-        args.levelCode,
-        chapterId: args.chapterId,
-        title: args.laneTitle,
+      return withVocabContentTimeout(
+        repo.fetchTermsForHajimeteChapter(
+          args.levelCode,
+          chapterId: args.chapterId,
+          title: args.laneTitle,
+        ),
+        ref: ref,
       );
     });
 
@@ -95,7 +109,10 @@ final hajimeteKanjiChapterProvider =
       HajimeteKanjiChapterDetail?,
       HajimeteChapterDetailArgs
     >((ref, args) {
-      return loadHajimeteKanjiChapterDetail(args.levelCode, args.chapterId);
+      return withVocabContentTimeout(
+        loadHajimeteKanjiChapterDetail(args.levelCode, args.chapterId),
+        ref: ref,
+      );
     });
 
 Map<int, UserLessonTermData> mapHajimeteUserTermsByItemId(

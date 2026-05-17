@@ -10,6 +10,7 @@ import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/data/utils/hajimete_catalog_loader.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_content_timeout.dart';
 
 class HajimeteChapterCatalogArgs {
   const HajimeteChapterCatalogArgs({
@@ -39,7 +40,10 @@ final hajimeteChapterCatalogProvider =
       ref,
       args,
     ) {
-      return loadHajimeteChapterCatalog(args.levelCode);
+      return withVocabContentTimeout(
+        loadHajimeteChapterCatalog(args.levelCode),
+        ref: ref,
+      );
     });
 
 class _HajimeteChapterStatusArgs {

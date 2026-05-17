@@ -268,33 +268,68 @@ void main() {
     expect(terms.single.definitionEn, 'as ever; as usual; the same');
   });
 
-  test('seedTermsIfEmpty loads canonical lesson vocab for every JLPT level', () async {
-    const cases = [
-      (level: 'N5', lessonId: 1, expectedTerm: '私'),
-      (level: 'N4', lessonId: 26, expectedTerm: '見ます'),
-      (level: 'N3', lessonId: 1, expectedTerm: '愛'),
-      (level: 'N2', lessonId: 1, expectedTerm: 'あいかわらず'),
-      (level: 'N1', lessonId: 1, expectedTerm: '嗚呼'),
-    ];
+  test(
+    'seedTermsIfEmpty loads canonical lesson vocab for every JLPT level',
+    () async {
+      const cases = [
+        (level: 'N5', lessonId: 1, expectedTerm: '私'),
+        (level: 'N4', lessonId: 26, expectedTerm: '見ます'),
+        (level: 'N3', lessonId: 1, expectedTerm: '愛'),
+        (level: 'N2', lessonId: 1, expectedTerm: 'あいかわらず'),
+        (level: 'N1', lessonId: 1, expectedTerm: '嗚呼'),
+      ];
 
-    for (final item in cases) {
-      await db.delete(db.userLessonTerm).go();
-      await db.delete(db.userLesson).go();
+      for (final item in cases) {
+        await db.delete(db.userLessonTerm).go();
+        await db.delete(db.userLesson).go();
+        await repository.ensureLesson(
+          lessonId: item.lessonId,
+          level: item.level,
+          title: '${item.level} lesson ${item.lessonId}',
+        );
+        await repository.seedTermsIfEmpty(item.lessonId, item.level);
+
+        final terms = await repository.fetchTerms(item.lessonId);
+        expect(terms, isNotEmpty, reason: '${item.level} lesson should load');
+        expect(terms.first.term, item.expectedTerm);
+        expect(
+          terms.every((term) => term.definition.trim().isNotEmpty),
+          isTrue,
+          reason: '${item.level} terms should have Vietnamese definitions',
+        );
+      }
+    },
+  );
+
+  test(
+    'curriculum storage lesson IDs keep same-number levels separate',
+    () async {
+      final n5StorageId = LessonRepository.curriculumStorageLessonId('N5', 1);
+      final n3StorageId = LessonRepository.curriculumStorageLessonId('N3', 1);
+
+      expect(n5StorageId, isNot(n3StorageId));
+
       await repository.ensureLesson(
-        lessonId: item.lessonId,
-        level: item.level,
-        title: '${item.level} lesson ${item.lessonId}',
+        lessonId: n5StorageId,
+        level: 'N5',
+        title: 'N5 lesson 1',
       );
-      await repository.seedTermsIfEmpty(item.lessonId, item.level);
+      await repository.seedTermsIfEmpty(n5StorageId, 'N5', sourceLessonId: 1);
 
-      final terms = await repository.fetchTerms(item.lessonId);
-      expect(terms, isNotEmpty, reason: '${item.level} lesson should load');
-      expect(terms.first.term, item.expectedTerm);
-      expect(
-        terms.every((term) => term.definition.trim().isNotEmpty),
-        isTrue,
-        reason: '${item.level} terms should have Vietnamese definitions',
+      await repository.ensureLesson(
+        lessonId: n3StorageId,
+        level: 'N3',
+        title: 'N3 lesson 1',
       );
-    }
-  });
+      await repository.seedTermsIfEmpty(n3StorageId, 'N3', sourceLessonId: 1);
+
+      final n5Terms = await repository.fetchTerms(n5StorageId);
+      final n3Terms = await repository.fetchTerms(n3StorageId);
+
+      expect(n5Terms, isNotEmpty);
+      expect(n3Terms, isNotEmpty);
+      expect(n5Terms.first.term, '私');
+      expect(n3Terms.first.term, '愛');
+    },
+  );
 }
