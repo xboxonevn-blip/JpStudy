@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
-import 'package:jpstudy/features/community/community_screen.dart';
 import 'package:jpstudy/features/design_lab/design_lab_screen.dart';
 import 'package:jpstudy/features/leaderboard/leaderboard_screen.dart';
 import 'package:jpstudy/features/legal/legal_document_screen.dart';
@@ -59,7 +58,7 @@ List<RouteBase> buildProfileRoutes() {
     GoRoute(
       path: AppRoutePath.community,
       name: AppRouteName.community,
-      builder: (context, state) => const CommunityScreen(),
+      redirect: (context, state) => AppRoutePath.me,
     ),
     GoRoute(
       path: AppRoutePath.progress,

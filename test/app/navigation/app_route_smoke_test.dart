@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
 import 'package:jpstudy/features/learn/learn_hub_screen.dart';
+import 'package:jpstudy/features/me/me_screen.dart';
 import 'package:jpstudy/features/me/screens/data_settings_screen.dart';
 import 'package:jpstudy/features/practice/practice_screen.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
@@ -25,6 +26,14 @@ void main() {
 
     await pumpSmokeRoute(tester, AppRoutePath.review);
     expect(find.byType(PracticeScreen), findsOneWidget);
+
+    await pumpSmokeRoute(tester, AppRoutePath.memory);
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/review');
+    expect(find.byType(PracticeScreen), findsOneWidget);
+
+    await pumpSmokeRoute(tester, AppRoutePath.community);
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/me');
+    expect(find.byType(MeScreen), findsOneWidget);
 
     await pumpSmokeRoute(tester, AppRoutePath.studyHub);
     expect(find.byType(StudyHubScreen), findsOneWidget);

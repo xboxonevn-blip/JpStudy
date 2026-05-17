@@ -16,7 +16,7 @@ List<RouteBase> buildMemoryRoutes() {
     GoRoute(
       path: AppRoutePath.memory,
       name: AppRouteName.memory,
-      builder: (context, state) => const StudyHubScreen(),
+      redirect: (context, state) => AppRoutePath.review,
     ),
     GoRoute(
       path: AppRoutePath.studyHub,
