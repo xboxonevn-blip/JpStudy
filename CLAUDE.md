@@ -165,7 +165,7 @@ Active workstream status (as of 2026-05-17):
   bootstrap by seeding persisted providers before `runApp`. `17100cb1` adds
   `npm run report:live-route-matrix`, and the latest run passed `36/36` N4/N3/N2/N1
   live direct-route checks with no N5 fallback markers across audited hash routes.
-- Latest D2 content integrity correction: `3b380191` plus
+- Latest D2 content integrity correction: `f5ff772b` plus
   `D2-spot-check-N3-2026-05-16.md` and
   `D2-spot-check-N1-2026-05-16.md`.
   Current audit reports N5/N4 launch-tier and N3/N2/N1 launch-tier quality

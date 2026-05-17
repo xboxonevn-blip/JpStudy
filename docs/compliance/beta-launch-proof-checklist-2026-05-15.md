@@ -28,7 +28,7 @@ proof state file. Firebase Storage is intentionally descoped for beta and
 recorded as deferred metadata because the app is local-first and the project
 remains on Spark.
 
-Latest post-descope run on `2026-05-17T08:27+07:00` returned
+Latest post-descope run on `2026-05-17T09:12+07:00` returned
 `complete=false` with blockers: `legal-approval-missing`,
 `sentry-dsn-missing`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, and `app-check-enforcement-deferred`.
@@ -134,7 +134,7 @@ Evidence recorded:
 
 Goal: prove source-wired Sentry is operational in a deployed web build.
 
-Current status: completed.
+Current status: source-ready, live proof missing.
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
   `main`; use the current GitHub Actions run for exact CI/deploy proof.
@@ -142,10 +142,10 @@ Current status: completed.
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
   `https://jpstudy.web.app/?sentry-smoke=1` in Chromium.
-- Repository Actions secrets rechecked on `2026-05-17T07:14+07:00` include
+- Repository Actions secrets rechecked on `2026-05-17T09:13+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
-- Sentry readiness CLI rechecked on `2026-05-17T07:14+07:00` with
+- Sentry readiness CLI rechecked on `2026-05-17T09:13+07:00` with
   `npm run report:sentry-readiness -- --json`: source wiring and workflow smoke
   gate are present, repo secrets metadata is readable, no event was sent, and
   readiness remains `false` with reason `sentry-dsn-missing`.
@@ -250,7 +250,7 @@ Current status:
   `tool/research/firebase_admin_delete_user.js`.
 - Dry-run helper defaults to `safeMode=true`; live Auth deletion requires
   explicit `--execute`.
-- Recheck on `2026-05-17T07:14+07:00` removed Storage from beta scope and
+- Recheck on `2026-05-17T09:13+07:00` removed Storage from beta scope and
   reports deletion readiness `executable=false`. Remaining proof blockers are
   missing test Support ID/Firebase UID, GA4 Admin deletion access, and
   `gcloud` or equivalent operator proof path.
