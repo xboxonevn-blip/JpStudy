@@ -35,4 +35,6 @@ Scope: 30 sampled N1 items after grammar rewrite, kanji Han-Viet correction, and
 | 29 | Kanji | 鼾 | HV missing | HV=Hãn; tiếng ngáy |
 | 30 | Kanji | 稲 | HV missing | HV=Đạo; lúa; cây lúa |
 
+Owner spot-check follow-up 2026-05-17: all 200 N1 kanji display glosses were re-scanned for wrong-source errors where the kanji gloss was accidentally copied from an example compound. The reported `稲` defect remains fixed as `稲 (lúa; cây lúa)`. No additional N1 `meaningViDisplay` wrong-source defects were found by the re-scan; the suspicious exact-overlap cases were valid single-kanji/example overlaps such as `笑`, `祈`, and `鼾`.
+
 Result: current audit reports N1 `machine=0`, `open-review=0`.

@@ -427,3 +427,10 @@
 - Actual observation: owner spot-check found duplicated N3 glosses, wrong N3 meanings such as `合わせる`, and N1 kanji meanings copied from compound examples such as `稲光` into `稲`.
 - Delta: -45 percentage points on confidence that taxonomy counters alone prove content quality.
 - Updated belief: D2 evidence needs semantic spot-checks over representative vocab and kanji display glosses, not only tag-state integrity.
+
+## 2026-05-17T08:55:00+07:00 - Duplicate-gloss guard needed canonical text
+
+- Prior belief: the existing N3 duplicate-gloss regression would catch repeated semicolon fragments.
+- Actual observation: labels like `(1) hoàn toàn` and `(sl) ôm` made duplicate fragments look distinct, so 35 repeated N3 Hajimete glosses still passed until the test canonicalized numbered/parenthetical prefixes.
+- Delta: -30 percentage points on confidence that separator-only checks catch editorial debt.
+- Updated belief: content QA tests must normalize editorial wrappers before comparing meanings; otherwise real duplicate glosses hide behind dictionary labels.

@@ -169,7 +169,7 @@ void main() {
               offenders.add('${file.path} $term no-space comma: $meaningVi');
             }
             final parts = _splitTopLevelSemicolons(meaningVi)
-                .map((part) => part.trim().toLowerCase())
+                .map(_canonicalGlossForDup)
                 .where((part) => part.isNotEmpty)
                 .toList();
             if (parts.toSet().length != parts.length) {
@@ -473,4 +473,12 @@ List<String> _splitTopLevelSemicolons(String value) {
   }
   parts.add(buffer.toString());
   return parts;
+}
+
+String _canonicalGlossForDup(String value) {
+  var normalized = value.trim().toLowerCase();
+  normalized = normalized.replaceFirst(RegExp(r'^\(\d+\)\s*'), '');
+  normalized = normalized.replaceFirst(RegExp(r'^\([^)]+\)\s*'), '');
+  normalized = normalized.replaceFirst(RegExp(r'\s+\([^)]+\)$'), '');
+  return normalized.trim();
 }
