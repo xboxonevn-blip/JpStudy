@@ -55,6 +55,9 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
    - Fill `docs/compliance/launch-proof-state.json`:
      `legal.approved=true`, `legal.reviewer`, `legal.approvedAt`,
      `legal.commit`, and `legal.evidence`.
+   - After approval is recorded, remove the in-app draft notice and
+     `review-needed draft` status in the approved-copy commit; launch readiness
+     intentionally remains blocked while draft signals are still visible.
 2. Sentry proof:
    - Add GitHub Actions secret `JPSTUDY_SENTRY_DSN`.
    - Run GitHub Actions `CI` manually with `sentry_smoke=true`.
@@ -93,7 +96,10 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 
 Use these as field-shape examples only. Do not record screenshots with secret
 values or private learner data. Leave a gate `false` until its evidence is
-real and repeatable.
+real and repeatable. `npm run report:launch-readiness -- --json
+--proof-state docs/compliance/launch-proof-state.json` rejects template
+placeholders such as `<run-id>`, `<app-id>`, `approved-copy-commit-hash`, and
+`dedicated-test-firebase-uid`.
 
 Legal approval:
 
