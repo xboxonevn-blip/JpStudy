@@ -40,7 +40,7 @@ extension AppNavigationContext on BuildContext {
   );
   void popFoundations() => pop();
   void openLibrary() => pushNamed(AppRouteName.library);
-  void openStudy() => pushNamed(AppRouteName.study);
+  void openStudy() => goNamed(AppRouteName.review);
   void openStudyHub() => pushNamed(AppRouteName.studyHub);
   void openMistakes() => pushNamed(AppRouteName.mistakes);
   void openImmersion() => pushNamed(AppRouteName.immersion);

@@ -31,6 +31,14 @@ void main() {
     expect(AppRouter.router.routeInformationProvider.value.uri.path, '/review');
     expect(find.byType(PracticeScreen), findsOneWidget);
 
+    await pumpSmokeRoute(tester, AppRoutePath.active);
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/review');
+    expect(find.byType(PracticeScreen), findsOneWidget);
+
+    await pumpSmokeRoute(tester, AppRoutePath.study);
+    expect(AppRouter.router.routeInformationProvider.value.uri.path, '/review');
+    expect(find.byType(PracticeScreen), findsOneWidget);
+
     await pumpSmokeRoute(tester, AppRoutePath.community);
     expect(AppRouter.router.routeInformationProvider.value.uri.path, '/me');
     expect(find.byType(MeScreen), findsOneWidget);

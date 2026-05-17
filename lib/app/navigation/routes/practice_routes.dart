@@ -1,7 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_route_builders.dart';
-import 'package:jpstudy/features/custom_decks/custom_decks_screen.dart';
 import 'package:jpstudy/features/games/match_game/match_game_screen.dart';
 import 'package:jpstudy/features/immersion/immersion_home_screen.dart';
 import 'package:jpstudy/features/practice/models/recall_sprint_strategy.dart';
@@ -22,12 +21,12 @@ List<RouteBase> buildPracticeRoutes() {
     GoRoute(
       path: AppRoutePath.active,
       name: AppRouteName.active,
-      builder: (context, state) => const CustomDecksScreen(),
+      redirect: (context, state) => AppRoutePath.review,
     ),
     GoRoute(
       path: AppRoutePath.study,
       name: AppRouteName.study,
-      builder: (context, state) => const PracticeScreen(),
+      redirect: (context, state) => AppRoutePath.review,
     ),
     GoRoute(
       path: AppRoutePath.practice,

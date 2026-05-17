@@ -174,6 +174,8 @@ Verified source changes:
 - Old enhanced lesson mode URLs redirect to canonical `/lesson/:id/practice/:mode`:
   `learn-enhanced`, `flashcards-enhanced`, `test-enhanced`, `write-mode`, and `match-mode`.
 - New navigation calls for lesson learn/write/match/flashcards/test use canonical practice routes.
+- Legacy `/active` and `/study` routes now redirect to canonical `/review`
+  instead of exposing the old custom-deck/study surfaces.
 - Home no longer mounts a second inline onboarding system or mobile-only fallback path.
 - `CommunityScreen` was removed because Community was not a real community surface and now resolves to Profile.
 - Review screen title now matches the shell label.
