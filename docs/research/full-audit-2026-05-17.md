@@ -138,3 +138,24 @@ That explains transient drift: current branch local state, global provider, and 
 ## Surprise
 
 The content inventory is mostly present and current `main` has a regenerated manifest, but live lesson detail can still show zero because route identity and loading state are wrong. Mental model update: "content exists" is not enough; curriculum identity must be level-scoped and loading must fail closed with a learner-readable error instead of pretending zero content.
+
+## Phase 1 P0 Live Recheck
+
+Timestamp: `2026-05-17T14:13+07:00`
+
+Commit/deploy: `096e913a fix(app): repair lesson loading and navigation P0`, deployed to `https://jpstudy.web.app`.
+
+Live Playwright results after deploy:
+
+| Route | Seeded level | Result |
+| --- | --- | --- |
+| `/#/lesson/1` | N5 | Vocab tab rendered `Tổng 51`; first term `私` with Vietnamese meaning `tôi`. |
+| `/#/lesson/26?level=N4` | N4 | Vocab tab rendered `Tổng 68`; first term `見ます`. |
+| `/#/lesson/1?level=N3` | N3 | Vocab tab rendered `Tổng 7`; first term `愛`. |
+| `/#/lesson/1?level=N2` | N2 | Vocab tab rendered `Tổng 73`; first term `あいかわらず`. |
+| `/#/lesson/1?level=N1` | N1 | Vocab tab rendered `Tổng 140`; first term `嗚呼`. |
+| `/#/vocab` | N5 | Catalog resolved without spinner-only state after 9s. |
+| `/#/premium` | N5 | Rendered Upgrade content, not Leaderboard. |
+| `/#/search` | N5 | Rendered Search content with `Xem tất cả (988)` vocab entries, not Community. |
+
+Remaining caveat: this verifies the P0 learner-loop blockers, not the later Phase 2 level-store unification or Phase 3 IA consolidation.

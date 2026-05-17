@@ -39,7 +39,7 @@ The active mission is complete only if all are true:
 | App Check enforcement | `docs/compliance/launch-proof-state.json` has `appCheck.enforced=false`; enforcement intentionally deferred until monitoring window | Deferred/missing |
 | App coherence Phase 0 | `docs/research/app-coherence-audit-2026-05-17.md` confirms 11 shell branches, 68 routes, duplicate Home routes, dual onboarding gates, split Home implementations, and stale manifest/runtime vocab drift | New blocker class documented |
 | App coherence Phase 1 | `docs/research/app-coherence-phase1-content-pipeline-2026-05-17.md`; commits `2dcd5938`, `39020712`, `98cad1bf` make lesson vocab source-aware, regenerate/guard the content manifest, and cover N5-N1 lesson vocab seeding | Passed for runtime vocab availability; level-ID collision caveat remains |
-| Full live app audit | `docs/research/full-audit-2026-05-17.md` verifies live lesson routes still show `Tổng 0` + spinner and traces root causes to route identity, unbounded async loading, double shell navigation, and fragmented level writers | P0 fix in progress: lesson storage IDs are now level-scoped for N3/N2/N1, loading no longer renders fake zero totals, vocab catalog/detail/search futures have timeout/error paths, and shell branch taps use one navigation path |
+| Full live app audit | `docs/research/full-audit-2026-05-17.md` verifies live lesson routes still show `Tổng 0` + spinner and traces root causes to route identity, unbounded async loading, double shell navigation, and fragmented level writers | P0 source fix deployed/rechecked: N5/N4/N3/N2/N1 lesson routes now render non-zero vocab totals; `/premium` and `/search` render matching screens |
 
 ## Latest Readiness Result
 
@@ -80,13 +80,15 @@ App coherence note: Phase 1 fixed the source-aware lesson vocab query and
 regenerated the content manifest. The follow-up P0 patch added level-scoped
 storage lesson IDs for N3/N2/N1, made lesson route links carry `level=`,
 kept loading totals hidden until data resolves, added vocab loading timeouts,
-and removed the double navigation in shell branch taps. Remaining work:
-live-deploy verification, then Phase 2 level-store unification and IA cleanup.
+and removed the double navigation in shell branch taps. Live deploy rechecked
+`/#/lesson/1`, `/#/lesson/26?level=N4`, `/#/lesson/1?level=N3/N2/N1`,
+`/#/vocab`, `/#/premium`, and `/#/search`. Remaining work: Phase 2 level-store
+unification and IA cleanup.
 
 Full live audit note: `full-audit-2026-05-17.md` supersedes the prior IA-first
-ordering. P0 source fixes are implemented locally; the deployed app must still
-be rebuilt/deployed and live-verified before this audit can mark lesson study
-usable.
+ordering. P0 source fixes were built, deployed, and live-verified on
+2026-05-17T14:13+07:00. Lesson study is no longer blocked by zero vocab totals
+or shell branch URL/content desync in the checked routes.
 
 ## Verdict
 
