@@ -31,7 +31,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 32;
+  int get schemaVersion => 33;
 
   @override
   MigrationStrategy get migration {
@@ -140,6 +140,9 @@ class ContentDatabase extends _$ContentDatabase {
           // kanji reseed consolidated into v32
         }
         if (from < 32) {
+          await _reseedMinnaKanji();
+        }
+        if (from < 33) {
           await _reseedMinnaKanji();
         }
       },
@@ -1058,6 +1061,14 @@ class ContentDatabase extends _$ContentDatabase {
             ? _readNullableText(legacy ?? const {}, 'meaning')
             : _readNullableText(labels, 'meaningViDisplay');
         if (character.isEmpty || meaning == null || meaning.isEmpty) continue;
+        final hanViet = labels == null
+            ? null
+            : _readNullableText(labels, 'hanViet');
+        final decomposition = _asMap(entry['decomposition']);
+        final decompositionJson = _kanjiDecompositionJson(
+          decomposition: decomposition,
+          hanViet: hanViet,
+        );
 
         rows.add({
           'lessonId': _readInt(entry, 'lessonId') ?? lessonId,
@@ -1089,9 +1100,7 @@ class ContentDatabase extends _$ContentDatabase {
           'mnemonic_en': mnemonic == null
               ? null
               : _readNullableText(mnemonic, 'en'),
-          'decomposition_json': entry['decomposition'] is Map
-              ? json.encode(entry['decomposition'])
-              : null,
+          'decomposition_json': decompositionJson,
           'examples': examples is List ? examples : const [],
           'jlptLevel': _readText(entry, 'level'),
         });
@@ -1101,6 +1110,17 @@ class ContentDatabase extends _$ContentDatabase {
     } catch (_) {
       return const [];
     }
+  }
+
+  String? _kanjiDecompositionJson({
+    required Map<String, dynamic>? decomposition,
+    required String? hanViet,
+  }) {
+    final merged = <String, dynamic>{
+      if (decomposition != null) ...decomposition,
+      if (hanViet != null && hanViet.isNotEmpty) 'hanViet': hanViet,
+    };
+    return merged.isEmpty ? null : json.encode(merged);
   }
 
   Future<void> _insertKanjiRows(List<dynamic> rows) async {

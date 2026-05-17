@@ -551,3 +551,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: kanji card semantics still used Vietnamese-only `Học` labels and romanized `onyomi/kunyomi` terms, so EN/JA users would hear VI-shaped accessibility copy even after visual gating.
 - Delta: -15 percentage points on confidence that visual localization covers assistive experiences.
 - Updated belief: per-language UX changes need rendered accessibility labels in the same regression set as visible widgets.
+
+## 2026-05-18 - Kanji labels existed but were not seeded into detail metadata
+
+- Prior belief: canonical kanji `labels.hanViet` would be available to the detail dialog through the existing decomposition model.
+- Actual observation: seed code copied `labels.meaningViDisplay` and mnemonics, but left `labels.hanViet` outside `decomposition_json`; live N5 `人` therefore showed Vietnamese title/mnemonic but no explicit Hán-Việt row.
+- Delta: -20 percentage points on confidence that canonical asset fields reach runtime models just because they exist in JSON.
+- Updated belief: every learner-facing canonical field needs a seed-path regression, especially when the runtime model stores it in a derived/nested field.

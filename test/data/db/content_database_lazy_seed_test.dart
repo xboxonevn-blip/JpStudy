@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -47,5 +49,24 @@ void main() {
 
     expect(counts['hajimete'], greaterThan(0));
     expect(counts['ShinKanzen'], greaterThan(0));
+  });
+
+  test('seeds kanji Han-Viet labels into decomposition metadata', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({'onboarding.level': 'N5'});
+    final db = ContentDatabase(executor: NativeDatabase.memory());
+    addTearDown(db.close);
+
+    final row =
+        await (db.select(db.kanji)
+              ..where(
+                (tbl) => tbl.character.equals('人') & tbl.jlptLevel.equals('N5'),
+              )
+              ..limit(1))
+            .getSingle();
+    final decomposition =
+        jsonDecode(row.decompositionJson!) as Map<String, dynamic>;
+
+    expect(decomposition['hanViet'], 'Nhân');
   });
 }
