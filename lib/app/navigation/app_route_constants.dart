@@ -1,5 +1,6 @@
 class AppRoutePath {
   static const kanji = '/kanji';
+  static const kanjiHanViet = '/kanji/han-viet';
   static const kanjiPractice = '/kanji/practice';
   static const handwritingPractice = '/practice/handwriting';
   static const kanjiReadingPractice = '/practice/kanji-reading';
@@ -80,6 +81,7 @@ class AppRoutePath {
 
 class AppRouteName {
   static const kanji = 'kanji';
+  static const kanjiHanViet = 'kanji-han-viet';
   static const kanjiPractice = 'kanji-practice';
   static const handwritingPractice = 'handwriting-practice';
   static const kanjiReadingPractice = 'kanji-reading-practice';

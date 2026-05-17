@@ -68,15 +68,16 @@ class FoundationsHubScreen extends ConsumerWidget {
                         onTap: context.openFoundationsCompounds,
                       ),
                     ),
-                    SizedBox(
-                      width: width,
-                      child: _ModuleCard(
-                        icon: Icons.rule_rounded,
-                        title: language.hanVietRulesTitle,
-                        subtitle: '32 rules',
-                        onTap: context.openFoundationsHanViet,
+                    if (language == AppLanguage.vi)
+                      SizedBox(
+                        width: width,
+                        child: _ModuleCard(
+                          icon: Icons.rule_rounded,
+                          title: language.hanVietRulesTitle,
+                          subtitle: '32 rules',
+                          onTap: context.openKanjiHanVietRules,
+                        ),
                       ),
-                    ),
                   ],
                 );
               },

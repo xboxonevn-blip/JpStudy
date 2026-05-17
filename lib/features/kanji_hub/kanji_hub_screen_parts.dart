@@ -742,11 +742,13 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                         ),
                       ),
                     ),
-                    OutlinedButton.icon(
-                      onPressed: context.openFoundationsHanViet,
-                      icon: const Icon(Icons.auto_stories_outlined, size: 18),
-                      label: Text(widget.language.hanVietRulesTitle),
-                    ),
+                    if (widget.language == AppLanguage.vi)
+                      OutlinedButton.icon(
+                        key: const ValueKey('kanji_han_viet_rules_button'),
+                        onPressed: context.openKanjiHanVietRules,
+                        icon: const Icon(Icons.auto_stories_outlined, size: 18),
+                        label: Text(widget.language.hanVietRulesTitle),
+                      ),
                   ],
                 ),
               ],

@@ -63,10 +63,8 @@ List<RouteBase> buildFoundationsRoutes() {
     GoRoute(
       path: AppRoutePath.foundationsHanViet,
       name: AppRouteName.foundationsHanViet,
-      builder: (context, state) => const _N5OnlyFoundationsRoute(
-        lockedMode: _FoundationsLockedMode.redirectHome,
-        child: HanVietReferenceScreen(),
-      ),
+      builder: (context, state) =>
+          const HanVietReferenceGate(fallbackPath: AppRoutePath.home),
     ),
   ];
 }

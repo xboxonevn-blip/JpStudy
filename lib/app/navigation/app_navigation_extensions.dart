@@ -26,6 +26,7 @@ extension AppNavigationContext on BuildContext {
   void openFoundationsCompounds() =>
       pushNamed(AppRouteName.foundationsCompounds);
   void openFoundationsHanViet() => pushNamed(AppRouteName.foundationsHanViet);
+  void openKanjiHanVietRules() => pushNamed(AppRouteName.kanjiHanViet);
   void openFoundationsQuiz({
     KanaScript? script,
     KanaView? view,

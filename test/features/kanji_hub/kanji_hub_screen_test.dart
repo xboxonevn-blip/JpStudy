@@ -411,6 +411,39 @@ void main() {
     expect(find.text('\u9b31'), findsOneWidget);
   });
 
+  testWidgets('Han-Viet rules action is visible only in Vietnamese', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(
+      _buildSubject(repo: _buildRepo(), language: AppLanguage.vi),
+    );
+    await _pumpKanjiHub(tester);
+
+    expect(
+      find.byKey(const ValueKey('kanji_han_viet_rules_button')),
+      findsOneWidget,
+    );
+
+    await tester.pumpWidget(Container());
+    await tester.pump();
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(
+      _buildSubject(repo: _buildRepo(), language: AppLanguage.en),
+    );
+    await _pumpKanjiHub(tester);
+
+    expect(
+      find.byKey(const ValueKey('kanji_han_viet_rules_button')),
+      findsNothing,
+    );
+  });
+
   testWidgets('study flow kanji card returns from radicals to kanji grid', (
     tester,
   ) async {

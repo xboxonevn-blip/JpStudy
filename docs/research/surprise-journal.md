@@ -509,3 +509,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: the roadmap copy claimed "content actually shipped" but its tags were inert strings, included unavailable listening tracks, and implied fixed month pacing for upper levels.
 - Delta: -25 percentage points on confidence that content-backed hubs make roadmap stages trustworthy automatically.
 - Updated belief: curriculum roadmaps need the same route ownership as catalogs: every visible chip should know its destination, and unavailable modalities should be absent or explicitly deferred.
+
+## 2026-05-17T23:45+07:00 - Hán-Việt rules were a kanji feature behind a kana gate
+
+- Prior belief: Hán-Việt rules could remain under Foundations because the data lived near kana/foundations services.
+- Actual observation: the route was wrapped by the N5-only Kana guard, so higher-level learners hit a Kana unavailable message from a Kanji aid.
+- Delta: -30 percentage points on confidence that module folder ownership matches product ownership.
+- Updated belief: language-specific learning aids should be routed by learner task ownership; Hán-Việt belongs to Kanji UX even if it reuses Foundations data services.

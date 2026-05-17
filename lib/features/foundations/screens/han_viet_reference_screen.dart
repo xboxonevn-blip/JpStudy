@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/foundations/models/han_viet_rule.dart';
 import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
+
+class HanVietReferenceGate extends ConsumerStatefulWidget {
+  const HanVietReferenceGate({super.key, required this.fallbackPath});
+
+  final String fallbackPath;
+
+  @override
+  ConsumerState<HanVietReferenceGate> createState() =>
+      _HanVietReferenceGateState();
+}
+
+class _HanVietReferenceGateState extends ConsumerState<HanVietReferenceGate> {
+  bool _scheduled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final language = ref.watch(appLanguageProvider);
+    if (language == AppLanguage.vi) {
+      return const HanVietReferenceScreen();
+    }
+    if (!_scheduled) {
+      _scheduled = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) context.go(widget.fallbackPath);
+      });
+    }
+    return const SizedBox.shrink();
+  }
+}
 
 class HanVietReferenceScreen extends ConsumerStatefulWidget {
   const HanVietReferenceScreen({super.key});

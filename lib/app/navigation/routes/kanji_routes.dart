@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/features/games/kanji_dash/kanji_dash_screen.dart';
+import 'package:jpstudy/features/foundations/screens/han_viet_reference_screen.dart';
 import 'package:jpstudy/features/kanji_hub/kanji_hub_screen.dart';
 import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/kanji_hub/screens/kanji_practice_hub_screen.dart';
@@ -21,6 +22,12 @@ List<RouteBase> buildKanjiRoutes() {
           state.uri.queryParameters['kanjiId'] ?? '',
         ),
       ),
+    ),
+    GoRoute(
+      path: AppRoutePath.kanjiHanViet,
+      name: AppRouteName.kanjiHanViet,
+      builder: (context, state) =>
+          const HanVietReferenceGate(fallbackPath: AppRoutePath.kanji),
     ),
     GoRoute(
       path: AppRoutePath.kanjiPractice,

@@ -9,12 +9,10 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/foundations/screens/foundations_hub_screen.dart';
+import 'package:jpstudy/features/foundations/screens/han_viet_reference_screen.dart';
 import 'package:jpstudy/features/foundations/screens/kana_locked_screen.dart';
 
-Widget _buildApp({
-  required StudyLevel level,
-  required String initialLocation,
-}) {
+Widget _buildApp({required StudyLevel level, required String initialLocation}) {
   final router = GoRouter(
     initialLocation: initialLocation,
     routes: [
@@ -64,6 +62,20 @@ void main() {
     expect(find.text('Bảng chữ là cấp N5 — bạn đang ở N4'), findsOneWidget);
   });
 
+  testWidgets('N4 can open Han-Viet rules without Kana lock', (tester) async {
+    await tester.pumpWidget(
+      _buildApp(
+        level: StudyLevel.n4,
+        initialLocation: AppRoutePath.foundationsHanViet,
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byType(HanVietReferenceScreen), findsOneWidget);
+    expect(find.byType(KanaLockedScreen), findsNothing);
+    expect(find.text('Home route'), findsNothing);
+  });
+
   testWidgets('N4 foundations subroute redirects home with snackbar action', (
     tester,
   ) async {
@@ -90,7 +102,10 @@ void main() {
     tester,
   ) async {
     await tester.pumpWidget(
-      _buildApp(level: StudyLevel.n4, initialLocation: '/foundations/kana-quiz'),
+      _buildApp(
+        level: StudyLevel.n4,
+        initialLocation: '/foundations/kana-quiz',
+      ),
     );
     await tester.pump();
     await tester.pumpAndSettle();
