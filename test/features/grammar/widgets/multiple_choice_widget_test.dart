@@ -208,11 +208,12 @@ void main() {
         home: Scaffold(
           body: SizedBox(
             width: 390,
-            height: 640,
+            height: 420,
             child: MultipleChoiceWidget(
               language: AppLanguage.vi,
               questionType: GrammarQuestionType.multipleChoice,
-              question: 'Chọn cách dùng đúng nhất.',
+              question:
+                  'Chọn cách dùng đúng nhất: "~ be about to / in the middle of / have just".',
               options: const ['Đáp án A', 'Đáp án B', 'Đáp án C', 'Đáp án D'],
               correctAnswer: 'Đáp án A',
               onAnswer: (isCorrect, selected) {},
@@ -227,6 +228,10 @@ void main() {
       expect(
         find.byKey(ValueKey('grammar_mc_option_$index')).hitTestable(),
         findsOneWidget,
+      );
+      expect(
+        tester.getSize(find.byKey(ValueKey('grammar_mc_option_$index'))).height,
+        greaterThan(48),
       );
     }
     expect(

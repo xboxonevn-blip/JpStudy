@@ -91,24 +91,32 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
             type: widget.questionType!,
             prompt: repairPrompt,
           );
-    final headerSection = Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        promptWidget,
-        const SizedBox(height: 14),
-        _buildSupportHint(context, isRepairQuestion: repairPrompt != null),
-      ],
-    );
+    Widget buildHeaderSection({required bool compact}) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          promptWidget,
+          if (!compact) ...[
+            const SizedBox(height: 14),
+            _buildSupportHint(context, isRepairQuestion: repairPrompt != null),
+          ],
+        ],
+      );
+    }
 
     return LayoutBuilder(
       builder: (context, constraints) {
         final useGrid = constraints.maxWidth >= 720;
+        final compactVertical = !useGrid && constraints.maxHeight < 520;
+        final headerFlex = compactVertical ? 2 : 3;
+        final optionsFlex = compactVertical ? 5 : 2;
+        final headerSection = buildHeaderSection(compact: compactVertical);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Flexible(
-              flex: 3,
+              flex: headerFlex,
               fit: FlexFit.loose,
               child: LayoutBuilder(
                 builder: (context, headerConstraints) {
@@ -124,7 +132,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
               ),
             ),
             const SizedBox(height: 10),
-            Expanded(flex: 2, child: _buildOptions(useGrid)),
+            Expanded(flex: optionsFlex, child: _buildOptions(useGrid)),
             const SizedBox(height: 10),
             FilledButton(
               key: const ValueKey('grammar_mc_confirm'),
