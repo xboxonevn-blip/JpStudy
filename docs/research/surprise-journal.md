@@ -530,3 +530,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: lesson learn multiple-choice had its own widget and tests that still assumed tap-to-submit, so the safer select -> confirm pattern was not shared yet.
 - Delta: -25 percentage points on confidence that fixing one quiz surface changes the product-wide quiz behavior.
 - Updated belief: the final answer-selection redesign needs a shared quiz component or an explicit consumer-by-consumer parity checklist; otherwise old instant-submit behavior will persist in parallel widgets.
+
+## 2026-05-17 - Test mode mobile needed a structural layout cut
+
+- Prior belief: adding select -> confirm to the shared learn multiple-choice widget would be enough for lesson test mode.
+- Actual observation: live mobile test mode still forced the header into vertical text because the status chips and question map consumed the answer viewport before the question rendered.
+- Delta: -30 percentage points on confidence that component-level compacting solves screen-level quiz UX.
+- Updated belief: quiz verification must include the whole route shell at mobile size, not just the answer widget.

@@ -50,56 +50,70 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final palette = context.appPalette;
-    final options = widget.question.options ?? const <String>[];
-    final selected = widget.showResult ? widget.selectedAnswer : _pendingAnswer;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final palette = context.appPalette;
+        final compact = constraints.maxWidth < 520;
+        final options = widget.question.options ?? const <String>[];
+        final selected = widget.showResult
+            ? widget.selectedAnswer
+            : _pendingAnswer;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        QuestionPromptCard(
-          label: widget.language.multipleChoiceLabel,
-          title: widget.question.targetItem.term,
-          subtitle: widget.question.targetItem.hasDisplayReading
-              ? widget.question.targetItem.reading!.trim()
-              : null,
-          prompt: widget.question.questionText,
-          icon: Icons.layers_rounded,
-          accentColor: palette.info,
-        ),
-        const SizedBox(height: AppSpacing.lg),
-        for (var index = 0; index < options.length; index++) ...[
-          QuestionChoiceTile(
-            title: options[index],
-            leadingLabel: String.fromCharCode(65 + index),
-            accentColor: palette.primary,
-            isSelected: selected == options[index],
-            isCorrect:
-                widget.revealCorrectAnswer &&
-                options[index] == widget.question.correctAnswer,
-            isWrong:
-                widget.showResult &&
-                widget.selectedAnswer == options[index] &&
-                options[index] != widget.question.correctAnswer,
-            onTap: widget.showResult
-                ? null
-                : () {
-                    setState(() {
-                      _pendingAnswer = options[index];
-                    });
-                  },
-          ),
-          if (index < options.length - 1) const SizedBox(height: AppSpacing.md),
-        ],
-        const SizedBox(height: AppSpacing.lg),
-        FilledButton(
-          key: const ValueKey('learn_mc_confirm'),
-          onPressed: widget.showResult || _pendingAnswer == null
-              ? null
-              : () => widget.onSelect(_pendingAnswer!),
-          child: Text(widget.language.checkAnswerLabel),
-        ),
-      ],
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            QuestionPromptCard(
+              label: widget.language.multipleChoiceLabel,
+              title: widget.question.targetItem.term,
+              subtitle: widget.question.targetItem.hasDisplayReading
+                  ? widget.question.targetItem.reading!.trim()
+                  : null,
+              prompt: widget.question.questionText,
+              icon: Icons.layers_rounded,
+              accentColor: palette.info,
+              compact: compact,
+            ),
+            SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
+            for (var index = 0; index < options.length; index++) ...[
+              QuestionChoiceTile(
+                title: options[index],
+                leadingLabel: String.fromCharCode(65 + index),
+                accentColor: palette.primary,
+                isSelected: selected == options[index],
+                isCorrect:
+                    widget.revealCorrectAnswer &&
+                    options[index] == widget.question.correctAnswer,
+                isWrong:
+                    widget.showResult &&
+                    widget.selectedAnswer == options[index] &&
+                    options[index] != widget.question.correctAnswer,
+                compact: compact,
+                onTap: widget.showResult
+                    ? null
+                    : () {
+                        setState(() {
+                          _pendingAnswer = options[index];
+                        });
+                      },
+              ),
+              if (index < options.length - 1)
+                SizedBox(height: compact ? AppSpacing.xs : AppSpacing.md),
+            ],
+            SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
+            FilledButton(
+              key: const ValueKey('learn_mc_confirm'),
+              style: FilledButton.styleFrom(
+                minimumSize: Size.fromHeight(compact ? 44 : 48),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              onPressed: widget.showResult || _pendingAnswer == null
+                  ? null
+                  : () => widget.onSelect(_pendingAnswer!),
+              child: Text(widget.language.checkAnswerLabel),
+            ),
+          ],
+        );
+      },
     );
   }
 }

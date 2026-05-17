@@ -233,6 +233,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final wide = constraints.maxWidth >= 1180;
+              final compact = constraints.maxWidth < 700;
               return Padding(
                 padding: const EdgeInsets.fromLTRB(
                   AppSpacing.lg,
@@ -246,7 +247,11 @@ class _TestScreenState extends ConsumerState<TestScreen> {
                     constraints: const BoxConstraints(maxWidth: 1360),
                     child: Column(
                       children: [
-                        _buildSessionOverview(language, question),
+                        _buildSessionOverview(
+                          language,
+                          question,
+                          compact: compact,
+                        ),
                         const SizedBox(height: AppSpacing.md),
                         Expanded(
                           child: wide
@@ -276,20 +281,25 @@ class _TestScreenState extends ConsumerState<TestScreen> {
                                 )
                               : Column(
                                   children: [
-                                    _buildQuestionNavigatorCard(),
-                                    const SizedBox(height: AppSpacing.md),
+                                    if (!compact) ...[
+                                      _buildQuestionNavigatorCard(),
+                                      const SizedBox(height: AppSpacing.md),
+                                    ],
                                     Expanded(
                                       child: _buildQuestionStage(
                                         question,
                                         language,
                                         wide: false,
+                                        compact: compact,
                                       ),
                                     ),
                                   ],
                                 ),
                         ),
-                        const SizedBox(height: AppSpacing.md),
-                        _buildNavigationButtons(language),
+                        if (wide || !compact || _showResult) ...[
+                          const SizedBox(height: AppSpacing.md),
+                          _buildNavigationButtons(language),
+                        ],
                       ],
                     ),
                   ),
@@ -414,6 +424,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
     Question question,
     AppLanguage language, {
     required bool wide,
+    bool compact = false,
   }) {
     final palette = context.appPalette;
     return Container(
@@ -424,7 +435,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
         border: Border.all(color: palette.outlineSoft),
       ),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSpacing.lg),
+        padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.lg),
         child: Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: wide ? 860 : 760),
@@ -456,8 +467,87 @@ class _TestScreenState extends ConsumerState<TestScreen> {
     );
   }
 
-  Widget _buildSessionOverview(AppLanguage language, Question question) {
+  Widget _buildSessionOverview(
+    AppLanguage language,
+    Question question, {
+    bool compact = false,
+  }) {
     final palette = context.appPalette;
+    if (compact) {
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          color: palette.elevated.withValues(alpha: 0.96),
+          borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+          border: Border.all(color: palette.outlineSoft),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    language.testProgressLabel(
+                      _session.currentQuestionIndex + 1,
+                      _session.totalQuestions,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
+                      color: palette.ink.withValues(alpha: 0.72),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.sm,
+                      vertical: AppSpacing.xs,
+                    ),
+                    decoration: BoxDecoration(
+                      color: palette.info.withValues(alpha: 0.10),
+                      borderRadius: BorderRadius.circular(
+                        AppSpacing.radiusPill,
+                      ),
+                      border: Border.all(
+                        color: palette.info.withValues(alpha: 0.18),
+                      ),
+                    ),
+                    child: Text(
+                      _questionTypeLabel(language, question.type),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        color: palette.info,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+              child: LinearProgressIndicator(
+                value: _session.progress,
+                minHeight: 6,
+                backgroundColor: palette.base,
+                color: palette.primary,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),

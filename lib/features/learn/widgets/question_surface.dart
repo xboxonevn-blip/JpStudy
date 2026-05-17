@@ -13,6 +13,7 @@ class QuestionPromptCard extends StatelessWidget {
     required this.accentColor,
     this.subtitle,
     this.centered = true,
+    this.compact = false,
   });
 
   final String label;
@@ -22,6 +23,7 @@ class QuestionPromptCard extends StatelessWidget {
   final IconData icon;
   final Color accentColor;
   final bool centered;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class QuestionPromptCard extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSpacing.xl),
+      padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.xl),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -61,34 +63,34 @@ class QuestionPromptCard extends StatelessWidget {
               _PromptChip(label: label, icon: icon, color: accentColor),
             ],
           ),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
           Text(
             title,
             textAlign: textAlign,
             style: TextStyle(
-              fontSize: centered ? 34 : 24,
+              fontSize: compact ? (centered ? 24 : 20) : (centered ? 34 : 24),
               height: 1.15,
               fontWeight: FontWeight.w900,
               color: palette.ink,
             ),
           ),
           if (subtitle != null && subtitle!.trim().isNotEmpty) ...[
-            const SizedBox(height: AppSpacing.sm),
+            SizedBox(height: compact ? AppSpacing.xs : AppSpacing.sm),
             Text(
               subtitle!.trim(),
               textAlign: textAlign,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: compact ? 14 : 18,
                 height: 1.35,
                 fontWeight: FontWeight.w600,
                 color: palette.ink.withValues(alpha: 0.66),
               ),
             ),
           ],
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(AppSpacing.lg),
+            padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.lg),
             decoration: BoxDecoration(
               color: accentColor.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
@@ -98,8 +100,8 @@ class QuestionPromptCard extends StatelessWidget {
               prompt,
               textAlign: textAlign,
               style: TextStyle(
-                fontSize: 15,
-                height: 1.55,
+                fontSize: compact ? 13 : 15,
+                height: compact ? 1.35 : 1.55,
                 fontWeight: FontWeight.w600,
                 color: palette.ink,
               ),
@@ -122,6 +124,7 @@ class QuestionChoiceTile extends StatelessWidget {
     this.isCorrect = false,
     this.isWrong = false,
     this.onTap,
+    this.compact = false,
   });
 
   final String title;
@@ -132,6 +135,7 @@ class QuestionChoiceTile extends StatelessWidget {
   final bool isCorrect;
   final bool isWrong;
   final VoidCallback? onTap;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +168,10 @@ class QuestionChoiceTile extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
         child: Ink(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: EdgeInsets.symmetric(
+            horizontal: compact ? AppSpacing.md : AppSpacing.lg,
+            vertical: compact ? AppSpacing.sm : AppSpacing.lg,
+          ),
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
@@ -182,8 +189,8 @@ class QuestionChoiceTile extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16,
-                    height: 1.45,
+                    fontSize: compact ? 14 : 16,
+                    height: compact ? 1.25 : 1.45,
                     fontWeight: FontWeight.w700,
                     color: isWrong ? palette.error : palette.ink,
                   ),
