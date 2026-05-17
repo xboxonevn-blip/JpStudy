@@ -256,6 +256,21 @@ test('collectEvidence rejects proof-state template placeholders', () => {
   assert.match(evidence.appCheck.source, /contains placeholder evidence/);
 });
 
+test('collectEvidence allows non-placeholder comparison punctuation', () => {
+  const proofStatePath = writeTempProofState({
+    ga4Retention: {
+      verified: true,
+      verifiedAt: '2026-05-17T10:00:00+07:00',
+      retention: '2 months',
+      evidence: 'GA4 Admin retention checked; table TTL >= 60 days.',
+    },
+  });
+
+  const evidence = collectEvidence({ skipLive: true, proofStatePath });
+
+  assert.equal(evidence.ga4.adminRetentionOk, true);
+});
+
 test('collectEvidence does not close gates from manual flags alone', () => {
   const evidence = collectEvidence({
     skipLive: true,

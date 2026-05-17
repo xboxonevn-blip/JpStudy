@@ -131,8 +131,7 @@ function looksLikeProofPlaceholder(value) {
   if (typeof value !== 'string') return false;
   const normalized = value.trim().toLowerCase();
   return (
-    normalized.includes('<') ||
-    normalized.includes('>') ||
+    /<[^>]+>/.test(normalized) ||
     normalized.includes('placeholder') ||
     normalized.includes('owner/legal reviewer') ||
     normalized === 'approved-copy-commit-hash' ||
