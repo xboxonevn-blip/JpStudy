@@ -28,7 +28,7 @@ proof state file. Firebase Storage is intentionally descoped for beta and
 recorded as deferred metadata because the app is local-first and the project
 remains on Spark.
 
-Latest post-descope run on `2026-05-17T04:07+07:00` returned
+Latest post-descope run on `2026-05-17T07:32+07:00` returned
 `complete=false` with blockers: `legal-approval-missing`,
 `sentry-dsn-missing`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -91,7 +91,7 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `60a95a4f`.
+Status: completed on `main`; latest re-confirmed on commit `dfc2b578`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -111,8 +111,8 @@ Operator note:
 
 Evidence recorded:
 
-- GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25972622502`
+- Latest GitHub Actions run URL:
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25976694125`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -126,9 +126,9 @@ Evidence recorded:
   Playwright visual smoke on `2026-05-16T08:05+07:00` checked Kanji radical
   headers, Han-Viet rules, and Review Forecast labels on
   `https://jpstudy.web.app`.
-- Latest CI recheck on `2026-05-17T04:05+07:00` completed
+- Latest CI recheck on `2026-05-17T07:31+07:00` completed
   `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` with
-  `success` on commit `60a95a4f` in GitHub Actions run `25972622502`.
+  `success` on commit `dfc2b578` in GitHub Actions run `25976694125`.
 
 ## 2. Sentry First-Issue Proof
 
@@ -137,15 +137,15 @@ Goal: prove source-wired Sentry is operational in a deployed web build.
 Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
-  `main`; latest CI/deploy proof is `60a95a4f`.
+  `main`; latest CI/deploy proof is `dfc2b578`.
 - Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
   `https://jpstudy.web.app/?sentry-smoke=1` in Chromium.
-- Repository Actions secrets rechecked on `2026-05-16T09:49+07:00` include
+- Repository Actions secrets rechecked on `2026-05-17T07:14+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
-- Sentry readiness CLI rechecked on `2026-05-16T22:58+07:00` with
+- Sentry readiness CLI rechecked on `2026-05-17T07:14+07:00` with
   `npm run report:sentry-readiness -- --json`: source wiring and workflow smoke
   gate are present, repo secrets metadata is readable, no event was sent, and
   readiness remains `false` with reason `sentry-dsn-missing`.
@@ -250,9 +250,9 @@ Current status:
   `tool/research/firebase_admin_delete_user.js`.
 - Dry-run helper defaults to `safeMode=true`; live Auth deletion requires
   explicit `--execute`.
-- Recheck on `2026-05-16T11:29+07:00` removed the previous
-  `firebase-admin` tooling blocker. After the `2026-05-17` Storage descope,
-  remaining deletion proof blockers are GA4 Admin deletion access and
+- Recheck on `2026-05-17T07:14+07:00` removed Storage from beta scope and
+  reports deletion readiness `executable=false`. Remaining proof blockers are
+  missing test Support ID/Firebase UID, GA4 Admin deletion access, and
   `gcloud` or equivalent operator proof path.
 
 ## 6. GA4 Retention UI Proof
@@ -270,7 +270,7 @@ Evidence to record:
   (`analyticsadmin.googleapis.com`) for project `129949648924`, grant the
   service account Analytics read access, then probe
   `properties/536663906/dataRetentionSettings`.
-- Codex rechecked the source-verifiable path on `2026-05-16T01:19+07:00`.
+- Codex rechecked the source-verifiable path on `2026-05-17T07:13+07:00`.
   The GA4 Admin probe still returns `403` because the Admin API is disabled,
   and the service account also receives `403 PERMISSION_DENIED` from Service
   Usage when checking that API state. Owner Console/API action is still needed.
@@ -289,12 +289,11 @@ Current status:
     `correct_count=10`, `total_count=10`, `accuracy=1.0`.
   - `session_quality_rated`: GA response `204`; params `mode=test`,
     `rating=5`.
-- Export ingestion is still pending. Recheck on `2026-05-16T22:58+07:00`
+- Export ingestion is still pending. Recheck on `2026-05-17T07:13+07:00`
   found daily tables `analytics_536663906.events_20260514` and
   `analytics_536663906.events_20260515`, but the learning rows are not in
   BigQuery yet. Latest exported event names are `page_view`,
-  `user_engagement`, `session_start`, `first_visit`, and
-  `onboarding_completed`.
+  `user_engagement`, `session_start`, and `first_visit`.
 - The export report query now scores the quiz gate from the app's actual
   telemetry params: `score`, or `accuracy * 100`, or
   `correct_count / total_count * 100`.
