@@ -53,8 +53,10 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final palette = context.appPalette;
-        final compact = constraints.maxWidth < 520;
+        final compact =
+            constraints.maxWidth < 520 || MediaQuery.sizeOf(context).width < 700;
         final options = widget.question.options ?? const <String>[];
+        final useGrid = !compact && constraints.maxWidth >= 720;
         final selected = widget.showResult
             ? widget.selectedAnswer
             : _pendingAnswer;
@@ -74,31 +76,37 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
               compact: compact,
             ),
             SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
-            for (var index = 0; index < options.length; index++) ...[
-              QuestionChoiceTile(
-                title: options[index],
-                leadingLabel: String.fromCharCode(65 + index),
-                accentColor: palette.primary,
-                isSelected: selected == options[index],
-                isCorrect:
-                    widget.revealCorrectAnswer &&
-                    options[index] == widget.question.correctAnswer,
-                isWrong:
-                    widget.showResult &&
-                    widget.selectedAnswer == options[index] &&
-                    options[index] != widget.question.correctAnswer,
-                compact: compact,
-                onTap: widget.showResult
-                    ? null
-                    : () {
-                        setState(() {
-                          _pendingAnswer = options[index];
-                        });
-                      },
-              ),
-              if (index < options.length - 1)
-                SizedBox(height: compact ? AppSpacing.xs : AppSpacing.md),
-            ],
+            if (useGrid)
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: options.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: AppSpacing.md,
+                  mainAxisSpacing: AppSpacing.md,
+                  childAspectRatio: 4.8,
+                ),
+                itemBuilder: (context, index) => _buildOptionTile(
+                  palette,
+                  options,
+                  index,
+                  selected,
+                  compact: false,
+                ),
+              )
+            else
+              for (var index = 0; index < options.length; index++) ...[
+                _buildOptionTile(
+                  palette,
+                  options,
+                  index,
+                  selected,
+                  compact: compact,
+                ),
+                if (index < options.length - 1)
+                  SizedBox(height: compact ? 4 : AppSpacing.md),
+              ],
             SizedBox(height: compact ? AppSpacing.xs : AppSpacing.lg),
             FilledButton(
               key: const ValueKey('learn_mc_confirm'),
@@ -114,6 +122,36 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildOptionTile(
+    AppThemePalette palette,
+    List<String> options,
+    int index,
+    String? selected, {
+    required bool compact,
+  }) {
+    final option = options[index];
+    return QuestionChoiceTile(
+      title: option,
+      leadingLabel: String.fromCharCode(65 + index),
+      accentColor: palette.primary,
+      isSelected: selected == option,
+      isCorrect:
+          widget.revealCorrectAnswer && option == widget.question.correctAnswer,
+      isWrong:
+          widget.showResult &&
+          widget.selectedAnswer == option &&
+          option != widget.question.correctAnswer,
+      compact: compact,
+      onTap: widget.showResult
+          ? null
+          : () {
+              setState(() {
+                _pendingAnswer = option;
+              });
+            },
     );
   }
 }

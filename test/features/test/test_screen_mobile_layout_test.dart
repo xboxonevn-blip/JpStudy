@@ -7,6 +7,7 @@ import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
+import 'package:jpstudy/features/learn/widgets/question_surface.dart';
 import 'package:jpstudy/features/test/models/test_config.dart';
 import 'package:jpstudy/features/test/screens/test_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,6 +85,11 @@ void main() {
 
       final confirm = find.text(AppLanguage.en.checkAnswerLabel);
       expect(confirm, findsOneWidget);
+      expect(find.byType(QuestionChoiceTile), findsNWidgets(4));
+      for (final tile in tester.widgetList(find.byType(QuestionChoiceTile))) {
+        final tileFinder = find.byWidget(tile);
+        expect(tester.getBottomLeft(tileFinder).dy, lessThanOrEqualTo(540));
+      }
       final confirmBottom = tester.getBottomLeft(confirm).dy;
       expect(confirmBottom, lessThanOrEqualTo(540));
     },

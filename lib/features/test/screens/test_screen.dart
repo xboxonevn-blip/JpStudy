@@ -384,12 +384,14 @@ class _TestScreenState extends ConsumerState<TestScreen> {
   }
 
   Widget _buildQuestionWidget(Question question, AppLanguage language) {
+    final compact = MediaQuery.sizeOf(context).width < 700;
     final chips = <Widget>[
-      _buildStageChip(
-        icon: Icons.school_rounded,
-        label: question.targetItem.level,
-        color: context.appPalette.secondary,
-      ),
+      if (!compact)
+        _buildStageChip(
+          icon: Icons.school_rounded,
+          label: question.targetItem.level,
+          color: context.appPalette.secondary,
+        ),
     ];
     if (_session.isFlagged(_session.currentQuestionIndex)) {
       chips.add(
@@ -409,12 +411,14 @@ class _TestScreenState extends ConsumerState<TestScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Wrap(
-          spacing: AppSpacing.sm,
-          runSpacing: AppSpacing.sm,
-          children: chips,
-        ),
-        const SizedBox(height: AppSpacing.md),
+        if (chips.isNotEmpty) ...[
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: chips,
+          ),
+          SizedBox(height: compact ? AppSpacing.sm : AppSpacing.md),
+        ],
         _buildQuestionContent(question, language),
       ],
     );
@@ -435,7 +439,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
         border: Border.all(color: palette.outlineSoft),
       ),
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.lg),
+        padding: EdgeInsets.all(compact ? AppSpacing.sm : AppSpacing.lg),
         child: Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: wide ? 860 : 760),
