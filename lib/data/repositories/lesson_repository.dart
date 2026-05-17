@@ -560,7 +560,20 @@ class LessonRepository {
     if (existing == null) {
       return fallback;
     }
-    return existing.isCustomTitle ? existing.title : fallback;
+    if (!existing.isCustomTitle || _isGeneratedLessonTitle(existing.title)) {
+      return fallback;
+    }
+    return existing.title;
+  }
+
+  bool _isGeneratedLessonTitle(String title) {
+    final normalized = title.trim();
+    if (normalized.isEmpty) {
+      return true;
+    }
+    return RegExp(
+      r'^(Minna No Nihongo|Minna no Nihongo|Lesson)\s+\d+$',
+    ).hasMatch(normalized);
   }
 
   Future<List<UserLessonData>> getAllLessons() {

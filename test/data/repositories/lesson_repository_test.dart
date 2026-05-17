@@ -209,6 +209,31 @@ void main() {
   });
 
   test(
+    'legacy generated Minna title does not override curriculum fallback',
+    () async {
+      await db
+          .into(db.userLesson)
+          .insert(
+            UserLessonCompanion.insert(
+              id: const Value(200001),
+              level: 'N2',
+              title: 'Minna No Nihongo 1',
+              isCustomTitle: const Value(true),
+              updatedAt: Value(DateTime.now()),
+            ),
+            mode: InsertMode.insertOrReplace,
+          );
+
+      final title = await repository.getLessonTitle(
+        200001,
+        'Shin Kanzen N2 Lesson 1',
+      );
+
+      expect(title, 'Shin Kanzen N2 Lesson 1');
+    },
+  );
+
+  test(
     'seedGrammarIfEmpty seeds the requested JLPT level when content DB opened on another active level',
     () async {
       SharedPreferences.setMockInitialValues({'onboarding.level': 'N5'});
