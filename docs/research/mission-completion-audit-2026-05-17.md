@@ -187,6 +187,14 @@ bumps the Kanji seed revision to `19`, and adds a lesson-18 sentinel. Local
 coverage audit reduced N3 incomplete current entries from `63` to `55`;
 live proof opened `裁` with `Tài (xét xử; phán quyết; cắt may)`.
 
+Kanji content expansion update: N3 lesson 19 is now source-verified against
+KANJIDIC2, Unihan, and local lesson context. Commit `7be4d16` corrects `材`
+from the wrong Vietnamese gloss `tài liệu` to ingredient/material meaning,
+fills Hán-Việt/display/search/related-kanji metadata for all eight entries,
+bumps the Kanji seed revision to `20`, and adds a lesson-19 sentinel. Local
+coverage audit reduced N3 incomplete current entries from `55` to `47`;
+live proof opened `材` with `Tài (nguyên liệu; vật liệu; gỗ)`.
+
 ## Verdict
 
 Implementation, docs, tooling, CI/deploy, and N4-N1 live direct-route fallback work are substantially complete. The active goal is not complete because the stopping condition includes external legal/ops proof gates that remain missing.

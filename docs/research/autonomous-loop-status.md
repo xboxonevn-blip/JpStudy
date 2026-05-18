@@ -322,3 +322,12 @@
 - Bumped content DB Kanji seed revision to `19` and added a lesson-18 sentinel for `裁` so existing browsers receive the new metadata even when level counts are already full.
 - Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `63` to `55`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
 - Deployed `777a5c13` to Firebase Hosting. Live proof: search `裁` opened detail showing `Tài (xét xử; phán quyết; cắt may)` plus Hán-Việt `Tài`.
+
+## 2026-05-18 N3 Kanji Lesson 19 Completeness Patch
+
+- Source-verified all eight N3 lesson-19 kanji (`料`, `理`, `食`, `材`, `味`, `調`, `保`, `鮮`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values, corrected `材` from the wrong Vietnamese gloss `tài liệu` to material/ingredient meaning, rewrote learner-facing Vietnamese display/search text, and filled all lesson-19 `relatedKanji` lists.
+- Replaced lesson-19 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `20` and added a lesson-19 sentinel for `材` so existing browsers receive the correction even when level counts are already full.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `55` to `47`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Deployed `7be4d16` to Firebase Hosting. Live proof: search `材` opened detail showing `Tài (nguyên liệu; vật liệu; gỗ)` plus Hán-Việt `Tài`.
