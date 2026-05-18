@@ -250,3 +250,12 @@
 - Bumped content DB Kanji seed revision to `12` so existing browsers with revision `11` receive the new lesson-12 metadata; regression now starts from `content_meta.kanjiSeedRevision=11` and stale `芸`.
 - Verified locally: `flutter analyze lib test`, UI string guard (`0` candidates), content status report (machine/open-review `0`), full `flutter test` (`2329` passed), and kanji coverage audit reduced N3 incomplete current entries from `110` to `102`.
 - Deployed `6eb06479` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `芸` returned one result, detail opened with `Nghệ (nghệ thuật; tài nghệ)` plus Hán-Việt `Nghệ`, and console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 13 Completeness Patch
+
+- Source-verified all eight N3 lesson-13 kanji (`教`, `育`, `課`, `題`, `績`, `席`, `卒`, `導`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `課`, `績`, `卒`, and `導`; capitalized/normalized Hán-Việt on `題` and `席`; rewrote learner-facing Vietnamese display/search text; filled all lesson-13 `relatedKanji` lists.
+- Replaced lesson-13 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `13` so existing browsers with revision `12` receive the new lesson-13 metadata; regression now starts from `content_meta.kanjiSeedRevision=12` and stale `課`.
+- Verified locally: focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `102` to `95`.
+- Live verification is pending deploy for this batch; do not count lesson 13 as live-proven yet.

@@ -266,3 +266,24 @@ Sources consulted:
 | `撮` | KANJIDIC2 `Toát`, meanings `snapshot`, `take pictures`; Unihan `kVietnamese=toát`, `kDefinition=little bit, small amount, pinch`; local context photography/filming | Added Hán-Việt `Toát`, display `Toát (chụp ảnh; quay phim; nắm lấy)`, search text, and image/recording related kanji. |
 
 Tagging: replaced the lesson-12 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 13 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_13.json`, especially education/school-life compounds such as `教育`, `課題`, `成績`, `出席`, `卒業`, and `指導`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `教` | KANJIDIC2 `Giáo`, meanings `teach`, `faith`, `doctrine`; Unihan `kVietnamese=giáo`, `kDefinition=teach, class`; local context education | Kept Hán-Việt `Giáo`; rewrote display to `Giáo (dạy; giáo dục; giáo lý)`, normalized search text, and linked education related kanji. |
+| `育` | KANJIDIC2 `Dục`, meanings `bring up`, `grow up`, `raise`; Unihan `kVietnamese=dục`, `kDefinition=produce, give birth to; educate`; local context `教育` | Kept Hán-Việt `Dục`; rewrote display to `Dục (nuôi dưỡng; giáo dục; lớn lên)`, normalized search text, and linked growth/education related kanji. |
+| `課` | KANJIDIC2 `Khóa`, meanings `chapter`, `lesson`, `section`; Unihan `kVietnamese=khoá`, `kDefinition=lesson; course; classwork`; local context `課題` | Added Hán-Việt `Khóa`, display `Khóa (bài học; khóa học; phần bài)`, search text, and course/lesson related kanji. |
+| `題` | KANJIDIC2 `Đề`, meanings `topic`, `subject`; Unihan `kDefinition=forehead; title, headline; theme`; local context `課題` | Capitalized Hán-Việt `Đề`; rewrote display to `Đề (chủ đề; đề bài; tiêu đề)`, normalized search text, and linked topic/question related kanji. |
+| `績` | KANJIDIC2 `Tích`, meanings `exploits`, `achievements`; Unihan `kVietnamese=tích`, `kDefinition=spin; achievements`; local context `成績` | Added Hán-Việt `Tích`, display `Tích (thành tích; công lao; kết quả)`, search text, and achievement/evaluation related kanji. |
+| `席` | KANJIDIC2 `Tịch`, meanings `seat`, `mat`, `occasion`, `place`; Unihan `kDefinition=seat; mat; take seat; banquet`; local context attendance/seat words | Capitalized Hán-Việt `Tịch`; rewrote display to `Tịch (chỗ ngồi; phiên; buổi)`, normalized search text, and linked attendance/place related kanji. |
+| `卒` | KANJIDIC2 `Tốt/Tuất/Thốt`, meanings `graduate`, `soldier`, `private`, `die`; Unihan `kVietnamese=tốt`, `kDefinition=soldier; servant; at last, finally`; local context `卒業` | Added primary learner-facing Hán-Việt `Tốt`, display `Tốt (tốt nghiệp; binh lính; kết thúc)`, search text, and graduation/school related kanji. |
+| `導` | KANJIDIC2 `Đạo`, meanings `guidance`, `leading`, `conduct`; Unihan `kVietnamese=đạo`, `kDefinition=direct, guide, lead, conduct`; local context `指導` | Added Hán-Việt `Đạo`, display `Đạo (dẫn dắt; hướng dẫn; chỉ đạo)`, search text, and guidance/teaching related kanji. |
+
+Tagging: replaced the lesson-13 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

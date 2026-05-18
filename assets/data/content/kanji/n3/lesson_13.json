@@ -14,8 +14,8 @@
       "strokeCount": 11,
       "labels": {
         "hanViet": "Giáo",
-        "meaningVi": "giáo",
-        "meaningViDisplay": "Giáo (giáo)",
+        "meaningVi": "dạy; giáo dục; giáo lý",
+        "meaningViDisplay": "Giáo (dạy; giáo dục; giáo lý)",
         "meaningEn": "teach, faith"
       },
       "readings": {
@@ -36,11 +36,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "育",
+          "学",
+          "課",
+          "師"
+        ]
       },
       "search": {
         "hanVietNoAccent": "giao",
-        "meaningViNoAccent": "giao",
+        "meaningViNoAccent": "day; giao duc; giao ly",
         "meaningEnNoAccent": "teach, faith"
       },
       "examples": [
@@ -62,10 +67,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Giáo (giáo)",
+        "meaning": "Giáo (dạy; giáo dục; giáo lý)",
         "onyomi": "キョウ",
         "kunyomi": "おし.える, おそ.わる"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -80,8 +88,8 @@
       "strokeCount": 8,
       "labels": {
         "hanViet": "Dục",
-        "meaningVi": "dục",
-        "meaningViDisplay": "Dục (dục)",
+        "meaningVi": "nuôi dưỡng; giáo dục; lớn lên",
+        "meaningViDisplay": "Dục (nuôi dưỡng; giáo dục; lớn lên)",
         "meaningEn": "bring up, grow up"
       },
       "readings": {
@@ -104,11 +112,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "教",
+          "学",
+          "児",
+          "成"
+        ]
       },
       "search": {
         "hanVietNoAccent": "duc",
-        "meaningViNoAccent": "duc",
+        "meaningViNoAccent": "nuoi duong; giao duc; lon len",
         "meaningEnNoAccent": "bring up, grow up"
       },
       "examples": [
@@ -122,10 +135,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Dục (dục)",
+        "meaning": "Dục (nuôi dưỡng; giáo dục; lớn lên)",
         "onyomi": "イク",
         "kunyomi": "そだ.つ, そだ.ち, そだ.てる, はぐく.む"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -139,9 +155,9 @@
       "character": "課",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "khóa/bài",
-        "meaningViDisplay": "khóa/bài",
+        "hanViet": "Khóa",
+        "meaningVi": "bài học; khóa học; phần bài",
+        "meaningViDisplay": "Khóa (bài học; khóa học; phần bài)",
         "meaningEn": "chapter, lesson"
       },
       "readings": {
@@ -155,15 +171,20 @@
         "en": "Core kanji for QUARTET 13: Education system and school life."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Khóa",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "題",
+          "教",
+          "学",
+          "科"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "khoa/bai",
+        "hanVietNoAccent": "khoa",
+        "meaningViNoAccent": "bai hoc; khoa hoc; phan bai",
         "meaningEnNoAccent": "chapter, lesson"
       },
       "examples": [
@@ -177,10 +198,13 @@
         }
       ],
       "legacy": {
-        "meaning": "khóa/bài",
+        "meaning": "Khóa (bài học; khóa học; phần bài)",
         "onyomi": "カ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -194,9 +218,9 @@
       "character": "題",
       "strokeCount": 18,
       "labels": {
-        "hanViet": "đề",
-        "meaningVi": "đề",
-        "meaningViDisplay": "đề (đề)",
+        "hanViet": "Đề",
+        "meaningVi": "chủ đề; đề bài; tiêu đề",
+        "meaningViDisplay": "Đề (chủ đề; đề bài; tiêu đề)",
         "meaningEn": "topic, subject"
       },
       "readings": {
@@ -210,15 +234,20 @@
         "en": "Core kanji for QUARTET 13: Education system and school life."
       },
       "decomposition": {
-        "hanViet": "đề",
+        "hanViet": "Đề",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "課",
+          "問",
+          "答",
+          "文"
+        ]
       },
       "search": {
         "hanVietNoAccent": "de",
-        "meaningViNoAccent": "de",
+        "meaningViNoAccent": "chu de; de bai; tieu de",
         "meaningEnNoAccent": "topic, subject"
       },
       "examples": [
@@ -232,10 +261,13 @@
         }
       ],
       "legacy": {
-        "meaning": "đề (đề)",
+        "meaning": "Đề (chủ đề; đề bài; tiêu đề)",
         "onyomi": "ダイ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -249,9 +281,9 @@
       "character": "績",
       "strokeCount": 17,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "tích",
-        "meaningViDisplay": "tích",
+        "hanViet": "Tích",
+        "meaningVi": "thành tích; công lao; kết quả",
+        "meaningViDisplay": "Tích (thành tích; công lao; kết quả)",
         "meaningEn": "exploits, achievements"
       },
       "readings": {
@@ -265,15 +297,20 @@
         "en": "Core kanji for QUARTET 13: Education system and school life."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tích",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "成",
+          "評",
+          "優",
+          "卒"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tich",
+        "hanVietNoAccent": "tich",
+        "meaningViNoAccent": "thanh tich; cong lao; ket qua",
         "meaningEnNoAccent": "exploits, achievements"
       },
       "examples": [
@@ -287,10 +324,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tích",
+        "meaning": "Tích (thành tích; công lao; kết quả)",
         "onyomi": "セキ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -304,9 +344,9 @@
       "character": "席",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "tịch",
-        "meaningVi": "tịch, chỗ ngồi",
-        "meaningViDisplay": "tịch (tịch, chỗ ngồi)",
+        "hanViet": "Tịch",
+        "meaningVi": "chỗ ngồi; phiên; buổi",
+        "meaningViDisplay": "Tịch (chỗ ngồi; phiên; buổi)",
         "meaningEn": "seat, mat"
       },
       "readings": {
@@ -322,15 +362,20 @@
         "en": "Core kanji for QUARTET 13: Education system and school life."
       },
       "decomposition": {
-        "hanViet": "tịch",
+        "hanViet": "Tịch",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "出",
+          "欠",
+          "座",
+          "場"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tich",
-        "meaningViNoAccent": "tich, cho ngoi",
+        "meaningViNoAccent": "cho ngoi; phien; buoi",
         "meaningEnNoAccent": "seat, mat"
       },
       "examples": [
@@ -352,10 +397,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tịch (tịch, chỗ ngồi)",
+        "meaning": "Tịch (chỗ ngồi; phiên; buổi)",
         "onyomi": "セキ",
         "kunyomi": "むしろ"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -369,9 +417,9 @@
       "character": "卒",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "tốt nghiệp",
-        "meaningViDisplay": "tốt nghiệp",
+        "hanViet": "Tốt",
+        "meaningVi": "tốt nghiệp; binh lính; kết thúc",
+        "meaningViDisplay": "Tốt (tốt nghiệp; binh lính; kết thúc)",
         "meaningEn": "graduate, soldier"
       },
       "readings": {
@@ -391,15 +439,20 @@
         "en": "Core kanji for QUARTET 13: Education system and school life."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tốt",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "業",
+          "学",
+          "校",
+          "導"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tot nghiep",
+        "hanVietNoAccent": "tot",
+        "meaningViNoAccent": "tot nghiep; binh linh; ket thuc",
         "meaningEnNoAccent": "graduate, soldier"
       },
       "examples": [
@@ -413,10 +466,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tốt nghiệp",
+        "meaning": "Tốt (tốt nghiệp; binh lính; kết thúc)",
         "onyomi": "ソツ, シュツ",
         "kunyomi": "そっ.する, お.える, お.わる, ついに"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -430,9 +486,9 @@
       "character": "導",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "đạo, dẫn dắt",
-        "meaningViDisplay": "đạo, dẫn dắt",
+        "hanViet": "Đạo",
+        "meaningVi": "dẫn dắt; hướng dẫn; chỉ đạo",
+        "meaningViDisplay": "Đạo (dẫn dắt; hướng dẫn; chỉ đạo)",
         "meaningEn": "guidance, leading"
       },
       "readings": {
@@ -448,15 +504,20 @@
         "en": "Core kanji for QUARTET 13: Education system and school life."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Đạo",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "指",
+          "教",
+          "育",
+          "道"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "dao, dan dat",
+        "hanVietNoAccent": "dao",
+        "meaningViNoAccent": "dan dat; huong dan; chi dao",
         "meaningEnNoAccent": "guidance, leading"
       },
       "examples": [
@@ -470,10 +531,13 @@
         }
       ],
       "legacy": {
-        "meaning": "đạo, dẫn dắt",
+        "meaning": "Đạo (dẫn dắt; hướng dẫn; chỉ đạo)",
         "onyomi": "ドウ",
         "kunyomi": "みちび.く"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 13,
         "themeEn": "Education system and school life",
@@ -482,6 +546,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }
