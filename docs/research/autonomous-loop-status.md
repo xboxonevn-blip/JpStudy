@@ -285,7 +285,7 @@
 - Replaced lesson-16 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
 - Bumped content DB Kanji seed revision to `16` so existing browsers with revision `15` receive the new lesson-16 metadata; regression now starts from `content_meta.kanjiSeedRevision=15` and stale `試`.
 - Verified locally: JSON parse passed, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `79` to `71`.
-- Live proof is pending after commit, push, build, and deploy.
+- Deployed with `78febd31`; live proof included cache-disabled N3 Kanji grid and write flow loading with console warnings/errors `0`.
 
 ## 2026-05-18 QA-A-014 Kanji Content DB Partial-Coverage Repair
 
@@ -293,5 +293,6 @@
 - Fresh-storage live check loaded N3 Kanji grid with `203` items and `Luyện viết (N3)`, so assets and fresh DB seeding are valid.
 - Root cause found locally: startup self-heal only checked whether each JLPT level had any kanji rows. A current-version content DB with one stale N3 row and `content_meta.kanjiSeedRevision=16` skipped reseed and stayed partial.
 - Added a RED regression for that current-version partial DB; it failed because `試` was absent. Implemented manifest-count coverage repair by comparing per-level DB counts to `assets/data/content/index.json` and reseeding only incomplete kanji levels.
-- Verified locally: the new regression passes; `flutter test test/data/db/content_database_lazy_seed_test.dart test/data/content/kanji_runtime_reachability_test.dart` passes; `flutter test -d chrome test/data/content/kanji_runtime_reachability_test.dart` passes.
-- Pending: full analyze/test guard cluster, build/deploy, and live proof across VI/EN/JA and N5-N1 plus write practice.
+- Verified locally: the new regression passes; focused native DB/reachability tests pass; `flutter test -d chrome test/data/content/kanji_runtime_reachability_test.dart` passes; UI string guard stays at `0`; content status machine/open-review stays `0`; taxonomy guard passes; `flutter analyze lib test` is clean; full `flutter test` passes with `2330`.
+- Built and deployed `78febd31` to Firebase Hosting.
+- Live proof with CDP cache disabled: VI Kanji grid loaded non-empty for N5, N4, N3, N2, and N1; VI write practice loaded `Viết tay: N1 — Học kanji mới`; EN grid and handwriting loaded with English copy; JA grid and handwriting loaded with Japanese copy; console warnings/errors remained `0`.
