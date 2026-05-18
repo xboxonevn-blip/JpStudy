@@ -608,6 +608,13 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Delta: -20 percentage points on confidence that app prefs and content IndexedDB stay coherent across service-worker/cache/version transitions.
 - Updated belief: content-data revision gates should live beside the content they govern; SharedPreferences is too indirect for DB repair/reseed decisions.
 
+## 2026-05-18 - Non-empty content DB levels can still be unusably partial
+
+- Prior belief: after adding physical-column self-heal and content DB seed revision, checking `COUNT(*) > 0` per JLPT level was enough to avoid empty Kanji routes.
+- Actual observation: a current-version content DB with one stale N3 row and current `content_meta.kanjiSeedRevision` skipped Kanji reseeding entirely, even though the route needed the full authored level inventory.
+- Delta: -20 percentage points on confidence that "non-empty" is an adequate seed-health predicate for learner-critical content.
+- Updated belief: content self-heal must compare runtime DB coverage against the honest manifest, then reseed incomplete levels even when schema/revision markers look current.
+
 ## 2026-05-18 - Cache API clearing is not a full live-proof cache bypass
 
 - Prior belief: unregistering the service worker and clearing Cache Storage before `page.goto` was enough to ensure the latest deployed Flutter web shell loaded.

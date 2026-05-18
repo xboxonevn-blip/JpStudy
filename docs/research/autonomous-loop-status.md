@@ -286,3 +286,12 @@
 - Bumped content DB Kanji seed revision to `16` so existing browsers with revision `15` receive the new lesson-16 metadata; regression now starts from `content_meta.kanjiSeedRevision=15` and stale `試`.
 - Verified locally: JSON parse passed, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `79` to `71`.
 - Live proof is pending after commit, push, build, and deploy.
+
+## 2026-05-18 QA-A-014 Kanji Content DB Partial-Coverage Repair
+
+- Owner reported a P0 deployed regression where VI/N3 `/#/kanji` and `/#/kanji/practice` could still fail after the prior `meaning_ja` self-heal.
+- Fresh-storage live check loaded N3 Kanji grid with `203` items and `Luyện viết (N3)`, so assets and fresh DB seeding are valid.
+- Root cause found locally: startup self-heal only checked whether each JLPT level had any kanji rows. A current-version content DB with one stale N3 row and `content_meta.kanjiSeedRevision=16` skipped reseed and stayed partial.
+- Added a RED regression for that current-version partial DB; it failed because `試` was absent. Implemented manifest-count coverage repair by comparing per-level DB counts to `assets/data/content/index.json` and reseeding only incomplete kanji levels.
+- Verified locally: the new regression passes; `flutter test test/data/db/content_database_lazy_seed_test.dart test/data/content/kanji_runtime_reachability_test.dart` passes; `flutter test -d chrome test/data/content/kanji_runtime_reachability_test.dart` passes.
+- Pending: full analyze/test guard cluster, build/deploy, and live proof across VI/EN/JA and N5-N1 plus write practice.

@@ -483,11 +483,33 @@ class ContentDatabase extends _$ContentDatabase {
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
-    final missingKanjiSpecs = _contentSeedSpecs
-        .where((s) => (counts[s.levelLabel] ?? 0) == 0)
-        .toList();
-    if (missingKanjiSpecs.isNotEmpty) {
-      await Future.wait(missingKanjiSpecs.map(_seedKanjiLevel));
+    final expectedCounts = await _loadExpectedKanjiCountsByLevel();
+    final incompleteKanjiSpecs = _contentSeedSpecs.where((s) {
+      final current = counts[s.levelLabel] ?? 0;
+      final expected = expectedCounts[s.levelLabel];
+      return current == 0 || (expected != null && current < expected);
+    }).toList();
+    if (incompleteKanjiSpecs.isNotEmpty) {
+      await _reseedKanjiLevels(incompleteKanjiSpecs);
+    }
+  }
+
+  Future<Map<String, int>> _loadExpectedKanjiCountsByLevel() async {
+    try {
+      final raw = await rootBundle.loadString('assets/data/content/index.json');
+      final payload = _asMap(json.decode(raw));
+      final datasets = _asMap(payload?['datasets']);
+      final kanjiDataset = _asMap(datasets?['kanji']);
+      final levels = _asMap(kanjiDataset?['levels']);
+      if (levels == null) return const {};
+      return {
+        for (final entry in levels.entries)
+          if (_asMap(entry.value)?['entries'] is num)
+            entry.key.toString().toUpperCase():
+                (_asMap(entry.value)!['entries'] as num).toInt(),
+      };
+    } catch (_) {
+      return const {};
     }
   }
 
@@ -1032,9 +1054,19 @@ class ContentDatabase extends _$ContentDatabase {
 
   Future<void> _reseedMinnaKanji() async {
     // Delete all existing Kanji data to prevent duplicates or stale data
-    await delete(kanji).go();
+    await _reseedKanjiLevels(_contentSeedSpecs);
+  }
 
-    await _seedMinnaKanji();
+  Future<void> _reseedKanjiLevels(Iterable<_ContentSeedSpec> specs) async {
+    final specList = specs.toList(growable: false);
+    if (specList.isEmpty) return;
+    await (delete(kanji)..where(
+          (tbl) => tbl.jlptLevel.isIn(
+            specList.map((spec) => spec.levelLabel).toList(growable: false),
+          ),
+        ))
+        .go();
+    await Future.wait(specList.map(_seedKanjiLevel));
   }
 
   Future<void> _seedMinnaKanji() {

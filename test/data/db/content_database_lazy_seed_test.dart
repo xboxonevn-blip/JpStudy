@@ -217,6 +217,73 @@ void main() {
     expect(row.decompositionJson, contains('"hanViet":"Thí"'));
     expect(revisionRow.data['value'], '16');
   });
+
+  test(
+    'current-version partial kanji DB reseeds missing level coverage',
+    () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+      final tempDir = await Directory.systemTemp.createTemp(
+        'jpstudy_content_db_current_partial_kanji_',
+      );
+      addTearDown(() async {
+        if (await tempDir.exists()) {
+          await tempDir.delete(recursive: true);
+        }
+      });
+      final file = File('${tempDir.path}/content.db');
+      await _createLegacyKanjiDb(
+        file,
+        userVersion: 35,
+        kanjiLessonId: 1,
+        kanjiCharacter: '作',
+        kanjiLevel: 'N3',
+        kanjiMeaning: 'stale',
+        kanjiMeaningEn: 'stale',
+        kanjiOnyomi: 'サク',
+        kanjiKunyomi: 'つく.る',
+        kanjiDecompositionJson: '{}',
+        contentMetaRevision: 16,
+      );
+
+      final db = ContentDatabase(executor: NativeDatabase(file));
+      addTearDown(db.close);
+
+      final countExpr = db.kanji.id.count();
+      final countRow =
+          await (db.selectOnly(db.kanji)
+                ..addColumns([countExpr])
+                ..where(db.kanji.jlptLevel.equals('N3')))
+              .getSingle();
+      final row =
+          await (db.select(db.kanji)
+                ..where(
+                  (tbl) =>
+                      tbl.character.equals('試') & tbl.jlptLevel.equals('N3'),
+                )
+                ..limit(1))
+              .getSingle();
+
+      expect(countRow.read(countExpr), _authoredKanjiCount('N3'));
+      expect(row.meaning, 'Thí (thử; kiểm tra; thi đấu)');
+    },
+  );
+}
+
+int _authoredKanjiCount(String level) {
+  final root = Directory('assets/data/content/kanji/${level.toLowerCase()}');
+  var count = 0;
+  for (final file in root.listSync().whereType<File>().where(
+    (file) => file.path.endsWith('.json'),
+  )) {
+    final payload = jsonDecode(file.readAsStringSync());
+    if (payload is! Map<String, dynamic>) continue;
+    final entries = payload['entries'];
+    if (entries is List) {
+      count += entries.length;
+    }
+  }
+  return count;
 }
 
 Future<void> _createV34DbMissingKanjiMeaningJa(File file) {
