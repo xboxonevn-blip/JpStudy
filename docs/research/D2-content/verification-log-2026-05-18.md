@@ -224,3 +224,24 @@ Sources consulted:
 | `泊` | KANJIDIC2 `Bạc/Phách`, meanings `overnight stay`, `put up at`, `ride at anchor`; Unihan `kVietnamese=bạc`, `kDefinition=anchor vessel; lie at anchor`; local context lodging | Added primary Hán-Việt `Bạc`, display `Bạc (nghỉ qua đêm; lưu trú; neo đậu)`, search text, and lodging/harbor related kanji. |
 
 Tagging: replaced the lesson-10 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 11 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_11.json`, especially `地震`, `災害`, `避難`, `洪水`, `津波`, and warning/disaster usage.
+
+| Item | Sources | Change |
+|---|---|---|
+| `震` | KANJIDIC2 `Chấn`, meanings `quake`, `shake`, `tremble`; Unihan `kDefinition=shake, quake, tremor`; local context earthquake/disaster | Capitalized Hán-Việt `Chấn`; rewrote display to `Chấn (rung chấn; động đất)`, normalized search text, and linked disaster/earthquake related kanji. |
+| `災` | KANJIDIC2 `Tai`, meanings `disaster`, `calamity`; Unihan `kVietnamese=tai`, `kDefinition=calamity, disaster, catastrophe`; local context `災害` | Added Hán-Việt `Tai`, display `Tai (thiên tai; tai họa)`, search text, and disaster/harm related kanji. |
+| `害` | KANJIDIC2 `Hại/Hạt`, meanings `harm`, `injury`; Unihan `kVietnamese=hại`, `kDefinition=injure, harm; destroy, kill`; local context `災害` | Added primary Hán-Việt `Hại`, display `Hại (thiệt hại; gây hại)`, search text, and harm/prevention related kanji. |
+| `避` | KANJIDIC2 `Tị`, meanings `evade`, `avoid`, `avert`; Unihan `kVietnamese=tị`, `kDefinition=avoid; turn aside; escape; hide`; local context `避難` | Added Hán-Việt `Tị`, display `Tị (tránh; né; lánh)`, search text, and evacuation/safety related kanji. |
+| `難` | KANJIDIC2 `Nan/Nạn`, meanings `difficult`, `trouble`, `accident`; Unihan `kVietnamese=nan`, `kDefinition=difficult, arduous, hard`; local context `避難` | Added primary disaster-context Hán-Việt `Nạn`, display `Nạn (khó khăn; tai nạn; hiểm nạn)`, search text, and disaster/difficulty related kanji. |
+| `洪` | KANJIDIC2 `Hồng`, meanings `deluge`, `flood`, `vast`; Unihan `kVietnamese=hòng hồng`, `kDefinition=vast, immense; flood, deluge`; local context flood | Added Hán-Việt `Hồng`, display `Hồng (lũ lớn; nước lớn; mênh mông)`, search text, and water/flood related kanji. |
+| `津` | KANJIDIC2 `Tân`, meanings `haven`, `port`, `harbor`; Unihan `kDefinition=ferry; saliva; ford`; local context `津波` | Capitalized Hán-Việt `Tân`; rewrote display to `Tân (bến cảng; bến đò)`, search text, and port/sea related kanji. |
+| `警` | KANJIDIC2 `Cảnh`, meanings `admonish`, `commandment`; Unihan `kDefinition=guard, watch; alert, alarm`; local context warning/safety | Added Hán-Việt `Cảnh`, display `Cảnh (cảnh báo; cảnh giác)`, search text, and warning/prevention related kanji. |
+
+Tagging: replaced the lesson-11 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
