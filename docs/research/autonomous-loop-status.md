@@ -267,4 +267,4 @@
 - Replaced lesson-14 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
 - Bumped content DB Kanji seed revision to `14` so existing browsers with revision `13` receive the new lesson-14 metadata; regression now starts from `content_meta.kanjiSeedRevision=13` and stale `族`.
 - Verified locally: focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `95` to `87`.
-- Live verification is pending deploy for this batch; do not count lesson 14 as live-proven yet.
+- Deployed `59a896fe` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `族` returned one result, detail opened with `Tộc (gia tộc; dân tộc; dòng họ)` plus Hán-Việt `Tộc`, and console errors/warnings remained `0`.
