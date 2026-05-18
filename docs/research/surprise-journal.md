@@ -635,3 +635,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: lesson 21 is themed economy/finance, but its current `ShinKanzen` vocab source ids point at unrelated N3 nouns such as `すり`, `制限`, and `成功`; they cannot be used as semantic authority for `経済`-style kanji metadata.
 - Delta: -20 percentage points on confidence that generated kanji-example links are trustworthy.
 - Updated belief: source verification should treat KANJIDIC2/Unihan plus the explicit lesson theme as authority until kanji-example links are rebuilt from real reachable vocab.
+
+## 2026-05-18 - Live deploy proof can test the old Flutter bundle
+
+- Prior belief: after Firebase Hosting deploy, navigating with a cache-busting query was enough to prove the latest Flutter build against an existing IndexedDB.
+- Actual observation: lesson-25 proof initially kept rendering stale `際` metadata until the service worker and Cache Storage were cleared and the app was reloaded, while preserving IndexedDB.
+- Delta: -15 percentage points on confidence that URL cache-busting alone bypasses Flutter web shell caching.
+- Updated belief: live proof for content DB seed migrations should explicitly bypass the service worker/web cache but keep IndexedDB, so verification tests both the newest bundle and the existing-user migration path.

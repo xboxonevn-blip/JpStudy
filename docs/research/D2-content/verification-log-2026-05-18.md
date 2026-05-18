@@ -549,3 +549,5 @@ Sources consulted:
 | `等` | KANJIDIC2 `Đẳng`, meanings `etc.`, `class`, `equal`; Unihan `kVietnamese=đẳng`, `kDefinition=rank, grade; equal`; local context `平等` | Added Hán-Việt `Đẳng`, display `Đẳng (bình đẳng; cấp bậc; vân vân)`, direct example `平等`, search text, and equality/rank related kanji. |
 
 Tagging: replaced the lesson-25 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+Live proof after deploy: VI/N3 Kanji search for `際` opened the lesson-25 detail modal with `Tế (dịp; ranh giới; khi)`, Hán-Việt `Tế`, and the QUARTET 25 global-issues/volunteering mnemonic. This was verified after bypassing the stale service-worker cache while preserving IndexedDB, so the existing browser DB upgraded from seed revision 25 to 26. Console errors/warnings after the interaction: `0`.
