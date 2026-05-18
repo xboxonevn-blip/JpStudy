@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-05-17",
+  "generatedAt": "2026-05-18",
   "datasets": {
     "vocab": {
       "files": 278,
@@ -110,6 +110,34 @@
           "entries": 980
         }
       }
+    },
+    "grammarPractice": {
+      "files": 125,
+      "entries": 754,
+      "levels": {
+        "N5": {
+          "files": 25,
+          "entries": 118
+        },
+        "N4": {
+          "files": 25,
+          "entries": 100
+        },
+        "N3": {
+          "files": 25,
+          "entries": 100
+        },
+        "N2": {
+          "files": 25,
+          "entries": 191
+        },
+        "N1": {
+          "files": 25,
+          "entries": 245
+        }
+      },
+      "generation": "generated-from-grammar-assets",
+      "authoredQuestions": 0
     },
     "immersion": {
       "files": 125,

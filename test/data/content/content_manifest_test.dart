@@ -10,23 +10,25 @@ void main() {
             as Map<String, dynamic>;
     final datasets = index['datasets'] as Map<String, dynamic>;
 
-    expect(datasets.keys, containsAll(<String>[
-      'vocab',
-      'kanji',
-      'grammar',
-      'grammarExamples',
-      'immersion',
-      'hanVietOnRules',
-      'kana',
-    ]));
+    expect(
+      datasets.keys,
+      containsAll(<String>[
+        'vocab',
+        'kanji',
+        'grammar',
+        'grammarExamples',
+        'grammarPractice',
+        'immersion',
+        'hanVietOnRules',
+        'kana',
+      ]),
+    );
 
     expect(_summary(datasets['vocab']), _scanVocab());
     expect(_summary(datasets['kanji']), _scanLessonDataset('kanji'));
     expect(_summary(datasets['grammar']), _scanGrammarDefinitions());
-    expect(
-      _summary(datasets['grammarExamples']),
-      _scanGrammarExamples(),
-    );
+    expect(_summary(datasets['grammarExamples']), _scanGrammarExamples());
+    expect(_summary(datasets['grammarPractice']), _scanGrammarPractice());
     expect(_summary(datasets['immersion']), _scanImmersion());
   });
 }
@@ -60,15 +62,18 @@ Map<String, dynamic> _scanVocab() {
     final count = _entryCount(jsonDecode(file.readAsStringSync()));
     entries += count;
     final current = levels[level] ?? (files: 0, entries: 0);
-    levels[level] = (files: current.files + 1, entries: current.entries + count);
+    levels[level] = (
+      files: current.files + 1,
+      entries: current.entries + count,
+    );
   }
   return _result(files.length, entries, levels);
 }
 
 Map<String, dynamic> _scanLessonDataset(String dataset) {
-  final files = _jsonFiles(Directory('assets/data/content/$dataset'))
-      .where((file) => _levelFromPath(file) != null)
-      .toList(growable: false);
+  final files = _jsonFiles(
+    Directory('assets/data/content/$dataset'),
+  ).where((file) => _levelFromPath(file) != null).toList(growable: false);
   final levels = <String, ({int files, int entries})>{};
   var entries = 0;
   for (final file in files) {
@@ -76,7 +81,10 @@ Map<String, dynamic> _scanLessonDataset(String dataset) {
     final count = _entryCount(jsonDecode(file.readAsStringSync()));
     entries += count;
     final current = levels[level] ?? (files: 0, entries: 0);
-    levels[level] = (files: current.files + 1, entries: current.entries + count);
+    levels[level] = (
+      files: current.files + 1,
+      entries: current.entries + count,
+    );
   }
   return _result(files.length, entries, levels);
 }
@@ -91,7 +99,10 @@ Map<String, dynamic> _scanGrammarDefinitions() {
     final count = _entryCount(jsonDecode(file.readAsStringSync()));
     entries += count;
     final current = levels[level] ?? (files: 0, entries: 0);
-    levels[level] = (files: current.files + 1, entries: current.entries + count);
+    levels[level] = (
+      files: current.files + 1,
+      entries: current.entries + count,
+    );
   }
   return _result(files.length, entries, levels);
 }
@@ -106,9 +117,22 @@ Map<String, dynamic> _scanGrammarExamples() {
     final count = _grammarExampleCount(jsonDecode(file.readAsStringSync()));
     entries += count;
     final current = levels[level] ?? (files: 0, entries: 0);
-    levels[level] = (files: current.files + 1, entries: current.entries + count);
+    levels[level] = (
+      files: current.files + 1,
+      entries: current.entries + count,
+    );
   }
   return _result(files.length, entries, levels);
+}
+
+Map<String, dynamic> _scanGrammarPractice() {
+  final grammar = _scanGrammarDefinitions();
+  final rawLevels = grammar['levels'] as Map<String, dynamic>;
+  return <String, dynamic>{
+    'files': grammar['files'],
+    'entries': grammar['entries'],
+    'levels': rawLevels,
+  };
 }
 
 Map<String, dynamic> _scanImmersion() {

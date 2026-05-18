@@ -139,6 +139,25 @@ function hanVietOnRulesDataset() {
   };
 }
 
+function grammarPracticeDataset() {
+  const grammar = lessonDataset('grammar');
+  const authoredPath = path.join(root, 'grammar_practice', 'authored_bank.json');
+  let authoredQuestions = 0;
+  if (fs.existsSync(authoredPath)) {
+    const authored = readJson(authoredPath);
+    authoredQuestions = Array.isArray(authored.questions)
+      ? authored.questions.length
+      : 0;
+  }
+  return {
+    files: grammar.files,
+    entries: grammar.entries + authoredQuestions,
+    levels: grammar.levels,
+    generation: 'generated-from-grammar-assets',
+    authoredQuestions,
+  };
+}
+
 const index = {
   schemaVersion: 3,
   generatedAt: new Date().toISOString().slice(0, 10),
@@ -147,6 +166,7 @@ const index = {
     kanji: lessonDataset('kanji'),
     grammar: lessonDataset('grammar'),
     grammarExamples: lessonDataset('grammar_examples', grammarExampleCount),
+    grammarPractice: grammarPracticeDataset(),
     immersion: immersionDataset(),
     hanVietOnRules: hanVietOnRulesDataset(),
     kana: kanaDataset(),

@@ -14,6 +14,7 @@ import '../../../data/models/mistake_context.dart';
 import '../../../data/repositories/grammar_repository.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 import '../grammar_providers.dart' as grammar_providers;
+import '../services/grammar_practice_bank.dart';
 import '../services/grammar_question_generator.dart';
 import '../widgets/cloze_test_widget.dart';
 import '../widgets/multiple_choice_widget.dart';
@@ -520,8 +521,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     ];
 
     final language = ref.read(appLanguageProvider);
-    var generated = GrammarQuestionGenerator.generateQuestions(
-      details,
+    var generated = GrammarPracticeBank.buildGenerated(
+      details: details,
       allPoints: distractorPool,
       language: language,
     );

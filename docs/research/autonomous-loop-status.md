@@ -393,3 +393,11 @@
 - QA-A-008 first implementation slice: grammar detail no longer exposes manual `Mark done` / `Đánh dấu đã học`; it shows `In progress` or `Understood ✓`, opens a shared `/grammar-practice` 5-question gate, and a >=4/5 pass auto-marks the grammar point learned. Existing per-answer SRS and mistake logging remain in the shared practice screen.
 - Verified locally: focused grammar tests, `flutter analyze lib test`, `python tooling\audit_ui_string_literals.py --check`, taxonomy guard, and full `flutter test` (`2335`) passed.
 - Deployed `57bc7698` to Firebase Hosting. Live proof with fresh EN/N5 browser: `/#/grammar/1` showed `In progress` + `Practice check`, clicking it opened `Practice check` with `Question 1 of 5`, and console warnings/errors were `0`. Still pending: authored/shared bank manifest guard; grammar SRS/exam consumer audit.
+
+## 2026-05-18 Grammar Practice Bank Guard Slice
+
+- Hypothesis: QA-A-008 still had a structural gap because generated grammar questions were produced directly by the screen, `index.json` did not advertise the grammar-practice dataset, and there was no guard preventing zero-question grammar points or future authored-question orphans.
+- Verified RED first: the new guard failed because `GrammarPracticeBank` did not exist and `index.json` lacked `grammarPractice`.
+- Fixed locally: added `GrammarPracticeBank` as the shared generated-question entry point, routed `GrammarPracticeScreen` through it, added `assets/data/content/grammar_practice/authored_bank.json`, registered `grammarPractice` in the content manifest, and added guard coverage for all seeded N5-N1 grammar points plus authored-bank orphan checks.
+- Verified locally: `flutter test test\data\content\grammar_practice_bank_guard_test.dart test\data\content\content_manifest_test.dart test\features\grammar\grammar_practice_screen_test.dart --reporter expanded`, `flutter analyze lib test`, `python tooling\audit_ui_string_literals.py --check`, taxonomy guard, and full `flutter test` passed (`2337`). This is a structural guard slice; no new live UX claim made.
+- Still pending: JLPT mock grammar items still use a local builder path and must be consolidated onto the shared bank before QA-A-008 is fully closed.
