@@ -130,3 +130,9 @@
 - Added `test/data/content/kanji_runtime_reachability_test.dart` so every authored kanji asset entry must seed into `ContentDatabase` and return from `LessonRepository.fetchKanjiByLevel`.
 - This protects the shared Kanji UI consumer path: grid, search, SRS, reading practice, and handwriting practice all depend on level fetches.
 - Verified locally: `flutter test test/data/content/kanji_runtime_reachability_test.dart` passed. No new Kanji content generated yet.
+
+## 2026-05-18 Kanji Expansion Source Policy
+
+- Verified source boundary: official JLPT does not publish modern vocabulary/kanji/grammar lists; KANJIDIC2 and Unihan are redistribution-safe fact sources, but KANJIDIC2 only has old JLPT tiers.
+- Added `docs/research/D2-content/kanji-expansion-source-policy-2026-05-18.md`.
+- Decision: do not bulk-copy third-party modern JLPT kanji lists with unclear licenses. N5/N4 can start from KANJIDIC2 old tiers; N3/N2/N1 need a redistribution-safe modern mapping or owner-approved curriculum mapping before generation.
