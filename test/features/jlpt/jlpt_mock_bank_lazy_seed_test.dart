@@ -46,4 +46,38 @@ void main() {
       expect(sections.map((section) => section.id), contains('grammar'));
     },
   );
+
+  test(
+    'JLPT mock grammar section reuses shared grammar practice bank questions',
+    () async {
+      SharedPreferences.setMockInitialValues({'onboarding.level': 'N5'});
+      final appDb = AppDatabase(executor: NativeDatabase.memory());
+      final contentDb = ContentDatabase(executor: NativeDatabase.memory());
+      final repo = _EmptyLessonRepository(appDb, contentDb);
+      addTearDown(contentDb.close);
+      addTearDown(appDb.close);
+
+      final sections = await buildJlptMockSections(
+        level: StudyLevel.n5,
+        language: AppLanguage.en,
+        contentDb: contentDb,
+        lessonRepo: repo,
+        random: Random(2),
+      );
+      final grammar = sections.singleWhere(
+        (section) => section.id == 'grammar',
+      );
+
+      final sharedBankId = RegExp(
+        r'^grammar-\d+-(sentenceBuilder|cloze|multipleChoice|reverseMultipleChoice|contextChoice|errorCorrection|transformation|pairContrast|errorReason)-',
+      );
+      expect(grammar.questions, isNotEmpty);
+      expect(
+        grammar.questions.every(
+          (question) => sharedBankId.hasMatch(question.id),
+        ),
+        isTrue,
+      );
+    },
+  );
 }

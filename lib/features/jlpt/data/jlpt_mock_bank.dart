@@ -4,12 +4,15 @@ import 'package:drift/drift.dart' show OrderingTerm;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/data/db/app_database.dart' as app;
 import 'package:jpstudy/data/db/content_database.dart' as content;
 import 'package:jpstudy/data/db/content_database_provider.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
+import 'package:jpstudy/features/grammar/services/grammar_practice_bank.dart';
+import 'package:jpstudy/features/grammar/services/grammar_question_generator.dart';
 
 import '../models/jlpt_coach_models.dart';
 import '../models/jlpt_mock_models.dart';
@@ -257,114 +260,56 @@ Future<JlptMockSection?> _buildGrammarSection({
         .add(example);
   }
 
-  final usablePoints = pointRows
-      .where((row) => _grammarMeaning(row, language).trim().isNotEmpty)
-      .toList(growable: false);
-  final selected = _selectSpread(usablePoints, 5, random: random);
+  final runtimePoints = pointRows.map(_toRuntimeGrammarPoint).toList();
+  final runtimePointById = {for (final point in runtimePoints) point.id: point};
+  final details = [
+    for (final row in pointRows)
+      (
+        point: runtimePointById[row.id]!,
+        examples: (examplesByPoint[row.id] ?? const [])
+            .map(_toRuntimeGrammarExample)
+            .toList(growable: false),
+      ),
+  ];
+  final generated = GrammarPracticeBank.buildGenerated(
+    details: details,
+    allPoints: runtimePoints,
+    language: language,
+  ).where(_isJlptMockCompatibleGrammarQuestion).toList(growable: false);
+  final selected = _selectSpread(generated, 5, random: random);
   if (selected.isEmpty) {
     return null;
   }
 
   final questions = <JlptMockQuestion>[];
   for (var i = 0; i < selected.length; i++) {
-    final target = selected[i];
-    final targetIndex = usablePoints.indexOf(target);
-    if (targetIndex < 0) {
-      continue;
-    }
-
-    final examples =
-        examplesByPoint[target.id] ?? const <content.GrammarExampleData>[];
-    if (i.isOdd && examples.isNotEmpty) {
-      final distractors = _selectDistinctCandidates(
-        pool: usablePoints,
-        targetIndex: targetIndex,
-        targetKey: (row) => row.id.toString(),
-        optionLabel: (row) => jlptMockGrammarPatternLabel(row, language),
-        random: random,
-      );
-      if (distractors.length < 3) {
-        continue;
-      }
-
-      final patternLabel = jlptMockGrammarPatternLabel(target, language);
-      final rawOptions = <String>[
-        patternLabel,
-        ...distractors
-            .take(3)
-            .map((row) => jlptMockGrammarPatternLabel(row, language)),
-      ];
-      final options = _shuffleOptions(rawOptions, random: random);
-      final correctIndex = options.indexOf(patternLabel);
-      if (correctIndex < 0) {
-        continue;
-      }
-
-      final example = examples.first;
-      questions.add(
-        JlptMockQuestion(
-          id: 'grammar-${target.id}-pattern',
-          area: JlptSkillArea.grammar,
-          prompt: _grammarPatternPrompt(language),
-          options: options,
-          correctIndex: correctIndex,
-          explanation: _grammarExplanation(target, language),
-          contextTitle: _exampleLabel(language),
-          contextBody:
-              '${example.sentence.trim()}\n${_grammarExampleTranslation(example, language)}',
-          sourceLabel: _lessonSourceLabel(
-            language,
-            level.shortLabel,
-            target.lessonId,
-          ),
-        ),
-      );
-      continue;
-    }
-
-    final meaning = _grammarMeaning(target, language);
-    final distractors = _selectDistinctCandidates(
-      pool: usablePoints,
-      targetIndex: targetIndex,
-      targetKey: (row) => row.id.toString(),
-      optionLabel: (row) => _grammarMeaning(row, language),
-      random: random,
-    );
-    if (distractors.length < 3) {
-      continue;
-    }
-
-    final rawOptions = <String>[
-      meaning,
-      ...distractors.take(3).map((row) => _grammarMeaning(row, language)),
-    ];
-    final options = _shuffleOptions(rawOptions, random: random);
-    final correctIndex = options.indexOf(meaning);
+    final question = selected[i];
+    final options = _shuffleOptions(question.options, random: random);
+    final correctIndex = options.indexOf(question.correctAnswer);
     if (correctIndex < 0) {
       continue;
     }
 
     questions.add(
       JlptMockQuestion(
-        id: 'grammar-${target.id}-meaning',
+        id: 'grammar-${question.point.id}-${question.type.name}-$i',
         area: JlptSkillArea.grammar,
-        prompt: _grammarMeaningPrompt(
-          language,
-          jlptMockGrammarPatternLabel(target, language),
-        ),
+        prompt: question.question,
         options: options,
         correctIndex: correctIndex,
-        explanation: _grammarExplanation(target, language),
-        contextTitle: jlptMockGrammarStructureLabel(target, language).isNotEmpty
+        explanation: _firstNonEmptyText([
+          question.feedback,
+          question.explanation,
+          question.correctAnswer,
+        ]),
+        contextTitle: question.point.connection.trim().isNotEmpty
             ? _structureLabel(language)
             : null,
-        contextBody: jlptMockGrammarStructureLabel(target, language).isNotEmpty
-            ? jlptMockGrammarStructureLabel(target, language)
-            : null,
+        contextBody: _emptyToNull(question.point.connection),
         sourceLabel: _lessonSourceLabel(
           language,
-          level.shortLabel,
-          target.lessonId,
+          question.point.jlptLevel,
+          question.point.lessonId,
         ),
       ),
     );
@@ -381,6 +326,65 @@ Future<JlptMockSection?> _buildGrammarSection({
     minutes: _sectionMinutes(questionCount: questions.length, baseMinutes: 10),
     questions: questions,
   );
+}
+
+bool _isJlptMockCompatibleGrammarQuestion(GeneratedQuestion question) {
+  if (question.type == GrammarQuestionType.sentenceBuilder) {
+    return false;
+  }
+  if (question.options.length < 2) {
+    return false;
+  }
+  return question.options.contains(question.correctAnswer);
+}
+
+app.GrammarPoint _toRuntimeGrammarPoint(content.GrammarPointData row) {
+  final viMeaning = _grammarMeaning(row, AppLanguage.vi);
+  final enMeaning = row.titleEn?.trim();
+  return app.GrammarPoint(
+    id: row.id,
+    lessonId: row.lessonId,
+    grammarPoint: row.title.trim().isEmpty ? row.structure : row.title,
+    titleEn: row.titleEn,
+    meaning: viMeaning.isEmpty ? row.title : viMeaning,
+    meaningVi: viMeaning.isEmpty ? row.title : viMeaning,
+    meaningEn: enMeaning == null || enMeaning.isEmpty
+        ? null
+        : normalizeGrammarTitleEn(enMeaning),
+    connection: row.structure,
+    connectionEn: row.structureEn,
+    explanation: row.explanation,
+    explanationVi: row.explanation,
+    explanationEn: row.explanationEn,
+    jlptLevel: row.level,
+    isLearned: false,
+  );
+}
+
+app.GrammarExample _toRuntimeGrammarExample(content.GrammarExampleData row) {
+  return app.GrammarExample(
+    id: row.id,
+    grammarId: row.grammarPointId,
+    japanese: row.sentence,
+    translation: row.translation,
+    translationVi: row.translation,
+    translationEn: row.translationEn,
+  );
+}
+
+String _firstNonEmptyText(Iterable<String?> values) {
+  for (final value in values) {
+    final trimmed = value?.trim() ?? '';
+    if (trimmed.isNotEmpty) {
+      return trimmed;
+    }
+  }
+  return '';
+}
+
+String? _emptyToNull(String value) {
+  final trimmed = value.trim();
+  return trimmed.isEmpty ? null : trimmed;
 }
 
 JlptMockSection? _buildKanjiSection({
@@ -655,17 +659,6 @@ String _readingLabel(AppLanguage language) {
   }
 }
 
-String _exampleLabel(AppLanguage language) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Example';
-    case AppLanguage.vi:
-      return 'Ví dụ';
-    case AppLanguage.ja:
-      return '例文';
-  }
-}
-
 String _structureLabel(AppLanguage language) {
   switch (language) {
     case AppLanguage.en:
@@ -737,28 +730,6 @@ String _vocabTermExplanation(
       return '"$meaning" tương ứng với $term.';
     case AppLanguage.ja:
       return '「$meaning」に合う語は $term です。';
-  }
-}
-
-String _grammarMeaningPrompt(AppLanguage language, String pattern) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'What is the best meaning of "$pattern"?';
-    case AppLanguage.vi:
-      return '"$pattern" diễn tả ý nào gần nhất?';
-    case AppLanguage.ja:
-      return '「$pattern」の意味として最も近いものはどれですか。';
-  }
-}
-
-String _grammarPatternPrompt(AppLanguage language) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Which grammar pattern fits the example below?';
-    case AppLanguage.vi:
-      return 'Ví dụ dưới đây đang dùng mẫu ngữ pháp nào?';
-    case AppLanguage.ja:
-      return '次の例文に合う文型はどれですか。';
   }
 }
 
@@ -935,34 +906,6 @@ String _grammarMeaning(content.GrammarPointData point, AppLanguage language) {
   }
 
   return point.title.trim();
-}
-
-String _grammarExplanation(
-  content.GrammarPointData point,
-  AppLanguage language,
-) {
-  if (language == AppLanguage.vi) {
-    return point.explanation.trim();
-  }
-  final english = point.explanationEn?.trim();
-  if (english != null && english.isNotEmpty) {
-    return english;
-  }
-  return point.explanation.trim();
-}
-
-String _grammarExampleTranslation(
-  content.GrammarExampleData example,
-  AppLanguage language,
-) {
-  if (language == AppLanguage.vi) {
-    return example.translation.trim();
-  }
-  final english = example.translationEn?.trim();
-  if (english != null && english.isNotEmpty) {
-    return english;
-  }
-  return example.translation.trim();
 }
 
 String _kanjiMeaning(KanjiItem item, AppLanguage language) {

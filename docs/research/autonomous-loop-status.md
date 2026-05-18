@@ -401,3 +401,10 @@
 - Fixed locally: added `GrammarPracticeBank` as the shared generated-question entry point, routed `GrammarPracticeScreen` through it, added `assets/data/content/grammar_practice/authored_bank.json`, registered `grammarPractice` in the content manifest, and added guard coverage for all seeded N5-N1 grammar points plus authored-bank orphan checks.
 - Verified locally: `flutter test test\data\content\grammar_practice_bank_guard_test.dart test\data\content\content_manifest_test.dart test\features\grammar\grammar_practice_screen_test.dart --reporter expanded`, `flutter analyze lib test`, `python tooling\audit_ui_string_literals.py --check`, taxonomy guard, and full `flutter test` passed (`2337`). This is a structural guard slice; no new live UX claim made.
 - Still pending: JLPT mock grammar items still use a local builder path and must be consolidated onto the shared bank before QA-A-008 is fully closed.
+
+## 2026-05-18 JLPT Mock Grammar Bank Slice
+
+- Hypothesis: the remaining QA-A-008 consumer gap was real because `jlpt_mock_bank.dart` built grammar mock questions with local `grammar-*-meaning/pattern` IDs and prompts, not `GrammarPracticeBank`.
+- Verified RED first: `flutter test test\features\jlpt\jlpt_mock_bank_lazy_seed_test.dart --reporter expanded` failed when asserting shared-bank question-type IDs.
+- Fixed locally: adapted content DB grammar rows/examples into runtime grammar records, generated mock grammar questions through `GrammarPracticeBank`, and removed the old local grammar prompt/meaning builders.
+- Verified locally: `flutter test test\features\jlpt\jlpt_mock_bank_lazy_seed_test.dart test\features\jlpt\jlpt_mock_bank_test.dart --reporter expanded`, `flutter analyze lib test`, UI string guard, taxonomy guard, focused grammar-bank guard, and full `flutter test` passed (`2338`).
