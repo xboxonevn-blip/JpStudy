@@ -142,6 +142,7 @@
 - Source-verified four N5 kanji with missing `meaningVi`: `二`, `三`, `漢`, `雪`.
 - Corrected `二` Hán-Việt from native meaning `Hai` to `Nhị`; corrected `三` from `Ba` to `Tam`; added natural Vietnamese meanings/search text for all four.
 - Changed these edited entries to `vi-source-verified` and updated taxonomy/content-status tooling to treat that tag as an approval signal. No `vi-human-approved` tag was added.
+- Added content DB schema v35 reseed so these asset edits reach existing users, with a regression for stale v34 `二/Hai` content.
 - Logged sources in `docs/research/D2-content/verification-log-2026-05-18.md`.
 - Verified locally: kanji coverage audit now reports N5 incomplete current entries `0`; content status remains machine/open-review `0`; focused taxonomy/reachability/audit tests passed.
 

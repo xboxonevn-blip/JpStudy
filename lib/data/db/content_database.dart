@@ -31,7 +31,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 34;
+  int get schemaVersion => 35;
 
   @override
   MigrationStrategy get migration {
@@ -139,7 +139,7 @@ class ContentDatabase extends _$ContentDatabase {
         if (from < 31) {
           // kanji reseed consolidated into v32
         }
-        if (from < 34) {
+        if (from < 35) {
           await _selfHealKanjiMeaningJaColumn();
         }
         if (from < 32) {
@@ -149,6 +149,9 @@ class ContentDatabase extends _$ContentDatabase {
           await _reseedMinnaKanji();
         }
         if (from < 34) {
+          await _reseedMinnaKanji();
+        }
+        if (from < 35) {
           await _reseedMinnaKanji();
         }
       },

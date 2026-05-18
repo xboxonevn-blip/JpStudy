@@ -130,13 +130,64 @@ void main() {
     final columnNames = columns.map((row) => row.data['name']).toSet();
     expect(columnNames, contains('meaning_ja'));
   });
+
+  test('v35 upgrade reseeds edited kanji metadata for existing DBs', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({'onboarding.level': 'N5'});
+    final tempDir = await Directory.systemTemp.createTemp(
+      'jpstudy_content_db_v34_stale_kanji_metadata_',
+    );
+    addTearDown(() async {
+      if (await tempDir.exists()) {
+        await tempDir.delete(recursive: true);
+      }
+    });
+    final file = File('${tempDir.path}/content.db');
+    await _createLegacyKanjiDb(
+      file,
+      userVersion: 34,
+      kanjiLessonId: 2,
+      kanjiCharacter: '二',
+      kanjiLevel: 'N5',
+      kanjiMeaning: 'Hai',
+      kanjiMeaningEn: 'Two',
+      kanjiOnyomi: 'NI',
+      kanjiKunyomi: 'futa',
+      kanjiDecompositionJson: '{"hanViet":"Hai"}',
+    );
+
+    final db = ContentDatabase(executor: NativeDatabase(file));
+    addTearDown(db.close);
+
+    final row =
+        await (db.select(db.kanji)
+              ..where(
+                (tbl) => tbl.character.equals('二') & tbl.jlptLevel.equals('N5'),
+              )
+              ..limit(1))
+            .getSingle();
+
+    expect(row.meaning, 'Nhị (hai)');
+    expect(row.decompositionJson, contains('"hanViet":"Nhị"'));
+  });
 }
 
 Future<void> _createV34DbMissingKanjiMeaningJa(File file) {
   return _createLegacyKanjiDb(file, userVersion: 34);
 }
 
-Future<void> _createLegacyKanjiDb(File file, {required int userVersion}) async {
+Future<void> _createLegacyKanjiDb(
+  File file, {
+  required int userVersion,
+  int kanjiLessonId = 1,
+  String kanjiCharacter = '作',
+  String kanjiLevel = 'N3',
+  String kanjiMeaning = 'Tác (làm)',
+  String kanjiMeaningEn = 'make, create',
+  String kanjiOnyomi = 'サク',
+  String kanjiKunyomi = 'つく.る',
+  String kanjiDecompositionJson = '{"hanViet":"Tác"}',
+}) async {
   final sqlite = sqlite3.open(file.path);
   try {
     sqlite.execute('PRAGMA user_version = $userVersion');
@@ -208,8 +259,9 @@ INSERT INTO kanji (
   lesson_id, character, stroke_count, onyomi, kunyomi, meaning, meaning_en,
   mnemonic_vi, mnemonic_en, decomposition_json, examples_json, jlpt_level
 ) VALUES (
-  1, '作', 7, 'サク', 'つく.る', 'Tác (làm)', 'make, create',
-  'Ghi nhớ', 'Remember', '{"hanViet":"Tác"}', '[]', 'N3'
+  $kanjiLessonId, '$kanjiCharacter', 7, '$kanjiOnyomi', '$kanjiKunyomi',
+  '$kanjiMeaning', '$kanjiMeaningEn', 'Ghi nhớ', 'Remember',
+  '$kanjiDecompositionJson', '[]', '$kanjiLevel'
 );
 ''');
   } finally {
