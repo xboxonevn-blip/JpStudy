@@ -350,3 +350,24 @@ Sources consulted:
 | `審` | KANJIDIC2 `Thẩm`, meanings `hearing`, `judge`, `trial`; Unihan `kVietnamese=thẩm`, `kDefinition=examine, investigate; judge`; local context judging/review | Added Hán-Việt `Thẩm`, display `Thẩm (xét xử; thẩm tra; đánh giá)`, search text, and judging/evaluation related kanji. |
 
 Tagging: replaced the lesson-16 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 17 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available; Japanese shinjitai `験`/`発` lack direct `kVietnamese`, so the traditional forms `驗`/`發` were checked for `nghiệm`/`phát`.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_17.json`, especially science/technology compounds such as `科学`, `技術`, `発明`, `実験`, `開発`, and `機械`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `科` | KANJIDIC2 meanings `department`, `course`, `section`; Unihan `kVietnamese=khoa`; local context `科学` | Kept Hán-Việt `Khoa`; rewrote display to `Khoa (khoa; ngành học; môn học)`, normalized search text, and linked science/course related kanji. |
+| `技` | KANJIDIC2 meanings `skill`, `art`, `craft`, `ability`; Unihan `kVietnamese=kĩ`; local context `技術` | Added learner-facing Hán-Việt `Kỹ`, display `Kỹ (kỹ năng; kỹ thuật; tài nghệ)`, search text, and skill/technology related kanji. |
+| `明` | KANJIDIC2 meanings `bright`, `light`; Unihan `kVietnamese=minh`; local context `発明` | Kept Hán-Việt `Minh`; rewrote display to `Minh (sáng; rõ ràng; sáng tỏ)`, normalized search text, and linked light/clarity related kanji. |
+| `験` | KANJIDIC2 meanings `verification`, `effect`, `testing`; Unihan direct entry has no `kVietnamese`, traditional `驗` has `nghiệm`; local context `実験` | Capitalized Hán-Việt `Nghiệm`, display `Nghiệm (kiểm nghiệm; thử nghiệm; chứng nghiệm)`, search text, and test/verification related kanji. |
+| `開` | KANJIDIC2 meanings `open`, `unfold`, `unseal`; Unihan `kVietnamese=khai`; local context `開発` | Kept Hán-Việt `Khai`; rewrote display to `Khai (mở; khai mở; bắt đầu)`, normalized search text, and linked open/start related kanji. |
+| `発` | KANJIDIC2 meanings `departure`, `discharge`, `publish`, `emit`; Unihan direct entry has no `kVietnamese`, traditional `發` has `phát`; local context `開発`/`発明` | Kept Hán-Việt `Phát`; rewrote display to `Phát (phát ra; khởi hành; phát triển)`, normalized search text, and linked invention/development related kanji. |
+| `機` | KANJIDIC2 meanings `loom`, `mechanism`, `machine`, `opportunity`; Unihan `kVietnamese=cơ`; local context `機械` | Kept Hán-Việt `Cơ`; rewrote display to `Cơ (máy móc; cơ chế; cơ hội)`, normalized search text, and linked machine/mechanism related kanji. |
+| `械` | KANJIDIC2 meanings `contraption`, `fetter`, `machine`, `instrument`; Unihan `kVietnamese=giới`; local context `機械` | Added Hán-Việt `Giới`, display `Giới (máy móc; dụng cụ; gông cùm)`, search text, and machine/tool related kanji. |
+
+Tagging: replaced the lesson-17 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

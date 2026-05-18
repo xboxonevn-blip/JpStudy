@@ -296,3 +296,12 @@
 - Verified locally: the new regression passes; focused native DB/reachability tests pass; `flutter test -d chrome test/data/content/kanji_runtime_reachability_test.dart` passes; UI string guard stays at `0`; content status machine/open-review stays `0`; taxonomy guard passes; `flutter analyze lib test` is clean; full `flutter test` passes with `2330`.
 - Built and deployed `78febd31` to Firebase Hosting.
 - Live proof with CDP cache disabled: VI Kanji grid loaded non-empty for N5, N4, N3, N2, and N1; VI write practice loaded `Viết tay: N1 — Học kanji mới`; EN grid and handwriting loaded with English copy; JA grid and handwriting loaded with Japanese copy; console warnings/errors remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 17 Completeness Patch
+
+- Source-verified all eight N3 lesson-17 kanji (`科`, `技`, `明`, `験`, `開`, `発`, `機`, `械`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `技` and `械`; normalized `験`; rewrote learner-facing Vietnamese display/search text for all eight entries; filled all lesson-17 `relatedKanji` lists.
+- Replaced lesson-17 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `17` so existing browsers with revision `16` receive the new lesson-17 metadata; regression now starts from `content_meta.kanjiSeedRevision=16` and stale `技`.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `71` to `63`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, and full `flutter test` passed with `2330`.
+- Live proof is pending after commit, push, build, and deploy.
