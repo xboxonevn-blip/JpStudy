@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/features/grammar/services/grammar_question_generator.dart';
+import 'package:jpstudy/features/quiz/widgets/shared_answer_selection.dart';
 
 import 'grammar_practice_surfaces.dart';
 
@@ -31,7 +32,7 @@ class MultipleChoiceWidget extends StatefulWidget {
 }
 
 class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
-  String? _selectedOption;
+  int? _selectedIndex;
   bool _isAnswered = false;
 
   @override
@@ -39,7 +40,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
     super.didUpdateWidget(oldWidget);
     if (_shouldResetForNewQuestion(oldWidget)) {
       setState(() {
-        _selectedOption = null;
+        _selectedIndex = null;
         _isAnswered = false;
       });
     }
@@ -52,19 +53,12 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
         !listEquals(oldWidget.options, widget.options);
   }
 
-  void _handleOptionTap(String option) {
-    if (_isAnswered) return;
+  void _confirmSelection(int index) {
+    if (_isAnswered || index < 0 || index >= widget.options.length) return;
+    final option = widget.options[index];
 
     setState(() {
-      _selectedOption = option;
-    });
-  }
-
-  void _confirmSelection() {
-    final option = _selectedOption;
-    if (_isAnswered || option == null) return;
-
-    setState(() {
+      _selectedIndex = index;
       _isAnswered = true;
     });
 
@@ -132,20 +126,35 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
               ),
             ),
             const SizedBox(height: 10),
-            Expanded(flex: optionsFlex, child: _buildOptions(useGrid)),
-            const SizedBox(height: 10),
-            FilledButton(
-              key: const ValueKey('grammar_mc_confirm'),
-              onPressed: _selectedOption == null || _isAnswered
-                  ? null
-                  : _confirmSelection,
-              style: FilledButton.styleFrom(
-                minimumSize: const Size.fromHeight(52),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+            Expanded(
+              flex: optionsFlex,
+              child: SharedAnswerSelection(
+                questionKey: Object.hash(
+                  widget.question,
+                  widget.correctAnswer,
+                  widget.questionType,
+                  Object.hashAll(widget.options),
+                ),
+                options: widget.options,
+                selectedIndex: _selectedIndex,
+                correctIndex: widget.options.indexOf(widget.correctAnswer),
+                revealResult: _isAnswered,
+                enabled: !_isAnswered,
+                fillAvailable: true,
+                forceCompact: !useGrid,
+                keyPrefix: 'grammar_mc',
+                confirmLabel: _confirmLabel(widget.language),
+                confirmMinHeight: 52,
+                onConfirm: _confirmSelection,
+                optionBuilder: (context, option) => GrammarOptionTile(
+                  key: option.key,
+                  marker: grammarChoiceMarker(option.index),
+                  label: option.label,
+                  state: _tileStateFor(option),
+                  compact: true,
+                  onTap: option.isRevealed ? null : option.onTap,
                 ),
               ),
-              child: Text(_confirmLabel(widget.language)),
             ),
           ],
         );
@@ -153,69 +162,10 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
     );
   }
 
-  Widget _buildOptions(bool useGrid) {
-    final tiles = [
-      for (var index = 0; index < widget.options.length; index++)
-        GrammarOptionTile(
-          key: ValueKey('grammar_mc_option_$index'),
-          marker: grammarChoiceMarker(index),
-          label: widget.options[index],
-          state: _tileStateFor(widget.options[index]),
-          compact: true,
-          onTap: _isAnswered
-              ? null
-              : () => _handleOptionTap(widget.options[index]),
-        ),
-    ];
-
-    if (useGrid && tiles.length == 4) {
-      return Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(child: tiles[0]),
-                const SizedBox(width: 10),
-                Expanded(child: tiles[1]),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(child: tiles[2]),
-                const SizedBox(width: 10),
-                Expanded(child: tiles[3]),
-              ],
-            ),
-          ),
-        ],
-      );
-    }
-
-    return Column(
-      children: [
-        for (var index = 0; index < tiles.length; index++) ...[
-          Expanded(child: tiles[index]),
-          if (index < tiles.length - 1) const SizedBox(height: 8),
-        ],
-      ],
-    );
-  }
-
-  GrammarOptionState _tileStateFor(String option) {
-    if (!_isAnswered) {
-      return _selectedOption == option
-          ? GrammarOptionState.selected
-          : GrammarOptionState.idle;
-    }
-    if (option == widget.correctAnswer) {
-      return GrammarOptionState.correct;
-    }
-    if (option == _selectedOption) {
-      return GrammarOptionState.incorrect;
-    }
+  GrammarOptionState _tileStateFor(SharedAnswerOption option) {
+    if (option.isCorrect) return GrammarOptionState.correct;
+    if (option.isWrong) return GrammarOptionState.incorrect;
+    if (option.isSelected) return GrammarOptionState.selected;
     return GrammarOptionState.idle;
   }
 

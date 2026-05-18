@@ -10,6 +10,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
+import 'package:jpstudy/features/quiz/widgets/shared_answer_selection.dart';
 
 import '../data/jlpt_mock_bank.dart';
 import '../models/jlpt_coach_models.dart';
@@ -1072,6 +1073,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
           ),
           const SizedBox(height: 12),
           _MockQuestionCard(
+            language: language,
             areaLabel: _areaLabel(language, question.area),
             prompt: question.prompt,
             options: question.options,
@@ -1079,7 +1081,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
             contextBody: question.contextBody,
             selectedIndex: selected,
             sourceLabel: question.sourceLabel,
-            onSelect: (index) {
+            onConfirm: (index) {
               setState(() {
                 _answers[question.id] = index;
               });
@@ -1812,6 +1814,7 @@ class _SectionResultCard extends StatelessWidget {
 
 class _MockQuestionCard extends StatelessWidget {
   const _MockQuestionCard({
+    required this.language,
     required this.areaLabel,
     required this.prompt,
     required this.options,
@@ -1819,9 +1822,10 @@ class _MockQuestionCard extends StatelessWidget {
     this.contextTitle,
     this.contextBody,
     this.sourceLabel,
-    required this.onSelect,
+    required this.onConfirm,
   });
 
+  final AppLanguage language;
   final String areaLabel;
   final String prompt;
   final List<String> options;
@@ -1829,7 +1833,7 @@ class _MockQuestionCard extends StatelessWidget {
   final String? contextTitle;
   final String? contextBody;
   final String? sourceLabel;
-  final ValueChanged<int> onSelect;
+  final ValueChanged<int> onConfirm;
 
   @override
   Widget build(BuildContext context) {
@@ -1933,45 +1937,109 @@ class _MockQuestionCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          ...List.generate(options.length, (index) {
-            final isSelected = selectedIndex == index;
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () => onSelect(index),
-                  borderRadius: BorderRadius.circular(14),
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? palette.primary.withValues(alpha: 0.12)
-                          : palette.base,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: isSelected
-                            ? palette.primary.withValues(alpha: 0.35)
-                            : palette.outlineSoft,
-                      ),
-                    ),
-                    child: Text(
-                      options[index],
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: palette.ink,
-                      ),
-                    ),
+          SharedAnswerSelection(
+            questionKey: Object.hash(prompt, Object.hashAll(options)),
+            options: options,
+            selectedIndex: selectedIndex,
+            keyPrefix: 'jlpt_mock_answer',
+            confirmLabel: _confirmLabel(language),
+            onConfirm: onConfirm,
+            optionBuilder: (context, option) =>
+                _MockOptionTile(key: option.key, option: option),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _confirmLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Answer';
+      case AppLanguage.vi:
+        return 'Trả lời';
+      case AppLanguage.ja:
+        return '回答する';
+    }
+  }
+}
+
+class _MockOptionTile extends StatelessWidget {
+  const _MockOptionTile({super.key, required this.option});
+
+  final SharedAnswerOption option;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: option.onTap,
+        borderRadius: BorderRadius.circular(14),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          decoration: BoxDecoration(
+            color: option.isSelected
+                ? palette.primary.withValues(alpha: 0.12)
+                : palette.base,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: option.isSelected
+                  ? palette.primary.withValues(alpha: 0.35)
+                  : palette.outlineSoft,
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 28,
+                height: 28,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: option.isSelected
+                      ? palette.primary.withValues(alpha: 0.14)
+                      : palette.elevated,
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: option.isSelected
+                        ? palette.primary.withValues(alpha: 0.24)
+                        : palette.outlineSoft,
+                  ),
+                ),
+                child: Text(
+                  option.marker,
+                  style: TextStyle(
+                    color: option.isSelected
+                        ? palette.primary
+                        : palette.ink.withValues(alpha: 0.72),
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
-            );
-          }),
-        ],
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  option.label,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: palette.ink,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Icon(
+                option.isSelected
+                    ? Icons.radio_button_checked_rounded
+                    : Icons.radio_button_unchecked_rounded,
+                color: option.isSelected
+                    ? palette.primary
+                    : palette.ink.withValues(alpha: 0.44),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

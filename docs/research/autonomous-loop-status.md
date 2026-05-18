@@ -408,3 +408,11 @@
 - Verified RED first: `flutter test test\features\jlpt\jlpt_mock_bank_lazy_seed_test.dart --reporter expanded` failed when asserting shared-bank question-type IDs.
 - Fixed locally: adapted content DB grammar rows/examples into runtime grammar records, generated mock grammar questions through `GrammarPracticeBank`, and removed the old local grammar prompt/meaning builders.
 - Verified locally: `flutter test test\features\jlpt\jlpt_mock_bank_lazy_seed_test.dart test\features\jlpt\jlpt_mock_bank_test.dart --reporter expanded`, `flutter analyze lib test`, UI string guard, taxonomy guard, focused grammar-bank guard, and full `flutter test` passed (`2338`).
+
+## 2026-05-18 QA-A-009 Shared Answer Selection Slice
+
+- Rechecked the owner-reported Kanji data-load P0 before new work. Current QA-A-013/014/015 repairs still cover fresh, stale, partial, and existing-browser DB paths; live VI/N3 Kanji grid and `Viết` loaded real data with console warnings/errors `0`.
+- Hypothesis: QA-A-009 still had one real gap because JLPT Mock Pro answers were committed immediately inside `_MockQuestionCard`, while grammar gate and lesson/test MC had already moved to select -> confirm.
+- Verified RED first: `flutter test test\features\jlpt\jlpt_mock_pro_screen_test.dart --reporter expanded` failed because active JLPT Mock Pro had no `Trả lời` confirm button.
+- Fixed locally: added `SharedAnswerSelection`, reused it from grammar multiple choice, lesson/test multiple choice, and JLPT Mock Pro, and kept surface-specific option tiles through a shared selection/confirm state machine.
+- Verified locally: focused JLPT/grammar/learn/test quiz suites passed, `flutter analyze lib test` was clean, UI string guard reported `0`, taxonomy guard passed, `dart run tool\research\content_vi_status_report.dart` reported machine/open-review `0`, `npm run test:research-tooling` passed `54`, and full `flutter test` passed (`2339`). Live post-deploy proof is still pending for this slice.

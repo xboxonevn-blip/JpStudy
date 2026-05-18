@@ -80,4 +80,47 @@ void main() {
     expect(find.text('Kết thúc ngay'), findsOneWidget);
     expect(find.text('Câu tiếp'), findsOneWidget);
   });
+
+  testWidgets('JlptMockProScreen uses select then confirm for answers', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.vi),
+          ),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+          jlptMockSectionsProvider((
+            level: StudyLevel.n5,
+            language: AppLanguage.vi,
+          )).overrideWith((ref) async => mockSections),
+        ],
+        child: const MaterialApp(home: JlptMockProScreen()),
+      ),
+    );
+
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    await tester.scrollUntilVisible(
+      find.text('Bắt đầu thi thử đầy đủ'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.text('Bắt đầu thi thử đầy đủ'));
+    await tester.pump();
+
+    expect(find.text('Tiến độ toàn bài • 0/2 đã làm'), findsOneWidget);
+    expect(find.text('Trả lời'), findsOneWidget);
+
+    await tester.tap(find.text('Đặt trước'));
+    await tester.pump();
+
+    expect(find.text('Tiến độ toàn bài • 0/2 đã làm'), findsOneWidget);
+
+    await tester.tap(find.text('Trả lời'));
+    await tester.pump();
+
+    expect(find.text('Tiến độ toàn bài • 1/2 đã làm'), findsOneWidget);
+  });
 }

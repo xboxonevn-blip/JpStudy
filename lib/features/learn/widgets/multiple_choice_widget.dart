@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
+import '../../quiz/widgets/shared_answer_selection.dart';
 import '../models/question.dart';
 import 'question_surface.dart';
 
@@ -32,24 +33,6 @@ class MultipleChoiceWidget extends StatefulWidget {
 }
 
 class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
-  String? _pendingAnswer;
-
-  @override
-  void initState() {
-    super.initState();
-    _pendingAnswer = widget.selectedAnswer;
-  }
-
-  @override
-  void didUpdateWidget(covariant MultipleChoiceWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.question.id != widget.question.id ||
-        oldWidget.selectedAnswer != widget.selectedAnswer ||
-        oldWidget.showResult != widget.showResult) {
-      _pendingAnswer = widget.selectedAnswer;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -60,10 +43,10 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
             constraints.maxWidth < 520 ||
             _isCompactViewport(context);
         final options = widget.question.options ?? const <String>[];
-        final useGrid = !compact && constraints.maxWidth >= 720;
-        final selected = widget.showResult
-            ? widget.selectedAnswer
-            : _pendingAnswer;
+        final selectedIndex = widget.selectedAnswer == null
+            ? null
+            : options.indexOf(widget.selectedAnswer!);
+        final correctIndex = options.indexOf(widget.question.correctAnswer);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,48 +63,21 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
               compact: compact,
             ),
             SizedBox(height: compact ? AppSpacing.sm : AppSpacing.lg),
-            if (useGrid)
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: options.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: AppSpacing.md,
-                  mainAxisSpacing: AppSpacing.md,
-                  childAspectRatio: 4.8,
-                ),
-                itemBuilder: (context, index) => _buildOptionTile(
-                  palette,
-                  options,
-                  index,
-                  selected,
-                  compact: false,
-                ),
-              )
-            else
-              for (var index = 0; index < options.length; index++) ...[
-                _buildOptionTile(
-                  palette,
-                  options,
-                  index,
-                  selected,
-                  compact: compact,
-                ),
-                if (index < options.length - 1)
-                  SizedBox(height: compact ? 4 : AppSpacing.md),
-              ],
-            SizedBox(height: compact ? AppSpacing.xs : AppSpacing.lg),
-            FilledButton(
-              key: const ValueKey('learn_mc_confirm'),
-              style: FilledButton.styleFrom(
-                minimumSize: Size.fromHeight(compact ? 32 : 48),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-              onPressed: widget.showResult || _pendingAnswer == null
-                  ? null
-                  : () => widget.onSelect(_pendingAnswer!),
-              child: Text(widget.language.checkAnswerLabel),
+            SharedAnswerSelection(
+              questionKey: widget.question.id,
+              options: options,
+              selectedIndex: selectedIndex != -1 ? selectedIndex : null,
+              correctIndex: correctIndex != -1 ? correctIndex : null,
+              revealResult: widget.showResult,
+              enabled: !widget.showResult,
+              forceCompact: compact,
+              fillAvailable: false,
+              keyPrefix: 'learn_mc',
+              confirmLabel: widget.language.checkAnswerLabel,
+              confirmMinHeight: compact ? 32 : 48,
+              onConfirm: (index) => widget.onSelect(options[index]),
+              optionBuilder: (context, option) =>
+                  _buildOptionTile(palette, option),
             ),
           ],
         );
@@ -129,33 +85,17 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
     );
   }
 
-  Widget _buildOptionTile(
-    AppThemePalette palette,
-    List<String> options,
-    int index,
-    String? selected, {
-    required bool compact,
-  }) {
-    final option = options[index];
+  Widget _buildOptionTile(AppThemePalette palette, SharedAnswerOption option) {
     return QuestionChoiceTile(
-      title: option,
-      leadingLabel: String.fromCharCode(65 + index),
+      key: option.key,
+      title: option.label,
+      leadingLabel: option.marker,
       accentColor: palette.primary,
-      isSelected: selected == option,
-      isCorrect:
-          widget.revealCorrectAnswer && option == widget.question.correctAnswer,
-      isWrong:
-          widget.showResult &&
-          widget.selectedAnswer == option &&
-          option != widget.question.correctAnswer,
-      compact: compact,
-      onTap: widget.showResult
-          ? null
-          : () {
-              setState(() {
-                _pendingAnswer = option;
-              });
-            },
+      isSelected: option.isSelected,
+      isCorrect: widget.revealCorrectAnswer && option.isCorrect,
+      isWrong: option.isWrong,
+      compact: option.compact,
+      onTap: option.isRevealed ? null : option.onTap,
     );
   }
 
