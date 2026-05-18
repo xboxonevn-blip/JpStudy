@@ -340,3 +340,12 @@
 - Bumped content DB Kanji seed revision to `21` and added a lesson-20 sentinel for `感` so existing browsers receive the updated metadata even when level counts are already full.
 - Verified locally before commit: JSON parse passed, coverage audit reduced N3 incomplete current entries from `47` to `39`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
 - Deployed `edd1ac06` to Firebase Hosting. Live proof: search `感` opened detail showing `Cảm (cảm xúc; cảm giác; cảm nhận)` plus Hán-Việt `Cảm`. The live session also recorded one existing minified console stack without a message; not treated as proof of zero-console state.
+
+## 2026-05-18 N3 Kanji Lesson 21 Completeness Patch
+
+- Source-verified all eight N3 lesson-21 kanji (`経`, `済`, `利`, `益`, `投`, `収`, `税`, `財`) against KANJIDIC2, Unihan, and the explicit local economy/finance theme.
+- Filled missing Hán-Việt values, corrected `済` from wrong learner-facing `tể` to `Tế`, rewrote display/search text, and filled all lesson-21 `relatedKanji` lists.
+- Replaced lesson-21 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `22` and added a lesson-21 sentinel for `財`.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `39` to `31`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Built and deployed `008767e8` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `財` opened detail showing `Tài (tài sản; của cải; tiền bạc)` plus Hán-Việt `Tài`, with console errors/warnings `0`.

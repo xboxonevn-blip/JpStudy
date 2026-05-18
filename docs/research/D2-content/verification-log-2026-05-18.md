@@ -457,3 +457,5 @@ Sources consulted:
 | `財` | KANJIDIC2 `Tài`, meanings `property`, `money`, `wealth`; Unihan `kVietnamese=tài`, `kDefinition=wealth, valuables, riches` | Added Hán-Việt `Tài`, display `Tài (tài sản; của cải; tiền bạc)`, search text, and asset/finance related kanji. |
 
 Tagging: replaced the lesson-21 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+Live proof after deploy: VI/N3 Kanji search for `財` opened the detail modal with `Tài (tài sản; của cải; tiền bạc)` plus Hán-Việt `Tài`, with console errors/warnings `0`.
