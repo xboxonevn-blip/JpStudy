@@ -600,3 +600,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: `二` and `三` had `hanViet` values `Hai` and `Ba`, which are native Vietnamese meanings, not Hán-Việt readings; KANJIDIC2/Unihan confirm `Nhị` and `Tam`.
 - Delta: -15 percentage points on confidence that low-level kanji metadata is semantically clean when visible display text looks acceptable.
 - Updated belief: Kanji completeness checks must validate field role correctness, not only non-empty strings; `hanViet` is not interchangeable with Vietnamese meaning.
+
+## 2026-05-18 - Kanji content reseed state belongs in the content DB
+
+- Prior belief: SharedPreferences was an adequate source of truth for a Kanji asset reseed revision after v35.
+- Actual observation: live proof against an existing browser DB still showed stale Kanji metadata until the seed revision moved into the content DB `content_meta` table and was checked in the same transaction path as the reseed.
+- Delta: -20 percentage points on confidence that app prefs and content IndexedDB stay coherent across service-worker/cache/version transitions.
+- Updated belief: content-data revision gates should live beside the content they govern; SharedPreferences is too indirect for DB repair/reseed decisions.
