@@ -521,6 +521,8 @@ class LessonRepository {
   final ContentDatabase _contentDb;
   final AnalyticsService? _analyticsService;
   final FsrsService _fsrsService = FsrsService();
+  Future<void>? _kanjiContentEnsureFuture;
+  bool _kanjiContentEnsured = false;
   static const int _defaultLessonCount = 25;
   static const _upperLevelLessonOffsets = <String, int>{
     'N1': 100000,
@@ -1988,7 +1990,26 @@ class LessonRepository {
     }
   }
 
+  Future<void> _ensureKanjiContentCurrent() async {
+    final pending = _kanjiContentEnsureFuture;
+    if (pending != null) return pending;
+
+    Future<void> ensure() async {
+      final repaired = await _contentDb.ensureKanjiContentCurrent();
+      if (repaired || !_kanjiContentEnsured) {
+        _kanjiByLevelCache.clear();
+        _kanjiCountCache.clear();
+      }
+      _kanjiContentEnsured = true;
+    }
+
+    final future = ensure();
+    _kanjiContentEnsureFuture = future;
+    await future.whenComplete(() => _kanjiContentEnsureFuture = null);
+  }
+
   Future<List<KanjiItem>> fetchKanji(int lessonId) async {
+    await _ensureKanjiContentCurrent();
     final rows = await (_contentDb.select(
       _contentDb.kanji,
     )..where((tbl) => tbl.lessonId.equals(lessonId))).get();
@@ -1996,6 +2017,7 @@ class LessonRepository {
   }
 
   Future<List<KanjiItem>> fetchKanjiForLevel(String level, int lessonId) async {
+    await _ensureKanjiContentCurrent();
     final rows =
         await (_contentDb.select(_contentDb.kanji)..where(
               (tbl) =>
@@ -2007,6 +2029,7 @@ class LessonRepository {
 
   Future<List<KanjiItem>> fetchKanjiByIds(List<int> ids) async {
     if (ids.isEmpty) return [];
+    await _ensureKanjiContentCurrent();
     final rows = await (_contentDb.select(
       _contentDb.kanji,
     )..where((tbl) => tbl.id.isIn(ids))).get();
@@ -2014,6 +2037,7 @@ class LessonRepository {
   }
 
   Future<List<KanjiItem>> fetchKanjiByLevel(String level) async {
+    await _ensureKanjiContentCurrent();
     final cached = _kanjiByLevelCache[level];
     if (cached != null) return cached;
 
@@ -2035,6 +2059,7 @@ class LessonRepository {
   /// Returns kanji at [level] whose SRS state is currently due (nextReviewAt <= now).
   /// Kanji with no SRS state row are excluded — they are "unseen", not "due".
   Future<List<KanjiItem>> fetchDueKanjiByLevel(String level) async {
+    await _ensureKanjiContentCurrent();
     // getDueKanjiIds() fetches only kanjiId values — no extra columns transferred.
     final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
     if (dueIds.isEmpty) return const [];
@@ -2058,6 +2083,7 @@ class LessonRepository {
     String level, {
     int limit = 15,
   }) async {
+    await _ensureKanjiContentCurrent();
     final seenIds = await _db.kanjiSrsDao.getAllSeenKanjiIds();
 
     final query = _contentDb.select(_contentDb.kanji)
@@ -2079,6 +2105,7 @@ class LessonRepository {
   /// COUNT-only: total kanji at [level]. No row deserialization. Result is
   /// cached for the process lifetime since content DB is read-only.
   Future<int> countKanjiByLevel(String level) async {
+    await _ensureKanjiContentCurrent();
     final cached = _kanjiCountCache[level];
     if (cached != null) return cached;
     final countExpr = _contentDb.kanji.id.count();
@@ -2094,6 +2121,7 @@ class LessonRepository {
 
   /// COUNT-only: due kanji at [level]. No KanjiItem deserialization.
   Future<int> countDueKanjiByLevel(String level) async {
+    await _ensureKanjiContentCurrent();
     final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
     if (dueIds.isEmpty) return 0;
     final countExpr = _contentDb.kanji.id.count();
@@ -2110,6 +2138,7 @@ class LessonRepository {
 
   /// COUNT-only: unseen kanji at [level] (no SRS row). No deserialization.
   Future<int> countUnseenKanjiByLevel(String level) async {
+    await _ensureKanjiContentCurrent();
     final seenIds = await _db.kanjiSrsDao.getAllSeenKanjiIds();
     final countExpr = _contentDb.kanji.id.count();
     final query = _contentDb.selectOnly(_contentDb.kanji)
@@ -2128,12 +2157,14 @@ class LessonRepository {
 
   /// Returns the IDs of all kanji that have ever been seen (have an SRS row).
   Future<Set<int>> fetchSeenKanjiIds() async {
+    await _ensureKanjiContentCurrent();
     final ids = await _db.kanjiSrsDao.getAllSeenKanjiIds();
     return ids.toSet();
   }
 
   /// Returns the IDs of all kanji that are currently due for review.
   Future<Set<int>> fetchDueKanjiIds() async {
+    await _ensureKanjiContentCurrent();
     final states = await _db.kanjiSrsDao.getDueReviews();
     return states.map((s) => s.kanjiId).toSet();
   }

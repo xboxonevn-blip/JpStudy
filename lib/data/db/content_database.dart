@@ -42,6 +42,8 @@ class ContentDatabase extends _$ContentDatabase {
   ContentDatabase({QueryExecutor? executor})
     : super(executor ?? _openContentConnection());
 
+  Future<bool>? _kanjiContentCurrentFuture;
+
   @override
   int get schemaVersion => 35;
 
@@ -168,36 +170,51 @@ class ContentDatabase extends _$ContentDatabase {
         }
       },
       beforeOpen: (details) async {
-        await _selfHealKanjiMeaningJaColumn();
-        await _ensureKanjiSeedRevision(details);
+        await _ensureKanjiContentCurrent();
         // All four checks are independent — run them concurrently so the
         // content DB is ready in the time of the single slowest check.
         await Future.wait([
           _ensureMinnaVocabularySeededForActiveLevel(),
           _ensureHajimeteVocabularySeededForActiveLevel(),
           _ensureMinnaGrammarSeededForActiveLevel(),
-          _ensureMinnaKanjiSeeded(),
         ]);
       },
     );
   }
 
-  Future<void> _selfHealKanjiMeaningJaColumn() async {
+  Future<bool> ensureKanjiContentCurrent() {
+    final pending = _kanjiContentCurrentFuture;
+    if (pending != null) return pending;
+    final future = _ensureKanjiContentCurrent();
+    _kanjiContentCurrentFuture = future;
+    return future.whenComplete(() => _kanjiContentCurrentFuture = null);
+  }
+
+  Future<bool> _ensureKanjiContentCurrent() async {
+    var repaired = false;
+    repaired = await _selfHealKanjiMeaningJaColumn() || repaired;
+    repaired = await _ensureKanjiSeedRevision() || repaired;
+    repaired = await _ensureMinnaKanjiSeeded() || repaired;
+    return repaired;
+  }
+
+  Future<bool> _selfHealKanjiMeaningJaColumn() async {
     final columns = await customSelect("PRAGMA table_info('kanji')").get();
     if (columns.isEmpty) {
-      return;
+      return false;
     }
     final columnNames = columns
         .map((row) => row.data['name'])
         .whereType<String>()
         .toSet();
     if (columnNames.contains('meaning_ja')) {
-      return;
+      return false;
     }
     await customStatement('ALTER TABLE kanji ADD COLUMN meaning_ja TEXT NULL');
+    return true;
   }
 
-  Future<void> _ensureKanjiSeedRevision(OpeningDetails details) async {
+  Future<bool> _ensureKanjiSeedRevision() async {
     await customStatement(
       'CREATE TABLE IF NOT EXISTS content_meta ('
       'key TEXT NOT NULL PRIMARY KEY, '
@@ -215,16 +232,19 @@ class ContentDatabase extends _$ContentDatabase {
     if (storedRevision != null &&
         storedRevision >= _kanjiSeedRevision &&
         sentinelsHealthy) {
-      return;
+      return false;
     }
 
-    if (!details.wasCreated || !sentinelsHealthy) {
+    var repaired = false;
+    if (storedRevision != null || !sentinelsHealthy) {
       await _reseedMinnaKanji();
+      repaired = true;
     }
     await customStatement(
       "INSERT OR REPLACE INTO content_meta (key, value) VALUES "
       "('$_kanjiSeedRevisionKey', '$_kanjiSeedRevision')",
     );
+    return repaired;
   }
 
   // ... (reseed methods)
@@ -478,7 +498,7 @@ class ContentDatabase extends _$ContentDatabase {
     );
   }
 
-  Future<void> _ensureMinnaKanjiSeeded() async {
+  Future<bool> _ensureMinnaKanjiSeeded() async {
     // One GROUP BY query replaces N sequential COUNT queries (one per level).
     final levelCol = kanji.jlptLevel;
     final countExpr = kanji.id.count();
@@ -503,7 +523,9 @@ class ContentDatabase extends _$ContentDatabase {
     }).toList();
     if (incompleteKanjiSpecs.isNotEmpty) {
       await _reseedKanjiLevels(incompleteKanjiSpecs);
+      return true;
     }
+    return false;
   }
 
   Future<bool> _kanjiSeedSentinelsHealthy() async {

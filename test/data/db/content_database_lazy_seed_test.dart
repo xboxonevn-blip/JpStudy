@@ -376,6 +376,77 @@ INSERT INTO kanji (
       expect(row.decompositionJson, contains('"hanViet":"Kỹ"'));
     },
   );
+
+  test(
+    'runtime kanji content ensure repairs an already-open stale DB',
+    () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+      final db = ContentDatabase(executor: NativeDatabase.memory());
+      addTearDown(db.close);
+
+      await db.customStatement(
+        "UPDATE kanji SET meaning = 'kỹ', decomposition_json = '{}' "
+        "WHERE jlpt_level = 'N3' AND lesson_id = 17 AND character = '技'",
+      );
+      await db.customStatement(
+        "INSERT OR REPLACE INTO content_meta (key, value) "
+        "VALUES ('kanjiSeedRevision', '18')",
+      );
+
+      final repaired = await db.ensureKanjiContentCurrent();
+
+      final row =
+          await (db.select(db.kanji)
+                ..where(
+                  (tbl) =>
+                      tbl.character.equals('技') &
+                      tbl.jlptLevel.equals('N3') &
+                      tbl.lessonId.equals(17),
+                )
+                ..limit(1))
+              .getSingle();
+
+      expect(row.meaning, 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)');
+      expect(row.decompositionJson, contains('"hanViet":"Kỹ"'));
+      expect(repaired, isTrue);
+    },
+  );
+
+  test(
+    'runtime kanji content ensure is a no-op for healthy revision',
+    () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+      final db = ContentDatabase(executor: NativeDatabase.memory());
+      addTearDown(db.close);
+
+      await db.customStatement(
+        "UPDATE kanji SET meaning = '__local_marker__' "
+        "WHERE jlpt_level = 'N3' AND lesson_id = 17 AND character = '科'",
+      );
+      await db.customStatement(
+        "INSERT OR REPLACE INTO content_meta (key, value) "
+        "VALUES ('kanjiSeedRevision', '18')",
+      );
+
+      final repaired = await db.ensureKanjiContentCurrent();
+
+      final row =
+          await (db.select(db.kanji)
+                ..where(
+                  (tbl) =>
+                      tbl.character.equals('科') &
+                      tbl.jlptLevel.equals('N3') &
+                      tbl.lessonId.equals(17),
+                )
+                ..limit(1))
+              .getSingle();
+
+      expect(row.meaning, '__local_marker__');
+      expect(repaired, isFalse);
+    },
+  );
 }
 
 int _authoredKanjiCount(String level) {
