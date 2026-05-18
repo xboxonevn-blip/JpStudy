@@ -215,7 +215,7 @@ void main() {
 
     expect(row.meaning, 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)');
     expect(row.decompositionJson, contains('"hanViet":"Kỹ"'));
-    expect(revisionRow.data['value'], '20');
+    expect(revisionRow.data['value'], '21');
   });
 
   test(
@@ -243,7 +243,7 @@ void main() {
         kanjiOnyomi: 'サク',
         kanjiKunyomi: 'つく.る',
         kanjiDecompositionJson: '{}',
-        contentMetaRevision: 20,
+        contentMetaRevision: 21,
       );
 
       final db = ContentDatabase(executor: NativeDatabase(file));
@@ -294,7 +294,7 @@ void main() {
         kanjiOnyomi: 'ギ',
         kanjiKunyomi: 'わざ',
         kanjiDecompositionJson: '{}',
-        contentMetaRevision: 20,
+        contentMetaRevision: 21,
       );
       await _padKanjiRowsToCount(file, 'N3', _authoredKanjiCount('N3'));
 
@@ -340,7 +340,7 @@ void main() {
         kanjiOnyomi: 'ギ',
         kanjiKunyomi: 'わざ',
         kanjiDecompositionJson: '{"hanViet":"Kỹ"}',
-        contentMetaRevision: 20,
+        contentMetaRevision: 21,
       );
       final sqlite = sqlite3.open(file.path);
       try {
@@ -391,7 +391,7 @@ INSERT INTO kanji (
       );
       await db.customStatement(
         "INSERT OR REPLACE INTO content_meta (key, value) "
-        "VALUES ('kanjiSeedRevision', '20')",
+        "VALUES ('kanjiSeedRevision', '21')",
       );
 
       final repaired = await db.ensureKanjiContentCurrent();
@@ -427,7 +427,7 @@ INSERT INTO kanji (
       );
       await db.customStatement(
         "INSERT OR REPLACE INTO content_meta (key, value) "
-        "VALUES ('kanjiSeedRevision', '20')",
+        "VALUES ('kanjiSeedRevision', '21')",
       );
 
       final repaired = await db.ensureKanjiContentCurrent();

@@ -413,3 +413,24 @@ Sources consulted:
 | `鮮` | KANJIDIC2 `Tiên/Tiển`, meanings `fresh`, `vivid`, `clear`; Unihan `kVietnamese=tiên`, `kDefinition=fresh, new, delicious; rare, few`; local context `新鮮` | Added learner-facing Hán-Việt `Tiên`, display `Tiên (tươi; rõ nét; rực rỡ)`, search text, and freshness/food related kanji. |
 
 Tagging: replaced the lesson-19 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 20 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_20.json`, especially emotion/psychology compounds such as `感情`, `不安`, `緊張`, `怒る`, and `悲しい`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `感` | KANJIDIC2 `Cảm`, meanings `emotion`, `feeling`, `sensation`; Unihan `kVietnamese=cảm`, `kDefinition=feel, perceive, emotion`; local context `感情` | Added Hán-Việt `Cảm`, display `Cảm (cảm xúc; cảm giác; cảm nhận)`, search text, and emotion related kanji. |
+| `情` | KANJIDIC2 `Tình`, meanings `feelings`, `emotion`, `passion`, `circumstances`; Unihan `kVietnamese=tình`, `kDefinition=feeling, sentiment, emotion`; local context `感情` | Added Hán-Việt `Tình`, display `Tình (tình cảm; cảm xúc; hoàn cảnh)`, search text, and emotion related kanji. |
+| `不` | KANJIDIC2 `Bất` plus variants, meanings `negative`, `non-`; Unihan `kVietnamese=bất`, `kDefinition=no, not; un-; negative prefix`; local context `不安` | Rewrote display to `Bất (không; phủ định; bất lợi)`, normalized search text, and linked negative/uneasy related kanji. |
+| `安` | KANJIDIC2 `An`, meanings `relax`, `cheap`, `quiet`, `peaceful`; Unihan `kVietnamese=an`, `kDefinition=peaceful, tranquil, quiet`; local context `不安`/peace of mind | Rewrote display to `An (yên ổn; rẻ; an tâm)`, normalized search text, and linked peace/rest related kanji. |
+| `緊` | KANJIDIC2 `Khẩn`, meanings `tense`, `solid`, `tight`; Unihan `kVietnamese=khẩn`, `kDefinition=tense, tight, taut; firm, secure`; local context `緊張` | Added Hán-Việt `Khẩn`, display `Khẩn (căng thẳng; chặt; khẩn cấp)`, search text, and tension related kanji. |
+| `張` | KANJIDIC2 `Trương/Trướng`, meanings `stretch`, `spread`, `put up`; Unihan `kVietnamese=trương`, `kDefinition=stretch, extend, expand`; local context `緊張`/trying hard | Rewrote display to `Trương (căng ra; trải rộng; cố gắng)`, normalized search text, and linked tension/effort related kanji. |
+| `怒` | KANJIDIC2 `Nộ`, meanings `angry`, `be offended`; Unihan `kVietnamese=nộ`, `kDefinition=anger, rage, passion; angry`; local context anger | Rewrote display to `Nộ (giận dữ; nổi giận; phẫn nộ)`, normalized search text, and linked emotion related kanji. |
+| `悲` | KANJIDIC2 `Bi`, meanings `grieve`, `sad`, `deplore`; Unihan `kVietnamese=bi`, `kDefinition=sorrow, grief; sorry, sad`; local context sadness | Rewrote display to `Bi (buồn; đau lòng; thương xót)`, normalized search text, and linked emotion related kanji. |
+
+Tagging: replaced the lesson-20 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

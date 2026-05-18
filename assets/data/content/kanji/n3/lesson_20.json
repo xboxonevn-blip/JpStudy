@@ -13,9 +13,9 @@
       "character": "感",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "cảm",
-        "meaningViDisplay": "cảm",
+        "hanViet": "Cảm",
+        "meaningVi": "cảm xúc; cảm giác; cảm nhận",
+        "meaningViDisplay": "Cảm (cảm xúc; cảm giác; cảm nhận)",
         "meaningEn": "emotion, feeling"
       },
       "readings": {
@@ -29,15 +29,20 @@
         "en": "Core kanji for QUARTET 20: Emotions and psychology."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Cảm",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "情",
+          "心",
+          "想",
+          "覚"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "cam",
+        "hanVietNoAccent": "cam",
+        "meaningViNoAccent": "cam xuc; cam giac; cam nhan",
         "meaningEnNoAccent": "emotion, feeling"
       },
       "examples": [
@@ -59,7 +64,7 @@
         }
       ],
       "legacy": {
-        "meaning": "cảm",
+        "meaning": "Cảm (cảm xúc; cảm giác; cảm nhận)",
         "onyomi": "カン",
         "kunyomi": ""
       },
@@ -67,7 +72,10 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l20_k002",
@@ -76,9 +84,9 @@
       "character": "情",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "tình",
-        "meaningViDisplay": "tình",
+        "hanViet": "Tình",
+        "meaningVi": "tình cảm; cảm xúc; hoàn cảnh",
+        "meaningViDisplay": "Tình (tình cảm; cảm xúc; hoàn cảnh)",
         "meaningEn": "feelings, emotion"
       },
       "readings": {
@@ -95,15 +103,20 @@
         "en": "Core kanji for QUARTET 20: Emotions and psychology."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tình",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "感",
+          "心",
+          "怒",
+          "悲"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tinh",
+        "hanVietNoAccent": "tinh",
+        "meaningViNoAccent": "tinh cam; cam xuc; hoan canh",
         "meaningEnNoAccent": "feelings, emotion"
       },
       "examples": [
@@ -117,7 +130,7 @@
         }
       ],
       "legacy": {
-        "meaning": "tình",
+        "meaning": "Tình (tình cảm; cảm xúc; hoàn cảnh)",
         "onyomi": "ジョウ, セイ",
         "kunyomi": "なさ.け"
       },
@@ -125,7 +138,10 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l20_k003",
@@ -135,8 +151,8 @@
       "strokeCount": 4,
       "labels": {
         "hanViet": "Bất",
-        "meaningVi": "bất",
-        "meaningViDisplay": "Bất (bất)",
+        "meaningVi": "không; phủ định; bất lợi",
+        "meaningViDisplay": "Bất (không; phủ định; bất lợi)",
         "meaningEn": "negative, non-"
       },
       "readings": {
@@ -155,11 +171,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "安",
+          "便",
+          "足",
+          "利"
+        ]
       },
       "search": {
         "hanVietNoAccent": "bat",
-        "meaningViNoAccent": "bat",
+        "meaningViNoAccent": "khong; phu dinh; bat loi",
         "meaningEnNoAccent": "negative, non-"
       },
       "examples": [
@@ -173,7 +194,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Bất (bất)",
+        "meaning": "Bất (không; phủ định; bất lợi)",
         "onyomi": "フ, ブ",
         "kunyomi": ""
       },
@@ -181,7 +202,10 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l20_k004",
@@ -191,8 +215,8 @@
       "strokeCount": 6,
       "labels": {
         "hanViet": "An",
-        "meaningVi": "an",
-        "meaningViDisplay": "An (an)",
+        "meaningVi": "yên ổn; rẻ; an tâm",
+        "meaningViDisplay": "An (yên ổn; rẻ; an tâm)",
         "meaningEn": "relax, cheap"
       },
       "readings": {
@@ -215,11 +239,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "不",
+          "心",
+          "全",
+          "休"
+        ]
       },
       "search": {
         "hanVietNoAccent": "an",
-        "meaningViNoAccent": "an",
+        "meaningViNoAccent": "yen on; re; an tam",
         "meaningEnNoAccent": "relax, cheap"
       },
       "examples": [
@@ -241,7 +270,7 @@
         }
       ],
       "legacy": {
-        "meaning": "An (an)",
+        "meaning": "An (yên ổn; rẻ; an tâm)",
         "onyomi": "アン",
         "kunyomi": "やす.い, やす.まる, やす, やす.らか"
       },
@@ -249,7 +278,10 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l20_k005",
@@ -258,9 +290,9 @@
       "character": "緊",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "khẩn, căng",
-        "meaningViDisplay": "khẩn, căng",
+        "hanViet": "Khẩn",
+        "meaningVi": "căng thẳng; chặt; khẩn cấp",
+        "meaningViDisplay": "Khẩn (căng thẳng; chặt; khẩn cấp)",
         "meaningEn": "tense, solid"
       },
       "readings": {
@@ -277,15 +309,20 @@
         "en": "Core kanji for QUARTET 20: Emotions and psychology."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Khẩn",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "張",
+          "急",
+          "感",
+          "心"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "khan, cang",
+        "hanVietNoAccent": "khan",
+        "meaningViNoAccent": "cang thang; chat; khan cap",
         "meaningEnNoAccent": "tense, solid"
       },
       "examples": [
@@ -299,7 +336,7 @@
         }
       ],
       "legacy": {
-        "meaning": "khẩn, căng",
+        "meaning": "Khẩn (căng thẳng; chặt; khẩn cấp)",
         "onyomi": "キン",
         "kunyomi": "し.める, し.まる"
       },
@@ -307,7 +344,10 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l20_k006",
@@ -317,8 +357,8 @@
       "strokeCount": 11,
       "labels": {
         "hanViet": "Trương",
-        "meaningVi": "trương",
-        "meaningViDisplay": "Trương (trương)",
+        "meaningVi": "căng ra; trải rộng; cố gắng",
+        "meaningViDisplay": "Trương (căng ra; trải rộng; cố gắng)",
         "meaningEn": "counter for bows & stringed instruments, stretch"
       },
       "readings": {
@@ -340,11 +380,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "緊",
+          "強",
+          "広",
+          "力"
+        ]
       },
       "search": {
         "hanVietNoAccent": "truong",
-        "meaningViNoAccent": "truong",
+        "meaningViNoAccent": "cang ra; trai rong; co gang",
         "meaningEnNoAccent": "counter for bows & stringed instruments, stretch"
       },
       "examples": [
@@ -358,7 +403,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Trương (trương)",
+        "meaning": "Trương (căng ra; trải rộng; cố gắng)",
         "onyomi": "チョウ",
         "kunyomi": "は.る, -は.り, -ば.り"
       },
@@ -366,7 +411,10 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l20_k007",
@@ -376,8 +424,8 @@
       "strokeCount": 9,
       "labels": {
         "hanViet": "Nộ",
-        "meaningVi": "nộ, giận",
-        "meaningViDisplay": "Nộ (nộ, giận)",
+        "meaningVi": "giận dữ; nổi giận; phẫn nộ",
+        "meaningViDisplay": "Nộ (giận dữ; nổi giận; phẫn nộ)",
         "meaningEn": "angry, be offended"
       },
       "readings": {
@@ -399,11 +447,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "情",
+          "感",
+          "心",
+          "悲"
+        ]
       },
       "search": {
         "hanVietNoAccent": "no",
-        "meaningViNoAccent": "no, gian",
+        "meaningViNoAccent": "gian du; noi gian; phan no",
         "meaningEnNoAccent": "angry, be offended"
       },
       "examples": [
@@ -417,7 +470,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Nộ (nộ, giận)",
+        "meaning": "Nộ (giận dữ; nổi giận; phẫn nộ)",
         "onyomi": "ド, ヌ",
         "kunyomi": "いか.る, おこ.る"
       },
@@ -425,7 +478,10 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l20_k008",
@@ -435,8 +491,8 @@
       "strokeCount": 12,
       "labels": {
         "hanViet": "Bi",
-        "meaningVi": "bi, buồn",
-        "meaningViDisplay": "Bi (bi, buồn)",
+        "meaningVi": "buồn; đau lòng; thương xót",
+        "meaningViDisplay": "Bi (buồn; đau lòng; thương xót)",
         "meaningEn": "grieve, sad"
       },
       "readings": {
@@ -457,11 +513,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "情",
+          "感",
+          "心",
+          "怒"
+        ]
       },
       "search": {
         "hanVietNoAccent": "bi",
-        "meaningViNoAccent": "bi, buon",
+        "meaningViNoAccent": "buon; dau long; thuong xot",
         "meaningEnNoAccent": "grieve, sad"
       },
       "examples": [
@@ -475,7 +536,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Bi (bi, buồn)",
+        "meaning": "Bi (buồn; đau lòng; thương xót)",
         "onyomi": "ヒ",
         "kunyomi": "かな.しい, かな.しむ"
       },
@@ -483,10 +544,13 @@
         "quartetLesson": 20,
         "themeEn": "Emotions and psychology",
         "themeVi": "Cảm xúc và tâm lý"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

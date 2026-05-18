@@ -13,7 +13,7 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
-const _kanjiSeedRevision = 20;
+const _kanjiSeedRevision = 21;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
   _KanjiSeedSentinel(
@@ -36,6 +36,13 @@ const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
     character: '材',
     meaning: 'Tài (nguyên liệu; vật liệu; gỗ)',
     decompositionContains: '"hanViet":"Tài"',
+  ),
+  _KanjiSeedSentinel(
+    level: 'N3',
+    lessonId: 20,
+    character: '感',
+    meaning: 'Cảm (cảm xúc; cảm giác; cảm nhận)',
+    decompositionContains: '"hanViet":"Cảm"',
   ),
 ];
 
