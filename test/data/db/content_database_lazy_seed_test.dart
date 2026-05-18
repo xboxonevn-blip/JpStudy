@@ -186,14 +186,15 @@ void main() {
     await _createLegacyKanjiDb(
       file,
       userVersion: 35,
-      kanjiLessonId: 2,
-      kanjiCharacter: '将',
+      kanjiLessonId: 3,
+      kanjiCharacter: '節',
       kanjiLevel: 'N3',
-      kanjiMeaning: 'tướng, tương lai',
-      kanjiMeaningEn: 'leader, commander',
-      kanjiOnyomi: 'ショウ, ソウ',
-      kanjiKunyomi: 'まさ.に',
+      kanjiMeaning: 'tiết, tiết chế',
+      kanjiMeaningEn: 'node, season',
+      kanjiOnyomi: 'セツ, セチ',
+      kanjiKunyomi: 'ふし',
       kanjiDecompositionJson: '{}',
+      contentMetaRevision: 2,
     );
 
     final db = ContentDatabase(executor: NativeDatabase(file));
@@ -202,7 +203,7 @@ void main() {
     final row =
         await (db.select(db.kanji)
               ..where(
-                (tbl) => tbl.character.equals('将') & tbl.jlptLevel.equals('N3'),
+                (tbl) => tbl.character.equals('節') & tbl.jlptLevel.equals('N3'),
               )
               ..limit(1))
             .getSingle();
@@ -212,9 +213,9 @@ void main() {
         )
         .getSingle();
 
-    expect(row.meaning, 'Tướng (tướng; tương lai)');
-    expect(row.decompositionJson, contains('"hanViet":"Tướng"'));
-    expect(revisionRow.data['value'], '2');
+    expect(row.meaning, 'Tiết (tiết; đốt; giai đoạn)');
+    expect(row.decompositionJson, contains('"hanViet":"Tiết"'));
+    expect(revisionRow.data['value'], '3');
   });
 }
 
@@ -233,6 +234,7 @@ Future<void> _createLegacyKanjiDb(
   String kanjiOnyomi = 'サク',
   String kanjiKunyomi = 'つく.る',
   String kanjiDecompositionJson = '{"hanViet":"Tác"}',
+  int? contentMetaRevision,
 }) async {
   final sqlite = sqlite3.open(file.path);
   try {
@@ -310,6 +312,18 @@ INSERT INTO kanji (
   '$kanjiDecompositionJson', '[]', '$kanjiLevel'
 );
 ''');
+    if (contentMetaRevision != null) {
+      sqlite.execute('''
+CREATE TABLE content_meta (
+  key TEXT NOT NULL PRIMARY KEY,
+  value TEXT NOT NULL
+);
+''');
+      sqlite.execute('''
+INSERT INTO content_meta (key, value)
+VALUES ('kanjiSeedRevision', '$contentMetaRevision');
+''');
+    }
   } finally {
     sqlite.close();
   }

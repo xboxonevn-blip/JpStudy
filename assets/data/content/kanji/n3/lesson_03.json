@@ -13,9 +13,9 @@
       "character": "節",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "tiết, tiết chế",
-        "meaningViDisplay": "tiết, tiết chế",
+        "hanViet": "Tiết",
+        "meaningVi": "tiết; đốt; giai đoạn",
+        "meaningViDisplay": "Tiết (tiết; đốt; giai đoạn)",
         "meaningEn": "node, season"
       },
       "readings": {
@@ -34,15 +34,20 @@
         "en": "Core kanji for QUARTET 3: A balance between convenience and reducing waste."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tiết",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "約",
+          "時",
+          "季",
+          "章"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tiet, tiet che",
+        "hanVietNoAccent": "tiet",
+        "meaningViNoAccent": "tiet; dot; giai doan",
         "meaningEnNoAccent": "node, season"
       },
       "examples": [
@@ -56,10 +61,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tiết, tiết chế",
+        "meaning": "Tiết (tiết; đốt; giai đoạn)",
         "onyomi": "セツ, セチ",
         "kunyomi": "ふし, -ぶし, のっと"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -74,8 +82,8 @@
       "strokeCount": 9,
       "labels": {
         "hanViet": "Ước",
-        "meaningVi": "ước, tóm lược",
-        "meaningViDisplay": "Ước (ước, tóm lược)",
+        "meaningVi": "ước hẹn; khoảng; rút gọn",
+        "meaningViDisplay": "Ước (ước hẹn; khoảng; rút gọn)",
         "meaningEn": "promise, approximately"
       },
       "readings": {
@@ -97,11 +105,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "節",
+          "束",
+          "定",
+          "契"
+        ]
       },
       "search": {
         "hanVietNoAccent": "uoc",
-        "meaningViNoAccent": "uoc, tom luoc",
+        "meaningViNoAccent": "uoc hen; khoang; rut gon",
         "meaningEnNoAccent": "promise, approximately"
       },
       "examples": [
@@ -115,10 +128,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Ước (ước, tóm lược)",
+        "meaning": "Ước (ước hẹn; khoảng; rút gọn)",
         "onyomi": "ヤク",
         "kunyomi": "つづ.まる, つづ.める, つづま.やか"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -132,9 +148,9 @@
       "character": "無",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "vô, không có",
-        "meaningViDisplay": "vô, không có",
+        "hanViet": "Vô",
+        "meaningVi": "không; không có",
+        "meaningViDisplay": "Vô (không; không có)",
         "meaningEn": "nothingness, none"
       },
       "readings": {
@@ -151,15 +167,20 @@
         "en": "Core kanji for QUARTET 3: A balance between convenience and reducing waste."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Vô",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "有",
+          "不",
+          "駄",
+          "料"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "vo, khong co",
+        "hanVietNoAccent": "vo",
+        "meaningViNoAccent": "khong; khong co",
         "meaningEnNoAccent": "nothingness, none"
       },
       "examples": [
@@ -173,10 +194,13 @@
         }
       ],
       "legacy": {
-        "meaning": "vô, không có",
+        "meaning": "Vô (không; không có)",
         "onyomi": "ム, ブ",
         "kunyomi": "な.い"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -190,9 +214,9 @@
       "character": "駄",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "đà",
-        "meaningVi": "đà, vô dụng",
-        "meaningViDisplay": "đà (đà, vô dụng)",
+        "hanViet": "Đà",
+        "meaningVi": "vô ích; phí phạm",
+        "meaningViDisplay": "Đà (vô ích; phí phạm)",
         "meaningEn": "burdensome, pack horse"
       },
       "readings": {
@@ -207,15 +231,20 @@
         "en": "Core kanji for QUARTET 3: A balance between convenience and reducing waste."
       },
       "decomposition": {
-        "hanViet": "đà",
+        "hanViet": "Đà",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "無",
+          "馬",
+          "費",
+          "浪"
+        ]
       },
       "search": {
         "hanVietNoAccent": "da",
-        "meaningViNoAccent": "da, vo dung",
+        "meaningViNoAccent": "vo ich; phi pham",
         "meaningEnNoAccent": "burdensome, pack horse"
       },
       "examples": [
@@ -229,10 +258,13 @@
         }
       ],
       "legacy": {
-        "meaning": "đà (đà, vô dụng)",
+        "meaning": "Đà (vô ích; phí phạm)",
         "onyomi": "ダ, タ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -246,9 +278,9 @@
       "character": "再",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "tái, lần nữa",
-        "meaningViDisplay": "tái, lần nữa",
+        "hanViet": "Tái",
+        "meaningVi": "lại; lần nữa",
+        "meaningViDisplay": "Tái (lại; lần nữa)",
         "meaningEn": "again, twice"
       },
       "readings": {
@@ -265,15 +297,20 @@
         "en": "Core kanji for QUARTET 3: A balance between convenience and reducing waste."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tái",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "復",
+          "回",
+          "生",
+          "利"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tai, lan nua",
+        "hanVietNoAccent": "tai",
+        "meaningViNoAccent": "lai; lan nua",
         "meaningEnNoAccent": "again, twice"
       },
       "examples": [
@@ -287,10 +324,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tái, lần nữa",
+        "meaning": "Tái (lại; lần nữa)",
         "onyomi": "サイ, サ",
         "kunyomi": "ふたた.び"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -304,9 +344,9 @@
       "character": "資",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "tư",
-        "meaningVi": "tư, tư liệu",
-        "meaningViDisplay": "tư (tư, tư liệu)",
+        "hanViet": "Tư",
+        "meaningVi": "tài nguyên; vốn; tư liệu",
+        "meaningViDisplay": "Tư (tài nguyên; vốn; tư liệu)",
         "meaningEn": "assets, resources"
       },
       "readings": {
@@ -320,15 +360,20 @@
         "en": "Core kanji for QUARTET 3: A balance between convenience and reducing waste."
       },
       "decomposition": {
-        "hanViet": "tư",
+        "hanViet": "Tư",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "源",
+          "料",
+          "金",
+          "本"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tu",
-        "meaningViNoAccent": "tu, tu lieu",
+        "meaningViNoAccent": "tai nguyen; von; tu lieu",
         "meaningEnNoAccent": "assets, resources"
       },
       "examples": [
@@ -342,10 +387,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tư (tư, tư liệu)",
+        "meaning": "Tư (tài nguyên; vốn; tư liệu)",
         "onyomi": "シ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -359,9 +407,9 @@
       "character": "源",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "nguyên, nguồn",
-        "meaningViDisplay": "nguyên, nguồn",
+        "hanViet": "Nguyên",
+        "meaningVi": "nguồn; nguồn gốc",
+        "meaningViDisplay": "Nguyên (nguồn; nguồn gốc)",
         "meaningEn": "source, origin"
       },
       "readings": {
@@ -377,15 +425,20 @@
         "en": "Core kanji for QUARTET 3: A balance between convenience and reducing waste."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Nguyên",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "資",
+          "水",
+          "原",
+          "泉"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "nguyen, nguon",
+        "hanVietNoAccent": "nguyen",
+        "meaningViNoAccent": "nguon; nguon goc",
         "meaningEnNoAccent": "source, origin"
       },
       "examples": [
@@ -399,10 +452,13 @@
         }
       ],
       "legacy": {
-        "meaning": "nguyên, nguồn",
+        "meaning": "Nguyên (nguồn; nguồn gốc)",
         "onyomi": "ゲン",
         "kunyomi": "みなもと"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -416,9 +472,9 @@
       "character": "環",
       "strokeCount": 17,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "hoàn, vòng",
-        "meaningViDisplay": "hoàn, vòng",
+        "hanViet": "Hoàn",
+        "meaningVi": "vòng; môi trường",
+        "meaningViDisplay": "Hoàn (vòng; môi trường)",
         "meaningEn": "ring, circle"
       },
       "readings": {
@@ -434,15 +490,20 @@
         "en": "Core kanji for QUARTET 3: A balance between convenience and reducing waste."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Hoàn",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "境",
+          "輪",
+          "球",
+          "資"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "hoan, vong",
+        "hanVietNoAccent": "hoan",
+        "meaningViNoAccent": "vong; moi truong",
         "meaningEnNoAccent": "ring, circle"
       },
       "examples": [
@@ -456,10 +517,13 @@
         }
       ],
       "legacy": {
-        "meaning": "hoàn, vòng",
+        "meaning": "Hoàn (vòng; môi trường)",
         "onyomi": "カン",
         "kunyomi": "わ"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 3,
         "themeEn": "A balance between convenience and reducing waste",
@@ -468,6 +532,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

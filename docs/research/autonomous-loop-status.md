@@ -160,3 +160,11 @@
 - Verified locally: JSON parses and kanji coverage audit reduced N3 incomplete current entries from `182` to `174`.
 - Added content DB metadata revision `2` so post-v35 asset metadata edits reseed for existing browsers, with a regression covering a current-version stale `将` row.
 - Verified live after deploying `a8ae956c` against the existing Playwright browser IndexedDB: N3 Kanji grid loaded, `将` detail showed updated Vietnamese display `tướng, tương lai`, `/kanji/practice` -> `Viết` loaded `Viết tay: N3 - Học kanji mới`, and console errors remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 03 Completeness Patch
+
+- Source-verified all eight N3 lesson-03 kanji (`節`, `約`, `無`, `駄`, `再`, `資`, `源`, `環`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `節`, `無`, `再`, `源`, and `環`; normalized lowercase Hán-Việt on `駄`/`資`; rewrote learner-facing Vietnamese display/search text for all eight entries; filled all lesson-03 `relatedKanji` lists.
+- Replaced lesson-03 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `3` so existing browsers with revision `2` receive the new lesson-03 metadata; regression now starts from `content_meta.kanjiSeedRevision=2` and stale `節`.
+- Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, and kanji coverage audit reduced N3 incomplete current entries from `174` to `168`.

@@ -13,7 +13,7 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
-const _kanjiSeedRevision = 2;
+const _kanjiSeedRevision = 3;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 
 @DriftDatabase(
@@ -195,11 +195,10 @@ class ContentDatabase extends _$ContentDatabase {
       'value TEXT NOT NULL'
       ')',
     );
-    final revisionRows =
-        await customSelect(
-          "SELECT value FROM content_meta WHERE key = '$_kanjiSeedRevisionKey' "
-          'LIMIT 1',
-        ).get();
+    final revisionRows = await customSelect(
+      "SELECT value FROM content_meta WHERE key = '$_kanjiSeedRevisionKey' "
+      'LIMIT 1',
+    ).get();
     final storedRevision = revisionRows.isEmpty
         ? null
         : int.tryParse('${revisionRows.single.data['value']}');
