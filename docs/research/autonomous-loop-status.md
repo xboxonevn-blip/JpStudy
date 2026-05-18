@@ -367,3 +367,21 @@
 - Bumped content DB Kanji seed revision to `24` and added a lesson-23 sentinel for `歴`.
 - Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `23` to `16`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
 - Built and deployed `b32bf246` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `歴` opened detail showing `Lịch (lịch sử; trải qua; quá trình)` plus Hán-Việt `Lịch`, with console errors/warnings `0`.
+
+## 2026-05-18 N3 Kanji Lesson 24 Completeness Patch
+
+- Source-verified all eight N3 lesson-24 kanji (`流`, `行`, `着`, `替`, `化`, `粧`, `装`, `飾`) against KANJIDIC2, Unihan, and the explicit local fashion/personal-style theme.
+- Filled missing Hán-Việt values, normalized learner-facing Vietnamese display/search text, replaced generated null source examples with direct examples, and filled all lesson-24 `relatedKanji` lists.
+- Replaced lesson-24 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `25` and added a lesson-24 sentinel for `流`.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `16` to `8`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Built and deployed `f1f7d692` to Firebase Hosting. Live proof: search `流` opened the lesson-24 detail showing `Lưu (dòng chảy; lưu hành; trôi)` plus Hán-Việt `Lưu`, with console errors/warnings `0`.
+
+## 2026-05-18 N3 Kanji Lesson 25 Completeness Patch
+
+- Source-verified all eight N3 lesson-25 kanji (`際`, `貧`, `困`, `難`, `汚`, `染`, `平`, `等`) against KANJIDIC2, Unihan, and the explicit local global-issues/volunteering theme.
+- Filled missing Hán-Việt values, normalized learner-facing Vietnamese display/search text, replaced generated null source examples with direct examples, and filled all lesson-25 `relatedKanji` lists.
+- Replaced lesson-25 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `26` and added a lesson-25 sentinel for `際`.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `8` to `0`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Built and deployed `ba226c46` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `際` opened the lesson-25 detail showing `Tế (dịp; ranh giới; khi)` plus Hán-Việt `Tế`, with console errors/warnings `0`.
