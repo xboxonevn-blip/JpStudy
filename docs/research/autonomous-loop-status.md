@@ -187,3 +187,11 @@
 - Bumped content DB Kanji seed revision to `5` so existing browsers with revision `4` receive the new lesson-05 metadata; regression now starts from `content_meta.kanjiSeedRevision=4` and stale `任`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, content status stayed machine/open-review `0`, and kanji coverage audit reduced N3 incomplete current entries from `164` to `156`.
 - Deployed `5dc748ad` to Firebase Hosting and verified live with cache disabled: `任` detail showed `Nhậm (trách nhiệm; giao phó)` plus Hán-Việt `Nhậm`; console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 06 Completeness Patch
+
+- Source-verified all eight N3 lesson-06 kanji (`注`, `文`, `配`, `送`, `返`, `品`, `評`, `価`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `返`, `品`, and `評`; normalized lowercase Hán-Việt on `価`; rewrote learner-facing Vietnamese display/search text for all eight entries; filled all lesson-06 `relatedKanji` lists.
+- Replaced lesson-06 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `6` so existing browsers with revision `5` receive the new lesson-06 metadata; regression now starts from `content_meta.kanjiSeedRevision=5` and stale `返`.
+- Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, and kanji coverage audit reduced N3 incomplete current entries from `156` to `148`.

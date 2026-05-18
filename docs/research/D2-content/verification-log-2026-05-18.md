@@ -119,3 +119,24 @@ Sources consulted:
 | `任` | KANJIDIC2 `Nhâm/Nhậm`, meanings `responsibility`, `duty`, `entrust`; Unihan `kVietnamese=nhậm`, `kDefinition=trust to, rely on, appoint; duty` | Added Hán-Việt `Nhậm`, display `Nhậm (trách nhiệm; giao phó)`, and responsibility/duty related kanji. |
 
 Tagging: replaced the lesson-05 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 06 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_06.json`, especially `注文`, `配送`, `返品`, and `評価`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `注` | KANJIDIC2 meanings `pour`, `concentrate on`, `notes`; Unihan `kVietnamese=chú`, `kDefinition=concentrate, focus, direct`; local context `注文` | Kept Hán-Việt `Chú`; rewrote learner display to `Chú (đặt hàng; chú ý; ghi chú)`, normalized search text, and linked order/note/question neighbors. |
+| `文` | KANJIDIC2 meanings `sentence`, `literature`, `style`; Unihan `kVietnamese=văn`, `kDefinition=literature, culture, writing`; local context `注文` | Kept Hán-Việt `Văn`; rewrote display to `Văn (chữ viết; câu văn; văn chương)` and linked writing/language neighbors. |
+| `配` | KANJIDIC2 meanings `distribute`, `spouse`, `rationing`; Unihan `kVietnamese=phối`, `kDefinition=match, pair; equal; blend`; local context `配送` | Kept Hán-Việt `Phối`; rewrote display to `Phối (phân phối; phân phát; sắp xếp)`, normalized search text, and linked delivery/goods neighbors. |
+| `送` | KANJIDIC2 meanings `escort`, `send`; Unihan `kVietnamese=tống`, `kDefinition=see off, send off; dispatch, give`; local context `配送` | Kept Hán-Việt `Tống`; rewrote display to `Tống (gửi đi; đưa tiễn)` and linked delivery/return neighbors. |
+| `返` | KANJIDIC2 meanings `return`, `answer`, `repay`; Unihan `kVietnamese=phản`, `kDefinition=return, revert to, restore`; local context `返品` | Added Hán-Việt `Phản`, display `Phản (trả lại; quay lại)`, search text, and return/answer related kanji. |
+| `品` | KANJIDIC2 meanings `goods`, `refinement`, `article`; Unihan `kVietnamese=phẩm`, `kDefinition=article, product, commodity`; local context `返品` | Added Hán-Việt `Phẩm`, display `Phẩm (hàng hóa; sản phẩm; phẩm chất)`, search text, and product/value related kanji. |
+| `評` | KANJIDIC2 meanings `evaluate`, `criticism`; Unihan `kVietnamese=bình`, `kDefinition=appraise, criticize, evaluate`; local context `評価` | Added Hán-Việt `Bình`, display `Bình (đánh giá; phê bình)`, search text, and review/opinion related kanji. |
+| `価` | KANJIDIC2 meanings `value`, `price`; Unihan `kDefinition=price, value` for Japanese `価`; local context `評価` | Capitalized Hán-Việt `Giá`, normalized display to `Giá (giá; giá trị)`, search text, and value/price related kanji. |
+
+Tagging: replaced the lesson-06 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

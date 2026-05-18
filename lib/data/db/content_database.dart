@@ -13,7 +13,7 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
-const _kanjiSeedRevision = 5;
+const _kanjiSeedRevision = 6;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 
 @DriftDatabase(

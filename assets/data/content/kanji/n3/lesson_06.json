@@ -14,8 +14,8 @@
       "strokeCount": 8,
       "labels": {
         "hanViet": "Chú",
-        "meaningVi": "chú, rót vào",
-        "meaningViDisplay": "Chú (chú, rót vào)",
+        "meaningVi": "đặt hàng; chú ý; ghi chú",
+        "meaningViDisplay": "Chú (đặt hàng; chú ý; ghi chú)",
         "meaningEn": "pour, irrigate"
       },
       "readings": {
@@ -37,11 +37,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "文",
+          "意",
+          "記",
+          "問"
+        ]
       },
       "search": {
         "hanVietNoAccent": "chu",
-        "meaningViNoAccent": "chu, rot vao",
+        "meaningViNoAccent": "dat hang; chu y; ghi chu",
         "meaningEnNoAccent": "pour, irrigate"
       },
       "examples": [
@@ -55,10 +60,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Chú (chú, rót vào)",
+        "meaning": "Chú (đặt hàng; chú ý; ghi chú)",
         "onyomi": "チュウ",
         "kunyomi": "そそ.ぐ, さ.す, つ.ぐ"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -73,8 +81,8 @@
       "strokeCount": 4,
       "labels": {
         "hanViet": "Văn",
-        "meaningVi": "văn, câu chữ",
-        "meaningViDisplay": "Văn (văn, câu chữ)",
+        "meaningVi": "chữ viết; câu văn; văn chương",
+        "meaningViDisplay": "Văn (chữ viết; câu văn; văn chương)",
         "meaningEn": "sentence, literature"
       },
       "readings": {
@@ -96,11 +104,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "注",
+          "語",
+          "書",
+          "字"
+        ]
       },
       "search": {
         "hanVietNoAccent": "van",
-        "meaningViNoAccent": "van, cau chu",
+        "meaningViNoAccent": "chu viet; cau van; van chuong",
         "meaningEnNoAccent": "sentence, literature"
       },
       "examples": [
@@ -114,10 +127,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Văn (văn, câu chữ)",
+        "meaning": "Văn (chữ viết; câu văn; văn chương)",
         "onyomi": "ブン, モン",
         "kunyomi": "ふみ, あや"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -132,8 +148,8 @@
       "strokeCount": 10,
       "labels": {
         "hanViet": "Phối",
-        "meaningVi": "phối, phân phát",
-        "meaningViDisplay": "Phối (phối, phân phát)",
+        "meaningVi": "phân phối; phân phát; sắp xếp",
+        "meaningViDisplay": "Phối (phân phối; phân phát; sắp xếp)",
         "meaningEn": "distribute, spouse"
       },
       "readings": {
@@ -153,11 +169,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "送",
+          "品",
+          "達",
+          "給"
+        ]
       },
       "search": {
         "hanVietNoAccent": "phoi",
-        "meaningViNoAccent": "phoi, phan phat",
+        "meaningViNoAccent": "phan phoi; phan phat; sap xep",
         "meaningEnNoAccent": "distribute, spouse"
       },
       "examples": [
@@ -171,10 +192,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Phối (phối, phân phát)",
+        "meaning": "Phối (phân phối; phân phát; sắp xếp)",
         "onyomi": "ハイ",
         "kunyomi": "くば.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -189,8 +213,8 @@
       "strokeCount": 9,
       "labels": {
         "hanViet": "Tống",
-        "meaningVi": "tống, gửi đi",
-        "meaningViDisplay": "Tống (tống, gửi đi)",
+        "meaningVi": "gửi đi; đưa tiễn",
+        "meaningViDisplay": "Tống (gửi đi; đưa tiễn)",
         "meaningEn": "escort, send"
       },
       "readings": {
@@ -210,11 +234,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "配",
+          "返",
+          "達",
+          "行"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tong",
-        "meaningViNoAccent": "tong, gui di",
+        "meaningViNoAccent": "gui di; dua tien",
         "meaningEnNoAccent": "escort, send"
       },
       "examples": [
@@ -236,10 +265,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Tống (tống, gửi đi)",
+        "meaning": "Tống (gửi đi; đưa tiễn)",
         "onyomi": "ソウ",
         "kunyomi": "おく.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -253,9 +285,9 @@
       "character": "返",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "phản, trả lại",
-        "meaningViDisplay": "phản, trả lại",
+        "hanViet": "Phản",
+        "meaningVi": "trả lại; quay lại",
+        "meaningViDisplay": "Phản (trả lại; quay lại)",
         "meaningEn": "return, answer"
       },
       "readings": {
@@ -274,15 +306,20 @@
         "en": "Core kanji for QUARTET 6: Online shopping and consumer behavior."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Phản",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "送",
+          "品",
+          "帰",
+          "答"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "phan, tra lai",
+        "hanVietNoAccent": "phan",
+        "meaningViNoAccent": "tra lai; quay lai",
         "meaningEnNoAccent": "return, answer"
       },
       "examples": [
@@ -296,10 +333,13 @@
         }
       ],
       "legacy": {
-        "meaning": "phản, trả lại",
+        "meaning": "Phản (trả lại; quay lại)",
         "onyomi": "ヘン",
         "kunyomi": "かえ.す, -かえ.す, かえ.る, -かえ.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -313,9 +353,9 @@
       "character": "品",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "phẩm, món hàng",
-        "meaningViDisplay": "phẩm, món hàng",
+        "hanViet": "Phẩm",
+        "meaningVi": "hàng hóa; sản phẩm; phẩm chất",
+        "meaningViDisplay": "Phẩm (hàng hóa; sản phẩm; phẩm chất)",
         "meaningEn": "goods, refinement"
       },
       "readings": {
@@ -332,15 +372,20 @@
         "en": "Core kanji for QUARTET 6: Online shopping and consumer behavior."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Phẩm",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "価",
+          "評",
+          "配",
+          "物"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "pham, mon hang",
+        "hanVietNoAccent": "pham",
+        "meaningViNoAccent": "hang hoa; san pham; pham chat",
         "meaningEnNoAccent": "goods, refinement"
       },
       "examples": [
@@ -362,10 +407,13 @@
         }
       ],
       "legacy": {
-        "meaning": "phẩm, món hàng",
+        "meaning": "Phẩm (hàng hóa; sản phẩm; phẩm chất)",
         "onyomi": "ヒン, ホン",
         "kunyomi": "しな"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -379,9 +427,9 @@
       "character": "評",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "bình, đánh giá",
-        "meaningViDisplay": "bình, đánh giá",
+        "hanViet": "Bình",
+        "meaningVi": "đánh giá; phê bình",
+        "meaningViDisplay": "Bình (đánh giá; phê bình)",
         "meaningEn": "evaluate, criticism"
       },
       "readings": {
@@ -395,15 +443,20 @@
         "en": "Core kanji for QUARTET 6: Online shopping and consumer behavior."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Bình",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "価",
+          "品",
+          "説",
+          "論"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "binh, danh gia",
+        "hanVietNoAccent": "binh",
+        "meaningViNoAccent": "danh gia; phe binh",
         "meaningEnNoAccent": "evaluate, criticism"
       },
       "examples": [
@@ -417,10 +470,13 @@
         }
       ],
       "legacy": {
-        "meaning": "bình, đánh giá",
+        "meaning": "Bình (đánh giá; phê bình)",
         "onyomi": "ヒョウ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -434,9 +490,9 @@
       "character": "価",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "giá",
+        "hanViet": "Giá",
         "meaningVi": "giá, giá trị",
-        "meaningViDisplay": "giá (giá, giá trị)",
+        "meaningViDisplay": "Giá (giá; giá trị)",
         "meaningEn": "value, price"
       },
       "readings": {
@@ -453,15 +509,20 @@
         "en": "Core kanji for QUARTET 6: Online shopping and consumer behavior."
       },
       "decomposition": {
-        "hanViet": "giá",
+        "hanViet": "Giá",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "品",
+          "評",
+          "値",
+          "金"
+        ]
       },
       "search": {
         "hanVietNoAccent": "gia",
-        "meaningViNoAccent": "gia, gia tri",
+        "meaningViNoAccent": "gia; gia tri",
         "meaningEnNoAccent": "value, price"
       },
       "examples": [
@@ -475,10 +536,13 @@
         }
       ],
       "legacy": {
-        "meaning": "giá (giá, giá trị)",
+        "meaning": "Giá (giá; giá trị)",
         "onyomi": "カ, ケ",
         "kunyomi": "あたい"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 6,
         "themeEn": "Online shopping and consumer behavior",
@@ -487,6 +551,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }
