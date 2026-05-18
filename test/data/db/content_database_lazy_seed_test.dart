@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// ignore: depend_on_referenced_packages
+import 'package:sqlite3/sqlite3.dart';
 
 void main() {
   test('seeds grammar only for the active study level on first open', () async {
@@ -69,4 +72,147 @@ void main() {
 
     expect(decomposition['hanViet'], 'Nhân');
   });
+
+  test('self-heals v34 content DBs missing kanji meaning_ja column', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+    final tempDir = await Directory.systemTemp.createTemp(
+      'jpstudy_content_db_v34_missing_meaning_ja_',
+    );
+    addTearDown(() async {
+      if (await tempDir.exists()) {
+        await tempDir.delete(recursive: true);
+      }
+    });
+    final file = File('${tempDir.path}/content.db');
+    await _createV34DbMissingKanjiMeaningJa(file);
+
+    final db = ContentDatabase(executor: NativeDatabase(file));
+    addTearDown(db.close);
+
+    final columns = await db.customSelect("PRAGMA table_info('kanji')").get();
+    final columnNames = columns.map((row) => row.data['name']).toSet();
+    expect(columnNames, contains('meaning_ja'));
+
+    final rows =
+        await (db.select(db.kanji)
+              ..where((tbl) => tbl.jlptLevel.equals('N3'))
+              ..limit(1))
+            .get();
+    expect(rows, isNotEmpty);
+  });
+
+  test('upgrades pre-v33 kanji DBs before reseeding current rows', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+    final tempDir = await Directory.systemTemp.createTemp(
+      'jpstudy_content_db_v32_missing_meaning_ja_',
+    );
+    addTearDown(() async {
+      if (await tempDir.exists()) {
+        await tempDir.delete(recursive: true);
+      }
+    });
+    final file = File('${tempDir.path}/content.db');
+    await _createLegacyKanjiDb(file, userVersion: 32);
+
+    final db = ContentDatabase(executor: NativeDatabase(file));
+    addTearDown(db.close);
+
+    final rows =
+        await (db.select(db.kanji)
+              ..where((tbl) => tbl.jlptLevel.equals('N3'))
+              ..limit(1))
+            .get();
+    expect(rows, isNotEmpty);
+
+    final columns = await db.customSelect("PRAGMA table_info('kanji')").get();
+    final columnNames = columns.map((row) => row.data['name']).toSet();
+    expect(columnNames, contains('meaning_ja'));
+  });
+}
+
+Future<void> _createV34DbMissingKanjiMeaningJa(File file) {
+  return _createLegacyKanjiDb(file, userVersion: 34);
+}
+
+Future<void> _createLegacyKanjiDb(File file, {required int userVersion}) async {
+  final sqlite = sqlite3.open(file.path);
+  try {
+    sqlite.execute('PRAGMA user_version = $userVersion');
+    sqlite.execute('''
+CREATE TABLE vocab (
+  id INTEGER NOT NULL PRIMARY KEY,
+  term TEXT NOT NULL,
+  reading TEXT NULL,
+  meaning TEXT NOT NULL,
+  meaning_en TEXT NULL,
+  kanji_meaning TEXT NULL,
+  source_vocab_id TEXT NULL,
+  source_sense_id TEXT NULL,
+  series TEXT NOT NULL DEFAULT 'minna',
+  level TEXT NOT NULL,
+  tags TEXT NULL
+);
+''');
+    sqlite.execute('''
+CREATE TABLE grammar_point (
+  id INTEGER NOT NULL PRIMARY KEY,
+  lesson_id INTEGER NOT NULL,
+  title TEXT NOT NULL,
+  title_en TEXT NULL,
+  structure TEXT NOT NULL,
+  structure_en TEXT NULL,
+  explanation TEXT NOT NULL,
+  explanation_en TEXT NULL,
+  level TEXT NOT NULL,
+  tags TEXT NULL
+);
+''');
+    sqlite.execute('''
+CREATE TABLE grammar_example (
+  id INTEGER NOT NULL PRIMARY KEY,
+  grammar_point_id INTEGER NOT NULL,
+  sentence TEXT NOT NULL,
+  translation TEXT NOT NULL,
+  translation_en TEXT NULL
+);
+''');
+    sqlite.execute('''
+CREATE TABLE user_progress (
+  vocab_id INTEGER NOT NULL PRIMARY KEY,
+  correct_count INTEGER NOT NULL DEFAULT 0,
+  missed_count INTEGER NOT NULL DEFAULT 0,
+  last_reviewed_at INTEGER NULL
+);
+''');
+    sqlite.execute('''
+CREATE TABLE kanji (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  lesson_id INTEGER NOT NULL,
+  character TEXT NOT NULL,
+  stroke_count INTEGER NOT NULL,
+  onyomi TEXT NULL,
+  kunyomi TEXT NULL,
+  meaning TEXT NOT NULL,
+  meaning_en TEXT NULL,
+  mnemonic_vi TEXT NULL,
+  mnemonic_en TEXT NULL,
+  decomposition_json TEXT NULL,
+  examples_json TEXT NOT NULL,
+  jlpt_level TEXT NOT NULL
+);
+''');
+    sqlite.execute('''
+INSERT INTO kanji (
+  lesson_id, character, stroke_count, onyomi, kunyomi, meaning, meaning_en,
+  mnemonic_vi, mnemonic_en, decomposition_json, examples_json, jlpt_level
+) VALUES (
+  1, '作', 7, 'サク', 'つく.る', 'Tác (làm)', 'make, create',
+  'Ghi nhớ', 'Remember', '{"hanViet":"Tác"}', '[]', 'N3'
+);
+''');
+  } finally {
+    sqlite.close();
+  }
 }

@@ -139,6 +139,9 @@ class ContentDatabase extends _$ContentDatabase {
         if (from < 31) {
           // kanji reseed consolidated into v32
         }
+        if (from < 34) {
+          await _selfHealKanjiMeaningJaColumn();
+        }
         if (from < 32) {
           await _reseedMinnaKanji();
         }
@@ -146,11 +149,11 @@ class ContentDatabase extends _$ContentDatabase {
           await _reseedMinnaKanji();
         }
         if (from < 34) {
-          await _addColumn(m, kanji, kanji.meaningJa);
           await _reseedMinnaKanji();
         }
       },
       beforeOpen: (details) async {
+        await _selfHealKanjiMeaningJaColumn();
         // All four checks are independent — run them concurrently so the
         // content DB is ready in the time of the single slowest check.
         await Future.wait([
@@ -161,6 +164,21 @@ class ContentDatabase extends _$ContentDatabase {
         ]);
       },
     );
+  }
+
+  Future<void> _selfHealKanjiMeaningJaColumn() async {
+    final columns = await customSelect("PRAGMA table_info('kanji')").get();
+    if (columns.isEmpty) {
+      return;
+    }
+    final columnNames = columns
+        .map((row) => row.data['name'])
+        .whereType<String>()
+        .toSet();
+    if (columnNames.contains('meaning_ja')) {
+      return;
+    }
+    await customStatement('ALTER TABLE kanji ADD COLUMN meaning_ja TEXT NULL');
   }
 
   // ... (reseed methods)
