@@ -482,3 +482,24 @@ Sources consulted:
 Tagging: replaced the lesson-22 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
 
 Live proof after deploy: VI/N3 Kanji search for `説` opened the detail modal with `Thuyết (giải thích; học thuyết; ý kiến)` plus Hán-Việt `Thuyết`, with console errors/warnings `0`.
+
+## Kanji N3 Lesson 23 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme in `assets/data/content/kanji/n3/lesson_23.json`, which labels the batch as history/politics; the current `ShinKanzen` vocab lesson-23 source ids are general nouns and were not used as semantic authority for this kanji batch.
+
+| Item | Sources | Change |
+|---|---|---|
+| `歴` | KANJIDIC2 `Lịch`, meanings `curriculum`, `continuation`, `passage of time`; Unihan `kDefinition=take place, past, history`; local theme history/politics | Added Hán-Việt `Lịch`, display `Lịch (lịch sử; trải qua; quá trình)`, search text, and history/time related kanji. |
+| `史` | KANJIDIC2 `Sử`, meanings `history`, `chronicle`; Unihan `kVietnamese=sử`, `kDefinition=history, chronicle, annals` | Added Hán-Việt `Sử`, display `Sử (lịch sử; sử ký; ghi chép)`, search text, and record/history related kanji. |
+| `政` | KANJIDIC2 `Chánh`, meanings `politics`, `government`; Unihan `kVietnamese=chính`, `kDefinition=government, political affairs` | Added learner-facing Hán-Việt `Chính`, display `Chính (chính trị; chính quyền; điều hành)`, search text, and politics/government related kanji. |
+| `治` | KANJIDIC2 `Trị/Trì`, meanings `rule`, `cure`, `calm`; Unihan `kVietnamese=trị`, `kDefinition=govern, regulate, administer` | Added Hán-Việt `Trị`, display `Trị (cai trị; chữa trị; ổn định)`, search text, and governance/cure related kanji. |
+| `戦` | KANJIDIC2 meanings `war`, `battle`, `match`; Unihan `kDefinition=war, fighting, battle`; local theme `戦争` | Capitalized learner-facing Hán-Việt `Chiến`, display `Chiến (chiến tranh; trận đấu; chiến đấu)`, search text, and war/contest related kanji. |
+| `争` | KANJIDIC2 `Tranh`, meanings `contend`, `dispute`, `argue`; Unihan `kDefinition=dispute, fight, contend, strive` | Added Hán-Việt `Tranh`, display `Tranh (tranh chấp; cạnh tranh; đấu tranh)`, search text, and conflict/debate related kanji. |
+| `平` | KANJIDIC2 `Bình`, meanings `even`, `flat`, `peace`; Unihan `kVietnamese=bình`, `kDefinition=flat, level, even; peaceful` | Added Hán-Việt `Bình`, display `Bình (bằng phẳng; bình yên; ngang nhau)`, search text, and peace/equality related kanji. |
+| `和` | KANJIDIC2 `Hòa`, meanings `harmony`, `Japanese style`, `peace`; Unihan `kVietnamese=hoà`, `kDefinition=harmony, peace; peaceful, calm` | Added Hán-Việt `Hòa`, display `Hòa (hòa hợp; hòa bình; kiểu Nhật)`, search text, and harmony/peace related kanji. |
+
+Tagging: replaced the lesson-23 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
