@@ -277,3 +277,12 @@
 - Bumped content DB Kanji seed revision to `15` so existing browsers with revision `14` receive the new lesson-15 metadata; regression now starts from `content_meta.kanjiSeedRevision=14` and stale `住`.
 - Verified locally: focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `87` to `79`.
 - Deployed `38d88d85` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `住` returned one result, detail opened with `Trú (sống ở; cư trú; nơi ở)` plus Hán-Việt `Trú`, VI write practice loaded `Viết tay: N3 - Học kanji mới`, and console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 16 Completeness Patch
+
+- Source-verified all eight N3 lesson-16 kanji (`試`, `勝`, `負`, `選`, `練`, `優`, `決`, `審`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `試`, `勝`, `負`, `練`, and `審`; normalized `選`, `優`, and `決`; rewrote learner-facing Vietnamese display/search text; filled all lesson-16 `relatedKanji` lists.
+- Replaced lesson-16 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `16` so existing browsers with revision `15` receive the new lesson-16 metadata; regression now starts from `content_meta.kanjiSeedRevision=15` and stale `試`.
+- Verified locally: JSON parse passed, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `79` to `71`.
+- Live proof is pending after commit, push, build, and deploy.

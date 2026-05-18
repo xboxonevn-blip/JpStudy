@@ -329,3 +329,24 @@ Sources consulted:
 | `民` | KANJIDIC2 `Dân`, meanings `people`, `nation`, `subjects`; Unihan `kVietnamese=dân`, `kDefinition=people, subjects, citizens`; local context `住民` | Added Hán-Việt `Dân`, display `Dân (người dân; dân chúng; quốc dân)`, search text, and resident/citizen related kanji. |
 
 Tagging: replaced the lesson-15 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 16 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_16.json`, especially sports/competition compounds such as `試合`, `勝負`, `選手`, `練習`, `優勝`, `決勝`, and `審査`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `試` | KANJIDIC2 `Thí`, meanings `test`, `try`, `attempt`, `experiment`; Unihan `kVietnamese=thí`, `kDefinition=test, try, experiment`; local context `試合` | Added Hán-Việt `Thí`, display `Thí (thử; kiểm tra; thi đấu)`, search text, and test/match related kanji. |
+| `勝` | KANJIDIC2 `Thắng/Thăng`, meanings `victory`, `win`, `prevail`, `excel`; Unihan `kVietnamese=thắng`, `kDefinition=victory; excel, be better than`; local context win/competition | Added learner-facing Hán-Việt `Thắng`, display `Thắng (thắng lợi; chiến thắng; vượt trội)`, search text, and competition related kanji. |
+| `負` | KANJIDIC2 `Phụ`, meanings `defeat`, `negative`, `bear`, `owe`, `assume a responsibility`; Unihan `kVietnamese=phụ`, `kDefinition=load, burden; carry, bear`; local context `勝負`/losing | Added Hán-Việt `Phụ`, display `Phụ (thua; mang; chịu trách nhiệm)`, search text, and win/loss/responsibility related kanji. |
+| `選` | KANJIDIC2 `Tuyển/Tuyến`, meanings `elect`, `select`, `choose`, `prefer`; Unihan `kVietnamese=tuyển`, `kDefinition=choose, select; elect; election`; local context `選手` | Kept Hán-Việt `Tuyển`; rewrote display to `Tuyển (lựa chọn; tuyển chọn; bầu chọn)`, normalized search text, and linked selection/competition related kanji. |
+| `練` | KANJIDIC2 `Luyện`, meanings `practice`, `train`, `drill`, `polish`, `refine`; Unihan `kVietnamese=luyện`, `kDefinition=practice, drill, exercise, train`; local context `練習` | Added Hán-Việt `Luyện`, display `Luyện (luyện tập; rèn luyện; trau dồi)`, search text, and practice/skill related kanji. |
+| `優` | KANJIDIC2 `Ưu`, meanings `tenderness`, `excel`, `surpass`, `superiority`, `gentleness`; Unihan `kDefinition=superior, excellent; actor`; local context `優勝` | Capitalized Hán-Việt `Ưu`; rewrote display to `Ưu (ưu tú; dịu dàng; vượt trội)`, normalized search text, and linked excellence/kindness related kanji. |
+| `決` | KANJIDIC2 `Quyết`, meanings `decide`, `fix`, `agree upon`, `appoint`; Unihan `kVietnamese=quyết`, `kDefinition=decide, determine, judge`; local context `決勝` | Kept Hán-Việt `Quyết`; rewrote display to `Quyết (quyết định; dứt khoát; phân định)`, normalized search text, and linked decision/result related kanji. |
+| `審` | KANJIDIC2 `Thẩm`, meanings `hearing`, `judge`, `trial`; Unihan `kVietnamese=thẩm`, `kDefinition=examine, investigate; judge`; local context judging/review | Added Hán-Việt `Thẩm`, display `Thẩm (xét xử; thẩm tra; đánh giá)`, search text, and judging/evaluation related kanji. |
+
+Tagging: replaced the lesson-16 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

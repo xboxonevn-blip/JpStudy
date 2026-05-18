@@ -13,9 +13,9 @@
       "character": "試",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thử",
-        "meaningViDisplay": "thử",
+        "hanViet": "Thí",
+        "meaningVi": "thử; kiểm tra; thi đấu",
+        "meaningViDisplay": "Thí (thử; kiểm tra; thi đấu)",
         "meaningEn": "test, try"
       },
       "readings": {
@@ -32,15 +32,20 @@
         "en": "Core kanji for QUARTET 16: Sports and competition."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thí",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "験",
+          "合",
+          "問",
+          "受"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "thu",
+        "hanVietNoAccent": "thi",
+        "meaningViNoAccent": "thu; kiem tra; thi dau",
         "meaningEnNoAccent": "test, try"
       },
       "examples": [
@@ -54,10 +59,13 @@
         }
       ],
       "legacy": {
-        "meaning": "thử",
+        "meaning": "Thí (thử; kiểm tra; thi đấu)",
         "onyomi": "シ",
         "kunyomi": "こころ.みる, ため.す"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -71,9 +79,9 @@
       "character": "勝",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thắng",
-        "meaningViDisplay": "thắng",
+        "hanViet": "Thắng",
+        "meaningVi": "thắng lợi; chiến thắng; vượt trội",
+        "meaningViDisplay": "Thắng (thắng lợi; chiến thắng; vượt trội)",
         "meaningEn": "victory, win"
       },
       "readings": {
@@ -92,15 +100,20 @@
         "en": "Core kanji for QUARTET 16: Sports and competition."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thắng",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "負",
+          "敗",
+          "優",
+          "戦"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "thang",
+        "hanVietNoAccent": "thang",
+        "meaningViNoAccent": "thang loi; chien thang; vuot troi",
         "meaningEnNoAccent": "victory, win"
       },
       "examples": [
@@ -130,10 +143,13 @@
         }
       ],
       "legacy": {
-        "meaning": "thắng",
+        "meaning": "Thắng (thắng lợi; chiến thắng; vượt trội)",
         "onyomi": "ショウ",
         "kunyomi": "か.つ, -が.ち, まさ.る, すぐ.れる"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -147,9 +163,9 @@
       "character": "負",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "phụ, thua",
-        "meaningViDisplay": "phụ, thua",
+        "hanViet": "Phụ",
+        "meaningVi": "thua; mang; chịu trách nhiệm",
+        "meaningViDisplay": "Phụ (thua; mang; chịu trách nhiệm)",
         "meaningEn": "defeat, negative"
       },
       "readings": {
@@ -167,15 +183,20 @@
         "en": "Core kanji for QUARTET 16: Sports and competition."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Phụ",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "勝",
+          "敗",
+          "責",
+          "借"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "phu, thua",
+        "hanVietNoAccent": "phu",
+        "meaningViNoAccent": "thua; mang; chiu trach nhiem",
         "meaningEnNoAccent": "defeat, negative"
       },
       "examples": [
@@ -189,10 +210,13 @@
         }
       ],
       "legacy": {
-        "meaning": "phụ, thua",
+        "meaning": "Phụ (thua; mang; chịu trách nhiệm)",
         "onyomi": "フ",
         "kunyomi": "ま.ける, ま.かす, お.う"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -207,8 +231,8 @@
       "strokeCount": 15,
       "labels": {
         "hanViet": "Tuyển",
-        "meaningVi": "tuyển, lựa chọn",
-        "meaningViDisplay": "Tuyển (tuyển, lựa chọn)",
+        "meaningVi": "lựa chọn; tuyển chọn; bầu chọn",
+        "meaningViDisplay": "Tuyển (lựa chọn; tuyển chọn; bầu chọn)",
         "meaningEn": "elect, select"
       },
       "readings": {
@@ -230,11 +254,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "試",
+          "勝",
+          "優",
+          "決"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tuyen",
-        "meaningViNoAccent": "tuyen, lua chon",
+        "meaningViNoAccent": "lua chon; tuyen chon; bau chon",
         "meaningEnNoAccent": "elect, select"
       },
       "examples": [
@@ -248,10 +277,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Tuyển (tuyển, lựa chọn)",
+        "meaning": "Tuyển (lựa chọn; tuyển chọn; bầu chọn)",
         "onyomi": "セン",
         "kunyomi": "えら.ぶ, え.る, よ.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -265,9 +297,9 @@
       "character": "練",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "luyện",
-        "meaningViDisplay": "luyện",
+        "hanViet": "Luyện",
+        "meaningVi": "luyện tập; rèn luyện; trau dồi",
+        "meaningViDisplay": "Luyện (luyện tập; rèn luyện; trau dồi)",
         "meaningEn": "practice, gloss"
       },
       "readings": {
@@ -284,15 +316,20 @@
         "en": "Core kanji for QUARTET 16: Sports and competition."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Luyện",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "習",
+          "技",
+          "努",
+          "力"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "luyen",
+        "hanVietNoAccent": "luyen",
+        "meaningViNoAccent": "luyen tap; ren luyen; trau doi",
         "meaningEnNoAccent": "practice, gloss"
       },
       "examples": [
@@ -306,10 +343,13 @@
         }
       ],
       "legacy": {
-        "meaning": "luyện",
+        "meaning": "Luyện (luyện tập; rèn luyện; trau dồi)",
         "onyomi": "レン",
         "kunyomi": "ね.る, ね.り"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -323,9 +363,9 @@
       "character": "優",
       "strokeCount": 17,
       "labels": {
-        "hanViet": "ưu",
-        "meaningVi": "ưu",
-        "meaningViDisplay": "ưu (ưu)",
+        "hanViet": "Ưu",
+        "meaningVi": "ưu tú; dịu dàng; vượt trội",
+        "meaningViDisplay": "Ưu (ưu tú; dịu dàng; vượt trội)",
         "meaningEn": "tenderness, excel"
       },
       "readings": {
@@ -344,15 +384,20 @@
         "en": "Core kanji for QUARTET 16: Sports and competition."
       },
       "decomposition": {
-        "hanViet": "ưu",
+        "hanViet": "Ưu",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "勝",
+          "良",
+          "技",
+          "人"
+        ]
       },
       "search": {
         "hanVietNoAccent": "uu",
-        "meaningViNoAccent": "uu",
+        "meaningViNoAccent": "uu tu; diu dang; vuot troi",
         "meaningEnNoAccent": "tenderness, excel"
       },
       "examples": [
@@ -366,10 +411,13 @@
         }
       ],
       "legacy": {
-        "meaning": "ưu (ưu)",
+        "meaning": "Ưu (ưu tú; dịu dàng; vượt trội)",
         "onyomi": "ユウ, ウ",
         "kunyomi": "やさ.しい, すぐ.れる, まさ.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -384,8 +432,8 @@
       "strokeCount": 7,
       "labels": {
         "hanViet": "Quyết",
-        "meaningVi": "quyết",
-        "meaningViDisplay": "Quyết (quyết)",
+        "meaningVi": "quyết định; dứt khoát; phân định",
+        "meaningViDisplay": "Quyết (quyết định; dứt khoát; phân định)",
         "meaningEn": "decide, fix"
       },
       "readings": {
@@ -408,11 +456,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "定",
+          "選",
+          "勝",
+          "負"
+        ]
       },
       "search": {
         "hanVietNoAccent": "quyet",
-        "meaningViNoAccent": "quyet",
+        "meaningViNoAccent": "quyet dinh; dut khoat; phan dinh",
         "meaningEnNoAccent": "decide, fix"
       },
       "examples": [
@@ -426,10 +479,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Quyết (quyết)",
+        "meaning": "Quyết (quyết định; dứt khoát; phân định)",
         "onyomi": "ケツ",
         "kunyomi": "き.める, -ぎ.め, き.まる, さ.く"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -443,9 +499,9 @@
       "character": "審",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thẩm, xét",
-        "meaningViDisplay": "thẩm, xét",
+        "hanViet": "Thẩm",
+        "meaningVi": "xét xử; thẩm tra; đánh giá",
+        "meaningViDisplay": "Thẩm (xét xử; thẩm tra; đánh giá)",
         "meaningEn": "hearing, judge"
       },
       "readings": {
@@ -462,15 +518,20 @@
         "en": "Core kanji for QUARTET 16: Sports and competition."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thẩm",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "評",
+          "試",
+          "決",
+          "問"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tham, xet",
+        "hanVietNoAccent": "tham",
+        "meaningViNoAccent": "xet xu; tham tra; danh gia",
         "meaningEnNoAccent": "hearing, judge"
       },
       "examples": [
@@ -484,10 +545,13 @@
         }
       ],
       "legacy": {
-        "meaning": "thẩm, xét",
+        "meaning": "Thẩm (xét xử; thẩm tra; đánh giá)",
         "onyomi": "シン",
         "kunyomi": "つまび.らか, つぶさ.に"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 16,
         "themeEn": "Sports and competition",
@@ -496,6 +560,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }
