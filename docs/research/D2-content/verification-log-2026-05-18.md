@@ -371,3 +371,24 @@ Sources consulted:
 | `械` | KANJIDIC2 meanings `contraption`, `fetter`, `machine`, `instrument`; Unihan `kVietnamese=giới`; local context `機械` | Added Hán-Việt `Giới`, display `Giới (máy móc; dụng cụ; gông cùm)`, search text, and machine/tool related kanji. |
 
 Tagging: replaced the lesson-17 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 18 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_18.json`, especially law/rules/society compounds such as `法律`, `規則`, `犯罪`, `裁判`, and `制度`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `法` | KANJIDIC2 `Pháp`, meanings `method`, `law`, `rule`; Unihan `kVietnamese=pháp`, `kDefinition=law, rule, regulation, statute` | Rewrote display to `Pháp (luật pháp; phương pháp; nguyên tắc)`, normalized search text, and linked law/rule related kanji. |
+| `律` | KANJIDIC2 `Luật`, meanings `rhythm`, `law`, `regulation`; Unihan `kVietnamese=luật`, `kDefinition=statute, principle, regulation`; local context `法律` | Added Hán-Việt `Luật`, display `Luật (luật lệ; quy tắc; nhịp điệu)`, search text, and rule-system related kanji. |
+| `規` | KANJIDIC2 `Quy`, meanings `standard`, `measure`; Unihan `kVietnamese=qui`, `kDefinition=rules, regulations, customs, law`; local context `規則` | Added learner-facing Hán-Việt `Quy`, display `Quy (quy tắc; chuẩn mực; phép đo)`, search text, and regulation related kanji. |
+| `則` | KANJIDIC2 `Tắc`, meanings `rule`, `law`, `follow`; Unihan `kVietnamese=tắc`, `kDefinition=rule, law, regulation`; local context `規則` | Added Hán-Việt `Tắc`, display `Tắc (quy tắc; noi theo; nguyên tắc)`, search text, and rule related kanji. |
+| `犯` | KANJIDIC2 `Phạm`, meanings `crime`, `sin`, `offense`; Unihan `kVietnamese=phạm`, `kDefinition=commit crime, violate; criminal`; local context `犯罪` | Added Hán-Việt `Phạm`, display `Phạm (phạm tội; vi phạm; người phạm tội)`, search text, and crime/legal related kanji. |
+| `罪` | KANJIDIC2 `Tội`, meanings `guilt`, `sin`, `crime`; Unihan `kVietnamese=tội`, `kDefinition=crime, sin, vice; evil`; local context `犯罪` | Added Hán-Việt `Tội`, display `Tội (tội lỗi; tội phạm; trách nhiệm)`, search text, and crime/judgment related kanji. |
+| `裁` | KANJIDIC2 `Tài`, meanings `tailor`, `judge`, `decision`; Unihan `kVietnamese=trài`, `kDefinition=cut out; decrease`; local context `裁判` | Added learner-facing Hán-Việt `Tài`, display `Tài (xét xử; phán quyết; cắt may)`, search text, and judgment related kanji. |
+| `制` | KANJIDIC2 `Chế`, meanings `system`, `law`, `rule`; Unihan `kVietnamese=chế`, `kDefinition=system; establish; overpower`; local context `制度` | Added Hán-Việt `Chế`, display `Chế (chế độ; kiểm soát; quy định)`, search text, and system/regulation related kanji. |
+
+Tagging: replaced the lesson-18 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
