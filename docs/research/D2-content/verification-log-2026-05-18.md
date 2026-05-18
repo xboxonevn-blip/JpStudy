@@ -434,3 +434,5 @@ Sources consulted:
 | `悲` | KANJIDIC2 `Bi`, meanings `grieve`, `sad`, `deplore`; Unihan `kVietnamese=bi`, `kDefinition=sorrow, grief; sorry, sad`; local context sadness | Rewrote display to `Bi (buồn; đau lòng; thương xót)`, normalized search text, and linked emotion related kanji. |
 
 Tagging: replaced the lesson-20 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+Live proof after deploy: VI/N3 Kanji search for `感` opened the detail modal with `Cảm (cảm xúc; cảm giác; cảm nhận)` plus Hán-Việt `Cảm`.

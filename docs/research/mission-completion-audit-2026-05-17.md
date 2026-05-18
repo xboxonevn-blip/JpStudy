@@ -195,6 +195,13 @@ bumps the Kanji seed revision to `20`, and adds a lesson-19 sentinel. Local
 coverage audit reduced N3 incomplete current entries from `55` to `47`;
 live proof opened `材` with `Tài (nguyên liệu; vật liệu; gỗ)`.
 
+Kanji content expansion update: N3 lesson 20 is now source-verified against
+KANJIDIC2, Unihan, and local lesson context. Commit `edd1ac06` fills
+Hán-Việt/display/search/related-kanji metadata for all eight emotion/psychology
+entries, bumps the Kanji seed revision to `21`, and adds a lesson-20 sentinel.
+Local coverage audit reduced N3 incomplete current entries from `47` to `39`;
+live proof opened `感` with `Cảm (cảm xúc; cảm giác; cảm nhận)`.
+
 ## Verdict
 
 Implementation, docs, tooling, CI/deploy, and N4-N1 live direct-route fallback work are substantially complete. The active goal is not complete because the stopping condition includes external legal/ops proof gates that remain missing.

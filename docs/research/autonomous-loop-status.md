@@ -331,3 +331,12 @@
 - Bumped content DB Kanji seed revision to `20` and added a lesson-19 sentinel for `材` so existing browsers receive the correction even when level counts are already full.
 - Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `55` to `47`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
 - Deployed `7be4d16` to Firebase Hosting. Live proof: search `材` opened detail showing `Tài (nguyên liệu; vật liệu; gỗ)` plus Hán-Việt `Tài`.
+
+## 2026-05-18 N3 Kanji Lesson 20 Completeness Patch
+
+- Source-verified all eight N3 lesson-20 kanji (`感`, `情`, `不`, `安`, `緊`, `張`, `怒`, `悲`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values, rewrote learner-facing Vietnamese display/search text, and filled all lesson-20 `relatedKanji` lists.
+- Replaced lesson-20 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `21` and added a lesson-20 sentinel for `感` so existing browsers receive the updated metadata even when level counts are already full.
+- Verified locally before commit: JSON parse passed, coverage audit reduced N3 incomplete current entries from `47` to `39`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Deployed `edd1ac06` to Firebase Hosting. Live proof: search `感` opened detail showing `Cảm (cảm xúc; cảm giác; cảm nhận)` plus Hán-Việt `Cảm`. The live session also recorded one existing minified console stack without a message; not treated as proof of zero-console state.
