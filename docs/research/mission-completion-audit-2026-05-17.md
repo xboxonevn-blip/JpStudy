@@ -159,6 +159,16 @@ gating, Japanese lesson Kanji tab, Japanese Kanji Reading, and Japanese
 Handwriting; Japanese definitions still need real data rather than English
 fallback.
 
+Kanji DB regression update: owner-reported VI/N3 Kanji grid and handwriting
+load failures were traced to existing content DBs that could be at schema v34
+while missing the physical `kanji.meaning_ja` column. Commit `ed47e8ae` adds a
+before-open/on-upgrade self-heal and regression fixtures for v34/pre-v33 DBs.
+Local verification passed focused DB tests, analyze, UI string guard, taxonomy
+guard, content status report, and full Flutter suite (`2326`). Firebase Hosting
+was redeployed, then a live Playwright matrix verified VI/EN/JA across N5-N1:
+Kanji grid rows and `Write/Viết/書く` handwriting practice loaded with zero
+console errors.
+
 ## Verdict
 
 Implementation, docs, tooling, CI/deploy, and N4-N1 live direct-route fallback work are substantially complete. The active goal is not complete because the stopping condition includes external legal/ops proof gates that remain missing.

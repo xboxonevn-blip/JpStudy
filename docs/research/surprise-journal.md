@@ -579,3 +579,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: runtime Kanji had Vietnamese and English meanings, but no Japanese definition field in the model/DB path, and current content assets have `0` `meaningJa` entries.
 - Delta: -20 percentage points on confidence that "localized schema exists" implies all target locales have data paths.
 - Updated belief: per-language learning modes need two checks: rendered UI gating and asset-to-model field availability for each locale, before claiming immersion completeness.
+
+## 2026-05-18 - Content DB schema version can lie about physical columns
+
+- Prior belief: bumping content DB schema v34 and adding migration coverage was enough to make `meaning_ja` safe for existing installs.
+- Actual observation: the deployed Kanji path could still hit an existing DB whose `user_version` was current but whose `kanji` table lacked the physical `meaning_ja` column, so Drift failed before Kanji data reached the UI.
+- Delta: -25 percentage points on confidence that `user_version` alone proves content DB shape after fast-moving seed migrations.
+- Updated belief: beta content DB migrations need self-healing physical-column checks for learner-critical tables, especially before startup seed/read code touches generated Drift columns.

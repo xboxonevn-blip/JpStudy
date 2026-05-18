@@ -248,6 +248,7 @@ Current D8.Q8.7 status: telemetry is acceptable only for closed beta with explic
 - D8 compliance status update: Q8.4 measured and partially implemented; Sentry web error capture is optional and consent-gated in source, but DSN setup and first-crash live verification remain open.
 - D8 compliance status update: Q8.5 measured and mostly remediated in source; local CI gates plus build-artifact/resource-count budgets exist, and `main` has a skip-safe deploy/live-smoke/Lighthouse job. Remaining gap is operational proof after GitHub deploy secrets are configured, plus notification/branch-protection policy.
 - D8 compliance status update: Q8.6 measured and partially remediated; manual primary-only deploy is proven, legacy default Hosting remains disabled, and active docs now avoid generic all-hosting deploy. Automated release remains deferred until secrets, live smoke, Lighthouse/trace, and notification policy are defined.
+- Quality loop status update: QA-A-013 fixed the Kanji content DB regression where existing DBs could miss `kanji.meaning_ja` despite a current schema version. Commit `ed47e8ae` self-heals the column before reads/reseeds, local regression/full tests pass, and the live VI/EN/JA x N5-N1 Playwright matrix verified Kanji grid plus handwriting practice with no console errors. Remaining Kanji work is content expansion and Japanese definition data, not data loading.
 
 ## Phase 0 Definition Of Done
 
