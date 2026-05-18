@@ -158,3 +158,4 @@
 - Filled missing Hán-Việt values for `将`, `標`, `計`, `画`, `努`; normalized learner-facing Vietnamese display/search text; filled all lesson-02 `relatedKanji` lists.
 - Added entry-level `vi-source-verified` tags for the eight edited entries. No `vi-human-approved` tag was added.
 - Verified locally: JSON parses and kanji coverage audit reduced N3 incomplete current entries from `182` to `174`.
+- Added content kanji seed revision `2` so post-v35 asset metadata edits reseed for existing browsers, with a regression covering a current-version stale `将` row.

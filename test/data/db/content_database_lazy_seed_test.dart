@@ -170,6 +170,48 @@ void main() {
     expect(row.meaning, 'Nhị (hai)');
     expect(row.decompositionJson, contains('"hanViet":"Nhị"'));
   });
+
+  test('kanji seed revision reseeds current-version stale metadata', () async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+    final tempDir = await Directory.systemTemp.createTemp(
+      'jpstudy_content_db_current_stale_kanji_metadata_',
+    );
+    addTearDown(() async {
+      if (await tempDir.exists()) {
+        await tempDir.delete(recursive: true);
+      }
+    });
+    final file = File('${tempDir.path}/content.db');
+    await _createLegacyKanjiDb(
+      file,
+      userVersion: 35,
+      kanjiLessonId: 2,
+      kanjiCharacter: '将',
+      kanjiLevel: 'N3',
+      kanjiMeaning: 'tướng, tương lai',
+      kanjiMeaningEn: 'leader, commander',
+      kanjiOnyomi: 'ショウ, ソウ',
+      kanjiKunyomi: 'まさ.に',
+      kanjiDecompositionJson: '{}',
+    );
+
+    final db = ContentDatabase(executor: NativeDatabase(file));
+    addTearDown(db.close);
+
+    final row =
+        await (db.select(db.kanji)
+              ..where(
+                (tbl) => tbl.character.equals('将') & tbl.jlptLevel.equals('N3'),
+              )
+              ..limit(1))
+            .getSingle();
+    final prefs = await SharedPreferences.getInstance();
+
+    expect(row.meaning, 'Tướng (tướng; tương lai)');
+    expect(row.decompositionJson, contains('"hanViet":"Tướng"'));
+    expect(prefs.getInt('content.kanji.seedRevision'), 2);
+  });
 }
 
 Future<void> _createV34DbMissingKanjiMeaningJa(File file) {

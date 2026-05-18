@@ -13,6 +13,9 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
+const _kanjiSeedRevision = 2;
+const _kanjiSeedRevisionPrefsKey = 'content.kanji.seedRevision';
+
 @DriftDatabase(
   tables: [
     Vocab,
@@ -157,6 +160,7 @@ class ContentDatabase extends _$ContentDatabase {
       },
       beforeOpen: (details) async {
         await _selfHealKanjiMeaningJaColumn();
+        await _ensureKanjiSeedRevision(details);
         // All four checks are independent — run them concurrently so the
         // content DB is ready in the time of the single slowest check.
         await Future.wait([
@@ -182,6 +186,24 @@ class ContentDatabase extends _$ContentDatabase {
       return;
     }
     await customStatement('ALTER TABLE kanji ADD COLUMN meaning_ja TEXT NULL');
+  }
+
+  Future<void> _ensureKanjiSeedRevision(OpeningDetails details) async {
+    final SharedPreferences prefs;
+    try {
+      prefs = await SharedPreferences.getInstance();
+    } catch (_) {
+      return;
+    }
+    final storedRevision = prefs.getInt(_kanjiSeedRevisionPrefsKey);
+    if (storedRevision == _kanjiSeedRevision) {
+      return;
+    }
+
+    if (!details.wasCreated) {
+      await _reseedMinnaKanji();
+    }
+    await prefs.setInt(_kanjiSeedRevisionPrefsKey, _kanjiSeedRevision);
   }
 
   // ... (reseed methods)
