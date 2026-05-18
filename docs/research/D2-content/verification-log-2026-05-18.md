@@ -392,3 +392,24 @@ Sources consulted:
 | `制` | KANJIDIC2 `Chế`, meanings `system`, `law`, `rule`; Unihan `kVietnamese=chế`, `kDefinition=system; establish; overpower`; local context `制度` | Added Hán-Việt `Chế`, display `Chế (chế độ; kiểm soát; quy định)`, search text, and system/regulation related kanji. |
 
 Tagging: replaced the lesson-18 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 19 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_19.json`, especially cooking/food compounds such as `料理`, `食材`, `味`, `調味料`, `保存`, and `新鮮`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `料` | KANJIDIC2 `Liêu/Liệu`, meanings `fee`, `materials`; Unihan `kVietnamese=liệu`, `kDefinition=consider, conjecture; materials, ingredients`; local context `料理`/`材料` | Added learner-facing Hán-Việt `Liệu`, display `Liệu (nguyên liệu; vật liệu; phí)`, search text, and food/material related kanji. |
+| `理` | KANJIDIC2 `Lý`, meanings `logic`, `arrangement`, `reason`; Unihan `kVietnamese=lí`, `kDefinition=reason, logic; manage`; local context `料理` | Added Hán-Việt `Lý`, display `Lý (lý lẽ; logic; xử lý)`, search text, and cooking/handling related kanji. |
+| `食` | KANJIDIC2 `Thực/Tự`, meanings `eat`, `food`; Unihan `kDefinition=eat; meal; food`; local context food vocabulary | Rewrote display to `Thực (ăn; thức ăn; thực phẩm)`, normalized search text, and linked food related kanji. |
+| `材` | KANJIDIC2 `Tài`, meanings `lumber`, `materials`, `ingredients`, `talent`; Unihan `kDefinition=material, stuff; timber; talent`; local context `食材`/`材料` | Corrected Vietnamese meaning from `tài liệu` to `nguyên liệu; vật liệu; gỗ`, capitalized Hán-Việt `Tài`, and linked material/food related kanji. |
+| `味` | KANJIDIC2 `Vị`, meanings `flavor`, `taste`; Unihan `kVietnamese=vị`, `kDefinition=taste, smell, odor; delicacy`; local context taste/seasoning | Rewrote display to `Vị (mùi vị; hương vị; nếm)`, normalized search text, and linked taste/food related kanji. |
+| `調` | KANJIDIC2 `Điều/Điệu`, meanings include `tune`, `prepare`, `investigate`, `harmonize`; Unihan `kVietnamese=điều`, `kDefinition=transfer, move, change; tune`; local context `調味料`/`調理` | Added learner-facing Hán-Việt `Điều`, display `Điều (điều chỉnh; chuẩn bị; tra cứu)`, search text, and preparation/flavor related kanji. |
+| `保` | KANJIDIC2 `Bảo`, meanings `protect`, `guarantee`, `keep`, `preserve`; Unihan `kVietnamese=bảo`, `kDefinition=protect, safeguard, defend, care`; local context food preservation | Added Hán-Việt `Bảo`, display `Bảo (bảo vệ; giữ gìn; duy trì)`, search text, and preservation related kanji. |
+| `鮮` | KANJIDIC2 `Tiên/Tiển`, meanings `fresh`, `vivid`, `clear`; Unihan `kVietnamese=tiên`, `kDefinition=fresh, new, delicious; rare, few`; local context `新鮮` | Added learner-facing Hán-Việt `Tiên`, display `Tiên (tươi; rõ nét; rực rỡ)`, search text, and freshness/food related kanji. |
+
+Tagging: replaced the lesson-19 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

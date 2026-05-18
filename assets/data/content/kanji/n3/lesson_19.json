@@ -13,9 +13,9 @@
       "character": "料",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "liệu",
-        "meaningViDisplay": "liệu",
+        "hanViet": "Liệu",
+        "meaningVi": "nguyên liệu; vật liệu; phí",
+        "meaningViDisplay": "Liệu (nguyên liệu; vật liệu; phí)",
         "meaningEn": "fee, materials"
       },
       "readings": {
@@ -29,15 +29,20 @@
         "en": "Core kanji for QUARTET 19: Cooking and food culture."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Liệu",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "理",
+          "食",
+          "材",
+          "味"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "lieu",
+        "hanVietNoAccent": "lieu",
+        "meaningViNoAccent": "nguyen lieu; vat lieu; phi",
         "meaningEnNoAccent": "fee, materials"
       },
       "examples": [
@@ -59,7 +64,7 @@
         }
       ],
       "legacy": {
-        "meaning": "liệu",
+        "meaning": "Liệu (nguyên liệu; vật liệu; phí)",
         "onyomi": "リョウ",
         "kunyomi": ""
       },
@@ -67,7 +72,10 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l19_k002",
@@ -76,9 +84,9 @@
       "character": "理",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "lý",
-        "meaningViDisplay": "lý",
+        "hanViet": "Lý",
+        "meaningVi": "lý lẽ; logic; xử lý",
+        "meaningViDisplay": "Lý (lý lẽ; logic; xử lý)",
         "meaningEn": "logic, arrangement"
       },
       "readings": {
@@ -94,15 +102,20 @@
         "en": "Core kanji for QUARTET 19: Cooking and food culture."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Lý",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "料",
+          "調",
+          "食",
+          "材"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ly",
+        "hanVietNoAccent": "ly",
+        "meaningViNoAccent": "ly le; logic; xu ly",
         "meaningEnNoAccent": "logic, arrangement"
       },
       "examples": [
@@ -116,7 +129,7 @@
         }
       ],
       "legacy": {
-        "meaning": "lý",
+        "meaning": "Lý (lý lẽ; logic; xử lý)",
         "onyomi": "リ",
         "kunyomi": "ことわり"
       },
@@ -124,7 +137,10 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l19_k003",
@@ -134,8 +150,8 @@
       "strokeCount": 9,
       "labels": {
         "hanViet": "Thực",
-        "meaningVi": "thực",
-        "meaningViDisplay": "Thực (thực)",
+        "meaningVi": "ăn; thức ăn; thực phẩm",
+        "meaningViDisplay": "Thực (ăn; thức ăn; thực phẩm)",
         "meaningEn": "eat, food"
       },
       "readings": {
@@ -159,11 +175,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "料",
+          "材",
+          "味",
+          "鮮"
+        ]
       },
       "search": {
         "hanVietNoAccent": "thuc",
-        "meaningViNoAccent": "thuc",
+        "meaningViNoAccent": "an; thuc an; thuc pham",
         "meaningEnNoAccent": "eat, food"
       },
       "examples": [
@@ -193,7 +214,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Thực (thực)",
+        "meaning": "Thực (ăn; thức ăn; thực phẩm)",
         "onyomi": "ショク, ジキ",
         "kunyomi": "く.う, く.らう, た.べる, は.む"
       },
@@ -201,7 +222,10 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l19_k004",
@@ -210,9 +234,9 @@
       "character": "材",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "tài",
-        "meaningVi": "tài liệu",
-        "meaningViDisplay": "tài (tài liệu)",
+        "hanViet": "Tài",
+        "meaningVi": "nguyên liệu; vật liệu; gỗ",
+        "meaningViDisplay": "Tài (nguyên liệu; vật liệu; gỗ)",
         "meaningEn": "lumber, log"
       },
       "readings": {
@@ -226,15 +250,20 @@
         "en": "Core kanji for QUARTET 19: Cooking and food culture."
       },
       "decomposition": {
-        "hanViet": "tài",
+        "hanViet": "Tài",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "料",
+          "食",
+          "味",
+          "鮮"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tai",
-        "meaningViNoAccent": "tai lieu",
+        "meaningViNoAccent": "nguyen lieu; vat lieu; go",
         "meaningEnNoAccent": "lumber, log"
       },
       "examples": [
@@ -256,7 +285,7 @@
         }
       ],
       "legacy": {
-        "meaning": "tài (tài liệu)",
+        "meaning": "Tài (nguyên liệu; vật liệu; gỗ)",
         "onyomi": "ザイ",
         "kunyomi": ""
       },
@@ -264,7 +293,10 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l19_k005",
@@ -274,8 +306,8 @@
       "strokeCount": 8,
       "labels": {
         "hanViet": "Vị",
-        "meaningVi": "vị",
-        "meaningViDisplay": "Vị (vị)",
+        "meaningVi": "mùi vị; hương vị; nếm",
+        "meaningViDisplay": "Vị (mùi vị; hương vị; nếm)",
         "meaningEn": "flavor, taste"
       },
       "readings": {
@@ -296,11 +328,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "食",
+          "料",
+          "調",
+          "鮮"
+        ]
       },
       "search": {
         "hanVietNoAccent": "vi",
-        "meaningViNoAccent": "vi",
+        "meaningViNoAccent": "mui vi; huong vi; nem",
         "meaningEnNoAccent": "flavor, taste"
       },
       "examples": [
@@ -322,7 +359,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Vị (vị)",
+        "meaning": "Vị (mùi vị; hương vị; nếm)",
         "onyomi": "ミ",
         "kunyomi": "あじ, あじ.わう"
       },
@@ -330,7 +367,10 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l19_k006",
@@ -339,9 +379,9 @@
       "character": "調",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "điều, điều chỉnh",
-        "meaningViDisplay": "điều, điều chỉnh",
+        "hanViet": "Điều",
+        "meaningVi": "điều chỉnh; chuẩn bị; tra cứu",
+        "meaningViDisplay": "Điều (điều chỉnh; chuẩn bị; tra cứu)",
         "meaningEn": "tune, tone"
       },
       "readings": {
@@ -360,15 +400,20 @@
         "en": "Core kanji for QUARTET 19: Cooking and food culture."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Điều",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "味",
+          "理",
+          "料",
+          "保"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "dieu, dieu chinh",
+        "hanVietNoAccent": "dieu",
+        "meaningViNoAccent": "dieu chinh; chuan bi; tra cuu",
         "meaningEnNoAccent": "tune, tone"
       },
       "examples": [
@@ -382,7 +427,7 @@
         }
       ],
       "legacy": {
-        "meaning": "điều, điều chỉnh",
+        "meaning": "Điều (điều chỉnh; chuẩn bị; tra cứu)",
         "onyomi": "チョウ",
         "kunyomi": "しら.べる, しら.べ, ととの.う, ととの.える"
       },
@@ -390,7 +435,10 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l19_k007",
@@ -399,9 +447,9 @@
       "character": "保",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "bảo",
-        "meaningViDisplay": "bảo",
+        "hanViet": "Bảo",
+        "meaningVi": "bảo vệ; giữ gìn; duy trì",
+        "meaningViDisplay": "Bảo (bảo vệ; giữ gìn; duy trì)",
         "meaningEn": "protect, guarantee"
       },
       "readings": {
@@ -418,15 +466,20 @@
         "en": "Core kanji for QUARTET 19: Cooking and food culture."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Bảo",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "鮮",
+          "食",
+          "材",
+          "守"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "bao",
+        "hanVietNoAccent": "bao",
+        "meaningViNoAccent": "bao ve; giu gin; duy tri",
         "meaningEnNoAccent": "protect, guarantee"
       },
       "examples": [
@@ -440,7 +493,7 @@
         }
       ],
       "legacy": {
-        "meaning": "bảo",
+        "meaning": "Bảo (bảo vệ; giữ gìn; duy trì)",
         "onyomi": "ホ, ホウ",
         "kunyomi": "たも.つ"
       },
@@ -448,7 +501,10 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l19_k008",
@@ -457,9 +513,9 @@
       "character": "鮮",
       "strokeCount": 17,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "tiên, tươi",
-        "meaningViDisplay": "tiên, tươi",
+        "hanViet": "Tiên",
+        "meaningVi": "tươi; rõ nét; rực rỡ",
+        "meaningViDisplay": "Tiên (tươi; rõ nét; rực rỡ)",
         "meaningEn": "fresh, vivid"
       },
       "readings": {
@@ -475,15 +531,20 @@
         "en": "Core kanji for QUARTET 19: Cooking and food culture."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tiên",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "食",
+          "材",
+          "味",
+          "保"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tien, tuoi",
+        "hanVietNoAccent": "tien",
+        "meaningViNoAccent": "tuoi; ro net; ruc ro",
         "meaningEnNoAccent": "fresh, vivid"
       },
       "examples": [
@@ -497,7 +558,7 @@
         }
       ],
       "legacy": {
-        "meaning": "tiên, tươi",
+        "meaning": "Tiên (tươi; rõ nét; rực rỡ)",
         "onyomi": "セン",
         "kunyomi": "あざ.やか"
       },
@@ -505,10 +566,13 @@
         "quartetLesson": 19,
         "themeEn": "Cooking and food culture",
         "themeVi": "Nấu ăn và văn hóa ẩm thực"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }
