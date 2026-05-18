@@ -313,3 +313,12 @@
 - Fix: `beforeOpen` now runs the private Kanji ensure path; public ensure returns whether it repaired content; `LessonRepository` ensures once per lifecycle and clears Kanji caches only on first use or actual repair.
 - Verified locally: `flutter test test\data\db\content_database_lazy_seed_test.dart`, `flutter test test\data\content\kanji_runtime_reachability_test.dart`, focused Kanji/taxonomy subset, `flutter analyze lib test`, UI string guard, and node research tests all passed.
 - Deployed `833ed3c8` to Firebase Hosting. Live proof: VI N3 Kanji grid loaded `203` entries, VI `Viết` opened real Kanji data (`将`); EN Kanji grid loaded; JA Kanji grid loaded; JA `214` radicals loaded. Remaining Kanji work: continue QA-B-002 source verification and expansion.
+
+## 2026-05-18 N3 Kanji Lesson 18 Completeness Patch
+
+- Source-verified all eight N3 lesson-18 kanji (`法`, `律`, `規`, `則`, `犯`, `罪`, `裁`, `制`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for seven entries; rewrote learner-facing Vietnamese display/search text; filled all lesson-18 `relatedKanji` lists.
+- Replaced lesson-18 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `19` and added a lesson-18 sentinel for `裁` so existing browsers receive the new metadata even when level counts are already full.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `63` to `55`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Deployed `777a5c13` to Firebase Hosting. Live proof: search `裁` opened detail showing `Tài (xét xử; phán quyết; cắt may)` plus Hán-Việt `Tài`.

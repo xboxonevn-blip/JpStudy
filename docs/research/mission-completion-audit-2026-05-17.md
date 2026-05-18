@@ -179,6 +179,14 @@ UI string guard, and node research tests. Firebase Hosting was redeployed; live
 proof verified VI N3 grid, VI handwriting, EN grid, JA grid, and JA `214`
 radicals load real data.
 
+Kanji content expansion update: N3 lesson 18 is now source-verified against
+KANJIDIC2, Unihan, and local lesson context. Commit `777a5c13` replaces the
+lesson's false `vi-human-approved` file tag with truthful `vi-source-verified`,
+fills Hán-Việt/display/search/related-kanji metadata for all eight entries,
+bumps the Kanji seed revision to `19`, and adds a lesson-18 sentinel. Local
+coverage audit reduced N3 incomplete current entries from `63` to `55`;
+live proof opened `裁` with `Tài (xét xử; phán quyết; cắt may)`.
+
 ## Verdict
 
 Implementation, docs, tooling, CI/deploy, and N4-N1 live direct-route fallback work are substantially complete. The active goal is not complete because the stopping condition includes external legal/ops proof gates that remain missing.
