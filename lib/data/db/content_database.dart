@@ -211,13 +211,14 @@ class ContentDatabase extends _$ContentDatabase {
     final storedRevision = revisionRows.isEmpty
         ? null
         : int.tryParse('${revisionRows.single.data['value']}');
+    final sentinelsHealthy = await _kanjiSeedSentinelsHealthy();
     if (storedRevision != null &&
         storedRevision >= _kanjiSeedRevision &&
-        await _kanjiSeedSentinelsHealthy()) {
+        sentinelsHealthy) {
       return;
     }
 
-    if (!details.wasCreated) {
+    if (!details.wasCreated || !sentinelsHealthy) {
       await _reseedMinnaKanji();
     }
     await customStatement(
