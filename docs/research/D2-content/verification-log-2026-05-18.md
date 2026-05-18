@@ -245,3 +245,24 @@ Sources consulted:
 | `警` | KANJIDIC2 `Cảnh`, meanings `admonish`, `commandment`; Unihan `kDefinition=guard, watch; alert, alarm`; local context warning/safety | Added Hán-Việt `Cảnh`, display `Cảnh (cảnh báo; cảnh giác)`, search text, and warning/prevention related kanji. |
 
 Tagging: replaced the lesson-11 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 12 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_12.json`, especially `芸術`, `演劇`, `鑑賞`, `演奏`, and `撮影`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `芸` | KANJIDIC2 lists `Vân`, meanings `technique`, `art`, `craft`; Unihan `kDefinition=art, talent, ability, craft, technique`; local Japanese `芸術` context maps learner-facing `芸` to `Nghệ` | Added pedagogic Hán-Việt `Nghệ`, display `Nghệ (nghệ thuật; tài nghệ)`, and documented the Japanese-shinjitai source mismatch instead of silently using `Vân`. |
+| `術` | KANJIDIC2 `Thuật`, meanings `art`, `technique`, `skill`; Unihan `kVietnamese=thuật`, `kDefinition=art, skill; method, technique`; local context `芸術` | Added Hán-Việt `Thuật`, display `Thuật (kỹ thuật; phương pháp; nghệ thuật)`, search text, and art/skill related kanji. |
+| `演` | KANJIDIC2 `Diễn`, meanings `performance`, `act`, `stage`; Unihan `kVietnamese=diễn`, `kDefinition=perform, put on; exercise`; local context performance | Added Hán-Việt `Diễn`, display `Diễn (biểu diễn; trình diễn; diễn xuất)`, search text, and performance/theater related kanji. |
+| `劇` | KANJIDIC2 `Kịch`, meanings `drama`, `play`; Unihan `kVietnamese=kịch`, `kDefinition=theatrical plays, opera, drama`; local context `演劇` | Added Hán-Việt `Kịch`, display `Kịch (kịch; sân khấu; vở diễn)`, search text, and theater/film related kanji. |
+| `鑑` | KANJIDIC2 `Giám`, meanings `specimen`, `take warning from`, `learn from`; Unihan `kDefinition=mirror, looking glass; reflect`; local context `鑑賞` | Added Hán-Việt `Giám`, display `Giám (xem xét; thưởng thức; soi chiếu)`, search text, and appreciation/viewing related kanji. |
+| `賞` | KANJIDIC2 `Thưởng`, meanings `prize`, `reward`, `praise`; Unihan `kVietnamese=thưởng`, `kDefinition=reward, grant, bestow; appreciate`; local context `鑑賞` | Added Hán-Việt `Thưởng`, display `Thưởng (giải thưởng; khen thưởng; thưởng thức)`, search text, and art/appreciation related kanji. |
+| `奏` | KANJIDIC2 `Tấu`, meanings `play music`, `speak to a ruler`; Unihan `kVietnamese=tấu`, `kDefinition=memorialize emperor; report`; local context `演奏` | Added Hán-Việt `Tấu`, display `Tấu (tấu nhạc; trình tấu)`, search text, and music/performance related kanji. |
+| `撮` | KANJIDIC2 `Toát`, meanings `snapshot`, `take pictures`; Unihan `kVietnamese=toát`, `kDefinition=little bit, small amount, pinch`; local context photography/filming | Added Hán-Việt `Toát`, display `Toát (chụp ảnh; quay phim; nắm lấy)`, search text, and image/recording related kanji. |
+
+Tagging: replaced the lesson-12 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
