@@ -13,10 +13,10 @@
       "character": "流",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "lưu",
-        "meaningViDisplay": "lưu",
-        "meaningEn": "current, a sink"
+        "hanViet": "Lưu",
+        "meaningVi": "dòng chảy; lưu hành; trôi",
+        "meaningViDisplay": "Lưu (dòng chảy; lưu hành; trôi)",
+        "meaningEn": "current, flow, circulate"
       },
       "readings": {
         "onyomi": [
@@ -35,29 +35,32 @@
         "en": "Core kanji for QUARTET 24: Fashion and personal style."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Lưu",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "水",
+          "川",
+          "通",
+          "行"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "luu",
-        "meaningEnNoAccent": "current, a sink"
+        "hanVietNoAccent": "luu",
+        "meaningViNoAccent": "dong chay; luu hanh; troi",
+        "meaningEnNoAccent": "current, flow, circulate"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v002",
-          "sourceSenseId": "n3_l24_s002",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "流行",
+          "reading": "りゅうこう",
+          "meaning": "trào lưu; thịnh hành",
+          "meaningEn": "trend; fashion"
         }
       ],
       "legacy": {
-        "meaning": "lưu",
+        "meaning": "Lưu (dòng chảy; lưu hành; trôi)",
         "onyomi": "リュウ, ル",
         "kunyomi": "なが.れる, なが.れ, なが.す, -なが.す"
       },
@@ -65,7 +68,10 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l24_k002",
@@ -75,9 +81,9 @@
       "strokeCount": 6,
       "labels": {
         "hanViet": "Hành",
-        "meaningVi": "hành, đi",
-        "meaningViDisplay": "Hành (hành, đi)",
-        "meaningEn": "going, journey"
+        "meaningVi": "đi; thực hiện; hàng lối",
+        "meaningViDisplay": "Hành (đi; thực hiện; hàng lối)",
+        "meaningEn": "going, journey, carry out"
       },
       "readings": {
         "onyomi": [
@@ -101,25 +107,28 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "流",
+          "道",
+          "動",
+          "歩"
+        ]
       },
       "search": {
         "hanVietNoAccent": "hanh",
-        "meaningViNoAccent": "hanh, di",
-        "meaningEnNoAccent": "going, journey"
+        "meaningViNoAccent": "di; thuc hien; hang loi",
+        "meaningEnNoAccent": "going, journey, carry out"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v002",
-          "sourceSenseId": "n3_l24_s002",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "流行",
+          "reading": "りゅうこう",
+          "meaning": "trào lưu; thịnh hành",
+          "meaningEn": "trend; fashion"
         }
       ],
       "legacy": {
-        "meaning": "Hành (hành, đi)",
+        "meaning": "Hành (đi; thực hiện; hàng lối)",
         "onyomi": "コウ, ギョウ, アン",
         "kunyomi": "い.く, ゆ.く, -ゆ.き, -ゆき"
       },
@@ -127,7 +136,10 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l24_k003",
@@ -137,9 +149,9 @@
       "strokeCount": 12,
       "labels": {
         "hanViet": "Trước",
-        "meaningVi": "trước, mặc",
-        "meaningViDisplay": "Trước (trước, mặc)",
-        "meaningEn": "don, arrive"
+        "meaningVi": "mặc; đến nơi; bám vào",
+        "meaningViDisplay": "Trước (mặc; đến nơi; bám vào)",
+        "meaningEn": "wear, arrive, attach"
       },
       "readings": {
         "onyomi": [
@@ -162,33 +174,34 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "服",
+          "替",
+          "到",
+          "衣"
+        ]
       },
       "search": {
         "hanVietNoAccent": "truoc",
-        "meaningViNoAccent": "truoc, mac",
-        "meaningEnNoAccent": "don, arrive"
+        "meaningViNoAccent": "mac; den noi; bam vao",
+        "meaningEnNoAccent": "wear, arrive, attach"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v005",
-          "sourceSenseId": "n3_l24_s005",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "着る",
+          "reading": "きる",
+          "meaning": "mặc",
+          "meaningEn": "to wear"
         },
         {
-          "sourceVocabId": "n3_l24_v006",
-          "sourceSenseId": "n3_l24_s006",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "到着",
+          "reading": "とうちゃく",
+          "meaning": "đến nơi",
+          "meaningEn": "arrival"
         }
       ],
       "legacy": {
-        "meaning": "Trước (trước, mặc)",
+        "meaning": "Trước (mặc; đến nơi; bám vào)",
         "onyomi": "チャク, ジャク",
         "kunyomi": "き.る, き.せる, つ.く, つ.ける"
       },
@@ -196,7 +209,10 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l24_k004",
@@ -206,9 +222,9 @@
       "strokeCount": 12,
       "labels": {
         "hanViet": "Thế",
-        "meaningVi": "thế, thay",
-        "meaningViDisplay": "Thế (thế, thay)",
-        "meaningEn": "exchange, spare"
+        "meaningVi": "thay thế; đổi; dự phòng",
+        "meaningViDisplay": "Thế (thay thế; đổi; dự phòng)",
+        "meaningEn": "exchange, substitute, spare"
       },
       "readings": {
         "onyomi": [
@@ -229,25 +245,28 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "代",
+          "換",
+          "着",
+          "服"
+        ]
       },
       "search": {
         "hanVietNoAccent": "the",
-        "meaningViNoAccent": "the, thay",
-        "meaningEnNoAccent": "exchange, spare"
+        "meaningViNoAccent": "thay the; doi; du phong",
+        "meaningEnNoAccent": "exchange, substitute, spare"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v006",
-          "sourceSenseId": "n3_l24_s006",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "着替える",
+          "reading": "きがえる",
+          "meaning": "thay quần áo",
+          "meaningEn": "to change clothes"
         }
       ],
       "legacy": {
-        "meaning": "Thế (thế, thay)",
+        "meaning": "Thế (thay thế; đổi; dự phòng)",
         "onyomi": "タイ",
         "kunyomi": "か.える, か.え-, か.わる"
       },
@@ -255,7 +274,10 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l24_k005",
@@ -264,10 +286,10 @@
       "character": "化",
       "strokeCount": 4,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "hóa",
-        "meaningViDisplay": "hóa",
-        "meaningEn": "change, take the form of"
+        "hanViet": "Hóa",
+        "meaningVi": "thay đổi; biến hóa; -hóa",
+        "meaningViDisplay": "Hóa (thay đổi; biến hóa; -hóa)",
+        "meaningEn": "change, take the form of, -ization"
       },
       "readings": {
         "onyomi": [
@@ -286,29 +308,32 @@
         "en": "Core kanji for QUARTET 24: Fashion and personal style."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Hóa",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "変",
+          "粧",
+          "改",
+          "成"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "hoa",
-        "meaningEnNoAccent": "change, take the form of"
+        "hanVietNoAccent": "hoa",
+        "meaningViNoAccent": "thay doi; bien hoa; -hoa",
+        "meaningEnNoAccent": "change, take the form of, -ization"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v007",
-          "sourceSenseId": "n3_l24_s007",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "化粧",
+          "reading": "けしょう",
+          "meaning": "trang điểm",
+          "meaningEn": "makeup"
         }
       ],
       "legacy": {
-        "meaning": "hóa",
+        "meaning": "Hóa (thay đổi; biến hóa; -hóa)",
         "onyomi": "カ, ケ",
         "kunyomi": "ば.ける, ば.かす, ふ.ける, け.する"
       },
@@ -316,7 +341,10 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l24_k006",
@@ -325,9 +353,9 @@
       "character": "粧",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "trang",
-        "meaningViDisplay": "trang",
+        "hanViet": "Trang",
+        "meaningVi": "trang điểm; làm đẹp; tô điểm",
+        "meaningViDisplay": "Trang (trang điểm; làm đẹp; tô điểm)",
         "meaningEn": "cosmetics, adorn (one's person)"
       },
       "readings": {
@@ -341,29 +369,32 @@
         "en": "Core kanji for QUARTET 24: Fashion and personal style."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Trang",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "化",
+          "装",
+          "飾",
+          "美"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "trang",
+        "hanVietNoAccent": "trang",
+        "meaningViNoAccent": "trang diem; lam dep; to diem",
         "meaningEnNoAccent": "cosmetics, adorn (one's person)"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v007",
-          "sourceSenseId": "n3_l24_s007",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "化粧",
+          "reading": "けしょう",
+          "meaning": "trang điểm",
+          "meaningEn": "makeup"
         }
       ],
       "legacy": {
-        "meaning": "trang",
+        "meaning": "Trang (trang điểm; làm đẹp; tô điểm)",
         "onyomi": "ショウ",
         "kunyomi": ""
       },
@@ -371,7 +402,10 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l24_k007",
@@ -380,10 +414,10 @@
       "character": "装",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "trang, mặc",
-        "meaningViDisplay": "trang, mặc",
-        "meaningEn": "attire, dress"
+        "hanViet": "Trang",
+        "meaningVi": "trang phục; ăn mặc; giả trang",
+        "meaningViDisplay": "Trang (trang phục; ăn mặc; giả trang)",
+        "meaningEn": "attire, dress, disguise"
       },
       "readings": {
         "onyomi": [
@@ -400,29 +434,32 @@
         "en": "Core kanji for QUARTET 24: Fashion and personal style."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Trang",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "粧",
+          "飾",
+          "服",
+          "着"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "trang, mac",
-        "meaningEnNoAccent": "attire, dress"
+        "hanVietNoAccent": "trang",
+        "meaningViNoAccent": "trang phuc; an mac; gia trang",
+        "meaningEnNoAccent": "attire, dress, disguise"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v008",
-          "sourceSenseId": "n3_l24_s008",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "服装",
+          "reading": "ふくそう",
+          "meaning": "trang phục",
+          "meaningEn": "clothing; attire"
         }
       ],
       "legacy": {
-        "meaning": "trang, mặc",
+        "meaning": "Trang (trang phục; ăn mặc; giả trang)",
         "onyomi": "ソウ, ショウ",
         "kunyomi": "よそお.う, よそお.い"
       },
@@ -430,7 +467,10 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l24_k008",
@@ -440,9 +480,9 @@
       "strokeCount": 13,
       "labels": {
         "hanViet": "Sức",
-        "meaningVi": "sức, trang trí",
-        "meaningViDisplay": "Sức (sức, trang trí)",
-        "meaningEn": "decorate, ornament"
+        "meaningVi": "trang trí; đồ trang sức; tô điểm",
+        "meaningViDisplay": "Sức (trang trí; đồ trang sức; tô điểm)",
+        "meaningEn": "decorate, ornament, adorn"
       },
       "readings": {
         "onyomi": [
@@ -462,25 +502,28 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "装",
+          "粧",
+          "美",
+          "品"
+        ]
       },
       "search": {
         "hanVietNoAccent": "suc",
-        "meaningViNoAccent": "suc, trang tri",
-        "meaningEnNoAccent": "decorate, ornament"
+        "meaningViNoAccent": "trang tri; do trang suc; to diem",
+        "meaningEnNoAccent": "decorate, ornament, adorn"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l24_v008",
-          "sourceSenseId": "n3_l24_s008",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "装飾",
+          "reading": "そうしょく",
+          "meaning": "trang trí",
+          "meaningEn": "decoration"
         }
       ],
       "legacy": {
-        "meaning": "Sức (sức, trang trí)",
+        "meaning": "Sức (trang trí; đồ trang sức; tô điểm)",
         "onyomi": "ショク",
         "kunyomi": "かざ.る, かざ.り"
       },
@@ -488,10 +531,13 @@
         "quartetLesson": 24,
         "themeEn": "Fashion and personal style",
         "themeVi": "Thời trang và phong cách cá nhân"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

@@ -13,7 +13,7 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
-const _kanjiSeedRevision = 24;
+const _kanjiSeedRevision = 25;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
   _KanjiSeedSentinel(
@@ -64,6 +64,13 @@ const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
     character: '歴',
     meaning: 'Lịch (lịch sử; trải qua; quá trình)',
     decompositionContains: '"hanViet":"Lịch"',
+  ),
+  _KanjiSeedSentinel(
+    level: 'N3',
+    lessonId: 24,
+    character: '流',
+    meaning: 'Lưu (dòng chảy; lưu hành; trôi)',
+    decompositionContains: '"hanViet":"Lưu"',
   ),
 ];
 

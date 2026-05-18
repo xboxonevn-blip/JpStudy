@@ -505,3 +505,24 @@ Sources consulted:
 Tagging: replaced the lesson-23 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
 
 Live proof after deploy: VI/N3 Kanji search for `歴` opened the detail modal with `Lịch (lịch sử; trải qua; quá trình)` plus Hán-Việt `Lịch`, with console errors/warnings `0`.
+
+## Kanji N3 Lesson 24 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings where present, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme in `assets/data/content/kanji/n3/lesson_24.json`, which labels the batch as fashion/personal style. The generated `sourceVocabId` links were not used as authority because ShinKanzen vocab IDs do not align with this kanji theme.
+
+| Item | Sources | Change |
+|---|---|---|
+| `流` | KANJIDIC2 `Lưu`, meanings `current`, `flow`, `forfeit`; Unihan `kVietnamese=lưu`, `kDefinition=flow, circulate, drift`; local theme via `流行` | Added Hán-Việt `Lưu`, display `Lưu (dòng chảy; lưu hành; trôi)`, direct example `流行`, search text, and flow/movement related kanji. |
+| `行` | KANJIDIC2 readings include `Hành/Hàng`, meanings `going`, `carry out`, `line`; Unihan `kVietnamese=hàng`, `kDefinition=go; walk; move`; local theme via `流行` | Rewrote display to `Hành (đi; thực hiện; hàng lối)`, normalized search text, direct example `流行`, and movement/action related kanji. |
+| `着` | KANJIDIC2 meanings `don`, `arrive`, `wear`; Unihan has no `kVietnamese` for this codepoint; existing app N4 entry uses learner-facing `Trước` | Kept app-standard Hán-Việt `Trước`, rewrote display to `Trước (mặc; đến nơi; bám vào)`, added direct examples `着る`/`到着`, and clothing/arrival related kanji. |
+| `替` | KANJIDIC2 `Thế`, meanings `exchange`, `spare`, `substitute`; Unihan `kVietnamese=thế`, `kDefinition=change, replace, substitute for` | Rewrote display to `Thế (thay thế; đổi; dự phòng)`, normalized search text, direct example `着替える`, and replacement/clothing related kanji. |
+| `化` | KANJIDIC2 `Hóa`, meanings `change`, `take the form of`, `-ization`; Unihan `kVietnamese=hoá`, `kDefinition=change, convert, reform` | Added Hán-Việt `Hóa`, display `Hóa (thay đổi; biến hóa; -hóa)`, direct example `化粧`, search text, and change/adornment related kanji. |
+| `粧` | KANJIDIC2 `Trang`, meanings `cosmetics`, `adorn`; Unihan `kDefinition=toilet; make-up; dress up; adorn` | Added Hán-Việt `Trang`, display `Trang (trang điểm; làm đẹp; tô điểm)`, direct example `化粧`, search text, and beauty/adornment related kanji. |
+| `装` | KANJIDIC2 `Trang`, meanings `attire`, `dress`, `disguise`; Unihan `kDefinition=dress, clothes, attire` | Added Hán-Việt `Trang`, display `Trang (trang phục; ăn mặc; giả trang)`, direct example `服装`, search text, and clothing/adornment related kanji. |
+| `飾` | KANJIDIC2 `Sức`, meanings `decorate`, `ornament`, `adorn`; Unihan `kDefinition=decorate, ornament, adorn` | Rewrote display to `Sức (trang trí; đồ trang sức; tô điểm)`, direct example `装飾`, search text, and decoration/beauty related kanji. |
+
+Tagging: replaced the lesson-24 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
