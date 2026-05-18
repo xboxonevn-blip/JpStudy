@@ -14,8 +14,8 @@
       "strokeCount": 13,
       "labels": {
         "hanViet": "Tân",
-        "meaningVi": "tân",
-        "meaningViDisplay": "Tân (tân)",
+        "meaningVi": "mới; đổi mới",
+        "meaningViDisplay": "Tân (mới; đổi mới)",
         "meaningEn": "new"
       },
       "readings": {
@@ -38,11 +38,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "聞",
+          "雑",
+          "誌",
+          "報"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tan",
-        "meaningViNoAccent": "tan",
+        "meaningViNoAccent": "moi; doi moi",
         "meaningEnNoAccent": "new"
       },
       "examples": [
@@ -56,10 +61,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Tân (tân)",
+        "meaning": "Tân (mới; đổi mới)",
         "onyomi": "シン",
         "kunyomi": "あたら.しい, あら.た, あら-, にい-"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -74,8 +82,8 @@
       "strokeCount": 14,
       "labels": {
         "hanViet": "Văn",
-        "meaningVi": "văn, nghe",
-        "meaningViDisplay": "Văn (văn, nghe)",
+        "meaningVi": "nghe; hỏi; tin tức",
+        "meaningViDisplay": "Văn (nghe; hỏi; tin tức)",
         "meaningEn": "hear, ask"
       },
       "readings": {
@@ -97,11 +105,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "新",
+          "誌",
+          "報",
+          "記"
+        ]
       },
       "search": {
         "hanVietNoAccent": "van",
-        "meaningViNoAccent": "van, nghe",
+        "meaningViNoAccent": "nghe; hoi; tin tuc",
         "meaningEnNoAccent": "hear, ask"
       },
       "examples": [
@@ -115,10 +128,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Văn (văn, nghe)",
+        "meaning": "Văn (nghe; hỏi; tin tức)",
         "onyomi": "ブン, モン",
         "kunyomi": "き.く, き.こえる"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -132,9 +148,9 @@
       "character": "雑",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "tạp",
-        "meaningVi": "tạp",
-        "meaningViDisplay": "tạp (tạp)",
+        "hanViet": "Tạp",
+        "meaningVi": "tạp; hỗn hợp; linh tinh",
+        "meaningViDisplay": "Tạp (tạp; hỗn hợp; linh tinh)",
         "meaningEn": "miscellaneous"
       },
       "readings": {
@@ -152,15 +168,20 @@
         "en": "Core kanji for QUARTET 9: Media and information."
       },
       "decomposition": {
-        "hanViet": "tạp",
+        "hanViet": "Tạp",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "誌",
+          "新",
+          "聞",
+          "記"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tap",
-        "meaningViNoAccent": "tap",
+        "meaningViNoAccent": "tap; hon hop; linh tinh",
         "meaningEnNoAccent": "miscellaneous"
       },
       "examples": [
@@ -174,10 +195,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tạp (tạp)",
+        "meaning": "Tạp (tạp; hỗn hợp; linh tinh)",
         "onyomi": "ザツ, ゾウ",
         "kunyomi": "まじ.える, まじ.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -191,9 +215,9 @@
       "character": "誌",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "chí, tạp chí",
-        "meaningViDisplay": "chí, tạp chí",
+        "hanViet": "Chí",
+        "meaningVi": "tạp chí; ghi chép",
+        "meaningViDisplay": "Chí (tạp chí; ghi chép)",
         "meaningEn": "document, records"
       },
       "readings": {
@@ -207,15 +231,20 @@
         "en": "Core kanji for QUARTET 9: Media and information."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Chí",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "雑",
+          "記",
+          "報",
+          "聞"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "chi, tap chi",
+        "hanVietNoAccent": "chi",
+        "meaningViNoAccent": "tap chi; ghi chep",
         "meaningEnNoAccent": "document, records"
       },
       "examples": [
@@ -229,10 +258,13 @@
         }
       ],
       "legacy": {
-        "meaning": "chí, tạp chí",
+        "meaning": "Chí (tạp chí; ghi chép)",
         "onyomi": "シ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -246,9 +278,9 @@
       "character": "放",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "phóng",
-        "meaningViDisplay": "phóng",
+        "hanViet": "Phóng",
+        "meaningVi": "phát ra; thả; phóng thích",
+        "meaningViDisplay": "Phóng (phát ra; thả; phóng thích)",
         "meaningEn": "set free, release"
       },
       "readings": {
@@ -267,15 +299,20 @@
         "en": "Core kanji for QUARTET 9: Media and information."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Phóng",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "報",
+          "送",
+          "発",
+          "聞"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "phong",
+        "hanVietNoAccent": "phong",
+        "meaningViNoAccent": "phat ra; tha; phong thich",
         "meaningEnNoAccent": "set free, release"
       },
       "examples": [
@@ -289,10 +326,13 @@
         }
       ],
       "legacy": {
-        "meaning": "phóng",
+        "meaning": "Phóng (phát ra; thả; phóng thích)",
         "onyomi": "ホウ",
         "kunyomi": "はな.す, -っぱな.し, はな.つ, はな.れる"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -306,9 +346,9 @@
       "character": "報",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "báo",
-        "meaningViDisplay": "báo",
+        "hanViet": "Báo",
+        "meaningVi": "báo cáo; tin tức; báo đáp",
+        "meaningViDisplay": "Báo (báo cáo; tin tức; báo đáp)",
         "meaningEn": "report, news"
       },
       "readings": {
@@ -324,15 +364,20 @@
         "en": "Core kanji for QUARTET 9: Media and information."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Báo",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "放",
+          "聞",
+          "記",
+          "誌"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "bao",
+        "hanVietNoAccent": "bao",
+        "meaningViNoAccent": "bao cao; tin tuc; bao dap",
         "meaningEnNoAccent": "report, news"
       },
       "examples": [
@@ -354,10 +399,13 @@
         }
       ],
       "legacy": {
-        "meaning": "báo",
+        "meaning": "Báo (báo cáo; tin tức; báo đáp)",
         "onyomi": "ホウ",
         "kunyomi": "むく.いる"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -371,9 +419,9 @@
       "character": "記",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "ký",
-        "meaningViDisplay": "ký",
+        "hanViet": "Kí",
+        "meaningVi": "ghi chép; bài viết",
+        "meaningViDisplay": "Kí (ghi chép; bài viết)",
         "meaningEn": "scribe, account"
       },
       "readings": {
@@ -389,15 +437,20 @@
         "en": "Core kanji for QUARTET 9: Media and information."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Kí",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "誌",
+          "報",
+          "録",
+          "文"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ky",
+        "hanVietNoAccent": "ki",
+        "meaningViNoAccent": "ghi chep; bai viet",
         "meaningEnNoAccent": "scribe, account"
       },
       "examples": [
@@ -411,10 +464,13 @@
         }
       ],
       "legacy": {
-        "meaning": "ký",
+        "meaning": "Kí (ghi chép; bài viết)",
         "onyomi": "キ",
         "kunyomi": "しる.す"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -428,9 +484,9 @@
       "character": "論",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "luận",
-        "meaningViDisplay": "luận",
+        "hanViet": "Luận",
+        "meaningVi": "bàn luận; lập luận",
+        "meaningViDisplay": "Luận (bàn luận; lập luận)",
         "meaningEn": "argument, discourse"
       },
       "readings": {
@@ -446,15 +502,20 @@
         "en": "Core kanji for QUARTET 9: Media and information."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Luận",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "議",
+          "文",
+          "話",
+          "記"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "luan",
+        "hanVietNoAccent": "luan",
+        "meaningViNoAccent": "ban luan; lap luan",
         "meaningEnNoAccent": "argument, discourse"
       },
       "examples": [
@@ -468,10 +529,13 @@
         }
       ],
       "legacy": {
-        "meaning": "luận",
+        "meaning": "Luận (bàn luận; lập luận)",
         "onyomi": "ロン",
         "kunyomi": "あげつら.う"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 9,
         "themeEn": "Media and information",
@@ -480,6 +544,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

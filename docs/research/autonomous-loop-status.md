@@ -214,3 +214,11 @@
 - Bumped content DB Kanji seed revision to `8` so existing browsers with revision `7` receive the new lesson-08 metadata; regression now starts from `content_meta.kanjiSeedRevision=7` and stale `統`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, and kanji coverage audit reduced N3 incomplete current entries from `141` to `133`.
 - Deployed `6019e798` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `統` returned one result, detail opened with `Thống (thống nhất; quản lý; hệ thống)` plus Hán-Việt `Thống`, and console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 09 Completeness Patch
+
+- Source-verified all eight N3 lesson-09 kanji (`新`, `聞`, `雑`, `誌`, `放`, `報`, `記`, `論`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `誌`, `放`, `報`, `記`, and `論`; normalized lowercase Hán-Việt on `雑`; rewrote learner-facing Vietnamese display/search text for all eight entries; filled all lesson-09 `relatedKanji` lists.
+- Replaced lesson-09 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `9` so existing browsers with revision `8` receive the new lesson-09 metadata; regression now starts from `content_meta.kanjiSeedRevision=8` and stale `誌`.
+- Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, content status stayed machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `133` to `125`.

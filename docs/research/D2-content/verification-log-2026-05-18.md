@@ -182,3 +182,24 @@ Sources consulted:
 | `祖` | KANJIDIC2 meanings `ancestor`, `pioneer`, `founder`; Unihan `kDefinition=ancestor, forefather; grandfather`; local context ancestors/tradition | Capitalized Hán-Việt `Tổ`, display `Tổ (tổ tiên; người sáng lập)`, search text, and ancestor/tradition related kanji. |
 
 Tagging: replaced the lesson-08 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 09 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_09.json`, especially `新聞`, `雑誌`, `放送`, `報道`, `記事`, and `論`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `新` | KANJIDIC2 `Tân`, meaning `new`; Unihan `kVietnamese=tân`, `kDefinition=new, recent, fresh, modern`; local context `新聞` | Kept Hán-Việt `Tân`; rewrote display to `Tân (mới; đổi mới)`, normalized search text, and linked media/news related kanji. |
+| `聞` | KANJIDIC2 `Văn/Vấn/Vặn`, meanings `hear`, `ask`, `listen`; Unihan `kDefinition=hear; smell; make known; news`; local context `新聞` | Kept primary Hán-Việt `Văn`; rewrote display to `Văn (nghe; hỏi; tin tức)`, normalized search text, and linked news/record related kanji. |
+| `雑` | KANJIDIC2 `Tạp`, meaning `miscellaneous`; Unihan `kDefinition=mixed, blended; mix, mingle`; local context `雑誌` | Capitalized Hán-Việt `Tạp`; rewrote display to `Tạp (tạp; hỗn hợp; linh tinh)`, normalized search text, and linked magazine/news related kanji. |
+| `誌` | KANJIDIC2 `Chí`, meanings `document`, `records`; Unihan `kVietnamese=chí`, `kDefinition=write down; record; magazine`; local context `雑誌` | Added Hán-Việt `Chí`, display `Chí (tạp chí; ghi chép)`, search text, and related record/news kanji. |
+| `放` | KANJIDIC2 `Phóng/Phỏng`, meanings `set free`, `release`, `emit`; Unihan `kVietnamese=phóng`, `kDefinition=put, release, free, liberate`; local context `放送` | Added primary Hán-Việt `Phóng`, display `Phóng (phát ra; thả; phóng thích)`, search text, and broadcast/news related kanji. |
+| `報` | KANJIDIC2 `Báo`, meanings `report`, `news`, `reward`; Unihan `kVietnamese=báo`, `kDefinition=report, tell, announce`; local context `報道` | Added Hán-Việt `Báo`, display `Báo (báo cáo; tin tức; báo đáp)`, search text, and report/news related kanji. |
+| `記` | KANJIDIC2 `Kí`, meanings `scribe`, `account`, `narrative`; Unihan `kVietnamese=kí`, `kDefinition=record; keep in mind, remember`; local context `記事` | Added Hán-Việt `Kí`, display `Kí (ghi chép; bài viết)`, search text, and record/writing related kanji. |
+| `論` | KANJIDIC2 `Luận/Luân`, meanings `argument`, `discourse`; Unihan `kVietnamese=luận`, `kDefinition=debate; discuss; discourse`; local context media/opinion | Added primary Hán-Việt `Luận`, display `Luận (bàn luận; lập luận)`, search text, and discussion/writing related kanji. |
+
+Tagging: replaced the lesson-09 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
