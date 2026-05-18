@@ -98,3 +98,24 @@ Sources consulted:
 | `流` | KANJIDIC2 `Lưu`, meanings `current`, `flow`; Unihan `kVietnamese=lưu`, `kDefinition=flow, circulate, drift; class` | Added Hán-Việt `Lưu`, display `Lưu (dòng chảy; lưu thông)`, and flow/exchange related kanji. |
 
 Tagging: replaced the lesson-04 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 05 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Hán-Việt readings, Japanese readings, stroke count, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_05.json`, especially `就職`, `面接`, `給料`, and `責任`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `就` | KANJIDIC2 `Tựu`, meanings `settle`, `take position`, `study`; Unihan `kDefinition=just, simply; to come, go to; to approach` | Added Hán-Việt `Tựu`, rewrote display to `đảm nhận; vào vị trí`, and linked job/responsibility/study neighbors. |
+| `職` | KANJIDIC2 `Chức`, meanings `post`, `employment`, `work`; Unihan `kVietnamese=chức`, `kDefinition=duty, profession; office, post` | Added Hán-Việt `Chức`, display `Chức (nghề nghiệp; chức vụ)`, and job-duty related kanji. |
+| `面` | KANJIDIC2 `Diện`, meanings `mask`, `face`, `surface`; Unihan `kDefinition=face; surface; plane` | Capitalized Hán-Việt `Diện`, display `Diện (mặt; bề mặt)`, and interview/face/surface related kanji. |
+| `接` | KANJIDIC2 `Tiếp`, meanings `touch`, `contact`, `adjoin`; Unihan `kVietnamese=tiếp`, `kDefinition=receive; continue; catch; connect` | Added Hán-Việt `Tiếp`, display `Tiếp (tiếp xúc; nối liền)`, and contact/connection related kanji. |
+| `給` | KANJIDIC2 `Cấp`, meanings `salary`, `wage`, `grant`; Unihan `kVietnamese=cấp`, `kDefinition=give; by, for` | Added Hán-Việt `Cấp`, display `Cấp (lương; cấp phát; cung cấp)`, fitting `給料`. |
+| `残` | KANJIDIC2 `Tàn`, meanings `remainder`, `leftover`, `balance`; Unihan `kDefinition=injure, spoil; oppress; broken` | Capitalized Hán-Việt `Tàn`, display `Tàn (còn lại; sót lại)`, and leftover/remain related kanji. |
+| `責` | KANJIDIC2 `Trách/Trái`, meanings `blame`, `condemn`, `censure`; Unihan `kVietnamese=trách`, `kDefinition=one's responsibility, duty` | Added primary Hán-Việt `Trách`, display `Trách (trách nhiệm; trách cứ)`, fitting `責任`. |
+| `任` | KANJIDIC2 `Nhâm/Nhậm`, meanings `responsibility`, `duty`, `entrust`; Unihan `kVietnamese=nhậm`, `kDefinition=trust to, rely on, appoint; duty` | Added Hán-Việt `Nhậm`, display `Nhậm (trách nhiệm; giao phó)`, and responsibility/duty related kanji. |
+
+Tagging: replaced the lesson-05 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
