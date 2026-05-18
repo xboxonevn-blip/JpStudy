@@ -13,9 +13,9 @@
       "character": "健",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "kiện, khỏe mạnh",
-        "meaningViDisplay": "kiện, khỏe mạnh",
+        "hanViet": "Kiện",
+        "meaningVi": "khỏe mạnh; sức khỏe",
+        "meaningViDisplay": "Kiện (khỏe mạnh; sức khỏe)",
         "meaningEn": "healthy, health"
       },
       "readings": {
@@ -31,15 +31,20 @@
         "en": "Core kanji for QUARTET 7: Health and lifestyle."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Kiện",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "康",
+          "体",
+          "病",
+          "強"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "kien, khoe manh",
+        "hanVietNoAccent": "kien",
+        "meaningViNoAccent": "khoe manh; suc khoe",
         "meaningEnNoAccent": "healthy, health"
       },
       "examples": [
@@ -53,10 +58,13 @@
         }
       ],
       "legacy": {
-        "meaning": "kiện, khỏe mạnh",
+        "meaning": "Kiện (khỏe mạnh; sức khỏe)",
         "onyomi": "ケン",
         "kunyomi": "すこ.やか"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -70,9 +78,9 @@
       "character": "康",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "khang",
-        "meaningViDisplay": "khang",
+        "hanViet": "Khang",
+        "meaningVi": "bình an; khỏe mạnh",
+        "meaningViDisplay": "Khang (bình an; khỏe mạnh)",
         "meaningEn": "ease, peace"
       },
       "readings": {
@@ -86,15 +94,20 @@
         "en": "Core kanji for QUARTET 7: Health and lifestyle."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Khang",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "健",
+          "安",
+          "楽",
+          "体"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "khang",
+        "hanVietNoAccent": "khang",
+        "meaningViNoAccent": "binh an; khoe manh",
         "meaningEnNoAccent": "ease, peace"
       },
       "examples": [
@@ -108,10 +121,13 @@
         }
       ],
       "legacy": {
-        "meaning": "khang",
+        "meaning": "Khang (bình an; khỏe mạnh)",
         "onyomi": "コウ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -125,9 +141,9 @@
       "character": "睡",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thụy, ngủ",
-        "meaningViDisplay": "thụy, ngủ",
+        "hanViet": "Thụy",
+        "meaningVi": "ngủ; buồn ngủ",
+        "meaningViDisplay": "Thụy (ngủ; buồn ngủ)",
         "meaningEn": "drowsy, sleep"
       },
       "readings": {
@@ -144,15 +160,20 @@
         "en": "Core kanji for QUARTET 7: Health and lifestyle."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thụy",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "眠",
+          "休",
+          "夜",
+          "疲"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "thuy, ngu",
+        "hanVietNoAccent": "thuy",
+        "meaningViNoAccent": "ngu; buon ngu",
         "meaningEnNoAccent": "drowsy, sleep"
       },
       "examples": [
@@ -166,10 +187,13 @@
         }
       ],
       "legacy": {
-        "meaning": "thụy, ngủ",
+        "meaning": "Thụy (ngủ; buồn ngủ)",
         "onyomi": "スイ",
         "kunyomi": "ねむ.る, ねむ.い"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -184,8 +208,8 @@
       "strokeCount": 10,
       "labels": {
         "hanViet": "Miên",
-        "meaningVi": "miên, ngủ",
-        "meaningViDisplay": "Miên (miên, ngủ)",
+        "meaningVi": "ngủ; giấc ngủ",
+        "meaningViDisplay": "Miên (ngủ; giấc ngủ)",
         "meaningEn": "sleep, die"
       },
       "readings": {
@@ -206,11 +230,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "睡",
+          "休",
+          "夜",
+          "夢"
+        ]
       },
       "search": {
         "hanVietNoAccent": "mien",
-        "meaningViNoAccent": "mien, ngu",
+        "meaningViNoAccent": "ngu; giac ngu",
         "meaningEnNoAccent": "sleep, die"
       },
       "examples": [
@@ -224,10 +253,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Miên (miên, ngủ)",
+        "meaning": "Miên (ngủ; giấc ngủ)",
         "onyomi": "ミン",
         "kunyomi": "ねむ.る, ねむ.い"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -241,9 +273,9 @@
       "character": "栄",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "vinh, dinh dưỡng",
-        "meaningViDisplay": "vinh, dinh dưỡng",
+        "hanViet": "Vinh",
+        "meaningVi": "phồn vinh; vinh quang; dinh dưỡng",
+        "meaningViDisplay": "Vinh (phồn vinh; vinh quang; dinh dưỡng)",
         "meaningEn": "flourish, prosperity"
       },
       "readings": {
@@ -263,15 +295,20 @@
         "en": "Core kanji for QUARTET 7: Health and lifestyle."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Vinh",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "養",
+          "食",
+          "成",
+          "育"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "vinh, dinh duong",
+        "hanVietNoAccent": "vinh",
+        "meaningViNoAccent": "phon vinh; vinh quang; dinh duong",
         "meaningEnNoAccent": "flourish, prosperity"
       },
       "examples": [
@@ -285,10 +322,13 @@
         }
       ],
       "legacy": {
-        "meaning": "vinh, dinh dưỡng",
+        "meaning": "Vinh (phồn vinh; vinh quang; dinh dưỡng)",
         "onyomi": "エイ, ヨウ",
         "kunyomi": "さか.える, は.え, -ば.え, は.える"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -302,9 +342,9 @@
       "character": "養",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "dưỡng",
-        "meaningViDisplay": "dưỡng",
+        "hanViet": "Dưỡng",
+        "meaningVi": "nuôi dưỡng; chăm sóc",
+        "meaningViDisplay": "Dưỡng (nuôi dưỡng; chăm sóc)",
         "meaningEn": "foster, bring up"
       },
       "readings": {
@@ -321,15 +361,20 @@
         "en": "Core kanji for QUARTET 7: Health and lifestyle."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Dưỡng",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "栄",
+          "育",
+          "食",
+          "療"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "duong",
+        "hanVietNoAccent": "duong",
+        "meaningViNoAccent": "nuoi duong; cham soc",
         "meaningEnNoAccent": "foster, bring up"
       },
       "examples": [
@@ -343,10 +388,13 @@
         }
       ],
       "legacy": {
-        "meaning": "dưỡng",
+        "meaning": "Dưỡng (nuôi dưỡng; chăm sóc)",
         "onyomi": "ヨウ, リョウ",
         "kunyomi": "やしな.う"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -360,9 +408,9 @@
       "character": "治",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "trị",
-        "meaningViDisplay": "trị",
+        "hanViet": "Trị",
+        "meaningVi": "chữa trị; cai trị",
+        "meaningViDisplay": "Trị (chữa trị; cai trị)",
         "meaningEn": "reign, be at peace"
       },
       "readings": {
@@ -382,15 +430,20 @@
         "en": "Core kanji for QUARTET 7: Health and lifestyle."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Trị",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "療",
+          "病",
+          "医",
+          "薬"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tri",
+        "hanVietNoAccent": "tri",
+        "meaningViNoAccent": "chua tri; cai tri",
         "meaningEnNoAccent": "reign, be at peace"
       },
       "examples": [
@@ -404,10 +457,13 @@
         }
       ],
       "legacy": {
-        "meaning": "trị",
+        "meaning": "Trị (chữa trị; cai trị)",
         "onyomi": "ジ, チ",
         "kunyomi": "おさ.める, おさ.まる, なお.る, なお.す"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -421,9 +477,9 @@
       "character": "療",
       "strokeCount": 17,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "liệu, chữa trị",
-        "meaningViDisplay": "liệu, chữa trị",
+        "hanViet": "Liệu",
+        "meaningVi": "chữa lành; điều trị",
+        "meaningViDisplay": "Liệu (chữa lành; điều trị)",
         "meaningEn": "heal, cure"
       },
       "readings": {
@@ -437,15 +493,20 @@
         "en": "Core kanji for QUARTET 7: Health and lifestyle."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Liệu",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "治",
+          "病",
+          "医",
+          "薬"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "lieu, chua tri",
+        "hanVietNoAccent": "lieu",
+        "meaningViNoAccent": "chua lanh; dieu tri",
         "meaningEnNoAccent": "heal, cure"
       },
       "examples": [
@@ -459,10 +520,13 @@
         }
       ],
       "legacy": {
-        "meaning": "liệu, chữa trị",
+        "meaning": "Liệu (chữa lành; điều trị)",
         "onyomi": "リョウ",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 7,
         "themeEn": "Health and lifestyle",
@@ -471,6 +535,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

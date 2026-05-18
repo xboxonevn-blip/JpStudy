@@ -140,3 +140,24 @@ Sources consulted:
 | `価` | KANJIDIC2 meanings `value`, `price`; Unihan `kDefinition=price, value` for Japanese `価`; local context `評価` | Capitalized Hán-Việt `Giá`, normalized display to `Giá (giá; giá trị)`, search text, and value/price related kanji. |
 
 Tagging: replaced the lesson-06 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 07 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_07.json`, especially `健康`, `睡眠`, `栄養`, and `治療`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `健` | KANJIDIC2 meanings `healthy`, `health`, `strength`; Unihan `kVietnamese=kiện`, `kDefinition=strong, robust, healthy` | Added Hán-Việt `Kiện`, display `Kiện (khỏe mạnh; sức khỏe)`, search text, and health/strength related kanji. |
+| `康` | KANJIDIC2 meanings `ease`, `peace`; Unihan `kVietnamese=khang`, `kDefinition=peaceful, quiet; happy, healthy`; local context `健康` | Added Hán-Việt `Khang`, display `Khang (bình an; khỏe mạnh)`, search text, and health/peace related kanji. |
+| `睡` | KANJIDIC2 meanings `drowsy`, `sleep`; Unihan `kDefinition=sleep, doze`; local context `睡眠` | Added Hán-Việt `Thụy`, display `Thụy (ngủ; buồn ngủ)`, search text, and sleep/rest related kanji. |
+| `眠` | KANJIDIC2 meanings `sleep`, `sleepy`; Unihan `kVietnamese=miên`, `kDefinition=close eyes, sleep; hibernate`; local context `睡眠` | Kept Hán-Việt `Miên`; rewrote display to `Miên (ngủ; giấc ngủ)` and added sleep/rest related kanji. |
+| `栄` | KANJIDIC2 meanings `flourish`, `prosperity`, `glory`; Unihan `kDefinition=glory, honor; flourish, prosper`; local context `栄養` | Added Hán-Việt `Vinh`, display `Vinh (phồn vinh; vinh quang; dinh dưỡng)`, search text, and nutrition/growth related kanji. |
+| `養` | KANJIDIC2 meanings `foster`, `bring up`, `nurture`; Unihan `kVietnamese=dưỡng`, `kDefinition=raise, rear, bring up; support`; local context `栄養` | Added Hán-Việt `Dưỡng`, display `Dưỡng (nuôi dưỡng; chăm sóc)`, search text, and nutrition/care related kanji. |
+| `治` | KANJIDIC2 meanings `cure`, `heal`, `rule`; Unihan `kVietnamese=trị`, `kDefinition=govern, regulate, administer`; local context `治療` | Added Hán-Việt `Trị`, display `Trị (chữa trị; cai trị)`, search text, and medicine/treatment related kanji. |
+| `療` | KANJIDIC2 meanings `heal`, `cure`; Unihan `kVietnamese=liệu`, `kDefinition=be healed, cured, recover`; local context `治療` | Added Hán-Việt `Liệu`, display `Liệu (chữa lành; điều trị)`, search text, and medicine/treatment related kanji. |
+
+Tagging: replaced the lesson-07 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

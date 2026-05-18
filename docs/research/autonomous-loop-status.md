@@ -196,3 +196,11 @@
 - Bumped content DB Kanji seed revision to `6` so existing browsers with revision `5` receive the new lesson-06 metadata; regression now starts from `content_meta.kanjiSeedRevision=5` and stale `返`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, and kanji coverage audit reduced N3 incomplete current entries from `156` to `148`.
 - Deployed `9a35ca6a` to Firebase Hosting and verified live with cache disabled: search `返` opened detail showing `Phản (trả lại; quay lại)` plus Hán-Việt `Phản`; console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 07 Completeness Patch
+
+- Source-verified all eight N3 lesson-07 kanji (`健`, `康`, `睡`, `眠`, `栄`, `養`, `治`, `療`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `健`, `康`, `睡`, `栄`, `養`, `治`, and `療`; rewrote learner-facing Vietnamese display/search text for all eight entries; filled all lesson-07 `relatedKanji` lists.
+- Replaced lesson-07 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `7` so existing browsers with revision `6` receive the new lesson-07 metadata; regression now starts from `content_meta.kanjiSeedRevision=6` and stale `健`.
+- Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, and kanji coverage audit reduced N3 incomplete current entries from `148` to `141`.
