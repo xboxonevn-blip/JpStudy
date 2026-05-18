@@ -586,3 +586,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: the deployed Kanji path could still hit an existing DB whose `user_version` was current but whose `kanji` table lacked the physical `meaning_ja` column, so Drift failed before Kanji data reached the UI.
 - Delta: -25 percentage points on confidence that `user_version` alone proves content DB shape after fast-moving seed migrations.
 - Updated belief: beta content DB migrations need self-healing physical-column checks for learner-critical tables, especially before startup seed/read code touches generated Drift columns.
+
+## 2026-05-18 - KANJIDIC2 is not a modern JLPT level map
+
+- Prior belief: KANJIDIC2 plus Unihan would be enough to drive a clean N5-N1 Kanji expansion plan.
+- Actual observation: KANJIDIC2 exposes old JLPT tiers only; it can quantify large N5/N4/N2/N1 gaps, but it has no modern N3 tier and cannot safely split modern N3/N2 on its own.
+- Delta: -30 percentage points on confidence that the expansion source stack is complete.
+- Updated belief: expansion needs two source layers: KANJIDIC2/Unihan for open readings/meanings/Hán-Việt, plus a separate modern JLPT level mapping before generating N3/N2/N1 batches.

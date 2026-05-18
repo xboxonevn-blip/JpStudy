@@ -117,3 +117,10 @@
 - Deployed to Firebase Hosting `jpstudy`.
 - Verified live after deploy: VI/EN/JA across N5/N4/N3/N2/N1 loaded real Kanji grid rows and `Write/Viết/書く` handwriting practice; the 15-combo Playwright matrix had `failed=0` and `consoleErrors=0`.
 - Still pending: old-browser IndexedDB migration cannot be directly proven against a production user DB without owning that browser state; the local regression fixtures cover the missing physical column path that caused the failure class.
+
+## 2026-05-18 Kanji Expansion Audit Baseline
+
+- Added a reproducible KANJIDIC2 old-JLPT coverage audit for QA-B-002. The local KANJIDIC2 XML remains a `.codex` cache and is ignored, not committed.
+- Verified locally: `flutter test test/core/research/kanji_coverage_audit_test.dart test/tool/research/kanji_coverage_audit_report_test.dart` passed. The real-cache CLI run completed against `assets/data/content`.
+- Baseline: current unique Kanji `638`; KANJIDIC2 old-JLPT unique `2230`; missing source kanji N5 `33`, N4 `157`, N2 `654`, N1 `1168`. KANJIDIC2 has no modern N3 tier, so N3 expansion still needs a separate modern JLPT source.
+- Still pending: no generated Kanji were added yet; reachability guards and source-backed modern JLPT level mapping must come before expansion batches.

@@ -111,6 +111,7 @@ tests/
 tmp/
 .codex/sources/*.zip
 .codex/sources/Unihan/
+.codex/sources/kanjidic2/
 
 # Service account / cloud credentials (NEVER commit)
 *-service-account.json
