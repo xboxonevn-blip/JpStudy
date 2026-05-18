@@ -258,4 +258,4 @@
 - Replaced lesson-13 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
 - Bumped content DB Kanji seed revision to `13` so existing browsers with revision `12` receive the new lesson-13 metadata; regression now starts from `content_meta.kanjiSeedRevision=12` and stale `課`.
 - Verified locally: focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `102` to `95`.
-- Live verification is pending deploy for this batch; do not count lesson 13 as live-proven yet.
+- Deployed `cf404253` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `課` returned one result, detail opened with `Khóa (bài học; khóa học; phần bài)` plus Hán-Việt `Khóa`, and console errors/warnings remained `0`.
