@@ -36,6 +36,8 @@ GrammarPracticeScreen buildGrammarPracticeScreen(
   GrammarPracticeBlueprint blueprint = GrammarPracticeBlueprint.quiz;
   GrammarGoalProfile goalProfile = GrammarGoalProfile.balanced;
   List<GrammarQuestionType>? allowedTypes;
+  int? gateGrammarId;
+  int? targetCount;
 
   if (state.extra is List<int>) {
     ids = state.extra as List<int>;
@@ -47,7 +49,12 @@ GrammarPracticeScreen buildGrammarPracticeScreen(
     }
   } else if (state.extra is Map) {
     final map = state.extra as Map;
-    ids = map['ids'];
+    final rawIds = map['ids'];
+    if (rawIds is List<int>) {
+      ids = rawIds;
+    } else if (rawIds is List) {
+      ids = rawIds.whereType<int>().toList(growable: false);
+    }
     mode = map['mode'] ?? GrammarPracticeMode.normal;
     sessionType = map['sessionType'] ?? GrammarSessionType.mastery;
     final rawBlueprint = map['blueprint'];
@@ -62,6 +69,14 @@ GrammarPracticeScreen buildGrammarPracticeScreen(
     if (rawAllowed is List<GrammarQuestionType>) {
       allowedTypes = rawAllowed;
     }
+    final rawGateGrammarId = map['gateGrammarId'];
+    if (rawGateGrammarId is int) {
+      gateGrammarId = rawGateGrammarId;
+    }
+    final rawTargetCount = map['targetCount'];
+    if (rawTargetCount is int) {
+      targetCount = rawTargetCount;
+    }
   }
 
   return GrammarPracticeScreen(
@@ -71,6 +86,8 @@ GrammarPracticeScreen buildGrammarPracticeScreen(
     blueprint: blueprint,
     goalProfile: goalProfile,
     allowedTypes: allowedTypes,
+    gateGrammarId: gateGrammarId,
+    targetCount: targetCount,
   );
 }
 

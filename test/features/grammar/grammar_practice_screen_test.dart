@@ -11,9 +11,10 @@ import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/grammar/services/grammar_question_generator.dart';
+import 'package:jpstudy/features/grammar/widgets/multiple_choice_widget.dart';
 
 void main() {
-  Future<void> seedPoint(
+  Future<int> seedPoint(
     AppDatabase db, {
     required int lessonId,
     required String jlptLevel,
@@ -54,6 +55,8 @@ void main() {
             translationEn: Value(translationEn),
           ),
         );
+
+    return grammarId;
   }
 
   testWidgets(
@@ -172,4 +175,155 @@ void main() {
       expect(find.text('N5 Gamma'), findsNothing);
     },
   );
+
+  testWidgets('practice gate runs a focused five-question check', (
+    tester,
+  ) async {
+    final db = AppDatabase(executor: NativeDatabase.memory());
+    addTearDown(() async {
+      await db.close();
+    });
+
+    final targetId = await seedPoint(
+      db,
+      lessonId: 1,
+      jlptLevel: 'N5',
+      grammarPoint: 'てもいい',
+      titleEn: 'May do',
+      meaningEn: 'permission',
+      sentence: 'ここで写真を撮ってもいいです。',
+      translationEn: 'You may take photos here.',
+    );
+    await seedPoint(
+      db,
+      lessonId: 1,
+      jlptLevel: 'N5',
+      grammarPoint: 'てはいけない',
+      titleEn: 'Must not',
+      meaningEn: 'prohibition',
+      sentence: 'ここで写真を撮ってはいけません。',
+      translationEn: 'You must not take photos here.',
+    );
+    await seedPoint(
+      db,
+      lessonId: 1,
+      jlptLevel: 'N5',
+      grammarPoint: 'なくてもいい',
+      titleEn: 'Need not',
+      meaningEn: 'not necessary',
+      sentence: '今日は来なくてもいいです。',
+      translationEn: 'You do not need to come today.',
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          databaseProvider.overrideWithValue(db),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+        ],
+        child: MaterialApp(
+          home: GrammarPracticeScreen(
+            initialIds: [targetId],
+            gateGrammarId: targetId,
+            targetCount: 5,
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Practice check'), findsWidgets);
+    expect(find.text('Question 1 of 5'), findsOneWidget);
+  });
+
+  testWidgets('practice gate pass marks the grammar point understood', (
+    tester,
+  ) async {
+    final db = AppDatabase(executor: NativeDatabase.memory());
+    addTearDown(() async {
+      await db.close();
+    });
+
+    final targetId = await seedPoint(
+      db,
+      lessonId: 1,
+      jlptLevel: 'N5',
+      grammarPoint: 'てもいい',
+      titleEn: 'May do',
+      meaningEn: 'permission',
+      sentence: 'ここで写真を撮ってもいいです。',
+      translationEn: 'You may take photos here.',
+    );
+    await seedPoint(
+      db,
+      lessonId: 1,
+      jlptLevel: 'N5',
+      grammarPoint: 'てはいけない',
+      titleEn: 'Must not',
+      meaningEn: 'prohibition',
+      sentence: 'ここで写真を撮ってはいけません。',
+      translationEn: 'You must not take photos here.',
+    );
+    await seedPoint(
+      db,
+      lessonId: 1,
+      jlptLevel: 'N5',
+      grammarPoint: 'なくてもいい',
+      titleEn: 'Need not',
+      meaningEn: 'not necessary',
+      sentence: '今日は来なくてもいいです。',
+      translationEn: 'You do not need to come today.',
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          databaseProvider.overrideWithValue(db),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+        ],
+        child: MaterialApp(
+          home: GrammarPracticeScreen(
+            initialIds: [targetId],
+            gateGrammarId: targetId,
+            targetCount: 5,
+            allowedTypes: const [
+              GrammarQuestionType.multipleChoice,
+              GrammarQuestionType.reverseMultipleChoice,
+              GrammarQuestionType.contextChoice,
+              GrammarQuestionType.errorCorrection,
+              GrammarQuestionType.transformation,
+              GrammarQuestionType.pairContrast,
+              GrammarQuestionType.errorReason,
+            ],
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    for (var i = 0; i < 5; i++) {
+      final widget = tester.widget<MultipleChoiceWidget>(
+        find.byType(MultipleChoiceWidget),
+      );
+      await tester.tap(find.text(widget.correctAnswer).last);
+      await tester.pump();
+      await tester.tap(find.byKey(const ValueKey('grammar_mc_confirm')));
+      await tester.pump(const Duration(milliseconds: 950));
+    }
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Practice check passed'), findsOneWidget);
+    final point = await (db.select(
+      db.grammarPoints,
+    )..where((tbl) => tbl.id.equals(targetId))).getSingle();
+    expect(point.isLearned, isTrue);
+  });
 }

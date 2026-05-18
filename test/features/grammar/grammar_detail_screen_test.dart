@@ -1,4 +1,3 @@
-import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
@@ -57,21 +56,6 @@ typedef _GrammarDetailRecord = ({
 });
 
 // ---------------------------------------------------------------------------
-// Fake repository — no-ops markAsLearned so no DB write is attempted
-// ---------------------------------------------------------------------------
-
-class _FakeGrammarRepository extends GrammarRepository {
-  _FakeGrammarRepository()
-    : super(AppDatabase(executor: NativeDatabase.memory()));
-
-  @override
-  Future<void> markAsLearned(int grammarId) async {}
-}
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
 Widget _buildScreen({
   AppLanguage language = AppLanguage.en,
   _GrammarDetailRecord? detail,
@@ -146,7 +130,7 @@ void main() {
     expect(find.text('食べてもいいですか？'), findsWidgets);
   });
 
-  testWidgets('"Mark done" button appears when point is not yet learned', (
+  testWidgets('unlearned point shows practice gate instead of manual mark', (
     tester,
   ) async {
     await tester.pumpWidget(
@@ -154,10 +138,12 @@ void main() {
     );
     await _pump(tester);
 
-    expect(find.text('Mark done'), findsOneWidget);
+    expect(find.text('Mark done'), findsNothing);
+    expect(find.text('In progress'), findsOneWidget);
+    expect(find.text('Practice check'), findsOneWidget);
   });
 
-  testWidgets('"Mark done" button is absent when point is already learned', (
+  testWidgets('learned point shows understood badge and keeps practice entry', (
     tester,
   ) async {
     await tester.pumpWidget(
@@ -166,22 +152,8 @@ void main() {
     await _pump(tester);
 
     expect(find.text('Mark done'), findsNothing);
-  });
-
-  testWidgets('"Mark done" tap shows confirmation snackbar', (tester) async {
-    await tester.pumpWidget(
-      _buildScreen(
-        detail: (point: _stubPoint, examples: const []),
-        repo: _FakeGrammarRepository(),
-      ),
-    );
-    await _pump(tester);
-
-    await tester.tap(find.text('Mark done'));
-    await _pump(tester);
-
-    expect(find.byType(SnackBar), findsOneWidget);
-    expect(find.text('Added to your review list.'), findsOneWidget);
+    expect(find.text('Understood ✓'), findsOneWidget);
+    expect(find.text('Practice check'), findsOneWidget);
   });
 
   testWidgets('VI locale shows Vietnamese app bar title', (tester) async {

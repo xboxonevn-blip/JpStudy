@@ -375,6 +375,8 @@ class GrammarPracticeScreen extends ConsumerStatefulWidget {
     this.blueprint = GrammarPracticeBlueprint.quiz,
     this.goalProfile = GrammarGoalProfile.balanced,
     this.allowedTypes,
+    this.gateGrammarId,
+    this.targetCount,
   });
 
   final List<int>? initialIds;
@@ -383,6 +385,8 @@ class GrammarPracticeScreen extends ConsumerStatefulWidget {
   final GrammarPracticeBlueprint blueprint;
   final GrammarGoalProfile goalProfile;
   final List<GrammarQuestionType>? allowedTypes;
+  final int? gateGrammarId;
+  final int? targetCount;
 
   @override
   ConsumerState<GrammarPracticeScreen> createState() =>
@@ -587,6 +591,10 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   }
 
   int _sessionQuestionCount(GrammarSessionType sessionType) {
+    final gateTarget = widget.targetCount;
+    if (widget.gateGrammarId != null && gateTarget != null && gateTarget > 0) {
+      return gateTarget;
+    }
     switch (sessionType) {
       case GrammarSessionType.quick:
         return 10;
@@ -608,6 +616,10 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   }
 
   int _maxQuestionsPerPointForSession(List<GeneratedQuestion> generated) {
+    final gateTarget = widget.targetCount;
+    if (widget.gateGrammarId != null && gateTarget != null && gateTarget > 0) {
+      return gateTarget;
+    }
     final uniquePointCount = generated.map((q) => q.point.id).toSet().length;
     if (uniquePointCount <= 0) return 1;
 
@@ -925,6 +937,18 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     final total = _questions.length;
     final wrong = total - _score;
     final percent = total == 0 ? 0 : ((_score / total) * 100).round();
+    final gatePassed =
+        widget.gateGrammarId != null && !timedOut && total > 0 && _score >= 4;
+
+    if (gatePassed) {
+      ref
+          .read(grammarRepositoryProvider)
+          .markAsLearned(widget.gateGrammarId!)
+          .then((_) {
+            ref.invalidate(grammar_providers.grammarPointsProvider);
+            ref.invalidate(grammar_providers.grammarDueCountProvider);
+          });
+    }
 
     showDialog<void>(
       context: context,
@@ -951,6 +975,28 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                   ),
                 ),
               Text(language.practiceSummaryLabel(_score, total)),
+              if (widget.gateGrammarId != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                  gatePassed
+                      ? _tr(
+                          language,
+                          en: 'Practice check passed. Status updated to Understood.',
+                          vi: 'Bạn đã vượt qua bài kiểm tra. Trạng thái đã chuyển thành Đã hiểu.',
+                          ja: '理解チェックに合格しました。ステータスを理解済みにしました。',
+                        )
+                      : _tr(
+                          language,
+                          en: 'Score 4/5 or higher to mark this point Understood.',
+                          vi: 'Cần đạt từ 4/5 để đánh dấu điểm này là Đã hiểu.',
+                          ja: '理解済みにするには5問中4問以上が必要です。',
+                        ),
+                  style: TextStyle(
+                    color: gatePassed ? palette.success : palette.warning,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
               const SizedBox(height: 8),
               Text(
                 _tr(
@@ -1021,6 +1067,14 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   }
 
   String _sessionTitle(AppLanguage language) {
+    if (widget.gateGrammarId != null) {
+      return _tr(
+        language,
+        en: 'Practice check',
+        vi: 'Kiểm tra hiểu bài',
+        ja: '理解チェック',
+      );
+    }
     if (_isWeakDrill) {
       return _tr(
         language,

@@ -385,3 +385,10 @@
 - Bumped content DB Kanji seed revision to `26` and added a lesson-25 sentinel for `際`.
 - Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `8` to `0`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
 - Built and deployed `ba226c46` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `際` opened the lesson-25 detail showing `Tế (dịp; ranh giới; khi)` plus Hán-Việt `Tế`, with console errors/warnings `0`.
+
+## 2026-05-18 Kanji P0 Recheck + Grammar Practice Gate Slice
+
+- Rechecked the owner-reported Kanji data-load regression before touching new work. Current repo already contains QA-A-013/014/015 repairs; focused migration guards passed for fresh DB, pre-v33 DB, missing `meaning_ja`, stale revision, partial current DB, full-count stale sentinel, duplicate sentinel, and runtime repair.
+- Live proof on `https://jpstudy.web.app/#/kanji` with existing Playwright IndexedDB and VI/N3: grid loaded `203` kanji, `/#/kanji/practice` -> `Viết` opened `Viết tay: N3 — Học kanji mới`, and console warnings/errors after navigation were `0`.
+- QA-A-008 first implementation slice: grammar detail no longer exposes manual `Mark done` / `Đánh dấu đã học`; it shows `In progress` or `Understood ✓`, opens a shared `/grammar-practice` 5-question gate, and a >=4/5 pass auto-marks the grammar point learned. Existing per-answer SRS and mistake logging remain in the shared practice screen.
+- Verified locally: focused grammar tests, `flutter analyze lib test`, `python tooling\audit_ui_string_literals.py --check`, taxonomy guard, and full `flutter test` (`2335`) passed. Still unverified: live QA-A-008 after deploy; authored/shared bank manifest guard; grammar SRS/exam consumer audit.

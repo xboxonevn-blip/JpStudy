@@ -713,7 +713,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('V-て + shimau'), findsAtLeastNWidgets(1));
-    expect(find.text('Mark done'), findsOneWidget);
+    expect(find.text('Mark done'), findsNothing);
+    expect(find.text('Practice check'), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsNothing);
   });
 

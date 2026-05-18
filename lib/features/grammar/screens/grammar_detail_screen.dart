@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -9,6 +10,7 @@ import '../../../data/db/app_database.dart';
 import '../../../data/repositories/grammar_repository.dart';
 import '../../common/widgets/compact_ui.dart';
 import '../widgets/grammar_example_widget.dart';
+import 'grammar_practice_screen.dart';
 
 class GrammarDetailScreen extends ConsumerWidget {
   const GrammarDetailScreen({super.key, required this.grammarId});
@@ -45,24 +47,27 @@ class GrammarDetailScreen extends ConsumerWidget {
                   title: headline,
                   subtitle: meaning,
                   status: AppStatusChip(
-                    label: point.jlptLevel,
-                    tone: AppStatusTone.primary,
+                    label: _statusLabel(language, point.isLearned),
+                    tone: point.isLearned
+                        ? AppStatusTone.success
+                        : AppStatusTone.warning,
                   ),
-                  primaryLabel: point.isLearned
-                      ? null
-                      : _markLearnedLabel(language),
-                  onPrimaryTap: point.isLearned
-                      ? null
-                      : () async {
-                          await ref
-                              .read(grammarRepositoryProvider)
-                              .markAsLearned(grammarId);
-                          ref.invalidate(grammarDetailProvider(grammarId));
-                          if (!context.mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(_markedToast(language))),
-                          );
-                        },
+                  primaryLabel: _practiceCheckLabel(language),
+                  onPrimaryTap: () => context.openGrammarPractice(
+                    extra: {
+                      'ids': [grammarId],
+                      'sessionType': GrammarSessionType.quick,
+                      'blueprint': GrammarPracticeBlueprint.quiz,
+                      'goalProfile': GrammarGoalProfile.balanced,
+                      'gateGrammarId': grammarId,
+                      'targetCount': 5,
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10),
+                AppStatusChip(
+                  label: point.jlptLevel,
+                  tone: AppStatusTone.primary,
                 ),
                 const SizedBox(height: 20),
                 _buildSectionTitle(context, language.grammarConnectionLabel),
@@ -207,19 +212,26 @@ class GrammarDetailScreen extends ConsumerWidget {
     };
   }
 
-  String _markLearnedLabel(AppLanguage language) {
+  String _practiceCheckLabel(AppLanguage language) {
     return switch (language) {
-      AppLanguage.en => 'Mark done',
-      AppLanguage.vi => 'Đánh dấu đã học',
-      AppLanguage.ja => '学習済みにする',
+      AppLanguage.en => 'Practice check',
+      AppLanguage.vi => 'Luyện tập để hiểu',
+      AppLanguage.ja => '理解チェック',
     };
   }
 
-  String _markedToast(AppLanguage language) {
+  String _statusLabel(AppLanguage language, bool isLearned) {
+    if (isLearned) {
+      return switch (language) {
+        AppLanguage.en => 'Understood ✓',
+        AppLanguage.vi => 'Đã hiểu ✓',
+        AppLanguage.ja => '理解済み ✓',
+      };
+    }
     return switch (language) {
-      AppLanguage.en => 'Added to your review list.',
-      AppLanguage.vi => 'Đã thêm vào danh sách ôn tập.',
-      AppLanguage.ja => '復習リストに追加しました。',
+      AppLanguage.en => 'In progress',
+      AppLanguage.vi => 'Đang học',
+      AppLanguage.ja => '学習中',
     };
   }
 }
