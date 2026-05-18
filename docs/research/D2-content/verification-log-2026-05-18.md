@@ -436,3 +436,24 @@ Sources consulted:
 Tagging: replaced the lesson-20 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
 
 Live proof after deploy: VI/N3 Kanji search for `感` opened the detail modal with `Cảm (cảm xúc; cảm giác; cảm nhận)` plus Hán-Việt `Cảm`.
+
+## Kanji N3 Lesson 21 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme in `assets/data/content/kanji/n3/lesson_21.json`, which labels the batch as economy/finance; the current `ShinKanzen` vocab lesson-21 source ids are not economy terms, so they were not used as semantic authority for this kanji batch.
+
+| Item | Sources | Change |
+|---|---|---|
+| `経` | KANJIDIC2 `Kinh`, meanings `sutra`, `longitude`, `pass thru`; Unihan `kDefinition=classic works; pass through`; local theme economy/finance via `経済` | Capitalized Hán-Việt `Kinh`, display `Kinh (trải qua; kinh sách; kinh tuyến)`, normalized search text, and linked economy/experience related kanji. |
+| `済` | KANJIDIC2 `Tế/Tề`, meanings `settle`, `relieve`, `finish`; Unihan `kDefinition=help, aid, relieve`; local theme `経済` | Corrected learner-facing Hán-Việt from `tể` to `Tế`, display `Tế (xong; giải quyết; cứu giúp)`, search text, and linked completion/relief related kanji. |
+| `利` | KANJIDIC2 `Lợi`, meanings `profit`, `advantage`, `benefit`; Unihan `kVietnamese=lợi`, `kDefinition=gains, advantage, profit, merit` | Expanded display to `Lợi (lợi ích; thuận lợi; lợi nhuận)`, normalized search text, and linked profit/benefit related kanji. |
+| `益` | KANJIDIC2 `Ích`, meanings `benefit`, `gain`, `profit`; Unihan `kVietnamese=ích`, `kDefinition=profit, benefit; advantage` | Added Hán-Việt `Ích`, display `Ích (lợi ích; tăng thêm; có ích)`, search text, and benefit/gain related kanji. |
+| `投` | KANJIDIC2 `Đầu`, meanings `throw`, `invest in`, `put in`; Unihan `kVietnamese=đầu`, `kDefinition=throw, cast, fling` | Rewrote display to `Đầu (ném; đầu tư; bỏ vào)`, normalized search text, and linked investment/put-in related kanji. |
+| `収` | KANJIDIC2 `Thu/Thâu`, meanings `income`, `obtain`, `store`; Unihan `kDefinition=gather together, collect; harvest` | Added learner-facing Hán-Việt `Thu`, display `Thu (thu vào; thu nhập; cất giữ)`, search text, and income/collection related kanji. |
+| `税` | KANJIDIC2 `Thuế`, meanings `tax`, `duty`; Unihan `kVietnamese=thuế`, `kDefinition=taxes` | Added Hán-Việt `Thuế`, display `Thuế (thuế; thuế vụ)`, search text, and tax/finance related kanji. |
+| `財` | KANJIDIC2 `Tài`, meanings `property`, `money`, `wealth`; Unihan `kVietnamese=tài`, `kDefinition=wealth, valuables, riches` | Added Hán-Việt `Tài`, display `Tài (tài sản; của cải; tiền bạc)`, search text, and asset/finance related kanji. |
+
+Tagging: replaced the lesson-21 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

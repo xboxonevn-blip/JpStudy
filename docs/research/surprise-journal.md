@@ -628,3 +628,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: when the first repository read called public ensure on an unopened content DB, Drift opened the DB, `beforeOpen` called the same public ensure, and both sides waited on the same pending future.
 - Delta: -25 percentage points on confidence that public repair helpers are safe inside DB open hooks.
 - Updated belief: Drift `beforeOpen` should use private, non-reentrant repair paths; public runtime ensures should return repair status and be called once per repository lifecycle, with cache invalidation tied to actual repair.
+
+## 2026-05-18 - N3 Kanji lesson source ids can point at unrelated vocab
+
+- Prior belief: N3 Kanji lesson `examples.sourceVocabId` values were weak but usually pointed at semantically related vocab context.
+- Actual observation: lesson 21 is themed economy/finance, but its current `ShinKanzen` vocab source ids point at unrelated N3 nouns such as `すり`, `制限`, and `成功`; they cannot be used as semantic authority for `経済`-style kanji metadata.
+- Delta: -20 percentage points on confidence that generated kanji-example links are trustworthy.
+- Updated belief: source verification should treat KANJIDIC2/Unihan plus the explicit lesson theme as authority until kanji-example links are rebuilt from real reachable vocab.
