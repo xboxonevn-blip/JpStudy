@@ -195,3 +195,4 @@
 - Replaced lesson-06 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
 - Bumped content DB Kanji seed revision to `6` so existing browsers with revision `5` receive the new lesson-06 metadata; regression now starts from `content_meta.kanjiSeedRevision=5` and stale `返`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, and kanji coverage audit reduced N3 incomplete current entries from `156` to `148`.
+- Deployed `9a35ca6a` to Firebase Hosting and verified live with cache disabled: search `返` opened detail showing `Phản (trả lại; quay lại)` plus Hán-Việt `Phản`; console errors/warnings remained `0`.
