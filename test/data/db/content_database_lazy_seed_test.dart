@@ -215,7 +215,7 @@ void main() {
 
     expect(row.meaning, 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)');
     expect(row.decompositionJson, contains('"hanViet":"Kỹ"'));
-    expect(revisionRow.data['value'], '17');
+    expect(revisionRow.data['value'], '18');
   });
 
   test(
@@ -243,7 +243,7 @@ void main() {
         kanjiOnyomi: 'サク',
         kanjiKunyomi: 'つく.る',
         kanjiDecompositionJson: '{}',
-        contentMetaRevision: 17,
+        contentMetaRevision: 18,
       );
 
       final db = ContentDatabase(executor: NativeDatabase(file));
@@ -294,7 +294,7 @@ void main() {
         kanjiOnyomi: 'ギ',
         kanjiKunyomi: 'わざ',
         kanjiDecompositionJson: '{}',
-        contentMetaRevision: 17,
+        contentMetaRevision: 18,
       );
       await _padKanjiRowsToCount(file, 'N3', _authoredKanjiCount('N3'));
 
@@ -306,6 +306,68 @@ void main() {
                 ..where(
                   (tbl) =>
                       tbl.character.equals('技') & tbl.jlptLevel.equals('N3'),
+                )
+                ..limit(1))
+              .getSingle();
+
+      expect(row.meaning, 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)');
+      expect(row.decompositionJson, contains('"hanViet":"Kỹ"'));
+    },
+  );
+
+  test(
+    'kanji sentinel checks the edited lesson row when duplicate characters exist',
+    () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+      final tempDir = await Directory.systemTemp.createTemp(
+        'jpstudy_content_db_duplicate_stale_kanji_',
+      );
+      addTearDown(() async {
+        if (await tempDir.exists()) {
+          await tempDir.delete(recursive: true);
+        }
+      });
+      final file = File('${tempDir.path}/content.db');
+      await _createLegacyKanjiDb(
+        file,
+        userVersion: 35,
+        kanjiLessonId: 12,
+        kanjiCharacter: '技',
+        kanjiLevel: 'N3',
+        kanjiMeaning: 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)',
+        kanjiMeaningEn: 'skill, art',
+        kanjiOnyomi: 'ギ',
+        kanjiKunyomi: 'わざ',
+        kanjiDecompositionJson: '{"hanViet":"Kỹ"}',
+        contentMetaRevision: 18,
+      );
+      final sqlite = sqlite3.open(file.path);
+      try {
+        sqlite.execute('''
+INSERT INTO kanji (
+  lesson_id, character, stroke_count, onyomi, kunyomi, meaning, meaning_en,
+  mnemonic_vi, mnemonic_en, decomposition_json, examples_json, jlpt_level
+) VALUES (
+  17, '技', 7, 'ギ', 'わざ', 'kỹ', 'skill, art', 'Ghi nhớ', 'Remember',
+  '{}', '[]', 'N3'
+);
+''');
+      } finally {
+        sqlite.close();
+      }
+      await _padKanjiRowsToCount(file, 'N3', _authoredKanjiCount('N3'));
+
+      final db = ContentDatabase(executor: NativeDatabase(file));
+      addTearDown(db.close);
+
+      final row =
+          await (db.select(db.kanji)
+                ..where(
+                  (tbl) =>
+                      tbl.character.equals('技') &
+                      tbl.jlptLevel.equals('N3') &
+                      tbl.lessonId.equals(17),
                 )
                 ..limit(1))
               .getSingle();

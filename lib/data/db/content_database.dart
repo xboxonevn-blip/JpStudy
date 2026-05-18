@@ -13,11 +13,12 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
-const _kanjiSeedRevision = 17;
+const _kanjiSeedRevision = 18;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
   _KanjiSeedSentinel(
     level: 'N3',
+    lessonId: 17,
     character: '技',
     meaning: 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)',
     decompositionContains: '"hanViet":"Kỹ"',
@@ -511,6 +512,7 @@ class ContentDatabase extends _$ContentDatabase {
                 ..where(
                   (tbl) =>
                       tbl.jlptLevel.equals(sentinel.level) &
+                      tbl.lessonId.equals(sentinel.lessonId) &
                       tbl.character.equals(sentinel.character),
                 )
                 ..limit(1))
@@ -1406,12 +1408,14 @@ class _ContentSeedSpec {
 class _KanjiSeedSentinel {
   const _KanjiSeedSentinel({
     required this.level,
+    required this.lessonId,
     required this.character,
     required this.meaning,
     required this.decompositionContains,
   });
 
   final String level;
+  final int lessonId;
   final String character;
   final String meaning;
   final String decompositionContains;
