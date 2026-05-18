@@ -593,3 +593,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: KANJIDIC2 exposes old JLPT tiers only; it can quantify large N5/N4/N2/N1 gaps, but it has no modern N3 tier and cannot safely split modern N3/N2 on its own.
 - Delta: -30 percentage points on confidence that the expansion source stack is complete.
 - Updated belief: expansion needs two source layers: KANJIDIC2/Unihan for open readings/meanings/Hán-Việt, plus a separate modern JLPT level mapping before generating N3/N2/N1 batches.
+
+## 2026-05-18 - Some N5 Hán-Việt fields held native Vietnamese meanings
+
+- Prior belief: missing `meaningVi` on a few N5 kanji was likely just a display-field omission.
+- Actual observation: `二` and `三` had `hanViet` values `Hai` and `Ba`, which are native Vietnamese meanings, not Hán-Việt readings; KANJIDIC2/Unihan confirm `Nhị` and `Tam`.
+- Delta: -15 percentage points on confidence that low-level kanji metadata is semantically clean when visible display text looks acceptable.
+- Updated belief: Kanji completeness checks must validate field role correctness, not only non-empty strings; `hanViet` is not interchangeable with Vietnamese meaning.

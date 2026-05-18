@@ -136,3 +136,11 @@
 - Verified source boundary: official JLPT does not publish modern vocabulary/kanji/grammar lists; KANJIDIC2 and Unihan are redistribution-safe fact sources, but KANJIDIC2 only has old JLPT tiers.
 - Added `docs/research/D2-content/kanji-expansion-source-policy-2026-05-18.md`.
 - Decision: do not bulk-copy third-party modern JLPT kanji lists with unclear licenses. N5/N4 can start from KANJIDIC2 old tiers; N3/N2/N1 need a redistribution-safe modern mapping or owner-approved curriculum mapping before generation.
+
+## 2026-05-18 N5 Kanji Completeness Patch
+
+- Source-verified four N5 kanji with missing `meaningVi`: `二`, `三`, `漢`, `雪`.
+- Corrected `二` Hán-Việt from native meaning `Hai` to `Nhị`; corrected `三` from `Ba` to `Tam`; added natural Vietnamese meanings/search text for all four.
+- Changed these edited entries to `vi-source-verified` and updated taxonomy/content-status tooling to treat that tag as an approval signal. No `vi-human-approved` tag was added.
+- Logged sources in `docs/research/D2-content/verification-log-2026-05-18.md`.
+- Verified locally: kanji coverage audit now reports N5 incomplete current entries `0`; content status remains machine/open-review `0`; focused taxonomy/reachability/audit tests passed.

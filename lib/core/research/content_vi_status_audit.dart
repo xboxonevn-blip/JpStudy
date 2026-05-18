@@ -400,6 +400,7 @@ _ContentViItemStatus _statusFor(Map<String, Object?> item) {
   final tags = _tagsFrom(item).toSet();
   final approved =
       tags.contains('vi-human-approved') ||
+      tags.contains('vi-source-verified') ||
       tags.contains('vi-editorial-codex-pass') ||
       tags.contains('vi-editorial-approved') ||
       tags.contains('human-reviewed') ||

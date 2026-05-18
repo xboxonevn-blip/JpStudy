@@ -28,27 +28,30 @@ void main() {
     expect(conflicts, isEmpty, reason: conflicts.join('\n'));
   });
 
-  test('human approval tag is absent from files that still carry review debt', () {
-    final files =
-        Directory('assets/data/content')
-            .listSync(recursive: true)
-            .whereType<File>()
-            .where((file) => file.path.endsWith('.json'))
-            .toList()
-          ..sort((a, b) => a.path.compareTo(b.path));
+  test(
+    'human approval tag is absent from files that still carry review debt',
+    () {
+      final files =
+          Directory('assets/data/content')
+              .listSync(recursive: true)
+              .whereType<File>()
+              .where((file) => file.path.endsWith('.json'))
+              .toList()
+            ..sort((a, b) => a.path.compareTo(b.path));
 
-    final conflicts = <String>[];
+      final conflicts = <String>[];
 
-    for (final file in files) {
-      final text = file.readAsStringSync();
-      if (text.contains('vi-human-approved') &&
-          _reviewDebtFileFragments.any(text.contains)) {
-        conflicts.add(file.path);
+      for (final file in files) {
+        final text = file.readAsStringSync();
+        if (text.contains('vi-human-approved') &&
+            _reviewDebtFileFragments.any(text.contains)) {
+          conflicts.add(file.path);
+        }
       }
-    }
 
-    expect(conflicts, isEmpty, reason: conflicts.join('\n'));
-  });
+      expect(conflicts, isEmpty, reason: conflicts.join('\n'));
+    },
+  );
 }
 
 void _collectReviewConflicts(
@@ -157,6 +160,7 @@ const _approvalTags = {
   'vi-editorial-approved',
   'vi-editorial-codex-pass',
   'vi-human-approved',
+  'vi-source-verified',
 };
 
 const _reviewDebtTags = {
