@@ -14,8 +14,8 @@
       "strokeCount": 10,
       "labels": {
         "hanViet": "Lưu",
-        "meaningVi": "lưu, ở lại",
-        "meaningViDisplay": "Lưu (lưu, ở lại)",
+        "meaningVi": "ở lại; lưu giữ",
+        "meaningViDisplay": "Lưu (ở lại; lưu giữ)",
         "meaningEn": "detain, fasten"
       },
       "readings": {
@@ -39,11 +39,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "学",
+          "流",
+          "住",
+          "止"
+        ]
       },
       "search": {
         "hanVietNoAccent": "luu",
-        "meaningViNoAccent": "luu, o lai",
+        "meaningViNoAccent": "o lai; luu giu",
         "meaningEnNoAccent": "detain, fasten"
       },
       "examples": [
@@ -57,10 +62,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Lưu (lưu, ở lại)",
+        "meaning": "Lưu (ở lại; lưu giữ)",
         "onyomi": "リュウ, ル",
         "kunyomi": "と.める, と.まる, とど.める, とど.まる"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -75,8 +83,8 @@
       "strokeCount": 8,
       "labels": {
         "hanViet": "Học",
-        "meaningVi": "học",
-        "meaningViDisplay": "Học (học)",
+        "meaningVi": "học; việc học",
+        "meaningViDisplay": "Học (học; việc học)",
         "meaningEn": "study, learning"
       },
       "readings": {
@@ -96,11 +104,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "留",
+          "文",
+          "校",
+          "生"
+        ]
       },
       "search": {
         "hanVietNoAccent": "hoc",
-        "meaningViNoAccent": "hoc",
+        "meaningViNoAccent": "hoc; viec hoc",
         "meaningEnNoAccent": "study, learning"
       },
       "examples": [
@@ -122,10 +135,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Học (học)",
+        "meaning": "Học (học; việc học)",
         "onyomi": "ガク",
         "kunyomi": "まな.ぶ"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -140,8 +156,8 @@
       "strokeCount": 4,
       "labels": {
         "hanViet": "Văn",
-        "meaningVi": "văn",
-        "meaningViDisplay": "Văn (văn)",
+        "meaningVi": "văn hóa; chữ viết; văn chương",
+        "meaningViDisplay": "Văn (văn hóa; chữ viết; văn chương)",
         "meaningEn": "sentence, literature"
       },
       "readings": {
@@ -163,11 +179,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "化",
+          "学",
+          "字",
+          "章"
+        ]
       },
       "search": {
         "hanVietNoAccent": "van",
-        "meaningViNoAccent": "van",
+        "meaningViNoAccent": "van hoa; chu viet; van chuong",
         "meaningEnNoAccent": "sentence, literature"
       },
       "examples": [
@@ -189,10 +210,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Văn (văn)",
+        "meaning": "Văn (văn hóa; chữ viết; văn chương)",
         "onyomi": "ブン, モン",
         "kunyomi": "ふみ, あや"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -206,9 +230,9 @@
       "character": "化",
       "strokeCount": 4,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "hóa, biến đổi",
-        "meaningViDisplay": "hóa, biến đổi",
+        "hanViet": "Hóa",
+        "meaningVi": "biến đổi; -hóa",
+        "meaningViDisplay": "Hóa (biến đổi; -hóa)",
         "meaningEn": "change, take the form of"
       },
       "readings": {
@@ -228,15 +252,20 @@
         "en": "Core kanji for QUARTET 4: Studying language and culture through abroad study."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Hóa",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "文",
+          "変",
+          "代",
+          "花"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "hoa, bien doi",
+        "hanVietNoAccent": "hoa",
+        "meaningViNoAccent": "bien doi; -hoa",
         "meaningEnNoAccent": "change, take the form of"
       },
       "examples": [
@@ -258,10 +287,13 @@
         }
       ],
       "legacy": {
-        "meaning": "hóa, biến đổi",
+        "meaning": "Hóa (biến đổi; -hóa)",
         "onyomi": "カ, ケ",
         "kunyomi": "ば.ける, ば.かす, ふ.ける, け.する"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -275,9 +307,9 @@
       "character": "言",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "ngôn, lời nói",
-        "meaningViDisplay": "ngôn, lời nói",
+        "hanViet": "Ngôn",
+        "meaningVi": "lời nói; nói",
+        "meaningViDisplay": "Ngôn (lời nói; nói)",
         "meaningEn": "say, word"
       },
       "readings": {
@@ -295,15 +327,20 @@
         "en": "Core kanji for QUARTET 4: Studying language and culture through abroad study."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Ngôn",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "語",
+          "話",
+          "文",
+          "口"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ngon, loi noi",
+        "hanVietNoAccent": "ngon",
+        "meaningViNoAccent": "loi noi; noi",
         "meaningEnNoAccent": "say, word"
       },
       "examples": [
@@ -317,10 +354,13 @@
         }
       ],
       "legacy": {
-        "meaning": "ngôn, lời nói",
+        "meaning": "Ngôn (lời nói; nói)",
         "onyomi": "ゲン, ゴン",
         "kunyomi": "い.う, こと"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -334,9 +374,9 @@
       "character": "語",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "ngữ, ngôn ngữ",
-        "meaningViDisplay": "ngữ, ngôn ngữ",
+        "hanViet": "Ngữ",
+        "meaningVi": "ngôn ngữ; từ ngữ; lời nói",
+        "meaningViDisplay": "Ngữ (ngôn ngữ; từ ngữ; lời nói)",
         "meaningEn": "word, speech"
       },
       "readings": {
@@ -353,15 +393,20 @@
         "en": "Core kanji for QUARTET 4: Studying language and culture through abroad study."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Ngữ",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "言",
+          "話",
+          "文",
+          "学"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ngu, ngon ngu",
+        "hanVietNoAccent": "ngu",
+        "meaningViNoAccent": "ngon ngu; tu ngu; loi noi",
         "meaningEnNoAccent": "word, speech"
       },
       "examples": [
@@ -375,10 +420,13 @@
         }
       ],
       "legacy": {
-        "meaning": "ngữ, ngôn ngữ",
+        "meaning": "Ngữ (ngôn ngữ; từ ngữ; lời nói)",
         "onyomi": "ゴ",
         "kunyomi": "かた.る, かた.らう"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -392,9 +440,9 @@
       "character": "交",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "giao",
-        "meaningViDisplay": "giao",
+        "hanViet": "Giao",
+        "meaningVi": "giao lưu; trao đổi; qua lại",
+        "meaningViDisplay": "Giao (giao lưu; trao đổi; qua lại)",
         "meaningEn": "mingle, mixing"
       },
       "readings": {
@@ -413,15 +461,20 @@
         "en": "Core kanji for QUARTET 4: Studying language and culture through abroad study."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Giao",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "流",
+          "通",
+          "会",
+          "換"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "giao",
+        "hanVietNoAccent": "giao",
+        "meaningViNoAccent": "giao luu; trao doi; qua lai",
         "meaningEnNoAccent": "mingle, mixing"
       },
       "examples": [
@@ -435,10 +488,13 @@
         }
       ],
       "legacy": {
-        "meaning": "giao",
+        "meaning": "Giao (giao lưu; trao đổi; qua lại)",
         "onyomi": "コウ",
         "kunyomi": "まじ.わる, まじ.える, ま.じる, まじ.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -452,9 +508,9 @@
       "character": "流",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "lưu, dòng chảy",
-        "meaningViDisplay": "lưu, dòng chảy",
+        "hanViet": "Lưu",
+        "meaningVi": "dòng chảy; lưu thông",
+        "meaningViDisplay": "Lưu (dòng chảy; lưu thông)",
         "meaningEn": "current, a sink"
       },
       "readings": {
@@ -474,15 +530,20 @@
         "en": "Core kanji for QUARTET 4: Studying language and culture through abroad study."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Lưu",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "交",
+          "水",
+          "留",
+          "通"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "luu, dong chay",
+        "hanVietNoAccent": "luu",
+        "meaningViNoAccent": "dong chay; luu thong",
         "meaningEnNoAccent": "current, a sink"
       },
       "examples": [
@@ -496,10 +557,13 @@
         }
       ],
       "legacy": {
-        "meaning": "lưu, dòng chảy",
+        "meaning": "Lưu (dòng chảy; lưu thông)",
         "onyomi": "リュウ, ル",
         "kunyomi": "なが.れる, なが.れ, なが.す, -なが.す"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 4,
         "themeEn": "Studying language and culture through abroad study",
@@ -508,6 +572,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

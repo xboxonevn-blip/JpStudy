@@ -169,3 +169,11 @@
 - Bumped content DB Kanji seed revision to `3` so existing browsers with revision `2` receive the new lesson-03 metadata; regression now starts from `content_meta.kanjiSeedRevision=2` and stale `節`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, and kanji coverage audit reduced N3 incomplete current entries from `174` to `168`.
 - Deployed `42769e1b` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded lesson-03 row (`節`, `約`, `無`, `駄`, `再`, `資`, `源`, `環`), `節` detail showed `Tiết (tiết; đốt; giai đoạn)` plus Hán-Việt `Tiết`, and console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 04 Completeness Patch
+
+- Source-verified all eight N3 lesson-04 kanji (`留`, `学`, `文`, `化`, `言`, `語`, `交`, `流`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `化`, `言`, `語`, `交`, and `流`; normalized learner-facing Vietnamese display/search text for all eight entries; filled all lesson-04 `relatedKanji` lists.
+- Replaced lesson-04 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `4` so existing browsers with revision `3` receive the new lesson-04 metadata; regression now starts from `content_meta.kanjiSeedRevision=3` and stale `化`.
+- Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, content status stayed machine/open-review `0`, and kanji coverage audit reduced N3 incomplete current entries from `168` to `164`.

@@ -77,3 +77,24 @@ Sources consulted:
 | `環` | KANJIDIC2 `Hoàn`, meanings `ring`, `circle`, `loop`; Unihan `kDefinition=jade ring or bracelet; ring`; local context `環境` | Added Hán-Việt `Hoàn`, display `Hoàn (vòng; môi trường)`, and environment/ring/circle neighbors. |
 
 Tagging: replaced the lesson-03 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 04 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Hán-Việt readings, Japanese readings, stroke count, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_04.json`, especially the `留学`, `文化`, `言語`, and `交流` abroad-study cluster.
+
+| Item | Sources | Change |
+|---|---|---|
+| `留` | KANJIDIC2 `Lưu`, meanings `detain`, `fasten`, `halt`, `stop`; Unihan `kVietnamese=lưu`, `kDefinition=stop, halt; stay, detain, keep` | Kept Hán-Việt `Lưu`; rewrote display to `ở lại; lưu giữ`, normalized search, and added study/stay/stop related kanji. |
+| `学` | KANJIDIC2 `Học`, meanings `study`, `learning`, `science`; Unihan `kDefinition=learning, knowledge; school` | Kept Hán-Việt `Học`; expanded display to `học; việc học` and linked study/school/life neighbors. |
+| `文` | KANJIDIC2 `Văn/Vấn`, meanings `sentence`, `literature`, `style`, `art`; Unihan `kVietnamese=văn`, `kDefinition=literature, culture, writing` | Kept primary Hán-Việt `Văn`; rewrote display to `văn hóa; chữ viết; văn chương`, fitting `文化` and language-learning context. |
+| `化` | KANJIDIC2 `Hóa`, meanings `change`, `take the form of`, `-ization`; Unihan `kVietnamese=hoá`, `kDefinition=change, convert, reform; -ize` | Added Hán-Việt `Hóa`, display `Hóa (biến đổi; -hóa)`, search text, and culture/change related kanji. |
+| `言` | KANJIDIC2 `Ngôn/Ngân`, meanings `say`, `word`; Unihan `kVietnamese=ngôn`, `kDefinition=words, speech; speak, say` | Added primary Hán-Việt `Ngôn`, display `Ngôn (lời nói; nói)`, and speech/language related kanji. |
+| `語` | KANJIDIC2 `Ngữ/Ngứ`, meanings `word`, `speech`, `language`; Unihan `kVietnamese=ngữ`, `kDefinition=language, words; saying, expression` | Added primary Hán-Việt `Ngữ`, display `Ngữ (ngôn ngữ; từ ngữ; lời nói)`, and language/study related kanji. |
+| `交` | KANJIDIC2 `Giao`, meanings `mingle`, `mixing`, `association`, `coming & going`; Unihan `kVietnamese=giao`, `kDefinition=mix; intersect; exchange, communicate` | Added Hán-Việt `Giao`, display `Giao (giao lưu; trao đổi; qua lại)`, and communication/exchange related kanji. |
+| `流` | KANJIDIC2 `Lưu`, meanings `current`, `flow`; Unihan `kVietnamese=lưu`, `kDefinition=flow, circulate, drift; class` | Added Hán-Việt `Lưu`, display `Lưu (dòng chảy; lưu thông)`, and flow/exchange related kanji. |
+
+Tagging: replaced the lesson-04 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
