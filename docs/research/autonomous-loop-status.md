@@ -231,3 +231,4 @@
 - Replaced lesson-10 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
 - Bumped content DB Kanji seed revision to `10` so existing browsers with revision `9` receive the new lesson-10 metadata; regression now starts from `content_meta.kanjiSeedRevision=9` and stale `観`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, content status stayed machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `125` to `117`.
+- Deployed `5db208d6` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `観` returned one result, detail opened with `Quan (xem; quan sát; quan điểm)` plus Hán-Việt `Quan`, and console errors/warnings remained `0`.
