@@ -13,10 +13,10 @@
       "character": "際",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "tế",
-        "meaningVi": "tế",
-        "meaningViDisplay": "tế (tế)",
-        "meaningEn": "occasion, side"
+        "hanViet": "Tế",
+        "meaningVi": "dịp; ranh giới; khi",
+        "meaningViDisplay": "Tế (dịp; ranh giới; khi)",
+        "meaningEn": "occasion, edge, when"
       },
       "readings": {
         "onyomi": [
@@ -32,29 +32,32 @@
         "en": "Core kanji for QUARTET 25: Global issues and volunteering."
       },
       "decomposition": {
-        "hanViet": "tế",
+        "hanViet": "Tế",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "国",
+          "世",
+          "外",
+          "境"
+        ]
       },
       "search": {
         "hanVietNoAccent": "te",
-        "meaningViNoAccent": "te",
-        "meaningEnNoAccent": "occasion, side"
+        "meaningViNoAccent": "dip; ranh gioi; khi",
+        "meaningEnNoAccent": "occasion, edge, when"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v001",
-          "sourceSenseId": "n3_l25_s001",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "国際",
+          "reading": "こくさい",
+          "meaning": "quốc tế",
+          "meaningEn": "international"
         }
       ],
       "legacy": {
-        "meaning": "tế (tế)",
+        "meaning": "Tế (dịp; ranh giới; khi)",
         "onyomi": "サイ",
         "kunyomi": "きわ, -ぎわ"
       },
@@ -62,7 +65,10 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l25_k002",
@@ -71,9 +77,9 @@
       "character": "貧",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "bần, nghèo",
-        "meaningViDisplay": "bần, nghèo",
+        "hanViet": "Bần",
+        "meaningVi": "nghèo; thiếu thốn; bần cùng",
+        "meaningViDisplay": "Bần (nghèo; thiếu thốn; bần cùng)",
         "meaningEn": "poverty, poor"
       },
       "readings": {
@@ -90,29 +96,32 @@
         "en": "Core kanji for QUARTET 25: Global issues and volunteering."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Bần",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "困",
+          "難",
+          "財",
+          "収"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ban, ngheo",
+        "hanVietNoAccent": "ban",
+        "meaningViNoAccent": "ngheo; thieu thon; ban cung",
         "meaningEnNoAccent": "poverty, poor"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v004",
-          "sourceSenseId": "n3_l25_s004",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "貧困",
+          "reading": "ひんこん",
+          "meaning": "nghèo đói; bần cùng",
+          "meaningEn": "poverty"
         }
       ],
       "legacy": {
-        "meaning": "bần, nghèo",
+        "meaning": "Bần (nghèo; thiếu thốn; bần cùng)",
         "onyomi": "ヒン, ビン",
         "kunyomi": "まず.しい"
       },
@@ -120,7 +129,10 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l25_k003",
@@ -130,9 +142,9 @@
       "strokeCount": 7,
       "labels": {
         "hanViet": "Khốn",
-        "meaningVi": "khốn",
-        "meaningViDisplay": "Khốn (khốn)",
-        "meaningEn": "quandary, become distressed"
+        "meaningVi": "gặp khó; lúng túng; khốn đốn",
+        "meaningViDisplay": "Khốn (gặp khó; lúng túng; khốn đốn)",
+        "meaningEn": "quandary, distress, trouble"
       },
       "readings": {
         "onyomi": [
@@ -151,25 +163,28 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "貧",
+          "難",
+          "助",
+          "救"
+        ]
       },
       "search": {
         "hanVietNoAccent": "khon",
-        "meaningViNoAccent": "khon",
-        "meaningEnNoAccent": "quandary, become distressed"
+        "meaningViNoAccent": "gap kho; lung tung; khon don",
+        "meaningEnNoAccent": "quandary, distress, trouble"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v004",
-          "sourceSenseId": "n3_l25_s004",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "困る",
+          "reading": "こまる",
+          "meaning": "gặp khó; lúng túng",
+          "meaningEn": "to be troubled"
         }
       ],
       "legacy": {
-        "meaning": "Khốn (khốn)",
+        "meaning": "Khốn (gặp khó; lúng túng; khốn đốn)",
         "onyomi": "コン",
         "kunyomi": "こま.る"
       },
@@ -177,7 +192,10 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l25_k004",
@@ -186,10 +204,10 @@
       "character": "難",
       "strokeCount": 18,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "nạn",
-        "meaningViDisplay": "nạn",
-        "meaningEn": "difficult, impossible"
+        "hanViet": "Nan/Nạn",
+        "meaningVi": "khó khăn; hiểm nạn; khó làm",
+        "meaningViDisplay": "Nan/Nạn (khó khăn; hiểm nạn; khó làm)",
+        "meaningEn": "difficult, impossible, trouble"
       },
       "readings": {
         "onyomi": [
@@ -207,29 +225,32 @@
         "en": "Core kanji for QUARTET 25: Global issues and volunteering."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Nan/Nạn",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "困",
+          "災",
+          "危",
+          "救"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "nan",
-        "meaningEnNoAccent": "difficult, impossible"
+        "hanVietNoAccent": "nan nan",
+        "meaningViNoAccent": "kho khan; hiem nan; kho lam",
+        "meaningEnNoAccent": "difficult, impossible, trouble"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v005",
-          "sourceSenseId": "n3_l25_s005",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "困難",
+          "reading": "こんなん",
+          "meaning": "khó khăn",
+          "meaningEn": "difficulty"
         }
       ],
       "legacy": {
-        "meaning": "nạn",
+        "meaning": "Nan/Nạn (khó khăn; hiểm nạn; khó làm)",
         "onyomi": "ナン",
         "kunyomi": "かた.い, -がた.い, むずか.しい, むづか.しい"
       },
@@ -237,7 +258,10 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l25_k005",
@@ -247,9 +271,9 @@
       "strokeCount": 6,
       "labels": {
         "hanViet": "Ô",
-        "meaningVi": "ô, bẩn",
-        "meaningViDisplay": "Ô (ô, bẩn)",
-        "meaningEn": "dirty, pollute"
+        "meaningVi": "bẩn; làm ô uế; ô nhiễm",
+        "meaningViDisplay": "Ô (bẩn; làm ô uế; ô nhiễm)",
+        "meaningEn": "dirty, pollute, defile"
       },
       "readings": {
         "onyomi": [
@@ -271,25 +295,28 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "染",
+          "水",
+          "環",
+          "清"
+        ]
       },
       "search": {
         "hanVietNoAccent": "o",
-        "meaningViNoAccent": "o, ban",
-        "meaningEnNoAccent": "dirty, pollute"
+        "meaningViNoAccent": "ban; lam o ue; o nhiem",
+        "meaningEnNoAccent": "dirty, pollute, defile"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v007",
-          "sourceSenseId": "n3_l25_s007",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "汚染",
+          "reading": "おせん",
+          "meaning": "ô nhiễm",
+          "meaningEn": "pollution"
         }
       ],
       "legacy": {
-        "meaning": "Ô (ô, bẩn)",
+        "meaning": "Ô (bẩn; làm ô uế; ô nhiễm)",
         "onyomi": "オ",
         "kunyomi": "けが.す, けが.れる, けが.らわしい, よご.す"
       },
@@ -297,7 +324,10 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l25_k006",
@@ -306,10 +336,10 @@
       "character": "染",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "nhiễm",
-        "meaningViDisplay": "nhiễm",
-        "meaningEn": "dye, color"
+        "hanViet": "Nhiễm",
+        "meaningVi": "nhuộm; nhiễm; thấm",
+        "meaningViDisplay": "Nhiễm (nhuộm; nhiễm; thấm)",
+        "meaningEn": "dye, stain, infect"
       },
       "readings": {
         "onyomi": [
@@ -327,29 +357,32 @@
         "en": "Core kanji for QUARTET 25: Global issues and volunteering."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Nhiễm",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "汚",
+          "色",
+          "水",
+          "化"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "nhiem",
-        "meaningEnNoAccent": "dye, color"
+        "hanVietNoAccent": "nhiem",
+        "meaningViNoAccent": "nhuom; nhiem; tham",
+        "meaningEnNoAccent": "dye, stain, infect"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v007",
-          "sourceSenseId": "n3_l25_s007",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "汚染",
+          "reading": "おせん",
+          "meaning": "ô nhiễm",
+          "meaningEn": "pollution"
         }
       ],
       "legacy": {
-        "meaning": "nhiễm",
+        "meaning": "Nhiễm (nhuộm; nhiễm; thấm)",
         "onyomi": "セン",
         "kunyomi": "そ.める, そ.まる, し.みる, し.み"
       },
@@ -357,7 +390,10 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l25_k007",
@@ -366,10 +402,10 @@
       "character": "平",
       "strokeCount": 5,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "bình",
-        "meaningViDisplay": "bình",
-        "meaningEn": "even, flat"
+        "hanViet": "Bình",
+        "meaningVi": "bình đẳng; bằng phẳng; hòa bình",
+        "meaningViDisplay": "Bình (bình đẳng; bằng phẳng; hòa bình)",
+        "meaningEn": "equal, flat, peace"
       },
       "readings": {
         "onyomi": [
@@ -388,29 +424,32 @@
         "en": "Core kanji for QUARTET 25: Global issues and volunteering."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Bình",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "等",
+          "和",
+          "均",
+          "公"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "binh",
-        "meaningEnNoAccent": "even, flat"
+        "hanVietNoAccent": "binh",
+        "meaningViNoAccent": "binh dang; bang phang; hoa binh",
+        "meaningEnNoAccent": "equal, flat, peace"
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v009",
-          "sourceSenseId": "n3_l25_s009",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "平等",
+          "reading": "びょうどう",
+          "meaning": "bình đẳng",
+          "meaningEn": "equality"
         }
       ],
       "legacy": {
-        "meaning": "bình",
+        "meaning": "Bình (bình đẳng; bằng phẳng; hòa bình)",
         "onyomi": "ヘイ, ビョウ, ヒョウ",
         "kunyomi": "たい.ら, たい.らげる, ひら"
       },
@@ -418,7 +457,10 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l25_k008",
@@ -427,10 +469,10 @@
       "character": "等",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "đẳng",
-        "meaningViDisplay": "đẳng",
-        "meaningEn": "etc., and so forth"
+        "hanViet": "Đẳng",
+        "meaningVi": "bình đẳng; cấp bậc; vân vân",
+        "meaningViDisplay": "Đẳng (bình đẳng; cấp bậc; vân vân)",
+        "meaningEn": "equal, rank, etc."
       },
       "readings": {
         "onyomi": [
@@ -447,29 +489,32 @@
         "en": "Core kanji for QUARTET 25: Global issues and volunteering."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Đẳng",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "平",
+          "級",
+          "同",
+          "比"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "dang",
-        "meaningEnNoAccent": "etc., and so forth"
+        "hanVietNoAccent": "dang",
+        "meaningViNoAccent": "binh dang; cap bac; van van",
+        "meaningEnNoAccent": "equal, rank, etc."
       },
       "examples": [
         {
-          "sourceVocabId": "n3_l25_v009",
-          "sourceSenseId": "n3_l25_s009",
-          "word": null,
-          "reading": null,
-          "meaningVi": null,
-          "meaningEn": null
+          "word": "平等",
+          "reading": "びょうどう",
+          "meaning": "bình đẳng",
+          "meaningEn": "equality"
         }
       ],
       "legacy": {
-        "meaning": "đẳng",
+        "meaning": "Đẳng (bình đẳng; cấp bậc; vân vân)",
         "onyomi": "トウ",
         "kunyomi": "ひと.しい, など, -ら"
       },
@@ -477,10 +522,13 @@
         "quartetLesson": 25,
         "themeEn": "Global issues and volunteering",
         "themeVi": "Vấn đề toàn cầu và tình nguyện"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

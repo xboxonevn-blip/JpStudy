@@ -13,7 +13,7 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
-const _kanjiSeedRevision = 25;
+const _kanjiSeedRevision = 26;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
   _KanjiSeedSentinel(
@@ -71,6 +71,13 @@ const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
     character: '流',
     meaning: 'Lưu (dòng chảy; lưu hành; trôi)',
     decompositionContains: '"hanViet":"Lưu"',
+  ),
+  _KanjiSeedSentinel(
+    level: 'N3',
+    lessonId: 25,
+    character: '際',
+    meaning: 'Tế (dịp; ranh giới; khi)',
+    decompositionContains: '"hanViet":"Tế"',
   ),
 ];
 

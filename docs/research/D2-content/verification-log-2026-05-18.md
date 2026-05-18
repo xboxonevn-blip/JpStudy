@@ -528,3 +528,24 @@ Sources consulted:
 Tagging: replaced the lesson-24 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
 
 Live proof after deploy: VI/N3 Kanji search for `流` returned three matches; the lesson-24 `流` opened the detail modal with `Lưu (dòng chảy; lưu hành; trôi)`, Hán-Việt `Lưu`, and the QUARTET 24 fashion/personal-style mnemonic. Console errors/warnings after the interaction: `0`.
+
+## Kanji N3 Lesson 25 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings where present, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme in `assets/data/content/kanji/n3/lesson_25.json`, which labels the batch as global issues/volunteering. The generated `sourceVocabId` links were not used as authority because ShinKanzen vocab IDs do not align with this kanji theme.
+
+| Item | Sources | Change |
+|---|---|---|
+| `際` | KANJIDIC2 `Tế`, meanings `occasion`, `edge`, `time`; Unihan `kDefinition=border, boundary, juncture`; local context `国際` | Capitalized Hán-Việt `Tế`, display `Tế (dịp; ranh giới; khi)`, direct example `国際`, search text, and boundary/world related kanji. |
+| `貧` | KANJIDIC2 `Bần`, meanings `poverty`, `poor`; Unihan `kVietnamese=bần`, `kDefinition=poor, impoverished, needy`; local context poverty/global issues | Added Hán-Việt `Bần`, display `Bần (nghèo; thiếu thốn; bần cùng)`, direct example `貧困`, search text, and poverty/finance related kanji. |
+| `困` | KANJIDIC2 `Khốn`, meanings `quandary`, `distressed`; Unihan `kVietnamese=khốn`, `kDefinition=to surround; difficult`; local context social problems | Rewrote display to `Khốn (gặp khó; lúng túng; khốn đốn)`, direct example `困る`, search text, and difficulty/help related kanji. |
+| `難` | KANJIDIC2 `Nan/Nạn`, meanings `difficult`, `trouble`, `accident`; Unihan `kVietnamese=nan`, `kDefinition=difficult, arduous, hard`; local context `困難` | Added Hán-Việt `Nan/Nạn`, display `Nan/Nạn (khó khăn; hiểm nạn; khó làm)`, direct example `困難`, search text, and disaster/help related kanji. |
+| `汚` | KANJIDIC2 `Ô`, meanings `dirty`, `pollute`, `defile`; Unihan `kDefinition=filthy, dirty, impure, polluted`; local context pollution | Rewrote display to `Ô (bẩn; làm ô uế; ô nhiễm)`, direct example `汚染`, search text, and pollution/environment related kanji. |
+| `染` | KANJIDIC2 `Nhiễm`, meanings `dye`, `stain`, `print`; Unihan `kVietnamese=nhuộm`, `kDefinition=dye; be contagious; infect`; local context `汚染` | Added learner-facing Hán-Việt `Nhiễm`, display `Nhiễm (nhuộm; nhiễm; thấm)`, direct example `汚染`, search text, and dye/pollution related kanji. |
+| `平` | KANJIDIC2 `Bình/Biền`, meanings `even`, `flat`, `peace`; Unihan `kVietnamese=bình`, `kDefinition=flat, level, even; peaceful`; local context `平等` | Added Hán-Việt `Bình`, display `Bình (bình đẳng; bằng phẳng; hòa bình)`, direct example `平等`, search text, and equality/peace related kanji. |
+| `等` | KANJIDIC2 `Đẳng`, meanings `etc.`, `class`, `equal`; Unihan `kVietnamese=đẳng`, `kDefinition=rank, grade; equal`; local context `平等` | Added Hán-Việt `Đẳng`, display `Đẳng (bình đẳng; cấp bậc; vân vân)`, direct example `平等`, search text, and equality/rank related kanji. |
+
+Tagging: replaced the lesson-25 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
