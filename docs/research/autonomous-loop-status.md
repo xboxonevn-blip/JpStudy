@@ -186,3 +186,4 @@
 - Replaced lesson-05 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
 - Bumped content DB Kanji seed revision to `5` so existing browsers with revision `4` receive the new lesson-05 metadata; regression now starts from `content_meta.kanjiSeedRevision=4` and stale `任`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, content status stayed machine/open-review `0`, and kanji coverage audit reduced N3 incomplete current entries from `164` to `156`.
+- Deployed `5dc748ad` to Firebase Hosting and verified live with cache disabled: `任` detail showed `Nhậm (trách nhiệm; giao phó)` plus Hán-Việt `Nhậm`; console errors/warnings remained `0`.
