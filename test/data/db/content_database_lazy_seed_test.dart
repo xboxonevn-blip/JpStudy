@@ -186,15 +186,15 @@ void main() {
     await _createLegacyKanjiDb(
       file,
       userVersion: 35,
-      kanjiLessonId: 14,
-      kanjiCharacter: '族',
+      kanjiLessonId: 15,
+      kanjiCharacter: '住',
       kanjiLevel: 'N3',
-      kanjiMeaning: 'tộc',
-      kanjiMeaningEn: 'tribe, family',
-      kanjiOnyomi: 'ゾク',
-      kanjiKunyomi: '',
+      kanjiMeaning: 'trú',
+      kanjiMeaningEn: 'dwell, reside',
+      kanjiOnyomi: 'ジュウ, ヂュウ, チュウ',
+      kanjiKunyomi: 'す.む, す.まう, -ず.まい',
       kanjiDecompositionJson: '{}',
-      contentMetaRevision: 13,
+      contentMetaRevision: 14,
     );
 
     final db = ContentDatabase(executor: NativeDatabase(file));
@@ -203,7 +203,7 @@ void main() {
     final row =
         await (db.select(db.kanji)
               ..where(
-                (tbl) => tbl.character.equals('族') & tbl.jlptLevel.equals('N3'),
+                (tbl) => tbl.character.equals('住') & tbl.jlptLevel.equals('N3'),
               )
               ..limit(1))
             .getSingle();
@@ -213,9 +213,9 @@ void main() {
         )
         .getSingle();
 
-    expect(row.meaning, 'Tộc (gia tộc; dân tộc; dòng họ)');
-    expect(row.decompositionJson, contains('"hanViet":"Tộc"'));
-    expect(revisionRow.data['value'], '14');
+    expect(row.meaning, 'Trú (sống ở; cư trú; nơi ở)');
+    expect(row.decompositionJson, contains('"hanViet":"Trú"'));
+    expect(revisionRow.data['value'], '15');
   });
 }
 

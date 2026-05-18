@@ -308,3 +308,24 @@ Sources consulted:
 | `頼` | KANJIDIC2 `Lại/Trái`, meanings `trust`, `request`; Unihan `kDefinition=rely, depend on; accuse falsely`; local context `信頼`/`依頼` | Kept Hán-Việt `Lại`; rewrote display to `Lại (nhờ cậy; tin cậy; yêu cầu)`, normalized search text, and linked trust/request related kanji. |
 
 Tagging: replaced the lesson-14 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 15 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_15.json`, especially housing/neighborhood compounds such as `住宅`, `建築`, `家賃`, `賃貸`, `設備`, `準備`, and `住民`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `住` | KANJIDIC2 lists `Trụ`, meanings `dwell`, `reside`, `live`; Unihan `kVietnamese=trú`, `kDefinition=reside, live at, dwell`; local context `住民`/`住宅` | Kept learner-facing Hán-Việt `Trú` for `cư trú`, rewrote display to `Trú (sống ở; cư trú; nơi ở)`, normalized search text, and linked housing/resident related kanji. |
+| `宅` | KANJIDIC2 `Trạch`, meanings `home`, `house`; Unihan `kDefinition=residence, dwelling, home`; local context housing | Kept Hán-Việt `Trạch`; rewrote display to `Trạch (nhà ở; nơi ở; tư gia)`, normalized search text, and linked home/building related kanji. |
+| `築` | KANJIDIC2 `Trúc`, meanings `fabricate`, `build`, `construct`; Unihan `kVietnamese=trốc`, `kDefinition=build, erect; building`; local context `建築` | Added learner-facing Hán-Việt `Trúc`, display `Trúc (xây dựng; kiến tạo; xây đắp)`, search text, and building/construction related kanji. |
+| `賃` | KANJIDIC2 `Nhẫm`, meanings `fare`, `fee`, `hire`, `rent`, `wages`; Unihan `kDefinition=rent, hire; hired person`; local context `家賃`/`賃貸` | Capitalized Hán-Việt `Nhẫm`; rewrote display to `Nhẫm (tiền thuê; phí thuê; công thuê)`, normalized search text, and linked rent/lending related kanji. |
+| `貸` | KANJIDIC2 `Thải/Thắc`, meaning `lend`; Unihan `kDefinition=lend; borrow; pardon`; local context `賃貸`/lending | Kept primary Hán-Việt `Thải`; rewrote display to `Thải (cho vay; cho mượn; cho thuê)`, normalized search text, and linked rent/return related kanji. |
+| `設` | KANJIDIC2 `Thiết`, meanings `establishment`, `provision`, `prepare`; Unihan `kVietnamese=thết`, `kDefinition=build; establish; display`; local context `設備` | Added Hán-Việt `Thiết`, display `Thiết (thiết lập; xây dựng; bố trí)`, search text, and equipment/building related kanji. |
+| `備` | KANJIDIC2 `Bị`, meanings `equip`, `provision`, `preparation`; Unihan `kVietnamese=bị`, `kDefinition=prepare, ready, perfect`; local context `設備`/`準備` | Added Hán-Việt `Bị`, display `Bị (chuẩn bị; trang bị; dự phòng)`, search text, and preparation/equipment related kanji. |
+| `民` | KANJIDIC2 `Dân`, meanings `people`, `nation`, `subjects`; Unihan `kVietnamese=dân`, `kDefinition=people, subjects, citizens`; local context `住民` | Added Hán-Việt `Dân`, display `Dân (người dân; dân chúng; quốc dân)`, search text, and resident/citizen related kanji. |
+
+Tagging: replaced the lesson-15 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

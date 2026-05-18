@@ -268,3 +268,12 @@
 - Bumped content DB Kanji seed revision to `14` so existing browsers with revision `13` receive the new lesson-14 metadata; regression now starts from `content_meta.kanjiSeedRevision=13` and stale `族`.
 - Verified locally: focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `95` to `87`.
 - Deployed `59a896fe` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `族` returned one result, detail opened with `Tộc (gia tộc; dân tộc; dòng họ)` plus Hán-Việt `Tộc`, and console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 15 Completeness Patch
+
+- Source-verified all eight N3 lesson-15 kanji (`住`, `宅`, `築`, `賃`, `貸`, `設`, `備`, `民`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `築`, `設`, `備`, and `民`; normalized housing/rent/equipment learner meanings and search text for all eight entries; filled all lesson-15 `relatedKanji` lists.
+- Replaced lesson-15 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `15` so existing browsers with revision `14` receive the new lesson-15 metadata; regression now starts from `content_meta.kanjiSeedRevision=14` and stale `住`.
+- Verified locally: focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `87` to `79`.
+- Live proof is pending after commit, push, build, and deploy.

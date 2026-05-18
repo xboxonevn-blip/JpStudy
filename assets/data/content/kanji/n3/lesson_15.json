@@ -14,8 +14,8 @@
       "strokeCount": 7,
       "labels": {
         "hanViet": "Trú",
-        "meaningVi": "trú",
-        "meaningViDisplay": "Trú (trú)",
+        "meaningVi": "sống ở; cư trú; nơi ở",
+        "meaningViDisplay": "Trú (sống ở; cư trú; nơi ở)",
         "meaningEn": "dwell, reside"
       },
       "readings": {
@@ -39,11 +39,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "宅",
+          "家",
+          "民",
+          "所"
+        ]
       },
       "search": {
         "hanVietNoAccent": "tru",
-        "meaningViNoAccent": "tru",
+        "meaningViNoAccent": "song o; cu tru; noi o",
         "meaningEnNoAccent": "dwell, reside"
       },
       "examples": [
@@ -65,10 +70,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Trú (trú)",
+        "meaning": "Trú (sống ở; cư trú; nơi ở)",
         "onyomi": "ジュウ, ヂュウ, チュウ",
         "kunyomi": "す.む, す.まう, -ず.まい"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -83,8 +91,8 @@
       "strokeCount": 6,
       "labels": {
         "hanViet": "Trạch",
-        "meaningVi": "trạch",
-        "meaningViDisplay": "Trạch (trạch)",
+        "meaningVi": "nhà ở; nơi ở; tư gia",
+        "meaningViDisplay": "Trạch (nhà ở; nơi ở; tư gia)",
         "meaningEn": "home, house"
       },
       "readings": {
@@ -102,11 +110,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "住",
+          "家",
+          "帰",
+          "建"
+        ]
       },
       "search": {
         "hanVietNoAccent": "trach",
-        "meaningViNoAccent": "trach",
+        "meaningViNoAccent": "nha o; noi o; tu gia",
         "meaningEnNoAccent": "home, house"
       },
       "examples": [
@@ -120,10 +133,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Trạch (trạch)",
+        "meaning": "Trạch (nhà ở; nơi ở; tư gia)",
         "onyomi": "タク",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -137,9 +153,9 @@
       "character": "築",
       "strokeCount": 16,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "trúc, xây dựng",
-        "meaningViDisplay": "trúc, xây dựng",
+        "hanViet": "Trúc",
+        "meaningVi": "xây dựng; kiến tạo; xây đắp",
+        "meaningViDisplay": "Trúc (xây dựng; kiến tạo; xây đắp)",
         "meaningEn": "fabricate, build"
       },
       "readings": {
@@ -155,15 +171,20 @@
         "en": "Core kanji for QUARTET 15: Housing and neighborhoods."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Trúc",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "建",
+          "設",
+          "宅",
+          "家"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "truc, xay dung",
+        "hanVietNoAccent": "truc",
+        "meaningViNoAccent": "xay dung; kien tao; xay dap",
         "meaningEnNoAccent": "fabricate, build"
       },
       "examples": [
@@ -185,10 +206,13 @@
         }
       ],
       "legacy": {
-        "meaning": "trúc, xây dựng",
+        "meaning": "Trúc (xây dựng; kiến tạo; xây đắp)",
         "onyomi": "チク",
         "kunyomi": "きず.く"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -202,9 +226,9 @@
       "character": "賃",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "nhẫm",
-        "meaningVi": "nhẫm, tiền thuê",
-        "meaningViDisplay": "nhẫm (nhẫm, tiền thuê)",
+        "hanViet": "Nhẫm",
+        "meaningVi": "tiền thuê; phí thuê; công thuê",
+        "meaningViDisplay": "Nhẫm (tiền thuê; phí thuê; công thuê)",
         "meaningEn": "fare, fee"
       },
       "readings": {
@@ -218,15 +242,20 @@
         "en": "Core kanji for QUARTET 15: Housing and neighborhoods."
       },
       "decomposition": {
-        "hanViet": "nhẫm",
+        "hanViet": "Nhẫm",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "貸",
+          "借",
+          "家",
+          "費"
+        ]
       },
       "search": {
         "hanVietNoAccent": "nham",
-        "meaningViNoAccent": "nham, tien thue",
+        "meaningViNoAccent": "tien thue; phi thue; cong thue",
         "meaningEnNoAccent": "fare, fee"
       },
       "examples": [
@@ -248,10 +277,13 @@
         }
       ],
       "legacy": {
-        "meaning": "nhẫm (nhẫm, tiền thuê)",
+        "meaning": "Nhẫm (tiền thuê; phí thuê; công thuê)",
         "onyomi": "チン",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -266,8 +298,8 @@
       "strokeCount": 12,
       "labels": {
         "hanViet": "Thải",
-        "meaningVi": "thải, cho vay/cho thuê",
-        "meaningViDisplay": "Thải (thải, cho vay/cho thuê)",
+        "meaningVi": "cho vay; cho mượn; cho thuê",
+        "meaningViDisplay": "Thải (cho vay; cho mượn; cho thuê)",
         "meaningEn": "lend"
       },
       "readings": {
@@ -289,11 +321,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "賃",
+          "借",
+          "返",
+          "金"
+        ]
       },
       "search": {
         "hanVietNoAccent": "thai",
-        "meaningViNoAccent": "thai, cho vay/cho thue",
+        "meaningViNoAccent": "cho vay; cho muon; cho thue",
         "meaningEnNoAccent": "lend"
       },
       "examples": [
@@ -307,10 +344,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Thải (thải, cho vay/cho thuê)",
+        "meaning": "Thải (cho vay; cho mượn; cho thuê)",
         "onyomi": "タイ",
         "kunyomi": "か.す, か.し-, かし-"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -324,9 +364,9 @@
       "character": "設",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thiết",
-        "meaningViDisplay": "thiết",
+        "hanViet": "Thiết",
+        "meaningVi": "thiết lập; xây dựng; bố trí",
+        "meaningViDisplay": "Thiết (thiết lập; xây dựng; bố trí)",
         "meaningEn": "establishment, provision"
       },
       "readings": {
@@ -342,15 +382,20 @@
         "en": "Core kanji for QUARTET 15: Housing and neighborhoods."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thiết",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "備",
+          "建",
+          "築",
+          "計"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "thiet",
+        "hanVietNoAccent": "thiet",
+        "meaningViNoAccent": "thiet lap; xay dung; bo tri",
         "meaningEnNoAccent": "establishment, provision"
       },
       "examples": [
@@ -364,10 +409,13 @@
         }
       ],
       "legacy": {
-        "meaning": "thiết",
+        "meaning": "Thiết (thiết lập; xây dựng; bố trí)",
         "onyomi": "セツ",
         "kunyomi": "もう.ける"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -381,9 +429,9 @@
       "character": "備",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "bị, chuẩn bị",
-        "meaningViDisplay": "bị, chuẩn bị",
+        "hanViet": "Bị",
+        "meaningVi": "chuẩn bị; trang bị; dự phòng",
+        "meaningViDisplay": "Bị (chuẩn bị; trang bị; dự phòng)",
         "meaningEn": "equip, provision"
       },
       "readings": {
@@ -401,15 +449,20 @@
         "en": "Core kanji for QUARTET 15: Housing and neighborhoods."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Bị",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "設",
+          "準",
+          "防",
+          "用"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "bi, chuan bi",
+        "hanVietNoAccent": "bi",
+        "meaningViNoAccent": "chuan bi; trang bi; du phong",
         "meaningEnNoAccent": "equip, provision"
       },
       "examples": [
@@ -423,10 +476,13 @@
         }
       ],
       "legacy": {
-        "meaning": "bị, chuẩn bị",
+        "meaning": "Bị (chuẩn bị; trang bị; dự phòng)",
         "onyomi": "ビ",
         "kunyomi": "そな.える, そな.わる, つぶさ.に"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -440,9 +496,9 @@
       "character": "民",
       "strokeCount": 5,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "dân",
-        "meaningViDisplay": "dân",
+        "hanViet": "Dân",
+        "meaningVi": "người dân; dân chúng; quốc dân",
+        "meaningViDisplay": "Dân (người dân; dân chúng; quốc dân)",
         "meaningEn": "people, nation"
       },
       "readings": {
@@ -458,15 +514,20 @@
         "en": "Core kanji for QUARTET 15: Housing and neighborhoods."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Dân",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "住",
+          "国",
+          "市",
+          "人"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "dan",
+        "hanVietNoAccent": "dan",
+        "meaningViNoAccent": "nguoi dan; dan chung; quoc dan",
         "meaningEnNoAccent": "people, nation"
       },
       "examples": [
@@ -480,10 +541,13 @@
         }
       ],
       "legacy": {
-        "meaning": "dân",
+        "meaning": "Dân (người dân; dân chúng; quốc dân)",
         "onyomi": "ミン",
         "kunyomi": "たみ"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 15,
         "themeEn": "Housing and neighborhoods",
@@ -492,6 +556,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }
