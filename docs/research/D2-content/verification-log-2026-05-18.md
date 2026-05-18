@@ -526,3 +526,5 @@ Sources consulted:
 | `飾` | KANJIDIC2 `Sức`, meanings `decorate`, `ornament`, `adorn`; Unihan `kDefinition=decorate, ornament, adorn` | Rewrote display to `Sức (trang trí; đồ trang sức; tô điểm)`, direct example `装飾`, search text, and decoration/beauty related kanji. |
 
 Tagging: replaced the lesson-24 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+Live proof after deploy: VI/N3 Kanji search for `流` returned three matches; the lesson-24 `流` opened the detail modal with `Lưu (dòng chảy; lưu hành; trôi)`, Hán-Việt `Lưu`, and the QUARTET 24 fashion/personal-style mnemonic. Console errors/warnings after the interaction: `0`.
