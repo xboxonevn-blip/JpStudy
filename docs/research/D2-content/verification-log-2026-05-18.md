@@ -503,3 +503,5 @@ Sources consulted:
 | `和` | KANJIDIC2 `Hòa`, meanings `harmony`, `Japanese style`, `peace`; Unihan `kVietnamese=hoà`, `kDefinition=harmony, peace; peaceful, calm` | Added Hán-Việt `Hòa`, display `Hòa (hòa hợp; hòa bình; kiểu Nhật)`, search text, and harmony/peace related kanji. |
 
 Tagging: replaced the lesson-23 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+Live proof after deploy: VI/N3 Kanji search for `歴` opened the detail modal with `Lịch (lịch sử; trải qua; quá trình)` plus Hán-Việt `Lịch`, with console errors/warnings `0`.

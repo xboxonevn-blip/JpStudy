@@ -358,3 +358,12 @@
 - Bumped content DB Kanji seed revision to `23` and added a lesson-22 sentinel for `説`.
 - Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `31` to `23`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
 - Built and deployed `c0aea700` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `説` opened detail showing `Thuyết (giải thích; học thuyết; ý kiến)` plus Hán-Việt `Thuyết`, with console errors/warnings `0`.
+
+## 2026-05-18 N3 Kanji Lesson 23 Completeness Patch
+
+- Source-verified all eight N3 lesson-23 kanji (`歴`, `史`, `政`, `治`, `戦`, `争`, `平`, `和`) against KANJIDIC2, Unihan, and the explicit local history/politics theme.
+- Filled missing Hán-Việt values, normalized lowercase Hán-Việt labels, rewrote display/search text, and filled all lesson-23 `relatedKanji` lists.
+- Replaced lesson-23 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `24` and added a lesson-23 sentinel for `歴`.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `23` to `16`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Built and deployed `b32bf246` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `歴` opened detail showing `Lịch (lịch sử; trải qua; quá trình)` plus Hán-Việt `Lịch`, with console errors/warnings `0`.

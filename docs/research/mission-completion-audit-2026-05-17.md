@@ -217,6 +217,13 @@ for `説`. Local coverage audit reduced N3 incomplete current entries from `31`
 to `23`; live proof opened `説` with
 `Thuyết (giải thích; học thuyết; ý kiến)`.
 
+Kanji content expansion update: N3 lesson 23 is now source-verified against
+KANJIDIC2, Unihan, and the local history/politics theme. Commit `b32bf246`
+fills Hán-Việt/display/search/related-kanji metadata for all eight entries,
+bumps the Kanji seed revision to `24`, and adds a lesson-23 sentinel for `歴`.
+Local coverage audit reduced N3 incomplete current entries from `23` to `16`;
+live proof opened `歴` with `Lịch (lịch sử; trải qua; quá trình)`.
+
 ## Verdict
 
 Implementation, docs, tooling, CI/deploy, and N4-N1 live direct-route fallback work are substantially complete. The active goal is not complete because the stopping condition includes external legal/ops proof gates that remain missing.
