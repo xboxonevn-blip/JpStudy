@@ -13,9 +13,9 @@
       "character": "将",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "",
+        "hanViet": "Tướng",
         "meaningVi": "tướng, tương lai",
-        "meaningViDisplay": "tướng, tương lai",
+        "meaningViDisplay": "Tướng (tướng; tương lai)",
         "meaningEn": "leader, commander"
       },
       "readings": {
@@ -35,14 +35,19 @@
         "en": "Core kanji for QUARTET 2: Making your future self from now."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tướng",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "来",
+          "標",
+          "計",
+          "画"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
+        "hanVietNoAccent": "tuong",
         "meaningViNoAccent": "tuong, tuong lai",
         "meaningEnNoAccent": "leader, commander"
       },
@@ -57,10 +62,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tướng, tương lai",
+        "meaning": "Tướng (tướng; tương lai)",
         "onyomi": "ショウ, ソウ",
         "kunyomi": "まさ.に, はた, まさ, ひきい.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",
@@ -100,7 +108,12 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "将",
+          "未",
+          "行",
+          "帰"
+        ]
       },
       "search": {
         "hanVietNoAccent": "lai",
@@ -122,6 +135,9 @@
         "onyomi": "ライ, タイ",
         "kunyomi": "く.る, きた.る, きた.す, き.たす"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",
@@ -160,7 +176,12 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "標",
+          "的",
+          "見",
+          "眼"
+        ]
       },
       "search": {
         "hanVietNoAccent": "muc",
@@ -182,6 +203,9 @@
         "onyomi": "モク, ボク",
         "kunyomi": "め, -め, ま-"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",
@@ -195,9 +219,9 @@
       "character": "標",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "mốc, mục tiêu",
-        "meaningViDisplay": "mốc, mục tiêu",
+        "hanViet": "Tiêu",
+        "meaningVi": "mốc; dấu hiệu; mục tiêu",
+        "meaningViDisplay": "Tiêu (mốc; dấu hiệu; mục tiêu)",
         "meaningEn": "signpost, seal"
       },
       "readings": {
@@ -214,15 +238,20 @@
         "en": "Core kanji for QUARTET 2: Making your future self from now."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tiêu",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "目",
+          "的",
+          "準",
+          "表"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "moc, muc tieu",
+        "hanVietNoAccent": "tieu",
+        "meaningViNoAccent": "moc, dau hieu, muc tieu",
         "meaningEnNoAccent": "signpost, seal"
       },
       "examples": [
@@ -236,10 +265,13 @@
         }
       ],
       "legacy": {
-        "meaning": "mốc, mục tiêu",
+        "meaning": "Tiêu (mốc; dấu hiệu; mục tiêu)",
         "onyomi": "ヒョウ",
         "kunyomi": "しるべ, しるし"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",
@@ -253,9 +285,9 @@
       "character": "計",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "kế, tính kế",
-        "meaningViDisplay": "kế, tính kế",
+        "hanViet": "Kế",
+        "meaningVi": "kế hoạch; tính toán",
+        "meaningViDisplay": "Kế (kế hoạch; tính toán)",
         "meaningEn": "plot, plan"
       },
       "readings": {
@@ -272,15 +304,20 @@
         "en": "Core kanji for QUARTET 2: Making your future self from now."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Kế",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "画",
+          "標",
+          "算",
+          "測"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ke, tinh ke",
+        "hanVietNoAccent": "ke",
+        "meaningViNoAccent": "ke hoach, tinh toan",
         "meaningEnNoAccent": "plot, plan"
       },
       "examples": [
@@ -294,10 +331,13 @@
         }
       ],
       "legacy": {
-        "meaning": "kế, tính kế",
+        "meaning": "Kế (kế hoạch; tính toán)",
         "onyomi": "ケイ",
         "kunyomi": "はか.る, はか.らう"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",
@@ -311,9 +351,9 @@
       "character": "画",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "",
+        "hanViet": "Hoạch/Họa",
         "meaningVi": "vẽ, hoạch định",
-        "meaningViDisplay": "vẽ, hoạch định",
+        "meaningViDisplay": "Hoạch/Họa (vẽ; hoạch định)",
         "meaningEn": "brush-stroke, picture"
       },
       "readings": {
@@ -335,14 +375,19 @@
         "en": "Core kanji for QUARTET 2: Making your future self from now."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Hoạch/Họa",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "計",
+          "標",
+          "絵",
+          "図"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
+        "hanVietNoAccent": "hoach, hoa",
         "meaningViNoAccent": "ve, hoach dinh",
         "meaningEnNoAccent": "brush-stroke, picture"
       },
@@ -357,10 +402,13 @@
         }
       ],
       "legacy": {
-        "meaning": "vẽ, hoạch định",
+        "meaning": "Hoạch/Họa (vẽ; hoạch định)",
         "onyomi": "ガ, カク, エ, カイ",
         "kunyomi": "えが.く, かく.する, かぎ.る, はかりごと"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",
@@ -374,9 +422,9 @@
       "character": "努",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "nỗ",
-        "meaningViDisplay": "nỗ",
+        "hanViet": "Nỗ",
+        "meaningVi": "nỗ lực; cố gắng",
+        "meaningViDisplay": "Nỗ (nỗ lực; cố gắng)",
         "meaningEn": "toil, diligent"
       },
       "readings": {
@@ -392,15 +440,20 @@
         "en": "Core kanji for QUARTET 2: Making your future self from now."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Nỗ",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "力",
+          "勉",
+          "勤",
+          "励"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "no",
+        "hanVietNoAccent": "no",
+        "meaningViNoAccent": "no luc, co gang",
         "meaningEnNoAccent": "toil, diligent"
       },
       "examples": [
@@ -414,10 +467,13 @@
         }
       ],
       "legacy": {
-        "meaning": "nỗ",
+        "meaning": "Nỗ (nỗ lực; cố gắng)",
         "onyomi": "ド",
         "kunyomi": "つと.める"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",
@@ -455,7 +511,12 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "努",
+          "動",
+          "働",
+          "強"
+        ]
       },
       "search": {
         "hanVietNoAccent": "luc",
@@ -477,6 +538,9 @@
         "onyomi": "リョク, リキ, リイ",
         "kunyomi": "ちから"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 2,
         "themeEn": "Making your future self from now",

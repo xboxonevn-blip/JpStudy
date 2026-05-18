@@ -151,3 +151,10 @@
 - Filled empty `relatedKanji` lists for 13 N4 kanji: `色`, `予`, `静`, `危`, `以`, `文`, `死`, `飛`, `包`, `乾`, `疑`, `配`, `参`.
 - No Hán-Việt, meanings, readings, or examples changed in this batch.
 - Verified locally: kanji coverage audit now reports N4 incomplete current entries `0`; focused reachability/audit tests passed.
+
+## 2026-05-18 N3 Kanji Lesson 02 Completeness Patch
+
+- Source-verified all eight N3 lesson-02 kanji (`将`, `来`, `目`, `標`, `計`, `画`, `努`, `力`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `将`, `標`, `計`, `画`, `努`; normalized learner-facing Vietnamese display/search text; filled all lesson-02 `relatedKanji` lists.
+- Added entry-level `vi-source-verified` tags for the eight edited entries. No `vi-human-approved` tag was added.
+- Verified locally: JSON parses and kanji coverage audit reduced N3 incomplete current entries from `182` to `174`.

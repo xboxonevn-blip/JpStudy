@@ -35,3 +35,24 @@ Method: filled empty `relatedKanji` lists from visible decomposition components 
 | `疑` | `匕`, `矢`, `疋`, `問` | Decomposition components + question/doubt neighbor. |
 | `配` | `酉`, `己`, `酒`, `送` | Components plus distribution/send neighbor. |
 | `参` | `大`, `加`, `産`, `形` | Components/shape plus participation/addition neighbor. |
+
+## Kanji N3 Lesson 02 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Hán-Việt readings and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese` where present and `kDefinition` meaning cross-checks.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_02.json` for learner-facing Vietnamese wording and related-kanji grouping.
+
+| Item | Sources | Change |
+|---|---|---|
+| `将` | KANJIDIC2 `Thương, Tương, Tướng`; Unihan `will, going to, future; general`; N3 theme uses `将来` | Added primary Hán-Việt `Tướng`, display `Tướng (tướng; tương lai)`, search text, and planning/future related kanji. |
+| `来` | Existing Hán-Việt `Lai`; KANJIDIC2 `Lai...`; Unihan `come, coming; return` | Kept meaning/readings; added source-verified related kanji. |
+| `目` | Existing Hán-Việt `Mục`; KANJIDIC2 `Mục`; Unihan `eye; division, topic` | Kept meaning/readings; added source-verified related kanji for eye/target usage. |
+| `標` | KANJIDIC2 `Tiêu, Phiêu`; Unihan `mark, symbol, label, sign; standard` | Added Hán-Việt `Tiêu`, rewrote Vietnamese display to `mốc; dấu hiệu; mục tiêu`, and added target/standard related kanji. |
+| `計` | KANJIDIC2 `Kế, Kê`; Unihan `plan, plot; stratagem; scheme` | Added Hán-Việt `Kế`, rewrote Vietnamese display to `kế hoạch; tính toán`, and added plan/calculation related kanji. |
+| `画` | KANJIDIC2 `Hoạch`; Unihan `painting, picture, drawing; to draw`; lesson context `計画` | Added Hán-Việt `Hoạch/Họa` to cover planning and drawing senses; updated display/search and related kanji. |
+| `努` | KANJIDIC2 `Nỗ`; Unihan `to exert, strive, make an effort` | Added Hán-Việt `Nỗ`, rewrote Vietnamese display to `nỗ lực; cố gắng`, and added effort-related kanji. |
+| `力` | Existing Hán-Việt `Lực`; KANJIDIC2 `Lực`; Unihan `power, capability, influence` | Kept meaning/readings; added force/effort related kanji. |
+
+Tagging: added entry-level `vi-source-verified` to the eight edited lesson-02 entries. No `vi-human-approved` tag was added.
