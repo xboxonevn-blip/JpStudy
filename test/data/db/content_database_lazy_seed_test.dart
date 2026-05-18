@@ -268,6 +268,52 @@ void main() {
       expect(row.meaning, 'Thí (thử; kiểm tra; thi đấu)');
     },
   );
+
+  test(
+    'current-version full-count kanji DB reseeds stale sentinel metadata',
+    () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      SharedPreferences.setMockInitialValues({'onboarding.level': 'N3'});
+      final tempDir = await Directory.systemTemp.createTemp(
+        'jpstudy_content_db_current_full_count_stale_kanji_',
+      );
+      addTearDown(() async {
+        if (await tempDir.exists()) {
+          await tempDir.delete(recursive: true);
+        }
+      });
+      final file = File('${tempDir.path}/content.db');
+      await _createLegacyKanjiDb(
+        file,
+        userVersion: 35,
+        kanjiLessonId: 17,
+        kanjiCharacter: '技',
+        kanjiLevel: 'N3',
+        kanjiMeaning: 'kỹ',
+        kanjiMeaningEn: 'skill, art',
+        kanjiOnyomi: 'ギ',
+        kanjiKunyomi: 'わざ',
+        kanjiDecompositionJson: '{}',
+        contentMetaRevision: 17,
+      );
+      await _padKanjiRowsToCount(file, 'N3', _authoredKanjiCount('N3'));
+
+      final db = ContentDatabase(executor: NativeDatabase(file));
+      addTearDown(db.close);
+
+      final row =
+          await (db.select(db.kanji)
+                ..where(
+                  (tbl) =>
+                      tbl.character.equals('技') & tbl.jlptLevel.equals('N3'),
+                )
+                ..limit(1))
+              .getSingle();
+
+      expect(row.meaning, 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)');
+      expect(row.decompositionJson, contains('"hanViet":"Kỹ"'));
+    },
+  );
 }
 
 int _authoredKanjiCount(String level) {
@@ -288,6 +334,34 @@ int _authoredKanjiCount(String level) {
 
 Future<void> _createV34DbMissingKanjiMeaningJa(File file) {
   return _createLegacyKanjiDb(file, userVersion: 34);
+}
+
+Future<void> _padKanjiRowsToCount(File file, String level, int targetCount) {
+  final sqlite = sqlite3.open(file.path);
+  try {
+    final current =
+        sqlite.select(
+              "SELECT COUNT(*) AS count FROM kanji WHERE jlpt_level = ?",
+              [level],
+            ).first['count']
+            as int;
+    for (var i = current; i < targetCount; i++) {
+      sqlite.execute(
+        '''
+INSERT INTO kanji (
+  lesson_id, character, stroke_count, onyomi, kunyomi, meaning, meaning_en,
+  mnemonic_vi, mnemonic_en, decomposition_json, examples_json, jlpt_level
+) VALUES (
+  17, ?, 1, '', '', 'dummy', 'dummy', 'dummy', 'dummy', '{}', '[]', ?
+);
+''',
+        ['dummy_$i', level],
+      );
+    }
+  } finally {
+    sqlite.close();
+  }
+  return Future.value();
 }
 
 Future<void> _createLegacyKanjiDb(

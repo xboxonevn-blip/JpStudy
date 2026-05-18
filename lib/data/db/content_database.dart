@@ -15,6 +15,14 @@ part 'content_database.g.dart';
 
 const _kanjiSeedRevision = 17;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
+const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
+  _KanjiSeedSentinel(
+    level: 'N3',
+    character: '技',
+    meaning: 'Kỹ (kỹ năng; kỹ thuật; tài nghệ)',
+    decompositionContains: '"hanViet":"Kỹ"',
+  ),
+];
 
 @DriftDatabase(
   tables: [
@@ -202,7 +210,9 @@ class ContentDatabase extends _$ContentDatabase {
     final storedRevision = revisionRows.isEmpty
         ? null
         : int.tryParse('${revisionRows.single.data['value']}');
-    if (storedRevision != null && storedRevision >= _kanjiSeedRevision) {
+    if (storedRevision != null &&
+        storedRevision >= _kanjiSeedRevision &&
+        await _kanjiSeedSentinelsHealthy()) {
       return;
     }
 
@@ -492,6 +502,28 @@ class ContentDatabase extends _$ContentDatabase {
     if (incompleteKanjiSpecs.isNotEmpty) {
       await _reseedKanjiLevels(incompleteKanjiSpecs);
     }
+  }
+
+  Future<bool> _kanjiSeedSentinelsHealthy() async {
+    for (final sentinel in _kanjiSeedSentinels) {
+      final rows =
+          await (select(kanji)
+                ..where(
+                  (tbl) =>
+                      tbl.jlptLevel.equals(sentinel.level) &
+                      tbl.character.equals(sentinel.character),
+                )
+                ..limit(1))
+              .get();
+      if (rows.isEmpty) return false;
+      final row = rows.single;
+      if (row.meaning != sentinel.meaning) return false;
+      final decomposition = row.decompositionJson ?? '';
+      if (!decomposition.contains(sentinel.decompositionContains)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   Future<Map<String, int>> _loadExpectedKanjiCountsByLevel() async {
@@ -1369,6 +1401,20 @@ class _ContentSeedSpec {
   final int startLesson;
   final int endLesson;
   final String series;
+}
+
+class _KanjiSeedSentinel {
+  const _KanjiSeedSentinel({
+    required this.level,
+    required this.character,
+    required this.meaning,
+    required this.decompositionContains,
+  });
+
+  final String level;
+  final String character;
+  final String meaning;
+  final String decompositionContains;
 }
 
 const _contentSeedSpecs = <_ContentSeedSpec>[
