@@ -206,11 +206,15 @@ void main() {
               )
               ..limit(1))
             .getSingle();
-    final prefs = await SharedPreferences.getInstance();
+    final revisionRow = await db
+        .customSelect(
+          "SELECT value FROM content_meta WHERE key = 'kanjiSeedRevision'",
+        )
+        .getSingle();
 
     expect(row.meaning, 'Tướng (tướng; tương lai)');
     expect(row.decompositionJson, contains('"hanViet":"Tướng"'));
-    expect(prefs.getInt('content.kanji.seedRevision'), 2);
+    expect(revisionRow.data['value'], '2');
   });
 }
 

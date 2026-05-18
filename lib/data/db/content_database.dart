@@ -14,7 +14,7 @@ import '../utils/han_viet_lookup.dart';
 part 'content_database.g.dart';
 
 const _kanjiSeedRevision = 2;
-const _kanjiSeedRevisionPrefsKey = 'content.kanji.seedRevision';
+const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 
 @DriftDatabase(
   tables: [
@@ -189,21 +189,31 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _ensureKanjiSeedRevision(OpeningDetails details) async {
-    final SharedPreferences prefs;
-    try {
-      prefs = await SharedPreferences.getInstance();
-    } catch (_) {
-      return;
-    }
-    final storedRevision = prefs.getInt(_kanjiSeedRevisionPrefsKey);
-    if (storedRevision == _kanjiSeedRevision) {
+    await customStatement(
+      'CREATE TABLE IF NOT EXISTS content_meta ('
+      'key TEXT NOT NULL PRIMARY KEY, '
+      'value TEXT NOT NULL'
+      ')',
+    );
+    final revisionRows =
+        await customSelect(
+          "SELECT value FROM content_meta WHERE key = '$_kanjiSeedRevisionKey' "
+          'LIMIT 1',
+        ).get();
+    final storedRevision = revisionRows.isEmpty
+        ? null
+        : int.tryParse('${revisionRows.single.data['value']}');
+    if (storedRevision != null && storedRevision >= _kanjiSeedRevision) {
       return;
     }
 
     if (!details.wasCreated) {
       await _reseedMinnaKanji();
     }
-    await prefs.setInt(_kanjiSeedRevisionPrefsKey, _kanjiSeedRevision);
+    await customStatement(
+      "INSERT OR REPLACE INTO content_meta (key, value) VALUES "
+      "('$_kanjiSeedRevisionKey', '$_kanjiSeedRevision')",
+    );
   }
 
   // ... (reseed methods)
