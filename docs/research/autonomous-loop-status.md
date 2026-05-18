@@ -276,4 +276,4 @@
 - Replaced lesson-15 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
 - Bumped content DB Kanji seed revision to `15` so existing browsers with revision `14` receive the new lesson-15 metadata; regression now starts from `content_meta.kanjiSeedRevision=14` and stale `住`.
 - Verified locally: focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `87` to `79`.
-- Live proof is pending after commit, push, build, and deploy.
+- Deployed `38d88d85` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `住` returned one result, detail opened with `Trú (sống ở; cư trú; nơi ở)` plus Hán-Việt `Trú`, VI write practice loaded `Viết tay: N3 - Học kanji mới`, and console errors/warnings remained `0`.
