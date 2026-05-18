@@ -349,3 +349,12 @@
 - Bumped content DB Kanji seed revision to `22` and added a lesson-21 sentinel for `財`.
 - Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `39` to `31`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
 - Built and deployed `008767e8` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `財` opened detail showing `Tài (tài sản; của cải; tiền bạc)` plus Hán-Việt `Tài`, with console errors/warnings `0`.
+
+## 2026-05-18 N3 Kanji Lesson 22 Completeness Patch
+
+- Source-verified all eight N3 lesson-22 kanji (`説`, `紹`, `介`, `謝`, `議`, `翻`, `訳`, `連`) against KANJIDIC2, Unihan, and the explicit local communication/expression theme.
+- Filled missing Hán-Việt values, normalized lowercase Hán-Việt labels, rewrote display/search text, and filled all lesson-22 `relatedKanji` lists.
+- Replaced lesson-22 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `23` and added a lesson-22 sentinel for `説`.
+- Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `31` to `23`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, and content status report machine/open-review `0`.
+- Built and deployed `c0aea700` to Firebase Hosting. Live proof after service-worker/cache bypass while preserving IndexedDB: search `説` opened detail showing `Thuyết (giải thích; học thuyết; ý kiến)` plus Hán-Việt `Thuyết`, with console errors/warnings `0`.

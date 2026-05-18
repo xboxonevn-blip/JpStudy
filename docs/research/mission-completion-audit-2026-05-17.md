@@ -209,6 +209,14 @@ bumps the Kanji seed revision to `22`, and adds a lesson-21 sentinel for `財`.
 Local coverage audit reduced N3 incomplete current entries from `39` to `31`;
 live proof opened `財` with `Tài (tài sản; của cải; tiền bạc)`.
 
+Kanji content expansion update: N3 lesson 22 is now source-verified against
+KANJIDIC2, Unihan, and the local communication/expression theme. Commit
+`c0aea700` fills Hán-Việt/display/search/related-kanji metadata for all eight
+entries, bumps the Kanji seed revision to `23`, and adds a lesson-22 sentinel
+for `説`. Local coverage audit reduced N3 incomplete current entries from `31`
+to `23`; live proof opened `説` with
+`Thuyết (giải thích; học thuyết; ý kiến)`.
+
 ## Verdict
 
 Implementation, docs, tooling, CI/deploy, and N4-N1 live direct-route fallback work are substantially complete. The active goal is not complete because the stopping condition includes external legal/ops proof gates that remain missing.

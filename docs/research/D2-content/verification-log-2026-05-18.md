@@ -480,3 +480,5 @@ Sources consulted:
 | `連` | KANJIDIC2 `Liên`, meanings `connect`, `join`, `take along`; Unihan `kVietnamese=liên`, `kDefinition=join, connect; continuous` | Expanded display to `Liên (liên kết; nối liền; dẫn theo)`, normalized search text, and linked connection/continuity related kanji. |
 
 Tagging: replaced the lesson-22 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+Live proof after deploy: VI/N3 Kanji search for `説` opened the detail modal with `Thuyết (giải thích; học thuyết; ý kiến)` plus Hán-Việt `Thuyết`, with console errors/warnings `0`.
