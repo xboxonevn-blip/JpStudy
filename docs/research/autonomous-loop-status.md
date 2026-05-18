@@ -205,3 +205,11 @@
 - Bumped content DB Kanji seed revision to `7` so existing browsers with revision `6` receive the new lesson-07 metadata; regression now starts from `content_meta.kanjiSeedRevision=6` and stale `健`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, and kanji coverage audit reduced N3 incomplete current entries from `148` to `141`.
 - Deployed `7d036448` to Firebase Hosting and verified live with cache disabled: search `健` opened detail showing `Kiện (khỏe mạnh; sức khỏe)` plus Hán-Việt `Kiện`; console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 08 Completeness Patch
+
+- Source-verified all eight N3 lesson-08 kanji (`伝`, `統`, `祭`, `季`, `節`, `神`, `礼`, `祖`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `統`, `祭`, `季`, `節`, and `神`; normalized lowercase Hán-Việt on `祖`; rewrote learner-facing Vietnamese display/search text for all eight entries; filled all lesson-08 `relatedKanji` lists.
+- Replaced lesson-08 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `8` so existing browsers with revision `7` receive the new lesson-08 metadata; regression now starts from `content_meta.kanjiSeedRevision=7` and stale `統`.
+- Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, and kanji coverage audit reduced N3 incomplete current entries from `141` to `133`.

@@ -161,3 +161,24 @@ Sources consulted:
 | `療` | KANJIDIC2 meanings `heal`, `cure`; Unihan `kVietnamese=liệu`, `kDefinition=be healed, cured, recover`; local context `治療` | Added Hán-Việt `Liệu`, display `Liệu (chữa lành; điều trị)`, search text, and medicine/treatment related kanji. |
 
 Tagging: replaced the lesson-07 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 08 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_08.json`, especially `伝統`, `祭`, `季節`, `神社`, and `祖先`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `伝` | KANJIDIC2 meanings `transmit`, `communicate`, `tradition`; Unihan `kDefinition=summon; propagate, transmit`; local context `伝統` | Kept Hán-Việt `Truyền`; rewrote display to `Truyền (truyền đạt; truyền thống)`, normalized search text, and linked tradition/story neighbors. |
+| `統` | KANJIDIC2 meanings `overall`, `ruling`, `governing`; Unihan `kVietnamese=thống`, `kDefinition=govern, command, control; unite`; local context `伝統` | Added Hán-Việt `Thống`, display `Thống (thống nhất; quản lý; hệ thống)`, search text, and governance/system related kanji. |
+| `祭` | KANJIDIC2 meanings `ritual`, `offer prayers`, `celebrate`; Unihan `kVietnamese=tế`, `kDefinition=sacrifice to, worship`; local context seasonal festivals | Added Hán-Việt `Tế`, display `Tế (lễ hội; cúng tế)`, search text, and festival/ritual related kanji. |
+| `季` | KANJIDIC2 meaning `seasons`; Unihan `kVietnamese=quí`, `kDefinition=quarter of year; season`; local context `季節` | Added Hán-Việt `Quý`, display `Quý (mùa; quý trong năm)`, search text, and season related kanji. |
+| `節` | KANJIDIC2 meanings `season`, `period`, `joint`; Unihan `kVietnamese=tiết`, `kDefinition=knot, node, joint; section`; local context `季節` | Added Hán-Việt `Tiết`, display `Tiết (mùa; tiết; giai đoạn)`, search text, and time/season related kanji. |
+| `神` | KANJIDIC2 meanings `gods`, `mind`, `soul`; Unihan `kVietnamese=thần`, `kDefinition=spirit, god, supernatural being`; local context `神社` | Added Hán-Việt `Thần`, display `Thần (thần linh; tinh thần)`, search text, and shrine/ritual related kanji. |
+| `礼` | KANJIDIC2 meanings `salute`, `bow`, `ceremony`, `thanks`; Unihan `kVietnamese=lễ`, `kDefinition=social custom; manners; courtesy; rites` | Kept Hán-Việt `Lễ`; rewrote display to `Lễ (lễ nghi; lời cảm ơn)` and added ceremony/thanks related kanji. |
+| `祖` | KANJIDIC2 meanings `ancestor`, `pioneer`, `founder`; Unihan `kDefinition=ancestor, forefather; grandfather`; local context ancestors/tradition | Capitalized Hán-Việt `Tổ`, display `Tổ (tổ tiên; người sáng lập)`, search text, and ancestor/tradition related kanji. |
+
+Tagging: replaced the lesson-08 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
