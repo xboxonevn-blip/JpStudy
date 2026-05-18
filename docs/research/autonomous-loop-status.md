@@ -305,3 +305,11 @@
 - Bumped content DB Kanji seed revision to `17` so existing browsers with revision `16` receive the new lesson-17 metadata; regression now starts from `content_meta.kanjiSeedRevision=16` and stale `技`.
 - Verified locally: JSON parse passed, coverage audit reduced N3 incomplete current entries from `71` to `63`, focused DB/reachability/taxonomy/coverage tests passed, `flutter analyze lib test` clean, UI string guard `0`, content status report machine/open-review `0`, and full `flutter test` passed with `2330`.
 - Live proof is pending after commit, push, build, and deploy.
+
+## 2026-05-18 QA-A-015 Kanji Runtime Ensure Deadlock Repair
+
+- Verified issue: `test/data/content/kanji_runtime_reachability_test.dart` hung because `LessonRepository.fetchKanjiByLevel` called public `ContentDatabase.ensureKanjiContentCurrent()` before the first content DB query.
+- Root cause: that public ensure opened Drift; `beforeOpen` then awaited the same pending public ensure, causing a startup deadlock for unopened content DBs. Repository-level Kanji caches were also cleared on every Kanji read.
+- Fix: `beforeOpen` now runs the private Kanji ensure path; public ensure returns whether it repaired content; `LessonRepository` ensures once per lifecycle and clears Kanji caches only on first use or actual repair.
+- Verified locally: `flutter test test\data\db\content_database_lazy_seed_test.dart`, `flutter test test\data\content\kanji_runtime_reachability_test.dart`, focused Kanji/taxonomy subset, `flutter analyze lib test`, UI string guard, and node research tests all passed.
+- Deployed `833ed3c8` to Firebase Hosting. Live proof: VI N3 Kanji grid loaded `203` entries, VI `Viết` opened real Kanji data (`将`); EN Kanji grid loaded; JA Kanji grid loaded; JA `214` radicals loaded. Remaining Kanji work: continue QA-B-002 source verification and expansion.

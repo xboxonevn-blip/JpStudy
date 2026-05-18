@@ -169,6 +169,16 @@ was redeployed, then a live Playwright matrix verified VI/EN/JA across N5-N1:
 Kanji grid rows and `Write/Viết/書く` handwriting practice loaded with zero
 console errors.
 
+Kanji runtime repair update: follow-up QA found public content repair could
+deadlock when called before the first Drift content DB query. Commit
+`833ed3c8` moves `beforeOpen` to the private non-reentrant ensure path, makes
+the public ensure report whether content was repaired, and ensures repository
+Kanji cache invalidation runs once per lifecycle or after actual repair. Local
+verification passed focused DB/reachability/coverage/taxonomy tests, analyze,
+UI string guard, and node research tests. Firebase Hosting was redeployed; live
+proof verified VI N3 grid, VI handwriting, EN grid, JA grid, and JA `214`
+radicals load real data.
+
 ## Verdict
 
 Implementation, docs, tooling, CI/deploy, and N4-N1 live direct-route fallback work are substantially complete. The active goal is not complete because the stopping condition includes external legal/ops proof gates that remain missing.

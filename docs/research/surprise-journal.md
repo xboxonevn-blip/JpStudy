@@ -621,3 +621,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: the first lesson-04 live proof still rendered stale `化` metadata until Playwright disabled the browser HTTP cache via CDP and reloaded; the asset JSON itself was already updated on Hosting.
 - Delta: -15 percentage points on confidence that service-worker/cache cleanup alone proves latest web code.
 - Updated belief: deploy verification for Flutter web should use CDP cache-disabled reload, or a fresh browser context, before treating stale UI as an app-data failure.
+
+## 2026-05-18 - Public startup repair helpers can deadlock Drift beforeOpen
+
+- Prior belief: exposing Kanji content repair as a public `ensure...()` and calling it before repository reads would safely repair already-open stale DBs.
+- Actual observation: when the first repository read called public ensure on an unopened content DB, Drift opened the DB, `beforeOpen` called the same public ensure, and both sides waited on the same pending future.
+- Delta: -25 percentage points on confidence that public repair helpers are safe inside DB open hooks.
+- Updated belief: Drift `beforeOpen` should use private, non-reentrant repair paths; public runtime ensures should return repair status and be called once per repository lifecycle, with cache invalidation tied to actual repair.
