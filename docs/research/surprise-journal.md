@@ -607,3 +607,10 @@ Phase 4 audit expected deep lesson data-model surgery, but the learner-facing Qu
 - Actual observation: live proof against an existing browser DB still showed stale Kanji metadata until the seed revision moved into the content DB `content_meta` table and was checked in the same transaction path as the reseed.
 - Delta: -20 percentage points on confidence that app prefs and content IndexedDB stay coherent across service-worker/cache/version transitions.
 - Updated belief: content-data revision gates should live beside the content they govern; SharedPreferences is too indirect for DB repair/reseed decisions.
+
+## 2026-05-18 - Cache API clearing is not a full live-proof cache bypass
+
+- Prior belief: unregistering the service worker and clearing Cache Storage before `page.goto` was enough to ensure the latest deployed Flutter web shell loaded.
+- Actual observation: the first lesson-04 live proof still rendered stale `化` metadata until Playwright disabled the browser HTTP cache via CDP and reloaded; the asset JSON itself was already updated on Hosting.
+- Delta: -15 percentage points on confidence that service-worker/cache cleanup alone proves latest web code.
+- Updated belief: deploy verification for Flutter web should use CDP cache-disabled reload, or a fresh browser context, before treating stale UI as an app-data failure.
