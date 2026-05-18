@@ -203,3 +203,24 @@ Sources consulted:
 | `論` | KANJIDIC2 `Luận/Luân`, meanings `argument`, `discourse`; Unihan `kVietnamese=luận`, `kDefinition=debate; discuss; discourse`; local context media/opinion | Added primary Hán-Việt `Luận`, display `Luận (bàn luận; lập luận)`, search text, and discussion/writing related kanji. |
 
 Tagging: replaced the lesson-09 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 10 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_10.json`, especially `旅行`, `観光`, `交通`, `予約`, `宿泊`, and travel/transport usage.
+
+| Item | Sources | Change |
+|---|---|---|
+| `旅` | KANJIDIC2 `Lữ`, meanings `trip`, `travel`; Unihan `kVietnamese=lữ`, `kDefinition=trip, journey; travel`; local context travel | Kept Hán-Việt `Lữ`; rewrote display to `Lữ (du lịch; chuyến đi)`, normalized search text, and linked travel/transport related kanji. |
+| `観` | KANJIDIC2 `Quan`, meanings `outlook`, `look`, `view`; Unihan `kDefinition=see, observe, view; appearance`; local context `観光`/travel | Added Hán-Việt `Quan`, display `Quan (xem; quan sát; quan điểm)`, search text, and view/sightseeing related kanji. |
+| `交` | KANJIDIC2 `Giao`, meanings `mingle`, `association`, `coming & going`; Unihan `kVietnamese=giao`, `kDefinition=mix; intersect; exchange, communicate`; local context `交通` | Added Hán-Việt `Giao`, display `Giao (giao thông; giao nhau; trao đổi)`, search text, and transport/exchange related kanji. |
+| `通` | KANJIDIC2 `Thông`, meanings `traffic`, `pass through`, `commute`; Unihan `kVietnamese=thông`, `kDefinition=pass through; common; communicate`; local context `交通` | Kept Hán-Việt `Thông`; rewrote display to `Thông (đi qua; giao thông; thông suốt)`, normalized search text, and linked transport/path related kanji. |
+| `予` | KANJIDIC2 lists `Dư/Dữ`, meanings `beforehand`, `previous`; Unihan `kVietnamese=nhừ`; local Japanese compound context maps learner-facing `予` to `Dự` in `予約`/`予定` | Kept the existing pedagogic Hán-Việt `Dự` for Japanese compounds, rewrote display to `Dự (trước; dự tính; chuẩn bị)`, and documented the source mismatch instead of silently changing it. |
+| `約` | KANJIDIC2 `Ước`, meanings `promise`, `approximately`, `shrink`; Unihan `kVietnamese=ước`, `kDefinition=treaty, agreement, covenant`; local context `予約` | Kept Hán-Việt `Ước`; rewrote display to `Ước (hẹn; khoảng; rút gọn)` and linked reservation/time related kanji. |
+| `宿` | KANJIDIC2 `Túc/Tú`, meanings `inn`, `lodging`, `dwell`; Unihan `kVietnamese=túc`, `kDefinition=stop, rest, lodge, stay overnight`; local context lodging | Added primary Hán-Việt `Túc`, display `Túc (nhà trọ; nghỉ lại; chỗ ở)`, search text, and lodging/travel related kanji. |
+| `泊` | KANJIDIC2 `Bạc/Phách`, meanings `overnight stay`, `put up at`, `ride at anchor`; Unihan `kVietnamese=bạc`, `kDefinition=anchor vessel; lie at anchor`; local context lodging | Added primary Hán-Việt `Bạc`, display `Bạc (nghỉ qua đêm; lưu trú; neo đậu)`, search text, and lodging/harbor related kanji. |
+
+Tagging: replaced the lesson-10 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

@@ -223,3 +223,11 @@
 - Bumped content DB Kanji seed revision to `9` so existing browsers with revision `8` receive the new lesson-09 metadata; regression now starts from `content_meta.kanjiSeedRevision=8` and stale `誌`.
 - Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, content status stayed machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `133` to `125`.
 - Deployed `7b22c3df` to Firebase Hosting and verified live with cache-bypass while preserving IndexedDB: N3 Kanji grid loaded, searching `誌` returned one result, detail opened with `Chí (tạp chí; ghi chép)` plus Hán-Việt `Chí`, and console errors/warnings remained `0`.
+
+## 2026-05-18 N3 Kanji Lesson 10 Completeness Patch
+
+- Source-verified all eight N3 lesson-10 kanji (`旅`, `観`, `交`, `通`, `予`, `約`, `宿`, `泊`) against KANJIDIC2, Unihan, and local lesson context.
+- Filled missing Hán-Việt values for `観`, `交`, `宿`, and `泊`; kept pedagogic `Dự` for `予` despite source mismatch because Japanese `予` compounds map to `dự` for learners; rewrote learner-facing Vietnamese display/search text for all eight entries; filled all lesson-10 `relatedKanji` lists.
+- Replaced lesson-10 file-level `vi-human-approved` with truthful `vi-source-verified` and added entry-level `vi-source-verified`. No `vi-human-approved` tag was added.
+- Bumped content DB Kanji seed revision to `10` so existing browsers with revision `9` receive the new lesson-10 metadata; regression now starts from `content_meta.kanjiSeedRevision=9` and stale `観`.
+- Verified locally: lesson JSON parses, focused DB/reachability/taxonomy/coverage tests passed, UI string guard stayed at `0`, content status stayed machine/open-review `0`, full `flutter test` passed with `2329` tests, and kanji coverage audit reduced N3 incomplete current entries from `125` to `117`.

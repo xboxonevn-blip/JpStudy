@@ -14,8 +14,8 @@
       "strokeCount": 10,
       "labels": {
         "hanViet": "Lữ",
-        "meaningVi": "lữ, du lịch",
-        "meaningViDisplay": "Lữ (lữ, du lịch)",
+        "meaningVi": "du lịch; chuyến đi",
+        "meaningViDisplay": "Lữ (du lịch; chuyến đi)",
         "meaningEn": "trip, travel"
       },
       "readings": {
@@ -35,11 +35,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "観",
+          "交",
+          "通",
+          "宿"
+        ]
       },
       "search": {
         "hanVietNoAccent": "lu",
-        "meaningViNoAccent": "lu, du lich",
+        "meaningViNoAccent": "du lich; chuyen di",
         "meaningEnNoAccent": "trip, travel"
       },
       "examples": [
@@ -53,10 +58,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Lữ (lữ, du lịch)",
+        "meaning": "Lữ (du lịch; chuyến đi)",
         "onyomi": "リョ",
         "kunyomi": "たび"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -70,9 +78,9 @@
       "character": "観",
       "strokeCount": 18,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "quan, xem",
-        "meaningViDisplay": "quan, xem",
+        "hanViet": "Quan",
+        "meaningVi": "xem; quan sát; quan điểm",
+        "meaningViDisplay": "Quan (xem; quan sát; quan điểm)",
         "meaningEn": "outlook, look"
       },
       "readings": {
@@ -89,15 +97,20 @@
         "en": "Core kanji for QUARTET 10: Travel and transportation."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Quan",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "旅",
+          "光",
+          "見",
+          "景"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "quan, xem",
+        "hanVietNoAccent": "quan",
+        "meaningViNoAccent": "xem; quan sat; quan diem",
         "meaningEnNoAccent": "outlook, look"
       },
       "examples": [
@@ -111,10 +124,13 @@
         }
       ],
       "legacy": {
-        "meaning": "quan, xem",
+        "meaning": "Quan (xem; quan sát; quan điểm)",
         "onyomi": "カン",
         "kunyomi": "み.る, しめ.す"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -128,9 +144,9 @@
       "character": "交",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "giao",
-        "meaningViDisplay": "giao",
+        "hanViet": "Giao",
+        "meaningVi": "giao thông; giao nhau; trao đổi",
+        "meaningViDisplay": "Giao (giao thông; giao nhau; trao đổi)",
         "meaningEn": "mingle, mixing"
       },
       "readings": {
@@ -149,15 +165,20 @@
         "en": "Core kanji for QUARTET 10: Travel and transportation."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Giao",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "通",
+          "流",
+          "道",
+          "旅"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "giao",
+        "hanVietNoAccent": "giao",
+        "meaningViNoAccent": "giao thong; giao nhau; trao doi",
         "meaningEnNoAccent": "mingle, mixing"
       },
       "examples": [
@@ -171,10 +192,13 @@
         }
       ],
       "legacy": {
-        "meaning": "giao",
+        "meaning": "Giao (giao thông; giao nhau; trao đổi)",
         "onyomi": "コウ",
         "kunyomi": "まじ.わる, まじ.える, ま.じる, まじ.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -189,8 +213,8 @@
       "strokeCount": 10,
       "labels": {
         "hanViet": "Thông",
-        "meaningVi": "thông",
-        "meaningViDisplay": "Thông (thông)",
+        "meaningVi": "đi qua; giao thông; thông suốt",
+        "meaningViDisplay": "Thông (đi qua; giao thông; thông suốt)",
         "meaningEn": "traffic, pass through"
       },
       "readings": {
@@ -214,11 +238,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "交",
+          "道",
+          "送",
+          "駅"
+        ]
       },
       "search": {
         "hanVietNoAccent": "thong",
-        "meaningViNoAccent": "thong",
+        "meaningViNoAccent": "di qua; giao thong; thong suot",
         "meaningEnNoAccent": "traffic, pass through"
       },
       "examples": [
@@ -232,10 +261,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Thông (thông)",
+        "meaning": "Thông (đi qua; giao thông; thông suốt)",
         "onyomi": "ツウ, ツ",
         "kunyomi": "とお.る, とお.り, -とお.り, -どお.り"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -250,8 +282,8 @@
       "strokeCount": 4,
       "labels": {
         "hanViet": "Dự",
-        "meaningVi": "dự",
-        "meaningViDisplay": "Dự (dự)",
+        "meaningVi": "trước; dự tính; chuẩn bị",
+        "meaningViDisplay": "Dự (trước; dự tính; chuẩn bị)",
         "meaningEn": "beforehand, previous"
       },
       "readings": {
@@ -272,11 +304,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "約",
+          "定",
+          "計",
+          "前"
+        ]
       },
       "search": {
         "hanVietNoAccent": "du",
-        "meaningViNoAccent": "du",
+        "meaningViNoAccent": "truoc; du tinh; chuan bi",
         "meaningEnNoAccent": "beforehand, previous"
       },
       "examples": [
@@ -290,10 +327,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Dự (dự)",
+        "meaning": "Dự (trước; dự tính; chuẩn bị)",
         "onyomi": "ヨ, シャ",
         "kunyomi": "あらかじ.め"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -308,8 +348,8 @@
       "strokeCount": 9,
       "labels": {
         "hanViet": "Ước",
-        "meaningVi": "ước",
-        "meaningViDisplay": "Ước (ước)",
+        "meaningVi": "hẹn; khoảng; rút gọn",
+        "meaningViDisplay": "Ước (hẹn; khoảng; rút gọn)",
         "meaningEn": "promise, approximately"
       },
       "readings": {
@@ -331,11 +371,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "予",
+          "束",
+          "計",
+          "時"
+        ]
       },
       "search": {
         "hanVietNoAccent": "uoc",
-        "meaningViNoAccent": "uoc",
+        "meaningViNoAccent": "hen; khoang; rut gon",
         "meaningEnNoAccent": "promise, approximately"
       },
       "examples": [
@@ -349,10 +394,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Ước (ước)",
+        "meaning": "Ước (hẹn; khoảng; rút gọn)",
         "onyomi": "ヤク",
         "kunyomi": "つづ.まる, つづ.める, つづま.やか"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -366,9 +414,9 @@
       "character": "宿",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "túc, trọ",
-        "meaningViDisplay": "túc, trọ",
+        "hanViet": "Túc",
+        "meaningVi": "nhà trọ; nghỉ lại; chỗ ở",
+        "meaningViDisplay": "Túc (nhà trọ; nghỉ lại; chỗ ở)",
         "meaningEn": "inn, lodging"
       },
       "readings": {
@@ -386,15 +434,20 @@
         "en": "Core kanji for QUARTET 10: Travel and transportation."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Túc",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "泊",
+          "旅",
+          "屋",
+          "館"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "tuc, tro",
+        "hanVietNoAccent": "tuc",
+        "meaningViNoAccent": "nha tro; nghi lai; cho o",
         "meaningEnNoAccent": "inn, lodging"
       },
       "examples": [
@@ -408,10 +461,13 @@
         }
       ],
       "legacy": {
-        "meaning": "túc, trọ",
+        "meaning": "Túc (nhà trọ; nghỉ lại; chỗ ở)",
         "onyomi": "シュク",
         "kunyomi": "やど, やど.る, やど.す"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -425,9 +481,9 @@
       "character": "泊",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "bạc, lưu trú",
-        "meaningViDisplay": "bạc, lưu trú",
+        "hanViet": "Bạc",
+        "meaningVi": "nghỉ qua đêm; lưu trú; neo đậu",
+        "meaningViDisplay": "Bạc (nghỉ qua đêm; lưu trú; neo đậu)",
         "meaningEn": "overnight stay, put up at"
       },
       "readings": {
@@ -444,15 +500,20 @@
         "en": "Core kanji for QUARTET 10: Travel and transportation."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Bạc",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "宿",
+          "旅",
+          "港",
+          "夜"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "bac, luu tru",
+        "hanVietNoAccent": "bac",
+        "meaningViNoAccent": "nghi qua dem; luu tru; neo dau",
         "meaningEnNoAccent": "overnight stay, put up at"
       },
       "examples": [
@@ -466,10 +527,13 @@
         }
       ],
       "legacy": {
-        "meaning": "bạc, lưu trú",
+        "meaning": "Bạc (nghỉ qua đêm; lưu trú; neo đậu)",
         "onyomi": "ハク",
         "kunyomi": "と.まる, と.める"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 10,
         "themeEn": "Travel and transportation",
@@ -478,6 +542,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }
