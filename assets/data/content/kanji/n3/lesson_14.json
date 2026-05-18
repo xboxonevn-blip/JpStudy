@@ -13,9 +13,9 @@
       "character": "族",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "tộc",
-        "meaningViDisplay": "tộc",
+        "hanViet": "Tộc",
+        "meaningVi": "gia tộc; dân tộc; dòng họ",
+        "meaningViDisplay": "Tộc (gia tộc; dân tộc; dòng họ)",
         "meaningEn": "tribe, family"
       },
       "readings": {
@@ -29,15 +29,20 @@
         "en": "Core kanji for QUARTET 14: Family and relationships."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Tộc",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "家",
+          "親",
+          "戚",
+          "婦"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "toc",
+        "hanVietNoAccent": "toc",
+        "meaningViNoAccent": "gia toc; dan toc; dong ho",
         "meaningEnNoAccent": "tribe, family"
       },
       "examples": [
@@ -51,10 +56,13 @@
         }
       ],
       "legacy": {
-        "meaning": "tộc",
+        "meaning": "Tộc (gia tộc; dân tộc; dòng họ)",
         "onyomi": "ゾク",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -68,9 +76,9 @@
       "character": "戚",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thích, họ hàng",
-        "meaningViDisplay": "thích, họ hàng",
+        "hanViet": "Thích",
+        "meaningVi": "họ hàng; thân thích; buồn đau",
+        "meaningViDisplay": "Thích (họ hàng; thân thích; buồn đau)",
         "meaningEn": "grieve, relatives"
       },
       "readings": {
@@ -89,15 +97,20 @@
         "en": "Core kanji for QUARTET 14: Family and relationships."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thích",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "親",
+          "族",
+          "家",
+          "婦"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "thich, ho hang",
+        "hanVietNoAccent": "thich",
+        "meaningViNoAccent": "ho hang; than thich; buon dau",
         "meaningEnNoAccent": "grieve, relatives"
       },
       "examples": [
@@ -111,10 +124,13 @@
         }
       ],
       "legacy": {
-        "meaning": "thích, họ hàng",
+        "meaning": "Thích (họ hàng; thân thích; buồn đau)",
         "onyomi": "ソク, セキ",
         "kunyomi": "いた.む, うれ.える, みうち"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -128,9 +144,9 @@
       "character": "婦",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "phụ",
-        "meaningViDisplay": "phụ",
+        "hanViet": "Phụ",
+        "meaningVi": "phụ nữ; vợ; cô dâu",
+        "meaningViDisplay": "Phụ (phụ nữ; vợ; cô dâu)",
         "meaningEn": "lady, woman"
       },
       "readings": {
@@ -146,15 +162,20 @@
         "en": "Core kanji for QUARTET 14: Family and relationships."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Phụ",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "夫",
+          "妻",
+          "女",
+          "婚"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "phu",
+        "hanVietNoAccent": "phu",
+        "meaningViNoAccent": "phu nu; vo; co dau",
         "meaningEnNoAccent": "lady, woman"
       },
       "examples": [
@@ -168,10 +189,13 @@
         }
       ],
       "legacy": {
-        "meaning": "phụ",
+        "meaning": "Phụ (phụ nữ; vợ; cô dâu)",
         "onyomi": "フ",
         "kunyomi": "よめ"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -186,8 +210,8 @@
       "strokeCount": 8,
       "labels": {
         "hanViet": "Dục",
-        "meaningVi": "dục, nuôi dưỡng",
-        "meaningViDisplay": "Dục (dục, nuôi dưỡng)",
+        "meaningVi": "nuôi dưỡng; giáo dục; lớn lên",
+        "meaningViDisplay": "Dục (nuôi dưỡng; giáo dục; lớn lên)",
         "meaningEn": "bring up, grow up"
       },
       "readings": {
@@ -210,11 +234,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "子",
+          "親",
+          "教",
+          "成"
+        ]
       },
       "search": {
         "hanVietNoAccent": "duc",
-        "meaningViNoAccent": "duc, nuoi duong",
+        "meaningViNoAccent": "nuoi duong; giao duc; lon len",
         "meaningEnNoAccent": "bring up, grow up"
       },
       "examples": [
@@ -228,10 +257,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Dục (dục, nuôi dưỡng)",
+        "meaning": "Dục (nuôi dưỡng; giáo dục; lớn lên)",
         "onyomi": "イク",
         "kunyomi": "そだ.つ, そだ.ち, そだ.てる, はぐく.む"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -245,9 +277,9 @@
       "character": "結",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "kết",
-        "meaningViDisplay": "kết",
+        "hanViet": "Kết",
+        "meaningVi": "kết nối; thắt buộc; kết hôn",
+        "meaningViDisplay": "Kết (kết nối; thắt buộc; kết hôn)",
         "meaningEn": "tie, bind"
       },
       "readings": {
@@ -266,15 +298,20 @@
         "en": "Core kanji for QUARTET 14: Family and relationships."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Kết",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "婚",
+          "離",
+          "約",
+          "合"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ket",
+        "hanVietNoAccent": "ket",
+        "meaningViNoAccent": "ket noi; that buoc; ket hon",
         "meaningEnNoAccent": "tie, bind"
       },
       "examples": [
@@ -288,10 +325,13 @@
         }
       ],
       "legacy": {
-        "meaning": "kết",
+        "meaning": "Kết (kết nối; thắt buộc; kết hôn)",
         "onyomi": "ケツ, ケチ",
         "kunyomi": "むす.ぶ, ゆ.う, ゆ.わえる"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -305,9 +345,9 @@
       "character": "離",
       "strokeCount": 19,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "ly",
-        "meaningViDisplay": "ly",
+        "hanViet": "Ly",
+        "meaningVi": "rời xa; tách ra; ly hôn",
+        "meaningViDisplay": "Ly (rời xa; tách ra; ly hôn)",
         "meaningEn": "detach, separation"
       },
       "readings": {
@@ -324,15 +364,20 @@
         "en": "Core kanji for QUARTET 14: Family and relationships."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Ly",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "結",
+          "婚",
+          "別",
+          "遠"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "ly",
+        "hanVietNoAccent": "ly",
+        "meaningViNoAccent": "roi xa; tach ra; ly hon",
         "meaningEnNoAccent": "detach, separation"
       },
       "examples": [
@@ -346,10 +391,13 @@
         }
       ],
       "legacy": {
-        "meaning": "ly",
+        "meaning": "Ly (rời xa; tách ra; ly hôn)",
         "onyomi": "リ",
         "kunyomi": "はな.れる, はな.す"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -363,9 +411,9 @@
       "character": "援",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "viện, hỗ trợ",
-        "meaningViDisplay": "viện, hỗ trợ",
+        "hanViet": "Viện",
+        "meaningVi": "hỗ trợ; cứu giúp; tiếp viện",
+        "meaningViDisplay": "Viện (hỗ trợ; cứu giúp; tiếp viện)",
         "meaningEn": "abet, help"
       },
       "readings": {
@@ -379,15 +427,20 @@
         "en": "Core kanji for QUARTET 14: Family and relationships."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Viện",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "助",
+          "支",
+          "救",
+          "頼"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "vien, ho tro",
+        "hanVietNoAccent": "vien",
+        "meaningViNoAccent": "ho tro; cuu giup; tiep vien",
         "meaningEnNoAccent": "abet, help"
       },
       "examples": [
@@ -401,10 +454,13 @@
         }
       ],
       "legacy": {
-        "meaning": "viện, hỗ trợ",
+        "meaning": "Viện (hỗ trợ; cứu giúp; tiếp viện)",
         "onyomi": "エン",
         "kunyomi": ""
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -419,8 +475,8 @@
       "strokeCount": 16,
       "labels": {
         "hanViet": "Lại",
-        "meaningVi": "lại, nhờ cậy/tin cậy",
-        "meaningViDisplay": "Lại (lại, nhờ cậy/tin cậy)",
+        "meaningVi": "nhờ cậy; tin cậy; yêu cầu",
+        "meaningViDisplay": "Lại (nhờ cậy; tin cậy; yêu cầu)",
         "meaningEn": "trust, request"
       },
       "readings": {
@@ -442,11 +498,16 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "信",
+          "依",
+          "援",
+          "任"
+        ]
       },
       "search": {
         "hanVietNoAccent": "lai",
-        "meaningViNoAccent": "lai, nho cay/tin cay",
+        "meaningViNoAccent": "nho cay; tin cay; yeu cau",
         "meaningEnNoAccent": "trust, request"
       },
       "examples": [
@@ -460,10 +521,13 @@
         }
       ],
       "legacy": {
-        "meaning": "Lại (lại, nhờ cậy/tin cậy)",
+        "meaning": "Lại (nhờ cậy; tin cậy; yêu cầu)",
         "onyomi": "ライ",
         "kunyomi": "たの.む, たの.もしい, たよ.る"
       },
+      "tags": [
+        "vi-source-verified"
+      ],
       "theme": {
         "quartetLesson": 14,
         "themeEn": "Family and relationships",
@@ -472,6 +536,6 @@
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }

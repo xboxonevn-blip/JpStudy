@@ -287,3 +287,24 @@ Sources consulted:
 | `導` | KANJIDIC2 `Đạo`, meanings `guidance`, `leading`, `conduct`; Unihan `kVietnamese=đạo`, `kDefinition=direct, guide, lead, conduct`; local context `指導` | Added Hán-Việt `Đạo`, display `Đạo (dẫn dắt; hướng dẫn; chỉ đạo)`, search text, and guidance/teaching related kanji. |
 
 Tagging: replaced the lesson-13 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
+
+## Kanji N3 Lesson 14 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `%TEMP%/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme/vocab context in `assets/data/content/kanji/n3/lesson_14.json`, especially family/relationship compounds such as `家族`, `親戚`, `夫婦`, `子育て`, `結婚`, `離婚`, `援助`, and `信頼`.
+
+| Item | Sources | Change |
+|---|---|---|
+| `族` | KANJIDIC2 `Tộc`, meanings `tribe`, `family`; Unihan `kVietnamese=tộc`, `kDefinition=a family clan, ethnic group, tribe`; local context `家族` | Added Hán-Việt `Tộc`, display `Tộc (gia tộc; dân tộc; dòng họ)`, search text, and family/clan related kanji. |
+| `戚` | KANJIDIC2 `Thích`, meanings `grieve`, `relatives`; Unihan `kVietnamese=thích`, `kDefinition=relative; be related to; sad`; local context `親戚` | Added Hán-Việt `Thích`, display `Thích (họ hàng; thân thích; buồn đau)`, search text, and kinship related kanji. |
+| `婦` | KANJIDIC2 `Phụ`, meanings `lady`, `woman`, `wife`, `bride`; Unihan `kVietnamese=phụ`, `kDefinition=married women; woman; wife`; local context `夫婦` | Added Hán-Việt `Phụ`, display `Phụ (phụ nữ; vợ; cô dâu)`, search text, and spouse/woman related kanji. |
+| `育` | KANJIDIC2 `Dục`, meanings `bring up`, `grow up`, `raise`; Unihan `kVietnamese=dục`, `kDefinition=produce, give birth to; educate`; local context child-raising | Kept Hán-Việt `Dục`; rewrote display to `Dục (nuôi dưỡng; giáo dục; lớn lên)`, normalized search text, and linked child/education related kanji. |
+| `結` | KANJIDIC2 `Kết`, meanings `tie`, `bind`, `join`, `organize`; Unihan `kVietnamese=kết`, `kDefinition=knot, tie; join, connect`; local context `結婚` | Added Hán-Việt `Kết`, display `Kết (kết nối; thắt buộc; kết hôn)`, search text, and marriage/connection related kanji. |
+| `離` | KANJIDIC2 `Ly`, meanings `detach`, `separation`, `disjoin`; Unihan `kVietnamese=li`, `kDefinition=leave, depart; separate`; local context `離婚` | Added learner-facing Hán-Việt `Ly`, display `Ly (rời xa; tách ra; ly hôn)`, search text, and separation/divorce related kanji. |
+| `援` | KANJIDIC2 `Viên/Viện`, meanings `abet`, `help`, `save`; Unihan `kVietnamese=viện`, `kDefinition=aid, assist; lead; cite`; local context `援助` | Added primary learner-facing Hán-Việt `Viện`, display `Viện (hỗ trợ; cứu giúp; tiếp viện)`, search text, and support related kanji. |
+| `頼` | KANJIDIC2 `Lại/Trái`, meanings `trust`, `request`; Unihan `kDefinition=rely, depend on; accuse falsely`; local context `信頼`/`依頼` | Kept Hán-Việt `Lại`; rewrote display to `Lại (nhờ cậy; tin cậy; yêu cầu)`, normalized search text, and linked trust/request related kanji. |
+
+Tagging: replaced the lesson-14 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
