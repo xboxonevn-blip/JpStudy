@@ -144,3 +144,9 @@
 - Changed these edited entries to `vi-source-verified` and updated taxonomy/content-status tooling to treat that tag as an approval signal. No `vi-human-approved` tag was added.
 - Logged sources in `docs/research/D2-content/verification-log-2026-05-18.md`.
 - Verified locally: kanji coverage audit now reports N5 incomplete current entries `0`; content status remains machine/open-review `0`; focused taxonomy/reachability/audit tests passed.
+
+## 2026-05-18 N4 Kanji Related-Kanji Patch
+
+- Filled empty `relatedKanji` lists for 13 N4 kanji: `色`, `予`, `静`, `危`, `以`, `文`, `死`, `飛`, `包`, `乾`, `疑`, `配`, `参`.
+- No Hán-Việt, meanings, readings, or examples changed in this batch.
+- Verified locally: kanji coverage audit now reports N4 incomplete current entries `0`; focused reachability/audit tests passed.

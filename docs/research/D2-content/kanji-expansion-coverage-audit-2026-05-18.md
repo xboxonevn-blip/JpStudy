@@ -19,7 +19,7 @@ KANJIDIC2 exposes old JLPT tiers (`1`-`4`), not the modern N5-N1 split. This aud
 | Level | Current unique | Source unique | Missing from app | Incomplete current |
 |---|---:|---:|---:|---:|
 | N5 | 159 | 103 | 33 | 0 |
-| N4 | 138 | 181 | 157 | 13 |
+| N4 | 138 | 181 | 157 | 0 |
 | N3 | 192 | 0 | 0 | 182 |
 | N2 | 200 | 739 | 654 | 200 |
 | N1 | 200 | 1207 | 1168 | 200 |
@@ -35,7 +35,7 @@ KANJIDIC2 exposes old JLPT tiers (`1`-`4`), not the modern N5-N1 split. This aud
 ## Incomplete Current Kanji Samples
 
 - N5: none
-- N4: 乾(relatedKanji), 予(relatedKanji), 以(relatedKanji), 包(relatedKanji), 危(relatedKanji), 参(relatedKanji), 文(relatedKanji), 死(relatedKanji), 疑(relatedKanji), 色(relatedKanji), 配(relatedKanji), 静(relatedKanji), 飛(relatedKanji)
+- N4: none
 - N3: 不(relatedKanji), 予(relatedKanji), 争(hanViet+relatedKanji), 交(hanViet+relatedKanji), 介(hanViet+relatedKanji), 任(hanViet+relatedKanji), 伝(relatedKanji), 住(relatedKanji), 価(relatedKanji), 保(hanViet+relatedKanji), 健(hanViet+relatedKanji), 備(hanViet+relatedKanji), 優(relatedKanji), 再(hanViet+relatedKanji), 利(relatedKanji), 制(hanViet+relatedKanji), 則(hanViet+relatedKanji), 劇(hanViet+relatedKanji), 力(relatedKanji), 努(hanViet+relatedKanji)
 - N2: 一(relatedKanji), 上(relatedKanji), 中(relatedKanji), 争(relatedKanji), 井(relatedKanji), 人(relatedKanji), 付(relatedKanji), 代(relatedKanji), 以(relatedKanji), 仮(relatedKanji), 会(relatedKanji), 伝(relatedKanji), 伯(relatedKanji), 住(relatedKanji), 体(relatedKanji), 余(relatedKanji), 佚(relatedKanji), 偉(relatedKanji), 儀(relatedKanji), 児(relatedKanji)
 - N1: 一(relatedKanji), 上(relatedKanji), 主(relatedKanji), 予(relatedKanji), 争(relatedKanji), 井(relatedKanji), 亜(relatedKanji), 人(relatedKanji), 今(relatedKanji), 他(relatedKanji), 仰(relatedKanji), 伊(relatedKanji), 位(relatedKanji), 住(relatedKanji), 何(relatedKanji), 余(relatedKanji), 依(relatedKanji), 値(relatedKanji), 光(relatedKanji), 具(relatedKanji)
