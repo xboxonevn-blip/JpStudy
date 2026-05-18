@@ -459,3 +459,24 @@ Sources consulted:
 Tagging: replaced the lesson-21 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.
 
 Live proof after deploy: VI/N3 Kanji search for `財` opened the detail modal with `Tài (tài sản; của cải; tiền bạc)` plus Hán-Việt `Tài`, with console errors/warnings `0`.
+
+## Kanji N3 Lesson 22 Completeness Batch
+
+Sources consulted:
+
+- KANJIDIC2 local cache `.codex/sources/kanjidic2/kanjidic2.xml` for Japanese readings, stroke count, Hán-Việt readings, and English definitions.
+- Unihan local cache `.codex/sources/Unihan/Unihan_Readings.txt` for `kVietnamese`/`kDefinition` cross-checks where available.
+- Existing authored N3 lesson theme in `assets/data/content/kanji/n3/lesson_22.json`, which labels the batch as communication/expression; the current `ShinKanzen` vocab lesson-22 source ids are general nouns and were not used as semantic authority for this kanji batch.
+
+| Item | Sources | Change |
+|---|---|---|
+| `説` | KANJIDIC2 `Thuyết`, meanings `opinion`, `theory`, `explanation`; Unihan `kVietnamese=thuyết`, `kDefinition=speak`; local theme communication/expression | Added Hán-Việt `Thuyết`, display `Thuyết (giải thích; học thuyết; ý kiến)`, search text, and explanation/speech related kanji. |
+| `紹` | KANJIDIC2 `Thiệu`, meanings `introduce`, `inherit`, `help`; Unihan `kVietnamese=thiệu`, `kDefinition=continue, carry on; hand down; to join` | Added Hán-Việt `Thiệu`, display `Thiệu (giới thiệu; nối tiếp; giúp đỡ)`, search text, and introduction/continuation related kanji. |
+| `介` | KANJIDIC2 `Giới`, meanings `mediate`, `concern oneself with`; Unihan `kVietnamese=giới`, `kDefinition=to lie between; sea shell` | Added Hán-Việt `Giới`, display `Giới (làm trung gian; giới thiệu; xen vào)`, search text, and mediation/introduction related kanji. |
+| `謝` | KANJIDIC2 `Tạ`, meanings `apologize`, `thank`, `refuse`; Unihan `kVietnamese=tạ`, `kDefinition=thank; decline` | Rewrote display to `Tạ (cảm ơn; xin lỗi; từ chối)`, normalized search text, and linked apology/thanks related kanji. |
+| `議` | KANJIDIC2 `Nghị`, meanings `deliberation`, `consultation`, `debate`; Unihan `kVietnamese=nghị`, `kDefinition=consult, talk over, discuss` | Added Hán-Việt `Nghị`, display `Nghị (bàn bạc; thảo luận; nghị luận)`, search text, and discussion/debate related kanji. |
+| `翻` | KANJIDIC2 `Phiên`, meanings `flip`, `turn over`, `change`; Unihan `kDefinition=flip over, upset, capsize` | Capitalized Hán-Việt `Phiên`, display `Phiên (lật; đảo lại; đổi ý)`, search text, and flip/translation related kanji. |
+| `訳` | KANJIDIC2 `Dịch`, meanings `translate`, `reason`, `circumstance`; Unihan `kDefinition=translate; decode; encode` | Capitalized Hán-Việt `Dịch`, display `Dịch (dịch thuật; lý do; hoàn cảnh)`, search text, and translation/reason related kanji. |
+| `連` | KANJIDIC2 `Liên`, meanings `connect`, `join`, `take along`; Unihan `kVietnamese=liên`, `kDefinition=join, connect; continuous` | Expanded display to `Liên (liên kết; nối liền; dẫn theo)`, normalized search text, and linked connection/continuity related kanji. |
+
+Tagging: replaced the lesson-22 file-level `vi-human-approved` with `vi-source-verified` and added entry-level `vi-source-verified` to all eight edited entries. No `vi-human-approved` tag was added.

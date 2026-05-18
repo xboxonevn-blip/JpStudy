@@ -13,7 +13,7 @@ import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
-const _kanjiSeedRevision = 22;
+const _kanjiSeedRevision = 23;
 const _kanjiSeedRevisionKey = 'kanjiSeedRevision';
 const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
   _KanjiSeedSentinel(
@@ -50,6 +50,13 @@ const _kanjiSeedSentinels = <_KanjiSeedSentinel>[
     character: '財',
     meaning: 'Tài (tài sản; của cải; tiền bạc)',
     decompositionContains: '"hanViet":"Tài"',
+  ),
+  _KanjiSeedSentinel(
+    level: 'N3',
+    lessonId: 22,
+    character: '説',
+    meaning: 'Thuyết (giải thích; học thuyết; ý kiến)',
+    decompositionContains: '"hanViet":"Thuyết"',
   ),
 ];
 

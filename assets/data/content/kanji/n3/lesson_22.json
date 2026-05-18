@@ -13,10 +13,10 @@
       "character": "説",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thuyết",
-        "meaningViDisplay": "thuyết",
-        "meaningEn": "opinion, theory"
+        "hanViet": "Thuyết",
+        "meaningVi": "giải thích; học thuyết; ý kiến",
+        "meaningViDisplay": "Thuyết (giải thích; học thuyết; ý kiến)",
+        "meaningEn": "opinion, theory, explanation"
       },
       "readings": {
         "onyomi": [
@@ -32,16 +32,21 @@
         "en": "Core kanji for QUARTET 22: Communication and expression."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thuyết",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "話",
+          "言",
+          "議",
+          "明"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "thuyet",
-        "meaningEnNoAccent": "opinion, theory"
+        "hanVietNoAccent": "thuyet",
+        "meaningViNoAccent": "giai thich; hoc thuyet; y kien",
+        "meaningEnNoAccent": "opinion, theory, explanation"
       },
       "examples": [
         {
@@ -54,7 +59,7 @@
         }
       ],
       "legacy": {
-        "meaning": "thuyết",
+        "meaning": "Thuyết (giải thích; học thuyết; ý kiến)",
         "onyomi": "セツ, ゼイ",
         "kunyomi": "と.く"
       },
@@ -62,7 +67,10 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l22_k002",
@@ -71,9 +79,9 @@
       "character": "紹",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "thiệu",
-        "meaningViDisplay": "thiệu",
+        "hanViet": "Thiệu",
+        "meaningVi": "giới thiệu; nối tiếp; giúp đỡ",
+        "meaningViDisplay": "Thiệu (giới thiệu; nối tiếp; giúp đỡ)",
         "meaningEn": "introduce, inherit"
       },
       "readings": {
@@ -87,15 +95,20 @@
         "en": "Core kanji for QUARTET 22: Communication and expression."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Thiệu",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "介",
+          "引",
+          "継",
+          "伝"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "thieu",
+        "hanVietNoAccent": "thieu",
+        "meaningViNoAccent": "gioi thieu; noi tiep; giup do",
         "meaningEnNoAccent": "introduce, inherit"
       },
       "examples": [
@@ -109,7 +122,7 @@
         }
       ],
       "legacy": {
-        "meaning": "thiệu",
+        "meaning": "Thiệu (giới thiệu; nối tiếp; giúp đỡ)",
         "onyomi": "ショウ",
         "kunyomi": ""
       },
@@ -117,7 +130,10 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l22_k003",
@@ -126,10 +142,10 @@
       "character": "介",
       "strokeCount": 4,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "giới",
-        "meaningViDisplay": "giới",
-        "meaningEn": "jammed in, shellfish"
+        "hanViet": "Giới",
+        "meaningVi": "làm trung gian; giới thiệu; xen vào",
+        "meaningViDisplay": "Giới (làm trung gian; giới thiệu; xen vào)",
+        "meaningEn": "mediate, interpose, shellfish"
       },
       "readings": {
         "onyomi": [
@@ -142,16 +158,21 @@
         "en": "Core kanji for QUARTET 22: Communication and expression."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Giới",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "紹",
+          "助",
+          "間",
+          "入"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "gioi",
-        "meaningEnNoAccent": "jammed in, shellfish"
+        "hanVietNoAccent": "gioi",
+        "meaningViNoAccent": "lam trung gian; gioi thieu; xen vao",
+        "meaningEnNoAccent": "mediate, interpose, shellfish"
       },
       "examples": [
         {
@@ -164,7 +185,7 @@
         }
       ],
       "legacy": {
-        "meaning": "giới",
+        "meaning": "Giới (làm trung gian; giới thiệu; xen vào)",
         "onyomi": "カイ",
         "kunyomi": ""
       },
@@ -172,7 +193,10 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l22_k004",
@@ -182,9 +206,9 @@
       "strokeCount": 17,
       "labels": {
         "hanViet": "Tạ",
-        "meaningVi": "tạ, xin lỗi",
-        "meaningViDisplay": "Tạ (tạ, xin lỗi)",
-        "meaningEn": "apologize, thank"
+        "meaningVi": "cảm ơn; xin lỗi; từ chối",
+        "meaningViDisplay": "Tạ (cảm ơn; xin lỗi; từ chối)",
+        "meaningEn": "apologize, thank, refuse"
       },
       "readings": {
         "onyomi": [
@@ -203,12 +227,17 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "感",
+          "礼",
+          "罪",
+          "辞"
+        ]
       },
       "search": {
         "hanVietNoAccent": "ta",
-        "meaningViNoAccent": "ta, xin loi",
-        "meaningEnNoAccent": "apologize, thank"
+        "meaningViNoAccent": "cam on; xin loi; tu choi",
+        "meaningEnNoAccent": "apologize, thank, refuse"
       },
       "examples": [
         {
@@ -221,7 +250,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Tạ (tạ, xin lỗi)",
+        "meaning": "Tạ (cảm ơn; xin lỗi; từ chối)",
         "onyomi": "シャ",
         "kunyomi": "あやま.る"
       },
@@ -229,7 +258,10 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l22_k005",
@@ -238,10 +270,10 @@
       "character": "議",
       "strokeCount": 20,
       "labels": {
-        "hanViet": "",
-        "meaningVi": "nghị",
-        "meaningViDisplay": "nghị",
-        "meaningEn": "deliberation, consultation"
+        "hanViet": "Nghị",
+        "meaningVi": "bàn bạc; thảo luận; nghị luận",
+        "meaningViDisplay": "Nghị (bàn bạc; thảo luận; nghị luận)",
+        "meaningEn": "deliberation, consultation, debate"
       },
       "readings": {
         "onyomi": [
@@ -254,16 +286,21 @@
         "en": "Core kanji for QUARTET 22: Communication and expression."
       },
       "decomposition": {
-        "hanViet": "",
+        "hanViet": "Nghị",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "会",
+          "論",
+          "説",
+          "討"
+        ]
       },
       "search": {
-        "hanVietNoAccent": "",
-        "meaningViNoAccent": "nghi",
-        "meaningEnNoAccent": "deliberation, consultation"
+        "hanVietNoAccent": "nghi",
+        "meaningViNoAccent": "ban bac; thao luan; nghi luan",
+        "meaningEnNoAccent": "deliberation, consultation, debate"
       },
       "examples": [
         {
@@ -276,7 +313,7 @@
         }
       ],
       "legacy": {
-        "meaning": "nghị",
+        "meaning": "Nghị (bàn bạc; thảo luận; nghị luận)",
         "onyomi": "ギ",
         "kunyomi": ""
       },
@@ -284,7 +321,10 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l22_k006",
@@ -293,10 +333,10 @@
       "character": "翻",
       "strokeCount": 18,
       "labels": {
-        "hanViet": "phiên",
-        "meaningVi": "phiên",
-        "meaningViDisplay": "phiên (phiên)",
-        "meaningEn": "flip, turn over"
+        "hanViet": "Phiên",
+        "meaningVi": "lật; đảo lại; đổi ý",
+        "meaningViDisplay": "Phiên (lật; đảo lại; đổi ý)",
+        "meaningEn": "flip, turn over, change"
       },
       "readings": {
         "onyomi": [
@@ -313,16 +353,21 @@
         "en": "Core kanji for QUARTET 22: Communication and expression."
       },
       "decomposition": {
-        "hanViet": "phiên",
+        "hanViet": "Phiên",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "訳",
+          "返",
+          "変",
+          "転"
+        ]
       },
       "search": {
         "hanVietNoAccent": "phien",
-        "meaningViNoAccent": "phien",
-        "meaningEnNoAccent": "flip, turn over"
+        "meaningViNoAccent": "lat; dao lai; doi y",
+        "meaningEnNoAccent": "flip, turn over, change"
       },
       "examples": [
         {
@@ -335,7 +380,7 @@
         }
       ],
       "legacy": {
-        "meaning": "phiên (phiên)",
+        "meaning": "Phiên (lật; đảo lại; đổi ý)",
         "onyomi": "ホン, ハン",
         "kunyomi": "ひるがえ.る, ひるがえ.す"
       },
@@ -343,7 +388,10 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l22_k007",
@@ -352,9 +400,9 @@
       "character": "訳",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "dịch",
-        "meaningVi": "dịch",
-        "meaningViDisplay": "dịch (dịch)",
+        "hanViet": "Dịch",
+        "meaningVi": "dịch thuật; lý do; hoàn cảnh",
+        "meaningViDisplay": "Dịch (dịch thuật; lý do; hoàn cảnh)",
         "meaningEn": "translate, reason"
       },
       "readings": {
@@ -370,15 +418,20 @@
         "en": "Core kanji for QUARTET 22: Communication and expression."
       },
       "decomposition": {
-        "hanViet": "dịch",
+        "hanViet": "Dịch",
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "翻",
+          "言",
+          "語",
+          "理"
+        ]
       },
       "search": {
         "hanVietNoAccent": "dich",
-        "meaningViNoAccent": "dich",
+        "meaningViNoAccent": "dich thuat; ly do; hoan canh",
         "meaningEnNoAccent": "translate, reason"
       },
       "examples": [
@@ -392,7 +445,7 @@
         }
       ],
       "legacy": {
-        "meaning": "dịch (dịch)",
+        "meaning": "Dịch (dịch thuật; lý do; hoàn cảnh)",
         "onyomi": "ヤク",
         "kunyomi": "わけ"
       },
@@ -400,7 +453,10 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     },
     {
       "kanjiId": "n3_l22_k008",
@@ -410,9 +466,9 @@
       "strokeCount": 10,
       "labels": {
         "hanViet": "Liên",
-        "meaningVi": "liên",
-        "meaningViDisplay": "Liên (liên)",
-        "meaningEn": "take along, lead"
+        "meaningVi": "liên kết; nối liền; dẫn theo",
+        "meaningViDisplay": "Liên (liên kết; nối liền; dẫn theo)",
+        "meaningEn": "connect, join, take along"
       },
       "readings": {
         "onyomi": [
@@ -434,12 +490,17 @@
         "structure": "standalone",
         "components": [],
         "componentNames": [],
-        "relatedKanji": []
+        "relatedKanji": [
+          "絡",
+          "続",
+          "結",
+          "係"
+        ]
       },
       "search": {
         "hanVietNoAccent": "lien",
-        "meaningViNoAccent": "lien",
-        "meaningEnNoAccent": "take along, lead"
+        "meaningViNoAccent": "lien ket; noi lien; dan theo",
+        "meaningEnNoAccent": "connect, join, take along"
       },
       "examples": [
         {
@@ -452,7 +513,7 @@
         }
       ],
       "legacy": {
-        "meaning": "Liên (liên)",
+        "meaning": "Liên (liên kết; nối liền; dẫn theo)",
         "onyomi": "レン",
         "kunyomi": "つら.なる, つら.ねる, つ.れる, -づ.れ"
       },
@@ -460,10 +521,13 @@
         "quartetLesson": 22,
         "themeEn": "Communication and expression",
         "themeVi": "Giao tiếp và diễn đạt"
-      }
+      },
+      "tags": [
+        "vi-source-verified"
+      ]
     }
   ],
   "tags": [
-    "vi-human-approved"
+    "vi-source-verified"
   ]
 }
